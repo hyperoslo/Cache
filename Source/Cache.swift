@@ -1,6 +1,7 @@
-public struct Cache {
+public class Cache {
+
   
-  public enum Kind {
-    case Memory, Disk
-  }
+
+
+
 }
