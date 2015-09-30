@@ -1,9 +1,11 @@
 import Foundation
 
-public class MemoryCache {
+public class MemoryCache: CacheAware {
   public let prefix = "no.hyper.Cache.Memory"
 
-  private let cache = NSCache()
+  public var path: String {
+    return cache.name
+  }
 
   public var maxSize: UInt = 0 {
     didSet(value) {
@@ -11,9 +13,13 @@ public class MemoryCache {
     }
   }
 
-  public init(name: String) {
+  private let cache = NSCache()
+
+  public required init(name: String) {
     cache.name = prefix + name
   }
+
+  // MARK: - CacheAware
 
   public func add<T: AnyObject>(key: String, object: T) {
     cache.setObject(object, forKey: key)

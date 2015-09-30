@@ -1,6 +1,6 @@
 public protocol CacheAware {
   var prefix: String { get }
-  var name: String { get }
+  var path: String { get }
   var maxSize: UInt { get set }
 
   init(name: String)
