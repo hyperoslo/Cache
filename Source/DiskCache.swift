@@ -1,6 +1,6 @@
 import Foundation
 
-public class DiskCacheM: CacheAware {
+public class DiskCache: CacheAware {
 
   public let prefix = "no.hyper.Cache.Disk"
   public let path: String
