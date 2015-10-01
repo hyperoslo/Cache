@@ -13,7 +13,7 @@ public class MemoryCache: CacheAware {
     }
   }
 
-  private let cache = NSCache()
+  public let cache = NSCache()
 
   public required init(name: String) {
     cache.name = prefix + name
@@ -21,11 +21,11 @@ public class MemoryCache: CacheAware {
 
   // MARK: - CacheAware
 
-  public func add<T: AnyObject>(key: String, object: T) {
+  public func add<T: Cachable>(key: String, object: T) {
     cache.setObject(object, forKey: key)
   }
 
-  public func object<T: AnyObject>(key: String) -> T? {
+  public func object<T: Cachable>(key: String) -> T? {
     return cache.objectForKey(key) as? T
   }
 

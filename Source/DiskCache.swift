@@ -1,6 +1,7 @@
 import Foundation
 
-public class DiskCache: CacheAware {
+public class DiskCacheM: CacheAware {
+
   public let prefix = "no.hyper.Cache.Disk"
   public let path: String
   public var maxSize: UInt = 0
@@ -15,10 +16,10 @@ public class DiskCache: CacheAware {
 
   // MARK: - CacheAware
 
-  public func add<T: AnyObject>(key: String, object: T) {
+  public func add<T: Cachable>(key: String, object: T) {
   }
 
-  public func object<T: AnyObject>(key: String) -> T? {
+  public func object<T: Cachable>(key: String) -> T? {
     return nil
   }
 
