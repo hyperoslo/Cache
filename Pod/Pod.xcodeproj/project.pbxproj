@@ -11,6 +11,7 @@
 		D520D4B01BBC4770001A2A31 /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4AF1BBC4770001A2A31 /* MemoryCache.swift */; settings = {ASSET_TAGS = (); }; };
 		D520D4B21BBC47A2001A2A31 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4B11BBC47A2001A2A31 /* DiskCache.swift */; settings = {ASSET_TAGS = (); }; };
 		D520D4B61BBC4D0B001A2A31 /* CacheAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */; settings = {ASSET_TAGS = (); }; };
+		D520D4BB1BBEB59D001A2A31 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4BA1BBEB59D001A2A31 /* Cachable.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		D520D4AF1BBC4770001A2A31 /* MemoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		D520D4B11BBC47A2001A2A31 /* DiskCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheAware.swift; sourceTree = "<group>"; };
+		D520D4BA1BBEB59D001A2A31 /* Cachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				D520D4AF1BBC4770001A2A31 /* MemoryCache.swift */,
 				D520D4B11BBC47A2001A2A31 /* DiskCache.swift */,
 				D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */,
+				D520D4BA1BBEB59D001A2A31 /* Cachable.swift */,
 			);
 			name = Source;
 			path = ../Source;
@@ -170,6 +173,7 @@
 			files = (
 				D520D4B01BBC4770001A2A31 /* MemoryCache.swift in Sources */,
 				D520D4B21BBC47A2001A2A31 /* DiskCache.swift in Sources */,
+				D520D4BB1BBEB59D001A2A31 /* Cachable.swift in Sources */,
 				D520D4B61BBC4D0B001A2A31 /* CacheAware.swift in Sources */,
 				14A139B41AEFC72B00AD732F /* Tests.swift in Sources */,
 			);
