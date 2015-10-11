@@ -25,12 +25,13 @@ public class MemoryCache: CacheAware {
     cache.setObject(object, forKey: key)
   }
 
-  public func object<T: Cachable>(key: String) -> T? {
+  public func object<T: Cachable>(key: String, completion: (() -> Void)) -> T? {
     return cache.objectForKey(key) as? T
   }
 
-  public func remove(key: String) {
+  public func remove(key: String, completion: (() -> Void)?) {
     cache.removeObjectForKey(key)
+    completion?()
   }
 
   public func clear() {

@@ -7,7 +7,7 @@ public class DiskCache: CacheAware {
   public let path: String
   public var maxSize: UInt = 0
 
-  private var fileManager: NSFileManager
+  private var fileManager: NSFileManager!
   private let ioQueue: dispatch_queue_t
 
   public required init(name: String) {
@@ -41,16 +41,19 @@ public class DiskCache: CacheAware {
     }
   }
 
-  public func object<T: Cachable>(key: String) -> T? {
+  public func object<T: Cachable>(key: String, completion: () -> Void) -> T? {
     return nil
   }
 
-  public func remove(key: String) {
+  public func remove(key: String, completion: (() -> Void)?) {
     dispatch_async(ioQueue) {
       do {
         try self.fileManager.removeItemAtPath(self.filePath(key))
       } catch _ {}
-      callHandlerInMainQueue()
+
+      dispatch_async(dispatch_get_main_queue()) {
+        completion?()
+      }
     }
   }
 
