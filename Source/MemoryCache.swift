@@ -21,7 +21,7 @@ public class MemoryCache: CacheAware {
 
   // MARK: - CacheAware
 
-  public func add<T: Cachable>(key: String, object: T) {
+  public func add<T: Cachable>(key: String, object: T, completion: (() -> Void)? = nil) {
     cache.setObject(object, forKey: key)
   }
 

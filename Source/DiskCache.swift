@@ -16,7 +16,7 @@ public class DiskCache: CacheAware {
 
   // MARK: - CacheAware
 
-  public func add<T: Cachable>(key: String, object: T) {
+  public func add<T: Cachable>(key: String, object: T, completion: (() -> Void)? = nil) {
     if !fileManager.fileExistsAtPath(path) {
       do {
         try fileManager.createDirectoryAtPath(path,
@@ -26,6 +26,10 @@ public class DiskCache: CacheAware {
 
     fileManager.createFileAtPath(filePath(key),
       contents: object.encode(), attributes: nil)
+
+    dispatch_async(dispatch_get_main_queue()) {
+      completion?()
+    }
   }
 
   public func object<T: Cachable>(key: String) -> T? {
