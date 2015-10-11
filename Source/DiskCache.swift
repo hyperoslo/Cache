@@ -40,7 +40,11 @@ public class DiskCache: CacheAware {
 
   // MARK: - Helpers
 
+  private func fileName(key: String) -> String {
+    return key.base64()
+  }
+
   private func filePath(key: String) -> String {
-    return "\(path)/key"
+    return "\(path)/\(fileName(key))"
   }
 }
