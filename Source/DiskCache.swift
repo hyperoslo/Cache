@@ -2,8 +2,8 @@ import Foundation
 
 public class DiskCache: CacheAware {
 
-  public var prefix = "no.hyper.Cache.Disk"
-  public var ioQueueName = "no.hyper.Cache.Disk.IOQueue."
+  public let prefix = "no.hyper.Cache.Disk"
+  public let ioQueueName = "no.hyper.Cache.Disk.IOQueue."
   public let path: String
   public var maxSize: UInt = 0
 
