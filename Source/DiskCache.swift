@@ -28,6 +28,7 @@ public class DiskCache: CacheAware {
   public func add<T: Cachable>(key: String, object: T, completion: (() -> Void)? = nil) -> CacheTask? {
     return CacheTask { [weak self] in
       guard let weakSelf = self else { return }
+
       if !weakSelf.fileManager.fileExistsAtPath(weakSelf.path) {
         do {
           try weakSelf.fileManager.createDirectoryAtPath(weakSelf.path,
@@ -46,7 +47,21 @@ public class DiskCache: CacheAware {
   }
 
   public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) -> CacheTask? {
-    return nil
+    return CacheTask { [weak self] in
+      guard let weakSelf = self else { return }
+
+      dispatch_async(weakSelf.ioQueue) {
+        let filePath = weakSelf.filePath(key)
+        var cachedObject: T?
+        if let data = NSData(contentsOfFile: filePath)  {
+          cachedObject = T.decode(data) as T
+        }
+
+        dispatch_async(dispatch_get_main_queue()) {
+          completion(object: cachedObject)
+        }
+      }
+    }
   }
 
   public func remove(key: String, completion: (() -> Void)? = nil) -> CacheTask? {
