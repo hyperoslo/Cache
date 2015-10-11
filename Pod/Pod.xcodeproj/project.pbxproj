@@ -12,6 +12,7 @@
 		D520D4B21BBC47A2001A2A31 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4B11BBC47A2001A2A31 /* DiskCache.swift */; settings = {ASSET_TAGS = (); }; };
 		D520D4B61BBC4D0B001A2A31 /* CacheAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */; settings = {ASSET_TAGS = (); }; };
 		D520D4BB1BBEB59D001A2A31 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4BA1BBEB59D001A2A31 /* Cachable.swift */; settings = {ASSET_TAGS = (); }; };
+		D53116851BCACF6500EBD9C0 /* CacheTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53116841BCACF6500EBD9C0 /* CacheTask.swift */; settings = {ASSET_TAGS = (); }; };
 		D5704C531BC84DAA0089F388 /* String+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5704C521BC84DAA0089F388 /* String+Base64.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		D520D4B11BBC47A2001A2A31 /* DiskCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheAware.swift; sourceTree = "<group>"; };
 		D520D4BA1BBEB59D001A2A31 /* Cachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
+		D53116841BCACF6500EBD9C0 /* CacheTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheTask.swift; sourceTree = "<group>"; };
 		D5704C521BC84DAA0089F388 /* String+Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Base64.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 				D520D4B11BBC47A2001A2A31 /* DiskCache.swift */,
 				D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */,
 				D520D4BA1BBEB59D001A2A31 /* Cachable.swift */,
+				D53116841BCACF6500EBD9C0 /* CacheTask.swift */,
 			);
 			name = Source;
 			path = ../Source;
@@ -184,6 +187,7 @@
 				D5704C531BC84DAA0089F388 /* String+Base64.swift in Sources */,
 				D520D4B21BBC47A2001A2A31 /* DiskCache.swift in Sources */,
 				D520D4BB1BBEB59D001A2A31 /* Cachable.swift in Sources */,
+				D53116851BCACF6500EBD9C0 /* CacheTask.swift in Sources */,
 				D520D4B61BBC4D0B001A2A31 /* CacheAware.swift in Sources */,
 				14A139B41AEFC72B00AD732F /* Tests.swift in Sources */,
 			);
