@@ -12,6 +12,7 @@
 		D520D4B21BBC47A2001A2A31 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4B11BBC47A2001A2A31 /* DiskCache.swift */; settings = {ASSET_TAGS = (); }; };
 		D520D4B61BBC4D0B001A2A31 /* CacheAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */; settings = {ASSET_TAGS = (); }; };
 		D520D4BB1BBEB59D001A2A31 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4BA1BBEB59D001A2A31 /* Cachable.swift */; settings = {ASSET_TAGS = (); }; };
+		D5704C531BC84DAA0089F388 /* String+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5704C521BC84DAA0089F388 /* String+Base64.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,11 +24,11 @@
 		14C136521AB784B200B7B07A /* CONTRIBUTING.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CONTRIBUTING.md; path = ../CONTRIBUTING.md; sourceTree = "<group>"; };
 		14C136541AB784B200B7B07A /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = LICENSE.md; path = ../LICENSE.md; sourceTree = "<group>"; };
 		14C136551AB784B200B7B07A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		14C1365C1AB784BC00B7B07A /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		D520D4AF1BBC4770001A2A31 /* MemoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		D520D4B11BBC47A2001A2A31 /* DiskCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheAware.swift; sourceTree = "<group>"; };
 		D520D4BA1BBEB59D001A2A31 /* Cachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
+		D5704C521BC84DAA0089F388 /* String+Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Base64.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +94,7 @@
 		14C1365B1AB784BC00B7B07A /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				14C1365C1AB784BC00B7B07A /* .gitkeep */,
+				D5704C511BC84D990089F388 /* Extensions */,
 				D520D4AF1BBC4770001A2A31 /* MemoryCache.swift */,
 				D520D4B11BBC47A2001A2A31 /* DiskCache.swift */,
 				D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */,
@@ -101,6 +102,14 @@
 			);
 			name = Source;
 			path = ../Source;
+			sourceTree = "<group>";
+		};
+		D5704C511BC84D990089F388 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D5704C521BC84DAA0089F388 /* String+Base64.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D520D4B01BBC4770001A2A31 /* MemoryCache.swift in Sources */,
+				D5704C531BC84DAA0089F388 /* String+Base64.swift in Sources */,
 				D520D4B21BBC47A2001A2A31 /* DiskCache.swift in Sources */,
 				D520D4BB1BBEB59D001A2A31 /* Cachable.swift in Sources */,
 				D520D4B61BBC4D0B001A2A31 /* CacheAware.swift in Sources */,
