@@ -10,5 +10,5 @@ public protocol CacheAware {
   func add<T: Cachable>(key: String, object: T, completion: (() -> Void)?) -> CacheTask?
   func object<T: Cachable>(key: String, completion: (object: T?) -> Void) -> CacheTask?
   func remove(key: String, completion: (() -> Void)?) -> CacheTask?
-  func clear() -> CacheTask?
+  func clear(completion: (() -> Void)?) -> CacheTask?
 }

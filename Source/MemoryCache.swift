@@ -44,10 +44,11 @@ public class MemoryCache: CacheAware {
     }
   }
 
-  public func clear() -> CacheTask? {
+  public func clear(completion: (() -> Void)? = nil) -> CacheTask? {
     return CacheTask { [weak self] in
       guard let weakSelf = self else { return }
       weakSelf.cache.removeAllObjects()
+      completion?()
     }
   }
 }
