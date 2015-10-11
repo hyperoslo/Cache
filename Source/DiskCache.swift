@@ -2,16 +2,25 @@ import Foundation
 
 public class DiskCache: CacheAware {
 
-  public let prefix = "no.hyper.Cache.Disk"
+  public var prefix = "no.hyper.Cache.Disk"
+  public var ioQueueName = "no.hyper.Cache.Disk.IOQueue."
   public let path: String
   public var maxSize: UInt = 0
 
-  private var fileManager: NSFileManager!
+  private var fileManager: NSFileManager
+  private let ioQueue: dispatch_queue_t
 
   public required init(name: String) {
+    let cacheName = name.capitalizedString
     let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory,
       NSSearchPathDomainMask.UserDomainMask, true)
-    path = "\(paths.first!)/\(prefix)\(name)"
+    path = "\(paths.first!)/\(prefix).\(cacheName)"
+
+    ioQueue = dispatch_queue_create("\(ioQueueName).\(cacheName)", DISPATCH_QUEUE_SERIAL)
+
+    dispatch_sync(ioQueue) {
+      self.fileManager = NSFileManager()
+    }
   }
 
   // MARK: - CacheAware
@@ -37,6 +46,12 @@ public class DiskCache: CacheAware {
   }
 
   public func remove(key: String) {
+    dispatch_async(ioQueue) {
+      do {
+        try self.fileManager.removeItemAtPath(self.filePath(key))
+      } catch _ {}
+      callHandlerInMainQueue()
+    }
   }
 
   public func clear() {
