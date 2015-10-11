@@ -21,20 +21,33 @@ public class MemoryCache: CacheAware {
 
   // MARK: - CacheAware
 
-  public func add<T: Cachable>(key: String, object: T, completion: (() -> Void)? = nil) {
-    cache.setObject(object, forKey: key)
+  public func add<T: Cachable>(key: String, object: T, completion: (() -> Void)? = nil) -> CacheTask? {
+    return CacheTask { [weak self] in
+      guard let weakSelf = self else { return }
+      weakSelf.cache.setObject(object, forKey: key)
+    }
   }
 
-  public func object<T: Cachable>(key: String, completion: (() -> Void)) -> T? {
-    return cache.objectForKey(key) as? T
+  public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) -> CacheTask? {
+    return CacheTask { [weak self] in
+      guard let weakSelf = self else { return }
+      let cachedObject = weakSelf.cache.objectForKey(key) as? T
+      completion(object: cachedObject)
+    }
   }
 
-  public func remove(key: String, completion: (() -> Void)?) {
-    cache.removeObjectForKey(key)
-    completion?()
+  public func remove(key: String, completion: (() -> Void)? = nil) -> CacheTask? {
+    return CacheTask { [weak self] in
+      guard let weakSelf = self else { return }
+      weakSelf.cache.removeObjectForKey(key)
+      completion?()
+    }
   }
 
-  public func clear() {
-    cache.removeAllObjects()
+  public func clear() -> CacheTask? {
+    return CacheTask { [weak self] in
+      guard let weakSelf = self else { return }
+      weakSelf.cache.removeAllObjects()
+    }
   }
 }
