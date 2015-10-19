@@ -5,17 +5,20 @@ class DiskCacheSpec: QuickSpec {
 
   override func spec() {
     describe("DiskCache") {
-      let name = "Test"
+      let name = "DudeCache"
+      let key = "dudekey"
       let object = User(firstName: "John", lastName: "Snow")
       var cache: DiskCache!
-      var fileManager = NSFileManager()
+      let fileManager = NSFileManager()
 
       beforeEach {
         cache = DiskCache(name: name)
       }
 
       afterEach {
-        try! fileManager.removeItemAtPath(cache.path)
+        do {
+          try fileManager.removeItemAtPath(cache.path)
+        } catch {}
       }
 
       describe("#path") {
@@ -30,22 +33,90 @@ class DiskCacheSpec: QuickSpec {
 
       describe("#add") {
         it("creates cache directory") {
-          cache.add("testkey", object: object)
+          let expectation = self.expectationWithDescription(
+            "Create Cache Directory Expectation")
 
-          let fileExist = fileManager.fileExistsAtPath(cache.path)
-          expect(fileExist).to(beTrue())
+          cache.add(key, object: object) {
+            let fileExist = fileManager.fileExistsAtPath(cache.path)
+            expect(fileExist).to(beTrue())
+            expectation.fulfill()
+          }
+
+          self.waitForExpectationsWithTimeout(2.0, handler:nil)
         }
 
-        it("saves object for specified key") {
-          let version = app.version()
-          expect(version).to(match("^0.\\d.\\d$"))
+        it("saves an object") {
+          let expectation = self.expectationWithDescription(
+            "Save Object Expectation")
+
+          cache.add(key, object: object) {
+            let fileExist = fileManager.fileExistsAtPath(cache.filePath(key))
+            expect(fileExist).to(beTrue())
+            expectation.fulfill()
+          }
+
+          self.waitForExpectationsWithTimeout(2.0, handler:nil)
         }
       }
 
       describe("#object") {
-        it("returns the correct text") {
-          let author = app.author()
-          expect(author).to(equal("Mr. Vadym Markov"))
+        it("resolves cached object") {
+          let expectation = self.expectationWithDescription(
+            "Object Expectation")
+
+          cache.add(key, object: object)
+          cache.object(key) { (receivedObject: User?) in
+            expect(receivedObject?.firstName).to(equal(object.firstName))
+            expect(receivedObject?.lastName).to(equal(object.lastName))
+            expectation.fulfill()
+          }
+
+          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+        }
+      }
+
+      describe("#remove") {
+        it("removes cached object") {
+          let expectation = self.expectationWithDescription(
+            "Remove Expectation")
+
+          cache.add(key, object: object)
+          cache.remove(key) {
+            let fileExist = fileManager.fileExistsAtPath(cache.filePath(key))
+            expect(fileExist).to(beFalse())
+            expectation.fulfill()
+          }
+
+          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+        }
+      }
+
+      describe("#clear") {
+        it("clears cache directory") {
+          let expectation = self.expectationWithDescription(
+            "Clear Expectation")
+
+          cache.add(key, object: object)
+          cache.clear() {
+            let fileExist = fileManager.fileExistsAtPath(cache.path)
+            expect(fileExist).to(beFalse())
+            expectation.fulfill()
+          }
+
+          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+        }
+      }
+
+      describe("#fileName") {
+        it("returns a correct file name") {
+          expect(cache.fileName(key)).to(equal(key.base64()))
+        }
+      }
+
+      describe("#filePath") {
+        it("returns a correct file path") {
+          let filePath = "\(cache.path)/\(cache.fileName(key))"
+          expect(cache.filePath(key)).to(equal(filePath))
         }
       }
     }

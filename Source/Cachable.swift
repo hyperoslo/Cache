@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Cachable {}
+public protocol Cachable: AnyObject {}
 
 public extension Cachable {
   func encode() -> NSData {
