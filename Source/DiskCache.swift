@@ -25,8 +25,8 @@ public class DiskCache: CacheAware {
 
   // MARK: - CacheAware
 
-  public func add<T: Cachable>(key: String, object: T, completion: (() -> Void)? = nil) -> CacheTask? {
-    return CacheTask { [weak self] in
+  public func add<T: Cachable>(key: String, object: T, start: Bool = true, completion: (() -> Void)? = nil) -> CacheTask? {
+    let task = CacheTask { [weak self] in
       guard let weakSelf = self else { return }
 
       if !weakSelf.fileManager.fileExistsAtPath(weakSelf.path) {
@@ -44,10 +44,12 @@ public class DiskCache: CacheAware {
         completion?()
       }
     }
+
+    return start ? task.start() : task
   }
 
-  public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) -> CacheTask? {
-    return CacheTask { [weak self] in
+  public func object<T: Cachable>(key: String, start: Bool = true, completion: (object: T?) -> Void) -> CacheTask? {
+    let task = CacheTask { [weak self] in
       guard let weakSelf = self else { return }
 
       dispatch_async(weakSelf.ioQueue) {
@@ -62,10 +64,12 @@ public class DiskCache: CacheAware {
         }
       }
     }
+
+    return start ? task.start() : task
   }
 
-  public func remove(key: String, completion: (() -> Void)? = nil) -> CacheTask? {
-    return CacheTask { [weak self] in
+  public func remove(key: String, start: Bool = true, completion: (() -> Void)? = nil) -> CacheTask? {
+    let task = CacheTask { [weak self] in
       guard let weakSelf = self else { return }
 
       dispatch_async(weakSelf.ioQueue) {
@@ -78,10 +82,12 @@ public class DiskCache: CacheAware {
         }
       }
     }
+
+    return start ? task.start() : task
   }
 
-  public func clear(completion: (() -> Void)? = nil) -> CacheTask? {
-    return CacheTask { [weak self] in
+  public func clear(start: Bool = true, completion: (() -> Void)? = nil) -> CacheTask? {
+    let task = CacheTask { [weak self] in
       guard let weakSelf = self else { return }
 
       dispatch_async(weakSelf.ioQueue) {
@@ -94,6 +100,8 @@ public class DiskCache: CacheAware {
         }
       }
     }
+
+    return start ? task.start() : task
   }
 
   // MARK: - Helpers

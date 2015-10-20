@@ -21,34 +21,42 @@ public class MemoryCache: CacheAware {
 
   // MARK: - CacheAware
 
-  public func add<T: Cachable>(key: String, object: T, completion: (() -> Void)? = nil) -> CacheTask? {
-    return CacheTask { [weak self] in
+  public func add<T: Cachable>(key: String, object: T, start: Bool = true, completion: (() -> Void)? = nil) -> CacheTask? {
+    let task = CacheTask { [weak self] in
       guard let weakSelf = self else { return }
       weakSelf.cache.setObject(object, forKey: key)
     }
+
+    return start ? task.start() : task
   }
 
-  public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) -> CacheTask? {
-    return CacheTask { [weak self] in
+  public func object<T: Cachable>(key: String, start: Bool = true, completion: (object: T?) -> Void) -> CacheTask? {
+    let task = CacheTask { [weak self] in
       guard let weakSelf = self else { return }
       let cachedObject = weakSelf.cache.objectForKey(key) as? T
       completion(object: cachedObject)
     }
+
+    return start ? task.start() : task
   }
 
-  public func remove(key: String, completion: (() -> Void)? = nil) -> CacheTask? {
-    return CacheTask { [weak self] in
+  public func remove(key: String, start: Bool = true, completion: (() -> Void)? = nil) -> CacheTask? {
+    let task = CacheTask { [weak self] in
       guard let weakSelf = self else { return }
       weakSelf.cache.removeObjectForKey(key)
       completion?()
     }
+
+    return start ? task.start() : task
   }
 
-  public func clear(completion: (() -> Void)? = nil) -> CacheTask? {
-    return CacheTask { [weak self] in
+  public func clear(start: Bool = true, completion: (() -> Void)? = nil) -> CacheTask? {
+    let task = CacheTask { [weak self] in
       guard let weakSelf = self else { return }
       weakSelf.cache.removeAllObjects()
       completion?()
     }
+
+    return start ? task.start() : task
   }
 }

@@ -7,8 +7,8 @@ public protocol CacheAware {
 
   init(name: String)
 
-  func add<T: Cachable>(key: String, object: T, completion: (() -> Void)?) -> CacheTask?
-  func object<T: Cachable>(key: String, completion: (object: T?) -> Void) -> CacheTask?
-  func remove(key: String, completion: (() -> Void)?) -> CacheTask?
-  func clear(completion: (() -> Void)?) -> CacheTask?
+  func add<T: Cachable>(key: String, object: T, start: Bool, completion: (() -> Void)?) -> CacheTask?
+  func object<T: Cachable>(key: String, start: Bool,  completion: (object: T?) -> Void) -> CacheTask?
+  func remove(key: String, start: Bool, completion: (() -> Void)?) -> CacheTask?
+  func clear(start: Bool, completion: (() -> Void)?) -> CacheTask?
 }
