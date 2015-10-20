@@ -17,7 +17,7 @@
                BlueprintIdentifier = "146D72AB1AB782920058798C"
                BuildableName = "Tests.xctest"
                BlueprintName = "Tests"
-               ReferencedContainer = "container:Pod.xcodeproj">
+               ReferencedContainer = "container:CacheTests.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "146D72AB1AB782920058798C"
                BuildableName = "Tests.xctest"
                BlueprintName = "Tests"
-               ReferencedContainer = "container:Pod.xcodeproj">
+               ReferencedContainer = "container:CacheTests.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -45,7 +45,7 @@
             BlueprintIdentifier = "146D72AB1AB782920058798C"
             BuildableName = "Tests.xctest"
             BlueprintName = "Tests"
-            ReferencedContainer = "container:Pod.xcodeproj">
+            ReferencedContainer = "container:CacheTests.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -67,7 +67,7 @@
             BlueprintIdentifier = "146D72AB1AB782920058798C"
             BuildableName = "Tests.xctest"
             BlueprintName = "Tests"
-            ReferencedContainer = "container:Pod.xcodeproj">
+            ReferencedContainer = "container:CacheTests.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -85,7 +85,7 @@
             BlueprintIdentifier = "146D72AB1AB782920058798C"
             BuildableName = "Tests.xctest"
             BlueprintName = "Tests"
-            ReferencedContainer = "container:Pod.xcodeproj">
+            ReferencedContainer = "container:CacheTests.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

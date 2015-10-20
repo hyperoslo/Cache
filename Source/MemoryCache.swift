@@ -1,6 +1,7 @@
 import Foundation
 
 public class MemoryCache: CacheAware {
+
   public let prefix = "no.hyper.Cache.Memory"
 
   public var path: String {
@@ -15,25 +16,50 @@ public class MemoryCache: CacheAware {
 
   public let cache = NSCache()
 
+  // MARK: - Initialization
+
   public required init(name: String) {
-    cache.name = prefix + name
+    cache.name = "\(prefix).\(name.capitalizedString)"
   }
 
   // MARK: - CacheAware
 
-  public func add<T: Cachable>(key: String, object: T) {
-    cache.setObject(object, forKey: key)
+  public func add<T: Cachable>(key: String, object: T, start: Bool = true, completion: (() -> Void)? = nil) -> CacheTask? {
+    let task = CacheTask { [weak self] in
+      guard let weakSelf = self else { return }
+      weakSelf.cache.setObject(object, forKey: key)
+    }
+
+    return start ? task.start() : task
   }
 
-  public func object<T: Cachable>(key: String) -> T? {
-    return cache.objectForKey(key) as? T
+  public func object<T: Cachable>(key: String, start: Bool = true, completion: (object: T?) -> Void) -> CacheTask? {
+    let task = CacheTask { [weak self] in
+      guard let weakSelf = self else { return }
+      let cachedObject = weakSelf.cache.objectForKey(key) as? T
+      completion(object: cachedObject)
+    }
+
+    return start ? task.start() : task
   }
 
-  public func remove(key: String) {
-    cache.removeObjectForKey(key)
+  public func remove(key: String, start: Bool = true, completion: (() -> Void)? = nil) -> CacheTask? {
+    let task = CacheTask { [weak self] in
+      guard let weakSelf = self else { return }
+      weakSelf.cache.removeObjectForKey(key)
+      completion?()
+    }
+
+    return start ? task.start() : task
   }
 
-  public func clear() {
-    cache.removeAllObjects()
+  public func clear(start: Bool = true, completion: (() -> Void)? = nil) -> CacheTask? {
+    let task = CacheTask { [weak self] in
+      guard let weakSelf = self else { return }
+      weakSelf.cache.removeAllObjects()
+      completion?()
+    }
+
+    return start ? task.start() : task
   }
 }
