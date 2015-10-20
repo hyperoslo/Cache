@@ -3,6 +3,7 @@ import Foundation
 public protocol Cachable: AnyObject {}
 
 public extension Cachable {
+  
   func encode() -> NSData {
     var value = self
     return withUnsafePointer(&value) { p in
