@@ -7,6 +7,9 @@ public class CacheTask {
     block = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS) {
       processing()
     }
+  }
+
+  func start() {
     dispatch_async(dispatch_get_main_queue(), block)
   }
 
