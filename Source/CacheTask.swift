@@ -9,8 +9,9 @@ public class CacheTask {
     }
   }
 
-  func start() {
+  func start() -> Self {
     dispatch_async(dispatch_get_main_queue(), block)
+    return self
   }
 
   func cancel() {
