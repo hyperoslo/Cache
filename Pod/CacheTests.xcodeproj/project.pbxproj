@@ -18,6 +18,7 @@
 		D5EA23681BD5BE1400FEABC3 /* MemoryCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EA23671BD5BE1400FEABC3 /* MemoryCacheSpec.swift */; settings = {ASSET_TAGS = (); }; };
 		D5EA236B1BD5C21200FEABC3 /* String+ExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EA236A1BD5C21200FEABC3 /* String+ExtensionsSpec.swift */; settings = {ASSET_TAGS = (); }; };
 		D5EA236D1BD5C3FB00FEABC3 /* CachableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EA236C1BD5C3FB00FEABC3 /* CachableSpec.swift */; settings = {ASSET_TAGS = (); }; };
+		D5EA236F1BD5D12900FEABC3 /* CacheTaskSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EA236E1BD5D12900FEABC3 /* CacheTaskSpec.swift */; settings = {ASSET_TAGS = (); }; };
 		FB2C6582457B37B5F79DBC36 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894692FFFEE3D6AC1422C867 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		D5EA23671BD5BE1400FEABC3 /* MemoryCacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCacheSpec.swift; sourceTree = "<group>"; };
 		D5EA236A1BD5C21200FEABC3 /* String+ExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ExtensionsSpec.swift"; sourceTree = "<group>"; };
 		D5EA236C1BD5C3FB00FEABC3 /* CachableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachableSpec.swift; sourceTree = "<group>"; };
+		D5EA236E1BD5D12900FEABC3 /* CacheTaskSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheTaskSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				D5EA23651BD5BDF700FEABC3 /* DiskCacheSpec.swift */,
 				D5EA23671BD5BE1400FEABC3 /* MemoryCacheSpec.swift */,
 				D5EA236C1BD5C3FB00FEABC3 /* CachableSpec.swift */,
+				D5EA236E1BD5D12900FEABC3 /* CacheTaskSpec.swift */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5EA236B1BD5C21200FEABC3 /* String+ExtensionsSpec.swift in Sources */,
+				D5EA236F1BD5D12900FEABC3 /* CacheTaskSpec.swift in Sources */,
 				D5EA23661BD5BDF700FEABC3 /* DiskCacheSpec.swift in Sources */,
 				D520D4B01BBC4770001A2A31 /* MemoryCache.swift in Sources */,
 				D5704C531BC84DAA0089F388 /* String+Extensions.swift in Sources */,
