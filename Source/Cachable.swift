@@ -11,9 +11,11 @@ public extension Cachable {
     }
   }
 
-  static func decode<T: Cachable>(data: NSData) -> T {
-    let pointer = UnsafeMutablePointer<T>.alloc(sizeof(T.Type))
-    data.getBytes(pointer, length: sizeof(T))
+  static func decode(data: NSData) -> Self {
+    typealias CurrentSelf = Self
+
+    let pointer = UnsafeMutablePointer<CurrentSelf>.alloc(sizeof(CurrentSelf.Type))
+    data.getBytes(pointer, length: sizeof(Self))
     return pointer.move()
   }
 }

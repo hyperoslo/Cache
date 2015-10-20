@@ -54,7 +54,7 @@ public class DiskCache: CacheAware {
         let filePath = weakSelf.filePath(key)
         var cachedObject: T?
         if let data = NSData(contentsOfFile: filePath)  {
-          cachedObject = T.decode(data) as T
+          cachedObject = T.decode(data)
         }
 
         dispatch_async(dispatch_get_main_queue()) {
