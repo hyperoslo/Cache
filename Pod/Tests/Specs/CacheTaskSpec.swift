@@ -16,7 +16,6 @@ class CacheTaskSpec: QuickSpec {
           })
           task.start()
 
-
           self.waitForExpectationsWithTimeout(2.0, handler:nil)
         }
       }

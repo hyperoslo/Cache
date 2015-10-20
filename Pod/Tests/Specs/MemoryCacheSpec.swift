@@ -5,7 +5,7 @@ class MemoryCacheSpec: QuickSpec {
 
   override func spec() {
     describe("MemoryCache") {
-      let name = "GameOfThronesMemoryCache"
+      let name = "DudeMemoryCache"
       let key = "youknownothing"
       let object = User(firstName: "John", lastName: "Snow")
       var cache: MemoryCache!

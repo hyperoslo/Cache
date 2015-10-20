@@ -5,7 +5,6 @@ class CachableSpec: QuickSpec {
 
   override func spec() {
     describe("Cachable") {
-
       var object = User(firstName: "John", lastName: "Snow")
 
       describe("#encode") {

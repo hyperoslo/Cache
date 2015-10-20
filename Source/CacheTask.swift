@@ -1,6 +1,7 @@
 import Foundation
 
 public class CacheTask {
+
   private var block: dispatch_block_t
 
   init(processing: () -> Void) {

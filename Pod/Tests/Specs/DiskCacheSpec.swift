@@ -5,7 +5,7 @@ class DiskCacheSpec: QuickSpec {
 
   override func spec() {
     describe("DiskCache") {
-      let name = "GameOfThronesDiskCache"
+      let name = "DudeDiskCache"
       let key = "youknownothing"
       let object = User(firstName: "John", lastName: "Snow")
       var cache: DiskCache!

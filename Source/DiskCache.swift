@@ -10,12 +10,14 @@ public class DiskCache: CacheAware {
   private var fileManager: NSFileManager!
   private let ioQueue: dispatch_queue_t
 
+  // MARK: - Initialization
+
   public required init(name: String) {
     let cacheName = name.capitalizedString
     let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory,
       NSSearchPathDomainMask.UserDomainMask, true)
-    path = "\(paths.first!)/\(prefix).\(cacheName)"
 
+    path = "\(paths.first!)/\(prefix).\(cacheName)"
     ioQueue = dispatch_queue_create("\(ioQueueName).\(cacheName)", DISPATCH_QUEUE_SERIAL)
 
     dispatch_sync(ioQueue) {

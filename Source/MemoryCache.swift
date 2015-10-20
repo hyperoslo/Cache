@@ -1,6 +1,7 @@
 import Foundation
 
 public class MemoryCache: CacheAware {
+
   public let prefix = "no.hyper.Cache.Memory"
 
   public var path: String {
@@ -14,6 +15,8 @@ public class MemoryCache: CacheAware {
   }
 
   public let cache = NSCache()
+
+  // MARK: - Initialization
 
   public required init(name: String) {
     cache.name = "\(prefix).\(name.capitalizedString)"
