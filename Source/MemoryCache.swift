@@ -16,7 +16,7 @@ public class MemoryCache: CacheAware {
   public let cache = NSCache()
 
   public required init(name: String) {
-    cache.name = prefix + name
+    cache.name = "\(prefix).\(name.capitalizedString)"
   }
 
   // MARK: - CacheAware
