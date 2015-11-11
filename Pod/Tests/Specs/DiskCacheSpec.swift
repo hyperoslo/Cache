@@ -25,7 +25,7 @@ class DiskCacheSpec: QuickSpec {
         it("returns the correct path") {
           let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory,
             NSSearchPathDomainMask.UserDomainMask, true)
-          let path = "\(paths.first!)/\(MemoryCache.prefix).\(name.capitalizedString)"
+          let path = "\(paths.first!)/\(DiskCache.prefix).\(name.capitalizedString)"
 
           expect(cache.path).to(equal(path))
         }
