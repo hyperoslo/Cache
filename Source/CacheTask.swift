@@ -10,7 +10,7 @@ public class CacheTask {
     }
   }
 
-  func start() -> Self {
+  func start() -> CacheTask {
     dispatch_async(dispatch_get_main_queue(), block)
     return self
   }
