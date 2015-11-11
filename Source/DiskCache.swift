@@ -4,12 +4,12 @@ public class DiskCache: CacheAware {
 
   public static let prefix = "no.hyper.Cache.Disk"
 
-  public let ioQueueName = "no.hyper.Cache.Disk.IOQueue."
   public let path: String
   public var maxSize: UInt = 0
+  public private(set) var writeQueue: dispatch_queue_t
+  public private(set) var readQueue: dispatch_queue_t
 
   private var fileManager: NSFileManager!
-  private let ioQueue: dispatch_queue_t
 
   // MARK: - Initialization
 
@@ -19,8 +19,11 @@ public class DiskCache: CacheAware {
       NSSearchPathDomainMask.UserDomainMask, true)
 
     path = "\(paths.first!)/\(DiskCache.prefix).\(cacheName)"
-    ioQueue = dispatch_queue_create("\(ioQueueName).\(cacheName)", DISPATCH_QUEUE_SERIAL)
-
+    writeQueue = dispatch_queue_create("\(DiskCache.prefix).\(cacheName).WriteQueue",
+      DISPATCH_QUEUE_SERIAL)
+    readQueue = dispatch_queue_create("\(DiskCache.prefix).\(cacheName).ReadQueue",
+      DISPATCH_QUEUE_SERIAL)
+    
     dispatch_sync(ioQueue) {
       self.fileManager = NSFileManager()
     }

@@ -4,7 +4,6 @@ public class MemoryCache: CacheAware {
 
   public static let prefix = "no.hyper.Cache.Memory"
 
-
   public var path: String {
     return cache.name
   }
@@ -16,12 +15,15 @@ public class MemoryCache: CacheAware {
   }
 
   public let cache = NSCache()
-  
+  public private(set) var writeQueue: dispatch_queue_t
+  public private(set) var readQueue: dispatch_queue_t
 
   // MARK: - Initialization
 
   public required init(name: String) {
     cache.name = "\(MemoryCache.prefix).\(name.capitalizedString)"
+    writeQueue = dispatch_queue_create("\(cache.name).WriteQueue", DISPATCH_QUEUE_SERIAL)
+    readQueue = dispatch_queue_create("\(cache.name).ReadQueue", DISPATCH_QUEUE_SERIAL)
   }
 
   // MARK: - CacheAware
