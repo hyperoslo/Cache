@@ -29,21 +29,38 @@ public class MemoryCache: CacheAware {
   // MARK: - CacheAware
 
   public func add<T: Cachable>(key: String, object: T, completion: (() -> Void)? = nil) {
-    cache.setObject(object, forKey: key)
+    dispatch_async(writeQueue) { [weak self] in
+      guard let weakSelf = self else { return }
+
+      weakSelf.cache.setObject(object, forKey: key)
+      completion?()
+    }
   }
 
   public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) {
-    let cachedObject = cache.objectForKey(key) as? T
-    completion(object: cachedObject)
+    dispatch_async(readQueue) { [weak self] in
+      guard let weakSelf = self else { return }
+
+      let cachedObject = weakSelf.cache.objectForKey(key) as? T
+      completion(object: cachedObject)
+    }
   }
 
   public func remove(key: String, completion: (() -> Void)? = nil) {
-    cache.removeObjectForKey(key)
-    completion?()
+    dispatch_async(writeQueue) { [weak self] in
+      guard let weakSelf = self else { return }
+
+      weakSelf.cache.removeObjectForKey(key)
+      completion?()
+    }
   }
 
   public func clear(completion: (() -> Void)? = nil) {
-    cache.removeAllObjects()
-    completion?()
+    dispatch_async(writeQueue) { [weak self] in
+      guard let weakSelf = self else { return }
+
+      weakSelf.cache.removeAllObjects()
+      completion?()
+    }
   }
 }
