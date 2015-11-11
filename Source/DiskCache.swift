@@ -31,18 +31,22 @@ public class DiskCache: CacheAware {
   // MARK: - CacheAware
 
   public func add<T: Cachable>(key: String, object: T, completion: (() -> Void)? = nil) {
-    if !fileManager.fileExistsAtPath(path) {
-      do {
-        try fileManager.createDirectoryAtPath(path,
-          withIntermediateDirectories: true, attributes: nil)
-      } catch _ {}
-    }
+    dispatch_async(writeQueue) { [weak self] in
+      guard let weakSelf = self else { return }
 
-    fileManager.createFileAtPath(filePath(key),
-      contents: object.encode(), attributes: nil)
+      if !weakSelf.fileManager.fileExistsAtPath(weakSelf.path) {
+        do {
+          try weakSelf.fileManager.createDirectoryAtPath(weakSelf.path,
+            withIntermediateDirectories: true, attributes: nil)
+        } catch _ {}
+      }
 
-    dispatch_async(dispatch_get_main_queue()) {
-      completion?()
+      weakSelf.fileManager.createFileAtPath(weakSelf.filePath(key),
+        contents: object.encode(), attributes: nil)
+
+      dispatch_async(dispatch_get_main_queue()) {
+        completion?()
+      }
     }
   }
 
