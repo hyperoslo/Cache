@@ -3,7 +3,7 @@ import Foundation
 public class MemoryCache: CacheAware {
 
   public static let prefix = "no.hyper.Cache.Memory"
-  public let ioQueueName = "no.hyper.Cache.Disk.IOQueue."
+
 
   public var path: String {
     return cache.name
@@ -16,6 +16,7 @@ public class MemoryCache: CacheAware {
   }
 
   public let cache = NSCache()
+  
 
   // MARK: - Initialization
 
