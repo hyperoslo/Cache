@@ -9,7 +9,10 @@ public class DiskCache: CacheAware {
   public private(set) var writeQueue: dispatch_queue_t
   public private(set) var readQueue: dispatch_queue_t
 
-  private var fileManager: NSFileManager!
+  private lazy var fileManager: NSFileManager = {
+    let fileManager = NSFileManager()
+    return fileManager
+    }()
 
   // MARK: - Initialization
 
@@ -23,10 +26,6 @@ public class DiskCache: CacheAware {
       DISPATCH_QUEUE_SERIAL)
     readQueue = dispatch_queue_create("\(DiskCache.prefix).\(cacheName).ReadQueue",
       DISPATCH_QUEUE_SERIAL)
-    
-    dispatch_sync(ioQueue) {
-      self.fileManager = NSFileManager()
-    }
   }
 
   // MARK: - CacheAware
@@ -48,7 +47,7 @@ public class DiskCache: CacheAware {
   }
 
   public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) {
-    dispatch_async(ioQueue) { [weak self] in
+    dispatch_async(readQueue) { [weak self] in
       guard let weakSelf = self else { return }
 
       let filePath = weakSelf.filePath(key)
@@ -64,7 +63,7 @@ public class DiskCache: CacheAware {
   }
 
   public func remove(key: String, completion: (() -> Void)? = nil) {
-    dispatch_async(ioQueue) { [weak self] in
+    dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else { return }
 
       do {
@@ -78,7 +77,7 @@ public class DiskCache: CacheAware {
   }
 
   public func clear(completion: (() -> Void)? = nil) {
-    dispatch_async(ioQueue) { [weak self] in
+    dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else { return }
 
       do {
