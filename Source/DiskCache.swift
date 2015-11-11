@@ -44,9 +44,7 @@ public class DiskCache: CacheAware {
       weakSelf.fileManager.createFileAtPath(weakSelf.filePath(key),
         contents: object.encode(), attributes: nil)
 
-      dispatch_async(dispatch_get_main_queue()) {
-        completion?()
-      }
+      completion?()
     }
   }
 
@@ -60,9 +58,7 @@ public class DiskCache: CacheAware {
         cachedObject = T.decode(data)
       }
 
-      dispatch_async(dispatch_get_main_queue()) {
-        completion(object: cachedObject)
-      }
+      completion(object: cachedObject)
     }
   }
 
@@ -74,9 +70,7 @@ public class DiskCache: CacheAware {
         try weakSelf.fileManager.removeItemAtPath(weakSelf.filePath(key))
       } catch _ {}
 
-      dispatch_async(dispatch_get_main_queue()) {
-        completion?()
-      }
+      completion?()
     }
   }
 
@@ -88,9 +82,7 @@ public class DiskCache: CacheAware {
         try weakSelf.fileManager.removeItemAtPath(weakSelf.path)
       } catch _ {}
 
-      dispatch_async(dispatch_get_main_queue()) {
-        completion?()
-      }
+      completion?()
     }
   }
 
