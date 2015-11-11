@@ -2,7 +2,8 @@ import Foundation
 
 public class DiskCache: CacheAware {
 
-  public let prefix = "no.hyper.Cache.Disk"
+  public static let prefix = "no.hyper.Cache.Disk"
+
   public let ioQueueName = "no.hyper.Cache.Disk.IOQueue."
   public let path: String
   public var maxSize: UInt = 0
@@ -17,7 +18,7 @@ public class DiskCache: CacheAware {
     let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory,
       NSSearchPathDomainMask.UserDomainMask, true)
 
-    path = "\(paths.first!)/\(prefix).\(cacheName)"
+    path = "\(paths.first!)/\(DiskCache.prefix).\(cacheName)"
     ioQueue = dispatch_queue_create("\(ioQueueName).\(cacheName)", DISPATCH_QUEUE_SERIAL)
 
     dispatch_sync(ioQueue) {

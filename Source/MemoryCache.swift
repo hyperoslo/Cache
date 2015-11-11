@@ -2,7 +2,8 @@ import Foundation
 
 public class MemoryCache: CacheAware {
 
-  public let prefix = "no.hyper.Cache.Memory"
+  public static let prefix = "no.hyper.Cache.Memory"
+  public let ioQueueName = "no.hyper.Cache.Disk.IOQueue."
 
   public var path: String {
     return cache.name
@@ -19,7 +20,7 @@ public class MemoryCache: CacheAware {
   // MARK: - Initialization
 
   public required init(name: String) {
-    cache.name = "\(prefix).\(name.capitalizedString)"
+    cache.name = "\(MemoryCache.prefix).\(name.capitalizedString)"
   }
 
   // MARK: - CacheAware

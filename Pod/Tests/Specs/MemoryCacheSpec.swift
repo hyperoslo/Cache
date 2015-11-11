@@ -20,7 +20,7 @@ class MemoryCacheSpec: QuickSpec {
 
       describe("#path") {
         it("returns the correct path") {
-          let path = "\(cache.prefix).\(name.capitalizedString)"
+          let path = "\(MemoryCache.prefix).\(name.capitalizedString)"
           
           expect(cache.path).to(equal(path))
         }
