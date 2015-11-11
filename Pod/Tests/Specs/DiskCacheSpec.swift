@@ -70,11 +70,12 @@ class DiskCacheSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Object Expectation")
 
-          cache.add(key, object: object)
-          cache.object(key) { (receivedObject: User?) in
-            expect(receivedObject?.firstName).to(equal(object.firstName))
-            expect(receivedObject?.lastName).to(equal(object.lastName))
-            expectation.fulfill()
+          cache.add(key, object: object) {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject?.firstName).to(equal(object.firstName))
+              expect(receivedObject?.lastName).to(equal(object.lastName))
+              expectation.fulfill()
+            }
           }
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)
