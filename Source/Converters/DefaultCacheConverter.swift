@@ -4,7 +4,7 @@ public enum EncodingError: ErrorType {
   case InvalidSize
 }
 
-public struct DefaultConverter<T>: CacheConverter {
+public struct DefaultCacheConverter<T>: DataConvertionAware {
 
   public typealias CacheType = T
 

@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol CacheConverter {
+public protocol DataConvertionAware {
 
   typealias CacheType
 
