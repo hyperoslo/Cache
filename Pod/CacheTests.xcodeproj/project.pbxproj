@@ -12,6 +12,7 @@
 		D520D4B61BBC4D0B001A2A31 /* CacheAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */; };
 		D520D4BB1BBEB59D001A2A31 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520D4BA1BBEB59D001A2A31 /* Cachable.swift */; };
 		D52199EC1BF50DF0009D44DF /* CacheObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52199EB1BF50DF0009D44DF /* CacheObject.swift */; };
+		D52199EE1BF515C9009D44DF /* Expiration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52199ED1BF515C9009D44DF /* Expiration.swift */; };
 		D53116851BCACF6500EBD9C0 /* CacheTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53116841BCACF6500EBD9C0 /* CacheTask.swift */; };
 		D5704C531BC84DAA0089F388 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5704C521BC84DAA0089F388 /* String+Extensions.swift */; };
 		D5CD0F731BCAE5F6004C0B32 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD0F721BCAE5F6004C0B32 /* SpecHelper.swift */; };
@@ -38,6 +39,7 @@
 		D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheAware.swift; sourceTree = "<group>"; };
 		D520D4BA1BBEB59D001A2A31 /* Cachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
 		D52199EB1BF50DF0009D44DF /* CacheObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheObject.swift; sourceTree = "<group>"; };
+		D52199ED1BF515C9009D44DF /* Expiration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expiration.swift; sourceTree = "<group>"; };
 		D53116841BCACF6500EBD9C0 /* CacheTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheTask.swift; sourceTree = "<group>"; };
 		D5704C521BC84DAA0089F388 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		D5CD0F721BCAE5F6004C0B32 /* SpecHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				D520D4BA1BBEB59D001A2A31 /* Cachable.swift */,
 				D53116841BCACF6500EBD9C0 /* CacheTask.swift */,
 				D52199EB1BF50DF0009D44DF /* CacheObject.swift */,
+				D52199ED1BF515C9009D44DF /* Expiration.swift */,
 			);
 			name = Source;
 			path = ../Source;
@@ -300,6 +303,7 @@
 			files = (
 				D5EA236B1BD5C21200FEABC3 /* String+ExtensionsSpec.swift in Sources */,
 				D5EA236F1BD5D12900FEABC3 /* CacheTaskSpec.swift in Sources */,
+				D52199EE1BF515C9009D44DF /* Expiration.swift in Sources */,
 				D5EA23661BD5BDF700FEABC3 /* DiskCacheSpec.swift in Sources */,
 				D520D4B01BBC4770001A2A31 /* MemoryCache.swift in Sources */,
 				D5704C531BC84DAA0089F388 /* String+Extensions.swift in Sources */,
