@@ -90,6 +90,35 @@ public class DiskCache: CacheAware {
     }
   }
 
+  func removeIfExpired(key: String) {
+    let path = filePath(key)
+
+    dispatch_async(writeQueue) { [weak self] in
+      guard let weakSelf = self else { return }
+
+      do {
+        let attributes = try weakSelf.fileManager.attributesOfItemAtPath(path)
+        if let expiryDate = attributes[NSFileModificationDate] as? NSDate
+          where expiryDate.inThePast {
+            try weakSelf.fileManager.removeItemAtPath(weakSelf.filePath(key))
+        }
+      } catch _ {}
+    }
+  }
+
+  func removeAllExpired() {
+    dispatch_async(writeQueue) { [weak self] in
+      guard let weakSelf = self else { return }
+
+      do {
+        let files = try weakSelf.fileManager.contentsOfDirectoryAtPath(weakSelf.path)
+        for file in files {
+          weakSelf.removeIfExpired(file)
+        }
+      } catch {}
+    }
+  }
+
   public func clear(completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else {
@@ -106,22 +135,6 @@ public class DiskCache: CacheAware {
   }
 
   // MARK: - Helpers
-
-  func removeIfExpired(key: String) {
-    let path = filePath(key)
-
-    dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
-
-      do {
-        let attributes = try weakSelf.fileManager.attributesOfItemAtPath(path)
-        if let expiryDate = attributes[NSFileModificationDate] as? NSDate
-          where expiryDate.inThePast {
-            try weakSelf.fileManager.removeItemAtPath(weakSelf.filePath(key))
-        }
-      } catch _ {}
-    }
-  }
 
   func fileName(key: String) -> String {
     return key.base64()
