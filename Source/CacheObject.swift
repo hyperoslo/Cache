@@ -14,7 +14,7 @@ class CacheObject<T: AnyObject>: NSObject, NSCoding {
     return expirationDate.timeIntervalSinceNow < 0
   }
 
-  /// NSCoding
+  // MARK: - NSCoding
 
   required init?(coder aDecoder: NSCoder) {
     value = aDecoder.decodeObjectForKey("value") as! T
