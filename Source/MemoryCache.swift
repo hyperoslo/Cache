@@ -35,7 +35,7 @@ public class MemoryCache: CacheAware {
         return
       }
 
-      let capsule = Capsule<T>(value: object, expiry: expiry)
+      let capsule = Capsule(value: object, expiry: expiry)
 
       weakSelf.cache.setObject(capsule, forKey: key)
       completion?()
@@ -49,8 +49,12 @@ public class MemoryCache: CacheAware {
         return
       }
 
-      let capsule = weakSelf.cache.objectForKey(key) as? Capsule<T>
-      completion(object: capsule?.value)
+      let capsule = weakSelf.cache.objectForKey(key) as? Capsule
+      completion(object: capsule?.value as? T)
+
+      if let capsule = capsule {
+        weakSelf.removeIfExpired(key, capsule: capsule)
+      }
     }
   }
 
@@ -66,6 +70,16 @@ public class MemoryCache: CacheAware {
     }
   }
 
+  public func removeIfExpired(key: String) {
+    dispatch_async(writeQueue) { [weak self] in
+      guard let weakSelf = self else { return }
+
+      if let capsule = weakSelf.cache.objectForKey(key) as? Capsule {
+        weakSelf.removeIfExpired(key, capsule: capsule)
+      }
+    }
+  }
+
   public func clear(completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else {
@@ -75,6 +89,14 @@ public class MemoryCache: CacheAware {
 
       weakSelf.cache.removeAllObjects()
       completion?()
+    }
+  }
+
+  // MARK: - Helpers
+
+  func removeIfExpired(key: String, capsule: Capsule) {
+    if capsule.expired {
+      remove(key)
     }
   }
 }

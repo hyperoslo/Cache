@@ -1,8 +1,8 @@
 import Foundation
 
-class Capsule<T: Cachable>: NSObject {
+class Capsule: NSObject {
 
-  let value: T
+  let value: Any
   let expiryDate: NSDate
 
   var expired: Bool {
@@ -11,7 +11,7 @@ class Capsule<T: Cachable>: NSObject {
 
   // MARK: - Initialization
 
-  init(value: T, expiry: Expiry) {
+  init(value: Any, expiry: Expiry) {
     self.value = value
     self.expiryDate = expiry.date
   }

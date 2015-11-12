@@ -90,7 +90,7 @@ public class DiskCache: CacheAware {
     }
   }
 
-  func removeIfExpired(key: String) {
+  public func removeIfExpired(key: String) {
     let path = filePath(key)
 
     dispatch_async(writeQueue) { [weak self] in
@@ -103,19 +103,6 @@ public class DiskCache: CacheAware {
             try weakSelf.fileManager.removeItemAtPath(weakSelf.filePath(key))
         }
       } catch _ {}
-    }
-  }
-
-  func removeAllExpired() {
-    dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
-
-      do {
-        let files = try weakSelf.fileManager.contentsOfDirectoryAtPath(weakSelf.path)
-        for file in files {
-          weakSelf.removeIfExpired(file)
-        }
-      } catch {}
     }
   }
 
