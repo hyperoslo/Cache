@@ -32,7 +32,9 @@ public class MemoryCache: CacheAware {
     dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else { return }
 
-      weakSelf.cache.setObject(object, forKey: key)
+      let wrapper = ObjectWrapper<T>(value: object, expiry: expiry)
+
+      weakSelf.cache.setObject(wrapper, forKey: key)
       completion?()
     }
   }
