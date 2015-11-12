@@ -6,7 +6,7 @@ class Capsule<T: Cachable>: NSObject {
   let expiryDate: NSDate
 
   var expired: Bool {
-    return expiryDate.timeIntervalSinceNow < 0
+    return expiryDate.inThePast
   }
 
   // MARK: - Initialization
