@@ -19,8 +19,8 @@ class CachableSpec: QuickSpec {
 
       describe(".decode") {
         it("returns the correct decoded object") {
-          let data = object.encode()
-          let user = User.decode(data)
+          let data = object.encode()!
+          let user = User.decode(data)!
 
           expect(object.firstName).to(equal(user.firstName))
           expect(object.lastName).to(equal(user.lastName))
