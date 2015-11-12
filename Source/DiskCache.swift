@@ -2,13 +2,17 @@ import Foundation
 
 public class DiskCache: CacheAware {
 
-  public let prefix = "no.hyper.Cache.Disk"
-  public let ioQueueName = "no.hyper.Cache.Disk.IOQueue."
+  public static let prefix = "no.hyper.Cache.Disk"
+
   public let path: String
   public var maxSize: UInt = 0
+  public private(set) var writeQueue: dispatch_queue_t
+  public private(set) var readQueue: dispatch_queue_t
 
-  private var fileManager: NSFileManager!
-  private let ioQueue: dispatch_queue_t
+  private lazy var fileManager: NSFileManager = {
+    let fileManager = NSFileManager()
+    return fileManager
+    }()
 
   // MARK: - Initialization
 
@@ -17,34 +21,35 @@ public class DiskCache: CacheAware {
     let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory,
       NSSearchPathDomainMask.UserDomainMask, true)
 
-    path = "\(paths.first!)/\(prefix).\(cacheName)"
-    ioQueue = dispatch_queue_create("\(ioQueueName).\(cacheName)", DISPATCH_QUEUE_SERIAL)
-
-    dispatch_sync(ioQueue) {
-      self.fileManager = NSFileManager()
-    }
+    path = "\(paths.first!)/\(DiskCache.prefix).\(cacheName)"
+    writeQueue = dispatch_queue_create("\(DiskCache.prefix).\(cacheName).WriteQueue",
+      DISPATCH_QUEUE_SERIAL)
+    readQueue = dispatch_queue_create("\(DiskCache.prefix).\(cacheName).ReadQueue",
+      DISPATCH_QUEUE_SERIAL)
   }
 
   // MARK: - CacheAware
 
   public func add<T: Cachable>(key: String, object: T, completion: (() -> Void)? = nil) {
-    if !fileManager.fileExistsAtPath(path) {
-      do {
-        try fileManager.createDirectoryAtPath(path,
-          withIntermediateDirectories: true, attributes: nil)
-      } catch _ {}
-    }
+    dispatch_async(writeQueue) { [weak self] in
+      guard let weakSelf = self else { return }
 
-    fileManager.createFileAtPath(filePath(key),
-      contents: object.encode(), attributes: nil)
+      if !weakSelf.fileManager.fileExistsAtPath(weakSelf.path) {
+        do {
+          try weakSelf.fileManager.createDirectoryAtPath(weakSelf.path,
+            withIntermediateDirectories: true, attributes: nil)
+        } catch _ {}
+      }
 
-    dispatch_async(dispatch_get_main_queue()) {
+      weakSelf.fileManager.createFileAtPath(weakSelf.filePath(key),
+        contents: object.encode(), attributes: nil)
+
       completion?()
     }
   }
 
   public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) {
-    dispatch_async(ioQueue) { [weak self] in
+    dispatch_async(readQueue) { [weak self] in
       guard let weakSelf = self else { return }
 
       let filePath = weakSelf.filePath(key)
@@ -53,37 +58,31 @@ public class DiskCache: CacheAware {
         cachedObject = T.decode(data)
       }
 
-      dispatch_async(dispatch_get_main_queue()) {
-        completion(object: cachedObject)
-      }
+      completion(object: cachedObject)
     }
   }
 
   public func remove(key: String, completion: (() -> Void)? = nil) {
-    dispatch_async(ioQueue) { [weak self] in
+    dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else { return }
 
       do {
         try weakSelf.fileManager.removeItemAtPath(weakSelf.filePath(key))
       } catch _ {}
 
-      dispatch_async(dispatch_get_main_queue()) {
-        completion?()
-      }
+      completion?()
     }
   }
 
   public func clear(completion: (() -> Void)? = nil) {
-    dispatch_async(ioQueue) { [weak self] in
+    dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else { return }
 
       do {
         try weakSelf.fileManager.removeItemAtPath(weakSelf.path)
       } catch _ {}
 
-      dispatch_async(dispatch_get_main_queue()) {
-        completion?()
-      }
+      completion?()
     }
   }
 

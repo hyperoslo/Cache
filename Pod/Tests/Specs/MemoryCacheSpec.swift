@@ -20,7 +20,7 @@ class MemoryCacheSpec: QuickSpec {
 
       describe("#path") {
         it("returns the correct path") {
-          let path = "\(cache.prefix).\(name.capitalizedString)"
+          let path = "\(MemoryCache.prefix).\(name.capitalizedString)"
           
           expect(cache.path).to(equal(path))
         }
@@ -37,10 +37,11 @@ class MemoryCacheSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Save Object Expectation")
 
-          cache.add(key, object: object)
-          cache.object(key) { (receivedObject: User?) in
-            expect(receivedObject).toNot(beNil())
-            expectation.fulfill()
+          cache.add(key, object: object) {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).toNot(beNil())
+              expectation.fulfill()
+            }
           }
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)
@@ -52,11 +53,12 @@ class MemoryCacheSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Object Expectation")
 
-          cache.add(key, object: object)
-          cache.object(key) { (receivedObject: User?) in
-            expect(receivedObject?.firstName).to(equal(object.firstName))
-            expect(receivedObject?.lastName).to(equal(object.lastName))
-            expectation.fulfill()
+          cache.add(key, object: object) {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject?.firstName).to(equal(object.firstName))
+              expect(receivedObject?.lastName).to(equal(object.lastName))
+              expectation.fulfill()
+            }
           }
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)

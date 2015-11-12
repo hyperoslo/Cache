@@ -25,7 +25,7 @@ class DiskCacheSpec: QuickSpec {
         it("returns the correct path") {
           let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory,
             NSSearchPathDomainMask.UserDomainMask, true)
-          let path = "\(paths.first!)/\(cache.prefix).\(name.capitalizedString)"
+          let path = "\(paths.first!)/\(DiskCache.prefix).\(name.capitalizedString)"
 
           expect(cache.path).to(equal(path))
         }
@@ -70,11 +70,12 @@ class DiskCacheSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Object Expectation")
 
-          cache.add(key, object: object)
-          cache.object(key) { (receivedObject: User?) in
-            expect(receivedObject?.firstName).to(equal(object.firstName))
-            expect(receivedObject?.lastName).to(equal(object.lastName))
-            expectation.fulfill()
+          cache.add(key, object: object) {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject?.firstName).to(equal(object.firstName))
+              expect(receivedObject?.lastName).to(equal(object.lastName))
+              expectation.fulfill()
+            }
           }
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)
