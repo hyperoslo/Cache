@@ -43,8 +43,8 @@ public class MemoryCache: CacheAware {
     dispatch_async(readQueue) { [weak self] in
       guard let weakSelf = self else { return }
 
-      let cachedObject = weakSelf.cache.objectForKey(key) as? T
-      completion(object: cachedObject)
+      let capsule = weakSelf.cache.objectForKey(key) as? Capsule<T>
+      completion(object: capsule?.value)
     }
   }
 

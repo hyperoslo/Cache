@@ -71,10 +71,11 @@ class MemoryCacheSpec: QuickSpec {
             "Remove Expectation")
 
           cache.add(key, object: object)
-          cache.remove(key)
-          cache.object(key) { (receivedObject: User?) in
-            expect(receivedObject).to(beNil())
-            expectation.fulfill()
+          cache.remove(key) {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).to(beNil())
+              expectation.fulfill()
+            }
           }
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)
@@ -87,11 +88,11 @@ class MemoryCacheSpec: QuickSpec {
             "Clear Expectation")
 
           cache.add(key, object: object)
-          cache.clear()
-
-          cache.object(key) { (receivedObject: User?) in
-            expect(receivedObject).to(beNil())
-            expectation.fulfill()
+          cache.clear() {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).to(beNil())
+              expectation.fulfill()
+            }
           }
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)
