@@ -1,9 +1,9 @@
 import Foundation
 
-class CacheObject<T: AnyObject>: NSObject, NSCoding {
+public class CacheObject<T: AnyObject>: NSObject, NSCoding {
 
-  let value: T
-  let expirationDate: NSDate
+  public let value: T
+  public let expirationDate: NSDate
 
   init(value: T, expirationDate: NSDate) {
     self.value = value
@@ -16,14 +16,14 @@ class CacheObject<T: AnyObject>: NSObject, NSCoding {
 
   // MARK: - NSCoding
 
-  required init?(coder aDecoder: NSCoder) {
+  public required init?(coder aDecoder: NSCoder) {
     value = aDecoder.decodeObjectForKey("value") as! T
     expirationDate = aDecoder.decodeObjectForKey("expirationDate") as! NSDate
 
     super.init()
   }
 
-  func encodeWithCoder(aCoder: NSCoder) {
+  public func encodeWithCoder(aCoder: NSCoder) {
     aCoder.encodeObject(value, forKey: "value")
     aCoder.encodeObject(expirationDate, forKey: "expiryDate")
   }
