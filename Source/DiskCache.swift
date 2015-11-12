@@ -32,7 +32,10 @@ public class DiskCache: CacheAware {
 
   public func add<T: Cachable>(key: String, object: T, expiry: Expiry = .Never, completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
 
       if !weakSelf.fileManager.fileExistsAtPath(weakSelf.path) {
         do {
@@ -56,7 +59,10 @@ public class DiskCache: CacheAware {
 
   public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) {
     dispatch_async(readQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion(object: nil)
+        return
+      }
 
       let filePath = weakSelf.filePath(key)
       var cachedObject: T?
@@ -71,7 +77,10 @@ public class DiskCache: CacheAware {
 
   public func remove(key: String, completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
 
       do {
         try weakSelf.fileManager.removeItemAtPath(weakSelf.filePath(key))
@@ -83,7 +92,10 @@ public class DiskCache: CacheAware {
 
   public func clear(completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
 
       do {
         try weakSelf.fileManager.removeItemAtPath(weakSelf.path)

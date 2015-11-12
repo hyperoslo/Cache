@@ -30,7 +30,10 @@ public class MemoryCache: CacheAware {
 
   public func add<T: Cachable>(key: String, object: T, expiry: Expiry = .Never, completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
 
       let capsule = Capsule<T>(value: object, expiry: expiry)
 
@@ -41,7 +44,10 @@ public class MemoryCache: CacheAware {
 
   public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) {
     dispatch_async(readQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion(object: nil)
+        return
+      }
 
       let capsule = weakSelf.cache.objectForKey(key) as? Capsule<T>
       completion(object: capsule?.value)
@@ -50,7 +56,10 @@ public class MemoryCache: CacheAware {
 
   public func remove(key: String, completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
 
       weakSelf.cache.removeObjectForKey(key)
       completion?()
@@ -59,7 +68,10 @@ public class MemoryCache: CacheAware {
 
   public func clear(completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
 
       weakSelf.cache.removeAllObjects()
       completion?()
