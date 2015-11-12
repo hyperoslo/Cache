@@ -1,10 +1,10 @@
 import Quick
 import Nimble
 
-class StringExtensionsSpec: QuickSpec {
+class StringCacheSpec: QuickSpec {
 
   override func spec() {
-    describe("String+Extensions") {
+    describe("String+Cache") {
 
       describe("#base64") {
         it("returns the correct base64 string") {
