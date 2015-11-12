@@ -19,6 +19,29 @@ class StringCacheSpec: QuickSpec {
           }
         }
       }
+
+      describe("Cachable") {
+
+        describe(".decode") {
+          it("decodes string to NSData") {
+            let string = self.name
+            let data = string.dataUsingEncoding(NSUTF8StringEncoding)!
+            let result = String.decode(data)
+
+            expect(result).to(equal(string))
+          }
+        }
+
+        describe(".encode") {
+          it("decodes string to NSData") {
+            let string = self.name
+            let data = string.dataUsingEncoding(NSUTF8StringEncoding)!
+            let result = string.encode()
+
+            expect(result).to(equal(data))
+          }
+        }
+      }
     }
   }
 }
