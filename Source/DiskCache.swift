@@ -41,8 +41,14 @@ public class DiskCache: CacheAware {
         } catch _ {}
       }
 
-      weakSelf.fileManager.createFileAtPath(weakSelf.filePath(key),
-        contents: object.encode(), attributes: nil)
+      do {
+        let filePath = weakSelf.filePath(key)
+        weakSelf.fileManager.createFileAtPath(filePath,
+          contents: object.encode(), attributes: nil)
+        try weakSelf.fileManager.setAttributes(
+          [NSFileModificationDate : expiry.date],
+          ofItemAtPath: filePath)
+      } catch _ {}
 
       completion?()
     }
@@ -54,8 +60,9 @@ public class DiskCache: CacheAware {
 
       let filePath = weakSelf.filePath(key)
       var cachedObject: T?
+
       if let data = NSData(contentsOfFile: filePath)  {
-        cachedObject = T.decode(data)
+        cachedObject = T.decode(data) as? T
       }
 
       completion(object: cachedObject)

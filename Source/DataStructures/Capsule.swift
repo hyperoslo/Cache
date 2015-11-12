@@ -1,6 +1,6 @@
 import Foundation
 
-class ObjectWrapper<T>: NSObject {
+class Capsule<T: Cachable>: NSObject {
 
   let value: T
   let expiryDate: NSDate
