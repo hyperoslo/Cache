@@ -2,5 +2,5 @@ platform :ios, '8.0'
 use_frameworks!
 inhibit_all_warnings!
 
-pod 'Nimble', '>= 2.0.0-rc.3'
+pod 'Nimble'
 pod 'Quick'
