@@ -1,6 +1,6 @@
 import Foundation
 
-public enum Expiration {
+public enum Expiry {
   case Never
   case Seconds(NSTimeInterval)
   case Date(NSDate)

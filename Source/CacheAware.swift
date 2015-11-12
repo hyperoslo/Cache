@@ -10,7 +10,7 @@ public protocol CacheAware {
 
   init(name: String)
 
-  func add<T: Cachable>(key: String, object: T, expirationDate: NSDate, completion: (() -> Void)?)
+  func add<T: Cachable>(key: String, object: T, expiry: Expiry, completion: (() -> Void)?)
   func object<T: Cachable>(key: String, completion: (object: T?) -> Void)
   func remove(key: String, completion: (() -> Void)?)
   func clear(completion: (() -> Void)?)

@@ -28,7 +28,7 @@ public class MemoryCache: CacheAware {
 
   // MARK: - CacheAware
 
-  public func add<T: Cachable>(key: String, object: T, expirationDate: NSDate, completion: (() -> Void)? = nil) {
+  public func add<T: Cachable>(key: String, object: T, expiry: Expiry, completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else { return }
 
