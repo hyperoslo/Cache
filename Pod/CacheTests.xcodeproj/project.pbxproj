@@ -120,11 +120,11 @@
 		14C1365B1AB784BC00B7B07A /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D52199FD1BF53F98009D44DF /* Library */,
-				D52199EF1BF51CD7009D44DF /* DataStructures */,
 				D5704C511BC84D990089F388 /* Extensions */,
-				D520D4AF1BBC4770001A2A31 /* MemoryCache.swift */,
+				D52199EF1BF51CD7009D44DF /* DataStructures */,
+				D52199FD1BF53F98009D44DF /* Library */,
 				D520D4B11BBC47A2001A2A31 /* DiskCache.swift */,
+				D520D4AF1BBC4770001A2A31 /* MemoryCache.swift */,
 				D520D4B51BBC4D0B001A2A31 /* CacheAware.swift */,
 				D53116841BCACF6500EBD9C0 /* CacheTask.swift */,
 			);
