@@ -12,12 +12,14 @@ class CapsuleSpec: QuickSpec {
         it("is not expired") {
           let date = NSDate(timeInterval: 1000, sinceDate: NSDate())
           capsule = Capsule(value: object, expiry: .Date(date))
+
           expect(capsule.expired).to(beFalse())
         }
 
         it("is expired") {
           let date = NSDate(timeInterval: -1000, sinceDate: NSDate())
           capsule = Capsule(value: object, expiry: .Date(date))
+          
           expect(capsule.expired).to(beTrue())
         }
       }
