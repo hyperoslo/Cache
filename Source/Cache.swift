@@ -23,11 +23,34 @@ public class Cache<T: Cachable> {
   // MARK: - Caching
 
   func add(key: String, object: T, expiry: Expiry = .Never, completion: (() -> Void)?) {
+    frontCache.add(key, object: object, expiry: expiry) { [weak self] in
+      guard let weakSelf = self, backCache = weakSelf.backCache else {
+        completion?()
+        return
+      }
 
+      backCache.add(key, object: object, expiry: expiry) {
+        completion?()
+      }
+    }
   }
 
   func object(key: String, completion: (object: T?) -> Void) {
+    frontCache.object(key) { [weak self] (object: T?) in
+      if let object = object {
+        completion(object: object)
+        return
+      }
 
+      guard let weakSelf = self, backCache = weakSelf.backCache else {
+        completion(object: object)
+        return
+      }
+
+      backCache.object(key) { (object: T?) in
+        completion(object: object)
+      }
+    }
   }
 
   func remove(key: String, completion: (() -> Void)?) {
