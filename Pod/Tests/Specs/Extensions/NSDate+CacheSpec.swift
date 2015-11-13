@@ -15,7 +15,7 @@ class NSDateCacheSpec: QuickSpec {
 
         it("returns that date is in the past") {
           let date = NSDate(timeInterval: -1000, sinceDate: NSDate())
-          
+
           expect(date.inThePast).to(beTrue())
         }
       }

@@ -32,7 +32,7 @@ class StringCacheSpec: QuickSpec {
           }
         }
 
-        describe(".encode") {
+        describe("#encode") {
           it("decodes string to NSData") {
             let string = self.name
             let data = string.dataUsingEncoding(NSUTF8StringEncoding)!
