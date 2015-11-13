@@ -71,10 +71,44 @@ class MemoryCacheSpec: QuickSpec {
             "Remove Expectation")
 
           cache.add(key, object: object)
-          cache.remove(key)
-          cache.object(key) { (receivedObject: User?) in
-            expect(receivedObject).to(beNil())
-            expectation.fulfill()
+          cache.remove(key) {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).to(beNil())
+              expectation.fulfill()
+            }
+          }
+
+          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+        }
+      }
+
+      describe("removeIfExpired") {
+        it("removes expired object") {
+          let expectation = self.expectationWithDescription(
+            "Remove If Expired Expectation")
+          let expiry: Expiry = .Date(NSDate().dateByAddingTimeInterval(-100000))
+
+          cache.add(key, object: object, expiry: expiry)
+          cache.removeIfExpired(key) {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).to(beNil())
+              expectation.fulfill()
+            }
+          }
+
+          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+        }
+
+        it("don't remove not expired object") {
+          let expectation = self.expectationWithDescription(
+            "Don't Remove If Not Expired Expectation")
+
+          cache.add(key, object: object)
+          cache.removeIfExpired(key) {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).notTo(beNil())
+              expectation.fulfill()
+            }
           }
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)
@@ -87,11 +121,11 @@ class MemoryCacheSpec: QuickSpec {
             "Clear Expectation")
 
           cache.add(key, object: object)
-          cache.clear()
-
-          cache.object(key) { (receivedObject: User?) in
-            expect(receivedObject).to(beNil())
-            expectation.fulfill()
+          cache.clear() {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).to(beNil())
+              expectation.fulfill()
+            }
           }
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)

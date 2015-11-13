@@ -30,9 +30,12 @@ public class DiskCache: CacheAware {
 
   // MARK: - CacheAware
 
-  public func add<T: Cachable>(key: String, object: T, completion: (() -> Void)? = nil) {
+  public func add<T: Cachable>(key: String, object: T, expiry: Expiry = .Never, completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
 
       if !weakSelf.fileManager.fileExistsAtPath(weakSelf.path) {
         do {
@@ -41,8 +44,14 @@ public class DiskCache: CacheAware {
         } catch _ {}
       }
 
-      weakSelf.fileManager.createFileAtPath(weakSelf.filePath(key),
-        contents: object.encode(), attributes: nil)
+      do {
+        let filePath = weakSelf.filePath(key)
+        weakSelf.fileManager.createFileAtPath(filePath,
+          contents: object.encode(), attributes: nil)
+        try weakSelf.fileManager.setAttributes(
+          [NSFileModificationDate : expiry.date],
+          ofItemAtPath: filePath)
+      } catch _ {}
 
       completion?()
     }
@@ -50,12 +59,16 @@ public class DiskCache: CacheAware {
 
   public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) {
     dispatch_async(readQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion(object: nil)
+        return
+      }
 
       let filePath = weakSelf.filePath(key)
       var cachedObject: T?
+
       if let data = NSData(contentsOfFile: filePath)  {
-        cachedObject = T.decode(data)
+        cachedObject = T.decode(data) as? T
       }
 
       completion(object: cachedObject)
@@ -64,7 +77,10 @@ public class DiskCache: CacheAware {
 
   public func remove(key: String, completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
 
       do {
         try weakSelf.fileManager.removeItemAtPath(weakSelf.filePath(key))
@@ -74,9 +90,33 @@ public class DiskCache: CacheAware {
     }
   }
 
+  public func removeIfExpired(key: String, completion: (() -> Void)?) {
+    let path = filePath(key)
+
+    dispatch_async(writeQueue) { [weak self] in
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
+
+      do {
+        let attributes = try weakSelf.fileManager.attributesOfItemAtPath(path)
+        if let expiryDate = attributes[NSFileModificationDate] as? NSDate
+          where expiryDate.inThePast {
+            try weakSelf.fileManager.removeItemAtPath(weakSelf.filePath(key))
+        }
+      } catch _ {}
+
+      completion?()
+    }
+  }
+
   public func clear(completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
 
       do {
         try weakSelf.fileManager.removeItemAtPath(weakSelf.path)

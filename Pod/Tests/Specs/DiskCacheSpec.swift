@@ -98,6 +98,39 @@ class DiskCacheSpec: QuickSpec {
         }
       }
 
+      describe("removeIfExpired") {
+        it("removes expired object") {
+          let expectation = self.expectationWithDescription(
+            "Remove If Expired Expectation")
+          let expiry: Expiry = .Date(NSDate().dateByAddingTimeInterval(-100000))
+
+          cache.add(key, object: object, expiry: expiry)
+          cache.removeIfExpired(key) {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).to(beNil())
+              expectation.fulfill()
+            }
+          }
+
+          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+        }
+
+        it("don't remove not expired object") {
+          let expectation = self.expectationWithDescription(
+            "Don't Remove If Not Expired Expectation")
+
+          cache.add(key, object: object)
+          cache.removeIfExpired(key) {
+            cache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).notTo(beNil())
+              expectation.fulfill()
+            }
+          }
+
+          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+        }
+      }
+
       describe("#clear") {
         it("clears cache directory") {
           let expectation = self.expectationWithDescription(
