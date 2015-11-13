@@ -52,8 +52,7 @@ class DiskCacheSpec: QuickSpec {
         }
 
         it("saves an object") {
-          let expectation = self.expectationWithDescription(
-            "Save Object Expectation")
+          let expectation = self.expectationWithDescription("Save Expectation")
 
           cache.add(key, object: object) {
             let fileExist = fileManager.fileExistsAtPath(cache.filePath(key))
@@ -67,8 +66,7 @@ class DiskCacheSpec: QuickSpec {
 
       describe("#object") {
         it("resolves cached object") {
-          let expectation = self.expectationWithDescription(
-            "Object Expectation")
+          let expectation = self.expectationWithDescription("Object Expectation")
 
           cache.add(key, object: object) {
             cache.object(key) { (receivedObject: User?) in
@@ -84,8 +82,7 @@ class DiskCacheSpec: QuickSpec {
 
       describe("#remove") {
         it("removes cached object") {
-          let expectation = self.expectationWithDescription(
-            "Remove Expectation")
+          let expectation = self.expectationWithDescription("Remove Expectation")
 
           cache.add(key, object: object)
           cache.remove(key) {
@@ -133,8 +130,7 @@ class DiskCacheSpec: QuickSpec {
 
       describe("#clear") {
         it("clears cache directory") {
-          let expectation = self.expectationWithDescription(
-            "Clear Expectation")
+          let expectation = self.expectationWithDescription("Clear Expectation")
 
           cache.add(key, object: object)
           cache.clear() {

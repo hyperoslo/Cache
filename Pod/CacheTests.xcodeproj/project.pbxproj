@@ -146,8 +146,8 @@
 				D5219A121BF6230F009D44DF /* Cache */,
 				D5704C511BC84D990089F388 /* Extensions */,
 				D52199FD1BF53F98009D44DF /* Library */,
-				D5219A101BF60C09009D44DF /* Cache.swift */,
 				D5219A221BF625CA009D44DF /* Config.swift */,
+				D5219A101BF60C09009D44DF /* Cache.swift */,
 			);
 			name = Source;
 			path = ../Source;
