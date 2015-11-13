@@ -6,6 +6,7 @@ public class Cache<T: Cachable> {
 
   let config: Config
   let kinds: [CacheKind]
+  let caches = [CacheAware]()
 
   // MARK: - Inititalization
 
@@ -14,6 +15,10 @@ public class Cache<T: Cachable> {
       self.name = name
       self.kinds = kinds
       self.config = config
+
+      kinds.forEach {
+        caches.append(CacheFactory.resolve(name, kind: $0, maxSize: config.maxSize))
+      }
   }
 
   // MARK: - Caching
