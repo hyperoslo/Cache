@@ -96,7 +96,7 @@ class MemoryCacheSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+          self.waitForExpectationsWithTimeout(4.0, handler:nil)
         }
 
         it("don't remove not expired object") {
