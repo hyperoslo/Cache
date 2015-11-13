@@ -5,20 +5,19 @@ public class Cache<T: Cachable> {
   public let name: String
 
   let config: Config
-  let kinds: [CacheKind]
-  let caches = [CacheAware]()
+  let frontCache: CacheAware
+  var backCache: CacheAware?
 
   // MARK: - Inititalization
 
-  public init(name: String, kinds: [CacheKind] = [.Memory, .Disk],
-    config: Config = Config.defaultConfig) {
-      self.name = name
-      self.kinds = kinds
-      self.config = config
+  public init(name: String, config: Config = Config.defaultConfig) {
+    self.name = name
+    self.config = config
 
-      kinds.forEach {
-        caches.append(CacheFactory.resolve(name, kind: $0, maxSize: config.maxSize))
-      }
+    frontCache = CacheFactory.resolve(name, kind: config.frontKind, maxSize: config.maxSize)
+    if let backKind = config.backKind {
+      backCache = CacheFactory.resolve(name, kind: backKind, maxSize: config.maxSize)
+    }
   }
 
   // MARK: - Caching
