@@ -22,7 +22,7 @@ public class Cache<T: Cachable> {
 
   // MARK: - Caching
 
-  func add(key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)?) {
+  func add(key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
     let expiry = expiry ?? config.expiry
 
     frontCache.add(key, object: object, expiry: expiry) { [weak self] in
@@ -55,7 +55,7 @@ public class Cache<T: Cachable> {
     }
   }
 
-  func remove(key: String, completion: (() -> Void)?) {
+  func remove(key: String, completion: (() -> Void)? = nil) {
     frontCache.remove(key) { [weak self] in
       guard let weakSelf = self, backCache = weakSelf.backCache else {
         completion?()
@@ -68,7 +68,7 @@ public class Cache<T: Cachable> {
     }
   }
 
-  func clear(completion: (() -> Void)?) {
+  func clear(completion: (() -> Void)? = nil) {
     frontCache.clear() { [weak self] in
       guard let weakSelf = self, backCache = weakSelf.backCache else {
         completion?()
