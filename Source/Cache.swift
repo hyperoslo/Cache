@@ -1,9 +1,5 @@
 import Foundation
 
-public enum Kind {
-  case Memory, Disk
-}
-
 public class Cache<T: Cachable> {
 
   let name: String
