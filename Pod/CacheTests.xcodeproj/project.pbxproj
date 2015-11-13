@@ -26,6 +26,8 @@
 		D5219A211BF6240D009D44DF /* CacheTaskSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A201BF6240D009D44DF /* CacheTaskSpec.swift */; };
 		D5219A231BF625CA009D44DF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A221BF625CA009D44DF /* Config.swift */; };
 		D5219A251BF62AA8009D44DF /* CacheFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A241BF62AA8009D44DF /* CacheFactory.swift */; };
+		D5219A271BF6663D009D44DF /* CacheFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A261BF6663D009D44DF /* CacheFactorySpec.swift */; };
+		D5219A291BF66BD9009D44DF /* CacheKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A281BF66BD9009D44DF /* CacheKind.swift */; };
 		D5704C531BC84DAA0089F388 /* String+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5704C521BC84DAA0089F388 /* String+Cache.swift */; };
 		D5CD0F731BCAE5F6004C0B32 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD0F721BCAE5F6004C0B32 /* SpecHelper.swift */; };
 		D5EA236B1BD5C21200FEABC3 /* String+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EA236A1BD5C21200FEABC3 /* String+CacheSpec.swift */; };
@@ -61,6 +63,8 @@
 		D5219A201BF6240D009D44DF /* CacheTaskSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheTaskSpec.swift; sourceTree = "<group>"; };
 		D5219A221BF625CA009D44DF /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D5219A241BF62AA8009D44DF /* CacheFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheFactory.swift; sourceTree = "<group>"; };
+		D5219A261BF6663D009D44DF /* CacheFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheFactorySpec.swift; sourceTree = "<group>"; };
+		D5219A281BF66BD9009D44DF /* CacheKind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheKind.swift; sourceTree = "<group>"; };
 		D5704C521BC84DAA0089F388 /* String+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Cache.swift"; sourceTree = "<group>"; };
 		D5CD0F721BCAE5F6004C0B32 /* SpecHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
 		D5EA236A1BD5C21200FEABC3 /* String+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+CacheSpec.swift"; sourceTree = "<group>"; };
@@ -163,9 +167,10 @@
 		D52199EF1BF51CD7009D44DF /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
+				D52199F21BF51D03009D44DF /* Cachable.swift */,
+				D5219A281BF66BD9009D44DF /* CacheKind.swift */,
 				D52199F01BF51D03009D44DF /* Capsule.swift */,
 				D52199F11BF51D03009D44DF /* Expiry.swift */,
-				D52199F21BF51D03009D44DF /* Cachable.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 			children = (
 				D5219A1C1BF623F7009D44DF /* DiskCacheSpec.swift */,
 				D5219A1D1BF623F7009D44DF /* MemoryCacheSpec.swift */,
+				D5219A261BF6663D009D44DF /* CacheFactorySpec.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -237,9 +243,9 @@
 		D5EA23641BD5BDE700FEABC3 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				D5219A041BF55A95009D44DF /* DataStructures */,
 				D5219A1B1BF6239A009D44DF /* Cache */,
 				D5EA23691BD5C1E600FEABC3 /* Extensions */,
-				D5219A041BF55A95009D44DF /* DataStructures */,
 				D5219A091BF55E4F009D44DF /* Library */,
 			);
 			path = Specs;
@@ -385,11 +391,13 @@
 				D5704C531BC84DAA0089F388 /* String+Cache.swift in Sources */,
 				D5219A061BF55AAB009D44DF /* CapsuleSpec.swift in Sources */,
 				D5219A151BF62329009D44DF /* DiskCache.swift in Sources */,
+				D5219A291BF66BD9009D44DF /* CacheKind.swift in Sources */,
 				D52199F41BF51D03009D44DF /* Expiry.swift in Sources */,
 				D5219A251BF62AA8009D44DF /* CacheFactory.swift in Sources */,
 				D5219A031BF557DC009D44DF /* NSDate+CacheSpec.swift in Sources */,
 				D5219A011BF5502E009D44DF /* NSDate+Cache.swift in Sources */,
 				D52199F31BF51D03009D44DF /* Capsule.swift in Sources */,
+				D5219A271BF6663D009D44DF /* CacheFactorySpec.swift in Sources */,
 				D5219A1E1BF623F7009D44DF /* DiskCacheSpec.swift in Sources */,
 				D5219A231BF625CA009D44DF /* Config.swift in Sources */,
 				D5219A161BF62329009D44DF /* MemoryCache.swift in Sources */,
