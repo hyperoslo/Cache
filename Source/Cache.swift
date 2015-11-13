@@ -3,12 +3,11 @@ import Foundation
 public class Cache<T: Cachable> {
 
   let name: String
-  let kinds: [Kind]
-  let expiry: Expiry = .Never
+  let config: Config
 
-  public init(name: String, kinds: [Kind] = [.Memory, .Disk]) {
+  public init(name: String, config: Config = Config.defaultConfig) {
     self.name = name
-    self.kinds = kinds
+    self.config = config
   }
 
   func add(key: String, object: T, expiry: Expiry = .Never, completion: (() -> Void)?) {
