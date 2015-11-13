@@ -79,10 +79,10 @@ public class MemoryCache: CacheAware {
       }
 
       if let capsule = weakSelf.cache.objectForKey(key) as? Capsule {
-        weakSelf.removeIfExpired(key, capsule: capsule)
+        weakSelf.removeIfExpired(key, capsule: capsule, completion: completion)
+      } else {
+        completion?()
       }
-
-      completion?()
     }
   }
 
@@ -100,9 +100,11 @@ public class MemoryCache: CacheAware {
 
   // MARK: - Helpers
 
-  func removeIfExpired(key: String, capsule: Capsule) {
+  func removeIfExpired(key: String, capsule: Capsule, completion: (() -> Void)? = nil) {
     if capsule.expired {
-      remove(key)
+      remove(key, completion: completion)
+    } else {
+      completion?()
     }
   }
 }
