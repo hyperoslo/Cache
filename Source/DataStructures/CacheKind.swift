@@ -8,9 +8,9 @@ public enum CacheKind {
 
     switch self {
     case .Memory:
-      result = "memory"
+      result = "Memory"
     case .Disk:
-      result = "disk"
+      result = "Disk"
     case .Custom(let name):
       result = name
     }
