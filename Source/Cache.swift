@@ -2,13 +2,21 @@ import Foundation
 
 public class Cache<T: Cachable> {
 
-  let name: String
-  let config: Config
+  public let name: String
 
-  public init(name: String, config: Config = Config.defaultConfig) {
-    self.name = name
-    self.config = config
+  let config: Config
+  let kinds: [CacheKind]
+
+  // MARK: - Inititalization
+
+  public init(name: String, kinds: [CacheKind] = [.Memory, .Disk],
+    config: Config = Config.defaultConfig) {
+      self.name = name
+      self.kinds = kinds
+      self.config = config
   }
+
+  // MARK: - Caching
 
   func add(key: String, object: T, expiry: Expiry = .Never, completion: (() -> Void)?) {
 
