@@ -41,25 +41,35 @@ class CacheSpec: QuickSpec {
       }
 
       describe("#add") {
-        it("saves an object") {
-          let expectation = self.expectationWithDescription(
-            "Save Object Expectation")
+        it("saves an object to memory and disk") {
+          let expectation1 = self.expectationWithDescription("Save Expectation")
+          let expectation2 = self.expectationWithDescription("Save To Memory Expectation")
+          let expectation3 = self.expectationWithDescription("Save To Disk Expectation")
 
           cache.add(key, object: object) {
             cache.object(key) { (receivedObject: User?) in
               expect(receivedObject).toNot(beNil())
-              expectation.fulfill()
+              expectation1.fulfill()
+            }
+
+            cache.frontCache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).toNot(beNil())
+              expectation2.fulfill()
+            }
+
+            cache.backCache?.object(key) { (receivedObject: User?) in
+              expect(receivedObject).toNot(beNil())
+              expectation3.fulfill()
             }
           }
 
-          self.waitForExpectationsWithTimeout(4.0, handler:nil)
+          self.waitForExpectationsWithTimeout(8.0, handler:nil)
         }
       }
 
       describe("#object") {
         it("resolves cached object") {
-          let expectation = self.expectationWithDescription(
-            "Object Expectation")
+          let expectation = self.expectationWithDescription("Object Expectation")
 
           cache.add(key, object: object) {
             cache.object(key) { (receivedObject: User?) in
@@ -74,36 +84,60 @@ class CacheSpec: QuickSpec {
       }
 
       describe("#remove") {
-        it("removes cached object") {
-          let expectation = self.expectationWithDescription(
-            "Remove Expectation")
+        it("removes cached object from memory and disk") {
+          let expectation1 = self.expectationWithDescription("Remove Expectation")
+          let expectation2 = self.expectationWithDescription("Remove From Memory Expectation")
+          let expectation3 = self.expectationWithDescription("Remove From Disk Expectation")
 
           cache.add(key, object: object)
+
           cache.remove(key) {
             cache.object(key) { (receivedObject: User?) in
               expect(receivedObject).to(beNil())
-              expectation.fulfill()
+              expectation1.fulfill()
+            }
+
+            cache.frontCache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).to(beNil())
+              expectation2.fulfill()
+            }
+
+            cache.backCache?.object(key) { (receivedObject: User?) in
+              expect(receivedObject).to(beNil())
+              expectation3.fulfill()
             }
           }
 
-          self.waitForExpectationsWithTimeout(4.0, handler:nil)
+          self.waitForExpectationsWithTimeout(8.0, handler:nil)
         }
       }
 
       describe("#clear") {
-        it("clears cache directory") {
-          let expectation = self.expectationWithDescription(
-            "Clear Expectation")
+        it("clears memory and disk cache") {
+          let expectation1 = self.expectationWithDescription("Clear Expectation")
+          let expectation2 = self.expectationWithDescription("Clear Memory Expectation")
+          let expectation3 = self.expectationWithDescription("Clear Disk Expectation")
 
           cache.add(key, object: object)
+
           cache.clear() {
             cache.object(key) { (receivedObject: User?) in
               expect(receivedObject).to(beNil())
-              expectation.fulfill()
+              expectation1.fulfill()
+            }
+
+            cache.frontCache.object(key) { (receivedObject: User?) in
+              expect(receivedObject).to(beNil())
+              expectation2.fulfill()
+            }
+
+            cache.backCache?.object(key) { (receivedObject: User?) in
+              expect(receivedObject).to(beNil())
+              expectation3.fulfill()
             }
           }
           
-          self.waitForExpectationsWithTimeout(4.0, handler:nil)
+          self.waitForExpectationsWithTimeout(8.0, handler:nil)
         }
       }
     }
