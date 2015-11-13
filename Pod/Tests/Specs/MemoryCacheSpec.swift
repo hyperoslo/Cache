@@ -86,7 +86,7 @@ class MemoryCacheSpec: QuickSpec {
         it("removes expired object") {
           let expectation = self.expectationWithDescription(
             "Remove If Expired Expectation")
-          let expiry: Expiry = .Date(NSDate().dateByAddingTimeInterval(-1000))
+          let expiry: Expiry = .Date(NSDate().dateByAddingTimeInterval(-100000))
 
           cache.add(key, object: object, expiry: expiry)
           cache.removeIfExpired(key) {

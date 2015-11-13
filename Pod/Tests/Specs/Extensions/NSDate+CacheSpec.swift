@@ -8,13 +8,13 @@ class NSDateCacheSpec: QuickSpec {
 
       describe("#inThePast") {
         it("returns that date is not in the past") {
-          let date = NSDate(timeInterval: 1000, sinceDate: NSDate())
+          let date = NSDate(timeInterval: 100000, sinceDate: NSDate())
 
           expect(date.inThePast).to(beFalse())
         }
 
         it("returns that date is in the past") {
-          let date = NSDate(timeInterval: -1000, sinceDate: NSDate())
+          let date = NSDate(timeInterval: -100000, sinceDate: NSDate())
 
           expect(date.inThePast).to(beTrue())
         }
