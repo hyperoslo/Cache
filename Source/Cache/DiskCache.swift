@@ -5,7 +5,7 @@ public class DiskCache: CacheAware {
   public static let prefix = "no.hyper.Cache.Disk"
 
   public let path: String
-  public var maxSize: UInt = 0
+  public var maxSize: UInt
   public private(set) var writeQueue: dispatch_queue_t
   public private(set) var readQueue: dispatch_queue_t
 
@@ -16,7 +16,8 @@ public class DiskCache: CacheAware {
 
   // MARK: - Initialization
 
-  public required init(name: String) {
+  public required init(name: String, maxSize: UInt = 0) {
+    self.maxSize = maxSize
     let cacheName = name.capitalizedString
     let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory,
       NSSearchPathDomainMask.UserDomainMask, true)

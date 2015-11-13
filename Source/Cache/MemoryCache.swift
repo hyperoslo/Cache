@@ -8,7 +8,7 @@ public class MemoryCache: CacheAware {
     return cache.name
   }
 
-  public var maxSize: UInt = 0 {
+  public var maxSize: UInt {
     didSet(value) {
       self.cache.totalCostLimit = Int(maxSize)
     }
@@ -20,7 +20,8 @@ public class MemoryCache: CacheAware {
 
   // MARK: - Initialization
 
-  public required init(name: String) {
+  public required init(name: String, maxSize: UInt = 0) {
+    self.maxSize = maxSize
     cache.name = "\(MemoryCache.prefix).\(name.capitalizedString)"
     writeQueue = dispatch_queue_create("\(cache.name).WriteQueue", DISPATCH_QUEUE_SERIAL)
     readQueue = dispatch_queue_create("\(cache.name).ReadQueue", DISPATCH_QUEUE_SERIAL)
