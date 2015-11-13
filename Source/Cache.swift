@@ -22,7 +22,9 @@ public class Cache<T: Cachable> {
 
   // MARK: - Caching
 
-  func add(key: String, object: T, expiry: Expiry = .Never, completion: (() -> Void)?) {
+  func add(key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)?) {
+    let expiry = expiry ?? config.expiry
+
     frontCache.add(key, object: object, expiry: expiry) { [weak self] in
       guard let weakSelf = self, backCache = weakSelf.backCache else {
         completion?()
