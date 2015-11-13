@@ -54,10 +54,28 @@ public class Cache<T: Cachable> {
   }
 
   func remove(key: String, completion: (() -> Void)?) {
+    frontCache.remove(key) { [weak self] in
+      guard let weakSelf = self, backCache = weakSelf.backCache else {
+        completion?()
+        return
+      }
 
+      backCache.remove(key) {
+        completion?()
+      }
+    }
   }
 
   func clear(completion: (() -> Void)?) {
+    frontCache.clear() { [weak self] in
+      guard let weakSelf = self, backCache = weakSelf.backCache else {
+        completion?()
+        return
+      }
 
+      backCache.clear() {
+        completion?()
+      }
+    }
   }
 }
