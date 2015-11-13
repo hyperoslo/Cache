@@ -70,13 +70,18 @@ public class MemoryCache: CacheAware {
     }
   }
 
-  public func removeIfExpired(key: String) {
+  public func removeIfExpired(key: String, completion: (() -> Void)?) {
     dispatch_async(writeQueue) { [weak self] in
-      guard let weakSelf = self else { return }
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
 
       if let capsule = weakSelf.cache.objectForKey(key) as? Capsule {
         weakSelf.removeIfExpired(key, capsule: capsule)
       }
+
+      completion?()
     }
   }
 
