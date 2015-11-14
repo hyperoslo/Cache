@@ -8,7 +8,7 @@ public class MemoryCache: CacheAware {
     return cache.name
   }
 
-  public var maxSize: UInt = 0 {
+  public var maxSize: UInt {
     didSet(value) {
       self.cache.totalCostLimit = Int(maxSize)
     }
@@ -20,7 +20,8 @@ public class MemoryCache: CacheAware {
 
   // MARK: - Initialization
 
-  public required init(name: String) {
+  public required init(name: String, maxSize: UInt = 0) {
+    self.maxSize = maxSize
     cache.name = "\(MemoryCache.prefix).\(name.capitalizedString)"
     writeQueue = dispatch_queue_create("\(cache.name).WriteQueue", DISPATCH_QUEUE_SERIAL)
     readQueue = dispatch_queue_create("\(cache.name).ReadQueue", DISPATCH_QUEUE_SERIAL)
@@ -78,10 +79,10 @@ public class MemoryCache: CacheAware {
       }
 
       if let capsule = weakSelf.cache.objectForKey(key) as? Capsule {
-        weakSelf.removeIfExpired(key, capsule: capsule)
+        weakSelf.removeIfExpired(key, capsule: capsule, completion: completion)
+      } else {
+        completion?()
       }
-
-      completion?()
     }
   }
 
@@ -99,9 +100,11 @@ public class MemoryCache: CacheAware {
 
   // MARK: - Helpers
 
-  func removeIfExpired(key: String, capsule: Capsule) {
+  func removeIfExpired(key: String, capsule: Capsule, completion: (() -> Void)? = nil) {
     if capsule.expired {
-      remove(key)
+      remove(key, completion: completion)
+    } else {
+      completion?()
     }
   }
 }

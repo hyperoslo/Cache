@@ -8,7 +8,7 @@ public protocol CacheAware {
   var writeQueue: dispatch_queue_t { get }
   var readQueue: dispatch_queue_t { get }
 
-  init(name: String)
+  init(name: String, maxSize: UInt)
 
   func add<T: Cachable>(key: String, object: T, expiry: Expiry, completion: (() -> Void)?)
   func object<T: Cachable>(key: String, completion: (object: T?) -> Void)

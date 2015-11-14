@@ -1,27 +1,32 @@
 import Quick
 import Nimble
 
-class MemoryCacheSpec: QuickSpec {
+class DiskCacheSpec: QuickSpec {
 
   override func spec() {
-    describe("MemoryCache") {
-      let name = "DudeMemoryCache"
+    describe("DiskCache") {
+      let name = "DudeDiskCache"
       let key = "youknownothing"
       let object = User(firstName: "John", lastName: "Snow")
-      var cache: MemoryCache!
+      var cache: DiskCache!
+      let fileManager = NSFileManager()
 
       beforeEach {
-        cache = MemoryCache(name: name)
+        cache = DiskCache(name: name)
       }
 
       afterEach {
-        cache.clear()
+        do {
+          try fileManager.removeItemAtPath(cache.path)
+        } catch {}
       }
 
       describe("#path") {
         it("returns the correct path") {
-          let path = "\(MemoryCache.prefix).\(name.capitalizedString)"
-          
+          let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory,
+            NSSearchPathDomainMask.UserDomainMask, true)
+          let path = "\(paths.first!)/\(DiskCache.prefix).\(name.capitalizedString)"
+
           expect(cache.path).to(equal(path))
         }
       }
@@ -33,15 +38,26 @@ class MemoryCacheSpec: QuickSpec {
       }
 
       describe("#add") {
-        it("saves an object") {
+        it("creates cache directory") {
           let expectation = self.expectationWithDescription(
-            "Save Object Expectation")
+            "Create Cache Directory Expectation")
 
           cache.add(key, object: object) {
-            cache.object(key) { (receivedObject: User?) in
-              expect(receivedObject).toNot(beNil())
-              expectation.fulfill()
-            }
+            let fileExist = fileManager.fileExistsAtPath(cache.path)
+            expect(fileExist).to(beTrue())
+            expectation.fulfill()
+          }
+
+          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+        }
+
+        it("saves an object") {
+          let expectation = self.expectationWithDescription("Save Expectation")
+
+          cache.add(key, object: object) {
+            let fileExist = fileManager.fileExistsAtPath(cache.filePath(key))
+            expect(fileExist).to(beTrue())
+            expectation.fulfill()
           }
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)
@@ -50,8 +66,7 @@ class MemoryCacheSpec: QuickSpec {
 
       describe("#object") {
         it("resolves cached object") {
-          let expectation = self.expectationWithDescription(
-            "Object Expectation")
+          let expectation = self.expectationWithDescription("Object Expectation")
 
           cache.add(key, object: object) {
             cache.object(key) { (receivedObject: User?) in
@@ -67,15 +82,13 @@ class MemoryCacheSpec: QuickSpec {
 
       describe("#remove") {
         it("removes cached object") {
-          let expectation = self.expectationWithDescription(
-            "Remove Expectation")
+          let expectation = self.expectationWithDescription("Remove Expectation")
 
           cache.add(key, object: object)
           cache.remove(key) {
-            cache.object(key) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
-              expectation.fulfill()
-            }
+            let fileExist = fileManager.fileExistsAtPath(cache.filePath(key))
+            expect(fileExist).to(beFalse())
+            expectation.fulfill()
           }
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)
@@ -117,18 +130,29 @@ class MemoryCacheSpec: QuickSpec {
 
       describe("#clear") {
         it("clears cache directory") {
-          let expectation = self.expectationWithDescription(
-            "Clear Expectation")
+          let expectation = self.expectationWithDescription("Clear Expectation")
 
           cache.add(key, object: object)
           cache.clear() {
-            cache.object(key) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
-              expectation.fulfill()
-            }
+            let fileExist = fileManager.fileExistsAtPath(cache.path)
+            expect(fileExist).to(beFalse())
+            expectation.fulfill()
           }
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)
+        }
+      }
+
+      describe("#fileName") {
+        it("returns a correct file name") {
+          expect(cache.fileName(key)).to(equal(key.base64()))
+        }
+      }
+
+      describe("#filePath") {
+        it("returns a correct file path") {
+          let filePath = "\(cache.path)/\(cache.fileName(key))"
+          expect(cache.filePath(key)).to(equal(filePath))
         }
       }
     }
