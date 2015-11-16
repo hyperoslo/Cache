@@ -5,8 +5,8 @@ public class Cache<T: Cachable> {
   public let name: String
 
   let config: Config
-  let frontCache: CacheAware
-  var backCache: CacheAware?
+  let frontCache: StorageAware
+  var backCache: StorageAware?
 
   // MARK: - Inititalization
 

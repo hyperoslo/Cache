@@ -1,6 +1,6 @@
 import Foundation
 
-public class DiskStorage: StorageAware, CacheAware {
+public class DiskStorage: StorageAware {
 
   public static let prefix = "no.hyper.Cache.Disk"
 

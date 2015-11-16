@@ -1,6 +1,14 @@
 import Foundation
 
-public protocol StorageAware {
+public protocol CacheAware {
+  func add<T: Cachable>(key: String, object: T, expiry: Expiry, completion: (() -> Void)?)
+  func object<T: Cachable>(key: String, completion: (object: T?) -> Void)
+  func remove(key: String, completion: (() -> Void)?)
+  func removeIfExpired(key: String, completion: (() -> Void)?)
+  func clear(completion: (() -> Void)?)
+}
+
+public protocol StorageAware: CacheAware {
   static var prefix: String { get }
 
   var path: String { get }
@@ -9,12 +17,4 @@ public protocol StorageAware {
   var readQueue: dispatch_queue_t { get }
 
   init(name: String, maxSize: UInt)
-}
-
-public protocol CacheAware {
-  func add<T: Cachable>(key: String, object: T, expiry: Expiry, completion: (() -> Void)?)
-  func object<T: Cachable>(key: String, completion: (object: T?) -> Void)
-  func remove(key: String, completion: (() -> Void)?)
-  func removeIfExpired(key: String, completion: (() -> Void)?)
-  func clear(completion: (() -> Void)?)
 }
