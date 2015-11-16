@@ -1,6 +1,6 @@
 import Foundation
 
-public class Cache<T: Cachable>: CacheAware {
+public class Cache<T: Cachable> {
 
   public let name: String
 
@@ -64,10 +64,6 @@ public class Cache<T: Cachable>: CacheAware {
         completion?()
       }
     }
-  }
-
-  public func removeIfExpired(key: String, completion: (() -> Void)?) {
-
   }
 
   public func clear(completion: (() -> Void)? = nil) {

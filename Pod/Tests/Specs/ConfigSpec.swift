@@ -11,7 +11,7 @@ class ConfigSpec: QuickSpec {
           let config = Config.defaultConfig
 
           expect(config.frontKind.name).to(equal(StorageKind.Memory.name))
-          expect(config.backKind!.name).to(equal(StorageKind.Disk.name))
+          expect(config.backKind.name).to(equal(StorageKind.Disk.name))
           expect(config.expiry.date).to(equal(Expiry.Never.date))
           expect(config.maxSize).to(equal(0))
         }

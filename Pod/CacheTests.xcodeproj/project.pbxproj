@@ -27,7 +27,6 @@
 		D538305D1BFA1BE600F43D58 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53830581BFA1BE600F43D58 /* StorageFactory.swift */; };
 		D538305E1BFA1BE600F43D58 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53830591BFA1BE600F43D58 /* DiskStorage.swift */; };
 		D538305F1BFA1BE600F43D58 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D538305A1BFA1BE600F43D58 /* MemoryStorage.swift */; };
-		D53830601BFA1BE600F43D58 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D538305B1BFA1BE600F43D58 /* Storage.swift */; };
 		D53830631BFA245900F43D58 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53830621BFA245900F43D58 /* Cache.swift */; };
 		D53830681BFA29E100F43D58 /* DiskStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53830651BFA29E100F43D58 /* DiskStorageSpec.swift */; };
 		D53830691BFA29E100F43D58 /* MemoryStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53830661BFA29E100F43D58 /* MemoryStorageSpec.swift */; };
@@ -68,7 +67,6 @@
 		D53830581BFA1BE600F43D58 /* StorageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageFactory.swift; sourceTree = "<group>"; };
 		D53830591BFA1BE600F43D58 /* DiskStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
 		D538305A1BFA1BE600F43D58 /* MemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
-		D538305B1BFA1BE600F43D58 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		D53830621BFA245900F43D58 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D53830651BFA29E100F43D58 /* DiskStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskStorageSpec.swift; sourceTree = "<group>"; };
 		D53830661BFA29E100F43D58 /* MemoryStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorageSpec.swift; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 				D53830581BFA1BE600F43D58 /* StorageFactory.swift */,
 				D53830591BFA1BE600F43D58 /* DiskStorage.swift */,
 				D538305A1BFA1BE600F43D58 /* MemoryStorage.swift */,
-				D538305B1BFA1BE600F43D58 /* Storage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -422,7 +419,6 @@
 				D5219A2D1BF66CDC009D44DF /* ConfigSpec.swift in Sources */,
 				D5219A231BF625CA009D44DF /* Config.swift in Sources */,
 				D5219A2B1BF66C0A009D44DF /* StorageKindSpec.swift in Sources */,
-				D53830601BFA1BE600F43D58 /* Storage.swift in Sources */,
 				D5219A0B1BF55E63009D44DF /* DefaultCacheConverterSpec.swift in Sources */,
 				D5CD0F731BCAE5F6004C0B32 /* SpecHelper.swift in Sources */,
 				D53830631BFA245900F43D58 /* Cache.swift in Sources */,

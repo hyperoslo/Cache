@@ -55,7 +55,7 @@ class StorageFactorySpec: QuickSpec {
 
       describe(".reset") {
         it("resets to defaults") {
-          StorageFactory.register(.Disk, cache: MemoryStorage.self)
+          StorageFactory.register(.Disk, storage: MemoryStorage.self)
           StorageFactory.reset()
           let resolvedStorage = StorageFactory.resolve("Test", kind: .Disk)
 
