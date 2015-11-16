@@ -17,20 +17,21 @@
 		D5219A081BF55BD7009D44DF /* ExpirySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A071BF55BD7009D44DF /* ExpirySpec.swift */; };
 		D5219A0B1BF55E63009D44DF /* DefaultCacheConverterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A0A1BF55E63009D44DF /* DefaultCacheConverterSpec.swift */; };
 		D5219A111BF60C09009D44DF /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A101BF60C09009D44DF /* Cache.swift */; };
-		D5219A151BF62329009D44DF /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A131BF62329009D44DF /* DiskCache.swift */; };
-		D5219A161BF62329009D44DF /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A141BF62329009D44DF /* MemoryCache.swift */; };
-		D5219A181BF6234D009D44DF /* CacheAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A171BF6234D009D44DF /* CacheAware.swift */; };
 		D5219A1A1BF62371009D44DF /* CacheTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A191BF62371009D44DF /* CacheTask.swift */; };
 		D5219A1E1BF623F7009D44DF /* DiskCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A1C1BF623F7009D44DF /* DiskCacheSpec.swift */; };
 		D5219A1F1BF623F7009D44DF /* MemoryCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A1D1BF623F7009D44DF /* MemoryCacheSpec.swift */; };
 		D5219A211BF6240D009D44DF /* CacheTaskSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A201BF6240D009D44DF /* CacheTaskSpec.swift */; };
 		D5219A231BF625CA009D44DF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A221BF625CA009D44DF /* Config.swift */; };
-		D5219A251BF62AA8009D44DF /* CacheFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A241BF62AA8009D44DF /* CacheFactory.swift */; };
 		D5219A271BF6663D009D44DF /* CacheFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A261BF6663D009D44DF /* CacheFactorySpec.swift */; };
 		D5219A291BF66BD9009D44DF /* CacheKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A281BF66BD9009D44DF /* CacheKind.swift */; };
 		D5219A2B1BF66C0A009D44DF /* CacheKindSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A2A1BF66C0A009D44DF /* CacheKindSpec.swift */; };
 		D5219A2D1BF66CDC009D44DF /* ConfigSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A2C1BF66CDC009D44DF /* ConfigSpec.swift */; };
 		D5219A2F1BF66E8E009D44DF /* CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5219A2E1BF66E8E009D44DF /* CacheSpec.swift */; };
+		D538305C1BFA1BE600F43D58 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53830571BFA1BE600F43D58 /* StorageAware.swift */; };
+		D538305D1BFA1BE600F43D58 /* CacheFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53830581BFA1BE600F43D58 /* CacheFactory.swift */; };
+		D538305E1BFA1BE600F43D58 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53830591BFA1BE600F43D58 /* DiskStorage.swift */; };
+		D538305F1BFA1BE600F43D58 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D538305A1BFA1BE600F43D58 /* MemoryStorage.swift */; };
+		D53830601BFA1BE600F43D58 /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D538305B1BFA1BE600F43D58 /* MemoryCache.swift */; };
 		D5704C531BC84DAA0089F388 /* String+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5704C521BC84DAA0089F388 /* String+Cache.swift */; };
 		D5CD0F731BCAE5F6004C0B32 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD0F721BCAE5F6004C0B32 /* SpecHelper.swift */; };
 		D5EA236B1BD5C21200FEABC3 /* String+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EA236A1BD5C21200FEABC3 /* String+CacheSpec.swift */; };
@@ -57,20 +58,21 @@
 		D5219A071BF55BD7009D44DF /* ExpirySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpirySpec.swift; sourceTree = "<group>"; };
 		D5219A0A1BF55E63009D44DF /* DefaultCacheConverterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultCacheConverterSpec.swift; sourceTree = "<group>"; };
 		D5219A101BF60C09009D44DF /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
-		D5219A131BF62329009D44DF /* DiskCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
-		D5219A141BF62329009D44DF /* MemoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
-		D5219A171BF6234D009D44DF /* CacheAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheAware.swift; sourceTree = "<group>"; };
 		D5219A191BF62371009D44DF /* CacheTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheTask.swift; sourceTree = "<group>"; };
 		D5219A1C1BF623F7009D44DF /* DiskCacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskCacheSpec.swift; sourceTree = "<group>"; };
 		D5219A1D1BF623F7009D44DF /* MemoryCacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCacheSpec.swift; sourceTree = "<group>"; };
 		D5219A201BF6240D009D44DF /* CacheTaskSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheTaskSpec.swift; sourceTree = "<group>"; };
 		D5219A221BF625CA009D44DF /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		D5219A241BF62AA8009D44DF /* CacheFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheFactory.swift; sourceTree = "<group>"; };
 		D5219A261BF6663D009D44DF /* CacheFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheFactorySpec.swift; sourceTree = "<group>"; };
 		D5219A281BF66BD9009D44DF /* CacheKind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheKind.swift; sourceTree = "<group>"; };
 		D5219A2A1BF66C0A009D44DF /* CacheKindSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheKindSpec.swift; sourceTree = "<group>"; };
 		D5219A2C1BF66CDC009D44DF /* ConfigSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSpec.swift; sourceTree = "<group>"; };
 		D5219A2E1BF66E8E009D44DF /* CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheSpec.swift; sourceTree = "<group>"; };
+		D53830571BFA1BE600F43D58 /* StorageAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageAware.swift; sourceTree = "<group>"; };
+		D53830581BFA1BE600F43D58 /* CacheFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheFactory.swift; sourceTree = "<group>"; };
+		D53830591BFA1BE600F43D58 /* DiskStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
+		D538305A1BFA1BE600F43D58 /* MemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
+		D538305B1BFA1BE600F43D58 /* MemoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		D5704C521BC84DAA0089F388 /* String+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Cache.swift"; sourceTree = "<group>"; };
 		D5CD0F721BCAE5F6004C0B32 /* SpecHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
 		D5EA236A1BD5C21200FEABC3 /* String+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+CacheSpec.swift"; sourceTree = "<group>"; };
@@ -142,8 +144,9 @@
 		14C1365B1AB784BC00B7B07A /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D53830611BFA1CC900F43D58 /* Cache */,
+				D53830561BFA1BE600F43D58 /* Storage */,
 				D52199EF1BF51CD7009D44DF /* DataStructures */,
-				D5219A121BF6230F009D44DF /* Cache */,
 				D5704C511BC84D990089F388 /* Extensions */,
 				D52199FD1BF53F98009D44DF /* Library */,
 				D5219A221BF625CA009D44DF /* Config.swift */,
@@ -209,23 +212,31 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
-		D5219A121BF6230F009D44DF /* Cache */ = {
-			isa = PBXGroup;
-			children = (
-				D5219A171BF6234D009D44DF /* CacheAware.swift */,
-				D5219A131BF62329009D44DF /* DiskCache.swift */,
-				D5219A141BF62329009D44DF /* MemoryCache.swift */,
-				D5219A241BF62AA8009D44DF /* CacheFactory.swift */,
-			);
-			path = Cache;
-			sourceTree = "<group>";
-		};
 		D5219A1B1BF6239A009D44DF /* Cache */ = {
 			isa = PBXGroup;
 			children = (
 				D5219A1C1BF623F7009D44DF /* DiskCacheSpec.swift */,
 				D5219A1D1BF623F7009D44DF /* MemoryCacheSpec.swift */,
 				D5219A261BF6663D009D44DF /* CacheFactorySpec.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		D53830561BFA1BE600F43D58 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				D53830571BFA1BE600F43D58 /* StorageAware.swift */,
+				D53830581BFA1BE600F43D58 /* CacheFactory.swift */,
+				D53830591BFA1BE600F43D58 /* DiskStorage.swift */,
+				D538305A1BFA1BE600F43D58 /* MemoryStorage.swift */,
+				D538305B1BFA1BE600F43D58 /* MemoryCache.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		D53830611BFA1CC900F43D58 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -393,26 +404,27 @@
 				D52199F51BF51D03009D44DF /* Cachable.swift in Sources */,
 				D5EA236B1BD5C21200FEABC3 /* String+CacheSpec.swift in Sources */,
 				D5219A211BF6240D009D44DF /* CacheTaskSpec.swift in Sources */,
-				D5219A181BF6234D009D44DF /* CacheAware.swift in Sources */,
+				D538305D1BFA1BE600F43D58 /* CacheFactory.swift in Sources */,
 				D5219A1A1BF62371009D44DF /* CacheTask.swift in Sources */,
+				D538305E1BFA1BE600F43D58 /* DiskStorage.swift in Sources */,
 				D52199FF1BF53FA8009D44DF /* DefaultCacheConverter.swift in Sources */,
 				D5219A111BF60C09009D44DF /* Cache.swift in Sources */,
 				D5704C531BC84DAA0089F388 /* String+Cache.swift in Sources */,
 				D5219A061BF55AAB009D44DF /* CapsuleSpec.swift in Sources */,
-				D5219A151BF62329009D44DF /* DiskCache.swift in Sources */,
 				D5219A291BF66BD9009D44DF /* CacheKind.swift in Sources */,
 				D52199F41BF51D03009D44DF /* Expiry.swift in Sources */,
-				D5219A251BF62AA8009D44DF /* CacheFactory.swift in Sources */,
 				D5219A031BF557DC009D44DF /* NSDate+CacheSpec.swift in Sources */,
 				D5219A2F1BF66E8E009D44DF /* CacheSpec.swift in Sources */,
 				D5219A011BF5502E009D44DF /* NSDate+Cache.swift in Sources */,
+				D538305C1BFA1BE600F43D58 /* StorageAware.swift in Sources */,
+				D538305F1BFA1BE600F43D58 /* MemoryStorage.swift in Sources */,
 				D52199F31BF51D03009D44DF /* Capsule.swift in Sources */,
 				D5219A271BF6663D009D44DF /* CacheFactorySpec.swift in Sources */,
 				D5219A1E1BF623F7009D44DF /* DiskCacheSpec.swift in Sources */,
 				D5219A2D1BF66CDC009D44DF /* ConfigSpec.swift in Sources */,
 				D5219A231BF625CA009D44DF /* Config.swift in Sources */,
-				D5219A161BF62329009D44DF /* MemoryCache.swift in Sources */,
 				D5219A2B1BF66C0A009D44DF /* CacheKindSpec.swift in Sources */,
+				D53830601BFA1BE600F43D58 /* MemoryCache.swift in Sources */,
 				D5219A0B1BF55E63009D44DF /* DefaultCacheConverterSpec.swift in Sources */,
 				D5CD0F731BCAE5F6004C0B32 /* SpecHelper.swift in Sources */,
 			);

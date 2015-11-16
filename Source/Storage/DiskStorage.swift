@@ -1,6 +1,6 @@
 import Foundation
 
-public class DiskCache: CacheAware {
+public class DiskStorage: StorageAware, CacheAware {
 
   public static let prefix = "no.hyper.Cache.Disk"
 
@@ -22,10 +22,10 @@ public class DiskCache: CacheAware {
     let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory,
       NSSearchPathDomainMask.UserDomainMask, true)
 
-    path = "\(paths.first!)/\(DiskCache.prefix).\(cacheName)"
-    writeQueue = dispatch_queue_create("\(DiskCache.prefix).\(cacheName).WriteQueue",
+    path = "\(paths.first!)/\(DiskStorage.prefix).\(cacheName)"
+    writeQueue = dispatch_queue_create("\(DiskStorage.prefix).\(cacheName).WriteQueue",
       DISPATCH_QUEUE_SERIAL)
-    readQueue = dispatch_queue_create("\(DiskCache.prefix).\(cacheName).ReadQueue",
+    readQueue = dispatch_queue_create("\(DiskStorage.prefix).\(cacheName).ReadQueue",
       DISPATCH_QUEUE_SERIAL)
   }
 
