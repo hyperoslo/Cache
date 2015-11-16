@@ -1,23 +1,23 @@
 import Quick
 import Nimble
 
-class DiskCacheSpec: QuickSpec {
+class DiskStorageSpec: QuickSpec {
 
   override func spec() {
-    describe("DiskCache") {
-      let name = "DudeDiskCache"
+    describe("DiskStorage") {
+      let name = "Floppy"
       let key = "youknownothing"
       let object = User(firstName: "John", lastName: "Snow")
-      var cache: DiskCache!
+      var storage: DiskStorage!
       let fileManager = NSFileManager()
 
       beforeEach {
-        cache = DiskCache(name: name)
+        storage = DiskStorage(name: name)
       }
 
       afterEach {
         do {
-          try fileManager.removeItemAtPath(cache.path)
+          try fileManager.removeItemAtPath(storage.path)
         } catch {}
       }
 
@@ -25,15 +25,15 @@ class DiskCacheSpec: QuickSpec {
         it("returns the correct path") {
           let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory,
             NSSearchPathDomainMask.UserDomainMask, true)
-          let path = "\(paths.first!)/\(DiskCache.prefix).\(name.capitalizedString)"
+          let path = "\(paths.first!)/\(DiskStorage.prefix).\(name.capitalizedString)"
 
-          expect(cache.path).to(equal(path))
+          expect(storage.path).to(equal(path))
         }
       }
 
       describe("#maxSize") {
         it("returns the default maximum size of a cache") {
-          expect(cache.maxSize).to(equal(0))
+          expect(storage.maxSize).to(equal(0))
         }
       }
 
@@ -42,8 +42,8 @@ class DiskCacheSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Create Cache Directory Expectation")
 
-          cache.add(key, object: object) {
-            let fileExist = fileManager.fileExistsAtPath(cache.path)
+          storage.add(key, object: object) {
+            let fileExist = fileManager.fileExistsAtPath(storage.path)
             expect(fileExist).to(beTrue())
             expectation.fulfill()
           }
@@ -54,8 +54,8 @@ class DiskCacheSpec: QuickSpec {
         it("saves an object") {
           let expectation = self.expectationWithDescription("Save Expectation")
 
-          cache.add(key, object: object) {
-            let fileExist = fileManager.fileExistsAtPath(cache.filePath(key))
+          storage.add(key, object: object) {
+            let fileExist = fileManager.fileExistsAtPath(storage.filePath(key))
             expect(fileExist).to(beTrue())
             expectation.fulfill()
           }
@@ -68,8 +68,8 @@ class DiskCacheSpec: QuickSpec {
         it("resolves cached object") {
           let expectation = self.expectationWithDescription("Object Expectation")
 
-          cache.add(key, object: object) {
-            cache.object(key) { (receivedObject: User?) in
+          storage.add(key, object: object) {
+            storage.object(key) { (receivedObject: User?) in
               expect(receivedObject?.firstName).to(equal(object.firstName))
               expect(receivedObject?.lastName).to(equal(object.lastName))
               expectation.fulfill()
@@ -84,9 +84,9 @@ class DiskCacheSpec: QuickSpec {
         it("removes cached object") {
           let expectation = self.expectationWithDescription("Remove Expectation")
 
-          cache.add(key, object: object)
-          cache.remove(key) {
-            let fileExist = fileManager.fileExistsAtPath(cache.filePath(key))
+          storage.add(key, object: object)
+          storage.remove(key) {
+            let fileExist = fileManager.fileExistsAtPath(storage.filePath(key))
             expect(fileExist).to(beFalse())
             expectation.fulfill()
           }
@@ -101,9 +101,9 @@ class DiskCacheSpec: QuickSpec {
             "Remove If Expired Expectation")
           let expiry: Expiry = .Date(NSDate().dateByAddingTimeInterval(-100000))
 
-          cache.add(key, object: object, expiry: expiry)
-          cache.removeIfExpired(key) {
-            cache.object(key) { (receivedObject: User?) in
+          storage.add(key, object: object, expiry: expiry)
+          storage.removeIfExpired(key) {
+            storage.object(key) { (receivedObject: User?) in
               expect(receivedObject).to(beNil())
               expectation.fulfill()
             }
@@ -116,9 +116,9 @@ class DiskCacheSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Don't Remove If Not Expired Expectation")
 
-          cache.add(key, object: object)
-          cache.removeIfExpired(key) {
-            cache.object(key) { (receivedObject: User?) in
+          storage.add(key, object: object)
+          storage.removeIfExpired(key) {
+            storage.object(key) { (receivedObject: User?) in
               expect(receivedObject).notTo(beNil())
               expectation.fulfill()
             }
@@ -132,9 +132,9 @@ class DiskCacheSpec: QuickSpec {
         it("clears cache directory") {
           let expectation = self.expectationWithDescription("Clear Expectation")
 
-          cache.add(key, object: object)
-          cache.clear() {
-            let fileExist = fileManager.fileExistsAtPath(cache.path)
+          storage.add(key, object: object)
+          storage.clear() {
+            let fileExist = fileManager.fileExistsAtPath(storage.path)
             expect(fileExist).to(beFalse())
             expectation.fulfill()
           }
@@ -145,14 +145,14 @@ class DiskCacheSpec: QuickSpec {
 
       describe("#fileName") {
         it("returns a correct file name") {
-          expect(cache.fileName(key)).to(equal(key.base64()))
+          expect(storage.fileName(key)).to(equal(key.base64()))
         }
       }
 
       describe("#filePath") {
         it("returns a correct file path") {
-          let filePath = "\(cache.path)/\(cache.fileName(key))"
-          expect(cache.filePath(key)).to(equal(filePath))
+          let filePath = "\(storage.path)/\(storage.fileName(key))"
+          expect(storage.filePath(key)).to(equal(filePath))
         }
       }
     }

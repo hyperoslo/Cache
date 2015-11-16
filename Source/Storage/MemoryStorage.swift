@@ -1,6 +1,6 @@
 import Foundation
 
-public class MemoryCache: CacheAware {
+public class MemoryStorage: StorageAware {
 
   public static let prefix = "no.hyper.Cache.Memory"
 
@@ -22,7 +22,7 @@ public class MemoryCache: CacheAware {
 
   public required init(name: String, maxSize: UInt = 0) {
     self.maxSize = maxSize
-    cache.name = "\(MemoryCache.prefix).\(name.capitalizedString)"
+    cache.name = "\(MemoryStorage.prefix).\(name.capitalizedString)"
     writeQueue = dispatch_queue_create("\(cache.name).WriteQueue", DISPATCH_QUEUE_SERIAL)
     readQueue = dispatch_queue_create("\(cache.name).ReadQueue", DISPATCH_QUEUE_SERIAL)
   }

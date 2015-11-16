@@ -1,4 +1,4 @@
-public enum CacheKind {
+public enum StorageKind {
   case Memory
   case Disk
   case Custom(String)

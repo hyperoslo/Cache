@@ -1,34 +1,34 @@
 import Quick
 import Nimble
 
-class MemoryCacheSpec: QuickSpec {
+class MemoryStorageSpec: QuickSpec {
 
   override func spec() {
-    describe("MemoryCache") {
-      let name = "DudeMemoryCache"
+    describe("MemoryStorage") {
+      let name = "Brain"
       let key = "youknownothing"
       let object = User(firstName: "John", lastName: "Snow")
-      var cache: MemoryCache!
+      var storage: MemoryStorage!
 
       beforeEach {
-        cache = MemoryCache(name: name)
+        storage = MemoryStorage(name: name)
       }
 
       afterEach {
-        cache.clear()
+        storage.clear()
       }
 
       describe("#path") {
         it("returns the correct path") {
-          let path = "\(MemoryCache.prefix).\(name.capitalizedString)"
+          let path = "\(MemoryStorage.prefix).\(name.capitalizedString)"
           
-          expect(cache.path).to(equal(path))
+          expect(storage.path).to(equal(path))
         }
       }
 
       describe("#maxSize") {
         it("returns the default maximum size of a cache") {
-          expect(cache.maxSize).to(equal(0))
+          expect(storage.maxSize).to(equal(0))
         }
       }
 
@@ -37,8 +37,8 @@ class MemoryCacheSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Save Object Expectation")
 
-          cache.add(key, object: object) {
-            cache.object(key) { (receivedObject: User?) in
+          storage.add(key, object: object) {
+            storage.object(key) { (receivedObject: User?) in
               expect(receivedObject).toNot(beNil())
               expectation.fulfill()
             }
@@ -53,8 +53,8 @@ class MemoryCacheSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Object Expectation")
 
-          cache.add(key, object: object) {
-            cache.object(key) { (receivedObject: User?) in
+          storage.add(key, object: object) {
+            storage.object(key) { (receivedObject: User?) in
               expect(receivedObject?.firstName).to(equal(object.firstName))
               expect(receivedObject?.lastName).to(equal(object.lastName))
               expectation.fulfill()
@@ -70,9 +70,9 @@ class MemoryCacheSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Remove Expectation")
 
-          cache.add(key, object: object)
-          cache.remove(key) {
-            cache.object(key) { (receivedObject: User?) in
+          storage.add(key, object: object)
+          storage.remove(key) {
+            storage.object(key) { (receivedObject: User?) in
               expect(receivedObject).to(beNil())
               expectation.fulfill()
             }
@@ -88,9 +88,9 @@ class MemoryCacheSpec: QuickSpec {
             "Remove If Expired Expectation")
           let expiry: Expiry = .Date(NSDate().dateByAddingTimeInterval(-100000))
 
-          cache.add(key, object: object, expiry: expiry)
-          cache.removeIfExpired(key) {
-            cache.object(key) { (receivedObject: User?) in
+          storage.add(key, object: object, expiry: expiry)
+          storage.removeIfExpired(key) {
+            storage.object(key) { (receivedObject: User?) in
               expect(receivedObject).to(beNil())
               expectation.fulfill()
             }
@@ -103,9 +103,9 @@ class MemoryCacheSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Don't Remove If Not Expired Expectation")
 
-          cache.add(key, object: object)
-          cache.removeIfExpired(key) {
-            cache.object(key) { (receivedObject: User?) in
+          storage.add(key, object: object)
+          storage.removeIfExpired(key) {
+            storage.object(key) { (receivedObject: User?) in
               expect(receivedObject).notTo(beNil())
               expectation.fulfill()
             }
@@ -120,9 +120,9 @@ class MemoryCacheSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Clear Expectation")
 
-          cache.add(key, object: object)
-          cache.clear() {
-            cache.object(key) { (receivedObject: User?) in
+          storage.add(key, object: object)
+          storage.clear() {
+            storage.object(key) { (receivedObject: User?) in
               expect(receivedObject).to(beNil())
               expectation.fulfill()
             }
