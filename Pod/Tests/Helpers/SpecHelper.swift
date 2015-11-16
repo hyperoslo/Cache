@@ -35,3 +35,10 @@ extension User: Cachable {
     return data
   }
 }
+
+class nn {
+  func aa() {
+    let hc = HybridMemoryCache<User>(name: "olo")
+    hc.add("d", object: "")
+  }
+}

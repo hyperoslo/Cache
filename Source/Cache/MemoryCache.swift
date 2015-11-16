@@ -108,3 +108,14 @@ public class MemoryCache: CacheAware {
     }
   }
 }
+
+public class HybridMemoryCache<T: Cachable>: MemoryCache {
+
+  public required init(name: String, maxSize: UInt = 0) {
+    super.init(name: name, maxSize: maxSize)
+  }
+
+  public override func add(key: String, object: T, expiry: Expiry = .Never, completion: (() -> Void)? = nil) {
+    super.add(key, object: object, expiry: expiry, completion: completion)
+  }
+}
