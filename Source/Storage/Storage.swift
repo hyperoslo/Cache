@@ -12,11 +12,11 @@ public class Storage<T: Cachable>: CacheAware {
 
   // MARK: - CacheAware
 
-  public func add(key: String, object: T, expiry: Expiry = .Never, completion: (() -> Void)? = nil) {
+  public func add<T: Cachable>(key: String, object: T, expiry: Expiry = .Never, completion: (() -> Void)? = nil) {
     storage.add(key, object: object, expiry: expiry, completion: completion)
   }
 
-  public func object(key: String, completion: (object: T?) -> Void) {
+  public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) {
     storage.object(key, completion: completion)
   }
 

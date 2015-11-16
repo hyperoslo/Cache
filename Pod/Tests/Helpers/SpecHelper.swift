@@ -28,17 +28,13 @@ extension User: Cachable {
   func encode() -> NSData? {
     var data: NSData?
 
+    let storage = Storage<User>(kind: .Disk, name: "Storage")
+    storage.add("d", object: "Sft")
+
     do {
       data = try DefaultCacheConverter<User>().encode(self)
     } catch {}
 
     return data
-  }
-}
-
-class nn {
-  func aa() {
-    let hc = HybridMemoryCache<User>(name: "olo")
-    hc.add("d", object: "")
   }
 }

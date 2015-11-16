@@ -28,15 +28,14 @@ class CacheSpec: QuickSpec {
           let defaultConfig = Config.defaultConfig
 
           expect(cache.config.frontKind.name).to(equal(defaultConfig.frontKind.name))
-          expect(cache.config.backKind!.name).to(equal(defaultConfig.backKind!.name))
+          expect(cache.config.backKind.name).to(equal(defaultConfig.backKind.name))
           expect(cache.config.expiry.date).to(equal(defaultConfig.expiry.date))
           expect(cache.config.maxSize).to(equal(defaultConfig.maxSize))
         }
 
         it("sets the front cache as a memory cache") {
-          expect(cache.frontCache.self is MemoryCache).to(beTrue())
-          expect(cache.backCache).toNot(beNil())
-          expect(cache.backCache!.self is DiskCache).to(beTrue())
+          expect(cache.frontStorage.self is MemoryStorage).to(beTrue())
+          expect(cache.backStorage.self is DiskStorage).to(beTrue())
         }
       }
 
@@ -52,12 +51,12 @@ class CacheSpec: QuickSpec {
               expectation1.fulfill()
             }
 
-            cache.frontCache.object(key) { (receivedObject: User?) in
+            cache.frontStorage.object(key) { (receivedObject: User?) in
               expect(receivedObject).toNot(beNil())
               expectation2.fulfill()
             }
 
-            cache.backCache?.object(key) { (receivedObject: User?) in
+            cache.backStorage.object(key) { (receivedObject: User?) in
               expect(receivedObject).toNot(beNil())
               expectation3.fulfill()
             }
@@ -97,12 +96,12 @@ class CacheSpec: QuickSpec {
               expectation1.fulfill()
             }
 
-            cache.frontCache.object(key) { (receivedObject: User?) in
+            cache.frontStorage.object(key) { (receivedObject: User?) in
               expect(receivedObject).to(beNil())
               expectation2.fulfill()
             }
 
-            cache.backCache?.object(key) { (receivedObject: User?) in
+            cache.backStorage.object(key) { (receivedObject: User?) in
               expect(receivedObject).to(beNil())
               expectation3.fulfill()
             }
@@ -126,12 +125,12 @@ class CacheSpec: QuickSpec {
               expectation1.fulfill()
             }
 
-            cache.frontCache.object(key) { (receivedObject: User?) in
+            cache.frontStorage.object(key) { (receivedObject: User?) in
               expect(receivedObject).to(beNil())
               expectation2.fulfill()
             }
 
-            cache.backCache?.object(key) { (receivedObject: User?) in
+            cache.backStorage.object(key) { (receivedObject: User?) in
               expect(receivedObject).to(beNil())
               expectation3.fulfill()
             }

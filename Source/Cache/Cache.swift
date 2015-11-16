@@ -6,7 +6,7 @@ public class Cache<T: Cachable>: CacheAware {
 
   let config: Config
   let frontStorage: StorageAware
-  var backStorage: StorageAware?
+  var backStorage: StorageAware
 
   // MARK: - Inititalization
 
@@ -15,7 +15,7 @@ public class Cache<T: Cachable>: CacheAware {
     self.config = config
 
     frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: config.maxSize)
-    backStorage = StorageFactory.resolve(name, kind: backKind, maxSize: config.maxSize)
+    backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
   }
 
   // MARK: - Caching
@@ -64,6 +64,10 @@ public class Cache<T: Cachable>: CacheAware {
         completion?()
       }
     }
+  }
+
+  public func removeIfExpired(key: String, completion: (() -> Void)?) {
+
   }
 
   public func clear(completion: (() -> Void)? = nil) {
