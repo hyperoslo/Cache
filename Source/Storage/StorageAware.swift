@@ -2,11 +2,11 @@ import Foundation
 
 public protocol CacheAware {
   
-  func add<T: Cachable>(key: String, object: T, expiry: Expiry, completion: (() -> Void)?) throws
-  func object<T: Cachable>(key: String, completion: (object: T?) -> Void) throws
-  func remove(key: String, completion: (() -> Void)?) throws
-  func removeIfExpired(key: String, completion: (() -> Void)?) throws
-  func clear(completion: (() -> Void)?) throws
+  func add<T: Cachable>(key: String, object: T, expiry: Expiry, completion: (() -> Void)?)
+  func object<T: Cachable>(key: String, completion: (object: T?) -> Void)
+  func remove(key: String, completion: (() -> Void)?)
+  func removeIfExpired(key: String, completion: (() -> Void)?)
+  func clear(completion: (() -> Void)?)
 }
 
 public protocol StorageAware: CacheAware {
