@@ -12,6 +12,27 @@ extension UIImage: Cachable {
   }
 
   public func encode() -> NSData? {
-    return nil
+    let data = hasAlpha
+      ? UIImagePNGRepresentation(self) : UIImageJPEGRepresentation(self, CGFloat(compressionQuality))
+    return data
+  }
+}
+
+// MARK: - Helpers
+
+extension UIImage {
+
+  var hasAlpha: Bool {
+    let result: Bool
+    let alpha = CGImageGetAlphaInfo(CGImage)
+
+    switch alpha {
+    case .None, .NoneSkipFirst, .NoneSkipLast:
+      result = false
+    default:
+      result = true
+    }
+
+    return result
   }
 }

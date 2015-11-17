@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - Helpers
+
 extension NSDate {
 
   var inThePast: Bool {
