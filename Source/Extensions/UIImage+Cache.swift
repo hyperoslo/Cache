@@ -12,9 +12,9 @@ extension UIImage: Cachable {
   }
 
   public func encode() -> NSData? {
-    let data = hasAlpha
-      ? UIImagePNGRepresentation(self) : UIImageJPEGRepresentation(self, CGFloat(compressionQuality))
-    return data
+    return hasAlpha
+      ? UIImagePNGRepresentation(self)
+      : UIImageJPEGRepresentation(self, 1.0)
   }
 }
 
