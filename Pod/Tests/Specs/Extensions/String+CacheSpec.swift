@@ -23,7 +23,7 @@ class StringCacheSpec: QuickSpec {
       describe("Cachable") {
 
         describe(".decode") {
-          it("decodes string to NSData") {
+          it("decodes from NSData") {
             let string = self.name
             let data = string.dataUsingEncoding(NSUTF8StringEncoding)!
             let result = String.decode(data)
@@ -33,7 +33,7 @@ class StringCacheSpec: QuickSpec {
         }
 
         describe("#encode") {
-          it("decodes string to NSData") {
+          it("encodes to NSData") {
             let string = self.name
             let data = string.dataUsingEncoding(NSUTF8StringEncoding)!
             let result = string.encode()

@@ -6,16 +6,22 @@ struct SpecHelper {
     return User(firstName: "John", lastName: "Snow")
   }
 
-  static func image(color: UIColor, size: CGSize = CGSize(width: 1, height: 1), opaque: Bool = true) -> UIImage {
-    UIGraphicsBeginImageContextWithOptions(size, opaque, 0)
-    let context = UIGraphicsGetCurrentContext()
+  static func data(length : Int) -> NSData {
+    var buffer = [UInt8](count:length, repeatedValue:0)
+    return NSData(bytes:&buffer, length: length)
+  }
 
-    CGContextSetFillColorWithColor(context, color.CGColor)
-    CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height))
+  static func image(color: UIColor = UIColor.redColor(),
+    size: CGSize = CGSize(width: 1, height: 1), opaque: Bool = false) -> UIImage {
+      UIGraphicsBeginImageContextWithOptions(size, opaque, 0)
+      let context = UIGraphicsGetCurrentContext()
 
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
+      CGContextSetFillColorWithColor(context, color.CGColor)
+      CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height))
 
-    return image
+      let image = UIGraphicsGetImageFromCurrentImageContext()
+      UIGraphicsEndImageContext()
+
+      return image
   }
 }

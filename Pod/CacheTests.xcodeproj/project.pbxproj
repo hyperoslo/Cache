@@ -37,6 +37,10 @@
 		D5637DBE1BFB31150087E4EC /* JSON+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5637DBD1BFB31150087E4EC /* JSON+Cache.swift */; };
 		D5637DC31BFB46AC0087E4EC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5637DC21BFB46AC0087E4EC /* User.swift */; };
 		D5637DC51BFB48490087E4EC /* JSONSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5637DC41BFB48490087E4EC /* JSONSpec.swift */; };
+		D5637DC71BFB49790087E4EC /* NSData+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5637DC61BFB49790087E4EC /* NSData+CacheSpec.swift */; };
+		D5637DC91BFB51350087E4EC /* UIImage+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5637DC81BFB51350087E4EC /* UIImage+CacheSpec.swift */; };
+		D5637DCC1BFB58C40087E4EC /* UIImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5637DCB1BFB58C40087E4EC /* UIImage+CacheTests.swift */; };
+		D5637DCE1BFB5E6B0087E4EC /* JSON+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5637DCD1BFB5E6B0087E4EC /* JSON+CacheSpec.swift */; };
 		D5684E861BFA33AA00488B96 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5684E851BFA33AA00488B96 /* HybridCache.swift */; };
 		D5704C531BC84DAA0089F388 /* String+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5704C521BC84DAA0089F388 /* String+Cache.swift */; };
 		D5CD0F731BCAE5F6004C0B32 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD0F721BCAE5F6004C0B32 /* SpecHelper.swift */; };
@@ -84,6 +88,10 @@
 		D5637DBD1BFB31150087E4EC /* JSON+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON+Cache.swift"; sourceTree = "<group>"; };
 		D5637DC21BFB46AC0087E4EC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D5637DC41BFB48490087E4EC /* JSONSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSpec.swift; sourceTree = "<group>"; };
+		D5637DC61BFB49790087E4EC /* NSData+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+CacheSpec.swift"; sourceTree = "<group>"; };
+		D5637DC81BFB51350087E4EC /* UIImage+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CacheSpec.swift"; sourceTree = "<group>"; };
+		D5637DCB1BFB58C40087E4EC /* UIImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CacheTests.swift"; sourceTree = "<group>"; };
+		D5637DCD1BFB5E6B0087E4EC /* JSON+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON+CacheSpec.swift"; sourceTree = "<group>"; };
 		D5684E851BFA33AA00488B96 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
 		D5704C521BC84DAA0089F388 /* String+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Cache.swift"; sourceTree = "<group>"; };
 		D5CD0F721BCAE5F6004C0B32 /* SpecHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
@@ -263,13 +271,21 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		D5637DCA1BFB58B40087E4EC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D5637DCB1BFB58C40087E4EC /* UIImage+CacheTests.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D5704C511BC84D990089F388 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				D5704C521BC84DAA0089F388 /* String+Cache.swift */,
 				D5219A001BF5502E009D44DF /* NSDate+Cache.swift */,
-				D5637DB71BFB1AB80087E4EC /* UIImage+Cache.swift */,
 				D5637DB91BFB29310087E4EC /* NSData+Cache.swift */,
+				D5637DB71BFB1AB80087E4EC /* UIImage+Cache.swift */,
 				D5637DBD1BFB31150087E4EC /* JSON+Cache.swift */,
 			);
 			path = Extensions;
@@ -278,6 +294,7 @@
 		D5CD0F711BCAE5DC004C0B32 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D5637DCA1BFB58B40087E4EC /* Extensions */,
 				D5637DC11BFB469D0087E4EC /* Data */,
 				D5CD0F721BCAE5F6004C0B32 /* SpecHelper.swift */,
 			);
@@ -302,6 +319,9 @@
 			children = (
 				D5EA236A1BD5C21200FEABC3 /* String+CacheSpec.swift */,
 				D5219A021BF557DC009D44DF /* NSDate+CacheSpec.swift */,
+				D5637DC61BFB49790087E4EC /* NSData+CacheSpec.swift */,
+				D5637DC81BFB51350087E4EC /* UIImage+CacheSpec.swift */,
+				D5637DCD1BFB5E6B0087E4EC /* JSON+CacheSpec.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -442,6 +462,7 @@
 				D5219A061BF55AAB009D44DF /* CapsuleSpec.swift in Sources */,
 				D5219A291BF66BD9009D44DF /* StorageKind.swift in Sources */,
 				D52199F41BF51D03009D44DF /* Expiry.swift in Sources */,
+				D5637DCE1BFB5E6B0087E4EC /* JSON+CacheSpec.swift in Sources */,
 				D5219A031BF557DC009D44DF /* NSDate+CacheSpec.swift in Sources */,
 				D5637DC51BFB48490087E4EC /* JSONSpec.swift in Sources */,
 				D5219A2F1BF66E8E009D44DF /* CacheSpec.swift in Sources */,
@@ -450,9 +471,12 @@
 				D538305F1BFA1BE600F43D58 /* MemoryStorage.swift in Sources */,
 				D52199F31BF51D03009D44DF /* Capsule.swift in Sources */,
 				D538306A1BFA29E100F43D58 /* StorageFactorySpec.swift in Sources */,
+				D5637DC91BFB51350087E4EC /* UIImage+CacheSpec.swift in Sources */,
 				D5219A2D1BF66CDC009D44DF /* ConfigSpec.swift in Sources */,
 				D5637DBA1BFB29310087E4EC /* NSData+Cache.swift in Sources */,
+				D5637DCC1BFB58C40087E4EC /* UIImage+CacheTests.swift in Sources */,
 				D5219A231BF625CA009D44DF /* Config.swift in Sources */,
+				D5637DC71BFB49790087E4EC /* NSData+CacheSpec.swift in Sources */,
 				D5219A2B1BF66C0A009D44DF /* StorageKindSpec.swift in Sources */,
 				D5219A0B1BF55E63009D44DF /* DefaultCacheConverterSpec.swift in Sources */,
 				D5CD0F731BCAE5F6004C0B32 /* SpecHelper.swift in Sources */,
