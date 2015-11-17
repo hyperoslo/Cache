@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - Cachable
+
 extension String: Cachable {
 
   public typealias CacheType = String
@@ -16,6 +18,8 @@ extension String: Cachable {
     return dataUsingEncoding(NSUTF8StringEncoding)
   }
 }
+
+// MARK: - Helpers
 
 extension String {
 
