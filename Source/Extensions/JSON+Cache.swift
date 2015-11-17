@@ -21,9 +21,7 @@ extension JSON: Cachable {
       default:
         result = nil
       }
-    } catch {
-      print("Invalid JSON data")
-    }
+    } catch {}
 
     return result
   }
