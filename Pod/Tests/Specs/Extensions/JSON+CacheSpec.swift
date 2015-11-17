@@ -44,7 +44,7 @@ class JSONCacheSpec: QuickSpec {
             let data = try! NSJSONSerialization.dataWithJSONObject(object,
               options: NSJSONWritingOptions())
             let result = JSON.Dictionary(object).encode()
-            
+
             expect(result).to(equal(data))
           }
 
