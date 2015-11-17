@@ -5,7 +5,7 @@ class DefaultCacheConverterSpec: QuickSpec {
 
   override func spec() {
     describe("DefaultCacheConverter") {
-      var object = User(firstName: "John", lastName: "Snow")
+      var object = SpecHelper.user
 
       describe(".decode") {
         it("decodes string to NSData") {

@@ -19,6 +19,28 @@ class NSDateCacheSpec: QuickSpec {
           expect(date.inThePast).to(beTrue())
         }
       }
+
+      describe("Cachable") {
+        describe(".decode") {
+          it("decodes from NSData") {
+            let date = NSDate()
+            let data = NSKeyedArchiver.archivedDataWithRootObject(date)
+            let result = NSDate.decode(data)
+
+            expect(result).to(equal(date))
+          }
+        }
+
+        describe("#encode") {
+          it("encodes to NSData") {
+            let date = NSDate()
+            let data = NSKeyedArchiver.archivedDataWithRootObject(date)
+            let result = data.encode()
+
+            expect(result).to(equal(data))
+          }
+        }
+      }
     }
   }
 }

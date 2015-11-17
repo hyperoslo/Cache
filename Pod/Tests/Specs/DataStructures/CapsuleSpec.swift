@@ -5,7 +5,7 @@ class CapsuleSpec: QuickSpec {
 
   override func spec() {
     describe("Capsule") {
-      let object = User(firstName: "John", lastName: "Snow")
+      let object = SpecHelper.user
       var capsule: Capsule!
 
       describe("#expired") {

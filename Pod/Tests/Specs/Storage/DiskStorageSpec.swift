@@ -7,7 +7,7 @@ class DiskStorageSpec: QuickSpec {
     describe("DiskStorage") {
       let name = "Floppy"
       let key = "youknownothing"
-      let object = User(firstName: "John", lastName: "Snow")
+      let object = SpecHelper.user
       var storage: DiskStorage!
       let fileManager = NSFileManager()
 

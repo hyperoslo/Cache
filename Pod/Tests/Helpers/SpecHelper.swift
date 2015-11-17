@@ -1,37 +1,27 @@
-import Foundation
+import UIKit
 
-struct User {
+struct SpecHelper {
 
-  var firstName: String
-  var lastName: String
-
-  init(firstName: String, lastName: String) {
-    self.firstName = firstName
-    self.lastName = lastName
-  }
-}
-
-extension User: Cachable {
-
-  typealias CacheType = User
-
-  static func decode(data: NSData) -> CacheType? {
-    var object: User?
-
-    do {
-      object = try DefaultCacheConverter<User>().decode(data)
-    } catch {}
-
-    return object
+  static var user: User {
+    return User(firstName: "John", lastName: "Snow")
   }
 
-  func encode() -> NSData? {
-    var data: NSData?
+  static func data(length : Int) -> NSData {
+    var buffer = [UInt8](count:length, repeatedValue:0)
+    return NSData(bytes:&buffer, length: length)
+  }
 
-    do {
-      data = try DefaultCacheConverter<User>().encode(self)
-    } catch {}
+  static func image(color: UIColor = UIColor.redColor(),
+    size: CGSize = CGSize(width: 1, height: 1), opaque: Bool = false) -> UIImage {
+      UIGraphicsBeginImageContextWithOptions(size, opaque, 0)
+      let context = UIGraphicsGetCurrentContext()
 
-    return data
+      CGContextSetFillColorWithColor(context, color.CGColor)
+      CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height))
+
+      let image = UIGraphicsGetImageFromCurrentImageContext()
+      UIGraphicsEndImageContext()
+
+      return image
   }
 }
