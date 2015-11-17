@@ -1,3 +1,5 @@
+import Foundation
+
 struct User {
 
   var firstName: String

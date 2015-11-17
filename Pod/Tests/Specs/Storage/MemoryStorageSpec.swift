@@ -7,7 +7,7 @@ class MemoryStorageSpec: QuickSpec {
     describe("MemoryStorage") {
       let name = "Brain"
       let key = "youknownothing"
-      let object = User(firstName: "John", lastName: "Snow")
+      let object = SpecHelper.user
       var storage: MemoryStorage!
 
       beforeEach {

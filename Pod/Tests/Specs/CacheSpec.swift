@@ -7,7 +7,7 @@ class CacheSpec: QuickSpec {
     describe("Cache") {
       let name = "WeirdoCache"
       let key = "alongweirdkey"
-      let object = User(firstName: "John", lastName: "Snow")
+      let object = SpecHelper.user
       var cache: Cache<User>!
 
       beforeEach {
