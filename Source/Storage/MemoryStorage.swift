@@ -98,6 +98,10 @@ public class MemoryStorage: StorageAware {
     }
   }
 
+  public func clearExpired(completion: (() -> Void)? = nil) {
+    clear(completion)
+  }
+
   // MARK: - Helpers
 
   func removeIfExpired(key: String, capsule: Capsule, completion: (() -> Void)? = nil) {

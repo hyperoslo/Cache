@@ -42,7 +42,7 @@ public class DiskStorage: StorageAware {
         do {
           try weakSelf.fileManager.createDirectoryAtPath(weakSelf.path,
             withIntermediateDirectories: true, attributes: nil)
-        } catch _ {}
+        } catch {}
       }
 
       do {
@@ -52,7 +52,7 @@ public class DiskStorage: StorageAware {
         try weakSelf.fileManager.setAttributes(
           [NSFileModificationDate : expiry.date],
           ofItemAtPath: filePath)
-      } catch _ {}
+      } catch {}
 
       completion?()
     }
@@ -85,7 +85,7 @@ public class DiskStorage: StorageAware {
 
       do {
         try weakSelf.fileManager.removeItemAtPath(weakSelf.filePath(key))
-      } catch _ {}
+      } catch {}
 
       completion?()
     }
@@ -106,7 +106,7 @@ public class DiskStorage: StorageAware {
           where expiryDate.inThePast {
             try weakSelf.fileManager.removeItemAtPath(weakSelf.filePath(key))
         }
-      } catch _ {}
+      } catch {}
 
       completion?()
     }
@@ -121,7 +121,81 @@ public class DiskStorage: StorageAware {
 
       do {
         try weakSelf.fileManager.removeItemAtPath(weakSelf.path)
-      } catch _ {}
+      } catch {}
+
+      completion?()
+    }
+  }
+
+  public func clearExpired(completion: (() -> Void)? = nil) {
+    dispatch_async(writeQueue) { [weak self] in
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
+
+      let URL = NSURL(fileURLWithPath: weakSelf.path)
+      let resourceKeys = [NSURLIsDirectoryKey, NSURLContentModificationDateKey, NSURLTotalFileAllocatedSizeKey]
+      var objects = [(URL: NSURL, resourceValues: [NSObject: AnyObject])]()
+      var URLsToDelete = [NSURL]()
+      var totalSize: UInt = 0
+
+      guard let fileEnumerator = weakSelf.fileManager.enumeratorAtURL(URL, includingPropertiesForKeys: resourceKeys,
+        options: .SkipsHiddenFiles, errorHandler: nil), URLs = fileEnumerator.allObjects as? [NSURL] else {
+          completion?()
+          return
+      }
+
+      for fileURL in URLs {
+        do {
+          let resourceValues = try fileURL.resourceValuesForKeys(resourceKeys)
+
+          guard (resourceValues[NSURLIsDirectoryKey] as? NSNumber)?.boolValue == false else {
+            continue
+          }
+
+          if let expiryDate = resourceValues[NSURLContentModificationDateKey] as? NSDate
+            where expiryDate.inThePast {
+              URLsToDelete.append(fileURL)
+              continue
+          }
+
+          if let fileSize = resourceValues[NSURLTotalFileAllocatedSizeKey] as? NSNumber {
+            totalSize += fileSize.unsignedLongValue
+            objects.append((URL: fileURL, resourceValues: resourceValues))
+          }
+        } catch {}
+      }
+
+      for fileURL in URLsToDelete {
+        do {
+          try weakSelf.fileManager.removeItemAtURL(fileURL)
+        } catch {}
+      }
+
+      if weakSelf.maxSize > 0 && totalSize > weakSelf.maxSize {
+        let targetSize = weakSelf.maxSize / 2
+
+        let sortedFiles = objects.sort {
+          let time1 = ($0.resourceValues[NSURLContentModificationDateKey] as? NSDate)?.timeIntervalSince1970
+          let time2 = ($1.resourceValues[NSURLContentModificationDateKey] as? NSDate)?.timeIntervalSince1970
+          return time1 > time2
+        }
+
+        for file in sortedFiles {
+          do {
+            try weakSelf.fileManager.removeItemAtURL(file.URL)
+          } catch {}
+
+          if let fileSize = file.resourceValues[NSURLTotalFileAllocatedSizeKey] as? NSNumber {
+            totalSize -= fileSize.unsignedLongValue
+          }
+
+          if totalSize < targetSize {
+            break
+          }
+        }
+      }
 
       completion?()
     }

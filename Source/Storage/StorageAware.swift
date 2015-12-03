@@ -7,6 +7,7 @@ public protocol CacheAware {
   func remove(key: String, completion: (() -> Void)?)
   func removeIfExpired(key: String, completion: (() -> Void)?)
   func clear(completion: (() -> Void)?)
+  func clearExpired(completion: (() -> Void)?)
 }
 
 public protocol StorageAware: CacheAware {
