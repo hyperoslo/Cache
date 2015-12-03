@@ -16,6 +16,15 @@ public class HybridCache {
 
     frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: config.maxSize)
     backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
+
+    let notificationCenter = NSNotificationCenter.defaultCenter()
+
+    notificationCenter.addObserver(self, selector: "clearFrontStorage",
+      name: UIApplicationDidReceiveMemoryWarningNotification, object: nil)
+    notificationCenter.addObserver(self, selector: "cleanExpiredCache",
+      name: UIApplicationWillTerminateNotification, object: nil)
+    notificationCenter.addObserver(self, selector: "backgroundCleanExpiredCache",
+      name: UIApplicationDidEnterBackgroundNotification, object: nil)
   }
 
   // MARK: - Caching
