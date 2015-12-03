@@ -27,6 +27,10 @@ public class HybridCache {
       name: UIApplicationDidEnterBackgroundNotification, object: nil)
   }
 
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+
   // MARK: - Caching
 
   public func add<T: Cachable>(key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
