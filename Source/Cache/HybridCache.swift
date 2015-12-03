@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 public class HybridCache {
 
@@ -86,5 +86,11 @@ public class HybridCache {
         completion?()
       }
     }
+  }
+
+  // MARK: - Notifications
+
+  public func clearFrontStorage() {
+    frontStorage.clear(nil)
   }
 }
