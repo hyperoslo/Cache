@@ -90,15 +90,15 @@ public class HybridCache {
 
   // MARK: - Notifications
 
-  public func applicationDidReceiveMemoryWarning() {
+  func applicationDidReceiveMemoryWarning() {
     frontStorage.clearExpired(nil)
   }
 
-  public func applicationWillTerminate() {
+  func applicationWillTerminate() {
     backStorage.clearExpired(nil)
   }
 
-  public func applicationDidEnterBackground() {
+  func applicationDidEnterBackground() {
     let application = UIApplication.sharedApplication()
     var backgroundTask: UIBackgroundTaskIdentifier?
 
