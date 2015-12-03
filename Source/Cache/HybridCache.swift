@@ -19,11 +19,11 @@ public class HybridCache {
 
     let notificationCenter = NSNotificationCenter.defaultCenter()
 
-    notificationCenter.addObserver(self, selector: "clearFrontStorage",
+    notificationCenter.addObserver(self, selector: "applicationDidReceiveMemoryWarning",
       name: UIApplicationDidReceiveMemoryWarningNotification, object: nil)
-    notificationCenter.addObserver(self, selector: "cleanExpiredCache",
+    notificationCenter.addObserver(self, selector: "applicationWillTerminate",
       name: UIApplicationWillTerminateNotification, object: nil)
-    notificationCenter.addObserver(self, selector: "backgroundCleanExpiredCache",
+    notificationCenter.addObserver(self, selector: "applicationDidEnterBackground",
       name: UIApplicationDidEnterBackgroundNotification, object: nil)
   }
 
@@ -90,7 +90,35 @@ public class HybridCache {
 
   // MARK: - Notifications
 
-  public func clearFrontStorage() {
-    frontStorage.clear(nil)
+  public func applicationDidReceiveMemoryWarning() {
+    frontStorage.clearExpired(nil)
+  }
+
+  public func applicationWillTerminate() {
+    backStorage.clearExpired(nil)
+  }
+
+  public func applicationDidEnterBackground() {
+    let application = UIApplication.sharedApplication()
+    var backgroundTask: UIBackgroundTaskIdentifier?
+
+    backgroundTask = application.beginBackgroundTaskWithExpirationHandler { [weak self] in
+      guard let weakSelf = self, var backgroundTask = backgroundTask else { return }
+
+      weakSelf.endBackgroundTask(&backgroundTask)
+    }
+
+    backStorage.clearExpired { [weak self] in
+      guard let weakSelf = self, var backgroundTask = backgroundTask else { return }
+
+      dispatch_async(dispatch_get_main_queue()) {
+        weakSelf.endBackgroundTask(&backgroundTask)
+      }
+    }
+  }
+
+  func endBackgroundTask(inout task: UIBackgroundTaskIdentifier) {
+    UIApplication.sharedApplication().endBackgroundTask(task)
+    task = UIBackgroundTaskInvalid
   }
 }
