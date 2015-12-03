@@ -176,11 +176,11 @@ public class DiskStorage: StorageAware {
       if weakSelf.maxSize > 0 && totalSize > weakSelf.maxSize {
         let targetSize = weakSelf.maxSize / 2
 
-        let sortedFiles = objects.sort({
+        let sortedFiles = objects.sort {
           let time1 = ($0.resourceValues[NSURLContentModificationDateKey] as? NSDate)?.timeIntervalSince1970
           let time2 = ($1.resourceValues[NSURLContentModificationDateKey] as? NSDate)?.timeIntervalSince1970
           return time1 > time2
-        })
+        }
 
         for file in sortedFiles {
           do {
