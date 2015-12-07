@@ -50,22 +50,27 @@ let user = User(id: 1, firstName: "John", lastName: "Snow")
 let key1 = "\(user.id)"
 let key = "\(user.id)-copy"
 
-// Add objects to cache
+// Add objects to the cache
+
 cache.add(key, object: user)
 cache.add(key, object: user)
 
-// Fetch object from cache
+// Fetch object from the cache
+
 cache.object(key) { (user: User?) in
   print(user?.name)
 }
 
-// Remove object from cache
+// Remove object from the cache
+
 cache.remove(key)
 
-// Try to fetch removed object from cache
+// Try to fetch removed object from the cache
+
 cache.object(key) { (user: User?) in
   print(user?.name)
 }
 
-// Clean cache
+// Clear cache
+
 cache.clear()
