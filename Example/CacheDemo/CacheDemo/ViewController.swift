@@ -5,7 +5,7 @@ class ViewController: UIViewController {
 
   lazy var label: UILabel = {
     let label = UILabel()
-    label.text = NSLocalizedString("It's not really a demo, open playground instead 👽", comment: "")
+    label.text = NSLocalizedString("It's not really a demo, open playgrounds instead 👽", comment: "")
     label.numberOfLines = 0
     label.textAlignment = .Center
 
