@@ -17,6 +17,8 @@
 /* Begin PBXFileReference section */
 		61E2C9AD783C97B30282C46E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		80725A70C52DEFCF1BB7DA25 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D57DBC5E1C15D48300A281C8 /* CustomObjectPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = CustomObjectPlayground.playground; path = CacheDemo/CustomObjectPlayground.playground; sourceTree = SOURCE_ROOT; };
+		D58868A21C15D8E00052CA49 /* CustomObject.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = CustomObject.playground; path = Playgrounds/CustomObject.playground; sourceTree = SOURCE_ROOT; };
 		D5A871F41C15D0CD001F629A /* CachePlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CachePlayground.playground; sourceTree = "<group>"; };
 		D5B634931C15CDAE00F253A0 /* CacheDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CacheDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B634961C15CDAE00F253A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,9 +58,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D58868A11C15D8D40052CA49 /* Playgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				D58868A21C15D8E00052CA49 /* CustomObject.playground */,
+			);
+			path = Playgrounds;
+			sourceTree = "<group>";
+		};
 		D5B6348A1C15CDAE00F253A0 = {
 			isa = PBXGroup;
 			children = (
+				D58868A11C15D8D40052CA49 /* Playgrounds */,
 				D5B634951C15CDAE00F253A0 /* CacheDemo */,
 				D5B634941C15CDAE00F253A0 /* Products */,
 				97B7A1470A8ACDB8C7C87F15 /* Pods */,
@@ -83,6 +94,7 @@
 				D5B6349F1C15CDAE00F253A0 /* LaunchScreen.storyboard */,
 				D5B634A21C15CDAE00F253A0 /* Info.plist */,
 				D5A871F41C15D0CD001F629A /* CachePlayground.playground */,
+				D57DBC5E1C15D48300A281C8 /* CustomObjectPlayground.playground */,
 			);
 			path = CacheDemo;
 			sourceTree = "<group>";

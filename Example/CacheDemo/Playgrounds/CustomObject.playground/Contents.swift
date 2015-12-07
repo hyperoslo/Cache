@@ -1,5 +1,8 @@
 //: Playground - noun: a place where people can play
 
+import UIKit
+import Cache
+
 struct User {
 
   var id: Int
@@ -43,12 +46,26 @@ extension User: Cachable {
 }
 
 let cache = Cache<User>(name: "UserCache")
-let user = User(firstName: "John", lastName: "Snow")
+let user = User(id: 1, firstName: "John", lastName: "Snow")
+let key1 = "\(user.id)"
+let key = "\(user.id)-copy"
 
-cache.add("\(user.id)", object: user) {
-  print("Object has been added to memory and disk caches")
-}
+// Add objects to cache
+cache.add(key, object: user)
+cache.add(key, object: user)
 
+// Fetch object from cache
 cache.object(key) { (user: User?) in
   print(user?.name)
 }
+
+// Remove object from cache
+cache.remove(key)
+
+// Try to fetch removed object from cache
+cache.object(key) { (user: User?) in
+  print(user?.name)
+}
+
+// Clean cache
+cache.clear()

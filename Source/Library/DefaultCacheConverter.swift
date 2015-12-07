@@ -6,6 +6,8 @@ public enum EncodingError: ErrorType {
 
 public struct DefaultCacheConverter<T> {
 
+  public init() {}
+
   public func decode(data: NSData) throws -> T {
     guard data.length == sizeof(T) else {
       throw EncodingError.InvalidSize
