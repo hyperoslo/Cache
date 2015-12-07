@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "Cache"
-  s.summary          = "A short description of Cache."
-  s.version          = "0.1.0"
+  s.summary          = "Nothing but cache."
+  s.version          = "1.0.0"
   s.homepage         = "https://github.com/hyperoslo/Cache"
   s.license          = 'MIT'
   s.author           = { "Hyper Interaktiv AS" => "ios@hyper.no" }
@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.requires_arc = true
   s.source_files = 'Source/**/*'
-# s.frameworks = 'UIKit', 'MapKit'
-# s.dependency 'AFNetworking', '~> 2.3'
+
+  s.frameworks = 'UIKit', 'Foundation'
 end

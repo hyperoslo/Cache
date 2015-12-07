@@ -1,0 +1,14 @@
+PODS:
+  - Cache (1.0.0)
+
+DEPENDENCIES:
+  - Cache (from `../../`)
+
+EXTERNAL SOURCES:
+  Cache:
+    :path: ../../
+
+SPEC CHECKSUMS:
+  Cache: 5f381cc23cb2c69bc70b8cd2a5e260d006b03b6d
+
+COCOAPODS: 0.39.0
