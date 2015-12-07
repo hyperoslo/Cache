@@ -1,6 +1,6 @@
 import UIKit
 
-public class HybridCache {
+public class HybridCache: NSObject {
 
   public let name: String
 
@@ -16,6 +16,8 @@ public class HybridCache {
 
     frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: config.maxSize)
     backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
+
+    super.init()
 
     let notificationCenter = NSNotificationCenter.defaultCenter()
 
