@@ -20,6 +20,8 @@ struct User {
   }
 }
 
+// Implement Cachable protocol to be able to cache your object
+
 extension User: Cachable {
 
   typealias CacheType = User

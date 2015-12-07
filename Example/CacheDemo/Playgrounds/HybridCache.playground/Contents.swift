@@ -29,6 +29,10 @@ struct Helper {
 
 let cache = HybridCache(name: "Mix")
 
+// There is no need to implement Cachable protocol here.
+// We already have default implementations for:
+// String, JSON, UIImage, NSData and NSDate (just for fun =)
+
 let string = "This is a string"
 let json = JSON.Dictionary(["key": "value"])
 let image = Helper.image()
