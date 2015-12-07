@@ -1,0 +1,20 @@
+PODS:
+  - Cache (1.0.0)
+  - Fakery (1.1.0):
+    - SwiftyJSON
+  - SwiftyJSON (2.3.2)
+
+DEPENDENCIES:
+  - Cache (from `../../`)
+  - Fakery
+
+EXTERNAL SOURCES:
+  Cache:
+    :path: ../../
+
+SPEC CHECKSUMS:
+  Cache: 5f381cc23cb2c69bc70b8cd2a5e260d006b03b6d
+  Fakery: 593389814fb7c42fe7f0801e76c8ae55b95505e7
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+COCOAPODS: 0.39.0
