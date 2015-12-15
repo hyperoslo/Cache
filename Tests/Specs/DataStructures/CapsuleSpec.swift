@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+@testable import Cache
 
 class CapsuleSpec: QuickSpec {
 
@@ -19,7 +20,7 @@ class CapsuleSpec: QuickSpec {
         it("is expired") {
           let date = NSDate(timeInterval: -100000, sinceDate: NSDate())
           capsule = Capsule(value: object, expiry: .Date(date))
-          
+
           expect(capsule.expired).to(beTrue())
         }
       }

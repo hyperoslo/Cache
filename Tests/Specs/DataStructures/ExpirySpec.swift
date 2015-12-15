@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+@testable import Cache
 
 class ExpirySpec: QuickSpec {
 
@@ -25,7 +26,7 @@ class ExpirySpec: QuickSpec {
         it("returns specified date") {
           let date = NSDate().dateByAddingTimeInterval(1000)
           expiry = .Date(date)
-          
+
           expect(expiry.date).to(equal(date))
         }
       }

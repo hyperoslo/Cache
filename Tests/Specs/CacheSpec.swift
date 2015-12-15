@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+@testable import Cache
 
 class CacheSpec: QuickSpec {
 
@@ -135,7 +136,7 @@ class CacheSpec: QuickSpec {
               expectation3.fulfill()
             }
           }
-          
+
           self.waitForExpectationsWithTimeout(8.0, handler:nil)
         }
       }
