@@ -21,7 +21,7 @@ it, simply add the following line to your Podfile:
 pod 'Cache'
 ```
 
-**ImagePicker** is also available through [Carthage](https://github.com/Carthage/Carthage).
+**Cache** is also available through [Carthage](https://github.com/Carthage/Carthage).
 To install just write into your Cartfile:
 
 ```ruby
