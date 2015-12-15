@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/vadym/Development/hyper/ios/opensource/Cache/Pod/CacheTests.xcodeproj">
+      location = "self:Cache.xcodeproj">
    </FileRef>
 </Workspace>

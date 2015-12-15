@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+@testable import Cache
 
 class MemoryStorageSpec: QuickSpec {
 
