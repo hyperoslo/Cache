@@ -40,11 +40,126 @@ for `UIImage`, `String`, `JSON` and `NSData`.
 
 ## Usage
 
-```swift
+### Hybrid cache
+With `HybridCache` you could store every kind of `Cachable`-compliant objects.
+It's 2 layered cache (with front and back storages), as well as `Cache`.
 
+**Initialization with default configuration**
+```swift
+let cache = HybridCache(name: "Mix")
 ```
 
-### Optional bonus
+**Initialization with custom configuration**
+```swift
+let config = Config(
+   // Your front cache type
+  frontKind: .Memory,
+  // Your back cache type
+  backKind: .Disk,
+  // Expiry date that will be applied by default for every added object
+  // if it's not overridden in the `add(key: object: expiry: completion:)` method
+  expiry: .Never,
+  // Maximum size of your cache storage    
+  maxSize: 10000)
+  
+let cache = HybridCache(name: "Mix")
+```
+
+**Basic operations**
+```swift
+let cache = HybridCache(name: "Mix")
+
+// String
+cache.add("string", object: "This is a string")
+
+cache.object("string") { (string: String?) in
+  print(string)
+}
+
+// JSON is an enum that could be Array([AnyObject])
+// or Dictionary([String : AnyObject])
+cache.add("jsonDictionary", object: JSON.Dictionary(["key": "value"]))
+
+cache.object("jsonDictionary") { (json: JSON?) in
+  print(json?.object)
+}
+
+cache.add("jsonArray", object: JSON.Array([
+  ["key1": "value1"],
+  ["key2": "value2"]
+]))
+
+cache.object("jsonArray") { (json: JSON?) in
+  print(json?.object)
+}
+
+// UIImage
+cache.add("image", object: UIImage(named: "image.png"))
+
+cache.object("image") { (image: UIImage?) in
+  // Use your image
+}
+
+// NSData
+cache.add("data", object: data)
+
+cache.object("data") { (data: NSData?) in
+  print(data)
+}
+
+// Remove an object from the cache
+cache.remove("data")
+
+// Clean the cache
+
+cache.clear()
+```
+
+### Strict cache
+```swift
+let cache = Cache<UIImage>(name: "ImageCache")
+
+// Add objects to the cache
+cache.add("image", object: UIImage(named: "image.png"))
+
+// Fetch objects from the cache
+cache.object("image") { (image: UIImage?) in
+  // Use your image
+}
+
+// Remove an object from the cache
+cache.remove("image")
+
+// Clean the cache
+cache.clear()
+```
+
+### Implementation of Cachable protocol
+```swift
+class User: Cachable {
+
+  typealias CacheType = User
+
+  static func decode(data: NSData) -> CacheType? {
+    var object: User?
+
+    // Decode your object from data
+
+    return object
+  }
+
+  func encode() -> NSData? {
+    var data: NSData?
+
+    // Encode your object to data
+
+    return data
+  }
+}
+```
+
+
+## Optional bonus
 
 ## Installation
 
