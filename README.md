@@ -18,7 +18,7 @@
 * [Optional bonuses](#optional-bonuses)
   * [JSON](#json)
   * [DefaultCacheConverter](#defaultcacheconverter)
-* [What about images?](#what-about-images?)
+* [What about images?](#what-about-images)
 * [Installation](#installation)
 * [Author](#author)
 * [Contributing](#contributing)
