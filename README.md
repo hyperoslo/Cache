@@ -167,7 +167,7 @@ cache.add("string", object: "This is a string",
 
 ### Cachable protocol
 
-Encode and decode methods should be implemented if a type conforms `Cachable` protocol.
+Encode and decode methods should be implemented if a type conforms to `Cachable` protocol.
 
 ```swift
 class User: Cachable {
