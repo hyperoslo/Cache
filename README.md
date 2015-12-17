@@ -6,11 +6,243 @@
 [![License](https://img.shields.io/cocoapods/l/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
 [![Platform](https://img.shields.io/cocoapods/p/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
 
+## Table of Contents
+
+* [Description](#description)
+* [Key features](#key-features)
+* [Usage](#usage)
+  * [Hybrid cache](#hybrid-cache)
+  * [Type safe cache](#type-safe-cache)
+  * [Expiry date](#expiry-date)
+  * [Cachable protocol](#cachable-protocol)
+* [Optional bonuses](#optional-bonuses)
+  * [JSON](#json)
+  * [DefaultCacheConverter](#defaultcacheconverter)
+* [What about images?](#what-about-images)
+* [Installation](#installation)
+* [Author](#author)
+* [Contributing](#contributing)
+* [License](#license)
+
+## Description
+
+**Cache** doesn't claim to be unique in this area, but it's not another monster
+library that gives you a god's power.
+So don't ask it to fetch something from network or magically set an image from
+URL to your `UIImageView`.
+It does nothing but caching, but it does it well. It offers a good public API
+with out-of-box implementations and great customization possibilities.
+
+## Key features
+
+- Generic `Cachable` protocol to be able to cache any type you want.
+- `CacheAware` and `StorageAware` protocols to implement different kinds
+of key-value cache storages. The basic interface includes methods to add, get
+and remove objects by key.
+- `Cache` class to create a type safe cache storage by a given name for a specified
+`Cachable`-compliant type.
+- `HybridCache` class that works with every kind of `Cachable`-compliant types.
+- Flexible `Config` struct which is used in the initialization of `Cache` and
+`HybridCache` classes, based on the concept of having front- and back- caches.
+A request to a front cache should be less time and memory consuming (`NSCache` is used
+by default here). The difference between front and back caching is that back
+caching is used for content that outlives the application life-cycle. See it more
+like a convenient way to store user information that should persist across application
+launches. Disk cache is the most reliable choice here.
+- `StorageFactory` - a place to register and retrieve your cache storage by type.
+- Possibility to set expiry date + automatic cleanup of expired objects.
+- Basic memory and disk cache functionality.
+- Scalability, you are free to add as many cache storages as you want
+(if default implementations of memory and disk caches don't fit your purpose for some reason).
+- `NSData` encoding and decoding required by `Cachable` protocol are implemented
+for `UIImage`, `String`, `JSON` and `NSData`.
+
 ## Usage
 
+### Hybrid cache
+
+`HybridCache` supports storing all kinds of objects, as long as they conform to
+the `Cachable` protocol. It's two layered cache (with front and back storages),
+as well as `Cache`.
+
+**Initialization with default configuration**
+
 ```swift
-<API>
+let cache = HybridCache(name: "Mix")
 ```
+
+**Initialization with custom configuration**
+
+```swift
+let config = Config(
+  // Your front cache type
+  frontKind: .Memory,
+  // Your back cache type
+  backKind: .Disk,
+  // Expiry date that will be applied by default for every added object
+  // if it's not overridden in the add(key: object: expiry: completion:) method
+  expiry: .Date(NSDate().dateByAddingTimeInterval(100000)),
+  // Maximum size of your cache storage    
+  maxSize: 10000)
+
+let cache = HybridCache(name: "Custom", config: config)
+```
+
+**Basic operations**
+
+```swift
+let cache = HybridCache(name: "Mix")
+
+// String
+cache.add("string", object: "This is a string")
+
+cache.object("string") { (string: String?) in
+  print(string) // Prints "This is a string"
+}
+
+// JSON
+cache.add("jsonDictionary", object: JSON.Dictionary(["key": "value"]))
+
+cache.object("jsonDictionary") { (json: JSON?) in
+  print(json?.object)
+}
+
+// UIImage
+cache.add("image", object: UIImage(named: "image.png"))
+
+cache.object("image") { (image: UIImage?) in
+  // Use your image
+}
+
+// NSData
+cache.add("data", object: data)
+
+cache.object("data") { (data: NSData?) in
+  // Use your NSData object
+}
+
+// Remove an object from the cache
+cache.remove("data")
+
+// Clean the cache
+
+cache.clear()
+```
+
+### Type safe cache
+
+Initialization with default or custom configuration, basic operations and
+working with expiry dates are done exactly in the same way as in `HybridCache`.
+
+**Basic operations**
+
+```swift
+// Create an image cache, so it's possible to add only UIImage objects
+let cache = Cache<UIImage>(name: "ImageCache")
+
+// Add objects to the cache
+cache.add("image", object: UIImage(named: "image.png"))
+
+// Fetch objects from the cache
+cache.object("image") { (image: UIImage?) in
+  // Use your image
+}
+
+// Remove an object from the cache
+cache.remove("image")
+
+// Clean the cache
+cache.clear()
+```
+
+### Expiry date
+
+```swift
+// Default cache expiry date will be applied to the item
+cache.add("string", object: "This is a string")
+
+// A provided expiry date will be applied to the item
+cache.add("string", object: "This is a string",
+  expiry: .Date(NSDate().dateByAddingTimeInterval(100000)))
+```
+
+### Cachable protocol
+
+Encode and decode methods should be implemented if a type conforms to `Cachable` protocol.
+
+```swift
+class User: Cachable {
+
+  typealias CacheType = User
+
+  static func decode(data: NSData) -> CacheType? {
+    var object: User?
+
+    // Decode your object from data
+
+    return object
+  }
+
+  func encode() -> NSData? {
+    var data: NSData?
+
+    // Encode your object to data
+
+    return data
+  }
+}
+```
+
+## Optional bonuses
+
+### JSON
+
+JSON is a helper enum that could be `Array([AnyObject])` or `Dictionary([String : AnyObject])`.
+Then you could cache `JSON` objects using the same API methods:
+
+```swift
+cache.add("jsonDictionary", object: JSON.Dictionary(["key": "value"]))
+
+cache.object("jsonDictionary") { (json: JSON?) in
+  print(json?.object)
+}
+
+cache.add("jsonArray", object: JSON.Array([
+  ["key1": "value1"],
+  ["key2": "value2"]
+]))
+
+cache.object("jsonArray") { (json: JSON?) in
+  print(json?.object)
+}
+```
+
+### DefaultCacheConverter
+
+You could use this `NSData` encoding and decoding implementation for any kind
+of objects, but do it on ***your own risk***. With this approach decoding
+***will not work*** if the `NSData` length doesn't match the type size. This can commonly
+happen if you try to read the data after updates in the type's structure, so
+there is a different-sized version of the same type. Also note that `sizeof()`
+and `sizeofValue()` may return different values on different devices.
+
+```swift
+do {
+  object = try DefaultCacheConverter<User>().decode(data)
+} catch {}
+
+do {
+  data = try DefaultCacheConverter<User>().encode(self)
+} catch {}
+```
+
+## What about images?
+
+As being said before, `Cache` works with any kind of `Cachable` types, with no
+preferences and extra care about specific ones. But don't be desperate, we have
+something nice for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary)
+and uses `Cache` under the hood to make you life easier when it comes to working
+with remote images.
 
 ## Installation
 
@@ -30,8 +262,12 @@ github "hyperoslo/Cache"
 
 ## Author
 
-Hyper Interaktiv AS, ios@hyper.no
+[Hyper](http://hyper.no) made this with ❤️. If you’re using this library we probably want to [hire you](https://github.com/hyperoslo/iOS-playbook/blob/master/HYPER_RECIPES.md)! Send us an email at ios@hyper.no.
+
+## Contributing
+
+We would love you to contribute to **Cache**, check the [CONTRIBUTING](https://github.com/hyperoslo/Cache/blob/master/CONTRIBUTING.md) file for more info.
 
 ## License
 
-**Cache** is available under the MIT license. See the LICENSE file for more info.
+**Cache** is available under the MIT license. See the [LICENSE](https://github.com/hyperoslo/Cache/blob/master/LICENSE.md) file for more info.
