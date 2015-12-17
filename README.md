@@ -61,8 +61,9 @@ for `UIImage`, `String`, `JSON` and `NSData`.
 
 ### Hybrid cache
 
-With `HybridCache` you could store every kind of `Cachable` objects.
-It's 2 layered cache (with front and back storages), as well as `Cache`.
+`HybridCache` supports storing all kinds of objects, as long as they conform to
+the `Cachable` protocol. It's two layered cache (with front and back storages),
+as well as `Cache`.
 
 **Initialization with default configuration**
 
@@ -96,7 +97,7 @@ let cache = HybridCache(name: "Mix")
 cache.add("string", object: "This is a string")
 
 cache.object("string") { (string: String?) in
-  print(string)
+  print(string) // Prints "This is a string"
 }
 
 // JSON
@@ -117,7 +118,7 @@ cache.object("image") { (image: UIImage?) in
 cache.add("data", object: data)
 
 cache.object("data") { (data: NSData?) in
-  print(data)
+  // Use your NSData object
 }
 
 // Remove an object from the cache
