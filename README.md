@@ -30,9 +30,8 @@
 library that gives you a god's power.
 So don't ask it to fetch something from network or magically set an image from
 URL to your `UIImageView`.
-It does nothing but caching, but it does it well, having everything you expect
-from this kind of library. It offers a good public API with out-of-box
-implementations and great customization possibilities.   
+It does nothing but caching, but it does it well. It offers a good public API
+with out-of-box implementations and great customization possibilities.
 
 ## Key features
 
@@ -46,9 +45,10 @@ and remove objects by key.
 - Flexible `Config` struct which is used in the initialization of `Cache` and
 `HybridCache` classes, based on the concept of having front- and back- caches.
 A request to a front cache should be less time and memory consuming (`NSCache` is used
-by default here). On the other hand, back cache should be more permanent and
-independent from the life cycle of application, because it's more like backup
-solution to store your data (Disk cache is one of the reliable approaches here).
+by default here). The difference between front and back caching is that back
+caching is used for content that outlives the application life-cycle. See it more
+like a convenient way to store user information that should persist across application
+launches. Disk cache is the most reliable choice here.
 - `StorageFactory` - a place to register and retrieve your cache storage by type.
 - Possibility to set expiry date + automatic cleanup of expired objects.
 - Basic memory and disk cache functionality.
