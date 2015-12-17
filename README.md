@@ -1,4 +1,4 @@
-# Cache
+![Cache](https://github.com/hyperoslo/Cache/blob/master/Resources/CachePresentation.png)
 
 [![CI Status](http://img.shields.io/travis/hyperoslo/Cache.svg?style=flat)](https://travis-ci.org/hyperoslo/Cache)
 [![Version](https://img.shields.io/cocoapods/v/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
@@ -26,6 +26,7 @@
 
 ## Description
 
+<img src="https://github.com/hyperoslo/Cache/blob/master/Resources/CacheIcon.png" alt="Cache Icon" align="right" />
 **Cache** doesn't claim to be unique in this area, but it's not another monster
 library that gives you a god's power.
 So don't ask it to fetch something from network or magically set an image from
