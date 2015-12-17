@@ -17,6 +17,7 @@ from this kind of library. It offers a good public API with out-of-box
 implementations and great customization possibilities.   
 
 ## Key features
+
 - Generic `Cachable` protocol to be able to cache any type of objects
 - `CacheAware` and `StorageAware` protocol to implement different kinds
 of key-value cache storages. The basic interface includes methods to add, get
@@ -41,15 +42,18 @@ for `UIImage`, `String`, `JSON` and `NSData`.
 ## Usage
 
 ### Hybrid cache
+
 With `HybridCache` you could store every kind of `Cachable`-compliant objects.
 It's 2 layered cache (with front and back storages), as well as `Cache`.
 
 **Initialization with default configuration**
+
 ```swift
 let cache = HybridCache(name: "Mix")
 ```
 
 **Initialization with custom configuration**
+
 ```swift
 let config = Config(
    // Your front cache type
@@ -58,14 +62,15 @@ let config = Config(
   backKind: .Disk,
   // Expiry date that will be applied by default for every added object
   // if it's not overridden in the `add(key: object: expiry: completion:)` method
-  expiry: .Never,
+  expiry: .Date(NSDate().dateByAddingTimeInterval(100000)),
   // Maximum size of your cache storage    
   maxSize: 10000)
-  
-let cache = HybridCache(name: "Mix")
+
+let cache = HybridCache(name: "Custom", config: config)
 ```
 
 **Basic operations**
+
 ```swift
 let cache = HybridCache(name: "Mix")
 
@@ -76,20 +81,10 @@ cache.object("string") { (string: String?) in
   print(string)
 }
 
-// JSON is an enum that could be Array([AnyObject])
-// or Dictionary([String : AnyObject])
+// JSON
 cache.add("jsonDictionary", object: JSON.Dictionary(["key": "value"]))
 
 cache.object("jsonDictionary") { (json: JSON?) in
-  print(json?.object)
-}
-
-cache.add("jsonArray", object: JSON.Array([
-  ["key1": "value1"],
-  ["key2": "value2"]
-]))
-
-cache.object("jsonArray") { (json: JSON?) in
   print(json?.object)
 }
 
@@ -115,8 +110,26 @@ cache.remove("data")
 cache.clear()
 ```
 
-### Strict cache
+**Expiry dates**
+
 ```swift
+// Default cache expiry date will be applied to the item
+cache.add("string", object: "This is a string"
+
+// A provided expiry date will be applied to the item
+cache.add("string", object: "This is a string",
+  expiry: .Date(NSDate().dateByAddingTimeInterval(100000)))
+```
+
+### Strict cache
+
+Initialization with default or custom configuration, basic operations and
+working with expiry dates are done exactly in the same way as in `HybridCache`.
+
+**Basic operations**
+
+```swift
+// Create image cache, so it's possible to add only UIImage objects
 let cache = Cache<UIImage>(name: "ImageCache")
 
 // Add objects to the cache
@@ -135,6 +148,7 @@ cache.clear()
 ```
 
 ### Implementation of Cachable protocol
+
 ```swift
 class User: Cachable {
 
@@ -158,8 +172,48 @@ class User: Cachable {
 }
 ```
 
+## Optional bonuses
 
-## Optional bonus
+### JSON
+
+JSON is a helper enum that could be Array([AnyObject]) or Dictionary([String : AnyObject])
+cache.add("jsonDictionary", object: JSON.Dictionary(["key": "value"]))
+
+Then you could cache `JSON` objects using the same API methods:
+
+```swift
+cache.add("jsonDictionary", object: JSON.Dictionary(["key": "value"]))
+
+cache.object("jsonDictionary") { (json: JSON?) in
+  print(json?.object)
+}
+
+cache.add("jsonArray", object: JSON.Array([
+  ["key1": "value1"],
+  ["key2": "value2"]
+]))
+
+cache.object("jsonArray") { (json: JSON?) in
+  print(json?.object)
+}
+```
+
+### DefaultCacheConverter
+
+You could use this NSData encoding and decoding implementation for any kind
+of objects, but it's only on ***your own risk***. With this approach decoding
+will not work if the NSData length doesn't match the type size. This can commonly
+happen if you try to read the data after updates in the type's structure, so
+there is a different-sized version of the same type. Also note that `sizeof()`
+and `sizeofValue()` may return different values on different devices.
+
+## What about images?
+
+As being said before, `Cache` works with any kind of `Cachable` types, with no
+preferences and extra care about specific ones. But don't be desperate, we have
+something nice for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary)
+and uses `Cache` under the hood to make you life easier when it comes to working
+with remote images.
 
 ## Installation
 
