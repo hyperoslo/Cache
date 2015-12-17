@@ -12,7 +12,7 @@
 * [Key features](#key-features)
 * [Usage](#usage)
   * [Hybrid cache](#hybrid-cache)
-  * [Strict cache](#strict-cache)
+  * [Type safe cache](#type-safe-cache)
   * [Expiry date](#expiry-date)
   * [Cachable protocol](#cachable-protocol)
 * [Optional bonuses](#optional-bonuses)
@@ -39,7 +39,7 @@ with out-of-box implementations and great customization possibilities.
 - `CacheAware` and `StorageAware` protocols to implement different kinds
 of key-value cache storages. The basic interface includes methods to add, get
 and remove objects by key.
-- `Cache` class to create a strict cache storage by a given name for a specified
+- `Cache` class to create a type safe cache storage by a given name for a specified
 `Cachable`-compliant type.
 - `HybridCache` class that works with every kind of `Cachable`-compliant types.
 - Flexible `Config` struct which is used in the initialization of `Cache` and
@@ -129,7 +129,7 @@ cache.remove("data")
 cache.clear()
 ```
 
-### Strict cache
+### Type safe cache
 
 Initialization with default or custom configuration, basic operations and
 working with expiry dates are done exactly in the same way as in `HybridCache`.
