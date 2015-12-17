@@ -6,6 +6,24 @@
 [![License](https://img.shields.io/cocoapods/l/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
 [![Platform](https://img.shields.io/cocoapods/p/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
 
+## Table of Contents
+
+* [Description](#description)
+* [Key features](#key-features)
+* [Usage](#usage)
+  * [Hybrid cache](#hybrid-cache)
+  * [Strict cache](#strict-cache)
+  * [Expiry date](#expiry-date)
+  * [Cachable protocol](#cachable-protocol)
+* [Optional bonuses](#optional-bonuses)
+  * [JSON](#json)
+  * [DefaultCacheConverter](#defaultcacheconverter)
+* [What about images?](#what-about-images?)
+* [Installation](#installation)
+* [Author](#author)
+* [Contributing](#contributing)
+* [License](#license)
+
 ## Description
 
 **Cache** doesn't claim to be unique in this area, but it's not another monster
@@ -110,17 +128,6 @@ cache.remove("data")
 cache.clear()
 ```
 
-**Expiry date**
-
-```swift
-// Default cache expiry date will be applied to the item
-cache.add("string", object: "This is a string")
-
-// A provided expiry date will be applied to the item
-cache.add("string", object: "This is a string",
-  expiry: .Date(NSDate().dateByAddingTimeInterval(100000)))
-```
-
 ### Strict cache
 
 Initialization with default or custom configuration, basic operations and
@@ -147,7 +154,18 @@ cache.remove("image")
 cache.clear()
 ```
 
-### Implementation of Cachable protocol
+### Expiry date
+
+```swift
+// Default cache expiry date will be applied to the item
+cache.add("string", object: "This is a string")
+
+// A provided expiry date will be applied to the item
+cache.add("string", object: "This is a string",
+  expiry: .Date(NSDate().dateByAddingTimeInterval(100000)))
+```
+
+### Cachable protocol
 
 Encode and decode methods should be implemented if a type conforms `Cachable` protocol.
 
@@ -207,6 +225,16 @@ happen if you try to read the data after updates in the type's structure, so
 there is a different-sized version of the same type. Also note that `sizeof()`
 and `sizeofValue()` may return different values on different devices.
 
+```swift
+do {
+  object = try DefaultCacheConverter<User>().decode(data)
+} catch {}
+
+do {
+  data = try DefaultCacheConverter<User>().encode(self)
+} catch {}
+```
+
 ## What about images?
 
 As being said before, `Cache` works with any kind of `Cachable` types, with no
@@ -233,8 +261,12 @@ github "hyperoslo/Cache"
 
 ## Author
 
-Hyper Interaktiv AS, ios@hyper.no
+[Hyper](http://hyper.no) made this with ❤️. If you’re using this library we probably want to [hire you](https://github.com/hyperoslo/iOS-playbook/blob/master/HYPER_RECIPES.md)! Send us an email at ios@hyper.no.
+
+## Contributing
+
+We would love you to contribute to **Cache**, check the [CONTRIBUTING](https://github.com/hyperoslo/Cache/blob/master/CONTRIBUTING.md) file for more info.
 
 ## License
 
-**Cache** is available under the MIT license. See the LICENSE file for more info.
+**Cache** is available under the MIT license. See the [LICENSE](https://github.com/hyperoslo/Cache/blob/master/LICENSE.md) file for more info.
