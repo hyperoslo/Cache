@@ -18,24 +18,24 @@ implementations and great customization possibilities.
 
 ## Key features
 
-- Generic `Cachable` protocol to be able to cache any type of objects
-- `CacheAware` and `StorageAware` protocol to implement different kinds
+- Generic `Cachable` protocol to be able to cache any type you want.
+- `CacheAware` and `StorageAware` protocols to implement different kinds
 of key-value cache storages. The basic interface includes methods to add, get
 and remove objects by key.
-- `Cache` class to create a strict cache storage by a given name for specified
+- `Cache` class to create a strict cache storage by a given name for a specified
 `Cachable`-compliant type.
-- `HybridCache` class which is able to work with every kind of `Cachable`-compliant objects.
+- `HybridCache` class that works with every kind of `Cachable`-compliant types.
 - Flexible `Config` struct which is used in the initialization of `Cache` and
 `HybridCache` classes, based on the concept of having front- and back- caches.
 A request to a front cache should be less time and memory consuming (`NSCache` is used
 by default here). On the other hand, back cache should be more permanent and
 independent from the life cycle of application, because it's more like backup
 solution to store your data (Disk cache is one of the reliable approaches here).
-- `StorageFactory` - a place to register and retrieve your cache storage by type
-- Possibility to set expiry date + automatic cleanup of expired objects
-- Basic memory and disk cache functionality
+- `StorageFactory` - a place to register and retrieve your cache storage by type.
+- Possibility to set expiry date + automatic cleanup of expired objects.
+- Basic memory and disk cache functionality.
 - Scalability, you are free to add as many cache storages as you want
-(if default implementations of memory and disk caches don't fit your purpose for some reason)
+(if default implementations of memory and disk caches don't fit your purpose for some reason).
 - `NSData` encoding and decoding required by `Cachable` protocol are implemented
 for `UIImage`, `String`, `JSON` and `NSData`.
 
@@ -43,7 +43,7 @@ for `UIImage`, `String`, `JSON` and `NSData`.
 
 ### Hybrid cache
 
-With `HybridCache` you could store every kind of `Cachable`-compliant objects.
+With `HybridCache` you could store every kind of `Cachable` objects.
 It's 2 layered cache (with front and back storages), as well as `Cache`.
 
 **Initialization with default configuration**
@@ -56,12 +56,12 @@ let cache = HybridCache(name: "Mix")
 
 ```swift
 let config = Config(
-   // Your front cache type
+  // Your front cache type
   frontKind: .Memory,
   // Your back cache type
   backKind: .Disk,
   // Expiry date that will be applied by default for every added object
-  // if it's not overridden in the `add(key: object: expiry: completion:)` method
+  // if it's not overridden in the add(key: object: expiry: completion:) method
   expiry: .Date(NSDate().dateByAddingTimeInterval(100000)),
   // Maximum size of your cache storage    
   maxSize: 10000)
@@ -110,11 +110,11 @@ cache.remove("data")
 cache.clear()
 ```
 
-**Expiry dates**
+**Expiry date**
 
 ```swift
 // Default cache expiry date will be applied to the item
-cache.add("string", object: "This is a string"
+cache.add("string", object: "This is a string")
 
 // A provided expiry date will be applied to the item
 cache.add("string", object: "This is a string",
@@ -129,7 +129,7 @@ working with expiry dates are done exactly in the same way as in `HybridCache`.
 **Basic operations**
 
 ```swift
-// Create image cache, so it's possible to add only UIImage objects
+// Create an image cache, so it's possible to add only UIImage objects
 let cache = Cache<UIImage>(name: "ImageCache")
 
 // Add objects to the cache
@@ -148,6 +148,8 @@ cache.clear()
 ```
 
 ### Implementation of Cachable protocol
+
+Encode and decode methods should be implemented if a type conforms `Cachable` protocol.
 
 ```swift
 class User: Cachable {
@@ -176,9 +178,7 @@ class User: Cachable {
 
 ### JSON
 
-JSON is a helper enum that could be Array([AnyObject]) or Dictionary([String : AnyObject])
-cache.add("jsonDictionary", object: JSON.Dictionary(["key": "value"]))
-
+JSON is a helper enum that could be `Array([AnyObject])` or `Dictionary([String : AnyObject])`.
 Then you could cache `JSON` objects using the same API methods:
 
 ```swift
@@ -200,9 +200,9 @@ cache.object("jsonArray") { (json: JSON?) in
 
 ### DefaultCacheConverter
 
-You could use this NSData encoding and decoding implementation for any kind
-of objects, but it's only on ***your own risk***. With this approach decoding
-will not work if the NSData length doesn't match the type size. This can commonly
+You could use this `NSData` encoding and decoding implementation for any kind
+of objects, but do it on ***your own risk***. With this approach decoding
+***will not work*** if the `NSData` length doesn't match the type size. This can commonly
 happen if you try to read the data after updates in the type's structure, so
 there is a different-sized version of the same type. Also note that `sizeof()`
 and `sizeofValue()` may return different values on different devices.
