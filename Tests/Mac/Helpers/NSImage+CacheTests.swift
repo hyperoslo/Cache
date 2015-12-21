@@ -14,6 +14,7 @@ extension NSImage {
       ? .NSPNGFileType
       : .NSJPEGFileType
 
-    return (NSBitmapImageRep(data: representation)?.representationUsingType(imageFileType, properties: [:]))!
+    return (NSBitmapImageRep(data: representation)?.representationUsingType(
+      imageFileType, properties: [:]))!
   }
 }
