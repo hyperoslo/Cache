@@ -57,6 +57,7 @@ launches. Disk cache is the most reliable choice here.
 (if default implementations of memory and disk caches don't fit your purpose for some reason).
 - `NSData` encoding and decoding required by `Cachable` protocol are implemented
 for `UIImage`, `String`, `JSON` and `NSData`.
+- iOS and OSX support.
 
 ## Usage
 
