@@ -46,6 +46,7 @@
 		D5291C6E1C2828C700B702C9 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
 		D5291C711C28294F00B702C9 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6F1C28294C00B702C9 /* HybridCache.swift */; };
 		D5291C731C28296B00B702C9 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C721C28296B00B702C9 /* HybridCache.swift */; };
+		D5291C761C282AC800B702C9 /* NSImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C751C282AC800B702C9 /* NSImage+Cache.swift */; };
 		D5DC59EB1C20593E003BD79B /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC59E01C20593E003BD79B /* Cache.framework */; };
 		D5DC5A591C205AEF003BD79B /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A001C205AC9003BD79B /* SpecHelper.swift */; };
 		D5DC5A5A1C205B04003BD79B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC59FD1C205AC9003BD79B /* User.swift */; };
@@ -113,6 +114,7 @@
 		D5291C6B1C2827FB00B702C9 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D5291C6F1C28294C00B702C9 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
 		D5291C721C28296B00B702C9 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
+		D5291C751C282AC800B702C9 /* NSImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Cache.swift"; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DC59EA1C20593E003BD79B /* Cache-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DC59FD1C205AC9003BD79B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		D5291C0E1C28220B00B702C9 /* OSX */ = {
 			isa = PBXGroup;
 			children = (
+				D5291C741C2829E300B702C9 /* Extensions */,
 				D5291C6F1C28294C00B702C9 /* HybridCache.swift */,
 			);
 			path = OSX;
@@ -282,6 +285,14 @@
 				D5291C511C28226800B702C9 /* Info.plist */,
 			);
 			path = "Cache-OSXTests";
+			sourceTree = "<group>";
+		};
+		D5291C741C2829E300B702C9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D5291C751C282AC800B702C9 /* NSImage+Cache.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D5DC59D61C20593E003BD79B = {
@@ -614,6 +625,7 @@
 				D5291C641C2822A000B702C9 /* DefaultCacheConverter.swift in Sources */,
 				D5291C5F1C2822A000B702C9 /* StorageKind.swift in Sources */,
 				D5291C601C2822A000B702C9 /* JSON+Cache.swift in Sources */,
+				D5291C761C282AC800B702C9 /* NSImage+Cache.swift in Sources */,
 				D5291C621C2822A000B702C9 /* NSDate+Cache.swift in Sources */,
 				D5291C631C2822A000B702C9 /* String+Cache.swift in Sources */,
 			);
