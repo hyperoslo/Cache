@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 public enum EncodingError: ErrorType {
   case InvalidSize

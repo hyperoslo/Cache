@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../../
 
 SPEC CHECKSUMS:
-  Cache: 5f381cc23cb2c69bc70b8cd2a5e260d006b03b6d
+  Cache: 78f58bc008313c7a1182967a2ebcb3de9fddecd4
 
 COCOAPODS: 0.39.0
