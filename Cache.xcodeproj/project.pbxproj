@@ -394,13 +394,37 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		D5DC59D61C20593E003BD79B = {
+		D5291DA41C28452300B702C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D5291DA61C28454800B702C9 /* iOS */,
+				D5291DA51C28454000B702C9 /* Mac */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D5291DA51C28454000B702C9 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
 				D5291CD91C2835D000B702C9 /* Quick.framework */,
 				D5291CDA1C2835D000B702C9 /* Nimble.framework */,
+			);
+			name = Mac;
+			sourceTree = "<group>";
+		};
+		D5291DA61C28454800B702C9 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
 				D5DC5A6C1C205C2A003BD79B /* Quick.framework */,
 				D5DC5A6D1C205C2A003BD79B /* Nimble.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D5DC59D61C20593E003BD79B = {
+			isa = PBXGroup;
+			children = (
+				D5291DA41C28452300B702C9 /* Frameworks */,
 				D5291C081C28220B00B702C9 /* Source */,
 				D5DC5A161C205AC9003BD79B /* SupportFiles */,
 				D5DC59FA1C205AC9003BD79B /* Tests */,
