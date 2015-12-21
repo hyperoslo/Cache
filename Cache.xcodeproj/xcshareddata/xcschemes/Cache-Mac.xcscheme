@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Cache.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D5291D681C283B5400B702C9"
+               BuildableName = "Cache-Mac-Tests.xctest"
+               BlueprintName = "Cache-Mac-Tests"
+               ReferencedContainer = "container:Cache.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,7 +42,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D5291D681C283B5400B702C9"
+               BuildableName = "Cache-Mac-Tests.xctest"
+               BlueprintName = "Cache-Mac-Tests"
+               ReferencedContainer = "container:Cache.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D5291D5F1C283B5300B702C9"
+            BuildableName = "Cache-Mac.framework"
+            BlueprintName = "Cache-Mac"
+            ReferencedContainer = "container:Cache.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
