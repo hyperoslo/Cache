@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D5291C401C28226800B702C9"
-               BuildableName = "Cache-OSX.framework"
-               BlueprintName = "Cache-OSX"
+               BlueprintIdentifier = "D5291D5F1C283B5300B702C9"
+               BuildableName = "Cache-Mac.framework"
+               BlueprintName = "Cache-Mac"
                ReferencedContainer = "container:Cache.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D5291C491C28226800B702C9"
-               BuildableName = "Cache-OSX-Tests.xctest"
-               BlueprintName = "Cache-OSX-Tests"
-               ReferencedContainer = "container:Cache.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D5291C401C28226800B702C9"
-            BuildableName = "Cache-OSX.framework"
-            BlueprintName = "Cache-OSX"
-            ReferencedContainer = "container:Cache.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D5291C401C28226800B702C9"
-            BuildableName = "Cache-OSX.framework"
-            BlueprintName = "Cache-OSX"
+            BlueprintIdentifier = "D5291D5F1C283B5300B702C9"
+            BuildableName = "Cache-Mac.framework"
+            BlueprintName = "Cache-Mac"
             ReferencedContainer = "container:Cache.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D5291C401C28226800B702C9"
-            BuildableName = "Cache-OSX.framework"
-            BlueprintName = "Cache-OSX"
+            BlueprintIdentifier = "D5291D5F1C283B5300B702C9"
+            BuildableName = "Cache-Mac.framework"
+            BlueprintName = "Cache-Mac"
             ReferencedContainer = "container:Cache.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

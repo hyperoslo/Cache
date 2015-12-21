@@ -23,67 +23,71 @@
 		D5291C391C28220B00B702C9 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
 		D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
 		D5291C3B1C28220B00B702C9 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C271C28220B00B702C9 /* StorageFactory.swift */; };
-		D5291C441C28226800B702C9 /* Cache-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = D5291C431C28226800B702C9 /* Cache-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D5291C4B1C28226800B702C9 /* Cache-OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291C411C28226800B702C9 /* Cache-OSX.framework */; };
-		D5291C501C28226800B702C9 /* Cache_OSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C4F1C28226800B702C9 /* Cache_OSXTests.swift */; };
-		D5291C5A1C2822A000B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
-		D5291C5B1C2822A000B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
-		D5291C5C1C2822A000B702C9 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
-		D5291C5D1C2822A000B702C9 /* Expiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C191C28220B00B702C9 /* Expiry.swift */; };
-		D5291C5E1C2822A000B702C9 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1A1C28220B00B702C9 /* JSON.swift */; };
-		D5291C5F1C2822A000B702C9 /* StorageKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1B1C28220B00B702C9 /* StorageKind.swift */; };
-		D5291C601C2822A000B702C9 /* JSON+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1D1C28220B00B702C9 /* JSON+Cache.swift */; };
-		D5291C611C2822A000B702C9 /* NSData+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1E1C28220B00B702C9 /* NSData+Cache.swift */; };
-		D5291C621C2822A000B702C9 /* NSDate+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1F1C28220B00B702C9 /* NSDate+Cache.swift */; };
-		D5291C631C2822A000B702C9 /* String+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C201C28220B00B702C9 /* String+Cache.swift */; };
-		D5291C641C2822A000B702C9 /* DefaultCacheConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C221C28220B00B702C9 /* DefaultCacheConverter.swift */; };
-		D5291C651C2822A000B702C9 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C241C28220B00B702C9 /* DiskStorage.swift */; };
-		D5291C661C2822A000B702C9 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
-		D5291C671C2822A000B702C9 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
-		D5291C681C2822A000B702C9 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C271C28220B00B702C9 /* StorageFactory.swift */; };
 		D5291C6C1C2827FB00B702C9 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
 		D5291C6D1C2827FB00B702C9 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6B1C2827FB00B702C9 /* Cache.swift */; };
-		D5291C6E1C2828C700B702C9 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
-		D5291C711C28294F00B702C9 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6F1C28294C00B702C9 /* HybridCache.swift */; };
 		D5291C731C28296B00B702C9 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C721C28296B00B702C9 /* HybridCache.swift */; };
-		D5291C761C282AC800B702C9 /* NSImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C751C282AC800B702C9 /* NSImage+Cache.swift */; };
-		D5DC59EB1C20593E003BD79B /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC59E01C20593E003BD79B /* Cache.framework */; };
-		D5DC5A591C205AEF003BD79B /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A001C205AC9003BD79B /* SpecHelper.swift */; };
-		D5DC5A5A1C205B04003BD79B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC59FD1C205AC9003BD79B /* User.swift */; };
-		D5DC5A5B1C205B07003BD79B /* UIImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC59FF1C205AC9003BD79B /* UIImage+CacheTests.swift */; };
-		D5DC5A5C1C205B12003BD79B /* CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A031C205AC9003BD79B /* CacheSpec.swift */; };
-		D5DC5A5D1C205B16003BD79B /* ConfigSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A041C205AC9003BD79B /* ConfigSpec.swift */; };
-		D5DC5A5E1C205B19003BD79B /* CapsuleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A061C205AC9003BD79B /* CapsuleSpec.swift */; };
-		D5DC5A5F1C205B1C003BD79B /* ExpirySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A071C205AC9003BD79B /* ExpirySpec.swift */; };
-		D5DC5A601C205B1F003BD79B /* JSONSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A081C205AC9003BD79B /* JSONSpec.swift */; };
-		D5DC5A611C205B22003BD79B /* StorageKindSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A091C205AC9003BD79B /* StorageKindSpec.swift */; };
-		D5DC5A621C205B26003BD79B /* JSON+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A0B1C205AC9003BD79B /* JSON+CacheSpec.swift */; };
-		D5DC5A631C205B2A003BD79B /* NSData+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A0C1C205AC9003BD79B /* NSData+CacheSpec.swift */; };
-		D5DC5A651C205B2F003BD79B /* NSDate+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A0D1C205AC9003BD79B /* NSDate+CacheSpec.swift */; };
-		D5DC5A661C205B2F003BD79B /* String+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A0E1C205AC9003BD79B /* String+CacheSpec.swift */; };
-		D5DC5A671C205B2F003BD79B /* UIImage+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A0F1C205AC9003BD79B /* UIImage+CacheSpec.swift */; };
-		D5DC5A681C205B3D003BD79B /* DefaultCacheConverterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A111C205AC9003BD79B /* DefaultCacheConverterSpec.swift */; };
-		D5DC5A691C205B41003BD79B /* DiskStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A131C205AC9003BD79B /* DiskStorageSpec.swift */; };
-		D5DC5A6A1C205B41003BD79B /* MemoryStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A141C205AC9003BD79B /* MemoryStorageSpec.swift */; };
-		D5DC5A6B1C205B41003BD79B /* StorageFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A151C205AC9003BD79B /* StorageFactorySpec.swift */; };
-		D5DC5A6E1C205C2A003BD79B /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC5A6C1C205C2A003BD79B /* Quick.framework */; };
-		D5DC5A6F1C205C2A003BD79B /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC5A6D1C205C2A003BD79B /* Nimble.framework */; };
+		D5291D1D1C2837DB00B702C9 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC59E01C20593E003BD79B /* Cache.framework */; };
+		D5291D351C28389B00B702C9 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CDF1C28374800B702C9 /* SpecHelper.swift */; };
+		D5291D361C28389B00B702C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE01C28374800B702C9 /* User.swift */; };
+		D5291D371C28389B00B702C9 /* CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE21C28374800B702C9 /* CacheSpec.swift */; };
+		D5291D381C28389B00B702C9 /* ConfigSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE31C28374800B702C9 /* ConfigSpec.swift */; };
+		D5291D391C28389B00B702C9 /* CapsuleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE51C28374800B702C9 /* CapsuleSpec.swift */; };
+		D5291D3A1C28389B00B702C9 /* ExpirySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE61C28374800B702C9 /* ExpirySpec.swift */; };
+		D5291D3B1C28389B00B702C9 /* JSONSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE71C28374800B702C9 /* JSONSpec.swift */; };
+		D5291D3C1C28389B00B702C9 /* StorageKindSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE81C28374800B702C9 /* StorageKindSpec.swift */; };
+		D5291D3D1C28389B00B702C9 /* JSON+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEA1C28374800B702C9 /* JSON+CacheSpec.swift */; };
+		D5291D3E1C28389B00B702C9 /* NSData+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEB1C28374800B702C9 /* NSData+CacheSpec.swift */; };
+		D5291D3F1C28389B00B702C9 /* NSDate+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEC1C28374800B702C9 /* NSDate+CacheSpec.swift */; };
+		D5291D401C28389B00B702C9 /* String+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CED1C28374800B702C9 /* String+CacheSpec.swift */; };
+		D5291D411C28389B00B702C9 /* DefaultCacheConverterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEF1C28374800B702C9 /* DefaultCacheConverterSpec.swift */; };
+		D5291D421C28389B00B702C9 /* DiskStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF11C28374800B702C9 /* DiskStorageSpec.swift */; };
+		D5291D431C28389B00B702C9 /* MemoryStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF21C28374800B702C9 /* MemoryStorageSpec.swift */; };
+		D5291D441C28389B00B702C9 /* StorageFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF31C28374800B702C9 /* StorageFactorySpec.swift */; };
+		D5291D571C283A4200B702C9 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC5A6C1C205C2A003BD79B /* Quick.framework */; };
+		D5291D581C283A4200B702C9 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC5A6D1C205C2A003BD79B /* Nimble.framework */; };
+		D5291D6A1C283B5400B702C9 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291D601C283B5300B702C9 /* Cache.framework */; };
+		D5291D7D1C283BF200B702C9 /* NSImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D791C283BE300B702C9 /* NSImage+Cache.swift */; };
+		D5291D7E1C283BF200B702C9 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D7A1C283BE300B702C9 /* HybridCache.swift */; };
+		D5291D851C283C7C00B702C9 /* SpecHelper+OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D811C283C7000B702C9 /* SpecHelper+OSX.swift */; };
+		D5291D861C283CFB00B702C9 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
+		D5291D871C283CFB00B702C9 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6B1C2827FB00B702C9 /* Cache.swift */; };
+		D5291D881C283CFB00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
+		D5291D891C283CFB00B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
+		D5291D8A1C283CFB00B702C9 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
+		D5291D8B1C283CFB00B702C9 /* Expiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C191C28220B00B702C9 /* Expiry.swift */; };
+		D5291D8C1C283CFB00B702C9 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1A1C28220B00B702C9 /* JSON.swift */; };
+		D5291D8D1C283CFB00B702C9 /* StorageKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1B1C28220B00B702C9 /* StorageKind.swift */; };
+		D5291D8E1C283CFB00B702C9 /* JSON+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1D1C28220B00B702C9 /* JSON+Cache.swift */; };
+		D5291D8F1C283CFB00B702C9 /* NSData+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1E1C28220B00B702C9 /* NSData+Cache.swift */; };
+		D5291D901C283CFB00B702C9 /* NSDate+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1F1C28220B00B702C9 /* NSDate+Cache.swift */; };
+		D5291D911C283CFB00B702C9 /* String+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C201C28220B00B702C9 /* String+Cache.swift */; };
+		D5291D921C283CFB00B702C9 /* DefaultCacheConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C221C28220B00B702C9 /* DefaultCacheConverter.swift */; };
+		D5291D931C283CFB00B702C9 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C241C28220B00B702C9 /* DiskStorage.swift */; };
+		D5291D941C283CFB00B702C9 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
+		D5291D951C283CFB00B702C9 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
+		D5291D961C283CFB00B702C9 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C271C28220B00B702C9 /* StorageFactory.swift */; };
+		D5291D9A1C283DB300B702C9 /* UIImage+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D991C283DB300B702C9 /* UIImage+CacheSpec.swift */; };
+		D5291D9C1C283DD900B702C9 /* NSImage+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D9B1C283DD900B702C9 /* NSImage+CacheSpec.swift */; };
+		D5291D9D1C283EC000B702C9 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291CD91C2835D000B702C9 /* Quick.framework */; };
+		D5291D9E1C283EC000B702C9 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291CDA1C2835D000B702C9 /* Nimble.framework */; };
+		D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */; };
+		D5291DA31C2841D200B702C9 /* NSImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D5291C4C1C28226800B702C9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D5DC59D71C20593E003BD79B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D5291C401C28226800B702C9;
-			remoteInfo = "Cache-OSX";
-		};
-		D5DC59EC1C20593E003BD79B /* PBXContainerItemProxy */ = {
+		D5291D1E1C2837DB00B702C9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D5DC59D71C20593E003BD79B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D5DC59DF1C20593E003BD79B;
-			remoteInfo = Cache;
+			remoteInfo = "Cache-iOS";
+		};
+		D5291D6B1C283B5400B702C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5DC59D71C20593E003BD79B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D5291D5F1C283B5300B702C9;
+			remoteInfo = "Cache-Mac";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -104,56 +108,70 @@
 		D5291C251C28220B00B702C9 /* MemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		D5291C261C28220B00B702C9 /* StorageAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageAware.swift; sourceTree = "<group>"; };
 		D5291C271C28220B00B702C9 /* StorageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageFactory.swift; sourceTree = "<group>"; };
-		D5291C411C28226800B702C9 /* Cache-OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Cache-OSX.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5291C431C28226800B702C9 /* Cache-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cache-OSX.h"; sourceTree = "<group>"; };
-		D5291C451C28226800B702C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D5291C4A1C28226800B702C9 /* Cache-OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5291C4F1C28226800B702C9 /* Cache_OSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache_OSXTests.swift; sourceTree = "<group>"; };
-		D5291C511C28226800B702C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicHybridCache.swift; sourceTree = "<group>"; };
 		D5291C6B1C2827FB00B702C9 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
-		D5291C6F1C28294C00B702C9 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
 		D5291C721C28296B00B702C9 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
-		D5291C751C282AC800B702C9 /* NSImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Cache.swift"; sourceTree = "<group>"; };
+		D5291CD91C2835D000B702C9 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
+		D5291CDA1C2835D000B702C9 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
+		D5291CDF1C28374800B702C9 /* SpecHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
+		D5291CE01C28374800B702C9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D5291CE21C28374800B702C9 /* CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheSpec.swift; sourceTree = "<group>"; };
+		D5291CE31C28374800B702C9 /* ConfigSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSpec.swift; sourceTree = "<group>"; };
+		D5291CE51C28374800B702C9 /* CapsuleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapsuleSpec.swift; sourceTree = "<group>"; };
+		D5291CE61C28374800B702C9 /* ExpirySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpirySpec.swift; sourceTree = "<group>"; };
+		D5291CE71C28374800B702C9 /* JSONSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSpec.swift; sourceTree = "<group>"; };
+		D5291CE81C28374800B702C9 /* StorageKindSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageKindSpec.swift; sourceTree = "<group>"; };
+		D5291CEA1C28374800B702C9 /* JSON+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON+CacheSpec.swift"; sourceTree = "<group>"; };
+		D5291CEB1C28374800B702C9 /* NSData+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+CacheSpec.swift"; sourceTree = "<group>"; };
+		D5291CEC1C28374800B702C9 /* NSDate+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+CacheSpec.swift"; sourceTree = "<group>"; };
+		D5291CED1C28374800B702C9 /* String+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+CacheSpec.swift"; sourceTree = "<group>"; };
+		D5291CEF1C28374800B702C9 /* DefaultCacheConverterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultCacheConverterSpec.swift; sourceTree = "<group>"; };
+		D5291CF11C28374800B702C9 /* DiskStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskStorageSpec.swift; sourceTree = "<group>"; };
+		D5291CF21C28374800B702C9 /* MemoryStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorageSpec.swift; sourceTree = "<group>"; };
+		D5291CF31C28374800B702C9 /* StorageFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageFactorySpec.swift; sourceTree = "<group>"; };
+		D5291D181C2837DB00B702C9 /* Cache-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5291D231C28380100B702C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5291D601C283B5300B702C9 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5291D691C283B5400B702C9 /* Cache-Mac-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-Mac-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5291D791C283BE300B702C9 /* NSImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Cache.swift"; sourceTree = "<group>"; };
+		D5291D7A1C283BE300B702C9 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
+		D5291D811C283C7000B702C9 /* SpecHelper+OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SpecHelper+OSX.swift"; sourceTree = "<group>"; };
+		D5291D821C283C7000B702C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5291D991C283DB300B702C9 /* UIImage+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CacheSpec.swift"; sourceTree = "<group>"; };
+		D5291D9B1C283DD900B702C9 /* NSImage+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+CacheSpec.swift"; sourceTree = "<group>"; };
+		D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CacheTests.swift"; sourceTree = "<group>"; };
+		D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+CacheTests.swift"; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5DC59EA1C20593E003BD79B /* Cache-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5DC59FD1C205AC9003BD79B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		D5DC59FF1C205AC9003BD79B /* UIImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CacheTests.swift"; sourceTree = "<group>"; };
-		D5DC5A001C205AC9003BD79B /* SpecHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
-		D5DC5A011C205AC9003BD79B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D5DC5A031C205AC9003BD79B /* CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheSpec.swift; sourceTree = "<group>"; };
-		D5DC5A041C205AC9003BD79B /* ConfigSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSpec.swift; sourceTree = "<group>"; };
-		D5DC5A061C205AC9003BD79B /* CapsuleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapsuleSpec.swift; sourceTree = "<group>"; };
-		D5DC5A071C205AC9003BD79B /* ExpirySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpirySpec.swift; sourceTree = "<group>"; };
-		D5DC5A081C205AC9003BD79B /* JSONSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSpec.swift; sourceTree = "<group>"; };
-		D5DC5A091C205AC9003BD79B /* StorageKindSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageKindSpec.swift; sourceTree = "<group>"; };
-		D5DC5A0B1C205AC9003BD79B /* JSON+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON+CacheSpec.swift"; sourceTree = "<group>"; };
-		D5DC5A0C1C205AC9003BD79B /* NSData+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+CacheSpec.swift"; sourceTree = "<group>"; };
-		D5DC5A0D1C205AC9003BD79B /* NSDate+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+CacheSpec.swift"; sourceTree = "<group>"; };
-		D5DC5A0E1C205AC9003BD79B /* String+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+CacheSpec.swift"; sourceTree = "<group>"; };
-		D5DC5A0F1C205AC9003BD79B /* UIImage+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CacheSpec.swift"; sourceTree = "<group>"; };
-		D5DC5A111C205AC9003BD79B /* DefaultCacheConverterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultCacheConverterSpec.swift; sourceTree = "<group>"; };
-		D5DC5A131C205AC9003BD79B /* DiskStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskStorageSpec.swift; sourceTree = "<group>"; };
-		D5DC5A141C205AC9003BD79B /* MemoryStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorageSpec.swift; sourceTree = "<group>"; };
-		D5DC5A151C205AC9003BD79B /* StorageFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageFactorySpec.swift; sourceTree = "<group>"; };
 		D5DC5A181C205AC9003BD79B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5DC5A6C1C205C2A003BD79B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		D5DC5A6D1C205C2A003BD79B /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D5291C3D1C28226800B702C9 /* Frameworks */ = {
+		D5291D151C2837DB00B702C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5291D571C283A4200B702C9 /* Quick.framework in Frameworks */,
+				D5291D581C283A4200B702C9 /* Nimble.framework in Frameworks */,
+				D5291D1D1C2837DB00B702C9 /* Cache.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5291D5C1C283B5300B702C9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D5291C471C28226800B702C9 /* Frameworks */ = {
+		D5291D661C283B5400B702C9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5291C4B1C28226800B702C9 /* Cache-OSX.framework in Frameworks */,
+				D5291D9D1C283EC000B702C9 /* Quick.framework in Frameworks */,
+				D5291D9E1C283EC000B702C9 /* Nimble.framework in Frameworks */,
+				D5291D6A1C283B5400B702C9 /* Cache.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,16 +182,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D5DC59E71C20593E003BD79B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D5DC5A6E1C205C2A003BD79B /* Quick.framework in Frameworks */,
-				D5DC5A6F1C205C2A003BD79B /* Nimble.framework in Frameworks */,
-				D5DC59EB1C20593E003BD79B /* Cache.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -181,7 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				D5291C091C28220B00B702C9 /* iOS */,
-				D5291C0E1C28220B00B702C9 /* OSX */,
+				D5291D771C283BE300B702C9 /* Mac */,
 				D5291C111C28220B00B702C9 /* Shared */,
 			);
 			path = Source;
@@ -202,15 +210,6 @@
 				D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		D5291C0E1C28220B00B702C9 /* OSX */ = {
-			isa = PBXGroup;
-			children = (
-				D5291C741C2829E300B702C9 /* Extensions */,
-				D5291C6F1C28294C00B702C9 /* HybridCache.swift */,
-			);
-			path = OSX;
 			sourceTree = "<group>";
 		};
 		D5291C111C28220B00B702C9 /* Shared */ = {
@@ -269,28 +268,128 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
-		D5291C421C28226800B702C9 /* Cache-OSX */ = {
+		D5291CDD1C28374800B702C9 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D5291C431C28226800B702C9 /* Cache-OSX.h */,
-				D5291C451C28226800B702C9 /* Info.plist */,
+				D5291D231C28380100B702C9 /* Info.plist */,
+				D5291CDE1C28374800B702C9 /* Helpers */,
+				D5291CE11C28374800B702C9 /* Specs */,
 			);
-			path = "Cache-OSX";
+			path = iOS;
 			sourceTree = "<group>";
 		};
-		D5291C4E1C28226800B702C9 /* Cache-OSXTests */ = {
+		D5291CDE1C28374800B702C9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				D5291C4F1C28226800B702C9 /* Cache_OSXTests.swift */,
-				D5291C511C28226800B702C9 /* Info.plist */,
+				D5291CDF1C28374800B702C9 /* SpecHelper.swift */,
+				D5291CE01C28374800B702C9 /* User.swift */,
+				D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */,
 			);
-			path = "Cache-OSXTests";
+			path = Helpers;
 			sourceTree = "<group>";
 		};
-		D5291C741C2829E300B702C9 /* Extensions */ = {
+		D5291CE11C28374800B702C9 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				D5291C751C282AC800B702C9 /* NSImage+Cache.swift */,
+				D5291CE21C28374800B702C9 /* CacheSpec.swift */,
+				D5291CE31C28374800B702C9 /* ConfigSpec.swift */,
+				D5291CE41C28374800B702C9 /* DataStructures */,
+				D5291CE91C28374800B702C9 /* Extensions */,
+				D5291CEE1C28374800B702C9 /* Library */,
+				D5291CF01C28374800B702C9 /* Storage */,
+			);
+			path = Specs;
+			sourceTree = "<group>";
+		};
+		D5291CE41C28374800B702C9 /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				D5291CE51C28374800B702C9 /* CapsuleSpec.swift */,
+				D5291CE61C28374800B702C9 /* ExpirySpec.swift */,
+				D5291CE71C28374800B702C9 /* JSONSpec.swift */,
+				D5291CE81C28374800B702C9 /* StorageKindSpec.swift */,
+			);
+			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		D5291CE91C28374800B702C9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D5291CEA1C28374800B702C9 /* JSON+CacheSpec.swift */,
+				D5291CEB1C28374800B702C9 /* NSData+CacheSpec.swift */,
+				D5291CEC1C28374800B702C9 /* NSDate+CacheSpec.swift */,
+				D5291CED1C28374800B702C9 /* String+CacheSpec.swift */,
+				D5291D991C283DB300B702C9 /* UIImage+CacheSpec.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D5291CEE1C28374800B702C9 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				D5291CEF1C28374800B702C9 /* DefaultCacheConverterSpec.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		D5291CF01C28374800B702C9 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				D5291CF11C28374800B702C9 /* DiskStorageSpec.swift */,
+				D5291CF21C28374800B702C9 /* MemoryStorageSpec.swift */,
+				D5291CF31C28374800B702C9 /* StorageFactorySpec.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		D5291D771C283BE300B702C9 /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				D5291D781C283BE300B702C9 /* Extensions */,
+				D5291D7A1C283BE300B702C9 /* HybridCache.swift */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
+		D5291D781C283BE300B702C9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D5291D791C283BE300B702C9 /* NSImage+Cache.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D5291D7F1C283C7000B702C9 /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				D5291D801C283C7000B702C9 /* Helpers */,
+				D5291D971C283D4100B702C9 /* Specs */,
+				D5291D821C283C7000B702C9 /* Info.plist */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
+		D5291D801C283C7000B702C9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D5291D811C283C7000B702C9 /* SpecHelper+OSX.swift */,
+				D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D5291D971C283D4100B702C9 /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+				D5291D981C283D5200B702C9 /* Extensions */,
+			);
+			path = Specs;
+			sourceTree = "<group>";
+		};
+		D5291D981C283D5200B702C9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D5291D9B1C283DD900B702C9 /* NSImage+CacheSpec.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -298,13 +397,13 @@
 		D5DC59D61C20593E003BD79B = {
 			isa = PBXGroup;
 			children = (
+				D5291CD91C2835D000B702C9 /* Quick.framework */,
+				D5291CDA1C2835D000B702C9 /* Nimble.framework */,
 				D5DC5A6C1C205C2A003BD79B /* Quick.framework */,
 				D5DC5A6D1C205C2A003BD79B /* Nimble.framework */,
 				D5291C081C28220B00B702C9 /* Source */,
 				D5DC5A161C205AC9003BD79B /* SupportFiles */,
 				D5DC59FA1C205AC9003BD79B /* Tests */,
-				D5291C421C28226800B702C9 /* Cache-OSX */,
-				D5291C4E1C28226800B702C9 /* Cache-OSXTests */,
 				D5DC59E11C20593E003BD79B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -313,9 +412,9 @@
 			isa = PBXGroup;
 			children = (
 				D5DC59E01C20593E003BD79B /* Cache.framework */,
-				D5DC59EA1C20593E003BD79B /* Cache-iOS-Tests.xctest */,
-				D5291C411C28226800B702C9 /* Cache-OSX.framework */,
-				D5291C4A1C28226800B702C9 /* Cache-OSX-Tests.xctest */,
+				D5291D181C2837DB00B702C9 /* Cache-iOS-Tests.xctest */,
+				D5291D601C283B5300B702C9 /* Cache.framework */,
+				D5291D691C283B5400B702C9 /* Cache-Mac-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -323,91 +422,10 @@
 		D5DC59FA1C205AC9003BD79B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				D5DC5A011C205AC9003BD79B /* Info.plist */,
-				D5DC59FB1C205AC9003BD79B /* Helpers */,
-				D5DC5A021C205AC9003BD79B /* Specs */,
+				D5291CDD1C28374800B702C9 /* iOS */,
+				D5291D7F1C283C7000B702C9 /* Mac */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		D5DC59FB1C205AC9003BD79B /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				D5DC59FC1C205AC9003BD79B /* Data */,
-				D5DC59FE1C205AC9003BD79B /* Extensions */,
-				D5DC5A001C205AC9003BD79B /* SpecHelper.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		D5DC59FC1C205AC9003BD79B /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				D5DC59FD1C205AC9003BD79B /* User.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		D5DC59FE1C205AC9003BD79B /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				D5DC59FF1C205AC9003BD79B /* UIImage+CacheTests.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		D5DC5A021C205AC9003BD79B /* Specs */ = {
-			isa = PBXGroup;
-			children = (
-				D5DC5A031C205AC9003BD79B /* CacheSpec.swift */,
-				D5DC5A041C205AC9003BD79B /* ConfigSpec.swift */,
-				D5DC5A051C205AC9003BD79B /* DataStructures */,
-				D5DC5A0A1C205AC9003BD79B /* Extensions */,
-				D5DC5A101C205AC9003BD79B /* Library */,
-				D5DC5A121C205AC9003BD79B /* Storage */,
-			);
-			path = Specs;
-			sourceTree = "<group>";
-		};
-		D5DC5A051C205AC9003BD79B /* DataStructures */ = {
-			isa = PBXGroup;
-			children = (
-				D5DC5A061C205AC9003BD79B /* CapsuleSpec.swift */,
-				D5DC5A071C205AC9003BD79B /* ExpirySpec.swift */,
-				D5DC5A081C205AC9003BD79B /* JSONSpec.swift */,
-				D5DC5A091C205AC9003BD79B /* StorageKindSpec.swift */,
-			);
-			path = DataStructures;
-			sourceTree = "<group>";
-		};
-		D5DC5A0A1C205AC9003BD79B /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				D5DC5A0B1C205AC9003BD79B /* JSON+CacheSpec.swift */,
-				D5DC5A0C1C205AC9003BD79B /* NSData+CacheSpec.swift */,
-				D5DC5A0D1C205AC9003BD79B /* NSDate+CacheSpec.swift */,
-				D5DC5A0E1C205AC9003BD79B /* String+CacheSpec.swift */,
-				D5DC5A0F1C205AC9003BD79B /* UIImage+CacheSpec.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		D5DC5A101C205AC9003BD79B /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				D5DC5A111C205AC9003BD79B /* DefaultCacheConverterSpec.swift */,
-			);
-			path = Library;
-			sourceTree = "<group>";
-		};
-		D5DC5A121C205AC9003BD79B /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				D5DC5A131C205AC9003BD79B /* DiskStorageSpec.swift */,
-				D5DC5A141C205AC9003BD79B /* MemoryStorageSpec.swift */,
-				D5DC5A151C205AC9003BD79B /* StorageFactorySpec.swift */,
-			);
-			path = Storage;
 			sourceTree = "<group>";
 		};
 		D5DC5A161C205AC9003BD79B /* SupportFiles */ = {
@@ -421,11 +439,10 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D5291C3E1C28226800B702C9 /* Headers */ = {
+		D5291D5D1C283B5300B702C9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5291C441C28226800B702C9 /* Cache-OSX.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,40 +456,60 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D5291C401C28226800B702C9 /* Cache-OSX */ = {
+		D5291D171C2837DB00B702C9 /* Cache-iOS-Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D5291C521C28226800B702C9 /* Build configuration list for PBXNativeTarget "Cache-OSX" */;
+			buildConfigurationList = D5291D201C2837DB00B702C9 /* Build configuration list for PBXNativeTarget "Cache-iOS-Tests" */;
 			buildPhases = (
-				D5291C3C1C28226800B702C9 /* Sources */,
-				D5291C3D1C28226800B702C9 /* Frameworks */,
-				D5291C3E1C28226800B702C9 /* Headers */,
-				D5291C3F1C28226800B702C9 /* Resources */,
+				D5291D141C2837DB00B702C9 /* Sources */,
+				D5291D151C2837DB00B702C9 /* Frameworks */,
+				D5291D161C2837DB00B702C9 /* Resources */,
+				D5291D591C283AA700B702C9 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D5291D1F1C2837DB00B702C9 /* PBXTargetDependency */,
+			);
+			name = "Cache-iOS-Tests";
+			productName = "Cache-iOS-Tests";
+			productReference = D5291D181C2837DB00B702C9 /* Cache-iOS-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D5291D5F1C283B5300B702C9 /* Cache-Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5291D711C283B5400B702C9 /* Build configuration list for PBXNativeTarget "Cache-Mac" */;
+			buildPhases = (
+				D5291D5B1C283B5300B702C9 /* Sources */,
+				D5291D5C1C283B5300B702C9 /* Frameworks */,
+				D5291D5D1C283B5300B702C9 /* Headers */,
+				D5291D5E1C283B5300B702C9 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Cache-OSX";
-			productName = "Cache-OSX";
-			productReference = D5291C411C28226800B702C9 /* Cache-OSX.framework */;
+			name = "Cache-Mac";
+			productName = "Cache-Mac";
+			productReference = D5291D601C283B5300B702C9 /* Cache.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D5291C491C28226800B702C9 /* Cache-OSX-Tests */ = {
+		D5291D681C283B5400B702C9 /* Cache-Mac-Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D5291C551C28226800B702C9 /* Build configuration list for PBXNativeTarget "Cache-OSX-Tests" */;
+			buildConfigurationList = D5291D741C283B5400B702C9 /* Build configuration list for PBXNativeTarget "Cache-Mac-Tests" */;
 			buildPhases = (
-				D5291C461C28226800B702C9 /* Sources */,
-				D5291C471C28226800B702C9 /* Frameworks */,
-				D5291C481C28226800B702C9 /* Resources */,
+				D5291D651C283B5400B702C9 /* Sources */,
+				D5291D661C283B5400B702C9 /* Frameworks */,
+				D5291D671C283B5400B702C9 /* Resources */,
+				D5291D9F1C283ECD00B702C9 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D5291C4D1C28226800B702C9 /* PBXTargetDependency */,
+				D5291D6C1C283B5400B702C9 /* PBXTargetDependency */,
 			);
-			name = "Cache-OSX-Tests";
-			productName = "Cache-OSXTests";
-			productReference = D5291C4A1C28226800B702C9 /* Cache-OSX-Tests.xctest */;
+			name = "Cache-Mac-Tests";
+			productName = "Cache-MacTests";
+			productReference = D5291D691C283B5400B702C9 /* Cache-Mac-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		D5DC59DF1C20593E003BD79B /* Cache-iOS */ = {
@@ -493,25 +530,6 @@
 			productReference = D5DC59E01C20593E003BD79B /* Cache.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D5DC59E91C20593E003BD79B /* Cache-iOS-Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D5DC59F71C20593E003BD79B /* Build configuration list for PBXNativeTarget "Cache-iOS-Tests" */;
-			buildPhases = (
-				D5DC59E61C20593E003BD79B /* Sources */,
-				D5DC59E71C20593E003BD79B /* Frameworks */,
-				D5DC59E81C20593E003BD79B /* Resources */,
-				D56DA9D11C205D8C003E7253 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D5DC59ED1C20593E003BD79B /* PBXTargetDependency */,
-			);
-			name = "Cache-iOS-Tests";
-			productName = CacheTests;
-			productReference = D5DC59EA1C20593E003BD79B /* Cache-iOS-Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -522,16 +540,16 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Hyper Interaktiv AS";
 				TargetAttributes = {
-					D5291C401C28226800B702C9 = {
+					D5291D171C2837DB00B702C9 = {
 						CreatedOnToolsVersion = 7.2;
 					};
-					D5291C491C28226800B702C9 = {
+					D5291D5F1C283B5300B702C9 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					D5291D681C283B5400B702C9 = {
 						CreatedOnToolsVersion = 7.2;
 					};
 					D5DC59DF1C20593E003BD79B = {
-						CreatedOnToolsVersion = 7.2;
-					};
-					D5DC59E91C20593E003BD79B = {
 						CreatedOnToolsVersion = 7.2;
 					};
 				};
@@ -549,22 +567,29 @@
 			projectRoot = "";
 			targets = (
 				D5DC59DF1C20593E003BD79B /* Cache-iOS */,
-				D5DC59E91C20593E003BD79B /* Cache-iOS-Tests */,
-				D5291C401C28226800B702C9 /* Cache-OSX */,
-				D5291C491C28226800B702C9 /* Cache-OSX-Tests */,
+				D5291D171C2837DB00B702C9 /* Cache-iOS-Tests */,
+				D5291D5F1C283B5300B702C9 /* Cache-Mac */,
+				D5291D681C283B5400B702C9 /* Cache-Mac-Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D5291C3F1C28226800B702C9 /* Resources */ = {
+		D5291D161C2837DB00B702C9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D5291C481C28226800B702C9 /* Resources */ = {
+		D5291D5E1C283B5300B702C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5291D671C283B5400B702C9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -578,17 +603,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D5DC59E81C20593E003BD79B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D56DA9D11C205D8C003E7253 /* ShellScript */ = {
+		D5291D591C283AA700B702C9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -600,42 +618,85 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/bin/sh ";
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		D5291D9F1C283ECD00B702C9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/Quick.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Nimble.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D5291C3C1C28226800B702C9 /* Sources */ = {
+		D5291D141C2837DB00B702C9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5291C5B1C2822A000B702C9 /* Cachable.swift in Sources */,
-				D5291C5E1C2822A000B702C9 /* JSON.swift in Sources */,
-				D5291C681C2822A000B702C9 /* StorageFactory.swift in Sources */,
-				D5291C671C2822A000B702C9 /* StorageAware.swift in Sources */,
-				D5291C711C28294F00B702C9 /* HybridCache.swift in Sources */,
-				D5291C6E1C2828C700B702C9 /* BasicHybridCache.swift in Sources */,
-				D5291C5C1C2822A000B702C9 /* Capsule.swift in Sources */,
-				D5291C611C2822A000B702C9 /* NSData+Cache.swift in Sources */,
-				D5291C5D1C2822A000B702C9 /* Expiry.swift in Sources */,
-				D5291C5A1C2822A000B702C9 /* Config.swift in Sources */,
-				D5291C651C2822A000B702C9 /* DiskStorage.swift in Sources */,
-				D5291C661C2822A000B702C9 /* MemoryStorage.swift in Sources */,
-				D5291C641C2822A000B702C9 /* DefaultCacheConverter.swift in Sources */,
-				D5291C5F1C2822A000B702C9 /* StorageKind.swift in Sources */,
-				D5291C601C2822A000B702C9 /* JSON+Cache.swift in Sources */,
-				D5291C761C282AC800B702C9 /* NSImage+Cache.swift in Sources */,
-				D5291C621C2822A000B702C9 /* NSDate+Cache.swift in Sources */,
-				D5291C631C2822A000B702C9 /* String+Cache.swift in Sources */,
+				D5291D351C28389B00B702C9 /* SpecHelper.swift in Sources */,
+				D5291D371C28389B00B702C9 /* CacheSpec.swift in Sources */,
+				D5291D441C28389B00B702C9 /* StorageFactorySpec.swift in Sources */,
+				D5291D391C28389B00B702C9 /* CapsuleSpec.swift in Sources */,
+				D5291D361C28389B00B702C9 /* User.swift in Sources */,
+				D5291D3E1C28389B00B702C9 /* NSData+CacheSpec.swift in Sources */,
+				D5291D3F1C28389B00B702C9 /* NSDate+CacheSpec.swift in Sources */,
+				D5291D3C1C28389B00B702C9 /* StorageKindSpec.swift in Sources */,
+				D5291D3A1C28389B00B702C9 /* ExpirySpec.swift in Sources */,
+				D5291D3B1C28389B00B702C9 /* JSONSpec.swift in Sources */,
+				D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */,
+				D5291D381C28389B00B702C9 /* ConfigSpec.swift in Sources */,
+				D5291D431C28389B00B702C9 /* MemoryStorageSpec.swift in Sources */,
+				D5291D401C28389B00B702C9 /* String+CacheSpec.swift in Sources */,
+				D5291D9A1C283DB300B702C9 /* UIImage+CacheSpec.swift in Sources */,
+				D5291D411C28389B00B702C9 /* DefaultCacheConverterSpec.swift in Sources */,
+				D5291D3D1C28389B00B702C9 /* JSON+CacheSpec.swift in Sources */,
+				D5291D421C28389B00B702C9 /* DiskStorageSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D5291C461C28226800B702C9 /* Sources */ = {
+		D5291D5B1C283B5300B702C9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5291C501C28226800B702C9 /* Cache_OSXTests.swift in Sources */,
+				D5291D941C283CFB00B702C9 /* MemoryStorage.swift in Sources */,
+				D5291D921C283CFB00B702C9 /* DefaultCacheConverter.swift in Sources */,
+				D5291D8B1C283CFB00B702C9 /* Expiry.swift in Sources */,
+				D5291D891C283CFB00B702C9 /* Cachable.swift in Sources */,
+				D5291D961C283CFB00B702C9 /* StorageFactory.swift in Sources */,
+				D5291D7E1C283BF200B702C9 /* HybridCache.swift in Sources */,
+				D5291D8C1C283CFB00B702C9 /* JSON.swift in Sources */,
+				D5291D8E1C283CFB00B702C9 /* JSON+Cache.swift in Sources */,
+				D5291D8A1C283CFB00B702C9 /* Capsule.swift in Sources */,
+				D5291D7D1C283BF200B702C9 /* NSImage+Cache.swift in Sources */,
+				D5291D881C283CFB00B702C9 /* Config.swift in Sources */,
+				D5291D951C283CFB00B702C9 /* StorageAware.swift in Sources */,
+				D5291D871C283CFB00B702C9 /* Cache.swift in Sources */,
+				D5291D911C283CFB00B702C9 /* String+Cache.swift in Sources */,
+				D5291D901C283CFB00B702C9 /* NSDate+Cache.swift in Sources */,
+				D5291D931C283CFB00B702C9 /* DiskStorage.swift in Sources */,
+				D5291D861C283CFB00B702C9 /* BasicHybridCache.swift in Sources */,
+				D5291D8D1C283CFB00B702C9 /* StorageKind.swift in Sources */,
+				D5291D8F1C283CFB00B702C9 /* NSData+Cache.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5291D651C283B5400B702C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5291D9C1C283DD900B702C9 /* NSImage+CacheSpec.swift in Sources */,
+				D5291D851C283C7C00B702C9 /* SpecHelper+OSX.swift in Sources */,
+				D5291DA31C2841D200B702C9 /* NSImage+CacheTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,48 +726,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D5DC59E61C20593E003BD79B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D5DC5A5A1C205B04003BD79B /* User.swift in Sources */,
-				D5DC5A6A1C205B41003BD79B /* MemoryStorageSpec.swift in Sources */,
-				D5DC5A5C1C205B12003BD79B /* CacheSpec.swift in Sources */,
-				D5DC5A6B1C205B41003BD79B /* StorageFactorySpec.swift in Sources */,
-				D5DC5A5E1C205B19003BD79B /* CapsuleSpec.swift in Sources */,
-				D5DC5A5B1C205B07003BD79B /* UIImage+CacheTests.swift in Sources */,
-				D5DC5A591C205AEF003BD79B /* SpecHelper.swift in Sources */,
-				D5DC5A631C205B2A003BD79B /* NSData+CacheSpec.swift in Sources */,
-				D5DC5A651C205B2F003BD79B /* NSDate+CacheSpec.swift in Sources */,
-				D5DC5A611C205B22003BD79B /* StorageKindSpec.swift in Sources */,
-				D5DC5A5F1C205B1C003BD79B /* ExpirySpec.swift in Sources */,
-				D5DC5A671C205B2F003BD79B /* UIImage+CacheSpec.swift in Sources */,
-				D5DC5A601C205B1F003BD79B /* JSONSpec.swift in Sources */,
-				D5DC5A691C205B41003BD79B /* DiskStorageSpec.swift in Sources */,
-				D5DC5A5D1C205B16003BD79B /* ConfigSpec.swift in Sources */,
-				D5DC5A661C205B2F003BD79B /* String+CacheSpec.swift in Sources */,
-				D5DC5A681C205B3D003BD79B /* DefaultCacheConverterSpec.swift in Sources */,
-				D5DC5A621C205B26003BD79B /* JSON+CacheSpec.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D5291C4D1C28226800B702C9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D5291C401C28226800B702C9 /* Cache-OSX */;
-			targetProxy = D5291C4C1C28226800B702C9 /* PBXContainerItemProxy */;
-		};
-		D5DC59ED1C20593E003BD79B /* PBXTargetDependency */ = {
+		D5291D1F1C2837DB00B702C9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D5DC59DF1C20593E003BD79B /* Cache-iOS */;
-			targetProxy = D5DC59EC1C20593E003BD79B /* PBXContainerItemProxy */;
+			targetProxy = D5291D1E1C2837DB00B702C9 /* PBXContainerItemProxy */;
+		};
+		D5291D6C1C283B5400B702C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D5291D5F1C283B5300B702C9 /* Cache-Mac */;
+			targetProxy = D5291D6B1C283B5400B702C9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		D5291C531C28226800B702C9 /* Debug */ = {
+		D5291D211C2837DB00B702C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-iOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D5291D221C2837DB00B702C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-iOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D5291D721C283B5400B702C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
@@ -716,18 +780,18 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Cache-OSX/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/Mac/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-OSX";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-Mac";
+				PRODUCT_NAME = Cache;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		D5291C541C28226800B702C9 /* Release */ = {
+		D5291D731C283B5400B702C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
@@ -737,40 +801,48 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Cache-OSX/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/Mac/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-OSX";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-Mac";
+				PRODUCT_NAME = Cache;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		D5291C561C28226800B702C9 /* Debug */ = {
+		D5291D751C283B5400B702C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "Cache-OSXTests/Info.plist";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/Mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-OSXTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
-		D5291C571C28226800B702C9 /* Release */ = {
+		D5291D761C283B5400B702C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "Cache-OSXTests/Info.plist";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/Mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-OSXTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -872,7 +944,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -889,7 +961,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -899,50 +971,30 @@
 			};
 			name = Release;
 		};
-		D5DC59F81C20593E003BD79B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = no.hyper.CacheTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		D5DC59F91C20593E003BD79B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = no.hyper.CacheTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D5291C521C28226800B702C9 /* Build configuration list for PBXNativeTarget "Cache-OSX" */ = {
+		D5291D201C2837DB00B702C9 /* Build configuration list for PBXNativeTarget "Cache-iOS-Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D5291C531C28226800B702C9 /* Debug */,
-				D5291C541C28226800B702C9 /* Release */,
+				D5291D211C2837DB00B702C9 /* Debug */,
+				D5291D221C2837DB00B702C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
-		D5291C551C28226800B702C9 /* Build configuration list for PBXNativeTarget "Cache-OSX-Tests" */ = {
+		D5291D711C283B5400B702C9 /* Build configuration list for PBXNativeTarget "Cache-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D5291C561C28226800B702C9 /* Debug */,
-				D5291C571C28226800B702C9 /* Release */,
+				D5291D721C283B5400B702C9 /* Debug */,
+				D5291D731C283B5400B702C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D5291D741C283B5400B702C9 /* Build configuration list for PBXNativeTarget "Cache-Mac-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5291D751C283B5400B702C9 /* Debug */,
+				D5291D761C283B5400B702C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
@@ -960,15 +1012,6 @@
 			buildConfigurations = (
 				D5DC59F51C20593E003BD79B /* Debug */,
 				D5DC59F61C20593E003BD79B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D5DC59F71C20593E003BD79B /* Build configuration list for PBXNativeTarget "Cache-iOS-Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D5DC59F81C20593E003BD79B /* Debug */,
-				D5DC59F91C20593E003BD79B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
