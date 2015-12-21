@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D5DC59E91C20593E003BD79B"
-               BuildableName = "CacheTests.xctest"
-               BlueprintName = "CacheTests"
+               BuildableName = "Cache-iOS-Tests.xctest"
+               BlueprintName = "Cache-iOS-Tests"
                ReferencedContainer = "container:Cache.xcodeproj">
             </BuildableReference>
          </TestableReference>

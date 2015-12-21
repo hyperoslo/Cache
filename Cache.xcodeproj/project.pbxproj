@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		D5291C281C28220B00B702C9 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C0B1C28220B00B702C9 /* HybridCache.swift */; };
 		D5291C291C28220B00B702C9 /* UIImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */; };
-		D5291C2A1C28220B00B702C9 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C101C28220B00B702C9 /* HybridCache.swift */; };
-		D5291C2B1C28220B00B702C9 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C131C28220B00B702C9 /* Cache.swift */; };
-		D5291C2C1C28220B00B702C9 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C141C28220B00B702C9 /* HybridCache.swift */; };
 		D5291C2D1C28220B00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
 		D5291C2F1C28220B00B702C9 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
@@ -27,6 +24,28 @@
 		D5291C391C28220B00B702C9 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
 		D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
 		D5291C3B1C28220B00B702C9 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C271C28220B00B702C9 /* StorageFactory.swift */; };
+		D5291C441C28226800B702C9 /* Cache-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = D5291C431C28226800B702C9 /* Cache-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5291C4B1C28226800B702C9 /* Cache-OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291C411C28226800B702C9 /* Cache-OSX.framework */; };
+		D5291C501C28226800B702C9 /* Cache_OSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C4F1C28226800B702C9 /* Cache_OSXTests.swift */; };
+		D5291C5A1C2822A000B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
+		D5291C5B1C2822A000B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
+		D5291C5C1C2822A000B702C9 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
+		D5291C5D1C2822A000B702C9 /* Expiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C191C28220B00B702C9 /* Expiry.swift */; };
+		D5291C5E1C2822A000B702C9 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1A1C28220B00B702C9 /* JSON.swift */; };
+		D5291C5F1C2822A000B702C9 /* StorageKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1B1C28220B00B702C9 /* StorageKind.swift */; };
+		D5291C601C2822A000B702C9 /* JSON+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1D1C28220B00B702C9 /* JSON+Cache.swift */; };
+		D5291C611C2822A000B702C9 /* NSData+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1E1C28220B00B702C9 /* NSData+Cache.swift */; };
+		D5291C621C2822A000B702C9 /* NSDate+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1F1C28220B00B702C9 /* NSDate+Cache.swift */; };
+		D5291C631C2822A000B702C9 /* String+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C201C28220B00B702C9 /* String+Cache.swift */; };
+		D5291C641C2822A000B702C9 /* DefaultCacheConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C221C28220B00B702C9 /* DefaultCacheConverter.swift */; };
+		D5291C651C2822A000B702C9 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C241C28220B00B702C9 /* DiskStorage.swift */; };
+		D5291C661C2822A000B702C9 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
+		D5291C671C2822A000B702C9 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
+		D5291C681C2822A000B702C9 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C271C28220B00B702C9 /* StorageFactory.swift */; };
+		D5291C691C2823FE00B702C9 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C101C28220B00B702C9 /* HybridCache.swift */; };
+		D5291C6C1C2827FB00B702C9 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
+		D5291C6D1C2827FB00B702C9 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6B1C2827FB00B702C9 /* Cache.swift */; };
+		D5291C6E1C2828C700B702C9 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
 		D5DC59EB1C20593E003BD79B /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC59E01C20593E003BD79B /* Cache.framework */; };
 		D5DC5A591C205AEF003BD79B /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC5A001C205AC9003BD79B /* SpecHelper.swift */; };
 		D5DC5A5A1C205B04003BD79B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC59FD1C205AC9003BD79B /* User.swift */; };
@@ -51,6 +70,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D5291C4C1C28226800B702C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5DC59D71C20593E003BD79B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D5291C401C28226800B702C9;
+			remoteInfo = "Cache-OSX";
+		};
 		D5DC59EC1C20593E003BD79B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D5DC59D71C20593E003BD79B /* Project object */;
@@ -64,8 +90,6 @@
 		D5291C0B1C28220B00B702C9 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
 		D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Cache.swift"; sourceTree = "<group>"; };
 		D5291C101C28220B00B702C9 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
-		D5291C131C28220B00B702C9 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
-		D5291C141C28220B00B702C9 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
 		D5291C151C28220B00B702C9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D5291C171C28220B00B702C9 /* Cachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
 		D5291C181C28220B00B702C9 /* Capsule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
@@ -81,8 +105,16 @@
 		D5291C251C28220B00B702C9 /* MemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		D5291C261C28220B00B702C9 /* StorageAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageAware.swift; sourceTree = "<group>"; };
 		D5291C271C28220B00B702C9 /* StorageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageFactory.swift; sourceTree = "<group>"; };
+		D5291C411C28226800B702C9 /* Cache-OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Cache-OSX.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5291C431C28226800B702C9 /* Cache-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cache-OSX.h"; sourceTree = "<group>"; };
+		D5291C451C28226800B702C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5291C4A1C28226800B702C9 /* Cache-OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5291C4F1C28226800B702C9 /* Cache_OSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache_OSXTests.swift; sourceTree = "<group>"; };
+		D5291C511C28226800B702C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicHybridCache.swift; sourceTree = "<group>"; };
+		D5291C6B1C2827FB00B702C9 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5DC59EA1C20593E003BD79B /* CacheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CacheTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5DC59EA1C20593E003BD79B /* Cache-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DC59FD1C205AC9003BD79B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D5DC59FF1C205AC9003BD79B /* UIImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CacheTests.swift"; sourceTree = "<group>"; };
 		D5DC5A001C205AC9003BD79B /* SpecHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
@@ -108,6 +140,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D5291C3D1C28226800B702C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5291C471C28226800B702C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5291C4B1C28226800B702C9 /* Cache-OSX.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5DC59DC1C20593E003BD79B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,7 +229,8 @@
 		D5291C111C28220B00B702C9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				D5291C121C28220B00B702C9 /* Cache */,
+				D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */,
+				D5291C6B1C2827FB00B702C9 /* Cache.swift */,
 				D5291C151C28220B00B702C9 /* Config.swift */,
 				D5291C161C28220B00B702C9 /* DataStructures */,
 				D5291C1C1C28220B00B702C9 /* Extensions */,
@@ -190,15 +238,6 @@
 				D5291C231C28220B00B702C9 /* Storage */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		D5291C121C28220B00B702C9 /* Cache */ = {
-			isa = PBXGroup;
-			children = (
-				D5291C131C28220B00B702C9 /* Cache.swift */,
-				D5291C141C28220B00B702C9 /* HybridCache.swift */,
-			);
-			path = Cache;
 			sourceTree = "<group>";
 		};
 		D5291C161C28220B00B702C9 /* DataStructures */ = {
@@ -243,6 +282,24 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		D5291C421C28226800B702C9 /* Cache-OSX */ = {
+			isa = PBXGroup;
+			children = (
+				D5291C431C28226800B702C9 /* Cache-OSX.h */,
+				D5291C451C28226800B702C9 /* Info.plist */,
+			);
+			path = "Cache-OSX";
+			sourceTree = "<group>";
+		};
+		D5291C4E1C28226800B702C9 /* Cache-OSXTests */ = {
+			isa = PBXGroup;
+			children = (
+				D5291C4F1C28226800B702C9 /* Cache_OSXTests.swift */,
+				D5291C511C28226800B702C9 /* Info.plist */,
+			);
+			path = "Cache-OSXTests";
+			sourceTree = "<group>";
+		};
 		D5DC59D61C20593E003BD79B = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +308,8 @@
 				D5291C081C28220B00B702C9 /* Source */,
 				D5DC5A161C205AC9003BD79B /* SupportFiles */,
 				D5DC59FA1C205AC9003BD79B /* Tests */,
+				D5291C421C28226800B702C9 /* Cache-OSX */,
+				D5291C4E1C28226800B702C9 /* Cache-OSXTests */,
 				D5DC59E11C20593E003BD79B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -259,7 +318,9 @@
 			isa = PBXGroup;
 			children = (
 				D5DC59E01C20593E003BD79B /* Cache.framework */,
-				D5DC59EA1C20593E003BD79B /* CacheTests.xctest */,
+				D5DC59EA1C20593E003BD79B /* Cache-iOS-Tests.xctest */,
+				D5291C411C28226800B702C9 /* Cache-OSX.framework */,
+				D5291C4A1C28226800B702C9 /* Cache-OSX-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -365,6 +426,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		D5291C3E1C28226800B702C9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5291C441C28226800B702C9 /* Cache-OSX.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5DC59DD1C20593E003BD79B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -375,6 +444,42 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		D5291C401C28226800B702C9 /* Cache-OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5291C521C28226800B702C9 /* Build configuration list for PBXNativeTarget "Cache-OSX" */;
+			buildPhases = (
+				D5291C3C1C28226800B702C9 /* Sources */,
+				D5291C3D1C28226800B702C9 /* Frameworks */,
+				D5291C3E1C28226800B702C9 /* Headers */,
+				D5291C3F1C28226800B702C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Cache-OSX";
+			productName = "Cache-OSX";
+			productReference = D5291C411C28226800B702C9 /* Cache-OSX.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D5291C491C28226800B702C9 /* Cache-OSX-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5291C551C28226800B702C9 /* Build configuration list for PBXNativeTarget "Cache-OSX-Tests" */;
+			buildPhases = (
+				D5291C461C28226800B702C9 /* Sources */,
+				D5291C471C28226800B702C9 /* Frameworks */,
+				D5291C481C28226800B702C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D5291C4D1C28226800B702C9 /* PBXTargetDependency */,
+			);
+			name = "Cache-OSX-Tests";
+			productName = "Cache-OSXTests";
+			productReference = D5291C4A1C28226800B702C9 /* Cache-OSX-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D5DC59DF1C20593E003BD79B /* Cache-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5DC59F41C20593E003BD79B /* Build configuration list for PBXNativeTarget "Cache-iOS" */;
@@ -393,9 +498,9 @@
 			productReference = D5DC59E01C20593E003BD79B /* Cache.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D5DC59E91C20593E003BD79B /* CacheTests */ = {
+		D5DC59E91C20593E003BD79B /* Cache-iOS-Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D5DC59F71C20593E003BD79B /* Build configuration list for PBXNativeTarget "CacheTests" */;
+			buildConfigurationList = D5DC59F71C20593E003BD79B /* Build configuration list for PBXNativeTarget "Cache-iOS-Tests" */;
 			buildPhases = (
 				D5DC59E61C20593E003BD79B /* Sources */,
 				D5DC59E71C20593E003BD79B /* Frameworks */,
@@ -407,9 +512,9 @@
 			dependencies = (
 				D5DC59ED1C20593E003BD79B /* PBXTargetDependency */,
 			);
-			name = CacheTests;
+			name = "Cache-iOS-Tests";
 			productName = CacheTests;
-			productReference = D5DC59EA1C20593E003BD79B /* CacheTests.xctest */;
+			productReference = D5DC59EA1C20593E003BD79B /* Cache-iOS-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -422,6 +527,12 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Hyper Interaktiv AS";
 				TargetAttributes = {
+					D5291C401C28226800B702C9 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					D5291C491C28226800B702C9 = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					D5DC59DF1C20593E003BD79B = {
 						CreatedOnToolsVersion = 7.2;
 					};
@@ -443,12 +554,28 @@
 			projectRoot = "";
 			targets = (
 				D5DC59DF1C20593E003BD79B /* Cache-iOS */,
-				D5DC59E91C20593E003BD79B /* CacheTests */,
+				D5DC59E91C20593E003BD79B /* Cache-iOS-Tests */,
+				D5291C401C28226800B702C9 /* Cache-OSX */,
+				D5291C491C28226800B702C9 /* Cache-OSX-Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D5291C3F1C28226800B702C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5291C481C28226800B702C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5DC59DE1C20593E003BD79B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -484,6 +611,38 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D5291C3C1C28226800B702C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5291C5B1C2822A000B702C9 /* Cachable.swift in Sources */,
+				D5291C5E1C2822A000B702C9 /* JSON.swift in Sources */,
+				D5291C681C2822A000B702C9 /* StorageFactory.swift in Sources */,
+				D5291C671C2822A000B702C9 /* StorageAware.swift in Sources */,
+				D5291C691C2823FE00B702C9 /* HybridCache.swift in Sources */,
+				D5291C6E1C2828C700B702C9 /* BasicHybridCache.swift in Sources */,
+				D5291C5C1C2822A000B702C9 /* Capsule.swift in Sources */,
+				D5291C611C2822A000B702C9 /* NSData+Cache.swift in Sources */,
+				D5291C5D1C2822A000B702C9 /* Expiry.swift in Sources */,
+				D5291C5A1C2822A000B702C9 /* Config.swift in Sources */,
+				D5291C651C2822A000B702C9 /* DiskStorage.swift in Sources */,
+				D5291C661C2822A000B702C9 /* MemoryStorage.swift in Sources */,
+				D5291C641C2822A000B702C9 /* DefaultCacheConverter.swift in Sources */,
+				D5291C5F1C2822A000B702C9 /* StorageKind.swift in Sources */,
+				D5291C601C2822A000B702C9 /* JSON+Cache.swift in Sources */,
+				D5291C621C2822A000B702C9 /* NSDate+Cache.swift in Sources */,
+				D5291C631C2822A000B702C9 /* String+Cache.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5291C461C28226800B702C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5291C501C28226800B702C9 /* Cache_OSXTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5DC59DB1C20593E003BD79B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -494,20 +653,19 @@
 				D5291C341C28220B00B702C9 /* NSData+Cache.swift in Sources */,
 				D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */,
 				D5291C381C28220B00B702C9 /* DiskStorage.swift in Sources */,
-				D5291C2C1C28220B00B702C9 /* HybridCache.swift in Sources */,
 				D5291C391C28220B00B702C9 /* MemoryStorage.swift in Sources */,
 				D5291C3B1C28220B00B702C9 /* StorageFactory.swift in Sources */,
 				D5291C291C28220B00B702C9 /* UIImage+Cache.swift in Sources */,
 				D5291C351C28220B00B702C9 /* NSDate+Cache.swift in Sources */,
 				D5291C371C28220B00B702C9 /* DefaultCacheConverter.swift in Sources */,
+				D5291C6D1C2827FB00B702C9 /* Cache.swift in Sources */,
 				D5291C321C28220B00B702C9 /* StorageKind.swift in Sources */,
-				D5291C2A1C28220B00B702C9 /* HybridCache.swift in Sources */,
-				D5291C2B1C28220B00B702C9 /* Cache.swift in Sources */,
 				D5291C301C28220B00B702C9 /* Expiry.swift in Sources */,
 				D5291C331C28220B00B702C9 /* JSON+Cache.swift in Sources */,
 				D5291C2F1C28220B00B702C9 /* Capsule.swift in Sources */,
 				D5291C281C28220B00B702C9 /* HybridCache.swift in Sources */,
 				D5291C2D1C28220B00B702C9 /* Config.swift in Sources */,
+				D5291C6C1C2827FB00B702C9 /* BasicHybridCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +697,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D5291C4D1C28226800B702C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D5291C401C28226800B702C9 /* Cache-OSX */;
+			targetProxy = D5291C4C1C28226800B702C9 /* PBXContainerItemProxy */;
+		};
 		D5DC59ED1C20593E003BD79B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D5DC59DF1C20593E003BD79B /* Cache-iOS */;
@@ -547,6 +710,76 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D5291C531C28226800B702C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Cache-OSX/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-OSX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D5291C541C28226800B702C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Cache-OSX/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-OSX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D5291C561C28226800B702C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Cache-OSXTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-OSXTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D5291C571C28226800B702C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Cache-OSXTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-OSXTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		D5DC59F21C20593E003BD79B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -701,6 +934,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D5291C521C28226800B702C9 /* Build configuration list for PBXNativeTarget "Cache-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5291C531C28226800B702C9 /* Debug */,
+				D5291C541C28226800B702C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D5291C551C28226800B702C9 /* Build configuration list for PBXNativeTarget "Cache-OSX-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5291C561C28226800B702C9 /* Debug */,
+				D5291C571C28226800B702C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D5DC59DA1C20593E003BD79B /* Build configuration list for PBXProject "Cache" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -719,7 +968,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D5DC59F71C20593E003BD79B /* Build configuration list for PBXNativeTarget "CacheTests" */ = {
+		D5DC59F71C20593E003BD79B /* Build configuration list for PBXNativeTarget "Cache-iOS-Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D5DC59F81C20593E003BD79B /* Debug */,

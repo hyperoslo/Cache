@@ -1,6 +1,6 @@
-import UIKit
+import Foundation
 
-public class HybridCache: NSObject {
+public class BasicHybridCache: NSObject {
 
   public let name: String
 
@@ -18,19 +18,6 @@ public class HybridCache: NSObject {
     backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
 
     super.init()
-
-    let notificationCenter = NSNotificationCenter.defaultCenter()
-
-    notificationCenter.addObserver(self, selector: "applicationDidReceiveMemoryWarning",
-      name: UIApplicationDidReceiveMemoryWarningNotification, object: nil)
-    notificationCenter.addObserver(self, selector: "applicationWillTerminate",
-      name: UIApplicationWillTerminateNotification, object: nil)
-    notificationCenter.addObserver(self, selector: "applicationDidEnterBackground",
-      name: UIApplicationDidEnterBackgroundNotification, object: nil)
-  }
-
-  deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 
   // MARK: - Caching
@@ -92,39 +79,5 @@ public class HybridCache: NSObject {
         completion?()
       }
     }
-  }
-
-  // MARK: - Notifications
-
-  func applicationDidReceiveMemoryWarning() {
-    frontStorage.clearExpired(nil)
-  }
-
-  func applicationWillTerminate() {
-    backStorage.clearExpired(nil)
-  }
-
-  func applicationDidEnterBackground() {
-    let application = UIApplication.sharedApplication()
-    var backgroundTask: UIBackgroundTaskIdentifier?
-
-    backgroundTask = application.beginBackgroundTaskWithExpirationHandler { [weak self] in
-      guard let weakSelf = self, var backgroundTask = backgroundTask else { return }
-
-      weakSelf.endBackgroundTask(&backgroundTask)
-    }
-
-    backStorage.clearExpired { [weak self] in
-      guard let weakSelf = self, var backgroundTask = backgroundTask else { return }
-
-      dispatch_async(dispatch_get_main_queue()) {
-        weakSelf.endBackgroundTask(&backgroundTask)
-      }
-    }
-  }
-
-  func endBackgroundTask(inout task: UIBackgroundTaskIdentifier) {
-    UIApplication.sharedApplication().endBackgroundTask(task)
-    task = UIBackgroundTaskInvalid
   }
 }
