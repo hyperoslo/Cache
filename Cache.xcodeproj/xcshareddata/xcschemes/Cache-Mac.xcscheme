@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D5291D5F1C283B5300B702C9"
-               BuildableName = "Cache-Mac.framework"
+               BuildableName = "Cache.framework"
                BlueprintName = "Cache-Mac"
                ReferencedContainer = "container:Cache.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5291D5F1C283B5300B702C9"
-            BuildableName = "Cache-Mac.framework"
+            BuildableName = "Cache.framework"
             BlueprintName = "Cache-Mac"
             ReferencedContainer = "container:Cache.xcodeproj">
          </BuildableReference>
@@ -79,7 +79,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5291D5F1C283B5300B702C9"
-            BuildableName = "Cache-Mac.framework"
+            BuildableName = "Cache.framework"
             BlueprintName = "Cache-Mac"
             ReferencedContainer = "container:Cache.xcodeproj">
          </BuildableReference>
@@ -97,7 +97,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5291D5F1C283B5300B702C9"
-            BuildableName = "Cache-Mac.framework"
+            BuildableName = "Cache.framework"
             BlueprintName = "Cache-Mac"
             ReferencedContainer = "container:Cache.xcodeproj">
          </BuildableReference>
