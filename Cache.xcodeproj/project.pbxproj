@@ -141,6 +141,8 @@
 		D5291D9B1C283DD900B702C9 /* NSImage+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+CacheSpec.swift"; sourceTree = "<group>"; };
 		D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CacheTests.swift"; sourceTree = "<group>"; };
 		D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+CacheTests.swift"; sourceTree = "<group>"; };
+		D5643E351C43F2CC00582E17 /* CustomCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CustomCache.playground; sourceTree = "<group>"; };
+		D5643E361C43F2CC00582E17 /* HybridCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HybridCache.playground; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DC5A181C205AC9003BD79B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5DC5A6C1C205C2A003BD79B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -421,9 +423,19 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		D5643E341C43F2CC00582E17 /* Playgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				D5643E351C43F2CC00582E17 /* CustomCache.playground */,
+				D5643E361C43F2CC00582E17 /* HybridCache.playground */,
+			);
+			path = Playgrounds;
+			sourceTree = "<group>";
+		};
 		D5DC59D61C20593E003BD79B = {
 			isa = PBXGroup;
 			children = (
+				D5643E341C43F2CC00582E17 /* Playgrounds */,
 				D5291DA41C28452300B702C9 /* Frameworks */,
 				D5291C081C28220B00B702C9 /* Source */,
 				D5DC5A161C205AC9003BD79B /* SupportFiles */,
