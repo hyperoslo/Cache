@@ -797,7 +797,7 @@
 		D5291D721C283B5400B702C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -818,7 +818,7 @@
 		D5291D731C283B5400B702C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1005,6 +1005,7 @@
 				D5291D221C2837DB00B702C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D5291D711C283B5400B702C9 /* Build configuration list for PBXNativeTarget "Cache-Mac" */ = {
 			isa = XCConfigurationList;
@@ -1013,6 +1014,7 @@
 				D5291D731C283B5400B702C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D5291D741C283B5400B702C9 /* Build configuration list for PBXNativeTarget "Cache-Mac-Tests" */ = {
 			isa = XCConfigurationList;
@@ -1021,6 +1023,7 @@
 				D5291D761C283B5400B702C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D5DC59DA1C20593E003BD79B /* Build configuration list for PBXProject "Cache" */ = {
 			isa = XCConfigurationList;
