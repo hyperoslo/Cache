@@ -30,7 +30,7 @@ class CacheSpec: QuickSpec {
 
           expect(cache.config.frontKind.name).to(equal(defaultConfig.frontKind.name))
           expect(cache.config.backKind.name).to(equal(defaultConfig.backKind.name))
-          expect(cache.config.expiry.date).to(equal(defaultConfig.expiry.date))
+          expect(cache.config.expiry.date.timeIntervalSinceNow) ≈ defaultConfig.expiry.date.timeIntervalSinceNow
           expect(cache.config.maxSize).to(equal(defaultConfig.maxSize))
         }
 

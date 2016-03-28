@@ -10,7 +10,7 @@ public enum Expiry {
 
     switch self {
     case .Never:
-      result = NSDate.distantFuture()
+      result = NSDate().dateByAddingTimeInterval(1000 * 60 * 60 * 24)
     case .Seconds(let seconds):
       result = NSDate().dateByAddingTimeInterval(seconds)
     case .Date(let date):

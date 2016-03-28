@@ -117,13 +117,15 @@ class DiskStorageSpec: QuickSpec {
           let expectation = self.expectationWithDescription(
             "Don't Remove If Not Expired Expectation")
 
-          storage.add(key, object: object)
-          storage.removeIfExpired(key) {
-            storage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).notTo(beNil())
-              expectation.fulfill()
+          storage.add(key, object: object) {
+            storage.removeIfExpired(key) {
+              storage.object(key) { (receivedObject: User?) in
+                expect(receivedObject).notTo(beNil())
+                expectation.fulfill()
+              }
             }
           }
+          
 
           self.waitForExpectationsWithTimeout(2.0, handler:nil)
         }
