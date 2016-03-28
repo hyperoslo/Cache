@@ -9,9 +9,9 @@ public class HybridCache: BasicHybridCache {
 
     let notificationCenter = NSNotificationCenter.defaultCenter()
 
-    notificationCenter.addObserver(self, selector: "applicationWillTerminate",
+    notificationCenter.addObserver(self, selector: #selector(HybridCache.applicationWillTerminate),
       name: NSApplicationWillTerminateNotification, object: nil)
-    notificationCenter.addObserver(self, selector: "applicationDidResignActive",
+    notificationCenter.addObserver(self, selector: #selector(HybridCache.applicationDidResignActive),
       name: NSApplicationDidResignActiveNotification, object: nil)
   }
 
