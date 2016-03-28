@@ -19,7 +19,8 @@ public struct DefaultCacheConverter<T> {
     return pointer.move()
   }
 
-  public func encode(var value: T) throws -> NSData {
+  public func encode(value: T) throws -> NSData {
+    var value = value
     return withUnsafePointer(&value) { p in
       NSData(bytes: p, length: sizeofValue(value))
     }
