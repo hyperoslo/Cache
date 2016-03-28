@@ -20,7 +20,7 @@ class ExpirySpec: QuickSpec {
           let date = NSDate().dateByAddingTimeInterval(1000)
           expiry = .Seconds(1000)
 
-          expect(expiry.date.timeIntervalSince1970) ≈ (date.timeIntervalSince1970, 0.001)
+          expect(expiry.date.timeIntervalSince1970) ≈ (date.timeIntervalSince1970, 0.01)
         }
 
         it("returns specified date") {
