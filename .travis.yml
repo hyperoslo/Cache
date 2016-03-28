@@ -10,3 +10,5 @@ before_install:
 script:
 - xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator
 - xcodebuild test -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator
+- xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-Mac" -sdk macosx
+- xcodebuild test -project Cache.xcodeproj -scheme "Cache-Mac" -sdk macosx
