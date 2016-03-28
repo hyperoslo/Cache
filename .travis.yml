@@ -8,7 +8,7 @@ before_install:
 - travis_wait 35 carthage update --platform Mac,iOS
 
 script:
-- xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator
-- xcodebuild test -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator
 - xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-Mac" -sdk macosx
 - xcodebuild test -project Cache.xcodeproj -scheme "Cache-Mac" -sdk macosx
+- xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator
+- xcodebuild test -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator
