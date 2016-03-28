@@ -10,7 +10,7 @@ class ExpirySpec: QuickSpec {
 
       describe("#date") {
         it("returns date in the distant future") {
-          let date = NSDate.distantFuture()
+          let date = NSDate(timeIntervalSince1970: 60 * 60 * 24 * 365 * 68)
           expiry = .Never
 
           expect(expiry.date).to(equal(date))
