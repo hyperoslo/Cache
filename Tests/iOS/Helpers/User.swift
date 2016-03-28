@@ -32,7 +32,7 @@ extension User: Cachable {
     do {
       data = try DefaultCacheConverter<User>().encode(self)
     } catch {}
-    
+
     return data
   }
 }

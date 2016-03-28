@@ -9,11 +9,11 @@ public class HybridCache: BasicHybridCache {
 
     let notificationCenter = NSNotificationCenter.defaultCenter()
 
-    notificationCenter.addObserver(self, selector: "applicationDidReceiveMemoryWarning",
+    notificationCenter.addObserver(self, selector: #selector(HybridCache.applicationDidReceiveMemoryWarning),
       name: UIApplicationDidReceiveMemoryWarningNotification, object: nil)
-    notificationCenter.addObserver(self, selector: "applicationWillTerminate",
+    notificationCenter.addObserver(self, selector: #selector(HybridCache.applicationWillTerminate),
       name: UIApplicationWillTerminateNotification, object: nil)
-    notificationCenter.addObserver(self, selector: "applicationDidEnterBackground",
+    notificationCenter.addObserver(self, selector: #selector(HybridCache.applicationDidEnterBackground),
       name: UIApplicationDidEnterBackgroundNotification, object: nil)
   }
 
