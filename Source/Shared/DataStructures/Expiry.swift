@@ -10,7 +10,8 @@ public enum Expiry {
 
     switch self {
     case .Never:
-      result = NSDate.distantFuture()
+      // Ref: http://lists.apple.com/archives/cocoa-dev/2005/Apr/msg01833.html
+      result = NSDate(timeIntervalSince1970: 60 * 60 * 24 * 365 * 68)
     case .Seconds(let seconds):
       result = NSDate().dateByAddingTimeInterval(seconds)
     case .Date(let date):
