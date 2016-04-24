@@ -5,6 +5,7 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
 [![Platform](https://img.shields.io/cocoapods/p/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
+![Swift](https://img.shields.io/badge/%20in-swift%202.2-orange.svg)
 
 ## Table of Contents
 
@@ -84,7 +85,7 @@ let config = Config(
   // Expiry date that will be applied by default for every added object
   // if it's not overridden in the add(key: object: expiry: completion:) method
   expiry: .Date(NSDate().dateByAddingTimeInterval(100000)),
-  // Maximum size of your cache storage    
+  // Maximum size of your cache storage
   maxSize: 10000)
 
 let cache = HybridCache(name: "Custom", config: config)
