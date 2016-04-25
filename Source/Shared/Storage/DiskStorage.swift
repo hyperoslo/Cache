@@ -1,4 +1,5 @@
 import Foundation
+import MD5
 
 public class DiskStorage: StorageAware {
 
@@ -204,7 +205,19 @@ public class DiskStorage: StorageAware {
   // MARK: - Helpers
 
   func fileName(key: String) -> String {
-    return key.base64()
+    if let digest = key.dataUsingEncoding(NSUTF8StringEncoding)?.md5() {
+      var string = ""
+      var byte: UInt8 = 0
+        
+      for i in 0 ..< digest.length {
+        digest.getBytes(&byte, range: NSMakeRange(i, 1))
+        string += String(format: "%02x", byte)
+      }
+        
+      return string
+    } else {
+      return key.base64()
+    }
   }
 
   func filePath(key: String) -> String {
