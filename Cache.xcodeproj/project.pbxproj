@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9ABAE0371CCF8FF7009477CF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABAE0361CCF8FF7009477CF /* CryptoSwift.framework */; };
+		9ABAE0391CCF9003009477CF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABAE0381CCF9003009477CF /* CryptoSwift.framework */; };
 		D5291C291C28220B00B702C9 /* UIImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */; };
 		D5291C2D1C28220B00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
@@ -92,6 +94,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9ABAE0361CCF8FF7009477CF /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		9ABAE0381CCF9003009477CF /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/Mac/CryptoSwift.framework; sourceTree = "<group>"; };
 		D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Cache.swift"; sourceTree = "<group>"; };
 		D5291C151C28220B00B702C9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D5291C171C28220B00B702C9 /* Cachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ABAE0371CCF8FF7009477CF /* CryptoSwift.framework in Frameworks */,
+				9ABAE0391CCF9003009477CF /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +414,7 @@
 		D5291DA51C28454000B702C9 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
+				9ABAE0381CCF9003009477CF /* CryptoSwift.framework */,
 				D5291CD91C2835D000B702C9 /* Quick.framework */,
 				D5291CDA1C2835D000B702C9 /* Nimble.framework */,
 			);
@@ -417,6 +424,7 @@
 		D5291DA61C28454800B702C9 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				9ABAE0361CCF8FF7009477CF /* CryptoSwift.framework */,
 				D5DC5A6C1C205C2A003BD79B /* Quick.framework */,
 				D5DC5A6D1C205C2A003BD79B /* Nimble.framework */,
 			);
@@ -980,6 +988,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -997,6 +1010,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

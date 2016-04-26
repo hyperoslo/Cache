@@ -1,5 +1,5 @@
 import Foundation
-import MD5
+import CryptoSwift
 
 public class DiskStorage: StorageAware {
 
