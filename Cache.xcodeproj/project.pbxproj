@@ -78,6 +78,7 @@
 		D5ACACCA1CD01F3400567809 /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACC81CD01F3400567809 /* Syncer.swift */; };
 		D5ACACCC1CD0207300567809 /* HybridSyncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCB1CD0207300567809 /* HybridSyncer.swift */; };
 		D5ACACCD1CD0207300567809 /* HybridSyncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCB1CD0207300567809 /* HybridSyncer.swift */; };
+		D5ACACD11CD0228400567809 /* SyncerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCE1CD0227200567809 /* SyncerSpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +154,7 @@
 		D5643E361C43F2CC00582E17 /* HybridCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HybridCache.playground; sourceTree = "<group>"; };
 		D5ACACC81CD01F3400567809 /* Syncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syncer.swift; sourceTree = "<group>"; };
 		D5ACACCB1CD0207300567809 /* HybridSyncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridSyncer.swift; sourceTree = "<group>"; };
+		D5ACACCE1CD0227200567809 /* SyncerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncerSpec.swift; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DC5A181C205AC9003BD79B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5DC5A6C1C205C2A003BD79B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				D5291CEF1C28374800B702C9 /* DefaultCacheConverterSpec.swift */,
+				D5ACACCE1CD0227200567809 /* SyncerSpec.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 				D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */,
 				D5291D381C28389B00B702C9 /* ConfigSpec.swift in Sources */,
 				D5291D431C28389B00B702C9 /* MemoryStorageSpec.swift in Sources */,
+				D5ACACD11CD0228400567809 /* SyncerSpec.swift in Sources */,
 				D5291D401C28389B00B702C9 /* String+CacheSpec.swift in Sources */,
 				D5291D9A1C283DB300B702C9 /* UIImage+CacheSpec.swift in Sources */,
 				D5291D411C28389B00B702C9 /* DefaultCacheConverterSpec.swift in Sources */,
