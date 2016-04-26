@@ -79,7 +79,8 @@
 		D5ACACD11CD0228400567809 /* SyncCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCE1CD0227200567809 /* SyncCacheSpec.swift */; };
 		D5ACACD51CD0256700567809 /* SyncHybridCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */; };
 		D5ACACD61CD0256700567809 /* SyncHybridCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */; };
-		D5ACACD81CD0266300567809 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACD71CD0266300567809 /* Cache.swift */; };
+		D5ACACDE1CD0272600567809 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACDD1CD0272600567809 /* Cache.swift */; };
+		D5ACACDF1CD0272600567809 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACDD1CD0272600567809 /* Cache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,7 +157,7 @@
 		D5ACACCB1CD0207300567809 /* SyncHybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncHybridCache.swift; sourceTree = "<group>"; };
 		D5ACACCE1CD0227200567809 /* SyncCacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncCacheSpec.swift; sourceTree = "<group>"; };
 		D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncHybridCacheSpec.swift; sourceTree = "<group>"; };
-		D5ACACD71CD0266300567809 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		D5ACACDD1CD0272600567809 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DC5A181C205AC9003BD79B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5DC5A6C1C205C2A003BD79B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -217,7 +218,6 @@
 			isa = PBXGroup;
 			children = (
 				D5291C721C28296B00B702C9 /* HybridCache.swift */,
-				D5ACACD71CD0266300567809 /* Cache.swift */,
 				D5291C0C1C28220B00B702C9 /* Extensions */,
 			);
 			path = iOS;
@@ -235,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */,
+				D5ACACDD1CD0272600567809 /* Cache.swift */,
 				D5291C151C28220B00B702C9 /* Config.swift */,
 				D5291C161C28220B00B702C9 /* DataStructures */,
 				D5291C1C1C28220B00B702C9 /* Extensions */,
@@ -734,6 +735,7 @@
 				D5291D921C283CFB00B702C9 /* DefaultCacheConverter.swift in Sources */,
 				D5ACACCA1CD01F3400567809 /* SyncCache.swift in Sources */,
 				D5291D8B1C283CFB00B702C9 /* Expiry.swift in Sources */,
+				D5ACACDF1CD0272600567809 /* Cache.swift in Sources */,
 				D5291D891C283CFB00B702C9 /* Cachable.swift in Sources */,
 				D5291D961C283CFB00B702C9 /* StorageFactory.swift in Sources */,
 				D5291D7E1C283BF200B702C9 /* HybridCache.swift in Sources */,
@@ -772,7 +774,7 @@
 				D5291C311C28220B00B702C9 /* JSON.swift in Sources */,
 				D5ACACC91CD01F3400567809 /* SyncCache.swift in Sources */,
 				D5291C361C28220B00B702C9 /* String+Cache.swift in Sources */,
-				D5ACACD81CD0266300567809 /* Cache.swift in Sources */,
+				D5ACACDE1CD0272600567809 /* Cache.swift in Sources */,
 				D5291C341C28220B00B702C9 /* NSData+Cache.swift in Sources */,
 				D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */,
 				D5291C381C28220B00B702C9 /* DiskStorage.swift in Sources */,
