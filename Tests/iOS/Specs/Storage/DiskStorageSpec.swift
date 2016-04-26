@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+import CryptoSwift
 @testable import Cache
 
 class DiskStorageSpec: QuickSpec {
@@ -178,7 +179,19 @@ class DiskStorageSpec: QuickSpec {
 
       describe("#fileName") {
         it("returns a correct file name") {
-          expect(storage.fileName(key)).to(equal(key.base64()))
+          if let digest = key.dataUsingEncoding(NSUTF8StringEncoding)?.md5() {
+            var string = ""
+            var byte: UInt8 = 0
+                
+            for i in 0 ..< digest.length {
+              digest.getBytes(&byte, range: NSMakeRange(i, 1))
+              string += String(format: "%02x", byte)
+            }
+                
+            expect(storage.fileName(key)).to(equal(string))
+          } else {
+            expect(storage.fileName(key)).to(equal(key.base64()))
+          }
         }
       }
 
