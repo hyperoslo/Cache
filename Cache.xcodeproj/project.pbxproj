@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9ABAE0371CCF8FF7009477CF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABAE0361CCF8FF7009477CF /* CryptoSwift.framework */; };
-		9ABAE0391CCF9003009477CF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABAE0381CCF9003009477CF /* CryptoSwift.framework */; };
+		9AFE68041CCF982800B7C6AC /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFE68031CCF982800B7C6AC /* Quick.framework */; };
+		9AFE68071CCF994A00B7C6AC /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFE68051CCF986C00B7C6AC /* CryptoSwift.framework */; };
 		D5291C291C28220B00B702C9 /* UIImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */; };
 		D5291C2D1C28220B00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
@@ -70,7 +71,6 @@
 		D5291D961C283CFB00B702C9 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C271C28220B00B702C9 /* StorageFactory.swift */; };
 		D5291D9A1C283DB300B702C9 /* UIImage+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D991C283DB300B702C9 /* UIImage+CacheSpec.swift */; };
 		D5291D9C1C283DD900B702C9 /* NSImage+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D9B1C283DD900B702C9 /* NSImage+CacheSpec.swift */; };
-		D5291D9D1C283EC000B702C9 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291CD91C2835D000B702C9 /* Quick.framework */; };
 		D5291D9E1C283EC000B702C9 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291CDA1C2835D000B702C9 /* Nimble.framework */; };
 		D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */; };
 		D5291DA31C2841D200B702C9 /* NSImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */; };
@@ -95,7 +95,8 @@
 
 /* Begin PBXFileReference section */
 		9ABAE0361CCF8FF7009477CF /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
-		9ABAE0381CCF9003009477CF /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/Mac/CryptoSwift.framework; sourceTree = "<group>"; };
+		9AFE68031CCF982800B7C6AC /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
+		9AFE68051CCF986C00B7C6AC /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/Mac/CryptoSwift.framework; sourceTree = "<group>"; };
 		D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Cache.swift"; sourceTree = "<group>"; };
 		D5291C151C28220B00B702C9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D5291C171C28220B00B702C9 /* Cachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
@@ -115,7 +116,6 @@
 		D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicHybridCache.swift; sourceTree = "<group>"; };
 		D5291C6B1C2827FB00B702C9 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D5291C721C28296B00B702C9 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
-		D5291CD91C2835D000B702C9 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
 		D5291CDA1C2835D000B702C9 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
 		D5291CDF1C28374800B702C9 /* SpecHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
 		D5291CE01C28374800B702C9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -168,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AFE68071CCF994A00B7C6AC /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +176,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5291D9D1C283EC000B702C9 /* Quick.framework in Frameworks */,
 				D5291D9E1C283EC000B702C9 /* Nimble.framework in Frameworks */,
 				D5291D6A1C283B5400B702C9 /* Cache.framework in Frameworks */,
 			);
@@ -186,7 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9ABAE0371CCF8FF7009477CF /* CryptoSwift.framework in Frameworks */,
-				9ABAE0391CCF9003009477CF /* CryptoSwift.framework in Frameworks */,
+				9AFE68041CCF982800B7C6AC /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,8 +414,8 @@
 		D5291DA51C28454000B702C9 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
-				9ABAE0381CCF9003009477CF /* CryptoSwift.framework */,
-				D5291CD91C2835D000B702C9 /* Quick.framework */,
+				9AFE68051CCF986C00B7C6AC /* CryptoSwift.framework */,
+				9AFE68031CCF982800B7C6AC /* Quick.framework */,
 				D5291CDA1C2835D000B702C9 /* Nimble.framework */,
 			);
 			name = Mac;
@@ -674,6 +674,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/Quick.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/Nimble.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/CryptoSwift.framework",
 			);
 			outputPaths = (
 			);
@@ -824,6 +825,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/Mac/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -845,6 +850,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/Mac/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
