@@ -2,10 +2,10 @@ import Quick
 import Nimble
 @testable import Cache
 
-class SyncerSpec: QuickSpec {
+class SyncCacheSpec: QuickSpec {
 
   override func spec() {
-    describe("Syncer") {
+    describe("SyncCache") {
       let name = "WeirdoCache"
       let key = "alongweirdkey"
       let object = SpecHelper.user
