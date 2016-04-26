@@ -86,7 +86,7 @@ class CacheSpec: QuickSpec {
       describe("#object") {
         it("resolves cached object") {
           cache.add(key, object: object) {
-            let receivedObject = Syncer(cache).object(key)
+            let receivedObject = SyncCache(cache).object(key)
             expect(receivedObject?.firstName).to(equal(object.firstName))
             expect(receivedObject?.lastName).to(equal(object.lastName))
           }

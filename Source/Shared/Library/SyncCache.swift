@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Syncer<T: Cachable> {
+public struct SyncCache<T: Cachable> {
 
   let cache: Cache<T>
 
@@ -38,10 +38,10 @@ public struct Syncer<T: Cachable> {
   }
 
   public func remove(key: String) {
-    HybridSyncer(cache).remove(key)
+    SyncHybridCache(cache).remove(key)
   }
 
   public func clear() {
-    HybridSyncer(cache).clear()
+    SyncHybridCache(cache).clear()
   }
 }

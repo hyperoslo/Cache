@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HybridSyncer {
+public struct SyncHybridCache {
 
   let cache: BasicHybridCache
 

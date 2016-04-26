@@ -10,11 +10,11 @@ class SyncerSpec: QuickSpec {
       let key = "alongweirdkey"
       let object = SpecHelper.user
       var cache: Cache<User>!
-      var syncer: Syncer<User>!
+      var syncer: SyncCache<User>!
 
       beforeEach {
         cache = Cache<User>(name: name)
-        syncer = Syncer(cache)
+        syncer = SyncCache(cache)
       }
 
       afterEach {
