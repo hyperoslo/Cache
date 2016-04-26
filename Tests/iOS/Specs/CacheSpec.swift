@@ -67,7 +67,7 @@ class CacheSpec: QuickSpec {
         }
       }
 
-      describe("#object") {
+      describe("#object:completion") {
         it("resolves cached object") {
           let expectation = self.expectationWithDescription("Object Expectation")
 
@@ -80,6 +80,16 @@ class CacheSpec: QuickSpec {
           }
 
           self.waitForExpectationsWithTimeout(4.0, handler:nil)
+        }
+      }
+
+      describe("#object") {
+        it("resolves cached object") {
+          cache.add(key, object: object) {
+            let receivedObject = Syncer(cache).object(key)
+            expect(receivedObject?.firstName).to(equal(object.firstName))
+            expect(receivedObject?.lastName).to(equal(object.lastName))
+          }
         }
       }
 

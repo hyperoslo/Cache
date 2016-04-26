@@ -74,6 +74,8 @@
 		D5291D9E1C283EC000B702C9 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291CDA1C2835D000B702C9 /* Nimble.framework */; };
 		D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */; };
 		D5291DA31C2841D200B702C9 /* NSImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */; };
+		D5ACACC91CD01F3400567809 /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACC81CD01F3400567809 /* Syncer.swift */; };
+		D5ACACCA1CD01F3400567809 /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACC81CD01F3400567809 /* Syncer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +149,7 @@
 		D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+CacheTests.swift"; sourceTree = "<group>"; };
 		D5643E351C43F2CC00582E17 /* CustomCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CustomCache.playground; sourceTree = "<group>"; };
 		D5643E361C43F2CC00582E17 /* HybridCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HybridCache.playground; sourceTree = "<group>"; };
+		D5ACACC81CD01F3400567809 /* Syncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syncer.swift; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DC5A181C205AC9003BD79B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5DC5A6C1C205C2A003BD79B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -261,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				D5291C221C28220B00B702C9 /* DefaultCacheConverter.swift */,
+				D5ACACC81CD01F3400567809 /* Syncer.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -716,6 +720,7 @@
 			files = (
 				D5291D941C283CFB00B702C9 /* MemoryStorage.swift in Sources */,
 				D5291D921C283CFB00B702C9 /* DefaultCacheConverter.swift in Sources */,
+				D5ACACCA1CD01F3400567809 /* Syncer.swift in Sources */,
 				D5291D8B1C283CFB00B702C9 /* Expiry.swift in Sources */,
 				D5291D891C283CFB00B702C9 /* Cachable.swift in Sources */,
 				D5291D961C283CFB00B702C9 /* StorageFactory.swift in Sources */,
@@ -752,6 +757,7 @@
 			files = (
 				D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */,
 				D5291C311C28220B00B702C9 /* JSON.swift in Sources */,
+				D5ACACC91CD01F3400567809 /* Syncer.swift in Sources */,
 				D5291C361C28220B00B702C9 /* String+Cache.swift in Sources */,
 				D5291C341C28220B00B702C9 /* NSData+Cache.swift in Sources */,
 				D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */,
