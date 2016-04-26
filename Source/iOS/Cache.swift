@@ -1,6 +1,6 @@
 import Foundation
 
-public class Cache<T: Cachable>: BasicHybridCache {
+public class Cache<T: Cachable>: HybridCache {
 
   public override init(name: String, config: Config = Config.defaultConfig) {
     super.init(name: name, config: config)
