@@ -18,5 +18,5 @@ Pod::Spec.new do |s|
   s.tvos.source_files = 'Source/{iOS,Shared}/**/*'
 
   s.frameworks = 'Foundation'
-  s.dependency 'MD5'
+  s.dependency 'CryptoSwift'
 end
