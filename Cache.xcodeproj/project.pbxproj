@@ -76,6 +76,8 @@
 		D5291DA31C2841D200B702C9 /* NSImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */; };
 		D5ACACC91CD01F3400567809 /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACC81CD01F3400567809 /* Syncer.swift */; };
 		D5ACACCA1CD01F3400567809 /* Syncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACC81CD01F3400567809 /* Syncer.swift */; };
+		D5ACACCC1CD0207300567809 /* HybridSyncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCB1CD0207300567809 /* HybridSyncer.swift */; };
+		D5ACACCD1CD0207300567809 /* HybridSyncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCB1CD0207300567809 /* HybridSyncer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +152,7 @@
 		D5643E351C43F2CC00582E17 /* CustomCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CustomCache.playground; sourceTree = "<group>"; };
 		D5643E361C43F2CC00582E17 /* HybridCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HybridCache.playground; sourceTree = "<group>"; };
 		D5ACACC81CD01F3400567809 /* Syncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syncer.swift; sourceTree = "<group>"; };
+		D5ACACCB1CD0207300567809 /* HybridSyncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridSyncer.swift; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DC5A181C205AC9003BD79B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5DC5A6C1C205C2A003BD79B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -265,6 +268,7 @@
 			children = (
 				D5291C221C28220B00B702C9 /* DefaultCacheConverter.swift */,
 				D5ACACC81CD01F3400567809 /* Syncer.swift */,
+				D5ACACCB1CD0207300567809 /* HybridSyncer.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -736,6 +740,7 @@
 				D5291D901C283CFB00B702C9 /* NSDate+Cache.swift in Sources */,
 				D5291D931C283CFB00B702C9 /* DiskStorage.swift in Sources */,
 				D5291D861C283CFB00B702C9 /* BasicHybridCache.swift in Sources */,
+				D5ACACCD1CD0207300567809 /* HybridSyncer.swift in Sources */,
 				D5291D8D1C283CFB00B702C9 /* StorageKind.swift in Sources */,
 				D5291D8F1C283CFB00B702C9 /* NSData+Cache.swift in Sources */,
 			);
@@ -773,6 +778,7 @@
 				D5291C331C28220B00B702C9 /* JSON+Cache.swift in Sources */,
 				D5291C2F1C28220B00B702C9 /* Capsule.swift in Sources */,
 				D5291C2D1C28220B00B702C9 /* Config.swift in Sources */,
+				D5ACACCC1CD0207300567809 /* HybridSyncer.swift in Sources */,
 				D5291C6C1C2827FB00B702C9 /* BasicHybridCache.swift in Sources */,
 				D5291C731C28296B00B702C9 /* HybridCache.swift in Sources */,
 			);
