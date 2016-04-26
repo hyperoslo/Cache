@@ -3,6 +3,9 @@ import Cocoa
 
 // MARK: - Cachable
 
+/**
+ Implementation of Cachable protocol.
+ */
 extension NSImage: Cachable {
 
   public typealias CacheType = NSImage
