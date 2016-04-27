@@ -163,7 +163,7 @@ cache.clear()
 
 ### SyncHybridCache
 
-`Cache` is born to be async, but if for some reason you need to perform cache
+`Cache` was born to be async, but if for some reason you need to perform cache
 operations synchronously, there is a helper for that.
 
 ```swift
