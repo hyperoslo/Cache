@@ -14,6 +14,8 @@
 * [Usage](#usage)
   * [Hybrid cache](#hybrid-cache)
   * [Type safe cache](#type-safe-cache)
+  * [SyncCache](#sync-cache)
+  * [SyncHybridCache](#sync-hybrid-cache)
   * [Expiry date](#expiry-date)
   * [Cachable protocol](#cachable-protocol)
 * [Optional bonuses](#optional-bonuses)
@@ -156,6 +158,43 @@ cache.remove("image")
 
 // Clean the cache
 cache.clear()
+```
+
+### SyncHybridCache
+
+`Cache` is born to be async, but if for some reason you need to perform cache
+operations synchronously, there is a helper for that.
+
+```swift
+let cache = HybridCache(name: "Mix")
+let syncCache = SyncHybridCache(cache)
+
+// Add UIImage to cache synchronously
+syncCache.add("image", object: UIImage(named: "image.png"))
+
+// Retrieve image from cache synchronously
+let image: UIImage? = syncCache.object("image")
+
+// Remove an object from the cache
+syncCache.remove("image")
+
+// Clean the cache
+syncCache.clear()
+```
+
+### SyncCache
+
+`SyncCache` works exactly in the same way as `SyncHybridCache`, the only
+difference is that it's a wrapper around a type safe cache.
+
+```swift
+let cache = Cache<UIImage>(name: "ImageCache")
+let syncCache = SyncCache(cache)
+
+syncCache.add("image", object: UIImage(named: "image.png"))
+let image = syncCache.object("image")
+syncCache.remove("image")
+syncCache.clear()
 ```
 
 ### Expiry date
