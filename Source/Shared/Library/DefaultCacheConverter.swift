@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+ Encoding error type
+ */
 public enum EncodingError: ErrorType {
   case InvalidSize
 }
@@ -13,6 +16,7 @@ public enum EncodingError: ErrorType {
  */
 public struct DefaultCacheConverter<T> {
 
+  /// Initialization
   public init() {}
 
   /**
