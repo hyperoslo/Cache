@@ -3,9 +3,8 @@ language: objective-c
 
 before_install:
 - brew update
-- if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
 - if brew outdated | grep -qx carthage; then brew upgrade carthage; fi
-- travis_wait 35 carthage update --platform Mac,iOS
+- travis_wait 35 carthage bootstrap --platform Mac,iOS
 
 script:
 - xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-Mac" -sdk macosx

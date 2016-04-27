@@ -3,15 +3,26 @@ import Cocoa
 
 // MARK: - Cachable
 
+/**
+ Implementation of Cachable protocol.
+ */
 extension NSImage: Cachable {
 
   public typealias CacheType = NSImage
 
+  /**
+   Creates UIImage from NSData
+
+   - Parameter data: Data to decode from
+   */
   public static func decode(data: NSData) -> CacheType? {
     let image = NSImage(data: data)
     return image
   }
 
+  /**
+   Encodes UIImage to NSData
+   */
   public func encode() -> NSData? {
     guard let data = TIFFRepresentation else { return nil }
 
@@ -25,8 +36,14 @@ extension NSImage: Cachable {
 
 // MARK: - Helpers
 
+/**
+ Helper UIImage extension.
+ */
 extension NSImage {
 
+  /**
+   Checks if image has alpha component
+   */
   var hasAlpha: Bool {
     var imageRect:CGRect = CGRectMake(0, 0, size.width, size.height)
     let imageRef = CGImageForProposedRect(&imageRect, context: nil, hints: nil)

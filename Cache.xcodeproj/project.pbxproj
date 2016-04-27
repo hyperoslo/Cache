@@ -27,7 +27,6 @@
 		D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
 		D5291C3B1C28220B00B702C9 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C271C28220B00B702C9 /* StorageFactory.swift */; };
 		D5291C6C1C2827FB00B702C9 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
-		D5291C6D1C2827FB00B702C9 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6B1C2827FB00B702C9 /* Cache.swift */; };
 		D5291C731C28296B00B702C9 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C721C28296B00B702C9 /* HybridCache.swift */; };
 		D5291D1D1C2837DB00B702C9 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC59E01C20593E003BD79B /* Cache.framework */; };
 		D5291D351C28389B00B702C9 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CDF1C28374800B702C9 /* SpecHelper.swift */; };
@@ -53,7 +52,6 @@
 		D5291D7E1C283BF200B702C9 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D7A1C283BE300B702C9 /* HybridCache.swift */; };
 		D5291D851C283C7C00B702C9 /* SpecHelper+OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D811C283C7000B702C9 /* SpecHelper+OSX.swift */; };
 		D5291D861C283CFB00B702C9 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
-		D5291D871C283CFB00B702C9 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6B1C2827FB00B702C9 /* Cache.swift */; };
 		D5291D881C283CFB00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		D5291D891C283CFB00B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
 		D5291D8A1C283CFB00B702C9 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
@@ -74,6 +72,15 @@
 		D5291D9E1C283EC000B702C9 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291CDA1C2835D000B702C9 /* Nimble.framework */; };
 		D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */; };
 		D5291DA31C2841D200B702C9 /* NSImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */; };
+		D5ACACC91CD01F3400567809 /* SyncCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACC81CD01F3400567809 /* SyncCache.swift */; };
+		D5ACACCA1CD01F3400567809 /* SyncCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACC81CD01F3400567809 /* SyncCache.swift */; };
+		D5ACACCC1CD0207300567809 /* SyncHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCB1CD0207300567809 /* SyncHybridCache.swift */; };
+		D5ACACCD1CD0207300567809 /* SyncHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCB1CD0207300567809 /* SyncHybridCache.swift */; };
+		D5ACACD11CD0228400567809 /* SyncCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCE1CD0227200567809 /* SyncCacheSpec.swift */; };
+		D5ACACD51CD0256700567809 /* SyncHybridCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */; };
+		D5ACACD61CD0256700567809 /* SyncHybridCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */; };
+		D5ACACDE1CD0272600567809 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACDD1CD0272600567809 /* Cache.swift */; };
+		D5ACACDF1CD0272600567809 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACDD1CD0272600567809 /* Cache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,7 +121,6 @@
 		D5291C261C28220B00B702C9 /* StorageAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageAware.swift; sourceTree = "<group>"; };
 		D5291C271C28220B00B702C9 /* StorageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageFactory.swift; sourceTree = "<group>"; };
 		D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicHybridCache.swift; sourceTree = "<group>"; };
-		D5291C6B1C2827FB00B702C9 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D5291C721C28296B00B702C9 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
 		D5291CDA1C2835D000B702C9 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
 		D5291CDF1C28374800B702C9 /* SpecHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
@@ -147,6 +153,11 @@
 		D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+CacheTests.swift"; sourceTree = "<group>"; };
 		D5643E351C43F2CC00582E17 /* CustomCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CustomCache.playground; sourceTree = "<group>"; };
 		D5643E361C43F2CC00582E17 /* HybridCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HybridCache.playground; sourceTree = "<group>"; };
+		D5ACACC81CD01F3400567809 /* SyncCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncCache.swift; sourceTree = "<group>"; };
+		D5ACACCB1CD0207300567809 /* SyncHybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncHybridCache.swift; sourceTree = "<group>"; };
+		D5ACACCE1CD0227200567809 /* SyncCacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncCacheSpec.swift; sourceTree = "<group>"; };
+		D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncHybridCacheSpec.swift; sourceTree = "<group>"; };
+		D5ACACDD1CD0272600567809 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DC5A181C205AC9003BD79B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5DC5A6C1C205C2A003BD79B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -224,7 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */,
-				D5291C6B1C2827FB00B702C9 /* Cache.swift */,
+				D5ACACDD1CD0272600567809 /* Cache.swift */,
 				D5291C151C28220B00B702C9 /* Config.swift */,
 				D5291C161C28220B00B702C9 /* DataStructures */,
 				D5291C1C1C28220B00B702C9 /* Extensions */,
@@ -261,6 +272,8 @@
 			isa = PBXGroup;
 			children = (
 				D5291C221C28220B00B702C9 /* DefaultCacheConverter.swift */,
+				D5ACACC81CD01F3400567809 /* SyncCache.swift */,
+				D5ACACCB1CD0207300567809 /* SyncHybridCache.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -336,6 +349,8 @@
 			isa = PBXGroup;
 			children = (
 				D5291CEF1C28374800B702C9 /* DefaultCacheConverterSpec.swift */,
+				D5ACACCE1CD0227200567809 /* SyncCacheSpec.swift */,
+				D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -702,6 +717,8 @@
 				D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */,
 				D5291D381C28389B00B702C9 /* ConfigSpec.swift in Sources */,
 				D5291D431C28389B00B702C9 /* MemoryStorageSpec.swift in Sources */,
+				D5ACACD11CD0228400567809 /* SyncCacheSpec.swift in Sources */,
+				D5ACACD51CD0256700567809 /* SyncHybridCacheSpec.swift in Sources */,
 				D5291D401C28389B00B702C9 /* String+CacheSpec.swift in Sources */,
 				D5291D9A1C283DB300B702C9 /* UIImage+CacheSpec.swift in Sources */,
 				D5291D411C28389B00B702C9 /* DefaultCacheConverterSpec.swift in Sources */,
@@ -716,7 +733,9 @@
 			files = (
 				D5291D941C283CFB00B702C9 /* MemoryStorage.swift in Sources */,
 				D5291D921C283CFB00B702C9 /* DefaultCacheConverter.swift in Sources */,
+				D5ACACCA1CD01F3400567809 /* SyncCache.swift in Sources */,
 				D5291D8B1C283CFB00B702C9 /* Expiry.swift in Sources */,
+				D5ACACDF1CD0272600567809 /* Cache.swift in Sources */,
 				D5291D891C283CFB00B702C9 /* Cachable.swift in Sources */,
 				D5291D961C283CFB00B702C9 /* StorageFactory.swift in Sources */,
 				D5291D7E1C283BF200B702C9 /* HybridCache.swift in Sources */,
@@ -726,11 +745,11 @@
 				D5291D7D1C283BF200B702C9 /* NSImage+Cache.swift in Sources */,
 				D5291D881C283CFB00B702C9 /* Config.swift in Sources */,
 				D5291D951C283CFB00B702C9 /* StorageAware.swift in Sources */,
-				D5291D871C283CFB00B702C9 /* Cache.swift in Sources */,
 				D5291D911C283CFB00B702C9 /* String+Cache.swift in Sources */,
 				D5291D901C283CFB00B702C9 /* NSDate+Cache.swift in Sources */,
 				D5291D931C283CFB00B702C9 /* DiskStorage.swift in Sources */,
 				D5291D861C283CFB00B702C9 /* BasicHybridCache.swift in Sources */,
+				D5ACACCD1CD0207300567809 /* SyncHybridCache.swift in Sources */,
 				D5291D8D1C283CFB00B702C9 /* StorageKind.swift in Sources */,
 				D5291D8F1C283CFB00B702C9 /* NSData+Cache.swift in Sources */,
 			);
@@ -742,6 +761,7 @@
 			files = (
 				D5291D9C1C283DD900B702C9 /* NSImage+CacheSpec.swift in Sources */,
 				D5291D851C283C7C00B702C9 /* SpecHelper+OSX.swift in Sources */,
+				D5ACACD61CD0256700567809 /* SyncHybridCacheSpec.swift in Sources */,
 				D5291DA31C2841D200B702C9 /* NSImage+CacheTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -752,7 +772,9 @@
 			files = (
 				D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */,
 				D5291C311C28220B00B702C9 /* JSON.swift in Sources */,
+				D5ACACC91CD01F3400567809 /* SyncCache.swift in Sources */,
 				D5291C361C28220B00B702C9 /* String+Cache.swift in Sources */,
+				D5ACACDE1CD0272600567809 /* Cache.swift in Sources */,
 				D5291C341C28220B00B702C9 /* NSData+Cache.swift in Sources */,
 				D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */,
 				D5291C381C28220B00B702C9 /* DiskStorage.swift in Sources */,
@@ -761,12 +783,12 @@
 				D5291C291C28220B00B702C9 /* UIImage+Cache.swift in Sources */,
 				D5291C351C28220B00B702C9 /* NSDate+Cache.swift in Sources */,
 				D5291C371C28220B00B702C9 /* DefaultCacheConverter.swift in Sources */,
-				D5291C6D1C2827FB00B702C9 /* Cache.swift in Sources */,
 				D5291C321C28220B00B702C9 /* StorageKind.swift in Sources */,
 				D5291C301C28220B00B702C9 /* Expiry.swift in Sources */,
 				D5291C331C28220B00B702C9 /* JSON+Cache.swift in Sources */,
 				D5291C2F1C28220B00B702C9 /* Capsule.swift in Sources */,
 				D5291C2D1C28220B00B702C9 /* Config.swift in Sources */,
+				D5ACACCC1CD0207300567809 /* SyncHybridCache.swift in Sources */,
 				D5291C6C1C2827FB00B702C9 /* BasicHybridCache.swift in Sources */,
 				D5291C731C28296B00B702C9 /* HybridCache.swift in Sources */,
 			);
