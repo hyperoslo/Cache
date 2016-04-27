@@ -26,6 +26,9 @@ public class HybridCache: BasicHybridCache {
       name: NSApplicationDidResignActiveNotification, object: nil)
   }
 
+  /**
+   Removes notification center observer.
+   */
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }

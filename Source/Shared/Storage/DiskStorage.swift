@@ -1,15 +1,24 @@
 import Foundation
 import CryptoSwift
 
+/**
+ File-based cache storage
+ */
 public class DiskStorage: StorageAware {
 
+  /// Domain prefix
   public static let prefix = "no.hyper.Cache.Disk"
 
+  /// Storage root path
   public let path: String
+  /// Maximum size of the cache storage
   public var maxSize: UInt
+  /// Queue for write operations
   public private(set) var writeQueue: dispatch_queue_t
+  /// Queue for read operations
   public private(set) var readQueue: dispatch_queue_t
 
+  /// File manager to read/write to the disk
   private lazy var fileManager: NSFileManager = {
     let fileManager = NSFileManager()
     return fileManager
@@ -17,6 +26,12 @@ public class DiskStorage: StorageAware {
 
   // MARK: - Initialization
 
+  /**
+   Creates a new disk storage.
+
+   - Parameter name: A name of the storage
+   - Parameter maxSize: Maximum size of the cache storage
+   */
   public required init(name: String, maxSize: UInt = 0) {
     self.maxSize = maxSize
     let cacheName = name.capitalizedString
@@ -32,6 +47,14 @@ public class DiskStorage: StorageAware {
 
   // MARK: - CacheAware
 
+  /**
+   Saves passed object on the disk.
+
+   - Parameter key: Unique key to identify the object in the cache
+   - Parameter object: Object that needs to be cached
+   - Parameter expiry: Expiration date for the cached object
+   - Parameter completion: Completion closure to be called when the task is done
+   */
   public func add<T: Cachable>(key: String, object: T, expiry: Expiry = .Never, completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else {
@@ -59,6 +82,12 @@ public class DiskStorage: StorageAware {
     }
   }
 
+  /**
+   Tries to retrieve the object from the disk storage.
+
+   - Parameter key: Unique key to identify the object in the cache
+   - Parameter completion: Completion closure returns object or nil
+   */
   public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) {
     dispatch_async(readQueue) { [weak self] in
       guard let weakSelf = self else {
@@ -77,6 +106,12 @@ public class DiskStorage: StorageAware {
     }
   }
 
+  /**
+   Removes the object from the cache by the given key.
+
+   - Parameter key: Unique key to identify the object in the cache
+   - Parameter completion: Completion closure to be called when the task is done
+   */
   public func remove(key: String, completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else {
@@ -92,6 +127,12 @@ public class DiskStorage: StorageAware {
     }
   }
 
+  /**
+   Removes the object from the cache if it's expired.
+
+   - Parameter key: Unique key to identify the object in the cache
+   - Parameter completion: Completion closure to be called when the task is done
+   */
   public func removeIfExpired(key: String, completion: (() -> Void)?) {
     let path = filePath(key)
 
@@ -113,6 +154,11 @@ public class DiskStorage: StorageAware {
     }
   }
 
+  /**
+   Clears the cache storage.
+
+   - Parameter completion: Completion closure to be called when the task is done
+   */
   public func clear(completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else {
@@ -128,6 +174,11 @@ public class DiskStorage: StorageAware {
     }
   }
 
+  /**
+   Clears all expired objects.
+
+   - Parameter completion: Completion closure to be called when the task is done
+   */
   public func clearExpired(completion: (() -> Void)? = nil) {
     dispatch_async(writeQueue) { [weak self] in
       guard let weakSelf = self else {
@@ -204,22 +255,32 @@ public class DiskStorage: StorageAware {
 
   // MARK: - Helpers
 
+  /**
+   Builds file name from the key.
+
+   - Parameter key: Unique key to identify the object in the cache
+   */
   func fileName(key: String) -> String {
     if let digest = key.dataUsingEncoding(NSUTF8StringEncoding)?.md5() {
       var string = ""
       var byte: UInt8 = 0
-        
+
       for i in 0 ..< digest.length {
         digest.getBytes(&byte, range: NSMakeRange(i, 1))
         string += String(format: "%02x", byte)
       }
-        
+
       return string
     } else {
       return key.base64()
     }
   }
 
+  /**
+   Builds file path from the key.
+
+   - Parameter key: Unique key to identify the object in the cache
+   */
   func filePath(key: String) -> String {
     return "\(path)/\(fileName(key))"
   }

@@ -2,10 +2,18 @@ import Foundation
 
 // MARK: - Cachable
 
+/**
+ Implementation of Cachable protocol.
+ */
 extension JSON: Cachable {
 
   public typealias CacheType = JSON
 
+  /**
+   Creates JSON from NSData
+
+   - Parameter data: Data to decode from
+   */
   public static func decode(data: NSData) -> CacheType? {
     var result: CacheType?
 
@@ -26,6 +34,9 @@ extension JSON: Cachable {
     return result
   }
 
+  /**
+   Encodes JSON to NSData
+   */
   public func encode() -> NSData? {
     return try? NSJSONSerialization.dataWithJSONObject(object,
       options: NSJSONWritingOptions())

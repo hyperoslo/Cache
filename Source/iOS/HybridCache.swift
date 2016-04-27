@@ -28,6 +28,9 @@ public class HybridCache: BasicHybridCache {
       name: UIApplicationDidEnterBackgroundNotification, object: nil)
   }
 
+  /**
+   Removes notification center observer.
+   */
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }

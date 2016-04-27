@@ -1,10 +1,17 @@
 import Foundation
 
+/**
+ Helper enum to set the expiration date
+ */
 public enum Expiry {
+  /// Object will be expired in the nearest future
   case Never
+  /// Object will be expired in the specified amount of seconds
   case Seconds(NSTimeInterval)
+  /// Object will be expired on the specified date
   case Date(NSDate)
 
+  /// Returns the appropriate date object
   public var date: NSDate {
     let result: NSDate
 

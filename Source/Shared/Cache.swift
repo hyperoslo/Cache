@@ -34,7 +34,7 @@ public class Cache<T: Cachable>: HybridCache {
   }
 
   /**
-   Tries to retrieves the object from to the front and back cache storages.
+   Tries to retrieve the object from to the front and back cache storages.
 
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
