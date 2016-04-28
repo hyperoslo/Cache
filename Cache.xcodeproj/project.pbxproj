@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9ABAE0371CCF8FF7009477CF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABAE0361CCF8FF7009477CF /* CryptoSwift.framework */; };
-		9AFE68041CCF982800B7C6AC /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFE68031CCF982800B7C6AC /* Quick.framework */; };
 		9AFE68071CCF994A00B7C6AC /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFE68051CCF986C00B7C6AC /* CryptoSwift.framework */; };
 		D5291C291C28220B00B702C9 /* UIImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */; };
 		D5291C2D1C28220B00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
@@ -78,9 +77,11 @@
 		D5ACACCD1CD0207300567809 /* SyncHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCB1CD0207300567809 /* SyncHybridCache.swift */; };
 		D5ACACD11CD0228400567809 /* SyncCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCE1CD0227200567809 /* SyncCacheSpec.swift */; };
 		D5ACACD51CD0256700567809 /* SyncHybridCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */; };
-		D5ACACD61CD0256700567809 /* SyncHybridCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */; };
 		D5ACACDE1CD0272600567809 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACDD1CD0272600567809 /* Cache.swift */; };
 		D5ACACDF1CD0272600567809 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACDD1CD0272600567809 /* Cache.swift */; };
+		D5BAEBF31CD1F4B70003E865 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFE68031CCF982800B7C6AC /* Quick.framework */; };
+		D5BAEBF51CD1F57D0003E865 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABAE0361CCF8FF7009477CF /* CryptoSwift.framework */; };
+		D5BAEBF61CD1F6250003E865 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFE68051CCF986C00B7C6AC /* CryptoSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,9 +170,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5291D1D1C2837DB00B702C9 /* Cache.framework in Frameworks */,
+				D5BAEBF51CD1F57D0003E865 /* CryptoSwift.framework in Frameworks */,
 				D5291D571C283A4200B702C9 /* Quick.framework in Frameworks */,
 				D5291D581C283A4200B702C9 /* Nimble.framework in Frameworks */,
-				D5291D1D1C2837DB00B702C9 /* Cache.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,8 +189,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5291D9E1C283EC000B702C9 /* Nimble.framework in Frameworks */,
 				D5291D6A1C283B5400B702C9 /* Cache.framework in Frameworks */,
+				D5BAEBF61CD1F6250003E865 /* CryptoSwift.framework in Frameworks */,
+				D5BAEBF31CD1F4B70003E865 /* Quick.framework in Frameworks */,
+				D5291D9E1C283EC000B702C9 /* Nimble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +201,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9ABAE0371CCF8FF7009477CF /* CryptoSwift.framework in Frameworks */,
-				9AFE68041CCF982800B7C6AC /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +545,7 @@
 				D5291D5C1C283B5300B702C9 /* Frameworks */,
 				D5291D5D1C283B5300B702C9 /* Headers */,
 				D5291D5E1C283B5300B702C9 /* Resources */,
+				D5BAEBF41CD1F4D30003E865 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -579,6 +583,7 @@
 				D5DC59DC1C20593E003BD79B /* Frameworks */,
 				D5DC59DD1C20593E003BD79B /* Headers */,
 				D5DC59DE1C20593E003BD79B /* Resources */,
+				D5BAEBF21CD1F4490003E865 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -697,6 +702,34 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
+		D5BAEBF21CD1F4490003E865 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		D5BAEBF41CD1F4D30003E865 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/CryptoSwift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -761,7 +794,6 @@
 			files = (
 				D5291D9C1C283DD900B702C9 /* NSImage+CacheSpec.swift in Sources */,
 				D5291D851C283C7C00B702C9 /* SpecHelper+OSX.swift in Sources */,
-				D5ACACD61CD0256700567809 /* SyncHybridCacheSpec.swift in Sources */,
 				D5291DA31C2841D200B702C9 /* NSImage+CacheTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
