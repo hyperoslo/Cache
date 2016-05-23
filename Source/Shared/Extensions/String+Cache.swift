@@ -13,6 +13,7 @@ extension String: Cachable {
    Creates a string from NSData
 
    - Parameter data: Data to decode from
+   - Returns: An optional CacheType
    */
   public static func decode(data: NSData) -> CacheType? {
     guard let string = String(data: data, encoding: NSUTF8StringEncoding) else {
@@ -24,6 +25,7 @@ extension String: Cachable {
 
   /**
    Encodes a string to NSData
+   - Returns: Optional NSData
    */
   public func encode() -> NSData? {
     return dataUsingEncoding(NSUTF8StringEncoding)
@@ -39,6 +41,8 @@ extension String {
 
   /**
    Creates base64 string
+
+   - Returns: A base64 encoded string
    */
   func base64() -> String {
     guard let data = self.dataUsingEncoding(NSUTF8StringEncoding) else { return self }

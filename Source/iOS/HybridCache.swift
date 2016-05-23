@@ -59,22 +59,25 @@ public class HybridCache: BasicHybridCache {
     var backgroundTask: UIBackgroundTaskIdentifier?
 
     backgroundTask = application.beginBackgroundTaskWithExpirationHandler { [weak self] in
-      guard let weakSelf = self, var backgroundTask = backgroundTask else { return }
+      guard let weakSelf = self, backgroundTask = backgroundTask else { return }
+      var mutableBackgroundTask = backgroundTask
 
-      weakSelf.endBackgroundTask(&backgroundTask)
+      weakSelf.endBackgroundTask(&mutableBackgroundTask)
     }
 
     backStorage.clearExpired { [weak self] in
-      guard let weakSelf = self, var backgroundTask = backgroundTask else { return }
+      guard let weakSelf = self, backgroundTask = backgroundTask else { return }
+      var mutableBackgroundTask = backgroundTask
 
       dispatch_async(dispatch_get_main_queue()) {
-        weakSelf.endBackgroundTask(&backgroundTask)
+        weakSelf.endBackgroundTask(&mutableBackgroundTask)
       }
     }
   }
 
   /**
    Ends given background task.
+   - Parameter task: A UIBackgroundTaskIdentifier
    */
   func endBackgroundTask(inout task: UIBackgroundTaskIdentifier) {
     UIApplication.sharedApplication().endBackgroundTask(task)
