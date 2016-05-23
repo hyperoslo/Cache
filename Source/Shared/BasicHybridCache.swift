@@ -28,7 +28,7 @@ public class BasicHybridCache: NSObject {
     self.name = name
     self.config = config
 
-    frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: config.maxSize)
+    frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: UInt(config.maxObjects))
     backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
 
     super.init()
