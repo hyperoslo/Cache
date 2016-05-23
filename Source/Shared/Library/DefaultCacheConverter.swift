@@ -23,6 +23,7 @@ public struct DefaultCacheConverter<T> {
    Creates an instance from NSData
 
    - Parameter data: Data to decode from
+   - Returns: A generic type or throws
    */
   public func decode(data: NSData) throws -> T {
     guard data.length == sizeof(T) else {
@@ -37,6 +38,9 @@ public struct DefaultCacheConverter<T> {
 
   /**
    Encodes an instance to NSData
+
+   - Parameter value: A generic value
+   - Returns: A NSData or throws
    */
   public func encode(value: T) throws -> NSData {
     var value = value

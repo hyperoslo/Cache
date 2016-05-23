@@ -14,6 +14,7 @@ extension NSImage: Cachable {
    Creates UIImage from NSData
 
    - Parameter data: Data to decode from
+   - Returns: Optional CacheType
    */
   public static func decode(data: NSData) -> CacheType? {
     let image = NSImage(data: data)
@@ -22,6 +23,7 @@ extension NSImage: Cachable {
 
   /**
    Encodes UIImage to NSData
+   - Returns: Optional NSData
    */
   public func encode() -> NSData? {
     guard let data = TIFFRepresentation else { return nil }
@@ -45,7 +47,7 @@ extension NSImage {
    Checks if image has alpha component
    */
   var hasAlpha: Bool {
-    var imageRect:CGRect = CGRectMake(0, 0, size.width, size.height)
+    var imageRect: CGRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
     let imageRef = CGImageForProposedRect(&imageRect, context: nil, hints: nil)
     let result: Bool
     let alpha = CGImageGetAlphaInfo(imageRef)

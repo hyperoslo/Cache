@@ -14,11 +14,7 @@ public class MemoryStorage: StorageAware {
   }
 
   /// Maximum size of the cache storage
-  public var maxSize: UInt {
-    didSet(value) {
-      self.cache.totalCostLimit = Int(maxSize)
-    }
-  }
+  public var maxSize: UInt
 
   /// Memory cache instance
   public let cache = NSCache()
@@ -37,6 +33,9 @@ public class MemoryStorage: StorageAware {
    */
   public required init(name: String, maxSize: UInt = 0) {
     self.maxSize = maxSize
+
+    cache.countLimit = Int(maxSize)
+    cache.totalCostLimit = Int(maxSize)
     cache.name = "\(MemoryStorage.prefix).\(name.capitalizedString)"
     writeQueue = dispatch_queue_create("\(cache.name).WriteQueue", DISPATCH_QUEUE_SERIAL)
     readQueue = dispatch_queue_create("\(cache.name).ReadQueue", DISPATCH_QUEUE_SERIAL)

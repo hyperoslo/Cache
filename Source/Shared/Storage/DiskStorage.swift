@@ -98,7 +98,7 @@ public class DiskStorage: StorageAware {
       let filePath = weakSelf.filePath(key)
       var cachedObject: T?
 
-      if let data = NSData(contentsOfFile: filePath)  {
+      if let data = NSData(contentsOfFile: filePath) {
         cachedObject = T.decode(data) as? T
       }
 
@@ -259,6 +259,7 @@ public class DiskStorage: StorageAware {
    Builds file name from the key.
 
    - Parameter key: Unique key to identify the object in the cache
+   - Returns: A md5 or base64 string
    */
   func fileName(key: String) -> String {
     if let digest = key.dataUsingEncoding(NSUTF8StringEncoding)?.md5() {
@@ -266,7 +267,7 @@ public class DiskStorage: StorageAware {
       var byte: UInt8 = 0
 
       for i in 0 ..< digest.length {
-        digest.getBytes(&byte, range: NSMakeRange(i, 1))
+        digest.getBytes(&byte, range: NSRange(location: i, length: 1))
         string += String(format: "%02x", byte)
       }
 
@@ -280,6 +281,7 @@ public class DiskStorage: StorageAware {
    Builds file path from the key.
 
    - Parameter key: Unique key to identify the object in the cache
+   - Returns: A string path based on key
    */
   func filePath(key: String) -> String {
     return "\(path)/\(fileName(key))"

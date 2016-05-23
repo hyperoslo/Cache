@@ -13,6 +13,7 @@ extension NSDate: Cachable {
    Creates an instance from NSData
 
    - Parameter data: Data to decode from
+   - Returns: An optional CacheType
    */
   public static func decode(data: NSData) -> CacheType? {
     return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDate
@@ -20,6 +21,7 @@ extension NSDate: Cachable {
 
   /**
    Encodes an instance to NSData
+   - Returns: Optional NSData
    */
   public func encode() -> NSData? {
     return NSKeyedArchiver.archivedDataWithRootObject(self)

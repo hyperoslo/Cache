@@ -13,15 +13,16 @@ extension JSON: Cachable {
    Creates JSON from NSData
 
    - Parameter data: Data to decode from
+   - Returns: An optional CacheType
    */
   public static func decode(data: NSData) -> CacheType? {
     var result: CacheType?
 
     do {
       let object = try NSJSONSerialization.JSONObjectWithData(data,
-        options: NSJSONReadingOptions())
+                                                              options: NSJSONReadingOptions())
 
-      switch (object) {
+      switch object {
       case let dictionary as [String : AnyObject]:
         result = JSON.Dictionary(dictionary)
       case let array as [AnyObject]:
@@ -36,6 +37,8 @@ extension JSON: Cachable {
 
   /**
    Encodes JSON to NSData
+
+   - Returns: Optional NSData
    */
   public func encode() -> NSData? {
     return try? NSJSONSerialization.dataWithJSONObject(object,
