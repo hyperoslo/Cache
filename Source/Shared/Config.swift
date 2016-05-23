@@ -10,8 +10,10 @@ public struct Config {
   /// Expiry date that will be applied by default for every added object
   /// if it's not overridden in the add(key: object: expiry: completion:) method
   public let expiry: Expiry
-  // Maximum size of the cache storage
+  /// Maximum size of the cache storage
   public let maxSize: UInt
+  /// Maximum amount of items to store in memory
+  public let maxObjects: Int
 
   // MARK: - Initialization
 
@@ -22,12 +24,14 @@ public struct Config {
    - Parameter backKind: Back cache type
    - Parameter expiry: Expiry date that will be applied by default for every added object
    - Parameter maxSize: Maximum size of the cache storage
+   - Parameter maxObjects: Maximum amount of objects to be stored in memory
    */
-  public init(frontKind: StorageKind, backKind: StorageKind, expiry: Expiry, maxSize: UInt) {
+  public init(frontKind: StorageKind, backKind: StorageKind, expiry: Expiry = .Never, maxSize: UInt = 0, maxObjects: Int = 0) {
     self.frontKind = frontKind
     self.backKind = backKind
     self.expiry = expiry
     self.maxSize = maxSize
+    self.maxObjects = maxObjects
   }
 }
 
@@ -41,8 +45,6 @@ extension Config {
   public static var defaultConfig: Config {
     return Config(
       frontKind: .Memory,
-      backKind: .Disk,
-      expiry: .Never,
-      maxSize: 0)
+      backKind: .Disk)
   }
 }
