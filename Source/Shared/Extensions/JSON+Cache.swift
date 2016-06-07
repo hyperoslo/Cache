@@ -5,6 +5,12 @@ import Foundation
 /**
  Implementation of Cachable protocol.
  */
+
+public struct CacheJSONOptions {
+  public static var readingOptions: NSJSONReadingOptions = NSJSONReadingOptions()
+  public static var writeOptions: NSJSONWritingOptions = NSJSONWritingOptions()
+}
+
 extension JSON: Cachable {
 
   public typealias CacheType = JSON
