@@ -1,15 +1,18 @@
 import Foundation
 
+/// A configuration struct
+public struct CacheJSONOptions {
+  /// Options used when creating Foundation objects from JSON data
+  public static var readingOptions: NSJSONReadingOptions = NSJSONReadingOptions()
+  /// Options for writing JSON data.
+  public static var writeOptions: NSJSONWritingOptions = NSJSONWritingOptions()
+}
+
 // MARK: - Cachable
 
 /**
  Implementation of Cachable protocol.
  */
-
-public struct CacheJSONOptions {
-  public static var readingOptions: NSJSONReadingOptions = NSJSONReadingOptions()
-  public static var writeOptions: NSJSONWritingOptions = NSJSONWritingOptions()
-}
 
 extension JSON: Cachable {
 
