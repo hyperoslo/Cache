@@ -26,7 +26,7 @@ extension JSON: Cachable {
 
     do {
       let object = try NSJSONSerialization.JSONObjectWithData(data,
-                                                              options: NSJSONReadingOptions())
+                                                              options: CacheJSONOptions.readingOptions)
 
       switch object {
       case let dictionary as [String : AnyObject]:
@@ -48,6 +48,6 @@ extension JSON: Cachable {
    */
   public func encode() -> NSData? {
     return try? NSJSONSerialization.dataWithJSONObject(object,
-      options: NSJSONWritingOptions())
+      options: CacheJSONOptions.writeOptions)
   }
 }
