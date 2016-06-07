@@ -1,7 +1,7 @@
 import Foundation
 
-/// A configuration struct
-public struct CacheJSONOptions {
+/// A configuration enum
+public enum CacheJSONOptions {
   /// Options used when creating Foundation objects from JSON data
   public static var readingOptions: NSJSONReadingOptions = NSJSONReadingOptions()
   /// Options for writing JSON data.
