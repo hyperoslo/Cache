@@ -16,6 +16,10 @@ public class BasicHybridCache: NSObject {
   // BAck cache (used for content that outlives the application life-cycle)
   var backStorage: StorageAware
 
+  public var path: String {
+    return backStorage.path
+  }
+
   // MARK: - Inititalization
 
   /**
