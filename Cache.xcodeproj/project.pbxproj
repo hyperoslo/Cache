@@ -584,7 +584,6 @@
 				D5DC59DC1C20593E003BD79B /* Frameworks */,
 				D5DC59DD1C20593E003BD79B /* Headers */,
 				D5DC59DE1C20593E003BD79B /* Resources */,
-				D5BAEBF21CD1F4490003E865 /* ShellScript */,
 				BD58C3AD1CF2E9FD003F7141 /* ShellScript */,
 			);
 			buildRules = (
@@ -723,20 +722,6 @@
 				"$(SRCROOT)/Carthage/Build/Mac/Quick.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/Nimble.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/CryptoSwift.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		D5BAEBF21CD1F4490003E865 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
 			);
 			outputPaths = (
 			);
