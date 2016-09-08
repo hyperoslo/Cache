@@ -14,12 +14,20 @@ struct SpecHelper {
   static func image(color: UIColor = UIColor.redColor(),
     size: CGSize = CGSize(width: 1, height: 1), opaque: Bool = false) -> UIImage {
       UIGraphicsBeginImageContextWithOptions(size, opaque, 0)
-      let context = UIGraphicsGetCurrentContext()
+      #if swift(>=2.3)
+          let context = UIGraphicsGetCurrentContext()!
+      #else
+          let context = UIGraphicsGetCurrentContext()
+      #endif
 
       CGContextSetFillColorWithColor(context, color.CGColor)
       CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height))
 
-      let image = UIGraphicsGetImageFromCurrentImageContext()
+      #if swift(>=2.3)
+          let image = UIGraphicsGetImageFromCurrentImageContext()!
+      #else
+          let image = UIGraphicsGetImageFromCurrentImageContext()
+      #endif
       UIGraphicsEndImageContext()
 
       return image

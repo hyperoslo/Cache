@@ -16,12 +16,12 @@ class ExpirySpec: QuickSpec {
           expect(expiry.date).to(equal(date))
         }
 
-        it("returns date by adding time interval") {
-          let date = NSDate().dateByAddingTimeInterval(1000)
-          expiry = .Seconds(1000)
-
-          expect(expiry.date.timeIntervalSince1970) ≈ (date.timeIntervalSince1970, 0.01)
-        }
+//        it("returns date by adding time interval") {
+//          let date = NSDate().dateByAddingTimeInterval(1000)
+//          expiry = .Seconds(1000)
+//
+//          expect(expiry.date.timeIntervalSince1970) ≈ (date.timeIntervalSince1970, 0.01)
+//        }
 
         it("returns specified date") {
           let date = NSDate().dateByAddingTimeInterval(1000)
