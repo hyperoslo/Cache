@@ -19,6 +19,10 @@ extension UIImage {
     let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
 
-    return CGDataProviderCopyData(CGImageGetDataProvider(drawnImage.CGImage))!
+    #if swift(>=2.3)
+        return CGDataProviderCopyData(CGImageGetDataProvider(drawnImage!.CGImage!)!)!
+    #else
+        return CGDataProviderCopyData(CGImageGetDataProvider(drawnImage.CGImage))!
+    #endif
   }
 }

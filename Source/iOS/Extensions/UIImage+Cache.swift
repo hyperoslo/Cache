@@ -44,7 +44,12 @@ extension UIImage {
    */
   var hasAlpha: Bool {
     let result: Bool
-    let alpha = CGImageGetAlphaInfo(CGImage)
+    #if swift(>=2.3)
+        let cgImage = CGImage!
+    #else
+        let cgImage = CGImage
+    #endif
+    let alpha = CGImageGetAlphaInfo(cgImage)
 
     switch alpha {
     case .None, .NoneSkipFirst, .NoneSkipLast:
