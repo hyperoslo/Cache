@@ -28,10 +28,16 @@ extension NSImage: Cachable {
   public func encode() -> NSData? {
     guard let data = TIFFRepresentation else { return nil }
 
+    #if swift(>=2.3)
+    let imageFileType: NSBitmapImageFileType = hasAlpha
+      ? .PNG
+      : .JPEG
+    #else
     let imageFileType: NSBitmapImageFileType = hasAlpha
       ? .NSPNGFileType
       : .NSJPEGFileType
-
+    #endif
+        
     return NSBitmapImageRep(data: data)?.representationUsingType(imageFileType, properties: [:])
   }
 }
@@ -50,7 +56,17 @@ extension NSImage {
     var imageRect: CGRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
     let imageRef = CGImageForProposedRect(&imageRect, context: nil, hints: nil)
     let result: Bool
+    
+    #if swift(>=2.3)
+    let alpha: CGImageAlphaInfo
+    if let image = imageRef {
+        alpha = CGImageGetAlphaInfo(image)
+    } else {
+        alpha = .None
+    }
+    #else
     let alpha = CGImageGetAlphaInfo(imageRef)
+    #endif
 
     switch alpha {
     case .None, .NoneSkipFirst, .NoneSkipLast:
