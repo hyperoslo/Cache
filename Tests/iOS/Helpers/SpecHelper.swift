@@ -16,12 +16,21 @@ struct SpecHelper {
       UIGraphicsBeginImageContextWithOptions(size, opaque, 0)
       let context = UIGraphicsGetCurrentContext()
 
+      #if swift(>=2.3)
+      CGContextSetFillColorWithColor(context!, color.CGColor)
+      CGContextFillRect(context!, CGRectMake(0, 0, size.width, size.height))
+      #else
       CGContextSetFillColorWithColor(context, color.CGColor)
       CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height))
+      #endif
 
       let image = UIGraphicsGetImageFromCurrentImageContext()
       UIGraphicsEndImageContext()
 
+      #if swift(>=2.3)
+      return image!
+      #else
       return image
+      #endif
   }
 }
