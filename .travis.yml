@@ -1,5 +1,12 @@
 language: objective-c
 
+env:
+  global:
+  - LC_CTYPE=en_US.UTF-8
+  - LANG=en_US.UTF-8
+  - OSX_SIM="macosx"
+  - IOS_SIM="iphonesimulator"
+
 matrix:
   include:
     - os: osx
@@ -21,7 +28,7 @@ before_install:
 - travis_wait 35 carthage bootstrap --platform Mac,iOS
 
 script:
-- xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-Mac" -sdk macosx -destination "$DESTINATION"
-- xcodebuild test -project Cache.xcodeproj -scheme "Cache-Mac" -sdk macosx -destination "$DESTINATION"
-- xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator -destination "$DESTINATION"
-- xcodebuild test -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator -destination "$DESTINATION"
+- xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-Mac" -sdk "$SDK" -destination "$DESTINATION"
+- xcodebuild test -project Cache.xcodeproj -scheme "Cache-Mac" -sdk "$SDK" -destination "$DESTINATION"
+- xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-iOS" -sdk "$SDK" -destination "$DESTINATION"
+- xcodebuild test -project Cache.xcodeproj -scheme "Cache-iOS" -sdk "$SDK" -destination "$DESTINATION"
