@@ -11,16 +11,16 @@ matrix:
   include:
     - os: osx
       osx_image: xcode7.3
-      env: DESTINATION="arch=x86_64" SDK="${OSX_SIM}10.11"
+      env: DESTINATION="arch=x86_64" SDK="${OSX_SIM}" SCHEME="Cache-Mac"
     - os: osx
       osx_image: xcode7.3
-      env: DESTINATION="OS=9.2,name=iPhone 6S" SDK="${IOS_SIM}9.3"
+      env: DESTINATION="OS=9.2,name=iPhone 6S" SDK="${IOS_SIM}9.3" SCHEME="Cache-iOS"
     - os: osx
       osx_image: xcode8
-      env: DESTINATION="arch=x86_64" SDK="${OSX_SIM}10.12"
+      env: DESTINATION="arch=x86_64" SDK="${OSX_SIM}" SCHEME="Cache-Mac"
     - os: osx
       osx_image: xcode8
-      env: DESTINATION="OS=10.0,name=iPhone 6S" SDK="${IOS_SIM}10.0"
+      env: DESTINATION="OS=10.0,name=iPhone 6S" SDK="${IOS_SIM}10.0" SCHEME="Cache-iOS"
 
 before_install:
 - brew update
@@ -28,7 +28,5 @@ before_install:
 - travis_wait 35 carthage bootstrap --platform Mac,iOS
 
 script:
-- xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-Mac" -sdk "$SDK" -destination "$DESTINATION"
-- xcodebuild test -project Cache.xcodeproj -scheme "Cache-Mac" -sdk "$SDK" -destination "$DESTINATION"
-- xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-iOS" -sdk "$SDK" -destination "$DESTINATION"
-- xcodebuild test -project Cache.xcodeproj -scheme "Cache-iOS" -sdk "$SDK" -destination "$DESTINATION"
+- xcodebuild clean build -project Cache.xcodeproj -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION"
+- xcodebuild test -project Cache.xcodeproj -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION"
