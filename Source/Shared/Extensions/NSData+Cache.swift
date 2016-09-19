@@ -5,9 +5,9 @@ import Foundation
 /**
  Implementation of Cachable protocol.
  */
-extension NSData: Cachable {
+extension Data: Cachable {
 
-  public typealias CacheType = NSData
+  public typealias CacheType = Data
 
   /**
    Creates an instance from NSData
@@ -15,7 +15,7 @@ extension NSData: Cachable {
    - Parameter data: Data to decode from
    - Returns: An optional CacheType
    */
-  public static func decode(data: NSData) -> CacheType? {
+  public static func decode(_ data: Data) -> CacheType? {
     return data
   }
 
@@ -23,7 +23,7 @@ extension NSData: Cachable {
    Encodes an instance to NSData
    - Returns: Optional NSData
    */
-  public func encode() -> NSData? {
+  public func encode() -> Data? {
     return self
   }
 }

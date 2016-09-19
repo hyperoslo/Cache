@@ -11,8 +11,8 @@ class JSONCacheSpec: QuickSpec {
         describe(".decode") {
           it("decodes a dictionary from NSData") {
             let object = ["key": "value"]
-            let data = try! NSJSONSerialization.dataWithJSONObject(object,
-              options: NSJSONWritingOptions())
+            let data = try! JSONSerialization.data(withJSONObject: object,
+              options: JSONSerialization.WritingOptions())
             let result = JSON.decode(data)!
 
             switch result {
@@ -25,8 +25,8 @@ class JSONCacheSpec: QuickSpec {
 
           it("decodes an array from NSData") {
             let object = ["value1", "value2", "value3"]
-            let data = try! NSJSONSerialization.dataWithJSONObject(object,
-              options: NSJSONWritingOptions())
+            let data = try! JSONSerialization.data(withJSONObject: object,
+              options: JSONSerialization.WritingOptions())
             let result = JSON.decode(data)!
 
             switch result {
@@ -42,8 +42,8 @@ class JSONCacheSpec: QuickSpec {
         describe("#encode") {
           it("encodes a dictionary to NSData") {
             let object = ["key": "value"]
-            let data = try! NSJSONSerialization.dataWithJSONObject(object,
-              options: NSJSONWritingOptions())
+            let data = try! JSONSerialization.data(withJSONObject: object,
+              options: JSONSerialization.WritingOptions())
             let result = JSON.Dictionary(object).encode()
 
             expect(result).to(equal(data))
@@ -51,8 +51,8 @@ class JSONCacheSpec: QuickSpec {
 
           it("encodes an array to NSData") {
             let object = ["value1", "value2", "value3"]
-            let data = try! NSJSONSerialization.dataWithJSONObject(object,
-              options: NSJSONWritingOptions())
+            let data = try! JSONSerialization.data(withJSONObject: object,
+              options: JSONSerialization.WritingOptions())
             let result = JSON.Array(object).encode()
 
             expect(result).to(equal(data))

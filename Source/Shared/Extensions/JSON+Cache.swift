@@ -3,9 +3,9 @@ import Foundation
 /// A configuration struct
 public struct CacheJSONOptions {
   /// Options used when creating Foundation objects from JSON data
-  public static var readingOptions: NSJSONReadingOptions = NSJSONReadingOptions()
+  public static var readingOptions: JSONSerialization.ReadingOptions = JSONSerialization.ReadingOptions()
   /// Options for writing JSON data.
-  public static var writeOptions: NSJSONWritingOptions = NSJSONWritingOptions()
+  public static var writeOptions: JSONSerialization.WritingOptions = JSONSerialization.WritingOptions()
 }
 
 // MARK: - Cachable
@@ -24,18 +24,18 @@ extension JSON: Cachable {
    - Parameter data: Data to decode from
    - Returns: An optional CacheType
    */
-  public static func decode(data: NSData) -> CacheType? {
+  public static func decode(_ data: Data) -> CacheType? {
     var result: CacheType?
 
     do {
-      let object = try NSJSONSerialization.JSONObjectWithData(data,
+      let object = try JSONSerialization.jsonObject(with: data,
                                                               options: CacheJSONOptions.readingOptions)
 
       switch object {
       case let dictionary as [String : AnyObject]:
-        result = JSON.Dictionary(dictionary)
+        result = JSON.dictionary(dictionary)
       case let array as [AnyObject]:
-        result = JSON.Array(array)
+        result = JSON.array(array)
       default:
         result = nil
       }
@@ -49,8 +49,8 @@ extension JSON: Cachable {
 
    - Returns: Optional NSData
    */
-  public func encode() -> NSData? {
-    return try? NSJSONSerialization.dataWithJSONObject(object,
+  public func encode() -> Data? {
+    return try? JSONSerialization.data(withJSONObject: object,
       options: CacheJSONOptions.writeOptions)
   }
 }

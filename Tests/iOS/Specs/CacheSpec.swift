@@ -42,9 +42,9 @@ class CacheSpec: QuickSpec {
 
       describe("#add") {
         it("saves an object to memory and disk") {
-          let expectation1 = self.expectationWithDescription("Save Expectation")
-          let expectation2 = self.expectationWithDescription("Save To Memory Expectation")
-          let expectation3 = self.expectationWithDescription("Save To Disk Expectation")
+          let expectation1 = self.expectation(withDescription: "Save Expectation")
+          let expectation2 = self.expectation(withDescription: "Save To Memory Expectation")
+          let expectation3 = self.expectation(withDescription: "Save To Disk Expectation")
 
           cache.add(key, object: object) {
             cache.object(key) { (receivedObject: User?) in
@@ -63,13 +63,13 @@ class CacheSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(8.0, handler:nil)
+          self.waitForExpectations(withTimeout: 8.0, handler:nil)
         }
       }
 
       describe("#object") {
         it("resolves cached object") {
-          let expectation = self.expectationWithDescription("Object Expectation")
+          let expectation = self.expectation(withDescription: "Object Expectation")
 
           cache.add(key, object: object) {
             cache.object(key) { (receivedObject: User?) in
@@ -79,15 +79,15 @@ class CacheSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(4.0, handler:nil)
+          self.waitForExpectations(withTimeout: 4.0, handler:nil)
         }
       }
 
       describe("#remove") {
         it("removes cached object from memory and disk") {
-          let expectation1 = self.expectationWithDescription("Remove Expectation")
-          let expectation2 = self.expectationWithDescription("Remove From Memory Expectation")
-          let expectation3 = self.expectationWithDescription("Remove From Disk Expectation")
+          let expectation1 = self.expectation(withDescription: "Remove Expectation")
+          let expectation2 = self.expectation(withDescription: "Remove From Memory Expectation")
+          let expectation3 = self.expectation(withDescription: "Remove From Disk Expectation")
 
           cache.add(key, object: object)
 
@@ -108,15 +108,15 @@ class CacheSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(8.0, handler:nil)
+          self.waitForExpectations(withTimeout: 8.0, handler:nil)
         }
       }
 
       describe("#clear") {
         it("clears memory and disk cache") {
-          let expectation1 = self.expectationWithDescription("Clear Expectation")
-          let expectation2 = self.expectationWithDescription("Clear Memory Expectation")
-          let expectation3 = self.expectationWithDescription("Clear Disk Expectation")
+          let expectation1 = self.expectation(withDescription: "Clear Expectation")
+          let expectation2 = self.expectation(withDescription: "Clear Memory Expectation")
+          let expectation3 = self.expectation(withDescription: "Clear Disk Expectation")
 
           cache.add(key, object: object)
 
@@ -137,7 +137,7 @@ class CacheSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(8.0, handler:nil)
+          self.waitForExpectations(withTimeout: 8.0, handler:nil)
         }
       }
     }

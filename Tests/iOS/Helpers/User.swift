@@ -16,7 +16,7 @@ extension User: Cachable {
 
   typealias CacheType = User
 
-  static func decode(data: NSData) -> CacheType? {
+  static func decode(_ data: Data) -> CacheType? {
     var object: User?
 
     do {
@@ -26,8 +26,8 @@ extension User: Cachable {
     return object
   }
 
-  func encode() -> NSData? {
-    var data: NSData?
+  func encode() -> Data? {
+    var data: Data?
 
     do {
       data = try DefaultCacheConverter<User>().encode(self)

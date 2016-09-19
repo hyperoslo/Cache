@@ -4,10 +4,10 @@ import Foundation
  BasicHybridCache supports storing all kinds of objects, as long as they conform to
  Cachable protocol. It's two layered cache (with front and back storages)
  */
-public class BasicHybridCache: NSObject {
+open class BasicHybridCache: NSObject {
 
   /// A name of the cache
-  public let name: String
+  open let name: String
 
   /// Cache configuration
   let config: Config
@@ -16,7 +16,7 @@ public class BasicHybridCache: NSObject {
   // BAck cache (used for content that outlives the application life-cycle)
   var backStorage: StorageAware
 
-  public var path: String {
+  open var path: String {
     return backStorage.path
   }
 
@@ -48,7 +48,7 @@ public class BasicHybridCache: NSObject {
    - Parameter expiry: Expiration date for the cached object
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func add<T: Cachable>(key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
+  open func add<T: Cachable>(_ key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
     let expiry = expiry ?? config.expiry
 
     frontStorage.add(key, object: object, expiry: expiry) { [weak self] in
@@ -69,20 +69,20 @@ public class BasicHybridCache: NSObject {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-  public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) {
+  open func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
     frontStorage.object(key) { [weak self] (object: T?) in
       if let object = object {
-        completion(object: object)
+        completion(object)
         return
       }
 
       guard let weakSelf = self else {
-        completion(object: object)
+        completion(object)
         return
       }
 
       weakSelf.backStorage.object(key) { (object: T?) in
-        completion(object: object)
+        completion(object)
       }
     }
   }
@@ -93,7 +93,7 @@ public class BasicHybridCache: NSObject {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func remove(key: String, completion: (() -> Void)? = nil) {
+  open func remove(_ key: String, completion: (() -> Void)? = nil) {
     frontStorage.remove(key) { [weak self] in
       guard let weakSelf = self else {
         completion?()
@@ -111,7 +111,7 @@ public class BasicHybridCache: NSObject {
 
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func clear(completion: (() -> Void)? = nil) {
+  open func clear(_ completion: (() -> Void)? = nil) {
     frontStorage.clear() { [weak self] in
       guard let weakSelf = self else {
         completion?()

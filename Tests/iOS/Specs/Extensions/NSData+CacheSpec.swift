@@ -11,7 +11,7 @@ class NSDataCacheSpec: QuickSpec {
         describe(".decode") {
           it("decodes from NSData") {
             let data = SpecHelper.data(64)
-            let result = NSData.decode(data)
+            let result = Data.decode(data)
 
             expect(result).to(equal(data))
           }

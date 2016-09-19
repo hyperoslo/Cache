@@ -26,7 +26,7 @@ public struct Config {
    - Parameter maxSize: Maximum size of the cache storage
    - Parameter maxObjects: Maximum amount of objects to be stored in memory
    */
-  public init(frontKind: StorageKind, backKind: StorageKind, expiry: Expiry = .Never, maxSize: UInt = 0, maxObjects: Int = 0) {
+  public init(frontKind: StorageKind, backKind: StorageKind, expiry: Expiry = .never, maxSize: UInt = 0, maxObjects: Int = 0) {
     self.frontKind = frontKind
     self.backKind = backKind
     self.expiry = expiry
@@ -44,7 +44,7 @@ extension Config {
    */
   public static var defaultConfig: Config {
     return Config(
-      frontKind: .Memory,
-      backKind: .Disk)
+      frontKind: .memory,
+      backKind: .disk)
   }
 }

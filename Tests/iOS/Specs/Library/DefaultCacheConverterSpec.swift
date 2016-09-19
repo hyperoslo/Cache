@@ -11,8 +11,8 @@ class DefaultCacheConverterSpec: QuickSpec {
       describe(".decode") {
         it("decodes string to NSData") {
           let data = object.encode()!
-          let pointer = UnsafeMutablePointer<User>.alloc(1)
-          data.getBytes(pointer, length: data.length)
+          let pointer = UnsafeMutablePointer<User>.allocate(capacity: 1)
+          (data as NSData).getBytes(pointer, length: data.count)
 
           let value = pointer.move()
           let result = try! DefaultCacheConverter<User>().decode(data)
@@ -24,8 +24,8 @@ class DefaultCacheConverterSpec: QuickSpec {
 
       describe(".encode") {
         it("decodes string to NSData") {
-          let data = withUnsafePointer(&object) { p in
-            NSData(bytes: p, length: sizeofValue(object))
+          let data = withUnsafePointer(to: &object) { p in
+            Data(bytes: UnsafePointer<UInt8>(p), count: sizeofValue(object))
           }
           let result = try! DefaultCacheConverter<User>().encode(object)
 

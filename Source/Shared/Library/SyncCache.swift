@@ -28,14 +28,14 @@ public struct SyncCache<T: Cachable> {
    - Parameter object: Object that needs to be cached
    - Parameter expiry: Expiration date for the cached object
    */
-  public func add(key: String, object: T, expiry: Expiry? = nil) {
-    let semaphore = dispatch_semaphore_create(0)
+  public func add(_ key: String, object: T, expiry: Expiry? = nil) {
+    let semaphore = DispatchSemaphore(value: 0)
 
     cache.add(key, object: object, expiry: expiry) {
-      dispatch_semaphore_signal(semaphore)
+      semaphore.signal()
     }
 
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+    _ = semaphore.wait(timeout: DispatchTime.distantFuture)
   }
 
   /**
@@ -44,17 +44,17 @@ public struct SyncCache<T: Cachable> {
    - Parameter key: Unique key to identify the object in the cache
    - Returns: Found object or nil
    */
-  public func object(key: String) -> T? {
+  public func object(_ key: String) -> T? {
     var result: T?
 
-    let semaphore = dispatch_semaphore_create(0)
+    let semaphore = DispatchSemaphore(value: 0)
 
     cache.object(key) { (object: T?) in
       result = object
-      dispatch_semaphore_signal(semaphore)
+      semaphore.signal()
     }
 
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+    _ = semaphore.wait(timeout: DispatchTime.distantFuture)
 
     return result
   }
@@ -64,7 +64,7 @@ public struct SyncCache<T: Cachable> {
 
    - Parameter key: Unique key to identify the object in the cache
    */
-  public func remove(key: String) {
+  public func remove(_ key: String) {
     SyncHybridCache(cache).remove(key)
   }
 

@@ -13,7 +13,7 @@ public protocol CacheAware {
    - Parameter expiry: Expiration date for the cached object
    - Parameter completion: Completion closure to be called when the task is done
    */
-  func add<T: Cachable>(key: String, object: T, expiry: Expiry, completion: (() -> Void)?)
+  func add<T: Cachable>(_ key: String, object: T, expiry: Expiry, completion: (() -> Void)?)
 
   /**
    Tries to retrieve the object from the cache.
@@ -21,7 +21,7 @@ public protocol CacheAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-  func object<T: Cachable>(key: String, completion: (object: T?) -> Void)
+  func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void)
 
   /**
    Removes the object from the cache by the given key.
@@ -29,7 +29,7 @@ public protocol CacheAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
-  func remove(key: String, completion: (() -> Void)?)
+  func remove(_ key: String, completion: (() -> Void)?)
 
   /**
    Removes the object from the cache if it's expired.
@@ -37,21 +37,21 @@ public protocol CacheAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
-  func removeIfExpired(key: String, completion: (() -> Void)?)
+  func removeIfExpired(_ key: String, completion: (() -> Void)?)
 
   /**
    Clears the cache storage.
 
    - Parameter completion: Completion closure to be called when the task is done
    */
-  func clear(completion: (() -> Void)?)
+  func clear(_ completion: (() -> Void)?)
 
   /**
    Clears all expired objects.
 
    - Parameter completion: Completion closure to be called when the task is done
    */
-  func clearExpired(completion: (() -> Void)?)
+  func clearExpired(_ completion: (() -> Void)?)
 }
 
 /**
@@ -66,9 +66,9 @@ public protocol StorageAware: CacheAware {
   /// Maximum size of the cache storage
   var maxSize: UInt { get set }
   /// Queue for write operations
-  var writeQueue: dispatch_queue_t { get }
+  var writeQueue: DispatchQueue { get }
   /// Queue for read operations
-  var readQueue: dispatch_queue_t { get }
+  var readQueue: DispatchQueue { get }
 
   /**
    Storage initialization.

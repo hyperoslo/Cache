@@ -15,7 +15,7 @@ extension UIImage: Cachable {
    - Parameter data: Data to decode from
    - Returns: An optional share type
    */
-  public static func decode(data: NSData) -> CacheType? {
+  public static func decode(_ data: Data) -> CacheType? {
     let image = UIImage(data: data)
     return image
   }
@@ -25,7 +25,7 @@ extension UIImage: Cachable {
 
    - Returns: Optional NSData
    */
-  public func encode() -> NSData? {
+  public func encode() -> Data? {
     return hasAlpha
       ? UIImagePNGRepresentation(self)
       : UIImageJPEGRepresentation(self, 1.0)
@@ -44,10 +44,11 @@ extension UIImage {
    */
   var hasAlpha: Bool {
     let result: Bool
-    let alpha = CGImageGetAlphaInfo(CGImage)
+
+    guard let alpha = cgImage?.alphaInfo else { return false }
 
     switch alpha {
-    case .None, .NoneSkipFirst, .NoneSkipLast:
+    case .none, .noneSkipFirst, .noneSkipLast:
       result = false
     default:
       result = true

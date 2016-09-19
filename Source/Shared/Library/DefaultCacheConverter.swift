@@ -3,8 +3,8 @@ import Foundation
 /**
  Encoding error type
  */
-public enum EncodingError: ErrorType {
-  case InvalidSize
+public enum EncodingError: Error {
+  case invalidSize
 }
 
 /**
@@ -25,13 +25,13 @@ public struct DefaultCacheConverter<T> {
    - Parameter data: Data to decode from
    - Returns: A generic type or throws
    */
-  public func decode(data: NSData) throws -> T {
-    guard data.length == sizeof(T) else {
-      throw EncodingError.InvalidSize
+  public func decode(_ data: Data) throws -> T {
+    guard data.count == MemoryLayout<T>.size else {
+      throw EncodingError.invalidSize
     }
 
-    let pointer = UnsafeMutablePointer<T>.alloc(1)
-    data.getBytes(pointer, length: data.length)
+    let pointer = UnsafeMutablePointer<T>.allocate(capacity: 1)
+    (data as NSData).getBytes(pointer, length: data.count)
 
     return pointer.move()
   }
@@ -42,10 +42,10 @@ public struct DefaultCacheConverter<T> {
    - Parameter value: A generic value
    - Returns: A NSData or throws
    */
-  public func encode(value: T) throws -> NSData {
+  public func encode(_ value: T) throws -> Data {
     var value = value
-    return withUnsafePointer(&value) { p in
-      NSData(bytes: p, length: sizeofValue(value))
+    return withUnsafePointer(to: &value) { p in
+      Data(bytes: UnsafePointer<UInt8>(p), count: MemoryLayout.size(ofValue: value))
     }
   }
 }

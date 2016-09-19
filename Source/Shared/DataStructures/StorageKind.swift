@@ -3,22 +3,22 @@
  */
 public enum StorageKind {
   /// Memory storage
-  case Memory
+  case memory
   /// Disk storage
-  case Disk
+  case disk
   /// Custom kind of storage by the given name
-  case Custom(String)
+  case custom(String)
 
   /// Converts value to appropriate string
   public var name: String {
     let result: String
 
     switch self {
-    case .Memory:
+    case .memory:
       result = "Memory"
-    case .Disk:
+    case .disk:
       result = "Disk"
-    case .Custom(let name):
+    case .custom(let name):
       result = name
     }
 
