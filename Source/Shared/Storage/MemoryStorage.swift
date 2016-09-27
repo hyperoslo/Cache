@@ -3,25 +3,25 @@ import Foundation
 /**
  Memory cache storage based on NSCache
  */
-open class MemoryStorage: StorageAware {
+public final class MemoryStorage: StorageAware {
 
   /// Domain prefix
-  open static let prefix = "no.hyper.Cache.Memory"
+  public static let prefix = "no.hyper.Cache.Memory"
 
   /// Storage root path
-  open var path: String {
+  public var path: String {
     return cache.name
   }
 
   /// Maximum size of the cache storage
-  open var maxSize: UInt
+  public var maxSize: UInt
 
   /// Memory cache instance
-  open let cache = NSCache<AnyObject, AnyObject>()
+  public let cache = NSCache<AnyObject, AnyObject>()
   /// Queue for write operations
-  open fileprivate(set) var writeQueue: DispatchQueue
+  public fileprivate(set) var writeQueue: DispatchQueue
   /// Queue for read operations
-  open fileprivate(set) var readQueue: DispatchQueue
+  public fileprivate(set) var readQueue: DispatchQueue
 
   // MARK: - Initialization
 
@@ -51,7 +51,7 @@ open class MemoryStorage: StorageAware {
    - Parameter expiry: Expiration date for the cached object
    - Parameter completion: Completion closure to be called when the task is done
    */
-  open func add<T: Cachable>(_ key: String, object: T, expiry: Expiry = .never, completion: (() -> Void)? = nil) {
+  public func add<T: Cachable>(_ key: String, object: T, expiry: Expiry = .never, completion: (() -> Void)? = nil) {
     writeQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion?()
@@ -71,7 +71,7 @@ open class MemoryStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-  open func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
+  public func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
     readQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion(nil)
@@ -93,7 +93,7 @@ open class MemoryStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
-  open func remove(_ key: String, completion: (() -> Void)? = nil) {
+  public func remove(_ key: String, completion: (() -> Void)? = nil) {
     writeQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion?()
@@ -111,7 +111,7 @@ open class MemoryStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
-  open func removeIfExpired(_ key: String, completion: (() -> Void)?) {
+  public func removeIfExpired(_ key: String, completion: (() -> Void)?) {
     writeQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion?()
@@ -131,7 +131,7 @@ open class MemoryStorage: StorageAware {
 
    - Parameter completion: Completion closure to be called when the task is done
    */
-  open func clear(_ completion: (() -> Void)? = nil) {
+  public func clear(_ completion: (() -> Void)? = nil) {
     writeQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion?()
@@ -148,7 +148,7 @@ open class MemoryStorage: StorageAware {
 
    - Parameter completion: Completion closure to be called when the task is done
    */
-  open func clearExpired(_ completion: (() -> Void)? = nil) {
+  public func clearExpired(_ completion: (() -> Void)? = nil) {
     clear(completion)
   }
 

@@ -5,7 +5,7 @@ import UIKit
  Cachable protocol. It's two layered cache (with front and back storages), as well as Cache.
  Subscribes to system notifications to clear expired cached objects.
  */
-open class HybridCache: BasicHybridCache {
+public class HybridCache: BasicHybridCache {
 
   // MARK: - Inititalization
 

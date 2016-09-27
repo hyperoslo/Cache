@@ -349,8 +349,8 @@
 		D5291D771C283BE300B702C9 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
-				D5291D781C283BE300B702C9 /* Extensions */,
 				D5291D7A1C283BE300B702C9 /* HybridCache.swift */,
+				D5291D781C283BE300B702C9 /* Extensions */,
 			);
 			path = Mac;
 			sourceTree = "<group>";

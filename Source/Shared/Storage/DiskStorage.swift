@@ -1,42 +1,22 @@
 import Foundation
 import CryptoSwift
-fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 /**
  File-based cache storage
  */
-open class DiskStorage: StorageAware {
+public final class DiskStorage: StorageAware {
 
   /// Domain prefix
-  open static let prefix = "no.hyper.Cache.Disk"
+  public static let prefix = "no.hyper.Cache.Disk"
 
   /// Storage root path
-  open let path: String
+  public let path: String
   /// Maximum size of the cache storage
-  open var maxSize: UInt
+  public var maxSize: UInt
   /// Queue for write operations
-  open fileprivate(set) var writeQueue: DispatchQueue
+  public fileprivate(set) var writeQueue: DispatchQueue
   /// Queue for read operations
-  open fileprivate(set) var readQueue: DispatchQueue
+  public fileprivate(set) var readQueue: DispatchQueue
 
   /// File manager to read/write to the disk
   fileprivate lazy var fileManager: FileManager = {
@@ -75,7 +55,7 @@ open class DiskStorage: StorageAware {
    - Parameter expiry: Expiration date for the cached object
    - Parameter completion: Completion closure to be called when the task is done
    */
-  open func add<T: Cachable>(_ key: String, object: T, expiry: Expiry = .never, completion: (() -> Void)? = nil) {
+  public func add<T: Cachable>(_ key: String, object: T, expiry: Expiry = .never, completion: (() -> Void)? = nil) {
     writeQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion?()
@@ -108,7 +88,7 @@ open class DiskStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-  open func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
+  public func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
     readQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion(nil)
@@ -132,7 +112,7 @@ open class DiskStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
-  open func remove(_ key: String, completion: (() -> Void)? = nil) {
+  public func remove(_ key: String, completion: (() -> Void)? = nil) {
     writeQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion?()
@@ -153,7 +133,7 @@ open class DiskStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
-  open func removeIfExpired(_ key: String, completion: (() -> Void)?) {
+  public func removeIfExpired(_ key: String, completion: (() -> Void)?) {
     let path = filePath(key)
 
     writeQueue.async { [weak self] in
@@ -179,7 +159,7 @@ open class DiskStorage: StorageAware {
 
    - Parameter completion: Completion closure to be called when the task is done
    */
-  open func clear(_ completion: (() -> Void)? = nil) {
+  public func clear(_ completion: (() -> Void)? = nil) {
     writeQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion?()
@@ -201,7 +181,7 @@ open class DiskStorage: StorageAware {
 
    - Parameter completion: Completion closure to be called when the task is done
    */
-  open func clearExpired(_ completion: (() -> Void)? = nil) {
+  public func clearExpired(_ completion: (() -> Void)? = nil) {
     writeQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion?()
@@ -316,5 +296,25 @@ open class DiskStorage: StorageAware {
    */
   func filePath(_ key: String) -> String {
     return "\(path)/\(fileName(key))"
+  }
+}
+
+fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
   }
 }

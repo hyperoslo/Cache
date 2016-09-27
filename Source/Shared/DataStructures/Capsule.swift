@@ -4,7 +4,7 @@ import Foundation
  Helper class to hold cached instance and expiry date.
  Used in memory storage to work with NSCache.
  */
-class Capsule: NSObject {
+final class Capsule: NSObject {
 
   /// Object to be cached
   let object: Any
