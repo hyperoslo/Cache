@@ -79,7 +79,7 @@ open class MemoryStorage: StorageAware {
       }
 
       let capsule = weakSelf.cache.object(forKey: key as AnyObject) as? Capsule
-      completion(capsule?.value as? T)
+      completion(capsule?.object as? T)
 
       if let capsule = capsule {
         weakSelf.removeIfExpired(key, capsule: capsule)

@@ -44,8 +44,10 @@ public struct DefaultCacheConverter<T> {
    */
   public func encode(_ value: T) throws -> Data {
     var value = value
-    return withUnsafePointer(to: &value) { p in
-      Data(bytes: UnsafePointer<UInt8>(p), count: MemoryLayout.size(ofValue: value))
+    return withUnsafePointer(to: &value) {
+      $0.withMemoryRebound(to: UInt8.self, capacity: 1) { bytes in
+        Data(bytes: bytes, count: MemoryLayout.size(ofValue: value))
+      }
     }
   }
 }

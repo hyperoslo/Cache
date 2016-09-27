@@ -9,8 +9,8 @@ class StorageKindSpec: QuickSpec {
 
       describe("#name") {
         it("returns the correct name for default values") {
-          expect(StorageKind.Memory.name).to(equal("Memory"))
-          expect(StorageKind.Disk.name).to(equal("Disk"))
+          expect(StorageKind.memory.name).to(equal("Memory"))
+          expect(StorageKind.disk.name).to(equal("Disk"))
         }
 
         it("returns the correct name for custom values") {

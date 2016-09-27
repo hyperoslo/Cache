@@ -7,7 +7,7 @@ import Foundation
 class Capsule: NSObject {
 
   /// Object to be cached
-  let value: Any
+  let object: Any
   /// Expiration date
   let expiryDate: Date
 
@@ -25,7 +25,7 @@ class Capsule: NSObject {
    - Parameter expiry: Expiration date
    */
   init(value: Any, expiry: Expiry) {
-    self.value = value
+    self.object = value
     self.expiryDate = expiry.date as Date
   }
 }

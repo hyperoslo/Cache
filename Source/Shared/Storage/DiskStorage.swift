@@ -1,6 +1,6 @@
 import Foundation
 import CryptoSwift
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -11,7 +11,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l > r
@@ -164,8 +164,8 @@ open class DiskStorage: StorageAware {
 
       do {
         let attributes = try weakSelf.fileManager.attributesOfItem(atPath: path)
-        if let expiryDate = attributes[FileAttributeKey.modificationDate] as? Date
-          , expiryDate.inThePast {
+        if let expiryDate = attributes[FileAttributeKey.modificationDate] as? Date,
+          expiryDate.inThePast {
             try weakSelf.fileManager.removeItem(atPath: weakSelf.filePath(key))
         }
       } catch {}
@@ -194,6 +194,8 @@ open class DiskStorage: StorageAware {
     }
   }
 
+  typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
+
   /**
    Clears all expired objects.
 
@@ -207,8 +209,8 @@ open class DiskStorage: StorageAware {
       }
 
       let URL = Foundation.URL(fileURLWithPath: weakSelf.path)
-      let resourceKeys = [URLResourceKey.isDirectoryKey, URLResourceKey.contentModificationDateKey, URLResourceKey.totalFileAllocatedSizeKey]
-      var objects: [(URL: Foundation.URL, resourceValues: [AnyHashable: Any])] = []
+      let resourceKeys: [URLResourceKey] = [.isDirectoryKey, .contentModificationDateKey, .totalFileAllocatedSizeKey]
+      var objects = [ResourceObject]()
       var URLsToDelete: [Foundation.URL] = []
       var totalSize: UInt = 0
 
@@ -226,15 +228,15 @@ open class DiskStorage: StorageAware {
             continue
           }
 
-          if let expiryDate = resourceValues[URLResourceKey.contentModificationDateKey] as? Date
-            , expiryDate.inThePast {
+          if let expiryDate = resourceValues[URLResourceKey.contentModificationDateKey] as? Date,
+            expiryDate.inThePast {
               URLsToDelete.append(fileURL)
               continue
           }
 
           if let fileSize = resourceValues[URLResourceKey.totalFileAllocatedSizeKey] as? NSNumber {
             totalSize += fileSize.uintValue
-            objects.append((URL: fileURL, resourceValues: resourceValues))
+            objects.append((url: fileURL, resourceValues: resourceValues))
           }
         } catch {}
       }
@@ -245,31 +247,43 @@ open class DiskStorage: StorageAware {
         } catch {}
       }
 
-      if weakSelf.maxSize > 0 && totalSize > weakSelf.maxSize {
-        let targetSize = weakSelf.maxSize / 2
+      weakSelf.removeResourceObjects(objects, totalSize: totalSize)
+      completion?()
+    }
+  }
 
-        let sortedFiles = objects.sorted {
-          let time1 = ($0.resourceValues[URLResourceKey.contentModificationDateKey] as? Date)?.timeIntervalSince1970
-          let time2 = ($1.resourceValues[URLResourceKey.contentModificationDateKey] as? Date)?.timeIntervalSince1970
-          return time1 > time2
-        }
+  /**
+   Removes expired resource objects.
 
-        for file in sortedFiles {
-          do {
-            try weakSelf.fileManager.removeItem(at: file.URL)
-          } catch {}
+   - Parameter objects: Resource objects to remove
+   - Parameter totalSize: Total size
+   */
+  func removeResourceObjects(_ objects: [ResourceObject], totalSize: UInt) {
+    guard maxSize > 0 && totalSize > maxSize else {
+      return
+    }
 
-          if let fileSize = file.resourceValues[URLResourceKey.totalFileAllocatedSizeKey] as? NSNumber {
-            totalSize -= fileSize.uintValue
-          }
+    var totalSize = totalSize
+    let targetSize = maxSize / 2
 
-          if totalSize < targetSize {
-            break
-          }
-        }
+    let sortedFiles = objects.sorted {
+      let time1 = ($0.resourceValues[URLResourceKey.contentModificationDateKey] as? Date)?.timeIntervalSince1970
+      let time2 = ($1.resourceValues[URLResourceKey.contentModificationDateKey] as? Date)?.timeIntervalSince1970
+      return time1 > time2
+    }
+
+    for file in sortedFiles {
+      do {
+        try fileManager.removeItem(at: file.url)
+      } catch {}
+
+      if let fileSize = file.resourceValues[URLResourceKey.totalFileAllocatedSizeKey] as? NSNumber {
+        totalSize -= fileSize.uintValue
       }
 
-      completion?()
+      if totalSize < targetSize {
+        break
+      }
     }
   }
 
@@ -284,11 +298,8 @@ open class DiskStorage: StorageAware {
   func fileName(_ key: String) -> String {
     if let digest = key.data(using: String.Encoding.utf8)?.md5() {
       var string = ""
-      var byte: UnsafeMutablePointer<UInt8>
-
-      for i in 0 ..< digest.count {
-        digest.copyBytes(to: byte, from: NSRange(location: i, length: 1))
-        string += String(format: "%02x", byte)
+      for byte in digest {
+        string += String(format:"%02x", byte)
       }
 
       return string
