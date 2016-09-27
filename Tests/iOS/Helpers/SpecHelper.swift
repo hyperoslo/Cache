@@ -7,8 +7,8 @@ struct SpecHelper {
   }
 
   static func data(_ length : Int) -> Data {
-    var buffer = [UInt8](repeating: 0, count: length)
-    return Data(bytes: UnsafePointer<UInt8>(&buffer), count: length)
+    let buffer = [UInt8](repeating: 0, count: length)
+    return Data(bytes: buffer)
   }
 
   static func image(_ color: UIColor = UIColor.red,

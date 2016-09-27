@@ -5,19 +5,19 @@ import Foundation
  */
 public enum JSON {
   /// JSON array
-  case array([AnyObject])
+  case array([Any])
   /// JSON dictionary
-  case dictionary([String : AnyObject])
+  case dictionary([String : Any])
 
   /// Converts value to AnyObject
-  public var object: AnyObject {
-    var result: AnyObject
+  public var object: Any {
+    var result: Any
 
     switch self {
     case .array(let object):
-      result = object as AnyObject
+      result = object as Any
     case .dictionary(let object):
-      result = object as AnyObject
+      result = object as Any
     }
 
     return result

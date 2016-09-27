@@ -19,7 +19,7 @@ class DiskStorageSpec: QuickSpec {
 
       afterEach {
         do {
-          try fileManager.removeItemAtPath(storage.path)
+          try fileManager.removeItem(atPath: storage.path)
         } catch {}
       }
 
@@ -27,7 +27,7 @@ class DiskStorageSpec: QuickSpec {
         it("returns the correct path") {
           let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory,
             FileManager.SearchPathDomainMask.userDomainMask, true)
-          let path = "\(paths.first!)/\(DiskStorage.prefix).\(name.capitalizedString)"
+          let path = "\(paths.first!)/\(DiskStorage.prefix).\(name.capitalized)"
 
           expect(storage.path).to(equal(path))
         }
@@ -41,34 +41,33 @@ class DiskStorageSpec: QuickSpec {
 
       describe("#add") {
         it("creates cache directory") {
-          let expectation = self.expectation(
-            withDescription: "Create Cache Directory Expectation")
+          let expectation = self.expectation(description: "Create Cache Directory Expectation")
 
           storage.add(key, object: object) {
-            let fileExist = fileManager.fileExistsAtPath(storage.path)
+            let fileExist = fileManager.fileExists(atPath: storage.path)
             expect(fileExist).to(beTrue())
             expectation.fulfill()
           }
 
-          self.waitForExpectations(withTimeout: 2.0, handler:nil)
+          self.waitForExpectations(timeout: 2.0, handler:nil)
         }
 
         it("saves an object") {
-          let expectation = self.expectation(withDescription: "Save Expectation")
+          let expectation = self.expectation(description: "Save Expectation")
 
           storage.add(key, object: object) {
-            let fileExist = fileManager.fileExistsAtPath(storage.filePath(key))
+            let fileExist = fileManager.fileExists(atPath: storage.filePath(key))
             expect(fileExist).to(beTrue())
             expectation.fulfill()
           }
 
-          self.waitForExpectations(withTimeout: 2.0, handler:nil)
+          self.waitForExpectations(timeout: 2.0, handler:nil)
         }
       }
 
       describe("#object") {
         it("resolves cached object") {
-          let expectation = self.expectation(withDescription: "Object Expectation")
+          let expectation = self.expectation(description: "Object Expectation")
 
           storage.add(key, object: object) {
             storage.object(key) { (receivedObject: User?) in
@@ -78,30 +77,29 @@ class DiskStorageSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectations(withTimeout: 2.0, handler:nil)
+          self.waitForExpectations(timeout: 2.0, handler:nil)
         }
       }
 
       describe("#remove") {
         it("removes cached object") {
-          let expectation = self.expectation(withDescription: "Remove Expectation")
+          let expectation = self.expectation(description: "Remove Expectation")
 
           storage.add(key, object: object)
           storage.remove(key) {
-            let fileExist = fileManager.fileExistsAtPath(storage.filePath(key))
+            let fileExist = fileManager.fileExists(atPath: storage.filePath(key))
             expect(fileExist).to(beFalse())
             expectation.fulfill()
           }
 
-          self.waitForExpectations(withTimeout: 2.0, handler:nil)
+          self.waitForExpectations(timeout: 2.0, handler:nil)
         }
       }
 
       describe("removeIfExpired") {
         it("removes expired object") {
-          let expectation = self.expectation(
-            withDescription: "Remove If Expired Expectation")
-          let expiry: Expiry = .Date(NSDate().dateByAddingTimeInterval(-100000))
+          let expectation = self.expectation(description: "Remove If Expired Expectation")
+          let expiry: Expiry = .date(Date().addingTimeInterval(-100000))
 
           storage.add(key, object: object, expiry: expiry)
           storage.removeIfExpired(key) {
@@ -111,12 +109,11 @@ class DiskStorageSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectations(withTimeout: 2.0, handler:nil)
+          self.waitForExpectations(timeout: 2.0, handler:nil)
         }
 
         it("don't remove not expired object") {
-          let expectation = self.expectation(
-            withDescription: "Don't Remove If Not Expired Expectation")
+          let expectation = self.expectation(description: "Don't Remove If Not Expired Expectation")
 
           storage.add(key, object: object)
           storage.removeIfExpired(key) {
@@ -126,34 +123,32 @@ class DiskStorageSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectations(withTimeout: 2.0, handler:nil)
+          self.waitForExpectations(timeout: 2.0, handler:nil)
         }
       }
 
       describe("#clear") {
         it("clears cache directory") {
-          let expectation = self.expectation(withDescription: "Clear Expectation")
+          let expectation = self.expectation(description: "Clear Expectation")
 
           storage.add(key, object: object)
           storage.clear() {
-            let fileExist = fileManager.fileExistsAtPath(storage.path)
+            let fileExist = fileManager.fileExists(atPath: storage.path)
             expect(fileExist).to(beFalse())
             expectation.fulfill()
           }
 
-          self.waitForExpectations(withTimeout: 2.0, handler:nil)
+          self.waitForExpectations(timeout: 2.0, handler:nil)
         }
       }
 
       describe("clearExpired") {
         it("removes expired objects") {
-          let expectation1 = self.expectation(
-            withDescription: "Clear If Expired Expectation")
-          let expectation2 = self.expectation(
-            withDescription: "Don't Clear If Not Expired Expectation")
+          let expectation1 = self.expectation(description: "Clear If Expired Expectation")
+          let expectation2 = self.expectation(description: "Don't Clear If Not Expired Expectation")
 
-          let expiry1: Expiry = .Date(NSDate().dateByAddingTimeInterval(-100000))
-          let expiry2: Expiry = .Date(NSDate().dateByAddingTimeInterval(100000))
+          let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))
+          let expiry2: Expiry = .date(Date().addingTimeInterval(100000))
 
           let key1 = "item1"
           let key2 = "item2"
@@ -173,7 +168,7 @@ class DiskStorageSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectations(withTimeout: 5.0, handler:nil)
+          self.waitForExpectations(timeout: 5.0, handler:nil)
         }
       }
 
@@ -181,11 +176,9 @@ class DiskStorageSpec: QuickSpec {
         it("returns a correct file name") {
           if let digest = key.data(using: String.Encoding.utf8)?.md5() {
             var string = ""
-            var byte: UInt8 = 0
-                
-            for i in 0 ..< digest.length {
-              digest.getBytes(&byte, range: NSMakeRange(i, 1))
-              string += String(format: "%02x", byte)
+
+            for byte in digest {
+              string += String(format:"%02x", byte)
             }
                 
             expect(storage.fileName(key)).to(equal(string))

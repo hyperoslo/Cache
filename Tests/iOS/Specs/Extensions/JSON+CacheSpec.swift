@@ -16,7 +16,7 @@ class JSONCacheSpec: QuickSpec {
             let result = JSON.decode(data)!
 
             switch result {
-            case JSON.Dictionary(let dictionary):
+            case JSON.dictionary(let dictionary):
               expect(dictionary["key"] is String).to(beTrue())
               expect(dictionary["key"] as? String).to(equal(object["key"]))
             default: break
@@ -30,7 +30,7 @@ class JSONCacheSpec: QuickSpec {
             let result = JSON.decode(data)!
 
             switch result {
-            case JSON.Array(let array):
+            case JSON.array(let array):
               expect(array is [String]).to(beTrue())
               expect(array.count).to(equal(3))
               expect(array[0] as? String).to(equal(object[0]))
@@ -44,7 +44,7 @@ class JSONCacheSpec: QuickSpec {
             let object = ["key": "value"]
             let data = try! JSONSerialization.data(withJSONObject: object,
               options: JSONSerialization.WritingOptions())
-            let result = JSON.Dictionary(object).encode()
+            let result = JSON.dictionary(object as [String : AnyObject]).encode()
 
             expect(result).to(equal(data))
           }
@@ -53,7 +53,7 @@ class JSONCacheSpec: QuickSpec {
             let object = ["value1", "value2", "value3"]
             let data = try! JSONSerialization.data(withJSONObject: object,
               options: JSONSerialization.WritingOptions())
-            let result = JSON.Array(object).encode()
+            let result = JSON.array(object as [AnyObject]).encode()
 
             expect(result).to(equal(data))
           }

@@ -24,9 +24,12 @@ class DefaultCacheConverterSpec: QuickSpec {
 
       describe(".encode") {
         it("decodes string to NSData") {
-          let data = withUnsafePointer(to: &object) { p in
-            Data(bytes: UnsafePointer<UInt8>(p), count: sizeofValue(object))
+          let data = withUnsafePointer(to: &object) {
+            $0.withMemoryRebound(to: UInt8.self, capacity: 1) { bytes in
+              Data(bytes: bytes, count: MemoryLayout.size(ofValue: object))
+            }
           }
+
           let result = try! DefaultCacheConverter<User>().encode(object)
 
           expect(result).to(equal(data))

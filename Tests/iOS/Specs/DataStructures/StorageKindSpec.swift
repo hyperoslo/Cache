@@ -14,7 +14,7 @@ class StorageKindSpec: QuickSpec {
         }
 
         it("returns the correct name for custom values") {
-          expect(StorageKind.Custom("Weirdo").name).to(equal("Weirdo"))
+          expect(StorageKind.custom("Weirdo").name).to(equal("Weirdo"))
         }
       }
     }

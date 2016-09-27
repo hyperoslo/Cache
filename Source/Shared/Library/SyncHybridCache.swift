@@ -35,7 +35,7 @@ public struct SyncHybridCache {
       semaphore.signal()
     }
 
-    semaphore.wait(timeout: DispatchTime.distantFuture)
+    _ = semaphore.wait(timeout: DispatchTime.distantFuture)
   }
 
   /**
@@ -54,7 +54,7 @@ public struct SyncHybridCache {
       semaphore.signal()
     }
 
-    semaphore.wait(timeout: DispatchTime.distantFuture)
+    _ = semaphore.wait(timeout: DispatchTime.distantFuture)
 
     return result
   }
@@ -71,7 +71,7 @@ public struct SyncHybridCache {
       semaphore.signal()
     }
 
-    semaphore.wait(timeout: DispatchTime.distantFuture)
+    _ = semaphore.wait(timeout: DispatchTime.distantFuture)
   }
 
   /**
@@ -84,6 +84,6 @@ public struct SyncHybridCache {
       semaphore.signal()
     }
 
-    semaphore.wait(timeout: DispatchTime.distantFuture)
+    _ = semaphore.wait(timeout: DispatchTime.distantFuture)
   }
 }

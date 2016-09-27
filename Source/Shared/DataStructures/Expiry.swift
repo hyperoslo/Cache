@@ -9,7 +9,7 @@ public enum Expiry {
   /// Object will be expired in the specified amount of seconds
   case seconds(TimeInterval)
   /// Object will be expired on the specified date
-  case Date(Foundation.Date)
+  case date(Foundation.Date)
 
   /// Returns the appropriate date object
   public var date: Foundation.Date {
@@ -21,7 +21,7 @@ public enum Expiry {
       result = Foundation.Date(timeIntervalSince1970: 60 * 60 * 24 * 365 * 68)
     case .seconds(let seconds):
       result = Foundation.Date().addingTimeInterval(seconds)
-    case .Date(let date):
+    case .date(let date):
       result = date
     }
 
