@@ -5,7 +5,7 @@ import Foundation
  Cachable protocol. It's two layered cache (with front and back storages).
  Subscribes to system notifications to clear expired cached objects.
  */
-open class Cache<T: Cachable>: HybridCache {
+public class Cache<T: Cachable>: HybridCache {
 
   // MARK: - Initialization
 

@@ -18,19 +18,19 @@ public class HybridCache: BasicHybridCache {
   public override init(name: String, config: Config = Config.defaultConfig) {
     super.init(name: name, config: config)
 
-    let notificationCenter = NSNotificationCenter.defaultCenter()
+    let notificationCenter = NotificationCenter.default
 
     notificationCenter.addObserver(self, selector: #selector(HybridCache.applicationWillTerminate),
-      name: NSApplicationWillTerminateNotification, object: nil)
+      name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
     notificationCenter.addObserver(self, selector: #selector(HybridCache.applicationDidResignActive),
-      name: NSApplicationDidResignActiveNotification, object: nil)
+      name: NSNotification.Name.NSApplicationDidResignActive, object: nil)
   }
 
   /**
    Removes notification center observer.
    */
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
   // MARK: - Notifications

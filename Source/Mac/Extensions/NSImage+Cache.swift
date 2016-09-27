@@ -16,7 +16,7 @@ extension NSImage: Cachable {
    - Parameter data: Data to decode from
    - Returns: Optional CacheType
    */
-  public static func decode(data: NSData) -> CacheType? {
+  public static func decode(_ data: Data) -> CacheType? {
     let image = NSImage(data: data)
     return image
   }
@@ -25,14 +25,11 @@ extension NSImage: Cachable {
    Encodes UIImage to NSData
    - Returns: Optional NSData
    */
-  public func encode() -> NSData? {
-    guard let data = TIFFRepresentation else { return nil }
+  public func encode() -> Data? {
+    guard let data = tiffRepresentation else { return nil }
 
-    let imageFileType: NSBitmapImageFileType = hasAlpha
-      ? .NSPNGFileType
-      : .NSJPEGFileType
-
-    return NSBitmapImageRep(data: data)?.representationUsingType(imageFileType, properties: [:])
+    let imageFileType: NSBitmapImageFileType = hasAlpha ? .PNG : .JPEG
+    return NSBitmapImageRep(data: data)?.representation(using: imageFileType, properties: [:])
   }
 }
 
@@ -48,12 +45,16 @@ extension NSImage {
    */
   var hasAlpha: Bool {
     var imageRect: CGRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-    let imageRef = CGImageForProposedRect(&imageRect, context: nil, hints: nil)
+
+    guard let imageRef = cgImage(forProposedRect: &imageRect, context: nil, hints: nil) else {
+      return false
+    }
+
     let result: Bool
-    let alpha = CGImageGetAlphaInfo(imageRef)
+    let alpha = imageRef.alphaInfo
 
     switch alpha {
-    case .None, .NoneSkipFirst, .NoneSkipLast:
+    case .none, .noneSkipFirst, .noneSkipLast:
       result = false
     default:
       result = true
