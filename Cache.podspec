@@ -19,4 +19,6 @@ Pod::Spec.new do |s|
 
   s.frameworks = 'Foundation'
   s.dependency 'CryptoSwift'
+
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.0' }
 end
