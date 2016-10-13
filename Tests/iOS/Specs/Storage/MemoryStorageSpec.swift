@@ -21,7 +21,7 @@ class MemoryStorageSpec: QuickSpec {
 
       describe("#path") {
         it("returns the correct path") {
-          let path = "\(MemoryStorage.prefix).\(name.capitalizedString)"
+          let path = "\(MemoryStorage.prefix).\(name.capitalized)"
           
           expect(storage.path).to(equal(path))
         }
@@ -35,8 +35,7 @@ class MemoryStorageSpec: QuickSpec {
 
       describe("#add") {
         it("saves an object") {
-          let expectation = self.expectationWithDescription(
-            "Save Object Expectation")
+          let expectation = self.expectation(description: "Save Object Expectation")
 
           storage.add(key, object: object) {
             storage.object(key) { (receivedObject: User?) in
@@ -45,14 +44,13 @@ class MemoryStorageSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+          self.waitForExpectations(timeout: 2.0, handler:nil)
         }
       }
 
       describe("#object") {
         it("resolves cached object") {
-          let expectation = self.expectationWithDescription(
-            "Object Expectation")
+          let expectation = self.expectation(description: "Object Expectation")
 
           storage.add(key, object: object) {
             storage.object(key) { (receivedObject: User?) in
@@ -62,14 +60,13 @@ class MemoryStorageSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+          self.waitForExpectations(timeout: 2.0, handler:nil)
         }
       }
 
       describe("#remove") {
         it("removes cached object") {
-          let expectation = self.expectationWithDescription(
-            "Remove Expectation")
+          let expectation = self.expectation(description: "Remove Expectation")
 
           storage.add(key, object: object)
           storage.remove(key) {
@@ -79,15 +76,14 @@ class MemoryStorageSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+          self.waitForExpectations(timeout: 2.0, handler:nil)
         }
       }
 
       describe("removeIfExpired") {
         it("removes expired object") {
-          let expectation = self.expectationWithDescription(
-            "Remove If Expired Expectation")
-          let expiry: Expiry = .Date(NSDate().dateByAddingTimeInterval(-100000))
+          let expectation = self.expectation(description: "Remove If Expired Expectation")
+          let expiry: Expiry = .date(Date().addingTimeInterval(-100000))
 
           storage.add(key, object: object, expiry: expiry)
           storage.removeIfExpired(key) {
@@ -97,12 +93,11 @@ class MemoryStorageSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(4.0, handler:nil)
+          self.waitForExpectations(timeout: 4.0, handler:nil)
         }
 
         it("don't remove not expired object") {
-          let expectation = self.expectationWithDescription(
-            "Don't Remove If Not Expired Expectation")
+          let expectation = self.expectation(description: "Don't Remove If Not Expired Expectation")
 
           storage.add(key, object: object)
           storage.removeIfExpired(key) {
@@ -112,14 +107,13 @@ class MemoryStorageSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(4.0, handler:nil)
+          self.waitForExpectations(timeout: 4.0, handler:nil)
         }
       }
 
       describe("#clear") {
         it("clears cache directory") {
-          let expectation = self.expectationWithDescription(
-            "Clear Expectation")
+          let expectation = self.expectation(description: "Clear Expectation")
 
           storage.add(key, object: object)
           storage.clear() {
@@ -129,19 +123,17 @@ class MemoryStorageSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(2.0, handler:nil)
+          self.waitForExpectations(timeout: 2.0, handler:nil)
         }
       }
 
       describe("clearExpired") {
         it("removes expired objects") {
-          let expectation1 = self.expectationWithDescription(
-            "Clear Expired Expectation 1")
-          let expectation2 = self.expectationWithDescription(
-            "Clear Expired Expectation 2")
+          let expectation1 = self.expectation(description: "Clear Expired Expectation 1")
+          let expectation2 = self.expectation(description: "Clear Expired Expectation 2")
 
-          let expiry1: Expiry = .Date(NSDate().dateByAddingTimeInterval(-100000))
-          let expiry2: Expiry = .Date(NSDate().dateByAddingTimeInterval(100000))
+          let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))
+          let expiry2: Expiry = .date(Date().addingTimeInterval(100000))
 
           let key1 = "item1"
           let key2 = "item2"
@@ -161,7 +153,7 @@ class MemoryStorageSpec: QuickSpec {
             }
           }
 
-          self.waitForExpectationsWithTimeout(5.0, handler:nil)
+          self.waitForExpectations(timeout: 5.0, handler:nil)
         }
       }
     }

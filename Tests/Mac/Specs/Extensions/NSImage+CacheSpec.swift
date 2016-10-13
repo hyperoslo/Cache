@@ -14,21 +14,18 @@ class NSImageCacheSpec: QuickSpec {
             let data = image.encode()!
             let result = NSImage.decode(data)!
 
-            expect(result.isEqualToImage(image)).to(beTrue())
+            expect(result.isEqualToImage(image: image)).to(beTrue())
           }
         }
 
         describe("#encode") {
           it("encodes to NSData") {
             let image = SpecHelper.image()
-            let representation = image.TIFFRepresentation!
+            let representation = image.tiffRepresentation!
 
-            let imageFileType: NSBitmapImageFileType = image.hasAlpha
-              ? .NSPNGFileType
-              : .NSJPEGFileType
-
-            let data = NSBitmapImageRep(data: representation)!.representationUsingType(
-              imageFileType, properties: [:])
+            let imageFileType: NSBitmapImageFileType = image.hasAlpha ? .PNG : .JPEG
+            let data = NSBitmapImageRep(data: representation)!.representation(
+              using: imageFileType, properties: [:])
 
             let result = image.encode()!
 

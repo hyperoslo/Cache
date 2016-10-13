@@ -18,21 +18,21 @@ public class HybridCache: BasicHybridCache {
   public override init(name: String, config: Config = Config.defaultConfig) {
     super.init(name: name, config: config)
 
-    let notificationCenter = NSNotificationCenter.defaultCenter()
+    let notificationCenter = NotificationCenter.default
 
     notificationCenter.addObserver(self, selector: #selector(HybridCache.applicationDidReceiveMemoryWarning),
-      name: UIApplicationDidReceiveMemoryWarningNotification, object: nil)
+      name: NSNotification.Name.UIApplicationDidReceiveMemoryWarning, object: nil)
     notificationCenter.addObserver(self, selector: #selector(HybridCache.applicationWillTerminate),
-      name: UIApplicationWillTerminateNotification, object: nil)
+      name: NSNotification.Name.UIApplicationWillTerminate, object: nil)
     notificationCenter.addObserver(self, selector: #selector(HybridCache.applicationDidEnterBackground),
-      name: UIApplicationDidEnterBackgroundNotification, object: nil)
+      name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
   }
 
   /**
    Removes notification center observer.
    */
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
   // MARK: - Notifications
@@ -55,21 +55,21 @@ public class HybridCache: BasicHybridCache {
    Clears expired cache items when the app enters background.
    */
   func applicationDidEnterBackground() {
-    let application = UIApplication.sharedApplication()
+    let application = UIApplication.shared
     var backgroundTask: UIBackgroundTaskIdentifier?
 
-    backgroundTask = application.beginBackgroundTaskWithExpirationHandler { [weak self] in
-      guard let weakSelf = self, backgroundTask = backgroundTask else { return }
+    backgroundTask = application.beginBackgroundTask (expirationHandler: { [weak self] in
+      guard let weakSelf = self, let backgroundTask = backgroundTask else { return }
       var mutableBackgroundTask = backgroundTask
 
       weakSelf.endBackgroundTask(&mutableBackgroundTask)
-    }
+    })
 
     backStorage.clearExpired { [weak self] in
-      guard let weakSelf = self, backgroundTask = backgroundTask else { return }
+      guard let weakSelf = self, let backgroundTask = backgroundTask else { return }
       var mutableBackgroundTask = backgroundTask
 
-      dispatch_async(dispatch_get_main_queue()) {
+      DispatchQueue.main.async {
         weakSelf.endBackgroundTask(&mutableBackgroundTask)
       }
     }
@@ -79,8 +79,8 @@ public class HybridCache: BasicHybridCache {
    Ends given background task.
    - Parameter task: A UIBackgroundTaskIdentifier
    */
-  func endBackgroundTask(inout task: UIBackgroundTaskIdentifier) {
-    UIApplication.sharedApplication().endBackgroundTask(task)
+  func endBackgroundTask(_ task: inout UIBackgroundTaskIdentifier) {
+    UIApplication.shared.endBackgroundTask(task)
     task = UIBackgroundTaskInvalid
   }
 }

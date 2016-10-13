@@ -12,10 +12,10 @@ public protocol Cachable {
 
    - Parameter data: Data to decode from
    */
-  static func decode(data: NSData) -> CacheType?
+  static func decode(_ data: Data) -> CacheType?
 
   /**
    Encodes an instance to NSData
    */
-  func encode() -> NSData?
+  func encode() -> Data?
 }

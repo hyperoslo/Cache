@@ -9,8 +9,8 @@ class JSONSpec: QuickSpec {
 
       describe("#object") {
         it("returns the value") {
-          expect(JSON.Array(["Floppy"]).object is [AnyObject]).to(beTrue())
-          expect(JSON.Dictionary(["Key": "Value"]).object is [String: AnyObject]).to(beTrue())
+          expect(JSON.array(["Floppy"]).object is [AnyObject]).to(beTrue())
+          expect(JSON.dictionary(["Key": "Value"]).object is [String: AnyObject]).to(beTrue())
         }
       }
     }

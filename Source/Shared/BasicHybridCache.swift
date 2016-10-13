@@ -48,7 +48,7 @@ public class BasicHybridCache: NSObject {
    - Parameter expiry: Expiration date for the cached object
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func add<T: Cachable>(key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
+  public func add<T: Cachable>(_ key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
     let expiry = expiry ?? config.expiry
 
     frontStorage.add(key, object: object, expiry: expiry) { [weak self] in
@@ -69,20 +69,20 @@ public class BasicHybridCache: NSObject {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-  public func object<T: Cachable>(key: String, completion: (object: T?) -> Void) {
+  public func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
     frontStorage.object(key) { [weak self] (object: T?) in
       if let object = object {
-        completion(object: object)
+        completion(object)
         return
       }
 
       guard let weakSelf = self else {
-        completion(object: object)
+        completion(object)
         return
       }
 
       weakSelf.backStorage.object(key) { (object: T?) in
-        completion(object: object)
+        completion(object)
       }
     }
   }
@@ -93,7 +93,7 @@ public class BasicHybridCache: NSObject {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func remove(key: String, completion: (() -> Void)? = nil) {
+  public func remove(_ key: String, completion: (() -> Void)? = nil) {
     frontStorage.remove(key) { [weak self] in
       guard let weakSelf = self else {
         completion?()
@@ -111,7 +111,7 @@ public class BasicHybridCache: NSObject {
 
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func clear(completion: (() -> Void)? = nil) {
+  public func clear(_ completion: (() -> Void)? = nil) {
     frontStorage.clear() { [weak self] in
       guard let weakSelf = self else {
         completion?()

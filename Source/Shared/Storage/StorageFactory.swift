@@ -1,19 +1,19 @@
 /**
  A place to register and retrieve a cache storage by type.
  */
-public class StorageFactory {
+public final class StorageFactory {
 
   /// Default storage type
-  private static var DefaultStorage: StorageAware.Type = MemoryStorage.self
+  fileprivate static var DefaultStorage: StorageAware.Type = MemoryStorage.self
 
   /// Dictionary of default storages
-  private static var defaultStorages: [String: StorageAware.Type] = [
-    StorageKind.Memory.name : MemoryStorage.self,
-    StorageKind.Disk.name : DiskStorage.self
+  fileprivate static var defaultStorages: [String: StorageAware.Type] = [
+    StorageKind.memory.name : MemoryStorage.self,
+    StorageKind.disk.name : DiskStorage.self
   ]
 
   /// Dictionary of storages
-  private static var storages = defaultStorages
+  fileprivate static var storages = defaultStorages
 
   // MARK: - Factory
 
@@ -23,7 +23,7 @@ public class StorageFactory {
    - Parameter kind: Storage kind
    - Parameter storage: StorageAware type
    */
-  static func register<T: StorageAware>(kind: StorageKind, storage: T.Type) {
+  static func register<T: StorageAware>(_ kind: StorageKind, storage: T.Type) {
     storages[kind.name] = storage
   }
 
@@ -35,7 +35,7 @@ public class StorageFactory {
    - Parameter maxSize: Maximum size of the cache storage
    - Returns: New storage
    */
-  static func resolve(name: String, kind: StorageKind, maxSize: UInt = 0) -> StorageAware {
+  static func resolve(_ name: String, kind: StorageKind, maxSize: UInt = 0) -> StorageAware {
     let StorageType: StorageAware.Type = storages[kind.name] ?? DefaultStorage
     return StorageType.init(name: name, maxSize: maxSize)
   }

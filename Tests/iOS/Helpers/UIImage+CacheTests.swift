@@ -2,23 +2,23 @@ import UIKit
 
 extension UIImage {
 
-  func isEqualToImage(image: UIImage) -> Bool {
+  func isEqualToImage(_ image: UIImage) -> Bool {
     let data = normalizedData()
-    return data.isEqualToData(image.normalizedData())
+    return (data == image.normalizedData())
   }
 
-  func normalizedData() -> NSData {
+  func normalizedData() -> Data {
     let pixelSize = CGSize(
       width : size.width * scale,
       height : size.height * scale)
 
     UIGraphicsBeginImageContext(pixelSize)
-    drawInRect(CGRect(x: 0, y: 0, width: pixelSize.width,
+    draw(in: CGRect(x: 0, y: 0, width: pixelSize.width,
       height: pixelSize.height))
 
     let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
 
-    return CGDataProviderCopyData(CGImageGetDataProvider(drawnImage.CGImage))!
+    return drawnImage!.cgImage!.dataProvider!.data! as Data
   }
 }

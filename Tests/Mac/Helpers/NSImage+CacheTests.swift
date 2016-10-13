@@ -4,17 +4,16 @@ import Cocoa
 extension NSImage {
 
   func isEqualToImage(image: NSImage) -> Bool {
-    return data.isEqualToData(image.data)
+    return data == image.data
   }
 
-  var data: NSData {
-    let representation = TIFFRepresentation!
+  var data: Data {
+    let representation = tiffRepresentation!
 
-    let imageFileType: NSBitmapImageFileType = hasAlpha
-      ? .NSPNGFileType
-      : .NSJPEGFileType
+    let imageFileType: NSBitmapImageFileType = hasAlpha ? .PNG : .JPEG
 
-    return (NSBitmapImageRep(data: representation)?.representationUsingType(
-      imageFileType, properties: [:]))!
+    return (NSBitmapImageRep(data: representation)?.representation(
+      using: imageFileType,
+      properties: [:]))!
   }
 }

@@ -9,13 +9,13 @@ class NSDateCacheSpec: QuickSpec {
 
       describe("#inThePast") {
         it("returns that date is not in the past") {
-          let date = NSDate(timeInterval: 100000, sinceDate: NSDate())
+          let date = Date(timeInterval: 100000, since: Date())
 
           expect(date.inThePast).to(beFalse())
         }
 
         it("returns that date is in the past") {
-          let date = NSDate(timeInterval: -100000, sinceDate: NSDate())
+          let date = Date(timeInterval: -100000, since: Date())
 
           expect(date.inThePast).to(beTrue())
         }
@@ -24,9 +24,9 @@ class NSDateCacheSpec: QuickSpec {
       describe("Cachable") {
         describe(".decode") {
           it("decodes from NSData") {
-            let date = NSDate()
-            let data = NSKeyedArchiver.archivedDataWithRootObject(date)
-            let result = NSDate.decode(data)
+            let date = Date()
+            let data = NSKeyedArchiver.archivedData(withRootObject: date)
+            let result = Date.decode(data)
 
             expect(result).to(equal(date))
           }
@@ -34,8 +34,8 @@ class NSDateCacheSpec: QuickSpec {
 
         describe("#encode") {
           it("encodes to NSData") {
-            let date = NSDate()
-            let data = NSKeyedArchiver.archivedDataWithRootObject(date)
+            let date = Date()
+            let data = NSKeyedArchiver.archivedData(withRootObject: date)
             let result = data.encode()
 
             expect(result).to(equal(data))

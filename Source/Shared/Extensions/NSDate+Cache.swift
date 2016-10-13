@@ -5,9 +5,9 @@ import Foundation
 /**
  Implementation of Cachable protocol.
  */
-extension NSDate: Cachable {
+extension Date: Cachable {
 
-  public typealias CacheType = NSDate
+  public typealias CacheType = Date
 
   /**
    Creates an instance from NSData
@@ -15,16 +15,16 @@ extension NSDate: Cachable {
    - Parameter data: Data to decode from
    - Returns: An optional CacheType
    */
-  public static func decode(data: NSData) -> CacheType? {
-    return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDate
+  public static func decode(_ data: Data) -> CacheType? {
+    return NSKeyedUnarchiver.unarchiveObject(with: data) as? Date
   }
 
   /**
    Encodes an instance to NSData
    - Returns: Optional NSData
    */
-  public func encode() -> NSData? {
-    return NSKeyedArchiver.archivedDataWithRootObject(self)
+  public func encode() -> Data? {
+    return NSKeyedArchiver.archivedData(withRootObject: self)
   }
 }
 
@@ -33,7 +33,7 @@ extension NSDate: Cachable {
 /**
  Helper NSDate extension.
  */
-extension NSDate {
+extension Date {
 
   /// Checks if the date is in the past
   var inThePast: Bool {

@@ -4,12 +4,12 @@ import Foundation
  Helper class to hold cached instance and expiry date.
  Used in memory storage to work with NSCache.
  */
-class Capsule: NSObject {
+final class Capsule: NSObject {
 
   /// Object to be cached
-  let value: Any
+  let object: Any
   /// Expiration date
-  let expiryDate: NSDate
+  let expiryDate: Date
 
   /// Checks if cached object is expired according to expiration date
   var expired: Bool {
@@ -25,7 +25,7 @@ class Capsule: NSObject {
    - Parameter expiry: Expiration date
    */
   init(value: Any, expiry: Expiry) {
-    self.value = value
-    self.expiryDate = expiry.date
+    self.object = value
+    self.expiryDate = expiry.date as Date
   }
 }
