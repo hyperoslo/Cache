@@ -82,12 +82,12 @@ let cache = HybridCache(name: "Mix")
 ```swift
 let config = Config(
   // Your front cache type
-  frontKind: .Memory,
+  frontKind: .memory,
   // Your back cache type
-  backKind: .Disk,
+  backKind: .disk,
   // Expiry date that will be applied by default for every added object
   // if it's not overridden in the add(key: object: expiry: completion:) method
-  expiry: .Date(Date().addingTimeInterval(100000)),
+  expiry: .date(Date().addingTimeInterval(100000)),
   // Maximum size of your cache storage
   maxSize: 10000)
 
@@ -206,7 +206,7 @@ cache.add("string", object: "This is a string")
 
 // A provided expiry date will be applied to the item
 cache.add("string", object: "This is a string",
-  expiry: .Date(Date().addingTimeInterval(100000)))
+  expiry: .date(Date().addingTimeInterval(100000)))
 ```
 
 ### Cachable protocol
