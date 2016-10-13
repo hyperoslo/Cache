@@ -12,7 +12,7 @@ public enum EncodingError: Error {
  but do it on your own risk. With this approach decoding will not work if the NSData length
  doesn't match the type size. This can commonly happen if you try to read the data after
  updates in the type's structure, so there is a different-sized version of the same type.
- Also note that sizeof() and sizeofValue() may return different values on different devices.
+ Also note that `size` and `size(ofValue:)` may return different values on different devices.
  */
 public struct DefaultCacheConverter<T> {
 

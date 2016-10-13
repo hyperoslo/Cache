@@ -34,7 +34,7 @@
 **Cache** doesn't claim to be unique in this area, but it's not another monster
 library that gives you a god's power.
 So don't ask it to fetch something from network or magically set an image from
-URL to your `UIImageView`.
+url to your `UIImageView`.
 It does nothing but caching, but it does it well. It offers a good public API
 with out-of-box implementations and great customization possibilities.
 
@@ -59,8 +59,8 @@ launches. Disk cache is the most reliable choice here.
 - Basic memory and disk cache functionality.
 - Scalability, you are free to add as many cache storages as you want
 (if default implementations of memory and disk caches don't fit your purpose for some reason).
-- `NSData` encoding and decoding required by `Cachable` protocol are implemented
-for `UIImage`, `String`, `JSON` and `NSData`.
+- `Data` encoding and decoding required by `Cachable` protocol are implemented
+for `UIImage`, `String`, `JSON` and `Data`.
 - iOS and OSX support.
 
 ## Usage
@@ -87,7 +87,7 @@ let config = Config(
   backKind: .Disk,
   // Expiry date that will be applied by default for every added object
   // if it's not overridden in the add(key: object: expiry: completion:) method
-  expiry: .Date(NSDate().dateByAddingTimeInterval(100000)),
+  expiry: .Date(Date().addingTimeInterval(100000)),
   // Maximum size of your cache storage
   maxSize: 10000)
 
@@ -107,7 +107,7 @@ cache.object("string") { (string: String?) in
 }
 
 // JSON
-cache.add("jsonDictionary", object: JSON.Dictionary(["key": "value"]))
+cache.add("jsonDictionary", object: JSON.dictionary(["key": "value"]))
 
 cache.object("jsonDictionary") { (json: JSON?) in
   print(json?.object)
@@ -120,11 +120,11 @@ cache.object("image") { (image: UIImage?) in
   // Use your image
 }
 
-// NSData
+// Data
 cache.add("data", object: data)
 
-cache.object("data") { (data: NSData?) in
-  // Use your NSData object
+cache.object("data") { (data: Data?) in
+  // Use your Data object
 }
 
 // Remove an object from the cache
@@ -206,7 +206,7 @@ cache.add("string", object: "This is a string")
 
 // A provided expiry date will be applied to the item
 cache.add("string", object: "This is a string",
-  expiry: .Date(NSDate().dateByAddingTimeInterval(100000)))
+  expiry: .Date(Date().addingTimeInterval(100000)))
 ```
 
 ### Cachable protocol
@@ -218,7 +218,7 @@ class User: Cachable {
 
   typealias CacheType = User
 
-  static func decode(data: NSData) -> CacheType? {
+  static func decode(_ data: Data) -> CacheType? {
     var object: User?
 
     // Decode your object from data
@@ -226,8 +226,8 @@ class User: Cachable {
     return object
   }
 
-  func encode() -> NSData? {
-    var data: NSData?
+  func encode() -> Data? {
+    var data: Data?
 
     // Encode your object to data
 
@@ -240,17 +240,17 @@ class User: Cachable {
 
 ### JSON
 
-JSON is a helper enum that could be `Array([AnyObject])` or `Dictionary([String : AnyObject])`.
+JSON is a helper enum that could be `Array([Any])` or `Dictionary([String : Any])`.
 Then you could cache `JSON` objects using the same API methods:
 
 ```swift
-cache.add("jsonDictionary", object: JSON.Dictionary(["key": "value"]))
+cache.add("jsonDictionary", object: JSON.dictionary(["key": "value"]))
 
 cache.object("jsonDictionary") { (json: JSON?) in
   print(json?.object)
 }
 
-cache.add("jsonArray", object: JSON.Array([
+cache.add("jsonArray", object: JSON.array([
   ["key1": "value1"],
   ["key2": "value2"]
 ]))
@@ -262,12 +262,12 @@ cache.object("jsonArray") { (json: JSON?) in
 
 ### DefaultCacheConverter
 
-You could use this `NSData` encoding and decoding implementation for any kind
+You could use this `Data` encoding and decoding implementation for any kind
 of objects, but do it on ***your own risk***. With this approach decoding
-***will not work*** if the `NSData` length doesn't match the type size. This can commonly
+***will not work*** if the `Data` length doesn't match the type size. This can commonly
 happen if you try to read the data after updates in the type's structure, so
-there is a different-sized version of the same type. Also note that `sizeof()`
-and `sizeofValue()` may return different values on different devices.
+there is a different-sized version of the same type. Also note that `size`
+and `size(ofValue:)` may return different values on different devices.
 
 ```swift
 do {
