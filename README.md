@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/cocoapods/l/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
 [![Platform](https://img.shields.io/cocoapods/p/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
 [![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
-![Swift](https://img.shields.io/badge/%20in-swift%202.2-orange.svg)
+![Swift](https://img.shields.io/badge/%20in-swift%203.0-orange.svg)
 
 ## Table of Contents
 
