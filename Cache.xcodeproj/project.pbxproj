@@ -7,6 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BDEDD35E1DBCE5C7007416A6 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C721C28296B00B702C9 /* HybridCache.swift */; };
+		BDEDD35F1DBCE5CA007416A6 /* UIImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */; };
+		BDEDD3601DBCE5CE007416A6 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
+		BDEDD3611DBCE5CE007416A6 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACDD1CD0272600567809 /* Cache.swift */; };
+		BDEDD3621DBCE5CE007416A6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
+		BDEDD3631DBCE5D8007416A6 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
+		BDEDD3641DBCE5D8007416A6 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
+		BDEDD3651DBCE5D8007416A6 /* Expiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C191C28220B00B702C9 /* Expiry.swift */; };
+		BDEDD3661DBCE5D8007416A6 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1A1C28220B00B702C9 /* JSON.swift */; };
+		BDEDD3671DBCE5D8007416A6 /* StorageKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1B1C28220B00B702C9 /* StorageKind.swift */; };
+		BDEDD3681DBCE5D8007416A6 /* JSON+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1D1C28220B00B702C9 /* JSON+Cache.swift */; };
+		BDEDD3691DBCE5D8007416A6 /* NSData+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1E1C28220B00B702C9 /* NSData+Cache.swift */; };
+		BDEDD36A1DBCE5D8007416A6 /* NSDate+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1F1C28220B00B702C9 /* NSDate+Cache.swift */; };
+		BDEDD36B1DBCE5D8007416A6 /* String+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C201C28220B00B702C9 /* String+Cache.swift */; };
+		BDEDD36C1DBCE5D8007416A6 /* DefaultCacheConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C221C28220B00B702C9 /* DefaultCacheConverter.swift */; };
+		BDEDD36D1DBCE5D8007416A6 /* SyncCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACC81CD01F3400567809 /* SyncCache.swift */; };
+		BDEDD36E1DBCE5D8007416A6 /* SyncHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCB1CD0207300567809 /* SyncHybridCache.swift */; };
+		BDEDD36F1DBCE5D8007416A6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C241C28220B00B702C9 /* DiskStorage.swift */; };
+		BDEDD3701DBCE5D8007416A6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
+		BDEDD3711DBCE5D8007416A6 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
+		BDEDD3721DBCE5D8007416A6 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C271C28220B00B702C9 /* StorageFactory.swift */; };
+		BDEDD37D1DBCEB8A007416A6 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDEDD3561DBCE5B1007416A6 /* Cache.framework */; };
+		BDEDD3831DBCEBC4007416A6 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CDF1C28374800B702C9 /* SpecHelper.swift */; };
+		BDEDD3841DBCEBC4007416A6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE01C28374800B702C9 /* User.swift */; };
+		BDEDD3851DBCEBC4007416A6 /* UIImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */; };
+		BDEDD3861DBCEBC4007416A6 /* CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE21C28374800B702C9 /* CacheSpec.swift */; };
+		BDEDD3871DBCEBC4007416A6 /* ConfigSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE31C28374800B702C9 /* ConfigSpec.swift */; };
+		BDEDD3881DBCEBD0007416A6 /* CapsuleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE51C28374800B702C9 /* CapsuleSpec.swift */; };
+		BDEDD3891DBCEBD0007416A6 /* ExpirySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE61C28374800B702C9 /* ExpirySpec.swift */; };
+		BDEDD38A1DBCEBD0007416A6 /* JSONSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE71C28374800B702C9 /* JSONSpec.swift */; };
+		BDEDD38B1DBCEBD0007416A6 /* StorageKindSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE81C28374800B702C9 /* StorageKindSpec.swift */; };
+		BDEDD38C1DBCEBD0007416A6 /* JSON+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEA1C28374800B702C9 /* JSON+CacheSpec.swift */; };
+		BDEDD38D1DBCEBD0007416A6 /* NSData+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEB1C28374800B702C9 /* NSData+CacheSpec.swift */; };
+		BDEDD38E1DBCEBD0007416A6 /* NSDate+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEC1C28374800B702C9 /* NSDate+CacheSpec.swift */; };
+		BDEDD38F1DBCEBD0007416A6 /* String+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CED1C28374800B702C9 /* String+CacheSpec.swift */; };
+		BDEDD3901DBCEBD0007416A6 /* UIImage+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D991C283DB300B702C9 /* UIImage+CacheSpec.swift */; };
+		BDEDD3911DBCEBD0007416A6 /* DefaultCacheConverterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEF1C28374800B702C9 /* DefaultCacheConverterSpec.swift */; };
+		BDEDD3921DBCEBD0007416A6 /* SyncCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCE1CD0227200567809 /* SyncCacheSpec.swift */; };
+		BDEDD3931DBCEBD0007416A6 /* SyncHybridCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */; };
+		BDEDD3941DBCEBD0007416A6 /* DiskStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF11C28374800B702C9 /* DiskStorageSpec.swift */; };
+		BDEDD3951DBCEBD0007416A6 /* MemoryStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF21C28374800B702C9 /* MemoryStorageSpec.swift */; };
+		BDEDD3961DBCEBD0007416A6 /* StorageFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF31C28374800B702C9 /* StorageFactorySpec.swift */; };
 		D5291C291C28220B00B702C9 /* UIImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */; };
 		D5291C2D1C28220B00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
@@ -77,6 +119,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BDEDD37E1DBCEB8A007416A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5DC59D71C20593E003BD79B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BDEDD3551DBCE5B1007416A6;
+			remoteInfo = "Cache-tvOS";
+		};
 		D5291D1E1C2837DB00B702C9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D5DC59D71C20593E003BD79B /* Project object */;
@@ -94,6 +143,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BDEDD3561DBCE5B1007416A6 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Cache.swift"; sourceTree = "<group>"; };
 		D5291C151C28220B00B702C9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D5291C171C28220B00B702C9 /* Cachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
@@ -148,10 +199,24 @@
 		D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncHybridCacheSpec.swift; sourceTree = "<group>"; };
 		D5ACACDD1CD0272600567809 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5DC5A181C205AC9003BD79B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BDEDD3521DBCE5B1007416A6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDEDD3751DBCEB8A007416A6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDEDD37D1DBCEB8A007416A6 /* Cache.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5291D151C2837DB00B702C9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -412,7 +477,6 @@
 			children = (
 				D5643E341C43F2CC00582E17 /* Playgrounds */,
 				D5291C081C28220B00B702C9 /* Source */,
-				D5DC5A161C205AC9003BD79B /* SupportFiles */,
 				D5DC59FA1C205AC9003BD79B /* Tests */,
 				D5DC59E11C20593E003BD79B /* Products */,
 			);
@@ -425,6 +489,8 @@
 				D5291D181C2837DB00B702C9 /* Cache-iOS-Tests.xctest */,
 				D5291D601C283B5300B702C9 /* Cache.framework */,
 				D5291D691C283B5400B702C9 /* Cache-Mac-Tests.xctest */,
+				BDEDD3561DBCE5B1007416A6 /* Cache.framework */,
+				BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -438,17 +504,16 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		D5DC5A161C205AC9003BD79B /* SupportFiles */ = {
-			isa = PBXGroup;
-			children = (
-				D5DC5A181C205AC9003BD79B /* Info.plist */,
-			);
-			path = SupportFiles;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		BDEDD3531DBCE5B1007416A6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5291D5D1C283B5300B702C9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -466,6 +531,44 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		BDEDD3551DBCE5B1007416A6 /* Cache-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDEDD35D1DBCE5B1007416A6 /* Build configuration list for PBXNativeTarget "Cache-tvOS" */;
+			buildPhases = (
+				BDEDD3511DBCE5B1007416A6 /* Sources */,
+				BDEDD3521DBCE5B1007416A6 /* Frameworks */,
+				BDEDD3531DBCE5B1007416A6 /* Headers */,
+				BDEDD3541DBCE5B1007416A6 /* Resources */,
+				BDEDD3731DBCE616007416A6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Cache-tvOS";
+			productName = "Cache-tvOS";
+			productReference = BDEDD3561DBCE5B1007416A6 /* Cache.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		BDEDD3771DBCEB8A007416A6 /* Cache-tvOS-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDEDD3801DBCEB8A007416A6 /* Build configuration list for PBXNativeTarget "Cache-tvOS-Tests" */;
+			buildPhases = (
+				BDEDD3741DBCEB8A007416A6 /* Sources */,
+				BDEDD3751DBCEB8A007416A6 /* Frameworks */,
+				BDEDD3761DBCEB8A007416A6 /* Resources */,
+				BDEDD3971DBCEE2D007416A6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BDEDD37F1DBCEB8A007416A6 /* PBXTargetDependency */,
+			);
+			name = "Cache-tvOS-Tests";
+			productName = "Cache-tvOS-Tests";
+			productReference = BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D5291D171C2837DB00B702C9 /* Cache-iOS-Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5291D201C2837DB00B702C9 /* Build configuration list for PBXNativeTarget "Cache-iOS-Tests" */;
@@ -548,10 +651,18 @@
 		D5DC59D71C20593E003BD79B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Hyper Interaktiv AS";
 				TargetAttributes = {
+					BDEDD3551DBCE5B1007416A6 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Manual;
+					};
+					BDEDD3771DBCEB8A007416A6 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Manual;
+					};
 					D5291D171C2837DB00B702C9 = {
 						CreatedOnToolsVersion = 7.2;
 						LastSwiftMigration = 0800;
@@ -584,11 +695,27 @@
 				D5291D171C2837DB00B702C9 /* Cache-iOS-Tests */,
 				D5291D5F1C283B5300B702C9 /* Cache-Mac */,
 				D5291D681C283B5400B702C9 /* Cache-Mac-Tests */,
+				BDEDD3551DBCE5B1007416A6 /* Cache-tvOS */,
+				BDEDD3771DBCEB8A007416A6 /* Cache-tvOS-Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BDEDD3541DBCE5B1007416A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDEDD3761DBCEB8A007416A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5291D161C2837DB00B702C9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -648,6 +775,35 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		BDEDD3731DBCE616007416A6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		BDEDD3971DBCEE2D007416A6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/Quick.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/Nimble.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/CryptoSwift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		D5291D591C283AA700B702C9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -683,6 +839,61 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BDEDD3511DBCE5B1007416A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDEDD36C1DBCE5D8007416A6 /* DefaultCacheConverter.swift in Sources */,
+				BDEDD36E1DBCE5D8007416A6 /* SyncHybridCache.swift in Sources */,
+				BDEDD3651DBCE5D8007416A6 /* Expiry.swift in Sources */,
+				BDEDD3631DBCE5D8007416A6 /* Cachable.swift in Sources */,
+				BDEDD35F1DBCE5CA007416A6 /* UIImage+Cache.swift in Sources */,
+				BDEDD3661DBCE5D8007416A6 /* JSON.swift in Sources */,
+				BDEDD3711DBCE5D8007416A6 /* StorageAware.swift in Sources */,
+				BDEDD3681DBCE5D8007416A6 /* JSON+Cache.swift in Sources */,
+				BDEDD3641DBCE5D8007416A6 /* Capsule.swift in Sources */,
+				BDEDD3721DBCE5D8007416A6 /* StorageFactory.swift in Sources */,
+				BDEDD35E1DBCE5C7007416A6 /* HybridCache.swift in Sources */,
+				BDEDD3621DBCE5CE007416A6 /* Config.swift in Sources */,
+				BDEDD3611DBCE5CE007416A6 /* Cache.swift in Sources */,
+				BDEDD36B1DBCE5D8007416A6 /* String+Cache.swift in Sources */,
+				BDEDD36D1DBCE5D8007416A6 /* SyncCache.swift in Sources */,
+				BDEDD36A1DBCE5D8007416A6 /* NSDate+Cache.swift in Sources */,
+				BDEDD36F1DBCE5D8007416A6 /* DiskStorage.swift in Sources */,
+				BDEDD3601DBCE5CE007416A6 /* BasicHybridCache.swift in Sources */,
+				BDEDD3701DBCE5D8007416A6 /* MemoryStorage.swift in Sources */,
+				BDEDD3671DBCE5D8007416A6 /* StorageKind.swift in Sources */,
+				BDEDD3691DBCE5D8007416A6 /* NSData+Cache.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDEDD3741DBCEB8A007416A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDEDD3841DBCEBC4007416A6 /* User.swift in Sources */,
+				BDEDD3861DBCEBC4007416A6 /* CacheSpec.swift in Sources */,
+				BDEDD3881DBCEBD0007416A6 /* CapsuleSpec.swift in Sources */,
+				BDEDD3851DBCEBC4007416A6 /* UIImage+CacheTests.swift in Sources */,
+				BDEDD3831DBCEBC4007416A6 /* SpecHelper.swift in Sources */,
+				BDEDD3941DBCEBD0007416A6 /* DiskStorageSpec.swift in Sources */,
+				BDEDD38D1DBCEBD0007416A6 /* NSData+CacheSpec.swift in Sources */,
+				BDEDD3931DBCEBD0007416A6 /* SyncHybridCacheSpec.swift in Sources */,
+				BDEDD38E1DBCEBD0007416A6 /* NSDate+CacheSpec.swift in Sources */,
+				BDEDD38B1DBCEBD0007416A6 /* StorageKindSpec.swift in Sources */,
+				BDEDD3891DBCEBD0007416A6 /* ExpirySpec.swift in Sources */,
+				BDEDD3961DBCEBD0007416A6 /* StorageFactorySpec.swift in Sources */,
+				BDEDD3901DBCEBD0007416A6 /* UIImage+CacheSpec.swift in Sources */,
+				BDEDD3921DBCEBD0007416A6 /* SyncCacheSpec.swift in Sources */,
+				BDEDD38A1DBCEBD0007416A6 /* JSONSpec.swift in Sources */,
+				BDEDD3871DBCEBC4007416A6 /* ConfigSpec.swift in Sources */,
+				BDEDD38F1DBCEBD0007416A6 /* String+CacheSpec.swift in Sources */,
+				BDEDD3911DBCEBD0007416A6 /* DefaultCacheConverterSpec.swift in Sources */,
+				BDEDD38C1DBCEBD0007416A6 /* JSON+CacheSpec.swift in Sources */,
+				BDEDD3951DBCEBD0007416A6 /* MemoryStorageSpec.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D5291D141C2837DB00B702C9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -779,6 +990,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BDEDD37F1DBCEB8A007416A6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BDEDD3551DBCE5B1007416A6 /* Cache-tvOS */;
+			targetProxy = BDEDD37E1DBCEB8A007416A6 /* PBXContainerItemProxy */;
+		};
 		D5291D1F1C2837DB00B702C9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D5DC59DF1C20593E003BD79B /* Cache-iOS */;
@@ -792,6 +1008,108 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		BDEDD35B1DBCE5B1007416A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/tvOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-tvOS";
+				PRODUCT_NAME = Cache;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		BDEDD35C1DBCE5B1007416A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/tvOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-tvOS";
+				PRODUCT_NAME = Cache;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		BDEDD3811DBCEB8A007416A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-tvOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		BDEDD3821DBCEB8A007416A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-tvOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 		D5291D211C2837DB00B702C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1053,6 +1371,23 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BDEDD35D1DBCE5B1007416A6 /* Build configuration list for PBXNativeTarget "Cache-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDEDD35B1DBCE5B1007416A6 /* Debug */,
+				BDEDD35C1DBCE5B1007416A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BDEDD3801DBCEB8A007416A6 /* Build configuration list for PBXNativeTarget "Cache-tvOS-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDEDD3811DBCEB8A007416A6 /* Debug */,
+				BDEDD3821DBCEB8A007416A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D5291D201C2837DB00B702C9 /* Build configuration list for PBXNativeTarget "Cache-iOS-Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
