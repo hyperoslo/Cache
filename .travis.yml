@@ -11,8 +11,8 @@ script:
 - xcodebuild test -project Cache.xcodeproj -scheme "Cache-Mac" -sdk macosx | xcpretty
 - xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator | xcpretty
 - xcodebuild test -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0' | xcpretty
-- xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-tvOS" -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=9.2' | xcpretty
-- xcodebuild test -project Cache.xcodeproj -scheme "Cache-tvOS" -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=9.2' | xcpretty
+- xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-tvOS" -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=10.0' | xcpretty
+- xcodebuild test -project Cache.xcodeproj -scheme "Cache-tvOS" -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=10.0' | xcpretty
 
 notifications:
   email: false
