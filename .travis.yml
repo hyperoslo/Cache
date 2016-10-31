@@ -1,10 +1,12 @@
 osx_image: xcode8
 language: objective-c
 
+cache:
+  directories:
+  - Carthage
+
 before_install:
-- brew update
-- if brew outdated | grep -qx carthage; then brew upgrade carthage; fi
-- travis_wait 35 carthage bootstrap --platform Mac,iOS,tvOS
+- travis_wait 35; bin/bootstrap-if-needed
 
 script:
 - xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-Mac" -sdk macosx | xcpretty
