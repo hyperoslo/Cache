@@ -123,4 +123,22 @@ public class BasicHybridCache: NSObject {
       }
     }
   }
+
+  /**
+   Clears all expired objects from front and back storages.
+     
+   - Parameter completion: Completion closure to be called when the task is done
+   */
+  public func clearExpired(_ completion: (() -> Void)? = nil) {
+    frontStorage.clearExpired { [weak self] in
+      guard let weakSelf = self else {
+        completion?()
+        return
+      }
+            
+      weakSelf.backStorage.clearExpired() {
+        completion?()
+      }
+    }
+  }
 }

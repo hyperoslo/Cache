@@ -207,6 +207,9 @@ cache.add("string", object: "This is a string")
 // A provided expiry date will be applied to the item
 cache.add("string", object: "This is a string",
   expiry: .date(Date().addingTimeInterval(100000)))
+  
+// Clear expired objects
+cache.clearExpired()
 ```
 
 ### Cachable protocol
