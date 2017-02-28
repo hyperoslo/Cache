@@ -14,6 +14,8 @@ public struct Config {
   public let maxSize: UInt
   /// Maximum amount of items to store in memory
   public let maxObjects: Int
+  /// (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
+  public let cacheDirectory: String?
 
   // MARK: - Initialization
 
@@ -26,12 +28,13 @@ public struct Config {
    - Parameter maxSize: Maximum size of the cache storage
    - Parameter maxObjects: Maximum amount of objects to be stored in memory
    */
-  public init(frontKind: StorageKind, backKind: StorageKind, expiry: Expiry = .never, maxSize: UInt = 0, maxObjects: Int = 0) {
+  public init(frontKind: StorageKind, backKind: StorageKind, expiry: Expiry = .never, maxSize: UInt = 0, maxObjects: Int = 0, cacheDirectory: String? = nil) {
     self.frontKind = frontKind
     self.backKind = backKind
     self.expiry = expiry
     self.maxSize = maxSize
     self.maxObjects = maxObjects
+    self.cacheDirectory = cacheDirectory
   }
 }
 

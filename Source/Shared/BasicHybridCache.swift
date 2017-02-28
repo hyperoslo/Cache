@@ -33,7 +33,7 @@ public class BasicHybridCache: NSObject {
     self.config = config
 
     frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: UInt(config.maxObjects))
-    backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
+    backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize, cacheDirectory: config.cacheDirectory)
 
     super.init()
   }

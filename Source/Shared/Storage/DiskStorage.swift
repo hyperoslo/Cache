@@ -32,13 +32,20 @@ public final class DiskStorage: StorageAware {
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
    */
-  public required init(name: String, maxSize: UInt = 0) {
+    public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
     self.maxSize = maxSize
     let cacheName = name.capitalized
-    let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory,
-      FileManager.SearchPathDomainMask.userDomainMask, true)
 
-    path = "\(paths.first!)/\(DiskStorage.prefix).\(cacheName)"
+    if let storageLocation = cacheDirectory {
+      path = storageLocation
+    }
+    else {
+      let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory,
+                                                      FileManager.SearchPathDomainMask.userDomainMask, true)
+        
+      path = "\(paths.first!)/\(DiskStorage.prefix).\(cacheName)"
+    }
+
     writeQueue = DispatchQueue(label: "\(DiskStorage.prefix).\(cacheName).WriteQueue",
       attributes: [])
     readQueue = DispatchQueue(label: "\(DiskStorage.prefix).\(cacheName).ReadQueue",
