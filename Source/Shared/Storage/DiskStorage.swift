@@ -4,7 +4,7 @@ import CryptoSwift
 /**
  File-based cache storage
  */
-public final class DiskStorage: StorageAware {
+public class DiskStorage: StorageAware {
 
   /// Domain prefix
   public static let prefix = "no.hyper.Cache.Disk"
@@ -31,19 +31,27 @@ public final class DiskStorage: StorageAware {
 
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
-   */
-  public required init(name: String, maxSize: UInt = 0) {
-    self.maxSize = maxSize
-    let cacheName = name.capitalized
-    let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory,
-      FileManager.SearchPathDomainMask.userDomainMask, true)
-
-    path = "\(paths.first!)/\(DiskStorage.prefix).\(cacheName)"
-    writeQueue = DispatchQueue(label: "\(DiskStorage.prefix).\(cacheName).WriteQueue",
-      attributes: [])
-    readQueue = DispatchQueue(label: "\(DiskStorage.prefix).\(cacheName).ReadQueue",
-      attributes: [])
-  }
+     */
+    public convenience required init(name: String, maxSize: UInt = 0) {
+        let cacheName = name.capitalized
+        let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory,
+                                                        FileManager.SearchPathDomainMask.userDomainMask, true)
+        
+        let path = "\(paths.first!)/\(DiskStorage.prefix).\(cacheName)"
+        self.init(name: name, maxSize: maxSize, path: path)
+    }
+    
+    public init(name: String, maxSize: UInt = 0, path: String) {
+        self.maxSize = maxSize
+        let cacheName = name.capitalized
+        
+        self.path = path
+        writeQueue = DispatchQueue(label: "\(DiskStorage.prefix).\(cacheName).WriteQueue",
+            attributes: [])
+        readQueue = DispatchQueue(label: "\(DiskStorage.prefix).\(cacheName).ReadQueue",
+            attributes: [])
+    }
+    
 
   // MARK: - CacheAware
 

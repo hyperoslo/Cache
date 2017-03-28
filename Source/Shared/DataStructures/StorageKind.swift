@@ -6,6 +6,8 @@ public enum StorageKind {
   case memory
   /// Disk storage
   case disk
+  /// Permanent disk storage
+  case permanentDisk
   /// Custom kind of storage by the given name
   case custom(String)
 
@@ -18,6 +20,8 @@ public enum StorageKind {
       result = "Memory"
     case .disk:
       result = "Disk"
+    case .permanentDisk:
+        result = "permanentDisk"
     case .custom(let name):
       result = name
     }

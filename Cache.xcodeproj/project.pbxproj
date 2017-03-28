@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		64A161061E871A08000148A3 /* PermanentDiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A161051E871A08000148A3 /* PermanentDiskStorage.swift */; };
+		64A161071E871A10000148A3 /* PermanentDiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A161051E871A08000148A3 /* PermanentDiskStorage.swift */; };
+		64A161081E871A11000148A3 /* PermanentDiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A161051E871A08000148A3 /* PermanentDiskStorage.swift */; };
 		BDEDD35E1DBCE5C7007416A6 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C721C28296B00B702C9 /* HybridCache.swift */; };
 		BDEDD35F1DBCE5CA007416A6 /* UIImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */; };
 		BDEDD3601DBCE5CE007416A6 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
@@ -143,6 +146,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		64A161051E871A08000148A3 /* PermanentDiskStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermanentDiskStorage.swift; sourceTree = "<group>"; };
 		BDEDD3561DBCE5B1007416A6 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5291C0D1C28220B00B702C9 /* UIImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Cache.swift"; sourceTree = "<group>"; };
@@ -328,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				D5291C241C28220B00B702C9 /* DiskStorage.swift */,
+				64A161051E871A08000148A3 /* PermanentDiskStorage.swift */,
 				D5291C251C28220B00B702C9 /* MemoryStorage.swift */,
 				D5291C261C28220B00B702C9 /* StorageAware.swift */,
 				D5291C271C28220B00B702C9 /* StorageFactory.swift */,
@@ -848,6 +853,7 @@
 				BDEDD3651DBCE5D8007416A6 /* Expiry.swift in Sources */,
 				BDEDD3631DBCE5D8007416A6 /* Cachable.swift in Sources */,
 				BDEDD35F1DBCE5CA007416A6 /* UIImage+Cache.swift in Sources */,
+				64A161081E871A11000148A3 /* PermanentDiskStorage.swift in Sources */,
 				BDEDD3661DBCE5D8007416A6 /* JSON.swift in Sources */,
 				BDEDD3711DBCE5D8007416A6 /* StorageAware.swift in Sources */,
 				BDEDD3681DBCE5D8007416A6 /* JSON+Cache.swift in Sources */,
@@ -930,6 +936,7 @@
 				D5ACACCA1CD01F3400567809 /* SyncCache.swift in Sources */,
 				D5291D8B1C283CFB00B702C9 /* Expiry.swift in Sources */,
 				D5ACACDF1CD0272600567809 /* Cache.swift in Sources */,
+				64A161071E871A10000148A3 /* PermanentDiskStorage.swift in Sources */,
 				D5291D891C283CFB00B702C9 /* Cachable.swift in Sources */,
 				D5291D961C283CFB00B702C9 /* StorageFactory.swift in Sources */,
 				D5291D7E1C283BF200B702C9 /* HybridCache.swift in Sources */,
@@ -968,6 +975,7 @@
 				D5ACACC91CD01F3400567809 /* SyncCache.swift in Sources */,
 				D5291C361C28220B00B702C9 /* String+Cache.swift in Sources */,
 				D5ACACDE1CD0272600567809 /* Cache.swift in Sources */,
+				64A161061E871A08000148A3 /* PermanentDiskStorage.swift in Sources */,
 				D5291C341C28220B00B702C9 /* NSData+Cache.swift in Sources */,
 				D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */,
 				D5291C381C28220B00B702C9 /* DiskStorage.swift in Sources */,
