@@ -1,5 +1,72 @@
 # Change Log
 
+## [Unreleased](https://github.com/hyperoslo/Cache/tree/HEAD)
+
+[Full Changelog](https://github.com/hyperoslo/Cache/compare/2.2.1...HEAD)
+
+**Closed issues:**
+
+- Not compatible with swift 3 [\#64](https://github.com/hyperoslo/Cache/issues/64)
+
+**Merged pull requests:**
+
+- Fix compile errors in Xcode 8.3 beta [\#74](https://github.com/hyperoslo/Cache/pull/74) ([bradhowes](https://github.com/bradhowes))
+- Update Cache.podspec for WatchOS [\#67](https://github.com/hyperoslo/Cache/pull/67) ([FrancoisObob](https://github.com/FrancoisObob))
+
+## [2.2.1](https://github.com/hyperoslo/Cache/tree/2.2.1) (2017-01-11)
+[Full Changelog](https://github.com/hyperoslo/Cache/compare/2.2.0...2.2.1)
+
+## [2.2.0](https://github.com/hyperoslo/Cache/tree/2.2.0) (2017-01-11)
+[Full Changelog](https://github.com/hyperoslo/Cache/compare/2.1.1...2.2.0)
+
+**Closed issues:**
+
+- Swift 3 support please... again [\#62](https://github.com/hyperoslo/Cache/issues/62)
+- Question on threading [\#57](https://github.com/hyperoslo/Cache/issues/57)
+- Question - Iterating? [\#51](https://github.com/hyperoslo/Cache/issues/51)
+- Question: Completion handlers are called in the original threads [\#40](https://github.com/hyperoslo/Cache/issues/40)
+
+**Merged pull requests:**
+
+- Allow manual clear of expired objects [\#65](https://github.com/hyperoslo/Cache/pull/65) ([eofs](https://github.com/eofs))
+- Add codecov.io to travis [\#61](https://github.com/hyperoslo/Cache/pull/61) ([zenangst](https://github.com/zenangst))
+- Improve build times on Travis [\#60](https://github.com/hyperoslo/Cache/pull/60) ([zenangst](https://github.com/zenangst))
+
+## [2.1.1](https://github.com/hyperoslo/Cache/tree/2.1.1) (2016-10-23)
+[Full Changelog](https://github.com/hyperoslo/Cache/compare/2.1.0...2.1.1)
+
+**Closed issues:**
+
+- Add tvOS target for Carthage [\#55](https://github.com/hyperoslo/Cache/issues/55)
+
+**Merged pull requests:**
+
+- Update deployment target [\#59](https://github.com/hyperoslo/Cache/pull/59) ([zenangst](https://github.com/zenangst))
+
+## [2.1.0](https://github.com/hyperoslo/Cache/tree/2.1.0) (2016-10-23)
+[Full Changelog](https://github.com/hyperoslo/Cache/compare/2.0.0...2.1.0)
+
+**Merged pull requests:**
+
+- Feature/tvOS target [\#58](https://github.com/hyperoslo/Cache/pull/58) ([zenangst](https://github.com/zenangst))
+
+## [2.0.0](https://github.com/hyperoslo/Cache/tree/2.0.0) (2016-10-13)
+[Full Changelog](https://github.com/hyperoslo/Cache/compare/1.5.1...2.0.0)
+
+**Closed issues:**
+
+- what time will be support swift3? [\#54](https://github.com/hyperoslo/Cache/issues/54)
+- Swift 3 [\#53](https://github.com/hyperoslo/Cache/issues/53)
+- 2.3 branch [\#50](https://github.com/hyperoslo/Cache/issues/50)
+- Carthage Update error with xcode 8gm build [\#48](https://github.com/hyperoslo/Cache/issues/48)
+- Default size of the cache storage [\#38](https://github.com/hyperoslo/Cache/issues/38)
+
+**Merged pull requests:**
+
+- Swift 3 [\#56](https://github.com/hyperoslo/Cache/pull/56) ([zenangst](https://github.com/zenangst))
+- Added Swift 2.3 support [\#52](https://github.com/hyperoslo/Cache/pull/52) ([Sumolari](https://github.com/Sumolari))
+- Removed script which copied the framework - Carthage suggests it should be done at app level. [\#47](https://github.com/hyperoslo/Cache/pull/47) ([okipol88](https://github.com/okipol88))
+
 ## [1.5.1](https://github.com/hyperoslo/Cache/tree/1.5.1) (2016-08-08)
 [Full Changelog](https://github.com/hyperoslo/Cache/compare/1.5.0...1.5.1)
 
