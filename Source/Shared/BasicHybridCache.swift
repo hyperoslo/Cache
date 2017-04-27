@@ -1,4 +1,8 @@
-import Foundation
+#if os(macOS)
+  import AppKit
+#else
+  import UIKit
+#endif
 
 /**
  BasicHybridCache supports storing all kinds of objects, as long as they conform to
@@ -34,8 +38,30 @@ public class BasicHybridCache: NSObject {
 
     frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: UInt(config.maxObjects))
     backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
-
     super.init()
+
+    let notificationCenter = NotificationCenter.default
+
+    #if os(macOS)
+      notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
+                                     name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
+      notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
+                                     name: NSNotification.Name.NSApplicationDidResignActive, object: nil)
+    #else
+      notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInFrontStorage),
+                                     name: .UIApplicationDidReceiveMemoryWarning, object: nil)
+      notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
+                                     name: .UIApplicationWillTerminate, object: nil)
+      notificationCenter.addObserver(self, selector: #selector(HybridCache.applicationDidEnterBackground),
+                                     name: .UIApplicationDidEnterBackground, object: nil)
+    #endif
+  }
+
+  /**
+   Removes notification center observer.
+   */
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
 
   // MARK: - Caching
@@ -48,7 +74,7 @@ public class BasicHybridCache: NSObject {
    - Parameter expiry: Expiration date for the cached object
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func add<T: Cachable>(_ key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
+  func add<T: Cachable>(_ key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
     let expiry = expiry ?? config.expiry
 
     frontStorage.add(key, object: object, expiry: expiry) { [weak self] in
@@ -69,7 +95,7 @@ public class BasicHybridCache: NSObject {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-  public func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
+  func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
     frontStorage.object(key) { [weak self] (object: T?) in
       if let object = object {
         completion(object)
@@ -126,7 +152,7 @@ public class BasicHybridCache: NSObject {
 
   /**
    Clears all expired objects from front and back storages.
-     
+
    - Parameter completion: Completion closure to be called when the task is done
    */
   public func clearExpired(_ completion: (() -> Void)? = nil) {
@@ -135,10 +161,61 @@ public class BasicHybridCache: NSObject {
         completion?()
         return
       }
-            
+
       weakSelf.backStorage.clearExpired() {
         completion?()
       }
     }
   }
+
+  /**
+   Clears expired cache items in front cache.
+   */
+  func clearExpiredDataInFrontStorage() {
+    frontStorage.clearExpired(nil)
+  }
+
+  /**
+   Clears expired cache items in back cache.
+   */
+  func clearExpiredDataInBackStorage() {
+    backStorage.clearExpired(nil)
+  }
+
+  #if !os(macOS)
+
+  /**
+   Clears expired cache items when the app enters background.
+   */
+  func applicationDidEnterBackground() {
+    let application = UIApplication.shared
+    var backgroundTask: UIBackgroundTaskIdentifier?
+
+    backgroundTask = application.beginBackgroundTask (expirationHandler: { [weak self] in
+      guard let weakSelf = self, let backgroundTask = backgroundTask else { return }
+      var mutableBackgroundTask = backgroundTask
+
+      weakSelf.endBackgroundTask(&mutableBackgroundTask)
+    })
+
+    backStorage.clearExpired { [weak self] in
+      guard let weakSelf = self, let backgroundTask = backgroundTask else { return }
+      var mutableBackgroundTask = backgroundTask
+
+      DispatchQueue.main.async {
+        weakSelf.endBackgroundTask(&mutableBackgroundTask)
+      }
+    }
+  }
+
+  /**
+   Ends given background task.
+   - Parameter task: A UIBackgroundTaskIdentifier
+   */
+  func endBackgroundTask(_ task: inout UIBackgroundTaskIdentifier) {
+    UIApplication.shared.endBackgroundTask(task)
+    task = UIBackgroundTaskInvalid
+  }
+
+  #endif
 }
