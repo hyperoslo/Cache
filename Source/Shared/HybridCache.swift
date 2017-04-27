@@ -13,8 +13,8 @@ public class HybridCache: BasicHybridCache {
    - Parameter expiry: Expiration date for the cached object
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public override func add<T: Cachable>(_ key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
-    super.add(key, object: object, expiry: expiry, completion: completion)
+  public func add<T: Cachable>(_ key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
+    super.add(object, forKey: key, expiry: expiry, completion: completion)
   }
 
   /**
@@ -23,7 +23,7 @@ public class HybridCache: BasicHybridCache {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-  public override func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
-    super.object(key, completion: completion)
+  public func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
+    super.object(forKey: key, completion: completion)
   }
 }

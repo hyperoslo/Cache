@@ -69,12 +69,13 @@ public class BasicHybridCache: NSObject {
   /**
    Adds passed object to the front and back cache storages.
 
-   - Parameter key: Unique key to identify the object in the cache
    - Parameter object: Object that needs to be cached
+   - Parameter key: Unique key to identify the object in the cache
    - Parameter expiry: Expiration date for the cached object
    - Parameter completion: Completion closure to be called when the task is done
    */
-  func add<T: Cachable>(_ key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
+  func add<T: Cachable>(_ object: T, forKey key: String,
+           expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
     let expiry = expiry ?? config.expiry
 
     frontStorage.add(key, object: object, expiry: expiry) { [weak self] in
@@ -95,7 +96,7 @@ public class BasicHybridCache: NSObject {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-  func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
+  func object<T: Cachable>(forKey key: String, completion: @escaping (_ object: T?) -> Void) {
     frontStorage.object(key) { [weak self] (object: T?) in
       if let object = object {
         completion(object)

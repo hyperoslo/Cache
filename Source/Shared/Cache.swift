@@ -18,7 +18,7 @@ public final class Cache<T: Cachable>: BasicHybridCache {
    - Parameter completion: Completion closure to be called when the task is done
    */
   public func add(_ key: String, object: T, expiry: Expiry? = nil, completion: (() -> Void)? = nil) {
-    super.add(key, object: object, expiry: expiry, completion: completion)
+    super.add(object, forKey: key, expiry: expiry, completion: completion)
   }
 
   /**
@@ -29,6 +29,6 @@ public final class Cache<T: Cachable>: BasicHybridCache {
    */
 
   public func object(_ key: String, completion: @escaping (_ object: T?) -> Void) {
-    super.object(key, completion: completion)
+    super.object(forKey: key, completion: completion)
   }
 }
