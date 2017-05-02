@@ -31,7 +31,7 @@ public struct SyncHybridCache {
   public func add<T: Cachable>(_ key: String, object: T, expiry: Expiry? = nil) {
     let semaphore = DispatchSemaphore(value: 0)
 
-    cache.add(key, object: object, expiry: expiry) {
+    cache.add(object, forKey: key, expiry: expiry) {
       semaphore.signal()
     }
 
@@ -49,7 +49,7 @@ public struct SyncHybridCache {
 
     let semaphore = DispatchSemaphore(value: 0)
 
-    cache.object(key) { (object: T?) in
+    cache.object(forKey: key) { (object: T?) in
       result = object
       semaphore.signal()
     }
