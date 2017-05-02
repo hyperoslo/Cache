@@ -6,7 +6,7 @@ cache:
   - Carthage
 
 before_install:
-- travis_wait 35; bin/bootstrap-if-needed
+- travis_wait 35; carthage bootstrap
 
 script:
 - xcodebuild clean build -project Cache.xcodeproj -scheme "Cache-Mac" -sdk macosx | xcpretty
