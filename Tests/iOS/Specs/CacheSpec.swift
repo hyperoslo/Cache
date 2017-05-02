@@ -20,7 +20,6 @@ class CacheSpec: QuickSpec {
       }
 
       describe("#init") {
-
         it("sets a name") {
           expect(cache.name).to(equal(name))
         }
