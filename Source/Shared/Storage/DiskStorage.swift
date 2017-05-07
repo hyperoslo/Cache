@@ -28,12 +28,12 @@ public final class DiskStorage: StorageAware {
 
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
+   - Parameter cacheDirectory: Path to custom directory to be used as a storage
    */
     public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
       self.maxSize = maxSize
 
-      let cacheName = name.capitalized
-      let fullName = [DiskStorage.prefix, cacheName].joined(separator: ".")
+      let fullName = [DiskStorage.prefix, name.capitalized].joined(separator: ".")
 
       if let cacheDirectory = cacheDirectory {
         path = cacheDirectory

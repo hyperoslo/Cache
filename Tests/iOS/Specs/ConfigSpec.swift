@@ -15,6 +15,7 @@ class ConfigSpec: QuickSpec {
           expect(config.backKind.name).to(equal(StorageKind.disk.name))
           expect(config.expiry.date).to(equal(Expiry.never.date))
           expect(config.maxSize).to(equal(0))
+          expect(config.cacheDirectory).to(beNil())
         }
       }
     }
