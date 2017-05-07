@@ -19,10 +19,7 @@ public final class DiskStorage: StorageAware {
   public fileprivate(set) var readQueue: DispatchQueue
 
   /// File manager to read/write to the disk
-  fileprivate lazy var fileManager: FileManager = {
-    let fileManager = FileManager()
-    return fileManager
-  }()
+  fileprivate let fileManager = FileManager()
 
   // MARK: - Initialization
 
@@ -33,23 +30,25 @@ public final class DiskStorage: StorageAware {
    - Parameter maxSize: Maximum size of the cache storage
    */
     public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
-    self.maxSize = maxSize
-    let cacheName = name.capitalized
+      self.maxSize = maxSize
 
-    if let storageLocation = cacheDirectory {
-      path = storageLocation
-    }
-    else {
-      let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory,
-                                                      FileManager.SearchPathDomainMask.userDomainMask, true)
-        
-      path = "\(paths.first!)/\(DiskStorage.prefix).\(cacheName)"
-    }
+      let cacheName = name.capitalized
+      let fullName = [DiskStorage.prefix, cacheName].joined(separator: ".")
 
-    writeQueue = DispatchQueue(label: "\(DiskStorage.prefix).\(cacheName).WriteQueue",
-      attributes: [])
-    readQueue = DispatchQueue(label: "\(DiskStorage.prefix).\(cacheName).ReadQueue",
-      attributes: [])
+      if let cacheDirectory = cacheDirectory {
+        path = cacheDirectory
+      } else {
+        do {
+          let url = try fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+
+          path = url.appendingPathComponent(fullName, isDirectory: true).path
+        } catch {
+          fatalError("Failed to find or get acces to caches directory: \(error)")
+        }
+      }
+
+      writeQueue = DispatchQueue(label: "\(fullName).WriteQueue")
+      readQueue = DispatchQueue(label: "\(fullName).ReadQueue")
   }
 
   // MARK: - CacheAware
