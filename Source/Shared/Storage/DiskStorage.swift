@@ -81,7 +81,7 @@ public final class DiskStorage: StorageAware {
         weakSelf.fileManager.createFile(atPath: filePath,
           contents: object.encode() as Data?, attributes: nil)
         try weakSelf.fileManager.setAttributes(
-          [FileAttributeKey.modificationDate : expiry.date],
+          [FileAttributeKey.modificationDate: expiry.date],
           ofItemAtPath: filePath)
       } catch {}
 

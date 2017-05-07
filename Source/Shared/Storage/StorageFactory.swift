@@ -8,8 +8,8 @@ public final class StorageFactory {
 
   /// Dictionary of default storages
   fileprivate static var defaultStorages: [String: StorageAware.Type] = [
-    StorageKind.memory.name : MemoryStorage.self,
-    StorageKind.disk.name : DiskStorage.self
+    StorageKind.memory.name: MemoryStorage.self,
+    StorageKind.disk.name: DiskStorage.self
   ]
 
   /// Dictionary of storages

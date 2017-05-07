@@ -80,7 +80,7 @@ public struct SyncHybridCache {
   public func clear() {
     let semaphore = DispatchSemaphore(value: 0)
 
-    cache.clear() {
+    cache.clear {
       semaphore.signal()
     }
 
