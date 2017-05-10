@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57506FAE1EC29437009B71E9 /* ObjectMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506FAD1EC29437009B71E9 /* ObjectMetadata.swift */; };
+		57506FBF1EC2E1B7009B71E9 /* ObjectMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506FAD1EC29437009B71E9 /* ObjectMetadata.swift */; };
+		57506FC01EC2E1BA009B71E9 /* ObjectMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506FAD1EC29437009B71E9 /* ObjectMetadata.swift */; };
 		BDEDD3601DBCE5CE007416A6 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
 		BDEDD3611DBCE5CE007416A6 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACDD1CD0272600567809 /* Cache.swift */; };
 		BDEDD3621DBCE5CE007416A6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
@@ -143,6 +146,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		57506FAD1EC29437009B71E9 /* ObjectMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectMetadata.swift; sourceTree = "<group>"; };
 		BDEDD3561DBCE5B1007416A6 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5291C151C28220B00B702C9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -322,6 +326,7 @@
 				D5291C251C28220B00B702C9 /* MemoryStorage.swift */,
 				D5291C261C28220B00B702C9 /* StorageAware.swift */,
 				D5291C271C28220B00B702C9 /* StorageFactory.swift */,
+				57506FAD1EC29437009B71E9 /* ObjectMetadata.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -840,6 +845,7 @@
 				BDEDD36D1DBCE5D8007416A6 /* SyncCache.swift in Sources */,
 				BDEDD36A1DBCE5D8007416A6 /* NSDate+Cache.swift in Sources */,
 				BDEDD36F1DBCE5D8007416A6 /* DiskStorage.swift in Sources */,
+				57506FC01EC2E1BA009B71E9 /* ObjectMetadata.swift in Sources */,
 				D5A138C21EB29BFA00881A20 /* UIImage+Cache.swift in Sources */,
 				BDEDD3601DBCE5CE007416A6 /* BasicHybridCache.swift in Sources */,
 				BDEDD3701DBCE5D8007416A6 /* MemoryStorage.swift in Sources */,
@@ -922,6 +928,7 @@
 				D5291D911C283CFB00B702C9 /* String+Cache.swift in Sources */,
 				D5291D901C283CFB00B702C9 /* NSDate+Cache.swift in Sources */,
 				D5A138C41EB29C2100881A20 /* NSImage+Cache.swift in Sources */,
+				57506FBF1EC2E1B7009B71E9 /* ObjectMetadata.swift in Sources */,
 				D5291D931C283CFB00B702C9 /* DiskStorage.swift in Sources */,
 				D5291D861C283CFB00B702C9 /* BasicHybridCache.swift in Sources */,
 				D5ACACCD1CD0207300567809 /* SyncHybridCache.swift in Sources */,
@@ -960,6 +967,7 @@
 				D5291C321C28220B00B702C9 /* StorageKind.swift in Sources */,
 				D5291C301C28220B00B702C9 /* Expiry.swift in Sources */,
 				D5291C331C28220B00B702C9 /* JSON+Cache.swift in Sources */,
+				57506FAE1EC29437009B71E9 /* ObjectMetadata.swift in Sources */,
 				D5A138C11EB29BFA00881A20 /* UIImage+Cache.swift in Sources */,
 				D5291C2F1C28220B00B702C9 /* Capsule.swift in Sources */,
 				D5291C2D1C28220B00B702C9 /* Config.swift in Sources */,

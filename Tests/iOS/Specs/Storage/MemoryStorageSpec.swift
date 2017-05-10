@@ -47,7 +47,38 @@ class MemoryStorageSpec: QuickSpec {
           self.waitForExpectations(timeout: 2.0, handler:nil)
         }
       }
-
+      
+      describe("#objectMetadata") {
+        it("returns nil if object doesn't exist") {
+          let storage = MemoryStorage(name: name)
+          
+          waitUntil(timeout: 2.0) { done in
+            
+            storage.objectMetadata(key) { metadata in
+              expect(metadata).to(beNil())
+              done()
+            }
+          }
+        }
+        
+        it("returns object metadata if object exists") {
+          let storage = MemoryStorage(name: name)
+          let expiry = Expiry.date(Date())
+          
+          waitUntil(timeout: 2.0) { done in
+            
+            storage.add(key, object: object, expiry: expiry) {
+              storage.objectMetadata(key) { metadata in
+                
+                let expectedMetadata = ObjectMetadata(expiry: expiry)
+                expect(metadata).to(equal(expectedMetadata))
+                done()
+              }
+            }
+          }
+        }
+      }
+      
       describe("#object") {
         it("resolves cached object") {
           let expectation = self.expectation(description: "Object Expectation")
