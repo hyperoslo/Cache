@@ -86,24 +86,17 @@ public final class DiskStorage: StorageAware {
    Gets information about the cached object.
    
    - Parameter key: Unique key to identify the object in the cache
-   - Parameter completion: Completion closure returns object metadata
    */
-  public func objectMetadata(_ key: String, completion: @escaping (_ metadata: ObjectMetadata?) -> Void) {
-    readQueue.async { [weak self] in
-      guard let weakSelf = self else {
-        completion(nil)
-        return
-      }
+  public func objectMetadata(_ key: String) -> ObjectMetadata? {
+
+    do {
+      let attributes = try fileManager.attributesOfItem(atPath: filePath(key))
+      let fileModifiedDate = Expiry.date(attributes[FileAttributeKey.modificationDate] as! Date)
+      return ObjectMetadata(expiry: fileModifiedDate)
       
-      do {
-        let attributes = try weakSelf.fileManager.attributesOfItem(atPath: weakSelf.filePath(key))
-        let fileModifiedDate = Expiry.date(attributes[FileAttributeKey.modificationDate] as! Date)
-        completion(ObjectMetadata(expiry: fileModifiedDate))
-        
-      } catch {
-        completion(nil)
-      }
-    }
+    } catch {}
+    
+    return nil
   }
 
   /**

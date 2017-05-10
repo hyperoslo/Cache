@@ -125,15 +125,15 @@ public class BasicHybridCache: NSObject {
   }
   
   private func copyToFrontStorage<T: Cachable>(_ key: String, object: T, completion: @escaping (_ object: T?) -> Void) {
-    self.backStorage.objectMetadata(key) { [weak self] (metadata: ObjectMetadata?) in
-      guard let weakSelf = self, let metadata = metadata else {
+    
+    guard let metadata = self.backStorage.objectMetadata(key) else {
         completion(nil)
         return
-      }
-      weakSelf.frontStorage.add(key, object: object, expiry: metadata.expiry, completion: { _ in
-        completion(object)
-      })
     }
+    
+    self.frontStorage.add(key, object: object, expiry: metadata.expiry, completion: { _ in
+        completion(object)
+    })
   }
 
   /**

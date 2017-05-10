@@ -69,23 +69,14 @@ public final class MemoryStorage: StorageAware {
    Gets information about the cached object.
    
    - Parameter key: Unique key to identify the object in the cache
-   - Parameter completion: Completion closure returns object metadata
    */
-  public func objectMetadata(_ key: String, completion: @escaping (_ metadata: ObjectMetadata?) -> Void) {
-    readQueue.async { [weak self] in
-      guard let weakSelf = self else {
-        completion(nil)
-        return
-      }
-      
-      guard let capsule = weakSelf.cache.object(forKey: key as AnyObject) as? Capsule else {
-        completion(nil)
-        return
-      }
-      
-      let expiryDate = Expiry.date(capsule.expiryDate)
-      completion(ObjectMetadata(expiry: expiryDate))
+  public func objectMetadata(_ key: String) -> ObjectMetadata? {
+
+    guard let capsule = cache.object(forKey: key as AnyObject) as? Capsule else {
+      return nil
     }
+    
+    return ObjectMetadata(expiry: Expiry.date(capsule.expiryDate))
   }
   
   /**

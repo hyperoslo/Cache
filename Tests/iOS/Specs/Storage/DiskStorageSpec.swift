@@ -69,13 +69,9 @@ class DiskStorageSpec: QuickSpec {
         it("returns nil if object doesn't exist") {
           let storage = DiskStorage(name: name)
           
-          waitUntil(timeout: 2.0) { done in
-  
-            storage.objectMetadata(key) { metadata in
-              expect(metadata).to(beNil())
-              done()
-            }
-          }
+          let metadata = storage.objectMetadata(key)
+          
+          expect(metadata).to(beNil())
         }
         
         it("returns object metadata if object exists") {
@@ -84,15 +80,13 @@ class DiskStorageSpec: QuickSpec {
           waitUntil(timeout: 2.0) { done in
 
             storage.add(key, object: object) {
-              storage.objectMetadata(key) { metadata in
-                
-                let attributes = try! fileManager.attributesOfItem(atPath: storage.filePath(key))
-                let fileModifiedDate = Expiry.date(attributes[FileAttributeKey.modificationDate] as! Date)
-                let expectedMetadata = ObjectMetadata(expiry: fileModifiedDate)
-
-                expect(metadata).to(equal(expectedMetadata))
-                done()
-              }
+              let metadata = storage.objectMetadata(key)
+              let attributes = try! fileManager.attributesOfItem(atPath: storage.filePath(key))
+              let fileModifiedDate = Expiry.date(attributes[FileAttributeKey.modificationDate] as! Date)
+              let expectedMetadata = ObjectMetadata(expiry: fileModifiedDate)
+              
+              expect(metadata).to(equal(expectedMetadata))
+              done()
             }
           }
         }

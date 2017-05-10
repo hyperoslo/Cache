@@ -52,13 +52,9 @@ class MemoryStorageSpec: QuickSpec {
         it("returns nil if object doesn't exist") {
           let storage = MemoryStorage(name: name)
           
-          waitUntil(timeout: 2.0) { done in
-            
-            storage.objectMetadata(key) { metadata in
-              expect(metadata).to(beNil())
-              done()
-            }
-          }
+          let metadata = storage.objectMetadata(key)
+          
+          expect(metadata).to(beNil())
         }
         
         it("returns object metadata if object exists") {
@@ -68,12 +64,10 @@ class MemoryStorageSpec: QuickSpec {
           waitUntil(timeout: 2.0) { done in
             
             storage.add(key, object: object, expiry: expiry) {
-              storage.objectMetadata(key) { metadata in
-                
-                let expectedMetadata = ObjectMetadata(expiry: expiry)
-                expect(metadata).to(equal(expectedMetadata))
-                done()
-              }
+              let metadata = storage.objectMetadata(key)
+              let expectedMetadata = ObjectMetadata(expiry: expiry)
+              expect(metadata).to(equal(expectedMetadata))
+              done()
             }
           }
         }

@@ -19,9 +19,8 @@ public protocol CacheAware {
    Gets information about the cached object.
    
    - Parameter key: Unique key to identify the object in the cache
-   - Parameter completion: Completion closure returns object metadata
    */
-  func objectMetadata(_ key: String, completion: @escaping (_ metadata: ObjectMetadata?) -> Void)
+  func objectMetadata(_ key: String) -> ObjectMetadata?
   
   /**
    Tries to retrieve the object from the cache.
