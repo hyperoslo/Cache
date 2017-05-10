@@ -32,16 +32,22 @@ public class BasicHybridCache: NSObject {
    - Parameter name: A name of the cache
    - Parameter config: Cache configuration
    */
-  public init(name: String, config: Config = Config.defaultConfig) {
+  public convenience init(name: String, config: Config = Config.defaultConfig) {
+    let frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: UInt(config.maxObjects))
+    let backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
+    self.init(name: name, frontStorage: frontStorage, backStorage: backStorage, config: config)
+    
+  }
+  internal init(name: String, frontStorage: StorageAware, backStorage: StorageAware, config: Config) {
     self.name = name
+    self.frontStorage = frontStorage
+    self.backStorage = backStorage
     self.config = config
 
-    frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: UInt(config.maxObjects))
-    backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
     super.init()
-
+    
     let notificationCenter = NotificationCenter.default
-
+    
     #if os(macOS)
       notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
                                      name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
@@ -56,7 +62,7 @@ public class BasicHybridCache: NSObject {
                                      name: .UIApplicationDidEnterBackground, object: nil)
     #endif
   }
-
+  
   /**
    Removes notification center observer.
    */
@@ -109,8 +115,24 @@ public class BasicHybridCache: NSObject {
       }
 
       weakSelf.backStorage.object(key) { (object: T?) in
-        completion(object)
+        guard let object = object else {
+            completion(nil)
+            return
+        }
+        weakSelf.copyToFrontStorage(key, object: object, completion: completion)
       }
+    }
+  }
+  
+  private func copyToFrontStorage<T: Cachable>(_ key: String, object: T, completion: @escaping (_ object: T?) -> Void) {
+    self.backStorage.objectMetadata(key) { [weak self] (metadata: ObjectMetadata?) in
+      guard let weakSelf = self, let metadata = metadata else {
+        completion(nil)
+        return
+      }
+      weakSelf.frontStorage.add(key, object: object, expiry: metadata.expiry, completion: { _ in
+        completion(object)
+      })
     }
   }
 
