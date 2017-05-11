@@ -65,28 +65,34 @@ class DiskStorageSpec: QuickSpec {
         }
       }
 
-      describe("#objectMetadata") {
-        it("returns nil if object doesn't exist") {
-          let storage = DiskStorage(name: name)
-          
-          let metadata = storage.objectMetadata(key)
-          
-          expect(metadata).to(beNil())
-        }
-        
-        it("returns object metadata if object exists") {
+      describe("#cacheEntry") {
+        it("returns nil if entry doesn't exist") {
           let storage = DiskStorage(name: name)
           
           waitUntil(timeout: 2.0) { done in
-
-            storage.add(key, object: object) {
-              let metadata = storage.objectMetadata(key)
-              let attributes = try! fileManager.attributesOfItem(atPath: storage.filePath(key))
-              let fileModifiedDate = Expiry.date(attributes[FileAttributeKey.modificationDate] as! Date)
-              let expectedMetadata = ObjectMetadata(expiry: fileModifiedDate)
-              
-              expect(metadata).to(equal(expectedMetadata))
+            storage.cacheEntry(key) { (entry: CacheEntry<User>?) in
+              expect(entry).to(beNil())
               done()
+            }
+          }
+        }
+        
+        it("returns entry if object exists") {
+          let storage = DiskStorage(name: name)
+          
+          waitUntil(timeout: 2.0) { done in
+            
+            storage.add(key, object: object) {
+              storage.cacheEntry(key) { (entry: CacheEntry<User>?) in
+                
+                let attributes = try! fileManager.attributesOfItem(atPath: storage.filePath(key))
+                let expiry = Expiry.date(attributes[FileAttributeKey.modificationDate] as! Date)
+                
+                expect(entry?.object.firstName).to(equal(object.firstName))
+                expect(entry?.object.lastName).to(equal(object.lastName))
+                expect(entry?.expiry.date).to(equal(expiry.date))
+                done()
+              }
             }
           }
         }

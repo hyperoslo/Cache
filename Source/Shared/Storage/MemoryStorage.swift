@@ -64,40 +64,47 @@ public final class MemoryStorage: StorageAware {
       completion?()
     }
   }
-
-  /**
-   Gets information about the cached object.
-   
-   - Parameter key: Unique key to identify the object in the cache
-   */
-  public func objectMetadata(_ key: String) -> ObjectMetadata? {
-
-    guard let capsule = cache.object(forKey: key as AnyObject) as? Capsule else {
-      return nil
-    }
-    
-    return ObjectMetadata(expiry: Expiry.date(capsule.expiryDate))
-  }
   
   /**
    Tries to retrieve the object from the memory storage.
-
+   
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
+
   public func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
+    cacheEntry(key) { (entry: CacheEntry<T>?) in
+      completion(entry?.object)
+    }
+  }
+  
+  /**
+   Get cache entry which includes object with metadata.
+   
+   - Parameter key: Unique key to identify the object in the cache
+   - Parameter completion: Completion closure returns object wrapper with metadata or nil
+   */
+  public func cacheEntry<T: Cachable>(_ key: String, completion: @escaping (_ object: CacheEntry<T>?) -> Void) {
     readQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion(nil)
         return
       }
-
-      let capsule = weakSelf.cache.object(forKey: key as AnyObject) as? Capsule
-      completion(capsule?.object as? T)
-
-      if let capsule = capsule {
-        weakSelf.removeIfExpired(key, capsule: capsule)
+      
+      guard let capsule = weakSelf.cache.object(forKey: key as AnyObject) as? Capsule else {
+        completion(nil)
+        return
       }
+      
+      var entry: CacheEntry<T>?
+      
+      if let object = capsule.object as? T {
+        entry = CacheEntry(object: object, expiry: Expiry.date(capsule.expiryDate))
+      }
+      
+      completion(entry)
+      
+      weakSelf.removeIfExpired(key, capsule: capsule)
     }
   }
 

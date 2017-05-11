@@ -102,38 +102,41 @@ public class BasicHybridCache: NSObject {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-  func object<T: Cachable>(forKey key: String, completion: @escaping (_ object: T?) -> Void) {
-    frontStorage.object(key) { [weak self] (object: T?) in
-      if let object = object {
-        completion(object)
-        return
-      }
-
-      guard let weakSelf = self else {
-        completion(object)
-        return
-      }
-
-      weakSelf.backStorage.object(key) { (object: T?) in
-        guard let object = object else {
-            completion(nil)
-            return
-        }
-        weakSelf.copyToFrontStorage(key, object: object, completion: completion)
-      }
+  func object<T: Cachable>(forKey key: String, completion: @escaping (_ object: T?) -> Void){
+    cacheEntry(forKey: key) { (entry: CacheEntry<T>?) in
+      completion(entry?.object)
     }
   }
   
-  private func copyToFrontStorage<T: Cachable>(_ key: String, object: T, completion: @escaping (_ object: T?) -> Void) {
-    
-    guard let metadata = self.backStorage.objectMetadata(key) else {
-        completion(nil)
+  /**
+   Tries to retrieve the cache entry from to the front and back cache storages.
+   
+   - Parameter key: Unique key to identify the cache entry in the cache
+   - Parameter completion: Completion closure returns cache entry or nil
+   */
+  func cacheEntry<T: Cachable>(forKey key: String, completion: @escaping (_ object: CacheEntry<T>?) -> Void) {
+    frontStorage.cacheEntry(key) { [weak self] (entry: CacheEntry<T>?) in
+      if let entry = entry {
+        completion(entry)
         return
+      }
+      
+      guard let weakSelf = self else {
+        completion(entry)
+        return
+      }
+      
+      weakSelf.backStorage.cacheEntry(key) { (entry: CacheEntry<T>?) in
+        guard let entry = entry else {
+          completion(nil)
+          return
+        }
+        
+        weakSelf.frontStorage.add(key, object: entry.object, expiry: entry.expiry) { _ in
+          completion(entry)
+        }
+      }
     }
-    
-    self.frontStorage.add(key, object: object, expiry: metadata.expiry, completion: { _ in
-        completion(object)
-    })
   }
 
   /**

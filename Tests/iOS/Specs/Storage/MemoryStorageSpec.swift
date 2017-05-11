@@ -48,26 +48,32 @@ class MemoryStorageSpec: QuickSpec {
         }
       }
       
-      describe("#objectMetadata") {
-        it("returns nil if object doesn't exist") {
-          let storage = MemoryStorage(name: name)
+      describe("#cacheEntry") {
+        it("returns nil if entry doesn't exist") {
+          let storage = DiskStorage(name: name)
           
-          let metadata = storage.objectMetadata(key)
-          
-          expect(metadata).to(beNil())
+          waitUntil(timeout: 2.0) { done in
+            storage.cacheEntry(key) { (entry: CacheEntry<User>?) in
+              expect(entry).to(beNil())
+              done()
+            }
+          }
         }
         
-        it("returns object metadata if object exists") {
+        it("returns entry if object exists") {
           let storage = MemoryStorage(name: name)
           let expiry = Expiry.date(Date())
           
           waitUntil(timeout: 2.0) { done in
             
             storage.add(key, object: object, expiry: expiry) {
-              let metadata = storage.objectMetadata(key)
-              let expectedMetadata = ObjectMetadata(expiry: expiry)
-              expect(metadata).to(equal(expectedMetadata))
-              done()
+              storage.cacheEntry(key) { (entry: CacheEntry<User>?) in
+                
+                expect(entry?.object.firstName).to(equal(object.firstName))
+                expect(entry?.object.lastName).to(equal(object.lastName))
+                expect(entry?.expiry.date).to(equal(expiry.date))
+                done()
+              }
             }
           }
         }
