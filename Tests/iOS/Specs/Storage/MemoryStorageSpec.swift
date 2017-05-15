@@ -47,7 +47,38 @@ class MemoryStorageSpec: QuickSpec {
           self.waitForExpectations(timeout: 2.0, handler:nil)
         }
       }
-
+      
+      describe("#cacheEntry") {
+        it("returns nil if entry doesn't exist") {
+          let storage = DiskStorage(name: name)
+          
+          waitUntil(timeout: 2.0) { done in
+            storage.cacheEntry(key) { (entry: CacheEntry<User>?) in
+              expect(entry).to(beNil())
+              done()
+            }
+          }
+        }
+        
+        it("returns entry if object exists") {
+          let storage = MemoryStorage(name: name)
+          let expiry = Expiry.date(Date())
+          
+          waitUntil(timeout: 2.0) { done in
+            
+            storage.add(key, object: object, expiry: expiry) {
+              storage.cacheEntry(key) { (entry: CacheEntry<User>?) in
+                
+                expect(entry?.object.firstName).to(equal(object.firstName))
+                expect(entry?.object.lastName).to(equal(object.lastName))
+                expect(entry?.expiry.date).to(equal(expiry.date))
+                done()
+              }
+            }
+          }
+        }
+      }
+      
       describe("#object") {
         it("resolves cached object") {
           let expectation = self.expectation(description: "Object Expectation")

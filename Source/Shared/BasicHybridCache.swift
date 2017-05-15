@@ -32,16 +32,22 @@ public class BasicHybridCache: NSObject {
    - Parameter name: A name of the cache
    - Parameter config: Cache configuration
    */
-  public init(name: String, config: Config = Config.defaultConfig) {
+  public convenience init(name: String, config: Config = Config.defaultConfig) {
+    let frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: UInt(config.maxObjects))
+    let backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
+    self.init(name: name, frontStorage: frontStorage, backStorage: backStorage, config: config)
+    
+  }
+  internal init(name: String, frontStorage: StorageAware, backStorage: StorageAware, config: Config) {
     self.name = name
+    self.frontStorage = frontStorage
+    self.backStorage = backStorage
     self.config = config
 
-    frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: UInt(config.maxObjects))
-    backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
     super.init()
-
+    
     let notificationCenter = NotificationCenter.default
-
+    
     #if os(macOS)
       notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
                                      name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
@@ -56,7 +62,7 @@ public class BasicHybridCache: NSObject {
                                      name: .UIApplicationDidEnterBackground, object: nil)
     #endif
   }
-
+  
   /**
    Removes notification center observer.
    */
@@ -96,20 +102,39 @@ public class BasicHybridCache: NSObject {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-  func object<T: Cachable>(forKey key: String, completion: @escaping (_ object: T?) -> Void) {
-    frontStorage.object(key) { [weak self] (object: T?) in
-      if let object = object {
-        completion(object)
+  func object<T: Cachable>(forKey key: String, completion: @escaping (_ object: T?) -> Void){
+    cacheEntry(forKey: key) { (entry: CacheEntry<T>?) in
+      completion(entry?.object)
+    }
+  }
+  
+  /**
+   Tries to retrieve the cache entry from to the front and back cache storages.
+   
+   - Parameter key: Unique key to identify the cache entry in the cache
+   - Parameter completion: Completion closure returns cache entry or nil
+   */
+  func cacheEntry<T: Cachable>(forKey key: String, completion: @escaping (_ object: CacheEntry<T>?) -> Void) {
+    frontStorage.cacheEntry(key) { [weak self] (entry: CacheEntry<T>?) in
+      if let entry = entry {
+        completion(entry)
         return
       }
-
+      
       guard let weakSelf = self else {
-        completion(object)
+        completion(entry)
         return
       }
-
-      weakSelf.backStorage.object(key) { (object: T?) in
-        completion(object)
+      
+      weakSelf.backStorage.cacheEntry(key) { (entry: CacheEntry<T>?) in
+        guard let entry = entry else {
+          completion(nil)
+          return
+        }
+        
+        weakSelf.frontStorage.add(key, object: entry.object, expiry: entry.expiry) { _ in
+          completion(entry)
+        }
       }
     }
   }

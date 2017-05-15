@@ -65,11 +65,29 @@ class CacheSpec: QuickSpec {
           self.waitForExpectations(timeout: 8.0, handler:nil)
         }
       }
-
+      
+      describe("#cacheEntry") {
+        it("resolves cache entry") {
+          waitUntil(timeout: 4.0) { done in
+            let expiryDate = Date()
+            
+            cache.add(key, object: object, expiry: .date(expiryDate)) {
+              cache.cacheEntry(key) { (entry: CacheEntry<User>?) in
+                expect(entry?.object.firstName).to(equal(object.firstName))
+                expect(entry?.object.lastName).to(equal(object.lastName))
+                expect(entry?.expiry.date).to(equal(expiryDate))
+                
+                done()
+              }
+            }
+          }
+        }
+      }
+      
       describe("#object") {
         it("resolves cached object") {
           let expectation = self.expectation(description: "Object Expectation")
-
+          
           cache.add(key, object: object) {
             cache.object(key) { (receivedObject: User?) in
               expect(receivedObject?.firstName).to(equal(object.firstName))
@@ -77,8 +95,36 @@ class CacheSpec: QuickSpec {
               expectation.fulfill()
             }
           }
-
+          
           self.waitForExpectations(timeout: 4.0, handler:nil)
+        }
+        
+        it("should resolve from disk and set in-memory cache if object not in-memory") {
+          let frontStorage = MemoryStorage(name: "MemoryStorage")
+          let backStorage = DiskStorage(name: "DiskStorage")
+          let config = Config.defaultConfig
+          let key = "myusernamedjohn"
+          let object = SpecHelper.user
+          
+          let cache = Cache<User>(name: "MyCache", frontStorage: frontStorage, backStorage: backStorage, config: config)
+          
+          waitUntil(timeout: 4.0) { done in
+            
+            backStorage.add(key, object: object) {
+              
+              cache.object(key) { (receivedObject: User?) in
+                
+                expect(receivedObject?.firstName).to(equal(object.firstName))
+                expect(receivedObject?.lastName).to(equal(object.lastName))
+                
+                frontStorage.object(key) { (inmemoryCachedUser: User?) in
+                  expect(inmemoryCachedUser?.firstName).to(equal(object.firstName))
+                  expect(inmemoryCachedUser?.lastName).to(equal(object.lastName))
+                  done()
+                }
+              }
+            }
+          }
         }
       }
 
