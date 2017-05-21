@@ -87,29 +87,61 @@ public final class DiskStorage: StorageAware {
       completion?()
     }
   }
-
+  
   /**
-   Tries to retrieve the object from the disk storage.
-
+   Gets information about the cached object.
+   
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
   public func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
+    cacheEntry(key) { (entry: CacheEntry<T>?) in
+      completion(entry?.object)
+    }
+  }
+
+  /**
+   Get cache entry which includes object with metadata.
+   
+   - Parameter key: Unique key to identify the object in the cache
+   - Parameter completion: Completion closure returns object wrapper with metadata or nil
+   */
+  public func cacheEntry<T: Cachable>(_ key: String, completion: @escaping (_ object: CacheEntry<T>?) -> Void) {
     readQueue.async { [weak self] in
       guard let weakSelf = self else {
         completion(nil)
         return
       }
-
+      
       let filePath = weakSelf.filePath(key)
       var cachedObject: T?
-
+      
       if let data = try? Data(contentsOf: URL(fileURLWithPath: filePath)) {
         cachedObject = T.decode(data) as? T
       }
-
-      completion(cachedObject)
+      
+      if let cachedObject = cachedObject,
+        let expiry = weakSelf.cachedObjectExpiry(path: filePath) {
+        
+        completion(CacheEntry(object: cachedObject, expiry: expiry))
+        return
+      }
+      
+      completion(nil)
     }
+  }
+  
+  private func cachedObjectExpiry(path: String) -> Expiry? {
+    do {
+      let attributes = try fileManager.attributesOfItem(atPath: path)
+      
+      guard let modificationDate = attributes[FileAttributeKey.modificationDate] as? Date else {
+        return nil
+      }
+      return Expiry.date(modificationDate)
+    } catch {}
+    
+    return nil
   }
 
   /**

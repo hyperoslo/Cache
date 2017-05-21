@@ -27,8 +27,17 @@ public final class Cache<T: Cachable>: BasicHybridCache {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-
   public func object(_ key: String, completion: @escaping (_ object: T?) -> Void) {
     super.object(forKey: key, completion: completion)
+  }
+  
+  /**
+   Tries to retrieve the cache entry from to the front and back cache storages.
+   
+   - Parameter key: Unique key to identify the cache entry in the cache
+   - Parameter completion: Completion closure returns cache entry or nil
+   */
+  public func cacheEntry(_ key: String, completion: @escaping (_ object: CacheEntry<T>?) -> Void) {
+    super.cacheEntry(forKey: key, completion: completion)
   }
 }

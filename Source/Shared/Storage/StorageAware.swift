@@ -16,6 +16,14 @@ public protocol CacheAware {
   func add<T: Cachable>(_ key: String, object: T, expiry: Expiry, completion: (() -> Void)?)
 
   /**
+   Get cache entry which includes object with metadata.
+   
+   - Parameter key: Unique key to identify the object in the cache
+   - Parameter completion: Completion closure returns object wrapper with metadata or nil
+   */
+  func cacheEntry<T: Cachable>(_ key: String, completion: @escaping (_ object: CacheEntry<T>?) -> Void)
+  
+  /**
    Tries to retrieve the object from the cache.
 
    - Parameter key: Unique key to identify the object in the cache
