@@ -31,6 +31,12 @@ class CacheSpec: QuickSpec {
           expect(cache.config.backKind.name).to(equal(defaultConfig.backKind.name))
           expect(cache.config.expiry.date).to(equal(defaultConfig.expiry.date))
           expect(cache.config.maxSize).to(equal(defaultConfig.maxSize))
+          
+          /**
+            I don't see a clear way to compare optional values via `Nimble` predicates,
+            so do it directly
+           */
+          expect(cache.config.cacheDirectory == defaultConfig.cacheDirectory).to(beTrue())
         }
 
         it("sets the front cache as a memory cache") {

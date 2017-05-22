@@ -8,8 +8,8 @@ public final class StorageFactory {
 
   /// Dictionary of default storages
   fileprivate static var defaultStorages: [String: StorageAware.Type] = [
-    StorageKind.memory.name : MemoryStorage.self,
-    StorageKind.disk.name : DiskStorage.self
+    StorageKind.memory.name: MemoryStorage.self,
+    StorageKind.disk.name: DiskStorage.self
   ]
 
   /// Dictionary of storages
@@ -35,9 +35,9 @@ public final class StorageFactory {
    - Parameter maxSize: Maximum size of the cache storage
    - Returns: New storage
    */
-  static func resolve(_ name: String, kind: StorageKind, maxSize: UInt = 0) -> StorageAware {
+  static func resolve(_ name: String, kind: StorageKind, maxSize: UInt = 0, cacheDirectory: String? = nil) -> StorageAware {
     let StorageType: StorageAware.Type = storages[kind.name] ?? DefaultStorage
-    return StorageType.init(name: name, maxSize: maxSize)
+    return StorageType.init(name: name, maxSize: maxSize, cacheDirectory: cacheDirectory)
   }
 
   /**

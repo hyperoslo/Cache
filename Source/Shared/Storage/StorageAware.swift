@@ -83,6 +83,7 @@ public protocol StorageAware: CacheAware {
 
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
+   - Parameter cacheDirectory: (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches
    */
-  init(name: String, maxSize: UInt)
+  init(name: String, maxSize: UInt, cacheDirectory: String?)
 }

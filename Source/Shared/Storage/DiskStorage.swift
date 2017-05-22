@@ -19,10 +19,7 @@ public final class DiskStorage: StorageAware {
   public fileprivate(set) var readQueue: DispatchQueue
 
   /// File manager to read/write to the disk
-  fileprivate lazy var fileManager: FileManager = {
-    let fileManager = FileManager()
-    return fileManager
-  }()
+  fileprivate let fileManager = FileManager()
 
   // MARK: - Initialization
 
@@ -31,18 +28,27 @@ public final class DiskStorage: StorageAware {
 
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
+   - Parameter cacheDirectory: Path to custom directory to be used as a storage
    */
-  public required init(name: String, maxSize: UInt = 0) {
-    self.maxSize = maxSize
-    let cacheName = name.capitalized
-    let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory,
-      FileManager.SearchPathDomainMask.userDomainMask, true)
+    public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
+      self.maxSize = maxSize
 
-    path = "\(paths.first!)/\(DiskStorage.prefix).\(cacheName)"
-    writeQueue = DispatchQueue(label: "\(DiskStorage.prefix).\(cacheName).WriteQueue",
-      attributes: [])
-    readQueue = DispatchQueue(label: "\(DiskStorage.prefix).\(cacheName).ReadQueue",
-      attributes: [])
+      let fullName = [DiskStorage.prefix, name.capitalized].joined(separator: ".")
+
+      if let cacheDirectory = cacheDirectory {
+        path = cacheDirectory
+      } else {
+        do {
+          let url = try fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+
+          path = url.appendingPathComponent(fullName, isDirectory: true).path
+        } catch {
+          fatalError("Failed to find or get acces to caches directory: \(error)")
+        }
+      }
+
+      writeQueue = DispatchQueue(label: "\(fullName).WriteQueue")
+      readQueue = DispatchQueue(label: "\(fullName).ReadQueue")
   }
 
   // MARK: - CacheAware
@@ -74,7 +80,7 @@ public final class DiskStorage: StorageAware {
         weakSelf.fileManager.createFile(atPath: filePath,
           contents: object.encode() as Data?, attributes: nil)
         try weakSelf.fileManager.setAttributes(
-          [FileAttributeKey.modificationDate : expiry.date],
+          [FileAttributeKey.modificationDate: expiry.date],
           ofItemAtPath: filePath)
       } catch {}
 

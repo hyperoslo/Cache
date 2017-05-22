@@ -89,7 +89,12 @@ let config = Config(
   // if it's not overridden in the add(key: object: expiry: completion:) method
   expiry: .date(Date().addingTimeInterval(100000)),
   // Maximum size of your cache storage
-  maxSize: 10000)
+  maxSize: 10000,
+  // where to store the disk cache. If nil, it is placed in an automatically generated directory in Caches
+  cacheDirectory: NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                      FileManager.SearchPathDomainMask.userDomainMask,
+                                                      true).first! + "/cache-in-documents"
+)
 
 let cache = HybridCache(name: "Custom", config: config)
 ```
