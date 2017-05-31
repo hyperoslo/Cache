@@ -6,7 +6,6 @@ import Foundation
  */
 public protocol Cachable {
   associatedtype CacheType
-
   /**
    Creates an instance from NSData
 

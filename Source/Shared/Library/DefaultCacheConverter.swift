@@ -15,13 +15,11 @@ public enum EncodingError: Error {
  Also note that `size` and `size(ofValue:)` may return different values on different devices.
  */
 public struct DefaultCacheConverter<T> {
-
   /// Initialization
   public init() {}
 
   /**
    Creates an instance from NSData
-
    - Parameter data: Data to decode from
    - Returns: A generic type or throws
    */
@@ -38,7 +36,6 @@ public struct DefaultCacheConverter<T> {
 
   /**
    Encodes an instance to NSData
-
    - Parameter value: A generic value
    - Returns: A NSData or throws
    */

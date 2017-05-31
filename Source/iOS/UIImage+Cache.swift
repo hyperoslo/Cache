@@ -6,12 +6,10 @@ import UIKit
  Implementation of Cachable protocol.
  */
 extension UIImage: Cachable {
-
   public typealias CacheType = UIImage
 
   /**
    Creates UIImage from NSData
-
    - Parameter data: Data to decode from
    - Returns: An optional share type
    */
@@ -22,7 +20,6 @@ extension UIImage: Cachable {
 
   /**
    Encodes UIImage to NSData
-
    - Returns: Optional NSData
    */
   public func encode() -> Data? {
@@ -38,7 +35,6 @@ extension UIImage: Cachable {
  Helper UIImage extension.
  */
 extension UIImage {
-
   /**
    Checks if image has alpha component
    */

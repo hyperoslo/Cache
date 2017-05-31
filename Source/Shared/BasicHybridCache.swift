@@ -9,15 +9,13 @@
  Cachable protocol. It's two layered cache (with front and back storages)
  */
 public class BasicHybridCache: NSObject {
-
   /// A name of the cache
   public let name: String
-
   /// Cache configuration
   let config: Config
   /// Front cache (should be less time and memory consuming)
   let frontStorage: StorageAware
-  // BAck cache (used for content that outlives the application life-cycle)
+  // Back cache (used for content that outlives the application life-cycle)
   var backStorage: StorageAware
 
   public var path: String {
@@ -28,7 +26,6 @@ public class BasicHybridCache: NSObject {
 
   /**
    Creates a new instance of BasicHybridCache.
-
    - Parameter name: A name of the cache
    - Parameter config: Cache configuration
    */
@@ -36,8 +33,8 @@ public class BasicHybridCache: NSObject {
     let frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: UInt(config.maxObjects))
     let backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
     self.init(name: name, frontStorage: frontStorage, backStorage: backStorage, config: config)
-    
   }
+
   internal init(name: String, frontStorage: StorageAware, backStorage: StorageAware, config: Config) {
     self.name = name
     self.frontStorage = frontStorage
@@ -45,9 +42,8 @@ public class BasicHybridCache: NSObject {
     self.config = config
 
     super.init()
-    
     let notificationCenter = NotificationCenter.default
-    
+
     #if os(macOS)
       notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
                                      name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
@@ -62,7 +58,7 @@ public class BasicHybridCache: NSObject {
                                      name: .UIApplicationDidEnterBackground, object: nil)
     #endif
   }
-  
+
   /**
    Removes notification center observer.
    */
@@ -74,7 +70,6 @@ public class BasicHybridCache: NSObject {
 
   /**
    Adds passed object to the front and back cache storages.
-
    - Parameter object: Object that needs to be cached
    - Parameter key: Unique key to identify the object in the cache
    - Parameter expiry: Expiration date for the cached object
@@ -98,19 +93,17 @@ public class BasicHybridCache: NSObject {
 
   /**
    Tries to retrieve the object from to the front and back cache storages.
-
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-  func object<T: Cachable>(forKey key: String, completion: @escaping (_ object: T?) -> Void){
+  func object<T: Cachable>(forKey key: String, completion: @escaping (_ object: T?) -> Void) {
     cacheEntry(forKey: key) { (entry: CacheEntry<T>?) in
       completion(entry?.object)
     }
   }
-  
+
   /**
    Tries to retrieve the cache entry from to the front and back cache storages.
-   
    - Parameter key: Unique key to identify the cache entry in the cache
    - Parameter completion: Completion closure returns cache entry or nil
    */
@@ -120,18 +113,18 @@ public class BasicHybridCache: NSObject {
         completion(entry)
         return
       }
-      
+
       guard let weakSelf = self else {
         completion(entry)
         return
       }
-      
+
       weakSelf.backStorage.cacheEntry(key) { (entry: CacheEntry<T>?) in
         guard let entry = entry else {
           completion(nil)
           return
         }
-        
+
         weakSelf.frontStorage.add(key, object: entry.object, expiry: entry.expiry) { _ in
           completion(entry)
         }
@@ -141,7 +134,6 @@ public class BasicHybridCache: NSObject {
 
   /**
    Removes the object from to the front and back cache storages.
-
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
@@ -160,7 +152,6 @@ public class BasicHybridCache: NSObject {
 
   /**
    Clears the front and back cache storages.
-
    - Parameter completion: Completion closure to be called when the task is done
    */
   public func clear(_ completion: (() -> Void)? = nil) {
@@ -178,7 +169,6 @@ public class BasicHybridCache: NSObject {
 
   /**
    Clears all expired objects from front and back storages.
-
    - Parameter completion: Completion closure to be called when the task is done
    */
   public func clearExpired(_ completion: (() -> Void)? = nil) {

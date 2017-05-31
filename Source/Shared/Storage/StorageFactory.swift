@@ -2,16 +2,13 @@
  A place to register and retrieve a cache storage by type.
  */
 public final class StorageFactory {
-
   /// Default storage type
   fileprivate static var DefaultStorage: StorageAware.Type = MemoryStorage.self
-
   /// Dictionary of default storages
   fileprivate static var defaultStorages: [String: StorageAware.Type] = [
     StorageKind.memory.name: MemoryStorage.self,
     StorageKind.disk.name: DiskStorage.self
   ]
-
   /// Dictionary of storages
   fileprivate static var storages = defaultStorages
 
@@ -19,7 +16,6 @@ public final class StorageFactory {
 
   /**
    Registers new storage for the specified kind.
-
    - Parameter kind: Storage kind
    - Parameter storage: StorageAware type
    */
@@ -29,7 +25,6 @@ public final class StorageFactory {
 
   /**
    Creates new storage with the specified name and maximum size.
-
    - Parameter name: A name of the storage
    - Parameter kind: Storage kind
    - Parameter maxSize: Maximum size of the cache storage

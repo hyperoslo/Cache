@@ -2,7 +2,6 @@
  Configuration needed to create a new cache instance
  */
 public struct Config {
-
   /// Front cache type
   public let frontKind: StorageKind
   /// Back cache type
@@ -21,7 +20,6 @@ public struct Config {
 
   /**
    Creates a new instance of Config.
-
    - Parameter frontKind: Front cache type
    - Parameter backKind: Back cache type
    - Parameter expiry: Expiry date that will be applied by default for every added object
@@ -41,7 +39,6 @@ public struct Config {
 // MARK: - Defaults
 
 extension Config {
-
   /**
    Default configuration used when config is not specified
    */

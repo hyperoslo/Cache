@@ -6,12 +6,10 @@ import Foundation
  Implementation of Cachable protocol.
  */
 extension String: Cachable {
-
   public typealias CacheType = String
 
   /**
    Creates a string from NSData
-
    - Parameter data: Data to decode from
    - Returns: An optional CacheType
    */
@@ -38,10 +36,8 @@ extension String: Cachable {
  Helper String extension.
  */
 extension String {
-
   /**
    Creates base64 string
-
    - Returns: A base64 encoded string
    */
   func base64() -> String {
