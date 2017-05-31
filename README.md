@@ -83,7 +83,7 @@ let config = Config(
   expiry: .date(Date().addingTimeInterval(100000)),
   /// Maximum amount of items to store in memory
   maxObjectsInMemory: 20,
-  /// Maximum size of the disk cache storage
+  /// Maximum size of the disk cache storage (in bytes)
   maxDiskSize: 10000,
   // Where to store the disk cache. If nil, it is placed in an automatically generated directory in Caches
   cacheDirectory: NSSearchPathForDirectoriesInDomains(.documentDirectory,

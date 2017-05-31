@@ -9,7 +9,7 @@ public struct Config {
   public let expiry: Expiry
   /// Maximum amount of items to store in memory
   public let maxObjectsInMemory: Int
-  /// Maximum size of the disk cache storage
+  /// Maximum size of the disk cache storage (in bytes)
   public let maxDiskSize: UInt
   /// A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
   public let cacheDirectory: String?
