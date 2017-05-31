@@ -14,9 +14,9 @@ public class BasicHybridCache: NSObject {
   /// Cache configuration
   let config: Config
   /// Front cache (should be less time and memory consuming)
-  let frontStorage: StorageAware
+  let frontStorage: MemoryStorage
   // Back cache (used for content that outlives the application life-cycle)
-  var backStorage: StorageAware
+  var backStorage: DiskStorage
 
   public var path: String {
     return backStorage.path
@@ -29,13 +29,13 @@ public class BasicHybridCache: NSObject {
    - Parameter name: A name of the cache
    - Parameter config: Cache configuration
    */
-  public convenience init(name: String, config: Config = Config.defaultConfig) {
-    let frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: UInt(config.maxObjects))
-    let backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
+  public convenience init(name: String, config: Config = Config()) {
+    let frontStorage = MemoryStorage(name: name, maxSize: UInt(config.maxObjectsInMemory))
+    let backStorage = DiskStorage(name: name, config: config)
     self.init(name: name, frontStorage: frontStorage, backStorage: backStorage, config: config)
   }
 
-  internal init(name: String, frontStorage: StorageAware, backStorage: StorageAware, config: Config) {
+  internal init(name: String, frontStorage: MemoryStorage, backStorage: DiskStorage, config: Config) {
     self.name = name
     self.frontStorage = frontStorage
     self.backStorage = backStorage

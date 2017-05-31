@@ -24,27 +24,27 @@ public final class DiskStorage: StorageAware {
    Creates a new disk storage.
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
-   - Parameter cacheDirectory: Path to custom directory to be used as a storage
+   - Parameter cacheDirectory: (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches
    */
-    public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
-      self.maxSize = maxSize
+  public required init(name: String, config: DiskStorageConfig) {
+    self.maxSize = config.maxSize
 
-      let fullName = [DiskStorage.prefix, name.capitalized].joined(separator: ".")
+    let fullName = [DiskStorage.prefix, name.capitalized].joined(separator: ".")
 
-      if let cacheDirectory = cacheDirectory {
-        path = cacheDirectory
-      } else {
-        do {
-          let url = try fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+    if let cacheDirectory = config.cacheDirectory {
+      path = cacheDirectory
+    } else {
+      do {
+        let url = try fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
 
-          path = url.appendingPathComponent(fullName, isDirectory: true).path
-        } catch {
-          fatalError("Failed to find or get acces to caches directory: \(error)")
-        }
+        path = url.appendingPathComponent(fullName, isDirectory: true).path
+      } catch {
+        fatalError("Failed to find or get acces to caches directory: \(error)")
       }
+    }
 
-      writeQueue = DispatchQueue(label: "\(fullName).WriteQueue")
-      readQueue = DispatchQueue(label: "\(fullName).ReadQueue")
+    writeQueue = DispatchQueue(label: "\(fullName).WriteQueue")
+    readQueue = DispatchQueue(label: "\(fullName).ReadQueue")
   }
 
   // MARK: - CacheAware

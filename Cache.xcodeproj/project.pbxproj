@@ -17,7 +17,6 @@
 		BDEDD3641DBCE5D8007416A6 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
 		BDEDD3651DBCE5D8007416A6 /* Expiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C191C28220B00B702C9 /* Expiry.swift */; };
 		BDEDD3661DBCE5D8007416A6 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1A1C28220B00B702C9 /* JSON.swift */; };
-		BDEDD3671DBCE5D8007416A6 /* StorageKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1B1C28220B00B702C9 /* StorageKind.swift */; };
 		BDEDD3681DBCE5D8007416A6 /* JSON+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1D1C28220B00B702C9 /* JSON+Cache.swift */; };
 		BDEDD3691DBCE5D8007416A6 /* NSData+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1E1C28220B00B702C9 /* NSData+Cache.swift */; };
 		BDEDD36A1DBCE5D8007416A6 /* NSDate+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1F1C28220B00B702C9 /* NSDate+Cache.swift */; };
@@ -28,7 +27,6 @@
 		BDEDD36F1DBCE5D8007416A6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C241C28220B00B702C9 /* DiskStorage.swift */; };
 		BDEDD3701DBCE5D8007416A6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
 		BDEDD3711DBCE5D8007416A6 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
-		BDEDD3721DBCE5D8007416A6 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C271C28220B00B702C9 /* StorageFactory.swift */; };
 		BDEDD37D1DBCEB8A007416A6 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDEDD3561DBCE5B1007416A6 /* Cache.framework */; };
 		BDEDD3831DBCEBC4007416A6 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CDF1C28374800B702C9 /* SpecHelper.swift */; };
 		BDEDD3841DBCEBC4007416A6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE01C28374800B702C9 /* User.swift */; };
@@ -55,7 +53,6 @@
 		D5291C2F1C28220B00B702C9 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
 		D5291C301C28220B00B702C9 /* Expiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C191C28220B00B702C9 /* Expiry.swift */; };
 		D5291C311C28220B00B702C9 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1A1C28220B00B702C9 /* JSON.swift */; };
-		D5291C321C28220B00B702C9 /* StorageKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1B1C28220B00B702C9 /* StorageKind.swift */; };
 		D5291C331C28220B00B702C9 /* JSON+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1D1C28220B00B702C9 /* JSON+Cache.swift */; };
 		D5291C341C28220B00B702C9 /* NSData+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1E1C28220B00B702C9 /* NSData+Cache.swift */; };
 		D5291C351C28220B00B702C9 /* NSDate+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1F1C28220B00B702C9 /* NSDate+Cache.swift */; };
@@ -64,7 +61,6 @@
 		D5291C381C28220B00B702C9 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C241C28220B00B702C9 /* DiskStorage.swift */; };
 		D5291C391C28220B00B702C9 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
 		D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
-		D5291C3B1C28220B00B702C9 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C271C28220B00B702C9 /* StorageFactory.swift */; };
 		D5291C6C1C2827FB00B702C9 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
 		D5291D1D1C2837DB00B702C9 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC59E01C20593E003BD79B /* Cache.framework */; };
 		D5291D351C28389B00B702C9 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CDF1C28374800B702C9 /* SpecHelper.swift */; };
@@ -91,7 +87,6 @@
 		D5291D8A1C283CFB00B702C9 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
 		D5291D8B1C283CFB00B702C9 /* Expiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C191C28220B00B702C9 /* Expiry.swift */; };
 		D5291D8C1C283CFB00B702C9 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1A1C28220B00B702C9 /* JSON.swift */; };
-		D5291D8D1C283CFB00B702C9 /* StorageKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1B1C28220B00B702C9 /* StorageKind.swift */; };
 		D5291D8E1C283CFB00B702C9 /* JSON+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1D1C28220B00B702C9 /* JSON+Cache.swift */; };
 		D5291D8F1C283CFB00B702C9 /* NSData+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1E1C28220B00B702C9 /* NSData+Cache.swift */; };
 		D5291D901C283CFB00B702C9 /* NSDate+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1F1C28220B00B702C9 /* NSDate+Cache.swift */; };
@@ -100,7 +95,6 @@
 		D5291D931C283CFB00B702C9 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C241C28220B00B702C9 /* DiskStorage.swift */; };
 		D5291D941C283CFB00B702C9 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
 		D5291D951C283CFB00B702C9 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
-		D5291D961C283CFB00B702C9 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C271C28220B00B702C9 /* StorageFactory.swift */; };
 		D5291D9A1C283DB300B702C9 /* UIImage+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D991C283DB300B702C9 /* UIImage+CacheSpec.swift */; };
 		D5291D9C1C283DD900B702C9 /* NSImage+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D9B1C283DD900B702C9 /* NSImage+CacheSpec.swift */; };
 		D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */; };
@@ -154,7 +148,6 @@
 		D5291C181C28220B00B702C9 /* Capsule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
 		D5291C191C28220B00B702C9 /* Expiry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expiry.swift; sourceTree = "<group>"; };
 		D5291C1A1C28220B00B702C9 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
-		D5291C1B1C28220B00B702C9 /* StorageKind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageKind.swift; sourceTree = "<group>"; };
 		D5291C1D1C28220B00B702C9 /* JSON+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON+Cache.swift"; sourceTree = "<group>"; };
 		D5291C1E1C28220B00B702C9 /* NSData+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Cache.swift"; sourceTree = "<group>"; };
 		D5291C1F1C28220B00B702C9 /* NSDate+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Cache.swift"; sourceTree = "<group>"; };
@@ -163,7 +156,6 @@
 		D5291C241C28220B00B702C9 /* DiskStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
 		D5291C251C28220B00B702C9 /* MemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		D5291C261C28220B00B702C9 /* StorageAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageAware.swift; sourceTree = "<group>"; };
-		D5291C271C28220B00B702C9 /* StorageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageFactory.swift; sourceTree = "<group>"; };
 		D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicHybridCache.swift; sourceTree = "<group>"; };
 		D5291CDF1C28374800B702C9 /* SpecHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
 		D5291CE01C28374800B702C9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -293,7 +285,6 @@
 				D5291C181C28220B00B702C9 /* Capsule.swift */,
 				D5291C191C28220B00B702C9 /* Expiry.swift */,
 				D5291C1A1C28220B00B702C9 /* JSON.swift */,
-				D5291C1B1C28220B00B702C9 /* StorageKind.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -325,7 +316,6 @@
 				D5291C241C28220B00B702C9 /* DiskStorage.swift */,
 				D5291C251C28220B00B702C9 /* MemoryStorage.swift */,
 				D5291C261C28220B00B702C9 /* StorageAware.swift */,
-				D5291C271C28220B00B702C9 /* StorageFactory.swift */,
 				57506FAD1EC29437009B71E9 /* CacheEntry.swift */,
 			);
 			path = Storage;
@@ -838,7 +828,6 @@
 				BDEDD3711DBCE5D8007416A6 /* StorageAware.swift in Sources */,
 				BDEDD3681DBCE5D8007416A6 /* JSON+Cache.swift in Sources */,
 				BDEDD3641DBCE5D8007416A6 /* Capsule.swift in Sources */,
-				BDEDD3721DBCE5D8007416A6 /* StorageFactory.swift in Sources */,
 				BDEDD3621DBCE5CE007416A6 /* Config.swift in Sources */,
 				BDEDD3611DBCE5CE007416A6 /* Cache.swift in Sources */,
 				BDEDD36B1DBCE5D8007416A6 /* String+Cache.swift in Sources */,
@@ -849,7 +838,6 @@
 				D5A138C21EB29BFA00881A20 /* UIImage+Cache.swift in Sources */,
 				BDEDD3601DBCE5CE007416A6 /* BasicHybridCache.swift in Sources */,
 				BDEDD3701DBCE5D8007416A6 /* MemoryStorage.swift in Sources */,
-				BDEDD3671DBCE5D8007416A6 /* StorageKind.swift in Sources */,
 				D5A138BF1EB296FD00881A20 /* HybridCache.swift in Sources */,
 				BDEDD3691DBCE5D8007416A6 /* NSData+Cache.swift in Sources */,
 			);
@@ -919,7 +907,6 @@
 				D5291D8B1C283CFB00B702C9 /* Expiry.swift in Sources */,
 				D5ACACDF1CD0272600567809 /* Cache.swift in Sources */,
 				D5291D891C283CFB00B702C9 /* Cachable.swift in Sources */,
-				D5291D961C283CFB00B702C9 /* StorageFactory.swift in Sources */,
 				D5291D8C1C283CFB00B702C9 /* JSON.swift in Sources */,
 				D5291D8E1C283CFB00B702C9 /* JSON+Cache.swift in Sources */,
 				D5291D8A1C283CFB00B702C9 /* Capsule.swift in Sources */,
@@ -932,7 +919,6 @@
 				D5291D931C283CFB00B702C9 /* DiskStorage.swift in Sources */,
 				D5291D861C283CFB00B702C9 /* BasicHybridCache.swift in Sources */,
 				D5ACACCD1CD0207300567809 /* SyncHybridCache.swift in Sources */,
-				D5291D8D1C283CFB00B702C9 /* StorageKind.swift in Sources */,
 				D5A138BE1EB296FD00881A20 /* HybridCache.swift in Sources */,
 				D5291D8F1C283CFB00B702C9 /* NSData+Cache.swift in Sources */,
 			);
@@ -961,10 +947,8 @@
 				D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */,
 				D5291C381C28220B00B702C9 /* DiskStorage.swift in Sources */,
 				D5291C391C28220B00B702C9 /* MemoryStorage.swift in Sources */,
-				D5291C3B1C28220B00B702C9 /* StorageFactory.swift in Sources */,
 				D5291C351C28220B00B702C9 /* NSDate+Cache.swift in Sources */,
 				D5291C371C28220B00B702C9 /* DefaultCacheConverter.swift in Sources */,
-				D5291C321C28220B00B702C9 /* StorageKind.swift in Sources */,
 				D5291C301C28220B00B702C9 /* Expiry.swift in Sources */,
 				D5291C331C28220B00B702C9 /* JSON+Cache.swift in Sources */,
 				57506FAE1EC29437009B71E9 /* CacheEntry.swift in Sources */,
