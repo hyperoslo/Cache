@@ -1,29 +1,9 @@
 import Foundation
 
 /**
- Configuration needed to create a new `MemoryStorage` instance
- */
-public protocol MemoryStorageConfig {
-  /// Maximum amount of items to store in memory
-  var maxObjectsInMemory: Int { get }
-}
-
-/**
- Configuration needed to create a new `DiskStorage` instance
- */
-public protocol DiskStorageConfig {
-  /// Maximum size of the cache storage
-  var maxDiskSize: UInt { get }
-  /// (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
-  var cacheDirectory: String? { get }
-  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
-  var fileProtectionType: FileProtectionType { get }
-}
-
-/**
  Configuration needed to create a new cache instance
  */
-public struct Config: MemoryStorageConfig, DiskStorageConfig {
+public struct Config {
   /// Expiry date that will be applied by default for every added object
   /// if it's not overridden in the add(key: object: expiry: completion:) method
   public let expiry: Expiry

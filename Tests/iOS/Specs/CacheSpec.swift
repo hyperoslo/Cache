@@ -25,23 +25,17 @@ class CacheSpec: QuickSpec {
         }
 
         it("sets a config") {
-          let defaultConfig = Config.defaultConfig
-
-          expect(cache.config.frontKind.name).to(equal(defaultConfig.frontKind.name))
-          expect(cache.config.backKind.name).to(equal(defaultConfig.backKind.name))
+          let defaultConfig = Config()
           expect(cache.config.expiry.date).to(equal(defaultConfig.expiry.date))
-          expect(cache.config.maxSize).to(equal(defaultConfig.maxSize))
-          
+          expect(cache.config.cacheDirectory).to(beNil())
+          expect(cache.config.fileProtectionType).to(equal(defaultConfig.fileProtectionType))
+          expect(cache.config.maxDiskSize).to(equal(defaultConfig.maxDiskSize))
+          expect(cache.config.maxObjectsInMemory).to(equal(defaultConfig.maxObjectsInMemory))
           /**
             I don't see a clear way to compare optional values via `Nimble` predicates,
             so do it directly
            */
           expect(cache.config.cacheDirectory == defaultConfig.cacheDirectory).to(beTrue())
-        }
-
-        it("sets the front cache as a memory cache") {
-          expect(cache.frontStorage.self is MemoryStorage).to(beTrue())
-          expect(cache.backStorage.self is DiskStorage).to(beTrue())
         }
       }
 
@@ -108,7 +102,7 @@ class CacheSpec: QuickSpec {
         it("should resolve from disk and set in-memory cache if object not in-memory") {
           let frontStorage = MemoryStorage(name: "MemoryStorage")
           let backStorage = DiskStorage(name: "DiskStorage")
-          let config = Config.defaultConfig
+          let config = Config()
           let key = "myusernamedjohn"
           let object = SpecHelper.user
           

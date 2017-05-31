@@ -31,7 +31,12 @@ public class BasicHybridCache: NSObject {
    */
   public convenience init(name: String, config: Config = Config()) {
     let frontStorage = MemoryStorage(name: name, maxSize: UInt(config.maxObjectsInMemory))
-    let backStorage = DiskStorage(name: name, config: config)
+    let backStorage = DiskStorage(
+      name: name,
+      maxSize: config.maxDiskSize,
+      cacheDirectory: config.cacheDirectory,
+      fileProtectionType: config.fileProtectionType
+    )
     self.init(name: name, frontStorage: frontStorage, backStorage: backStorage, config: config)
   }
 

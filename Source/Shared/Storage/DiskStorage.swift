@@ -15,6 +15,8 @@ public final class DiskStorage: StorageAware {
   public fileprivate(set) var writeQueue: DispatchQueue
   /// Queue for read operations
   public fileprivate(set) var readQueue: DispatchQueue
+  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
+  private let fileProtectionType: FileProtectionType
   /// File manager to read/write to the disk
   fileprivate let fileManager = FileManager()
 
@@ -25,13 +27,16 @@ public final class DiskStorage: StorageAware {
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
    - Parameter cacheDirectory: (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches
+   - Parameter fileProtectionType: Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
    */
-  public required init(name: String, config: DiskStorageConfig) {
-    self.maxSize = config.maxDiskSize
+  public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil,
+                       fileProtectionType: FileProtectionType = .none) {
+    self.maxSize = maxSize
+    self.fileProtectionType = fileProtectionType
 
     let fullName = [DiskStorage.prefix, name.capitalized].joined(separator: ".")
 
-    if let cacheDirectory = config.cacheDirectory {
+    if let cacheDirectory = cacheDirectory {
       path = cacheDirectory
     } else {
       do {
@@ -75,7 +80,10 @@ public final class DiskStorage: StorageAware {
         weakSelf.fileManager.createFile(atPath: filePath,
           contents: object.encode() as Data?, attributes: nil)
         try weakSelf.fileManager.setAttributes(
-          [FileAttributeKey.modificationDate: expiry.date],
+          [
+            FileAttributeKey.modificationDate: expiry.date,
+            FileAttributeKey.protectionKey: weakSelf.fileProtectionType
+          ],
           ofItemAtPath: filePath)
       } catch {}
 
