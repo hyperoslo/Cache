@@ -27,7 +27,7 @@ public final class DiskStorage: StorageAware {
    - Parameter cacheDirectory: (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches
    */
   public required init(name: String, config: DiskStorageConfig) {
-    self.maxSize = config.maxSize
+    self.maxSize = config.maxDiskSize
 
     let fullName = [DiskStorage.prefix, name.capitalized].joined(separator: ".")
 

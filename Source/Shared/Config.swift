@@ -13,7 +13,7 @@ public protocol MemoryStorageConfig {
  */
 public protocol DiskStorageConfig {
   /// Maximum size of the cache storage
-  var maxSize: UInt { get }
+  var maxDiskSize: UInt { get }
   /// (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
   var cacheDirectory: String? { get }
   /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
@@ -29,8 +29,8 @@ public struct Config: MemoryStorageConfig, DiskStorageConfig {
   public let expiry: Expiry
   /// Maximum amount of items to store in memory
   public let maxObjectsInMemory: Int
-  /// Maximum size of the cache storage
-  public let maxSize: UInt
+  /// Maximum size of the disk cache storage
+  public let maxDiskSize: UInt
   /// (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
   public let cacheDirectory: String?
   /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
@@ -48,12 +48,12 @@ public struct Config: MemoryStorageConfig, DiskStorageConfig {
    */
   public init(expiry: Expiry = .never,
               maxObjectsInMemory: Int = 0,
-              maxSize: UInt = 0,
+              maxDiskSize: UInt = 0,
               cacheDirectory: String? = nil,
               fileProtectionType: FileProtectionType = .none) {
     self.expiry = expiry
     self.maxObjectsInMemory = maxObjectsInMemory
-    self.maxSize = maxSize
+    self.maxDiskSize = maxDiskSize
     self.cacheDirectory = cacheDirectory
     self.fileProtectionType = fileProtectionType
   }

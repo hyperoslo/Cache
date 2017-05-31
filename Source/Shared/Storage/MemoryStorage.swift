@@ -165,7 +165,7 @@ public final class MemoryStorage: StorageAware {
    - Parameter capsule: cached object wrapper
    - Parameter completion: Completion closure to be called when the task is done
    */
-  func removeIfExpired(_ key: String, capsule: Capsule, completion: (() -> Void)? = nil) {
+  private func removeIfExpired(_ key: String, capsule: Capsule, completion: (() -> Void)? = nil) {
     if capsule.expired {
       remove(key, completion: completion)
     } else {
