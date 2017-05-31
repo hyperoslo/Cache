@@ -4,10 +4,8 @@ import Foundation
  Memory cache storage based on NSCache
  */
 public final class MemoryStorage: StorageAware {
-
   /// Domain prefix
   public static let prefix = "no.hyper.Cache.Memory"
-
   /// Storage root path
   public var path: String {
     return cache.name
@@ -15,7 +13,6 @@ public final class MemoryStorage: StorageAware {
 
   /// Maximum size of the cache storage
   public var maxSize: UInt
-
   /// Memory cache instance
   public let cache = NSCache<AnyObject, AnyObject>()
   /// Queue for write operations
@@ -27,13 +24,11 @@ public final class MemoryStorage: StorageAware {
 
   /**
    Creates a new memory storage.
-
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
    */
   public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
     self.maxSize = maxSize
-
     cache.countLimit = Int(maxSize)
     cache.totalCostLimit = Int(maxSize)
     cache.name = "\(MemoryStorage.prefix).\(name.capitalized)"
@@ -45,7 +40,6 @@ public final class MemoryStorage: StorageAware {
 
   /**
    Saves passed object in the memory.
-
    - Parameter key: Unique key to identify the object in the cache
    - Parameter object: Object that needs to be cached
    - Parameter expiry: Expiration date for the cached object
@@ -64,23 +58,20 @@ public final class MemoryStorage: StorageAware {
       completion?()
     }
   }
-  
+
   /**
    Tries to retrieve the object from the memory storage.
-   
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
-
   public func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
     cacheEntry(key) { (entry: CacheEntry<T>?) in
       completion(entry?.object)
     }
   }
-  
+
   /**
    Get cache entry which includes object with metadata.
-   
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object wrapper with metadata or nil
    */
@@ -90,27 +81,23 @@ public final class MemoryStorage: StorageAware {
         completion(nil)
         return
       }
-      
       guard let capsule = weakSelf.cache.object(forKey: key as AnyObject) as? Capsule else {
         completion(nil)
         return
       }
-      
+
       var entry: CacheEntry<T>?
-      
       if let object = capsule.object as? T {
         entry = CacheEntry(object: object, expiry: Expiry.date(capsule.expiryDate))
       }
-      
+
       completion(entry)
-      
       weakSelf.removeIfExpired(key, capsule: capsule)
     }
   }
 
   /**
    Removes the object from the cache by the given key.
-
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
@@ -128,7 +115,6 @@ public final class MemoryStorage: StorageAware {
 
   /**
    Removes the object from the cache if it's expired.
-
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
@@ -149,7 +135,6 @@ public final class MemoryStorage: StorageAware {
 
   /**
    Clears the cache storage.
-
    - Parameter completion: Completion closure to be called when the task is done
    */
   public func clear(_ completion: (() -> Void)? = nil) {
@@ -166,7 +151,6 @@ public final class MemoryStorage: StorageAware {
 
   /**
    Clears all expired objects.
-
    - Parameter completion: Completion closure to be called when the task is done
    */
   public func clearExpired(_ completion: (() -> Void)? = nil) {
@@ -177,7 +161,6 @@ public final class MemoryStorage: StorageAware {
 
   /**
    Removes the object from the cache if it's expired.
-
    - Parameter key: Unique key to identify the object in the cache
    - Parameter capsule: cached object wrapper
    - Parameter completion: Completion closure to be called when the task is done

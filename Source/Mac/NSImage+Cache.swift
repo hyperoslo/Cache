@@ -7,12 +7,10 @@ import Cocoa
  Implementation of Cachable protocol.
  */
 extension NSImage: Cachable {
-
   public typealias CacheType = NSImage
 
   /**
    Creates UIImage from NSData
-
    - Parameter data: Data to decode from
    - Returns: Optional CacheType
    */
@@ -39,7 +37,6 @@ extension NSImage: Cachable {
  Helper UIImage extension.
  */
 extension NSImage {
-
   /**
    Checks if image has alpha component
    */

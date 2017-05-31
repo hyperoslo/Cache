@@ -5,10 +5,8 @@ import CryptoSwift
  File-based cache storage
  */
 public final class DiskStorage: StorageAware {
-
   /// Domain prefix
   public static let prefix = "no.hyper.Cache.Disk"
-
   /// Storage root path
   public let path: String
   /// Maximum size of the cache storage
@@ -17,7 +15,6 @@ public final class DiskStorage: StorageAware {
   public fileprivate(set) var writeQueue: DispatchQueue
   /// Queue for read operations
   public fileprivate(set) var readQueue: DispatchQueue
-
   /// File manager to read/write to the disk
   fileprivate let fileManager = FileManager()
 
@@ -25,7 +22,6 @@ public final class DiskStorage: StorageAware {
 
   /**
    Creates a new disk storage.
-
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
    - Parameter cacheDirectory: Path to custom directory to be used as a storage
@@ -55,7 +51,6 @@ public final class DiskStorage: StorageAware {
 
   /**
    Saves passed object on the disk.
-
    - Parameter key: Unique key to identify the object in the cache
    - Parameter object: Object that needs to be cached
    - Parameter expiry: Expiration date for the cached object
@@ -87,10 +82,9 @@ public final class DiskStorage: StorageAware {
       completion?()
     }
   }
-  
+
   /**
    Gets information about the cached object.
-   
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object or nil
    */
@@ -102,7 +96,6 @@ public final class DiskStorage: StorageAware {
 
   /**
    Get cache entry which includes object with metadata.
-   
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object wrapper with metadata or nil
    */
@@ -112,41 +105,38 @@ public final class DiskStorage: StorageAware {
         completion(nil)
         return
       }
-      
+
       let filePath = weakSelf.filePath(key)
       var cachedObject: T?
-      
+
       if let data = try? Data(contentsOf: URL(fileURLWithPath: filePath)) {
         cachedObject = T.decode(data) as? T
       }
-      
+
       if let cachedObject = cachedObject,
         let expiry = weakSelf.cachedObjectExpiry(path: filePath) {
-        
         completion(CacheEntry(object: cachedObject, expiry: expiry))
         return
       }
-      
+
       completion(nil)
     }
   }
-  
+
   private func cachedObjectExpiry(path: String) -> Expiry? {
     do {
       let attributes = try fileManager.attributesOfItem(atPath: path)
-      
       guard let modificationDate = attributes[FileAttributeKey.modificationDate] as? Date else {
         return nil
       }
       return Expiry.date(modificationDate)
     } catch {}
-    
+
     return nil
   }
 
   /**
    Removes the object from the cache by the given key.
-
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
@@ -167,7 +157,6 @@ public final class DiskStorage: StorageAware {
 
   /**
    Removes the object from the cache if it's expired.
-
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
@@ -194,7 +183,6 @@ public final class DiskStorage: StorageAware {
 
   /**
    Clears the cache storage.
-
    - Parameter completion: Completion closure to be called when the task is done
    */
   public func clear(_ completion: (() -> Void)? = nil) {
@@ -216,7 +204,6 @@ public final class DiskStorage: StorageAware {
 
   /**
    Clears all expired objects.
-
    - Parameter completion: Completion closure to be called when the task is done
    */
   public func clearExpired(_ completion: (() -> Void)? = nil) {
@@ -272,7 +259,6 @@ public final class DiskStorage: StorageAware {
 
   /**
    Removes expired resource objects.
-
    - Parameter objects: Resource objects to remove
    - Parameter totalSize: Total size
    */
@@ -309,7 +295,6 @@ public final class DiskStorage: StorageAware {
 
   /**
    Builds file name from the key.
-
    - Parameter key: Unique key to identify the object in the cache
    - Returns: A md5 or base64 string
    */
@@ -328,7 +313,6 @@ public final class DiskStorage: StorageAware {
 
   /**
    Builds file path from the key.
-
    - Parameter key: Unique key to identify the object in the cache
    - Returns: A string path based on key
    */

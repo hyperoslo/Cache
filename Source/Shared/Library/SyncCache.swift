@@ -4,7 +4,6 @@ import Foundation
  Wrapper around type safe cache to work with cached data synchronously
  */
 public struct SyncCache<T: Cachable> {
-
   /// Cache that requires sync operations
   let cache: Cache<T>
 
@@ -12,7 +11,6 @@ public struct SyncCache<T: Cachable> {
 
   /**
    Creates a wrapper around cache object.
-
    - Parameter cache: Cache that requires sync operations
    */
   public init(_ cache: Cache<T>) {
@@ -23,7 +21,6 @@ public struct SyncCache<T: Cachable> {
 
   /**
    Adds passed object to the front and back cache storages.
-
    - Parameter key: Unique key to identify the object in the cache
    - Parameter object: Object that needs to be cached
    - Parameter expiry: Expiration date for the cached object
@@ -40,7 +37,6 @@ public struct SyncCache<T: Cachable> {
 
   /**
    Tries to retrieve the object from to the front and back cache storages.
-
    - Parameter key: Unique key to identify the object in the cache
    - Returns: Found object or nil
    */
@@ -61,7 +57,6 @@ public struct SyncCache<T: Cachable> {
 
   /**
    Removes the object from to the front and back cache storages.
-
    - Parameter key: Unique key to identify the object in the cache
    */
   public func remove(_ key: String) {

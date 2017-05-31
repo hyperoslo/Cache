@@ -6,12 +6,10 @@ import Foundation
  Implementation of Cachable protocol.
  */
 extension Data: Cachable {
-
   public typealias CacheType = Data
 
   /**
    Creates an instance from NSData
-
    - Parameter data: Data to decode from
    - Returns: An optional CacheType
    */

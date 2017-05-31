@@ -13,14 +13,11 @@ public struct CacheJSONOptions {
 /**
  Implementation of Cachable protocol.
  */
-
 extension JSON: Cachable {
-
   public typealias CacheType = JSON
 
   /**
    Creates JSON from NSData
-
    - Parameter data: Data to decode from
    - Returns: An optional CacheType
    */
@@ -28,8 +25,10 @@ extension JSON: Cachable {
     var result: CacheType?
 
     do {
-      let object = try JSONSerialization.jsonObject(with: data,
-                                                              options: CacheJSONOptions.readingOptions)
+      let object = try JSONSerialization.jsonObject(
+        with: data,
+        options: CacheJSONOptions.readingOptions
+      )
 
       switch object {
       case let dictionary as [String : AnyObject]:
@@ -46,11 +45,12 @@ extension JSON: Cachable {
 
   /**
    Encodes JSON to NSData
-
    - Returns: Optional NSData
    */
   public func encode() -> Data? {
-    return try? JSONSerialization.data(withJSONObject: object,
-      options: CacheJSONOptions.writeOptions)
+    return try? JSONSerialization.data(
+      withJSONObject: object,
+      options: CacheJSONOptions.writeOptions
+    )
   }
 }
