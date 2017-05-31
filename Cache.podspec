@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "Cache"
   s.summary          = "Nothing but cache."
-  s.version          = "2.2.2"
+  s.version          = "2.3.0"
   s.homepage         = "https://github.com/hyperoslo/Cache"
   s.license          = 'MIT'
   s.author           = { "Hyper Interaktiv AS" => "ios@hyper.no" }
