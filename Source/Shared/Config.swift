@@ -11,9 +11,10 @@ public struct Config {
   public let maxObjectsInMemory: Int
   /// Maximum size of the disk cache storage
   public let maxDiskSize: UInt
-  /// (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
+  /// A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
   public let cacheDirectory: String?
-  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
+  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
+  //https://developer.apple.com/library/content/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/StrategiesforImplementingYourApp/StrategiesforImplementingYourApp.html#//apple_ref/doc/uid/TP40007072-CH5-SW21
   public let fileProtectionType: FileProtectionType
 
   // MARK: - Initialization
