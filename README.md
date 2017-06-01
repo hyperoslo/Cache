@@ -15,8 +15,8 @@
 * [Usage](#usage)
   * [Hybrid cache](#hybrid-cache)
   * [Type safe cache](#type-safe-cache)
-  * [SyncCache](#sync-cache)
-  * [SyncHybridCache](#sync-hybrid-cache)
+  * [SpecializedSyncCache](#specialized-sync-cache)
+  * [HybridSyncCache](#hybrid-sync-cache)
   * [Expiry date](#expiry-date)
   * [Cachable protocol](#cachable-protocol)
 * [Optional bonuses](#optional-bonuses)
@@ -44,10 +44,10 @@ with out-of-box implementations and great customization possibilities.
 - `CacheAware` and `StorageAware` protocols to implement different kinds
 of key-value cache storages. The basic interface includes methods to add, get
 and remove objects by key.
-- `Cache` class to create a type safe cache storage by a given name for a specified
-`Cachable`-compliant type.
+- `SpecializedCache` class to create a type safe cache storage by a given name
+for a specified `Cachable`-compliant type.
 - `HybridCache` class that works with every kind of `Cachable`-compliant types.
-- Flexible `Config` struct which is used in the initialization of `Cache` and
+- Flexible `Config` struct which is used in the initialization of `SpecializedCache` and
 `HybridCache` classes, based on the concept of having front- and back- caches.
 A request to a front cache should be less time and memory consuming (`NSCache` is used
 by default here). The difference between front and back caching is that back
@@ -66,7 +66,7 @@ for `UIImage`, `String`, `JSON` and `Data`.
 
 `HybridCache` supports storing all kinds of objects, as long as they conform to
 the `Cachable` protocol. It's two layered cache (with front and back storages),
-as well as `Cache`.
+as well as `SpecializedCache`.
 
 **Initialization with default configuration**
 
@@ -146,7 +146,7 @@ working with expiry dates are done exactly in the same way as in `HybridCache`.
 
 ```swift
 // Create an image cache, so it's possible to add only UIImage objects
-let cache = Cache<UIImage>(name: "ImageCache")
+let cache = SpecializedCache<UIImage>(name: "ImageCache")
 
 // Add objects to the cache
 cache.add("image", object: UIImage(named: "image.png"))
@@ -163,14 +163,14 @@ cache.remove("image")
 cache.clear()
 ```
 
-### SyncHybridCache
+### HybridSyncCache
 
-`Cache` was born to be async, but if for some reason you need to perform cache
+**Cache** was born to be async, but if for some reason you need to perform cache
 operations synchronously, there is a helper for that.
 
 ```swift
 let cache = HybridCache(name: "Mix")
-let syncCache = SyncHybridCache(cache)
+let syncCache = HybridSyncCache(cache)
 
 // Add UIImage to cache synchronously
 syncCache.add("image", object: UIImage(named: "image.png"))
@@ -185,14 +185,14 @@ syncCache.remove("image")
 syncCache.clear()
 ```
 
-### SyncCache
+### SpecializedSyncCache
 
-`SyncCache` works exactly in the same way as `SyncHybridCache`, the only
-difference is that it's a wrapper around a type safe cache.
+`SpecializedSyncCache` works exactly in the same way as `HybridSyncCache`, the
+only difference is that it's a wrapper around a type safe cache.
 
 ```swift
-let cache = Cache<UIImage>(name: "ImageCache")
-let syncCache = SyncCache(cache)
+let cache = SpecializedCache<UIImage>(name: "ImageCache")
+let syncCache = SpecializedSyncCache(cache)
 
 syncCache.add("image", object: UIImage(named: "image.png"))
 let image = syncCache.object("image")
