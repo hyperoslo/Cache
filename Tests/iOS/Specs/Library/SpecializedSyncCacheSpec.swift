@@ -9,22 +9,16 @@ class SyncCacheSpec: QuickSpec {
       let name = "WeirdoCache"
       let key = "alongweirdkey"
       let object = SpecHelper.user
-      var cache: Cache<User>!
-      var syncer: SyncCache<User>!
+      var cache: SpecializedCache<User>!
+      var syncer: SpecializedSyncCache<User>!
 
       beforeEach {
-        cache = Cache<User>(name: name)
-        syncer = SyncCache(cache)
+        cache = SpecializedCache<User>(name: name)
+        syncer = SpecializedSyncCache(cache)
       }
 
       afterEach {
         cache.clear()
-      }
-
-      describe("#init") {
-        it("sets a cache") {
-          expect(syncer.cache).to(equal(cache))
-        }
       }
 
       describe("#add") {

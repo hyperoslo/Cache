@@ -1,11 +1,11 @@
 import Foundation
 
 /**
- Wrapper around type safe cache to work with cached data synchronously
+ Wrapper around hybrid cache to work with cached data synchronously
  */
-public struct SyncCache<T: Cachable> {
+public final class HybridSyncCache {
   /// Cache that requires sync operations
-  let cache: Cache<T>
+  private let cache: BasicHybridCache
 
   // MARK: - Initialization
 
@@ -13,7 +13,7 @@ public struct SyncCache<T: Cachable> {
    Creates a wrapper around cache object.
    - Parameter cache: Cache that requires sync operations
    */
-  public init(_ cache: Cache<T>) {
+  public init(_ cache: BasicHybridCache) {
     self.cache = cache
   }
 
@@ -25,10 +25,10 @@ public struct SyncCache<T: Cachable> {
    - Parameter object: Object that needs to be cached
    - Parameter expiry: Expiration date for the cached object
    */
-  public func add(_ key: String, object: T, expiry: Expiry? = nil) {
+  public func add<T: Cachable>(_ key: String, object: T, expiry: Expiry? = nil) {
     let semaphore = DispatchSemaphore(value: 0)
 
-    cache.add(key, object: object, expiry: expiry) {
+    cache.add(object, forKey: key, expiry: expiry) {
       semaphore.signal()
     }
 
@@ -40,12 +40,11 @@ public struct SyncCache<T: Cachable> {
    - Parameter key: Unique key to identify the object in the cache
    - Returns: Found object or nil
    */
-  public func object(_ key: String) -> T? {
+  public func object<T: Cachable>(_ key: String) -> T? {
     var result: T?
-
     let semaphore = DispatchSemaphore(value: 0)
 
-    cache.object(key) { (object: T?) in
+    cache.object(forKey: key) { (object: T?) in
       result = object
       semaphore.signal()
     }
@@ -60,13 +59,25 @@ public struct SyncCache<T: Cachable> {
    - Parameter key: Unique key to identify the object in the cache
    */
   public func remove(_ key: String) {
-    SyncHybridCache(cache).remove(key)
+    let semaphore = DispatchSemaphore(value: 0)
+
+    cache.remove(key) {
+      semaphore.signal()
+    }
+
+    _ = semaphore.wait(timeout: DispatchTime.distantFuture)
   }
 
   /**
    Clears the front and back cache storages.
    */
   public func clear() {
-    SyncHybridCache(cache).clear()
+    let semaphore = DispatchSemaphore(value: 0)
+
+    cache.clear {
+      semaphore.signal()
+    }
+
+    _ = semaphore.wait(timeout: DispatchTime.distantFuture)
   }
 }

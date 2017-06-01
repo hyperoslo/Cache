@@ -2,17 +2,17 @@ import Quick
 import Nimble
 @testable import Cache
 
-class CacheSpec: QuickSpec {
+class SpecializedCacheSpec: QuickSpec {
 
   override func spec() {
-    describe("Cache") {
+    describe("Specialized") {
       let name = "WeirdoCache"
       let key = "alongweirdkey"
       let object = SpecHelper.user
-      var cache: Cache<User>!
+      var cache: SpecializedCache<User>!
 
       beforeEach {
-        cache = Cache<User>(name: name)
+        cache = SpecializedCache<User>(name: name)
       }
 
       afterEach {
@@ -106,7 +106,12 @@ class CacheSpec: QuickSpec {
           let key = "myusernamedjohn"
           let object = SpecHelper.user
           
-          let cache = Cache<User>(name: "MyCache", frontStorage: frontStorage, backStorage: backStorage, config: config)
+          let cache = SpecializedCache<User>(
+            name: "MyCache",
+            frontStorage: frontStorage,
+            backStorage: backStorage,
+            config: config
+          )
           
           waitUntil(timeout: 4.0) { done in
             

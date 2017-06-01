@@ -1,11 +1,11 @@
 import Foundation
 
 /**
- Cache is type safe cache, works with objects that conform to
+ SpecializedCache is type safe cache, works with objects that conform to
  Cachable protocol. It's two layered cache (with front and back storages).
  Subscribes to system notifications to clear expired cached objects.
  */
-public final class Cache<T: Cachable>: BasicHybridCache {
+public final class SpecializedCache<T: Cachable>: BasicHybridCache {
   /**
    Adds passed object to the front and back cache storages.
    - Parameter key: Unique key to identify the object in the cache
