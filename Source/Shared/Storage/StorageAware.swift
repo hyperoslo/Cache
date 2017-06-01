@@ -68,12 +68,4 @@ public protocol StorageAware: CacheAware {
   var writeQueue: DispatchQueue { get }
   /// Queue for read operations
   var readQueue: DispatchQueue { get }
-
-  /**
-   Storage initialization.
-   - Parameter name: A name of the storage
-   - Parameter maxSize: Maximum size of the cache storage
-   - Parameter cacheDirectory: (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches
-   */
-  init(name: String, maxSize: UInt, cacheDirectory: String?)
 }

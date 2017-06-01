@@ -13,11 +13,11 @@ public class BasicHybridCache: NSObject {
   public let name: String
   /// Cache configuration
   let config: Config
-  /// Front cache (should be less time and memory consuming)
-  let frontStorage: StorageAware
-  // Back cache (used for content that outlives the application life-cycle)
-  var backStorage: StorageAware
-
+  /// Memory cache
+  let frontStorage: MemoryStorage
+  // Disk cache (used for content that outlives the application life-cycle)
+  var backStorage: DiskStorage
+  // Disk storage path
   public var path: String {
     return backStorage.path
   }
@@ -29,13 +29,25 @@ public class BasicHybridCache: NSObject {
    - Parameter name: A name of the cache
    - Parameter config: Cache configuration
    */
-  public convenience init(name: String, config: Config = Config.defaultConfig) {
-    let frontStorage = StorageFactory.resolve(name, kind: config.frontKind, maxSize: UInt(config.maxObjects))
-    let backStorage = StorageFactory.resolve(name, kind: config.backKind, maxSize: config.maxSize)
+  public convenience init(name: String, config: Config = Config()) {
+    let frontStorage = MemoryStorage(name: name, maxSize: UInt(config.maxObjectsInMemory))
+    let backStorage = DiskStorage(
+      name: name,
+      maxSize: config.maxDiskSize,
+      cacheDirectory: config.cacheDirectory,
+      fileProtectionType: config.fileProtectionType
+    )
     self.init(name: name, frontStorage: frontStorage, backStorage: backStorage, config: config)
   }
 
-  internal init(name: String, frontStorage: StorageAware, backStorage: StorageAware, config: Config) {
+  /**
+   Creates a new instance of BasicHybridCache.
+   - Parameter name: A name of the cache
+   - Parameter frontStorage: Memory cache instance
+   - Parameter backStorage: Disk cache instance
+   - Parameter config: Cache configuration
+   */
+  init(name: String, frontStorage: MemoryStorage, backStorage: DiskStorage, config: Config) {
     self.name = name
     self.frontStorage = frontStorage
     self.backStorage = backStorage

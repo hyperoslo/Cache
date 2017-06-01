@@ -54,11 +54,8 @@ by default here). The difference between front and back caching is that back
 caching is used for content that outlives the application life-cycle. See it more
 like a convenient way to store user information that should persist across application
 launches. Disk cache is the most reliable choice here.
-- `StorageFactory` - a place to register and retrieve your cache storage by type.
 - Possibility to set expiry date + automatic cleanup of expired objects.
 - Basic memory and disk cache functionality.
-- Scalability, you are free to add as many cache storages as you want
-(if default implementations of memory and disk caches don't fit your purpose for some reason).
 - `Data` encoding and decoding required by `Cachable` protocol are implemented
 for `UIImage`, `String`, `JSON` and `Data`.
 - iOS and OSX support.
@@ -81,19 +78,19 @@ let cache = HybridCache(name: "Mix")
 
 ```swift
 let config = Config(
-  // Your front cache type
-  frontKind: .memory,
-  // Your back cache type
-  backKind: .disk,
   // Expiry date that will be applied by default for every added object
   // if it's not overridden in the add(key: object: expiry: completion:) method
   expiry: .date(Date().addingTimeInterval(100000)),
-  // Maximum size of your cache storage
-  maxSize: 10000,
-  // where to store the disk cache. If nil, it is placed in an automatically generated directory in Caches
+  /// Maximum amount of items to store in memory
+  maxObjectsInMemory: 20,
+  /// Maximum size of the disk cache storage (in bytes)
+  maxDiskSize: 10000,
+  // Where to store the disk cache. If nil, it is placed in an automatically generated directory in Caches
   cacheDirectory: NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                       FileManager.SearchPathDomainMask.userDomainMask,
-                                                      true).first! + "/cache-in-documents"
+                                                      true).first! + "/cache-in-documents",
+  // Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
+  fileProtectionType: .complete
 )
 
 let cache = HybridCache(name: "Custom", config: config)
@@ -212,7 +209,7 @@ cache.add("string", object: "This is a string")
 // A provided expiry date will be applied to the item
 cache.add("string", object: "This is a string",
   expiry: .date(Date().addingTimeInterval(100000)))
-  
+
 // Clear expired objects
 cache.clearExpired()
 ```
@@ -223,7 +220,6 @@ Encode and decode methods should be implemented if a type conforms to `Cachable`
 
 ```swift
 class User: Cachable {
-
   typealias CacheType = User
 
   static func decode(_ data: Data) -> CacheType? {

@@ -15,6 +15,8 @@ public final class DiskStorage: StorageAware {
   public fileprivate(set) var writeQueue: DispatchQueue
   /// Queue for read operations
   public fileprivate(set) var readQueue: DispatchQueue
+  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
+  private let fileProtectionType: FileProtectionType
   /// File manager to read/write to the disk
   fileprivate let fileManager = FileManager()
 
@@ -24,27 +26,30 @@ public final class DiskStorage: StorageAware {
    Creates a new disk storage.
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
-   - Parameter cacheDirectory: Path to custom directory to be used as a storage
+   - Parameter cacheDirectory: (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches
+   - Parameter fileProtectionType: Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
    */
-    public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
-      self.maxSize = maxSize
+  public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil,
+                       fileProtectionType: FileProtectionType = .none) {
+    self.maxSize = maxSize
+    self.fileProtectionType = fileProtectionType
 
-      let fullName = [DiskStorage.prefix, name.capitalized].joined(separator: ".")
+    let fullName = [DiskStorage.prefix, name.capitalized].joined(separator: ".")
 
-      if let cacheDirectory = cacheDirectory {
-        path = cacheDirectory
-      } else {
-        do {
-          let url = try fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+    if let cacheDirectory = cacheDirectory {
+      path = cacheDirectory
+    } else {
+      do {
+        let url = try fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
 
-          path = url.appendingPathComponent(fullName, isDirectory: true).path
-        } catch {
-          fatalError("Failed to find or get acces to caches directory: \(error)")
-        }
+        path = url.appendingPathComponent(fullName, isDirectory: true).path
+      } catch {
+        fatalError("Failed to find or get acces to caches directory: \(error)")
       }
+    }
 
-      writeQueue = DispatchQueue(label: "\(fullName).WriteQueue")
-      readQueue = DispatchQueue(label: "\(fullName).ReadQueue")
+    writeQueue = DispatchQueue(label: "\(fullName).WriteQueue")
+    readQueue = DispatchQueue(label: "\(fullName).ReadQueue")
   }
 
   // MARK: - CacheAware
@@ -75,7 +80,10 @@ public final class DiskStorage: StorageAware {
         weakSelf.fileManager.createFile(atPath: filePath,
           contents: object.encode() as Data?, attributes: nil)
         try weakSelf.fileManager.setAttributes(
-          [FileAttributeKey.modificationDate: expiry.date],
+          [
+            FileAttributeKey.modificationDate: expiry.date,
+            FileAttributeKey.protectionKey: weakSelf.fileProtectionType
+          ],
           ofItemAtPath: filePath)
       } catch {}
 

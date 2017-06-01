@@ -1,20 +1,20 @@
+import Foundation
+
 /**
  Configuration needed to create a new cache instance
  */
 public struct Config {
-  /// Front cache type
-  public let frontKind: StorageKind
-  /// Back cache type
-  public let backKind: StorageKind
   /// Expiry date that will be applied by default for every added object
   /// if it's not overridden in the add(key: object: expiry: completion:) method
   public let expiry: Expiry
-  /// Maximum size of the cache storage
-  public let maxSize: UInt
   /// Maximum amount of items to store in memory
-  public let maxObjects: Int
-  /// (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
+  public let maxObjectsInMemory: Int
+  /// Maximum size of the disk cache storage (in bytes)
+  public let maxDiskSize: UInt
+  /// A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
   public let cacheDirectory: String?
+  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
+  public let fileProtectionType: FileProtectionType
 
   // MARK: - Initialization
 
@@ -26,25 +26,15 @@ public struct Config {
    - Parameter maxSize: Maximum size of the cache storage
    - Parameter maxObjects: Maximum amount of objects to be stored in memory
    */
-  public init(frontKind: StorageKind, backKind: StorageKind, expiry: Expiry = .never, maxSize: UInt = 0, maxObjects: Int = 0, cacheDirectory: String? = nil) {
-    self.frontKind = frontKind
-    self.backKind = backKind
+  public init(expiry: Expiry = .never,
+              maxObjectsInMemory: Int = 0,
+              maxDiskSize: UInt = 0,
+              cacheDirectory: String? = nil,
+              fileProtectionType: FileProtectionType = .none) {
     self.expiry = expiry
-    self.maxSize = maxSize
-    self.maxObjects = maxObjects
+    self.maxObjectsInMemory = maxObjectsInMemory
+    self.maxDiskSize = maxDiskSize
     self.cacheDirectory = cacheDirectory
-  }
-}
-
-// MARK: - Defaults
-
-extension Config {
-  /**
-   Default configuration used when config is not specified
-   */
-  public static var defaultConfig: Config {
-    return Config(
-      frontKind: .memory,
-      backKind: .disk)
+    self.fileProtectionType = fileProtectionType
   }
 }

@@ -27,7 +27,7 @@ public final class MemoryStorage: StorageAware {
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
    */
-  public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
+  public required init(name: String, maxSize: UInt = 0) {
     self.maxSize = maxSize
     cache.countLimit = Int(maxSize)
     cache.totalCostLimit = Int(maxSize)
@@ -165,7 +165,7 @@ public final class MemoryStorage: StorageAware {
    - Parameter capsule: cached object wrapper
    - Parameter completion: Completion closure to be called when the task is done
    */
-  func removeIfExpired(_ key: String, capsule: Capsule, completion: (() -> Void)? = nil) {
+  private func removeIfExpired(_ key: String, capsule: Capsule, completion: (() -> Void)? = nil) {
     if capsule.expired {
       remove(key, completion: completion)
     } else {
