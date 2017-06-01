@@ -63,7 +63,7 @@ public protocol StorageAware: CacheAware {
   /// Storage root path
   var path: String { get }
   /// Maximum size of the cache storage
-  var maxSize: UInt { get set }
+  var maxSize: UInt { get }
   /// Queue for write operations
   var writeQueue: DispatchQueue { get }
   /// Queue for read operations

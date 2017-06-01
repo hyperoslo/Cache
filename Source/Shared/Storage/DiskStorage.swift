@@ -10,15 +10,15 @@ public final class DiskStorage: StorageAware {
   /// Storage root path
   public let path: String
   /// Maximum size of the cache storage
-  public var maxSize: UInt
+  public let maxSize: UInt
   /// Queue for write operations
-  public fileprivate(set) var writeQueue: DispatchQueue
+  public private(set) var writeQueue: DispatchQueue
   /// Queue for read operations
-  public fileprivate(set) var readQueue: DispatchQueue
+  public private(set) var readQueue: DispatchQueue
   /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
   private let fileProtectionType: FileProtectionType
   /// File manager to read/write to the disk
-  fileprivate let fileManager = FileManager()
+  private let fileManager = FileManager()
 
   // MARK: - Initialization
 
@@ -208,7 +208,7 @@ public final class DiskStorage: StorageAware {
     }
   }
 
-  typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
+  private typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
 
   /**
    Clears all expired objects.
@@ -270,7 +270,7 @@ public final class DiskStorage: StorageAware {
    - Parameter objects: Resource objects to remove
    - Parameter totalSize: Total size
    */
-  func removeResourceObjects(_ objects: [ResourceObject], totalSize: UInt) {
+  private func removeResourceObjects(_ objects: [ResourceObject], totalSize: UInt) {
     guard maxSize > 0 && totalSize > maxSize else {
       return
     }
@@ -329,7 +329,7 @@ public final class DiskStorage: StorageAware {
   }
 }
 
-fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
+private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -340,7 +340,7 @@ fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
+private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l > r

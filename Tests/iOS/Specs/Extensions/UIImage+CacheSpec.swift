@@ -21,9 +21,7 @@ class UIImageCacheSpec: QuickSpec {
         describe("#encode") {
           it("encodes to NSData") {
             let image = SpecHelper.image()
-            let data = image.hasAlpha
-              ? UIImagePNGRepresentation(image)
-              : UIImageJPEGRepresentation(image, 1.0)
+            let data = UIImagePNGRepresentation(image)
             let result = image.encode()!
 
             expect(result).to(equal(data))

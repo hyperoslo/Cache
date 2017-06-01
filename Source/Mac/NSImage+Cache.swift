@@ -24,7 +24,9 @@ extension NSImage: Cachable {
    - Returns: Optional NSData
    */
   public func encode() -> Data? {
-    guard let data = tiffRepresentation else { return nil }
+    guard let data = tiffRepresentation else {
+      return nil
+    }
 
     let imageFileType: NSBitmapImageFileType = hasAlpha ? .PNG : .JPEG
     return NSBitmapImageRep(data: data)?.representation(using: imageFileType, properties: [:])
@@ -36,7 +38,7 @@ extension NSImage: Cachable {
 /**
  Helper UIImage extension.
  */
-extension NSImage {
+private extension NSImage {
   /**
    Checks if image has alpha component
    */

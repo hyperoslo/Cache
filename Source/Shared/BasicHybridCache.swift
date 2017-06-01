@@ -215,7 +215,7 @@ public class BasicHybridCache: NSObject {
   /**
    Clears expired cache items when the app enters background.
    */
-  func applicationDidEnterBackground() {
+  @objc private func applicationDidEnterBackground() {
     let application = UIApplication.shared
     var backgroundTask: UIBackgroundTaskIdentifier?
 

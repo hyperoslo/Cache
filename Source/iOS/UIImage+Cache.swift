@@ -34,14 +34,16 @@ extension UIImage: Cachable {
 /**
  Helper UIImage extension.
  */
-extension UIImage {
+private extension UIImage {
   /**
    Checks if image has alpha component
    */
   var hasAlpha: Bool {
     let result: Bool
 
-    guard let alpha = cgImage?.alphaInfo else { return false }
+    guard let alpha = cgImage?.alphaInfo else {
+      return false
+    }
 
     switch alpha {
     case .none, .noneSkipFirst, .noneSkipLast:

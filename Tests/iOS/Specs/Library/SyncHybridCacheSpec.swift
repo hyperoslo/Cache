@@ -10,21 +10,15 @@ class SyncHybridCacheSpec: QuickSpec {
       let key = "alongweirdkey"
       let object = SpecHelper.user
       var cache: HybridCache!
-      var syncer: SyncHybridCache!
+      var syncer: HybridSyncCache!
 
       beforeEach {
         cache = HybridCache(name: name)
-        syncer = SyncHybridCache(cache)
+        syncer = HybridSyncCache(cache)
       }
 
       afterEach {
         cache.clear()
-      }
-
-      describe("#init") {
-        it("sets a cache") {
-          expect(syncer.cache).to(equal(cache))
-        }
       }
 
       describe("#add") {

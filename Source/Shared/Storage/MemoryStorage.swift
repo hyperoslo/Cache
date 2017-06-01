@@ -12,13 +12,13 @@ public final class MemoryStorage: StorageAware {
   }
 
   /// Maximum size of the cache storage
-  public var maxSize: UInt
+  public let maxSize: UInt
   /// Memory cache instance
-  public let cache = NSCache<AnyObject, AnyObject>()
+  private let cache = NSCache<AnyObject, AnyObject>()
   /// Queue for write operations
-  public fileprivate(set) var writeQueue: DispatchQueue
+  public private(set) var writeQueue: DispatchQueue
   /// Queue for read operations
-  public fileprivate(set) var readQueue: DispatchQueue
+  public private(set) var readQueue: DispatchQueue
 
   // MARK: - Initialization
 
