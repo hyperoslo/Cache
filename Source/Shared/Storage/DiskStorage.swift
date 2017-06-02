@@ -1,5 +1,5 @@
 import Foundation
-import CryptoSwift
+import SwiftHash
 
 /**
  File-based cache storage
@@ -307,16 +307,7 @@ public final class DiskStorage: StorageAware {
    - Returns: A md5 or base64 string
    */
   func fileName(_ key: String) -> String {
-    if let digest = key.data(using: String.Encoding.utf8)?.md5() {
-      var string = ""
-      for byte in digest {
-        string += String(format:"%02x", byte)
-      }
-
-      return string
-    } else {
-      return key.base64()
-    }
+    return MD5(key)
   }
 
   /**
