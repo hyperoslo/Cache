@@ -761,7 +761,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/tvOS/Quick.framework",
 				"$(SRCROOT)/Carthage/Build/tvOS/Nimble.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/CryptoSwift.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/SwiftHash.framework",
 			);
 			outputPaths = (
 			);
@@ -793,7 +793,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/Quick.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/Nimble.framework",
-				"$(SRCROOT)/Carthage/Build/Mac/CryptoSwift.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/SwiftHash.framework",
 			);
 			outputPaths = (
 			);
