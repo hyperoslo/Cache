@@ -1,6 +1,6 @@
 import Quick
 import Nimble
-import CryptoSwift
+import SwiftHash
 @testable import Cache
 
 class DiskStorageSpec: QuickSpec {
@@ -207,17 +207,7 @@ class DiskStorageSpec: QuickSpec {
         
         describe("#fileName") {
           it("returns a correct file name") {
-            if let digest = key.data(using: String.Encoding.utf8)?.md5() {
-              var string = ""
-              
-              for byte in digest {
-                string += String(format:"%02x", byte)
-              }
-              
-              expect(storage.fileName(key)).to(equal(string))
-            } else {
-              expect(storage.fileName(key)).to(equal(key.base64()))
-            }
+            expect(storage.fileName(key)).to(equal(MD5(key)))
           }
         }
         
