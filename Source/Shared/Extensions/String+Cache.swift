@@ -29,19 +29,3 @@ extension String: Cachable {
     return data(using: String.Encoding.utf8)
   }
 }
-
-// MARK: - Helpers
-
-/**
- Helper String extension.
- */
-extension String {
-  /**
-   Creates base64 string
-   - Returns: A base64 encoded string
-   */
-  func base64() -> String {
-    guard let data = self.data(using: String.Encoding.utf8) else { return self }
-    return data.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
-  }
-}

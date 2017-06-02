@@ -304,7 +304,7 @@ public final class DiskStorage: StorageAware {
   /**
    Builds file name from the key.
    - Parameter key: Unique key to identify the object in the cache
-   - Returns: A md5 or base64 string
+   - Returns: A md5 string
    */
   func fileName(_ key: String) -> String {
     return MD5(key)
