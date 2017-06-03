@@ -34,6 +34,24 @@ class DiskStorageSpec: QuickSpec {
             expect(storage.path).to(equal(path))
           }
         }
+
+        describe("#setDirectoryAttributes") {
+          it("sets attributes") {
+            let storage = DiskStorage(name: name)
+            let expectation = self.expectation(description: "Create Cache Directory Expectation")
+
+            storage.add(key, object: object) {
+              try! storage.setDirectoryAttributes([FileAttributeKey.immutable: true])
+              var attributes = try! fileManager.attributesOfItem(atPath: storage.path)
+              expect(attributes[FileAttributeKey.immutable] as? Bool).to(beTrue())
+
+              try! storage.setDirectoryAttributes([FileAttributeKey.immutable: false])
+              expectation.fulfill()
+            }
+
+            self.waitForExpectations(timeout: 2.0, handler:nil)
+          }
+        }
         
         describe("#maxSize") {
           it("returns the default maximum size of a cache") {
@@ -80,7 +98,7 @@ class DiskStorageSpec: QuickSpec {
           }
           
           it("returns entry if object exists") {
-            let storage = DiskStorage(name: name, fileProtectionType: .none)
+            let storage = DiskStorage(name: name)
             
             waitUntil(timeout: 2.0) { done in
               storage.add(key, object: object) {

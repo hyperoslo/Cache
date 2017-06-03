@@ -13,28 +13,23 @@ public struct Config {
   public let maxDiskSize: UInt
   /// A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
   public let cacheDirectory: String?
-  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
-  public let fileProtectionType: FileProtectionType
 
   // MARK: - Initialization
 
   /**
    Creates a new instance of Config.
-   - Parameter frontKind: Front cache type
-   - Parameter backKind: Back cache type
    - Parameter expiry: Expiry date that will be applied by default for every added object
-   - Parameter maxSize: Maximum size of the cache storage
-   - Parameter maxObjects: Maximum amount of objects to be stored in memory
+   - Parameter maxObjectsInMemory: Maximum amount of items to store in memory
+   - Parameter maxDiskSize: Maximum size of the disk cache storage (in bytes)
+   - Parameter cacheDirectory: A folder to store the disk cache contents (Caches is default)
    */
   public init(expiry: Expiry = .never,
               maxObjectsInMemory: Int = 0,
               maxDiskSize: UInt = 0,
-              cacheDirectory: String? = nil,
-              fileProtectionType: FileProtectionType = .none) {
+              cacheDirectory: String? = nil) {
     self.expiry = expiry
     self.maxObjectsInMemory = maxObjectsInMemory
     self.maxDiskSize = maxDiskSize
     self.cacheDirectory = cacheDirectory
-    self.fileProtectionType = fileProtectionType
   }
 }
