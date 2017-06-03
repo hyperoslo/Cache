@@ -248,7 +248,7 @@ public class BasicHybridCache: NSObject {
 }
 
 extension BasicHybridCache {
-  #if os(iOS)
+  #if os(iOS) || os(tvOS)
   /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
   func setFileProtection( _ type: FileProtectionType) throws {
     try backStorage.setFileProtection(type)

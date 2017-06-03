@@ -220,7 +220,7 @@ the app’s container. Follow [App Distribution Guide](https://developer.apple.c
 data protection on iOS, WatchKit Extension, tvOS.
 
 In addition to that you can use a method on `HybridCache` and `SpecializedCache`
-to set file protection level:
+to set file protection level (iOS only):
 
 ```swift
 try cache.setFileProtection(.complete)

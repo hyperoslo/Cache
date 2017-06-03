@@ -315,7 +315,7 @@ public final class DiskStorage: StorageAware {
 }
 
 extension DiskStorage {
-  #if os(iOS)
+  #if os(iOS) || os(tvOS)
   /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
   func setFileProtection( _ type: FileProtectionType) throws {
     try setDirectoryAttributes([FileAttributeKey.protectionKey: type])

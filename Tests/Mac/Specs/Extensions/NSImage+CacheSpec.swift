@@ -23,7 +23,7 @@ class NSImageCacheSpec: QuickSpec {
             let image = SpecHelper.image()
             let representation = image.tiffRepresentation!
 
-            let imageFileType: NSBitmapImageFileType = image.hasAlpha ? .PNG : .JPEG
+            let imageFileType: NSBitmapImageFileType = .PNG
             let data = NSBitmapImageRep(data: representation)!.representation(
               using: imageFileType, properties: [:])
 
