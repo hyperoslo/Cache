@@ -15,10 +15,8 @@ public final class DiskStorage: StorageAware {
   public private(set) var writeQueue: DispatchQueue
   /// Queue for read operations
   public private(set) var readQueue: DispatchQueue
-  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
-  private let fileProtectionType: FileProtectionType
   /// File manager to read/write to the disk
-  private let fileManager = FileManager()
+  fileprivate let fileManager = FileManager()
 
   // MARK: - Initialization
 
@@ -29,11 +27,8 @@ public final class DiskStorage: StorageAware {
    - Parameter cacheDirectory: (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches
    - Parameter fileProtectionType: Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
    */
-  public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil,
-                       fileProtectionType: FileProtectionType = .none) {
+  public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
     self.maxSize = maxSize
-    self.fileProtectionType = fileProtectionType
-
     let fullName = [DiskStorage.prefix, name.capitalized].joined(separator: ".")
 
     if let cacheDirectory = cacheDirectory {
@@ -81,8 +76,7 @@ public final class DiskStorage: StorageAware {
           contents: object.encode() as Data?, attributes: nil)
         try weakSelf.fileManager.setAttributes(
           [
-            FileAttributeKey.modificationDate: expiry.date,
-            FileAttributeKey.protectionKey: weakSelf.fileProtectionType
+            FileAttributeKey.modificationDate: expiry.date
           ],
           ofItemAtPath: filePath)
       } catch {}
@@ -317,6 +311,20 @@ public final class DiskStorage: StorageAware {
    */
   func filePath(_ key: String) -> String {
     return "\(path)/\(fileName(key))"
+  }
+}
+
+extension DiskStorage {
+  #if os(iOS) || os(tvOS)
+  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
+  func setFileProtection( _ type: FileProtectionType) throws {
+    try setDirectoryAttributes([FileAttributeKey.protectionKey: type])
+  }
+  #endif
+
+  /// Set attributes on the disk cache folder.
+  func setDirectoryAttributes(_ attributes: [FileAttributeKey : Any]) throws {
+    try fileManager.setAttributes(attributes, ofItemAtPath: path)
   }
 }
 

@@ -18,6 +18,7 @@
   * [SpecializedSyncCache](#specialized-sync-cache)
   * [HybridSyncCache](#hybrid-sync-cache)
   * [Expiry date](#expiry-date)
+  * [Enabling Data Protection](#enabling-data-protection)
   * [Cachable protocol](#cachable-protocol)
 * [Optional bonuses](#optional-bonuses)
   * [JSON](#json)
@@ -88,9 +89,7 @@ let config = Config(
   // Where to store the disk cache. If nil, it is placed in an automatically generated directory in Caches
   cacheDirectory: NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                       FileManager.SearchPathDomainMask.userDomainMask,
-                                                      true).first! + "/cache-in-documents",
-  // Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
-  fileProtectionType: .complete
+                                                      true).first! + "/cache-in-documents"
 )
 
 let cache = HybridCache(name: "Custom", config: config)
@@ -212,6 +211,25 @@ cache.add("string", object: "This is a string",
 
 // Clear expired objects
 cache.clearExpired()
+```
+
+### Enabling data protection
+
+Data protection adds a level of security to files stored on disk by your app in
+the app’s container. Follow [App Distribution Guide](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW30) to enable
+data protection on iOS, WatchKit Extension, tvOS.
+
+In addition to that you can use a method on `HybridCache` and `SpecializedCache`
+to set file protection level (iOS and tvOS only):
+
+```swift
+try cache.setFileProtection(.complete)
+```
+
+It's also possible to update attributes of the disk cache folder:
+
+```swift
+try cache.setDirectoryAttributes([FileAttributeKey.immutable: true])
 ```
 
 ### Cachable protocol

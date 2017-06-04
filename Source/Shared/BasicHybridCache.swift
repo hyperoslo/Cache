@@ -34,8 +34,7 @@ public class BasicHybridCache: NSObject {
     let backStorage = DiskStorage(
       name: name,
       maxSize: config.maxDiskSize,
-      cacheDirectory: config.cacheDirectory,
-      fileProtectionType: config.fileProtectionType
+      cacheDirectory: config.cacheDirectory
     )
     self.init(name: name, frontStorage: frontStorage, backStorage: backStorage, config: config)
   }
@@ -246,4 +245,18 @@ public class BasicHybridCache: NSObject {
   }
 
   #endif
+}
+
+extension BasicHybridCache {
+  #if os(iOS) || os(tvOS)
+  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
+  func setFileProtection( _ type: FileProtectionType) throws {
+    try backStorage.setFileProtection(type)
+  }
+  #endif
+
+  /// Set attributes on the disk cache folder.
+  func setDiskCacheDirectoryAttributes(_ attributes: [FileAttributeKey : Any]) throws {
+    try backStorage.setDirectoryAttributes(attributes)
+  }
 }

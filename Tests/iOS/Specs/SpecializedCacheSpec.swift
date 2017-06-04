@@ -28,7 +28,6 @@ class SpecializedCacheSpec: QuickSpec {
           let defaultConfig = Config()
           expect(cache.config.expiry.date).to(equal(defaultConfig.expiry.date))
           expect(cache.config.cacheDirectory).to(beNil())
-          expect(cache.config.fileProtectionType).to(equal(defaultConfig.fileProtectionType))
           expect(cache.config.maxDiskSize).to(equal(defaultConfig.maxDiskSize))
           expect(cache.config.maxObjectsInMemory).to(equal(defaultConfig.maxObjectsInMemory))
           /**
