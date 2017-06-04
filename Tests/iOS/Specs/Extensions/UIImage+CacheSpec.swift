@@ -6,7 +6,6 @@ class UIImageCacheSpec: QuickSpec {
 
   override func spec() {
     describe("UIImage+Cache") {
-
       describe("Cachable") {
         describe(".decode") {
           it("decodes from NSData") {

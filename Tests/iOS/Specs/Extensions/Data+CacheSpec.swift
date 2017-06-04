@@ -5,8 +5,7 @@ import Nimble
 class NSDataCacheSpec: QuickSpec {
 
   override func spec() {
-    describe("NSData+Cache") {
-
+    describe("Data+Cache") {
       describe("Cachable") {
         describe(".decode") {
           it("decodes from NSData") {

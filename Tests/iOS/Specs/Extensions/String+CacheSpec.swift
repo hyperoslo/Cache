@@ -6,9 +6,7 @@ class StringCacheSpec: QuickSpec {
 
   override func spec() {
     describe("String+Cache") {
-
       describe("Cachable") {
-
         describe(".decode") {
           it("decodes from NSData") {
             let string = self.name

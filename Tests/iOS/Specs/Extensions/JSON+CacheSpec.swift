@@ -6,7 +6,6 @@ class JSONCacheSpec: QuickSpec {
 
   override func spec() {
     describe("JSON+Cache") {
-
       describe("Cachable") {
         describe(".decode") {
           it("decodes a dictionary from NSData") {

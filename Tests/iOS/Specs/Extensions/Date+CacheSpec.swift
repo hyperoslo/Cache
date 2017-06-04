@@ -3,20 +3,16 @@ import Nimble
 @testable import Cache
 
 class NSDateCacheSpec: QuickSpec {
-
   override func spec() {
-    describe("NSDate+Cache") {
-
+    describe("Date+Cache") {
       describe("#inThePast") {
         it("returns that date is not in the past") {
           let date = Date(timeInterval: 100000, since: Date())
-
           expect(date.inThePast).to(beFalse())
         }
 
         it("returns that date is in the past") {
           let date = Date(timeInterval: -100000, since: Date())
-
           expect(date.inThePast).to(beTrue())
         }
       }
