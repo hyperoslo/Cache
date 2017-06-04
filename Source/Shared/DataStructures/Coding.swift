@@ -1,6 +1,6 @@
 import Foundation
 
-/// Alternative to `NSCoding` protocol that does not require to be a class
+/// Alternative to `NSCoding` protocol for Swift structs and enums
 public protocol Coding: Cachable {
   func encode(with aCoder: NSCoder)
   init?(coder aDecoder: NSCoder)
