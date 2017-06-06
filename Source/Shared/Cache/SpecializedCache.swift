@@ -7,7 +7,7 @@ import Foundation
  */
 public final class SpecializedCache<T: Cachable>: BasicHybridCache {
   /// Async cache wrapper
-  public private(set) lazy var async: AcyncSpecializedCache<T> = .init(manager: self.manager)
+  public private(set) lazy var async: AsyncSpecializedCache<T> = .init(manager: self.manager)
 
   /**
    Adds passed object to the front and back cache storages.
@@ -61,7 +61,7 @@ public final class SpecializedCache<T: Cachable>: BasicHybridCache {
 }
 
 /// Wrapper around async cache operations.
-public class AcyncSpecializedCache<T: Cachable> {
+public class AsyncSpecializedCache<T: Cachable> {
   /// Cache manager
   private let manager: CacheManager
 

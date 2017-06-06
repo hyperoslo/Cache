@@ -5,7 +5,7 @@
  */
 public class HybridCache: BasicHybridCache {
   /// Async cache wrapper
-  public private(set) lazy var async: AcycnHybridCache = .init(manager: self.manager)
+  public private(set) lazy var async: AsyncHybridCache = .init(manager: self.manager)
 
   /**
    Adds passed object to the front and back cache storages.
@@ -59,7 +59,7 @@ public class HybridCache: BasicHybridCache {
 }
 
 /// Wrapper around async cache operations.
-public class AcycnHybridCache {
+public class AsyncHybridCache {
   /// Cache manager
   private let manager: CacheManager
 
