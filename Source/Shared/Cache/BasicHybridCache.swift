@@ -40,8 +40,8 @@ public extension BasicHybridCache {
   /**
    Calculates total disk cache size
    */
-  func totalSize() throws -> UInt64 {
-    return try manager.totalSize()
+  func totalDiskSize() throws -> UInt64 {
+    return try manager.totalDiskSize()
   }
 
   #if os(iOS) || os(tvOS)

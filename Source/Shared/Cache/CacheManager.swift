@@ -296,7 +296,7 @@ extension CacheManager {
   /**
     Calculates total disk cache size
    */
-  public func totalSize() throws -> UInt64 {
+  public func totalDiskSize() throws -> UInt64 {
     var size: UInt64 = 0
     try readQueue.sync { [weak self] in
       size = try self?.backStorage.totalSize() ?? 0

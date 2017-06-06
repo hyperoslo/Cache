@@ -317,11 +317,11 @@ class SpecializedCacheTests: XCTestCase {
     XCTAssertNotNil(cache.object(forKey: key2))
   }
 
-  func testTotalSize() throws {
+  func testTotalDiskSize() throws {
     let cache = SpecializedCache<Data>(name: cacheName)
     try cache.addObject(SpecHelper.data(10), forKey: "key1")
     try cache.addObject(SpecHelper.data(20), forKey: "key2")
-    let size = try cache.totalSize()
+    let size = try cache.totalDiskSize()
     XCTAssertEqual(size, 30)
   }
 }
