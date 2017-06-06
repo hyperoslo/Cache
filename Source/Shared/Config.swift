@@ -7,7 +7,7 @@ public struct Config {
   /// Expiry date that will be applied by default for every added object
   /// if it's not overridden in the add(key: object: expiry: completion:) method
   public let expiry: Expiry
-  /// The maximum number of objects the cache should hold
+  /// The maximum number of objects in memory the cache should hold
   public let memoryCountLimit: UInt
   /// The maximum total cost that the cache can hold before it starts evicting objects
   public let memoryTotalCostLimit: UInt
