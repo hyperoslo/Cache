@@ -40,7 +40,7 @@ final class MemoryStorage: CacheAware {
    - Returns: Cached object or nil if not found
    */
   func object<T: Cachable>(_ key: String) -> T? {
-    return cacheEntry(key)?.object
+    return (cacheEntry(key) as CacheEntry<T>?)?.object
   }
 
   /**
