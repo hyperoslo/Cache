@@ -10,8 +10,6 @@
 		57506FAE1EC29437009B71E9 /* CacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506FAD1EC29437009B71E9 /* CacheEntry.swift */; };
 		57506FBF1EC2E1B7009B71E9 /* CacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506FAD1EC29437009B71E9 /* CacheEntry.swift */; };
 		57506FC01EC2E1BA009B71E9 /* CacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57506FAD1EC29437009B71E9 /* CacheEntry.swift */; };
-		BDEDD3601DBCE5CE007416A6 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
-		BDEDD3611DBCE5CE007416A6 /* SpecializedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACDD1CD0272600567809 /* SpecializedCache.swift */; };
 		BDEDD3621DBCE5CE007416A6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		BDEDD3631DBCE5D8007416A6 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
 		BDEDD3641DBCE5D8007416A6 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
@@ -22,8 +20,6 @@
 		BDEDD36A1DBCE5D8007416A6 /* Date+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1F1C28220B00B702C9 /* Date+Cache.swift */; };
 		BDEDD36B1DBCE5D8007416A6 /* String+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C201C28220B00B702C9 /* String+Cache.swift */; };
 		BDEDD36C1DBCE5D8007416A6 /* DefaultCacheConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C221C28220B00B702C9 /* DefaultCacheConverter.swift */; };
-		BDEDD36D1DBCE5D8007416A6 /* SpecializedSyncCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACC81CD01F3400567809 /* SpecializedSyncCache.swift */; };
-		BDEDD36E1DBCE5D8007416A6 /* HybridSyncCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCB1CD0207300567809 /* HybridSyncCache.swift */; };
 		BDEDD36F1DBCE5D8007416A6 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C241C28220B00B702C9 /* DiskStorage.swift */; };
 		BDEDD3701DBCE5D8007416A6 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
 		BDEDD3711DBCE5D8007416A6 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
@@ -41,8 +37,6 @@
 		BDEDD38F1DBCEBD0007416A6 /* String+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CED1C28374800B702C9 /* String+CacheSpec.swift */; };
 		BDEDD3901DBCEBD0007416A6 /* UIImage+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D991C283DB300B702C9 /* UIImage+CacheSpec.swift */; };
 		BDEDD3911DBCEBD0007416A6 /* DefaultCacheConverterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEF1C28374800B702C9 /* DefaultCacheConverterSpec.swift */; };
-		BDEDD3921DBCEBD0007416A6 /* SpecializedSyncCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCE1CD0227200567809 /* SpecializedSyncCacheSpec.swift */; };
-		BDEDD3931DBCEBD0007416A6 /* SyncHybridCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */; };
 		BDEDD3941DBCEBD0007416A6 /* DiskStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF11C28374800B702C9 /* DiskStorageSpec.swift */; };
 		BDEDD3951DBCEBD0007416A6 /* MemoryStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF21C28374800B702C9 /* MemoryStorageSpec.swift */; };
 		D5291C2D1C28220B00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
@@ -58,7 +52,6 @@
 		D5291C381C28220B00B702C9 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C241C28220B00B702C9 /* DiskStorage.swift */; };
 		D5291C391C28220B00B702C9 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
 		D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
-		D5291C6C1C2827FB00B702C9 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
 		D5291D1D1C2837DB00B702C9 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC59E01C20593E003BD79B /* Cache.framework */; };
 		D5291D351C28389B00B702C9 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CDF1C28374800B702C9 /* SpecHelper.swift */; };
 		D5291D361C28389B00B702C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE01C28374800B702C9 /* User.swift */; };
@@ -75,7 +68,6 @@
 		D5291D431C28389B00B702C9 /* MemoryStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF21C28374800B702C9 /* MemoryStorageSpec.swift */; };
 		D5291D6A1C283B5400B702C9 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291D601C283B5300B702C9 /* Cache.framework */; };
 		D5291D851C283C7C00B702C9 /* SpecHelper+OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D811C283C7000B702C9 /* SpecHelper+OSX.swift */; };
-		D5291D861C283CFB00B702C9 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */; };
 		D5291D881C283CFB00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		D5291D891C283CFB00B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
 		D5291D8A1C283CFB00B702C9 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
@@ -93,20 +85,9 @@
 		D5291D9C1C283DD900B702C9 /* NSImage+CacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D9B1C283DD900B702C9 /* NSImage+CacheSpec.swift */; };
 		D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */; };
 		D5291DA31C2841D200B702C9 /* NSImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */; };
-		D5A138BD1EB296FD00881A20 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138BC1EB296FD00881A20 /* HybridCache.swift */; };
-		D5A138BE1EB296FD00881A20 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138BC1EB296FD00881A20 /* HybridCache.swift */; };
-		D5A138BF1EB296FD00881A20 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138BC1EB296FD00881A20 /* HybridCache.swift */; };
 		D5A138C11EB29BFA00881A20 /* UIImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138C01EB29BFA00881A20 /* UIImage+Cache.swift */; };
 		D5A138C21EB29BFA00881A20 /* UIImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138C01EB29BFA00881A20 /* UIImage+Cache.swift */; };
 		D5A138C41EB29C2100881A20 /* NSImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138C31EB29C2100881A20 /* NSImage+Cache.swift */; };
-		D5ACACC91CD01F3400567809 /* SpecializedSyncCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACC81CD01F3400567809 /* SpecializedSyncCache.swift */; };
-		D5ACACCA1CD01F3400567809 /* SpecializedSyncCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACC81CD01F3400567809 /* SpecializedSyncCache.swift */; };
-		D5ACACCC1CD0207300567809 /* HybridSyncCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCB1CD0207300567809 /* HybridSyncCache.swift */; };
-		D5ACACCD1CD0207300567809 /* HybridSyncCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCB1CD0207300567809 /* HybridSyncCache.swift */; };
-		D5ACACD11CD0228400567809 /* SpecializedSyncCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACCE1CD0227200567809 /* SpecializedSyncCacheSpec.swift */; };
-		D5ACACD51CD0256700567809 /* SyncHybridCacheSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */; };
-		D5ACACDE1CD0272600567809 /* SpecializedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACDD1CD0272600567809 /* SpecializedCache.swift */; };
-		D5ACACDF1CD0272600567809 /* SpecializedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ACACDD1CD0272600567809 /* SpecializedCache.swift */; };
 		D5CE966D1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
 		D5CE966E1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
 		D5CE966F1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
@@ -116,6 +97,18 @@
 		D5CE96751EE47AA8002BFE06 /* CodingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96741EE47AA8002BFE06 /* CodingSpec.swift */; };
 		D5CE96761EE47AA8002BFE06 /* CodingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96741EE47AA8002BFE06 /* CodingSpec.swift */; };
 		D5CE96771EE47AA8002BFE06 /* CodingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96741EE47AA8002BFE06 /* CodingSpec.swift */; };
+		D5CE96861EE691D6002BFE06 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96851EE691D6002BFE06 /* Logger.swift */; };
+		D5CE96871EE691D6002BFE06 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96851EE691D6002BFE06 /* Logger.swift */; };
+		D5CE96881EE691D6002BFE06 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96851EE691D6002BFE06 /* Logger.swift */; };
+		D5CE968D1EE69969002BFE06 /* SpecializedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE968A1EE69969002BFE06 /* SpecializedCache.swift */; };
+		D5CE968E1EE69969002BFE06 /* SpecializedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE968A1EE69969002BFE06 /* SpecializedCache.swift */; };
+		D5CE968F1EE69969002BFE06 /* SpecializedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE968A1EE69969002BFE06 /* SpecializedCache.swift */; };
+		D5CE96901EE69969002BFE06 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE968B1EE69969002BFE06 /* HybridCache.swift */; };
+		D5CE96911EE69969002BFE06 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE968B1EE69969002BFE06 /* HybridCache.swift */; };
+		D5CE96921EE69969002BFE06 /* HybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE968B1EE69969002BFE06 /* HybridCache.swift */; };
+		D5CE96931EE69969002BFE06 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE968C1EE69969002BFE06 /* BasicHybridCache.swift */; };
+		D5CE96941EE69969002BFE06 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE968C1EE69969002BFE06 /* BasicHybridCache.swift */; };
+		D5CE96951EE69969002BFE06 /* BasicHybridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE968C1EE69969002BFE06 /* BasicHybridCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,7 +152,6 @@
 		D5291C241C28220B00B702C9 /* DiskStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
 		D5291C251C28220B00B702C9 /* MemoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		D5291C261C28220B00B702C9 /* StorageAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageAware.swift; sourceTree = "<group>"; };
-		D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicHybridCache.swift; sourceTree = "<group>"; };
 		D5291CDF1C28374800B702C9 /* SpecHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
 		D5291CE01C28374800B702C9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D5291CE21C28374800B702C9 /* SpecializedCacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecializedCacheSpec.swift; sourceTree = "<group>"; };
@@ -185,17 +177,15 @@
 		D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+CacheTests.swift"; sourceTree = "<group>"; };
 		D5643E351C43F2CC00582E17 /* CustomCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CustomCache.playground; sourceTree = "<group>"; };
 		D5643E361C43F2CC00582E17 /* HybridCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HybridCache.playground; sourceTree = "<group>"; };
-		D5A138BC1EB296FD00881A20 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
 		D5A138C01EB29BFA00881A20 /* UIImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Cache.swift"; sourceTree = "<group>"; };
 		D5A138C31EB29C2100881A20 /* NSImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Cache.swift"; sourceTree = "<group>"; };
-		D5ACACC81CD01F3400567809 /* SpecializedSyncCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecializedSyncCache.swift; sourceTree = "<group>"; };
-		D5ACACCB1CD0207300567809 /* HybridSyncCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridSyncCache.swift; sourceTree = "<group>"; };
-		D5ACACCE1CD0227200567809 /* SpecializedSyncCacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecializedSyncCacheSpec.swift; sourceTree = "<group>"; };
-		D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncHybridCacheSpec.swift; sourceTree = "<group>"; };
-		D5ACACDD1CD0272600567809 /* SpecializedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = SpecializedCache.swift; sourceTree = "<group>"; tabWidth = 2; };
 		D5CE966C1EE475C0002BFE06 /* Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coding.swift; sourceTree = "<group>"; };
 		D5CE96701EE4774E002BFE06 /* NSDictionary+CacheSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDictionary+CacheSpec.swift"; sourceTree = "<group>"; };
 		D5CE96741EE47AA8002BFE06 /* CodingSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingSpec.swift; sourceTree = "<group>"; };
+		D5CE96851EE691D6002BFE06 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		D5CE968A1EE69969002BFE06 /* SpecializedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecializedCache.swift; sourceTree = "<group>"; };
+		D5CE968B1EE69969002BFE06 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
+		D5CE968C1EE69969002BFE06 /* BasicHybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicHybridCache.swift; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -269,10 +259,8 @@
 		D5291C111C28220B00B702C9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				D5291C6A1C2827FB00B702C9 /* BasicHybridCache.swift */,
 				D5291C151C28220B00B702C9 /* Config.swift */,
-				D5A138BC1EB296FD00881A20 /* HybridCache.swift */,
-				D5ACACDD1CD0272600567809 /* SpecializedCache.swift */,
+				D5CE96891EE69950002BFE06 /* Cache */,
 				D5291C161C28220B00B702C9 /* DataStructures */,
 				D5291C1C1C28220B00B702C9 /* Extensions */,
 				D5291C211C28220B00B702C9 /* Library */,
@@ -308,8 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				D5291C221C28220B00B702C9 /* DefaultCacheConverter.swift */,
-				D5ACACC81CD01F3400567809 /* SpecializedSyncCache.swift */,
-				D5ACACCB1CD0207300567809 /* HybridSyncCache.swift */,
+				D5CE96851EE691D6002BFE06 /* Logger.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -385,8 +372,6 @@
 			isa = PBXGroup;
 			children = (
 				D5291CEF1C28374800B702C9 /* DefaultCacheConverterSpec.swift */,
-				D5ACACCE1CD0227200567809 /* SpecializedSyncCacheSpec.swift */,
-				D5ACACD21CD0254300567809 /* SyncHybridCacheSpec.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -450,6 +435,16 @@
 				D5643E361C43F2CC00582E17 /* HybridCache.playground */,
 			);
 			path = Playgrounds;
+			sourceTree = "<group>";
+		};
+		D5CE96891EE69950002BFE06 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				D5CE968A1EE69969002BFE06 /* SpecializedCache.swift */,
+				D5CE968B1EE69969002BFE06 /* HybridCache.swift */,
+				D5CE968C1EE69969002BFE06 /* BasicHybridCache.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 		D5DC59D61C20593E003BD79B = {
@@ -824,26 +819,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDEDD36C1DBCE5D8007416A6 /* DefaultCacheConverter.swift in Sources */,
-				BDEDD36E1DBCE5D8007416A6 /* HybridSyncCache.swift in Sources */,
 				BDEDD3651DBCE5D8007416A6 /* Expiry.swift in Sources */,
 				BDEDD3631DBCE5D8007416A6 /* Cachable.swift in Sources */,
 				BDEDD3661DBCE5D8007416A6 /* JSON.swift in Sources */,
 				BDEDD3711DBCE5D8007416A6 /* StorageAware.swift in Sources */,
 				BDEDD3681DBCE5D8007416A6 /* JSON+Cache.swift in Sources */,
+				D5CE968F1EE69969002BFE06 /* SpecializedCache.swift in Sources */,
 				BDEDD3641DBCE5D8007416A6 /* Capsule.swift in Sources */,
 				BDEDD3621DBCE5CE007416A6 /* Config.swift in Sources */,
+				D5CE96951EE69969002BFE06 /* BasicHybridCache.swift in Sources */,
 				D5CE966F1EE475C0002BFE06 /* Coding.swift in Sources */,
-				BDEDD3611DBCE5CE007416A6 /* SpecializedCache.swift in Sources */,
 				BDEDD36B1DBCE5D8007416A6 /* String+Cache.swift in Sources */,
-				BDEDD36D1DBCE5D8007416A6 /* SpecializedSyncCache.swift in Sources */,
 				BDEDD36A1DBCE5D8007416A6 /* Date+Cache.swift in Sources */,
 				BDEDD36F1DBCE5D8007416A6 /* DiskStorage.swift in Sources */,
 				57506FC01EC2E1BA009B71E9 /* CacheEntry.swift in Sources */,
 				D5A138C21EB29BFA00881A20 /* UIImage+Cache.swift in Sources */,
-				BDEDD3601DBCE5CE007416A6 /* BasicHybridCache.swift in Sources */,
+				D5CE96881EE691D6002BFE06 /* Logger.swift in Sources */,
 				BDEDD3701DBCE5D8007416A6 /* MemoryStorage.swift in Sources */,
-				D5A138BF1EB296FD00881A20 /* HybridCache.swift in Sources */,
 				BDEDD3691DBCE5D8007416A6 /* Data+Cache.swift in Sources */,
+				D5CE96921EE69969002BFE06 /* HybridCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,11 +854,9 @@
 				D5CE96771EE47AA8002BFE06 /* CodingSpec.swift in Sources */,
 				BDEDD3941DBCEBD0007416A6 /* DiskStorageSpec.swift in Sources */,
 				BDEDD38D1DBCEBD0007416A6 /* Data+CacheSpec.swift in Sources */,
-				BDEDD3931DBCEBD0007416A6 /* SyncHybridCacheSpec.swift in Sources */,
 				BDEDD38E1DBCEBD0007416A6 /* Date+CacheSpec.swift in Sources */,
 				BDEDD3891DBCEBD0007416A6 /* ExpirySpec.swift in Sources */,
 				BDEDD3901DBCEBD0007416A6 /* UIImage+CacheSpec.swift in Sources */,
-				BDEDD3921DBCEBD0007416A6 /* SpecializedSyncCacheSpec.swift in Sources */,
 				BDEDD38A1DBCEBD0007416A6 /* JSONSpec.swift in Sources */,
 				BDEDD38F1DBCEBD0007416A6 /* String+CacheSpec.swift in Sources */,
 				BDEDD3911DBCEBD0007416A6 /* DefaultCacheConverterSpec.swift in Sources */,
@@ -889,8 +881,6 @@
 				D5291D3B1C28389B00B702C9 /* JSONSpec.swift in Sources */,
 				D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */,
 				D5291D431C28389B00B702C9 /* MemoryStorageSpec.swift in Sources */,
-				D5ACACD11CD0228400567809 /* SpecializedSyncCacheSpec.swift in Sources */,
-				D5ACACD51CD0256700567809 /* SyncHybridCacheSpec.swift in Sources */,
 				D5291D401C28389B00B702C9 /* String+CacheSpec.swift in Sources */,
 				D5291D9A1C283DB300B702C9 /* UIImage+CacheSpec.swift in Sources */,
 				D5291D411C28389B00B702C9 /* DefaultCacheConverterSpec.swift in Sources */,
@@ -905,25 +895,24 @@
 			files = (
 				D5291D941C283CFB00B702C9 /* MemoryStorage.swift in Sources */,
 				D5291D921C283CFB00B702C9 /* DefaultCacheConverter.swift in Sources */,
-				D5ACACCA1CD01F3400567809 /* SpecializedSyncCache.swift in Sources */,
 				D5291D8B1C283CFB00B702C9 /* Expiry.swift in Sources */,
-				D5ACACDF1CD0272600567809 /* SpecializedCache.swift in Sources */,
 				D5291D891C283CFB00B702C9 /* Cachable.swift in Sources */,
 				D5291D8C1C283CFB00B702C9 /* JSON.swift in Sources */,
 				D5291D8E1C283CFB00B702C9 /* JSON+Cache.swift in Sources */,
+				D5CE968E1EE69969002BFE06 /* SpecializedCache.swift in Sources */,
 				D5291D8A1C283CFB00B702C9 /* Capsule.swift in Sources */,
 				D5CE966E1EE475C0002BFE06 /* Coding.swift in Sources */,
+				D5CE96941EE69969002BFE06 /* BasicHybridCache.swift in Sources */,
 				D5291D881C283CFB00B702C9 /* Config.swift in Sources */,
 				D5291D951C283CFB00B702C9 /* StorageAware.swift in Sources */,
 				D5291D911C283CFB00B702C9 /* String+Cache.swift in Sources */,
 				D5291D901C283CFB00B702C9 /* Date+Cache.swift in Sources */,
 				D5A138C41EB29C2100881A20 /* NSImage+Cache.swift in Sources */,
 				57506FBF1EC2E1B7009B71E9 /* CacheEntry.swift in Sources */,
+				D5CE96871EE691D6002BFE06 /* Logger.swift in Sources */,
 				D5291D931C283CFB00B702C9 /* DiskStorage.swift in Sources */,
-				D5291D861C283CFB00B702C9 /* BasicHybridCache.swift in Sources */,
-				D5ACACCD1CD0207300567809 /* HybridSyncCache.swift in Sources */,
-				D5A138BE1EB296FD00881A20 /* HybridCache.swift in Sources */,
 				D5291D8F1C283CFB00B702C9 /* Data+Cache.swift in Sources */,
+				D5CE96911EE69969002BFE06 /* HybridCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -945,25 +934,24 @@
 			files = (
 				D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */,
 				D5291C311C28220B00B702C9 /* JSON.swift in Sources */,
-				D5ACACC91CD01F3400567809 /* SpecializedSyncCache.swift in Sources */,
 				D5291C361C28220B00B702C9 /* String+Cache.swift in Sources */,
-				D5ACACDE1CD0272600567809 /* SpecializedCache.swift in Sources */,
 				D5291C341C28220B00B702C9 /* Data+Cache.swift in Sources */,
 				D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */,
 				D5291C381C28220B00B702C9 /* DiskStorage.swift in Sources */,
+				D5CE968D1EE69969002BFE06 /* SpecializedCache.swift in Sources */,
 				D5291C391C28220B00B702C9 /* MemoryStorage.swift in Sources */,
 				D5CE966D1EE475C0002BFE06 /* Coding.swift in Sources */,
+				D5CE96931EE69969002BFE06 /* BasicHybridCache.swift in Sources */,
 				D5291C351C28220B00B702C9 /* Date+Cache.swift in Sources */,
 				D5291C371C28220B00B702C9 /* DefaultCacheConverter.swift in Sources */,
 				D5291C301C28220B00B702C9 /* Expiry.swift in Sources */,
 				D5291C331C28220B00B702C9 /* JSON+Cache.swift in Sources */,
 				57506FAE1EC29437009B71E9 /* CacheEntry.swift in Sources */,
 				D5A138C11EB29BFA00881A20 /* UIImage+Cache.swift in Sources */,
+				D5CE96861EE691D6002BFE06 /* Logger.swift in Sources */,
 				D5291C2F1C28220B00B702C9 /* Capsule.swift in Sources */,
 				D5291C2D1C28220B00B702C9 /* Config.swift in Sources */,
-				D5ACACCC1CD0207300567809 /* HybridSyncCache.swift in Sources */,
-				D5291C6C1C2827FB00B702C9 /* BasicHybridCache.swift in Sources */,
-				D5A138BD1EB296FD00881A20 /* HybridCache.swift in Sources */,
+				D5CE96901EE69969002BFE06 /* HybridCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
