@@ -5,7 +5,9 @@ import Foundation
  */
 final class MemoryStorage: CacheAware {
   /// Memory cache instance
-  private let cache = NSCache<NSString, AnyObject>()
+  private let cache = NSCache<NSString, Capsule>()
+  // Memory cache keys
+  private var keys = Set<String>()
 
   // MARK: - Initialization
 
@@ -32,6 +34,7 @@ final class MemoryStorage: CacheAware {
   func add<T: Cachable>(_ key: String, object: T, expiry: Expiry = .never) {
     let capsule = Capsule(value: object, expiry: expiry)
     cache.setObject(capsule, forKey: key as NSString)
+    keys.insert(key)
   }
 
   /**
@@ -49,7 +52,7 @@ final class MemoryStorage: CacheAware {
    - Returns: Object wrapper with metadata or nil if not found
    */
   func cacheEntry<T: Cachable>(_ key: String) -> CacheEntry<T>? {
-    guard let capsule = cache.object(forKey: key as NSString) as? Capsule else {
+    guard let capsule = cache.object(forKey: key as NSString) else {
       return nil
     }
     guard let object = capsule.object as? T else {
@@ -64,6 +67,7 @@ final class MemoryStorage: CacheAware {
    */
   func remove(_ key: String) {
     cache.removeObject(forKey: key as NSString)
+    keys.remove(key)
   }
 
   /**
@@ -71,7 +75,7 @@ final class MemoryStorage: CacheAware {
    - Parameter key: Unique key to identify the object in the cache
    */
   func removeIfExpired(_ key: String) {
-    if let capsule = cache.object(forKey: key as NSString) as? Capsule, capsule.expired {
+    if let capsule = cache.object(forKey: key as NSString), capsule.expired {
       remove(key)
     }
   }
@@ -87,6 +91,9 @@ final class MemoryStorage: CacheAware {
    Clears all expired objects.
    */
   func clearExpired() {
-    clear()
+    let allKeys = keys
+    for key in allKeys {
+      removeIfExpired(key)
+    }
   }
 }
