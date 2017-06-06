@@ -214,7 +214,7 @@ extension BasicHybridCache {
    - Parameter completion: Completion closure to be called when the task is done
    */
   func object<T: Cachable>(forKey key: String, completion: @escaping (T?) -> Void) {
-    cacheEntry(forKey: key) { entry in
+    cacheEntry(forKey: key) { (entry: CacheEntry<T>?) in
       completion(entry?.object)
     }
   }

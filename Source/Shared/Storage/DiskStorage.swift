@@ -65,7 +65,7 @@ final class DiskStorage: CacheAware {
    - Parameter key: Unique key to identify the object in the cache
    */
   func object<T: Cachable>(_ key: String) throws -> T? {
-    return try cacheEntry(key)?.object
+    return (try cacheEntry(key) as CacheEntry<T>?)?.object
   }
 
   /**
