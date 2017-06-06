@@ -1,246 +1,349 @@
-import Quick
-import Nimble
+import XCTest
 @testable import Cache
 
-class SpecializedCacheSpec: QuickSpec {
-  override func spec() {
-    describe("Specialized") {
-      let name = "WeirdoCache"
-      let key = "alongweirdkey"
-      let object = SpecHelper.user
-      var cache: SpecializedCache<User>!
+class SpecializedCacheTests: XCTestCase {
+  let cacheName = "WeirdoCache"
+  let key = "alongweirdkey"
+  let object = SpecHelper.user
+  var cache: SpecializedCache<User>!
 
-      beforeEach {
-        cache = SpecializedCache<User>(name: name)
+  override func setUp() {
+    super.setUp()
+    cache = SpecializedCache<User>(name: cacheName)
+  }
+
+  override func tearDown() {
+    try? cache.clear()
+    super.tearDown()
+  }
+
+  func testInit() {
+    let defaultConfig = Config()
+
+    XCTAssertEqual(cache.name, cacheName)
+    XCTAssertEqual(cache.manager.config.expiry.date, defaultConfig.expiry.date)
+    XCTAssertNil(cache.manager.config.cacheDirectory)
+    XCTAssertEqual(cache.manager.config.maxDiskSize, defaultConfig.maxDiskSize)
+    XCTAssertEqual(cache.manager.config.memoryCountLimit, defaultConfig.memoryCountLimit)
+    XCTAssertEqual(cache.manager.config.memoryTotalCostLimit, defaultConfig.memoryTotalCostLimit)
+    XCTAssertTrue(cache.manager.config.cacheDirectory == defaultConfig.cacheDirectory)
+  }
+
+  // MARK: - Async caching
+
+  func testAsyncAddObject() {
+    let expectation1 = self.expectation(description: "Save Expectation")
+    let expectation2 = self.expectation(description: "Save To Memory Expectation")
+    let expectation3 = self.expectation(description: "Save To Disk Expectation")
+
+    cache.async.addObject(object, forKey: key) { error in
+      if let error = error {
+        XCTFail("Failed with error: \(error)")
       }
 
-      afterEach {
-        cache.clear()
+      self.cache.async.object(forKey: self.key) { receivedObject in
+        XCTAssertNotNil(receivedObject)
+        expectation1.fulfill()
       }
 
-      describe("#init") {
-        it("sets a name") {
-          expect(cache.name).to(equal(name))
+
+      let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+      XCTAssertNotNil(memoryObject)
+      expectation2.fulfill()
+
+      let diskObject: User? = try! self.cache.manager.backStorage.object(self.key)
+      XCTAssertNotNil(diskObject)
+      expectation3.fulfill()
+    }
+
+    self.waitForExpectations(timeout: 1.0, handler:nil)
+  }
+
+  func testAsyncCacheEntry() {
+    let expectation = self.expectation(description: "Save Expectation")
+    let expiryDate = Date()
+    cache.async.addObject(object, forKey: key, expiry: .date(expiryDate)) { error in
+      if let error = error {
+        XCTFail("Failed with error: \(error)")
+      }
+
+      self.cache.async.cacheEntry(forKey: self.key) { entry in
+        XCTAssertEqual(entry?.object.firstName, self.object.firstName)
+        XCTAssertEqual(entry?.object.lastName, self.object.lastName)
+        XCTAssertEqual(entry?.expiry.date, expiryDate)
+        expectation.fulfill()
+      }
+    }
+    self.waitForExpectations(timeout: 1.0, handler:nil)
+  }
+
+  func testAsyncObject() {
+    let expectation = self.expectation(description: "Expectation")
+    cache.async.addObject(object, forKey: key) { error in
+      if let error = error {
+        XCTFail("Failed with error: \(error)")
+      }
+      self.cache.async.object(forKey: self.key) { receivedObject in
+        XCTAssertNotNil(receivedObject)
+        XCTAssertEqual(receivedObject?.firstName, self.object.firstName)
+        XCTAssertEqual(receivedObject?.lastName, self.object.lastName)
+        expectation.fulfill()
+      }
+    }
+    self.waitForExpectations(timeout: 1.0, handler:nil)
+  }
+
+  /// Should resolve from disk and set in-memory cache if object not in-memory
+  func testAsyncObjectCopyToMemory() {
+    let expectation = self.expectation(description: "Expectation")
+
+    try! cache.manager.backStorage.add(key, object: object)
+    cache.async.object(forKey: key) { receivedObject in
+      XCTAssertNotNil(receivedObject)
+      XCTAssertEqual(receivedObject?.firstName, self.object.firstName)
+      XCTAssertEqual(receivedObject?.lastName, self.object.lastName)
+
+      let inMemoryCachedUser: User? = self.cache.manager.frontStorage.object(self.key)
+      XCTAssertEqual(inMemoryCachedUser?.firstName, self.object.firstName)
+      XCTAssertEqual(inMemoryCachedUser?.lastName, self.object.lastName)
+
+      expectation.fulfill()
+    }
+
+    self.waitForExpectations(timeout: 1.0, handler:nil)
+  }
+
+  /// Removes cached object from memory and disk
+  func testAsyncRemoveObject() {
+    let expectation1 = self.expectation(description: "Remove Expectation")
+    let expectation2 = self.expectation(description: "Remove From Memory Expectation")
+    let expectation3 = self.expectation(description: "Remove From Disk Expectation")
+
+    cache.async.addObject(object, forKey: key) { error in
+      if let error = error {
+        XCTFail("Failed with error: \(error)")
+      }
+      self.cache.async.removeObject(forKey: self.key) { error in
+        if let error = error {
+          XCTFail("Failed with error: \(error)")
         }
 
-        it("sets a config") {
-          let defaultConfig = Config()
-          expect(cache.config.expiry.date).to(equal(defaultConfig.expiry.date))
-          expect(cache.config.cacheDirectory).to(beNil())
-          expect(cache.config.maxDiskSize).to(equal(defaultConfig.maxDiskSize))
-          expect(cache.config.memoryCountLimit).to(equal(defaultConfig.memoryCountLimit))
-          expect(cache.config.memoryTotalCostLimit).to(equal(defaultConfig.memoryTotalCostLimit))
-          expect(cache.config.cacheDirectory == defaultConfig.cacheDirectory).to(beTrue())
+        self.cache.async.object(forKey: self.key) { object in
+          XCTAssertNil(object)
+          expectation1.fulfill()
         }
+
+        let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+        XCTAssertNil(memoryObject)
+        expectation2.fulfill()
+
+        var diskObject: User?
+        do {
+          diskObject = try self.cache.manager.backStorage.object(self.key)
+        } catch {}
+
+        XCTAssertNil(diskObject)
+        expectation3.fulfill()
       }
+    }
 
-      describe("#add") {
-        it("saves an object to memory and disk") {
-          let expectation1 = self.expectation(description: "Save Expectation")
-          let expectation2 = self.expectation(description: "Save To Memory Expectation")
-          let expectation3 = self.expectation(description: "Save To Disk Expectation")
+    self.waitForExpectations(timeout: 1.0, handler:nil)
+  }
 
-          cache.add(key, object: object) { error in
-            if let error = error {
-              XCTFail("Failed with error: \(error)")
-            }
+  /// Clears memory and disk cache
+  func testAsyncClear() {
+    let expectation1 = self.expectation(description: "Clear Expectation")
+    let expectation2 = self.expectation(description: "Clear Memory Expectation")
+    let expectation3 = self.expectation(description: "Clear Disk Expectation")
 
-            cache.object(key) { receivedObject in
-              expect(receivedObject).toNot(beNil())
-              expectation1.fulfill()
-            }
+    cache.async.addObject(object, forKey: key) { error in
+      if let error = error {
+        XCTFail("Failed with error: \(error)")
+      }
+      self.cache.async.clear() { error in
+        if let error = error {
+          XCTFail("Failed with error: \(error)")
+        }
 
+        self.cache.async.object(forKey: self.key) { object in
+          XCTAssertNil(object)
+          expectation1.fulfill()
+        }
 
-            let memoryObject: User? = cache.frontStorage.object(key)
-            expect(memoryObject).toNot(beNil())
+        let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+        XCTAssertNil(memoryObject)
+        expectation2.fulfill()
+
+        var diskObject: User?
+        do {
+          diskObject = try self.cache.manager.backStorage.object(self.key)
+        } catch {}
+        XCTAssertNil(diskObject)
+        expectation3.fulfill()
+      }
+    }
+    self.waitForExpectations(timeout: 1.0, handler:nil)
+  }
+
+  /// Clears expired objects from memory and disk cache
+  func testAsyncClearExpired() {
+    let expectation1 = self.expectation(description: "Clear If Expired Expectation")
+    let expectation2 = self.expectation(description: "Don't Clear If Not Expired Expectation")
+    let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))
+    let expiry2: Expiry = .date(Date().addingTimeInterval(100000))
+    let key1 = "key1"
+    let key2 = "key2"
+
+    cache.async.addObject(object, forKey: key1, expiry: expiry1) { error in
+      if let error = error {
+        XCTFail("Failed with error: \(error)")
+      }
+      self.cache.async.addObject(self.object, forKey: key2, expiry: expiry2) { error in
+        if let error = error {
+          XCTFail("Failed with error: \(error)")
+        }
+        self.cache.async.clearExpired() { error in
+          if let error = error {
+            XCTFail("Failed with error: \(error)")
+          }
+          self.cache.async.object(forKey: key1) { object in
+            XCTAssertNil(object)
+            expectation1.fulfill()
+          }
+          self.cache.async.object(forKey: key2) { object in
+            XCTAssertNotNil(object)
             expectation2.fulfill()
-
-            let diskObject: User? = try! cache.backStorage.object(key)
-            expect(diskObject).toNot(beNil())
-            expectation3.fulfill()
-          }
-
-          self.waitForExpectations(timeout: 1.0, handler:nil)
-        }
-      }
-      
-      describe("#cacheEntry") {
-        it("resolves cache entry") {
-          waitUntil(timeout: 1.0) { done in
-            let expiryDate = Date()
-            cache.add(key, object: object, expiry: .date(expiryDate)) { error in
-              if let error = error {
-                XCTFail("Failed with error: \(error)")
-              }
-
-              cache.cacheEntry(key) { entry in
-                expect(entry?.object.firstName).to(equal(object.firstName))
-                expect(entry?.object.lastName).to(equal(object.lastName))
-                expect(entry?.expiry.date).to(equal(expiryDate))
-                done()
-              }
-            }
           }
         }
       }
-      
-      describe("#object") {
-        it("resolves cached object") {
-          let expectation = self.expectation(description: "Object Expectation")
-          cache.add(key, object: object) { error in
-            if let error = error {
-              XCTFail("Failed with error: \(error)")
-            }
-            cache.object(key) { receivedObject in
-              expect(receivedObject).toNot(beNil())
-              expect(receivedObject?.firstName).to(equal(object.firstName))
-              expect(receivedObject?.lastName).to(equal(object.lastName))
-              expectation.fulfill()
-            }
-          }
-          self.waitForExpectations(timeout: 1.0, handler:nil)
-        }
-        
-        it("should resolve from disk and set in-memory cache if object not in-memory") {
-          let frontStorage = MemoryStorage(name: "MemoryStorage")
-          let backStorage = DiskStorage(name: "DiskStorage")
-          let config = Config()
-          let key = "myusernamedjohn"
-          let object = SpecHelper.user
-          
-          let cache = SpecializedCache<User>(
-            name: "MyCache",
-            frontStorage: frontStorage,
-            backStorage: backStorage,
-            config: config
-          )
-          
-          waitUntil(timeout: 1.0) { done in
-            try! backStorage.add(key, object: object)
-            cache.object(key) { receivedObject in
-              expect(receivedObject).toNot(beNil())
-              expect(receivedObject?.firstName).to(equal(object.firstName))
-              expect(receivedObject?.lastName).to(equal(object.lastName))
-                
-              let inmemoryCachedUser: User? = frontStorage.object(key)
-              expect(inmemoryCachedUser?.firstName).to(equal(object.firstName))
-              expect(inmemoryCachedUser?.lastName).to(equal(object.lastName))
-              done()
-            }
-          }
-        }
-      }
+    }
 
-      describe("#remove") {
-        it("removes cached object from memory and disk") {
-          let expectation1 = self.expectation(description: "Remove Expectation")
-          let expectation2 = self.expectation(description: "Remove From Memory Expectation")
-          let expectation3 = self.expectation(description: "Remove From Disk Expectation")
+    self.waitForExpectations(timeout: 1.0, handler:nil)
+  }
 
-          cache.add(key, object: object) { error in
-            if let error = error {
-              XCTFail("Failed with error: \(error)")
-            }
-            cache.remove(key) { error in
-              if let error = error {
-                XCTFail("Failed with error: \(error)")
-              }
+  // MARK: - Sync caching
 
-              cache.object(key) { object in
-                expect(object).to(beNil())
-                expectation1.fulfill()
-              }
+  func testAdd() {
+    do {
+      try cache.addObject(object, forKey: key)
 
-              let memoryObject: User? = cache.frontStorage.object(key)
-              expect(memoryObject).to(beNil())
-              expectation2.fulfill()
+      let receivedObject = cache.object(forKey: key)
+      XCTAssertNotNil(receivedObject)
 
-              var diskObject: User?
-              do {
-                diskObject = try cache.backStorage.object(key)
-              } catch {}
+      let memoryObject: User? = cache.manager.frontStorage.object(self.key)
+      XCTAssertNotNil(memoryObject)
 
-              expect(diskObject).to(beNil())
-              expectation3.fulfill()
-            }
-          }
+      let diskObject: User? = try! cache.manager.backStorage.object(self.key)
+      XCTAssertNotNil(diskObject)
+    } catch {
+      XCTFail("Failed with error: \(error)")
+    }
+  }
 
-          self.waitForExpectations(timeout: 1.0, handler:nil)
-        }
-      }
+  func testCacheEntry() {
+    let expiryDate = Date()
+    do {
+      try cache.addObject(object, forKey: key, expiry: .date(expiryDate))
+      let entry = cache.cacheEntry(forKey: key)
 
-      describe("#clear") {
-        it("clears memory and disk cache") {
-          let expectation1 = self.expectation(description: "Clear Expectation")
-          let expectation2 = self.expectation(description: "Clear Memory Expectation")
-          let expectation3 = self.expectation(description: "Clear Disk Expectation")
+      XCTAssertEqual(entry?.object.firstName, self.object.firstName)
+      XCTAssertEqual(entry?.object.lastName, self.object.lastName)
+      XCTAssertEqual(entry?.expiry.date, expiryDate)
+    } catch {
+      XCTFail("Failed with error: \(error)")
+    }
+  }
 
-          cache.add(key, object: object) { error in
-            if let error = error {
-              XCTFail("Failed with error: \(error)")
-            }
-            cache.clear() { error in
-              if let error = error {
-                XCTFail("Failed with error: \(error)")
-              }
+  func testObject() {
+    do {
+      try cache.addObject(object, forKey: key)
+      let receivedObject = cache.object(forKey: key)
 
-              cache.object(key) { object in
-                expect(object).to(beNil())
-                expectation1.fulfill()
-              }
+      XCTAssertNotNil(receivedObject)
+      XCTAssertEqual(receivedObject?.firstName, self.object.firstName)
+      XCTAssertEqual(receivedObject?.lastName, self.object.lastName)
+    } catch {
+      XCTFail("Failed with error: \(error)")
+    }
+  }
 
-              let memoryObject: User? = cache.frontStorage.object(key)
-              expect(memoryObject).to(beNil())
-              expectation2.fulfill()
+  /// Should resolve from disk and set in-memory cache if object not in-memory
+  func testObjectCopyToMemory() {
+    do {
+      try cache.manager.backStorage.add(key, object: object)
+      let receivedObject = cache.object(forKey: key)
 
-              var diskObject: User?
-              do {
-                diskObject = try cache.backStorage.object(key)
-              } catch {}
-              expect(diskObject).to(beNil())
-              expectation3.fulfill()
-            }
-          }
-          self.waitForExpectations(timeout: 1.0, handler:nil)
-        }
-      }
-      
-      describe("#clearExpired") {
-        it("clears expired objects from memory and disk cache") {
-          let expectation1 = self.expectation(description: "Clear If Expired Expectation")
-          let expectation2 = self.expectation(description: "Don't Clear If Not Expired Expectation")
-          let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))
-          let expiry2: Expiry = .date(Date().addingTimeInterval(100000))
-          let key1 = "key1"
-          let key2 = "key2"
-          
-          cache.add(key1, object: object, expiry: expiry1) { error in
-            if let error = error {
-              XCTFail("Failed with error: \(error)")
-            }
-            cache.add(key2, object: object, expiry: expiry2) { error in
-              if let error = error {
-                XCTFail("Failed with error: \(error)")
-              }
-              cache.clearExpired() { error in
-                if let error = error {
-                  XCTFail("Failed with error: \(error)")
-                }
-                cache.object(key1) { object in
-                  expect(object).to(beNil())
-                  expectation1.fulfill()
-                }
-                cache.object(key2) { object in
-                  expect(object).toNot(beNil())
-                  expectation2.fulfill()
-                }
-              }
-            }
-          }
-          
-          self.waitForExpectations(timeout: 1.0, handler:nil)
-        }
-      }
+      XCTAssertNotNil(receivedObject)
+      XCTAssertEqual(receivedObject?.firstName, object.firstName)
+      XCTAssertEqual(receivedObject?.lastName, object.lastName)
+
+      let inmemoryCachedUser: User? = cache.manager.frontStorage.object(key)
+      XCTAssertEqual(inmemoryCachedUser?.firstName, object.firstName)
+      XCTAssertEqual(inmemoryCachedUser?.lastName, object.lastName)
+    } catch {
+      XCTFail("Failed with error: \(error)")
+    }
+  }
+
+  /// Removes cached object from memory and disk
+  func testRemoveObject() {
+    do {
+      try cache.addObject(object, forKey: key)
+      XCTAssertNotNil(cache.object(forKey: key))
+
+      try cache.removeObject(forKey: key)
+      XCTAssertNil(cache.object(forKey: key))
+
+      let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+      XCTAssertNil(memoryObject)
+
+      var diskObject: User?
+      do {
+        diskObject = try self.cache.manager.backStorage.object(self.key)
+      } catch {}
+
+      XCTAssertNil(diskObject)
+    } catch {
+      XCTFail("Failed with error: \(error)")
+    }
+  }
+
+  /// Clears memory and disk cache
+  func testClear() {
+    do {
+      try cache.addObject(object, forKey: key)
+      try cache.clear()
+
+      XCTAssertNil(cache.object(forKey: key))
+
+      let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+      XCTAssertNil(memoryObject)
+
+      var diskObject: User?
+      do {
+        diskObject = try self.cache.manager.backStorage.object(self.key)
+      } catch {}
+      XCTAssertNil(diskObject)
+    } catch {
+      XCTFail("Failed with error: \(error)")
+    }
+  }
+
+  /// Clears expired objects from memory and disk cache
+  func testClearExpired() {
+    let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))
+    let expiry2: Expiry = .date(Date().addingTimeInterval(100000))
+    let key1 = "key1"
+    let key2 = "key2"
+
+    do {
+      try cache.addObject(object, forKey: key1, expiry: expiry1)
+      try cache.addObject(object, forKey: key2, expiry: expiry2)
+      try cache.clearExpired()
+      XCTAssertNil(cache.object(forKey: key1))
+      XCTAssertNotNil(cache.object(forKey: key2))
+    } catch {
+      XCTFail("Failed with error: \(error)")
     }
   }
 }
