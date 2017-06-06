@@ -45,17 +45,10 @@ class CodingSpec: QuickSpec {
       
       describe("Encoding and decoding") {
         it("resolves cached object") {
-          let expectation = self.expectation(description: "Object Expectation")
-
-          storage.add(key, object: object) {
-            storage.object(key) { (receivedObject: Post?) in
-              expect(receivedObject?.title).to(equal("Title"))
-              expect(receivedObject?.text).to(equal("Text"))
-              expectation.fulfill()
-            }
-          }
-
-          self.waitForExpectations(timeout: 2.0, handler:nil)
+          try! storage.add(key, object: object)
+          let receivedObject: Post? = try! storage.object(key)
+          expect(receivedObject?.title).to(equal("Title"))
+          expect(receivedObject?.text).to(equal("Text"))
         }
       }
     }

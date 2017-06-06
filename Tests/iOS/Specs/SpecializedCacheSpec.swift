@@ -3,7 +3,6 @@ import Nimble
 @testable import Cache
 
 class SpecializedCacheSpec: QuickSpec {
-
   override func spec() {
     describe("Specialized") {
       let name = "WeirdoCache"
@@ -29,11 +28,8 @@ class SpecializedCacheSpec: QuickSpec {
           expect(cache.config.expiry.date).to(equal(defaultConfig.expiry.date))
           expect(cache.config.cacheDirectory).to(beNil())
           expect(cache.config.maxDiskSize).to(equal(defaultConfig.maxDiskSize))
-          expect(cache.config.maxObjectsInMemory).to(equal(defaultConfig.maxObjectsInMemory))
-          /**
-            I don't see a clear way to compare optional values via `Nimble` predicates,
-            so do it directly
-           */
+          expect(cache.config.memoryCountLimit).to(equal(defaultConfig.memoryCountLimit))
+          expect(cache.config.memoryTotalCostLimit).to(equal(defaultConfig.memoryTotalCostLimit))
           expect(cache.config.cacheDirectory == defaultConfig.cacheDirectory).to(beTrue())
         }
       }
@@ -44,38 +40,43 @@ class SpecializedCacheSpec: QuickSpec {
           let expectation2 = self.expectation(description: "Save To Memory Expectation")
           let expectation3 = self.expectation(description: "Save To Disk Expectation")
 
-          cache.add(key, object: object) {
-            cache.object(key) { (receivedObject: User?) in
+          cache.add(key, object: object) { error in
+            if let error = error {
+              XCTFail("Failed with error: \(error)")
+            }
+
+            cache.object(key) { receivedObject in
               expect(receivedObject).toNot(beNil())
               expectation1.fulfill()
             }
 
-            cache.frontStorage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).toNot(beNil())
-              expectation2.fulfill()
-            }
 
-            cache.backStorage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).toNot(beNil())
-              expectation3.fulfill()
-            }
+            let memoryObject: User? = cache.frontStorage.object(key)
+            expect(memoryObject).toNot(beNil())
+            expectation2.fulfill()
+
+            let diskObject: User? = try! cache.backStorage.object(key)
+            expect(diskObject).toNot(beNil())
+            expectation3.fulfill()
           }
 
-          self.waitForExpectations(timeout: 8.0, handler:nil)
+          self.waitForExpectations(timeout: 1.0, handler:nil)
         }
       }
       
       describe("#cacheEntry") {
         it("resolves cache entry") {
-          waitUntil(timeout: 4.0) { done in
+          waitUntil(timeout: 1.0) { done in
             let expiryDate = Date()
-            
-            cache.add(key, object: object, expiry: .date(expiryDate)) {
-              cache.cacheEntry(key) { (entry: CacheEntry<User>?) in
+            cache.add(key, object: object, expiry: .date(expiryDate)) { error in
+              if let error = error {
+                XCTFail("Failed with error: \(error)")
+              }
+
+              cache.cacheEntry(key) { entry in
                 expect(entry?.object.firstName).to(equal(object.firstName))
                 expect(entry?.object.lastName).to(equal(object.lastName))
                 expect(entry?.expiry.date).to(equal(expiryDate))
-                
                 done()
               }
             }
@@ -86,16 +87,18 @@ class SpecializedCacheSpec: QuickSpec {
       describe("#object") {
         it("resolves cached object") {
           let expectation = self.expectation(description: "Object Expectation")
-          
-          cache.add(key, object: object) {
-            cache.object(key) { (receivedObject: User?) in
+          cache.add(key, object: object) { error in
+            if let error = error {
+              XCTFail("Failed with error: \(error)")
+            }
+            cache.object(key) { receivedObject in
+              expect(receivedObject).toNot(beNil())
               expect(receivedObject?.firstName).to(equal(object.firstName))
               expect(receivedObject?.lastName).to(equal(object.lastName))
               expectation.fulfill()
             }
           }
-          
-          self.waitForExpectations(timeout: 4.0, handler:nil)
+          self.waitForExpectations(timeout: 1.0, handler:nil)
         }
         
         it("should resolve from disk and set in-memory cache if object not in-memory") {
@@ -112,21 +115,17 @@ class SpecializedCacheSpec: QuickSpec {
             config: config
           )
           
-          waitUntil(timeout: 4.0) { done in
-            
-            backStorage.add(key, object: object) {
-              
-              cache.object(key) { (receivedObject: User?) in
+          waitUntil(timeout: 1.0) { done in
+            try! backStorage.add(key, object: object)
+            cache.object(key) { receivedObject in
+              expect(receivedObject).toNot(beNil())
+              expect(receivedObject?.firstName).to(equal(object.firstName))
+              expect(receivedObject?.lastName).to(equal(object.lastName))
                 
-                expect(receivedObject?.firstName).to(equal(object.firstName))
-                expect(receivedObject?.lastName).to(equal(object.lastName))
-                
-                frontStorage.object(key) { (inmemoryCachedUser: User?) in
-                  expect(inmemoryCachedUser?.firstName).to(equal(object.firstName))
-                  expect(inmemoryCachedUser?.lastName).to(equal(object.lastName))
-                  done()
-                }
-              }
+              let inmemoryCachedUser: User? = frontStorage.object(key)
+              expect(inmemoryCachedUser?.firstName).to(equal(object.firstName))
+              expect(inmemoryCachedUser?.lastName).to(equal(object.lastName))
+              done()
             }
           }
         }
@@ -138,26 +137,35 @@ class SpecializedCacheSpec: QuickSpec {
           let expectation2 = self.expectation(description: "Remove From Memory Expectation")
           let expectation3 = self.expectation(description: "Remove From Disk Expectation")
 
-          cache.add(key, object: object)
-
-          cache.remove(key) {
-            cache.object(key) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
-              expectation1.fulfill()
+          cache.add(key, object: object) { error in
+            if let error = error {
+              XCTFail("Failed with error: \(error)")
             }
+            cache.remove(key) { error in
+              if let error = error {
+                XCTFail("Failed with error: \(error)")
+              }
 
-            cache.frontStorage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
+              cache.object(key) { object in
+                expect(object).to(beNil())
+                expectation1.fulfill()
+              }
+
+              let memoryObject: User? = cache.frontStorage.object(key)
+              expect(memoryObject).to(beNil())
               expectation2.fulfill()
-            }
 
-            cache.backStorage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
+              var diskObject: User?
+              do {
+                diskObject = try cache.backStorage.object(key)
+              } catch {}
+
+              expect(diskObject).to(beNil())
               expectation3.fulfill()
             }
           }
 
-          self.waitForExpectations(timeout: 8.0, handler:nil)
+          self.waitForExpectations(timeout: 1.0, handler:nil)
         }
       }
 
@@ -167,26 +175,33 @@ class SpecializedCacheSpec: QuickSpec {
           let expectation2 = self.expectation(description: "Clear Memory Expectation")
           let expectation3 = self.expectation(description: "Clear Disk Expectation")
 
-          cache.add(key, object: object)
-
-          cache.clear() {
-            cache.object(key) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
-              expectation1.fulfill()
+          cache.add(key, object: object) { error in
+            if let error = error {
+              XCTFail("Failed with error: \(error)")
             }
+            cache.clear() { error in
+              if let error = error {
+                XCTFail("Failed with error: \(error)")
+              }
 
-            cache.frontStorage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
+              cache.object(key) { object in
+                expect(object).to(beNil())
+                expectation1.fulfill()
+              }
+
+              let memoryObject: User? = cache.frontStorage.object(key)
+              expect(memoryObject).to(beNil())
               expectation2.fulfill()
-            }
 
-            cache.backStorage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
+              var diskObject: User?
+              do {
+                diskObject = try cache.backStorage.object(key)
+              } catch {}
+              expect(diskObject).to(beNil())
               expectation3.fulfill()
             }
           }
-
-          self.waitForExpectations(timeout: 8.0, handler:nil)
+          self.waitForExpectations(timeout: 1.0, handler:nil)
         }
       }
       
@@ -194,30 +209,36 @@ class SpecializedCacheSpec: QuickSpec {
         it("clears expired objects from memory and disk cache") {
           let expectation1 = self.expectation(description: "Clear If Expired Expectation")
           let expectation2 = self.expectation(description: "Don't Clear If Not Expired Expectation")
-          
           let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))
           let expiry2: Expiry = .date(Date().addingTimeInterval(100000))
-          
           let key1 = "key1"
           let key2 = "key2"
           
-          cache.add(key1, object: object, expiry: expiry1) {
-            cache.add(key2, object: object, expiry: expiry2) {
-              cache.clearExpired() {
-                cache.object(key1) { (receivedObject: User?) in
-                  expect(receivedObject).to(beNil())
+          cache.add(key1, object: object, expiry: expiry1) { error in
+            if let error = error {
+              XCTFail("Failed with error: \(error)")
+            }
+            cache.add(key2, object: object, expiry: expiry2) { error in
+              if let error = error {
+                XCTFail("Failed with error: \(error)")
+              }
+              cache.clearExpired() { error in
+                if let error = error {
+                  XCTFail("Failed with error: \(error)")
+                }
+                cache.object(key1) { object in
+                  expect(object).to(beNil())
                   expectation1.fulfill()
                 }
-                
-                cache.object(key2) { (receivedObject: User?) in
-                  expect(receivedObject).toNot(beNil())
+                cache.object(key2) { object in
+                  expect(object).toNot(beNil())
                   expectation2.fulfill()
                 }
               }
             }
           }
           
-          self.waitForExpectations(timeout: 5.0, handler:nil)
+          self.waitForExpectations(timeout: 1.0, handler:nil)
         }
       }
     }

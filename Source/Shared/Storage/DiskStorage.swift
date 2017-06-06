@@ -4,17 +4,15 @@ import SwiftHash
 /**
  File-based cache storage
  */
-public final class DiskStorage: StorageAware {
-  /// Domain prefix
-  public static let prefix = "no.hyper.Cache.Disk"
+final class DiskStorage: CacheAware {
+  enum Error: Swift.Error {
+    case fileEnumeratorFailed
+  }
+
   /// Storage root path
-  public let path: String
+  let path: String
   /// Maximum size of the cache storage
-  public let maxSize: UInt
-  /// Queue for write operations
-  public private(set) var writeQueue: DispatchQueue
-  /// Queue for read operations
-  public private(set) var readQueue: DispatchQueue
+  let maxSize: UInt
   /// File manager to read/write to the disk
   fileprivate let fileManager = FileManager()
 
@@ -27,24 +25,25 @@ public final class DiskStorage: StorageAware {
    - Parameter cacheDirectory: (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches
    - Parameter fileProtectionType: Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
    */
-  public required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
+  required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
     self.maxSize = maxSize
-    let fullName = [DiskStorage.prefix, name.capitalized].joined(separator: ".")
 
-    if let cacheDirectory = cacheDirectory {
-      path = cacheDirectory
-    } else {
-      do {
-        let url = try fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-
-        path = url.appendingPathComponent(fullName, isDirectory: true).path
-      } catch {
-        fatalError("Failed to find or get acces to caches directory: \(error)")
+    do {
+      if let cacheDirectory = cacheDirectory {
+        path = cacheDirectory
+      } else {
+        let url = try fileManager.url(
+          for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true
+        )
+        path = url.appendingPathComponent(name, isDirectory: true).path
       }
-    }
 
-    writeQueue = DispatchQueue(label: "\(fullName).WriteQueue")
-    readQueue = DispatchQueue(label: "\(fullName).ReadQueue")
+      if !fileManager.fileExists(atPath: path) {
+        try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+      }
+    } catch {
+      fatalError("Failed to find or get acces to caches directory: \(error)")
+    }
   }
 
   // MARK: - CacheAware
@@ -54,46 +53,19 @@ public final class DiskStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter object: Object that needs to be cached
    - Parameter expiry: Expiration date for the cached object
-   - Parameter completion: Completion closure to be called when the task is done
    */
-  public func add<T: Cachable>(_ key: String, object: T, expiry: Expiry = .never, completion: (() -> Void)? = nil) {
-    writeQueue.async { [weak self] in
-      guard let weakSelf = self else {
-        completion?()
-        return
-      }
-
-      if !weakSelf.fileManager.fileExists(atPath: weakSelf.path) {
-        do {
-          try weakSelf.fileManager.createDirectory(atPath: weakSelf.path,
-            withIntermediateDirectories: true, attributes: nil)
-        } catch {}
-      }
-
-      do {
-        let filePath = weakSelf.filePath(key)
-        weakSelf.fileManager.createFile(atPath: filePath,
-          contents: object.encode() as Data?, attributes: nil)
-        try weakSelf.fileManager.setAttributes(
-          [
-            FileAttributeKey.modificationDate: expiry.date
-          ],
-          ofItemAtPath: filePath)
-      } catch {}
-
-      completion?()
-    }
+  func add<T: Cachable>(_ key: String, object: T, expiry: Expiry = .never) throws {
+    let filePath = makeFilePath(for: key)
+    fileManager.createFile(atPath: filePath, contents: object.encode(), attributes: nil)
+    try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)
   }
 
   /**
    Gets information about the cached object.
    - Parameter key: Unique key to identify the object in the cache
-   - Parameter completion: Completion closure returns object or nil
    */
-  public func object<T: Cachable>(_ key: String, completion: @escaping (_ object: T?) -> Void) {
-    cacheEntry(key) { (entry: CacheEntry<T>?) in
-      completion(entry?.object)
-    }
+  func object<T: Cachable>(_ key: String) throws -> T? {
+    return (try cacheEntry(key) as CacheEntry<T>?)?.object
   }
 
   /**
@@ -101,170 +73,106 @@ public final class DiskStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object wrapper with metadata or nil
    */
-  public func cacheEntry<T: Cachable>(_ key: String, completion: @escaping (_ object: CacheEntry<T>?) -> Void) {
-    readQueue.async { [weak self] in
-      guard let weakSelf = self else {
-        completion(nil)
-        return
-      }
+  func cacheEntry<T: Cachable>(_ key: String) throws -> CacheEntry<T>? {
+    let filePath = makeFilePath(for: key)
+    let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
+    let attributes = try fileManager.attributesOfItem(atPath: filePath)
 
-      let filePath = weakSelf.filePath(key)
-      var cachedObject: T?
-
-      if let data = try? Data(contentsOf: URL(fileURLWithPath: filePath)) {
-        cachedObject = T.decode(data) as? T
-      }
-
-      if let cachedObject = cachedObject,
-        let expiry = weakSelf.cachedObjectExpiry(path: filePath) {
-        completion(CacheEntry(object: cachedObject, expiry: expiry))
-        return
-      }
-
-      completion(nil)
+    guard let object = T.decode(data) as? T, let date = attributes[.modificationDate] as? Date else {
+      return nil
     }
-  }
 
-  private func cachedObjectExpiry(path: String) -> Expiry? {
-    do {
-      let attributes = try fileManager.attributesOfItem(atPath: path)
-      guard let modificationDate = attributes[FileAttributeKey.modificationDate] as? Date else {
-        return nil
-      }
-      return Expiry.date(modificationDate)
-    } catch {}
-
-    return nil
+    return CacheEntry(
+      object: object,
+      expiry: Expiry.date(date)
+    )
   }
 
   /**
    Removes the object from the cache by the given key.
    - Parameter key: Unique key to identify the object in the cache
-   - Parameter completion: Completion closure to be called when the task is done
    */
-  public func remove(_ key: String, completion: (() -> Void)? = nil) {
-    writeQueue.async { [weak self] in
-      guard let weakSelf = self else {
-        completion?()
-        return
-      }
-
-      do {
-        try weakSelf.fileManager.removeItem(atPath: weakSelf.filePath(key))
-      } catch {}
-
-      completion?()
-    }
+  func remove(_ key: String) throws {
+    try fileManager.removeItem(atPath: makeFilePath(for: key))
   }
 
   /**
    Removes the object from the cache if it's expired.
    - Parameter key: Unique key to identify the object in the cache
-   - Parameter completion: Completion closure to be called when the task is done
    */
-  public func removeIfExpired(_ key: String, completion: (() -> Void)?) {
-    let path = filePath(key)
-
-    writeQueue.async { [weak self] in
-      guard let weakSelf = self else {
-        completion?()
-        return
-      }
-
-      do {
-        let attributes = try weakSelf.fileManager.attributesOfItem(atPath: path)
-        if let expiryDate = attributes[FileAttributeKey.modificationDate] as? Date,
-          expiryDate.inThePast {
-            try weakSelf.fileManager.removeItem(atPath: weakSelf.filePath(key))
-        }
-      } catch {}
-
-      completion?()
+  func removeIfExpired(_ key: String) throws {
+    let filePath = makeFilePath(for: key)
+    let attributes = try fileManager.attributesOfItem(atPath: filePath)
+    if let expiryDate = attributes[.modificationDate] as? Date, expiryDate.inThePast {
+      try fileManager.removeItem(atPath: filePath)
     }
   }
 
   /**
-   Clears the cache storage.
-   - Parameter completion: Completion closure to be called when the task is done
+   Removes all objects from the cache storage.
    */
-  public func clear(_ completion: (() -> Void)? = nil) {
-    writeQueue.async { [weak self] in
-      guard let weakSelf = self else {
-        completion?()
-        return
-      }
-
-      do {
-        try weakSelf.fileManager.removeItem(atPath: weakSelf.path)
-      } catch {}
-
-      completion?()
-    }
+  func clear() throws {
+    try fileManager.removeItem(atPath: path)
   }
 
   private typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
 
   /**
    Clears all expired objects.
-   - Parameter completion: Completion closure to be called when the task is done
    */
-  public func clearExpired(_ completion: (() -> Void)? = nil) {
-    writeQueue.async { [weak self] in
-      guard let weakSelf = self else {
-        completion?()
-        return
-      }
+  func clearExpired() throws {
+    let storageURL = URL(fileURLWithPath: path)
+    let resourceKeys: [URLResourceKey] = [
+      .isDirectoryKey,
+      .contentModificationDateKey,
+      .totalFileAllocatedSizeKey
+    ]
+    var resourceObjects = [ResourceObject]()
+    var filesToDelete = [URL]()
+    var totalSize: UInt = 0
+    let fileEnumerator = fileManager.enumerator(
+      at: storageURL,
+      includingPropertiesForKeys: resourceKeys,
+      options: .skipsHiddenFiles,
+      errorHandler: nil
+    )
 
-      let URL = Foundation.URL(fileURLWithPath: weakSelf.path)
-      let resourceKeys: [URLResourceKey] = [.isDirectoryKey, .contentModificationDateKey, .totalFileAllocatedSizeKey]
-      var objects = [ResourceObject]()
-      var URLsToDelete: [Foundation.URL] = []
-      var totalSize: UInt = 0
-
-      guard let fileEnumerator = weakSelf.fileManager.enumerator(at: URL, includingPropertiesForKeys: resourceKeys,
-        options: .skipsHiddenFiles, errorHandler: nil), let URLs = fileEnumerator.allObjects as? [Foundation.URL] else {
-          completion?()
-          return
-      }
-
-      for fileURL in URLs {
-        do {
-          let resourceValues = try (fileURL as NSURL).resourceValues(forKeys: resourceKeys)
-
-          guard (resourceValues[URLResourceKey.isDirectoryKey] as? NSNumber)?.boolValue == false else {
-            continue
-          }
-
-          if let expiryDate = resourceValues[URLResourceKey.contentModificationDateKey] as? Date,
-            expiryDate.inThePast {
-              URLsToDelete.append(fileURL)
-              continue
-          }
-
-          if let fileSize = resourceValues[URLResourceKey.totalFileAllocatedSizeKey] as? NSNumber {
-            totalSize += fileSize.uintValue
-            objects.append((url: fileURL, resourceValues: resourceValues))
-          }
-        } catch {}
-      }
-
-      for fileURL in URLsToDelete {
-        do {
-          try weakSelf.fileManager.removeItem(at: fileURL)
-        } catch {}
-      }
-
-      weakSelf.removeResourceObjects(objects, totalSize: totalSize)
-      completion?()
+    guard let urlArray = fileEnumerator?.allObjects as? [URL] else {
+      throw Error.fileEnumeratorFailed
     }
+
+    for url in urlArray {
+      let resourceValues = try (url as NSURL).resourceValues(forKeys: resourceKeys)
+      guard (resourceValues[.isDirectoryKey] as? NSNumber)?.boolValue == false else {
+        continue
+      }
+
+      if let expiryDate = resourceValues[.contentModificationDateKey] as? Date, expiryDate.inThePast {
+        filesToDelete.append(url)
+        continue
+      }
+
+      if let fileSize = resourceValues[.totalFileAllocatedSizeKey] as? NSNumber {
+        totalSize += fileSize.uintValue
+        resourceObjects.append((url: url, resourceValues: resourceValues))
+      }
+    }
+
+    // Remove expired objects
+    for url in filesToDelete {
+      try fileManager.removeItem(at: url)
+    }
+
+    // Remove objects if storage size exceeds max size
+    try removeResourceObjects(resourceObjects, totalSize: totalSize)
   }
 
   /**
-   Removes expired resource objects.
+   Removes objects if storage size exceeds max size.
    - Parameter objects: Resource objects to remove
    - Parameter totalSize: Total size
    */
-  private func removeResourceObjects(_ objects: [ResourceObject], totalSize: UInt) {
+  private func removeResourceObjects(_ objects: [ResourceObject], totalSize: UInt) throws {
     guard maxSize > 0 && totalSize > maxSize else {
       return
     }
@@ -273,20 +181,17 @@ public final class DiskStorage: StorageAware {
     let targetSize = maxSize / 2
 
     let sortedFiles = objects.sorted {
-      let time1 = ($0.resourceValues[URLResourceKey.contentModificationDateKey] as? Date)?.timeIntervalSince1970
-      let time2 = ($1.resourceValues[URLResourceKey.contentModificationDateKey] as? Date)?.timeIntervalSince1970
+      let key = URLResourceKey.contentModificationDateKey
+      let time1 = ($0.resourceValues[key] as? Date)?.timeIntervalSinceReferenceDate
+      let time2 = ($1.resourceValues[key] as? Date)?.timeIntervalSinceReferenceDate
       return time1 > time2
     }
 
     for file in sortedFiles {
-      do {
-        try fileManager.removeItem(at: file.url)
-      } catch {}
-
+      try fileManager.removeItem(at: file.url)
       if let fileSize = file.resourceValues[URLResourceKey.totalFileAllocatedSizeKey] as? NSNumber {
         totalSize -= fileSize.uintValue
       }
-
       if totalSize < targetSize {
         break
       }
@@ -300,7 +205,7 @@ public final class DiskStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    - Returns: A md5 string
    */
-  func fileName(_ key: String) -> String {
+  func makeFileName(for key: String) -> String {
     return MD5(key)
   }
 
@@ -309,8 +214,8 @@ public final class DiskStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    - Returns: A string path based on key
    */
-  func filePath(_ key: String) -> String {
-    return "\(path)/\(fileName(key))"
+  func makeFilePath(for key: String) -> String {
+    return "\(path)/\(makeFileName(for: key))"
   }
 }
 

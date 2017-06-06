@@ -12,179 +12,95 @@ class MemoryStorageSpec: QuickSpec {
       var storage: MemoryStorage!
 
       beforeEach {
-        storage = MemoryStorage(name: name)
+        storage = MemoryStorage.init(name: name)
       }
 
       afterEach {
         storage.clear()
       }
 
-      describe("#path") {
-        it("returns the correct path") {
-          let path = "\(MemoryStorage.prefix).\(name.capitalized)"
-          
-          expect(storage.path).to(equal(path))
-        }
-      }
-
-      describe("#maxSize") {
-        it("returns the default maximum size of a cache") {
-          expect(storage.maxSize).to(equal(0))
-        }
-      }
-
       describe("#add") {
         it("saves an object") {
-          let expectation = self.expectation(description: "Save Object Expectation")
-
-          storage.add(key, object: object) {
-            storage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).toNot(beNil())
-              expectation.fulfill()
-            }
-          }
-
-          self.waitForExpectations(timeout: 2.0, handler:nil)
+          storage.add(key, object: object)
+          let receivedObject: User? = storage.object(key)
+          expect(receivedObject).toNot(beNil())
         }
       }
       
       describe("#cacheEntry") {
         it("returns nil if entry doesn't exist") {
-          let storage = DiskStorage(name: name)
-          
-          waitUntil(timeout: 2.0) { done in
-            storage.cacheEntry(key) { (entry: CacheEntry<User>?) in
-              expect(entry).to(beNil())
-              done()
-            }
-          }
+          let entry: CacheEntry<User>? = storage.cacheEntry(key)
+          expect(entry).to(beNil())
         }
         
         it("returns entry if object exists") {
-          let storage = MemoryStorage(name: name)
           let expiry = Expiry.date(Date())
-          
-          waitUntil(timeout: 2.0) { done in
-            
-            storage.add(key, object: object, expiry: expiry) {
-              storage.cacheEntry(key) { (entry: CacheEntry<User>?) in
-                
-                expect(entry?.object.firstName).to(equal(object.firstName))
-                expect(entry?.object.lastName).to(equal(object.lastName))
-                expect(entry?.expiry.date).to(equal(expiry.date))
-                done()
-              }
-            }
-          }
+          storage.add(key, object: object, expiry: expiry)
+          let entry: CacheEntry<User>? = storage.cacheEntry(key)
+          expect(entry?.object.firstName).to(equal(object.firstName))
+          expect(entry?.object.lastName).to(equal(object.lastName))
+          expect(entry?.expiry.date).to(equal(expiry.date))
         }
       }
       
       describe("#object") {
         it("resolves cached object") {
-          let expectation = self.expectation(description: "Object Expectation")
-
-          storage.add(key, object: object) {
-            storage.object(key) { (receivedObject: User?) in
-              expect(receivedObject?.firstName).to(equal(object.firstName))
-              expect(receivedObject?.lastName).to(equal(object.lastName))
-              expectation.fulfill()
-            }
-          }
-
-          self.waitForExpectations(timeout: 2.0, handler:nil)
+          storage.add(key, object: object)
+          let receivedObject: User? = storage.object(key)
+          expect(receivedObject?.firstName).to(equal(object.firstName))
+          expect(receivedObject?.lastName).to(equal(object.lastName))
         }
       }
 
       describe("#remove") {
         it("removes cached object") {
-          let expectation = self.expectation(description: "Remove Expectation")
-
           storage.add(key, object: object)
-          storage.remove(key) {
-            storage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
-              expectation.fulfill()
-            }
-          }
-
-          self.waitForExpectations(timeout: 2.0, handler:nil)
+          storage.remove(key)
+          let receivedObject: User? = storage.object(key)
+          expect(receivedObject).to(beNil())
         }
       }
 
       describe("removeIfExpired") {
         it("removes expired object") {
-          let expectation = self.expectation(description: "Remove If Expired Expectation")
           let expiry: Expiry = .date(Date().addingTimeInterval(-100000))
-
           storage.add(key, object: object, expiry: expiry)
-          storage.removeIfExpired(key) {
-            storage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
-              expectation.fulfill()
-            }
-          }
-
-          self.waitForExpectations(timeout: 4.0, handler:nil)
+          storage.removeIfExpired(key)
+          let receivedObject: User? = storage.object(key)
+          expect(receivedObject).to(beNil())
         }
 
         it("don't remove not expired object") {
-          let expectation = self.expectation(description: "Don't Remove If Not Expired Expectation")
-
           storage.add(key, object: object)
-          storage.removeIfExpired(key) {
-            storage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).notTo(beNil())
-              expectation.fulfill()
-            }
-          }
-
-          self.waitForExpectations(timeout: 4.0, handler:nil)
+          storage.removeIfExpired(key)
+          let receivedObject: User? = storage.object(key)
+          expect(receivedObject).notTo(beNil())
         }
       }
 
       describe("#clear") {
         it("clears cache directory") {
-          let expectation = self.expectation(description: "Clear Expectation")
-
           storage.add(key, object: object)
-          storage.clear() {
-            storage.object(key) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
-              expectation.fulfill()
-            }
-          }
-
-          self.waitForExpectations(timeout: 2.0, handler:nil)
+          storage.clear()
+          let receivedObject: User? = storage.object(key)
+          expect(receivedObject).to(beNil())
         }
       }
 
       describe("clearExpired") {
         it("removes expired objects") {
-          let expectation1 = self.expectation(description: "Clear Expired Expectation 1")
-          let expectation2 = self.expectation(description: "Clear Expired Expectation 2")
-
           let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))
           let expiry2: Expiry = .date(Date().addingTimeInterval(100000))
-
           let key1 = "item1"
           let key2 = "item2"
-
           storage.add(key1, object: object, expiry: expiry1)
           storage.add(key2, object: object, expiry: expiry2)
+          storage.clearExpired()
+          let object1: User? = storage.object(key1)
+          let object2: User? = storage.object(key2)
 
-          storage.clearExpired {
-            storage.object(key1) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
-              expectation1.fulfill()
-            }
-
-            storage.object(key2) { (receivedObject: User?) in
-              expect(receivedObject).to(beNil())
-              expectation2.fulfill()
-            }
-          }
-
-          self.waitForExpectations(timeout: 5.0, handler:nil)
+          expect(object1).to(beNil())
+          expect(object2).to(beNil())
         }
       }
     }
