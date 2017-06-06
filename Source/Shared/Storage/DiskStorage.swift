@@ -46,6 +46,20 @@ final class DiskStorage: CacheAware {
     }
   }
 
+  /// Calculates total disk cache size
+  func totalSize() throws -> UInt64 {
+    var size: UInt64 = 0
+    let contents = try fileManager.contentsOfDirectory(atPath: path)
+    for pathComponent in contents {
+      let filePath = (path as NSString).appendingPathComponent(pathComponent)
+      let attributes = try fileManager.attributesOfItem(atPath: filePath)
+      if let fileSize = attributes[.size] as? UInt64 {
+        size += fileSize
+      }
+    }
+    return size
+  }
+
   // MARK: - CacheAware
 
   /**

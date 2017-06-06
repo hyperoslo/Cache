@@ -34,9 +34,16 @@ public class BasicHybridCache {
   }
 }
 
-// MARK: - Data protection
+// MARK: - Disk cache
 
 public extension BasicHybridCache {
+  /**
+   Calculates total disk cache size
+   */
+  func totalSize() throws -> UInt64 {
+    return try manager.totalSize()
+  }
+
   #if os(iOS) || os(tvOS)
   /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
   func setFileProtection( _ type: FileProtectionType) throws {

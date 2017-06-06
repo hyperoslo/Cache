@@ -41,8 +41,8 @@ class SpecializedCacheTests: XCTestCase {
         XCTFail("Failed with error: \(error)")
       }
 
-      self.cache.async.object(forKey: self.key) { receivedObject in
-        XCTAssertNotNil(receivedObject)
+      self.cache.async.object(forKey: self.key) { cachedObject in
+        XCTAssertNotNil(cachedObject)
         expectation1.fulfill()
       }
 
@@ -83,10 +83,10 @@ class SpecializedCacheTests: XCTestCase {
       if let error = error {
         XCTFail("Failed with error: \(error)")
       }
-      self.cache.async.object(forKey: self.key) { receivedObject in
-        XCTAssertNotNil(receivedObject)
-        XCTAssertEqual(receivedObject?.firstName, self.object.firstName)
-        XCTAssertEqual(receivedObject?.lastName, self.object.lastName)
+      self.cache.async.object(forKey: self.key) { cachedObject in
+        XCTAssertNotNil(cachedObject)
+        XCTAssertEqual(cachedObject?.firstName, self.object.firstName)
+        XCTAssertEqual(cachedObject?.lastName, self.object.lastName)
         expectation.fulfill()
       }
     }
@@ -98,10 +98,10 @@ class SpecializedCacheTests: XCTestCase {
     let expectation = self.expectation(description: "Expectation")
 
     try! cache.manager.backStorage.add(key, object: object)
-    cache.async.object(forKey: key) { receivedObject in
-      XCTAssertNotNil(receivedObject)
-      XCTAssertEqual(receivedObject?.firstName, self.object.firstName)
-      XCTAssertEqual(receivedObject?.lastName, self.object.lastName)
+    cache.async.object(forKey: key) { cachedObject in
+      XCTAssertNotNil(cachedObject)
+      XCTAssertEqual(cachedObject?.firstName, self.object.firstName)
+      XCTAssertEqual(cachedObject?.lastName, self.object.lastName)
 
       let inMemoryCachedUser: User? = self.cache.manager.frontStorage.object(self.key)
       XCTAssertEqual(inMemoryCachedUser?.firstName, self.object.firstName)
@@ -223,127 +223,105 @@ class SpecializedCacheTests: XCTestCase {
 
   // MARK: - Sync caching
 
-  func testAdd() {
-    do {
-      try cache.addObject(object, forKey: key)
+  func testAdd() throws {
+    try cache.addObject(object, forKey: key)
+    let cachedObject = cache.object(forKey: key)
+    XCTAssertNotNil(cachedObject)
 
-      let receivedObject = cache.object(forKey: key)
-      XCTAssertNotNil(receivedObject)
+    let memoryObject: User? = cache.manager.frontStorage.object(self.key)
+    XCTAssertNotNil(memoryObject)
 
-      let memoryObject: User? = cache.manager.frontStorage.object(self.key)
-      XCTAssertNotNil(memoryObject)
-
-      let diskObject: User? = try! cache.manager.backStorage.object(self.key)
-      XCTAssertNotNil(diskObject)
-    } catch {
-      XCTFail("Failed with error: \(error)")
-    }
+    let diskObject: User? = try! cache.manager.backStorage.object(self.key)
+    XCTAssertNotNil(diskObject)
   }
 
-  func testCacheEntry() {
+  func testCacheEntry() throws {
     let expiryDate = Date()
-    do {
-      try cache.addObject(object, forKey: key, expiry: .date(expiryDate))
-      let entry = cache.cacheEntry(forKey: key)
+    try cache.addObject(object, forKey: key, expiry: .date(expiryDate))
+    let entry = cache.cacheEntry(forKey: key)
 
-      XCTAssertEqual(entry?.object.firstName, self.object.firstName)
-      XCTAssertEqual(entry?.object.lastName, self.object.lastName)
-      XCTAssertEqual(entry?.expiry.date, expiryDate)
-    } catch {
-      XCTFail("Failed with error: \(error)")
-    }
+    XCTAssertEqual(entry?.object.firstName, self.object.firstName)
+    XCTAssertEqual(entry?.object.lastName, self.object.lastName)
+    XCTAssertEqual(entry?.expiry.date, expiryDate)
   }
 
-  func testObject() {
-    do {
-      try cache.addObject(object, forKey: key)
-      let receivedObject = cache.object(forKey: key)
+  func testObject() throws {
+    try cache.addObject(object, forKey: key)
+    let cachedObject = cache.object(forKey: key)
 
-      XCTAssertNotNil(receivedObject)
-      XCTAssertEqual(receivedObject?.firstName, self.object.firstName)
-      XCTAssertEqual(receivedObject?.lastName, self.object.lastName)
-    } catch {
-      XCTFail("Failed with error: \(error)")
-    }
+    XCTAssertNotNil(cachedObject)
+    XCTAssertEqual(cachedObject?.firstName, self.object.firstName)
+    XCTAssertEqual(cachedObject?.lastName, self.object.lastName)
   }
 
   /// Should resolve from disk and set in-memory cache if object not in-memory
-  func testObjectCopyToMemory() {
-    do {
-      try cache.manager.backStorage.add(key, object: object)
-      let receivedObject = cache.object(forKey: key)
+  func testObjectCopyToMemory() throws {
+    try cache.manager.backStorage.add(key, object: object)
+    let cachedObject = cache.object(forKey: key)
 
-      XCTAssertNotNil(receivedObject)
-      XCTAssertEqual(receivedObject?.firstName, object.firstName)
-      XCTAssertEqual(receivedObject?.lastName, object.lastName)
+    XCTAssertNotNil(cachedObject)
+    XCTAssertEqual(cachedObject?.firstName, object.firstName)
+    XCTAssertEqual(cachedObject?.lastName, object.lastName)
 
-      let inmemoryCachedUser: User? = cache.manager.frontStorage.object(key)
-      XCTAssertEqual(inmemoryCachedUser?.firstName, object.firstName)
-      XCTAssertEqual(inmemoryCachedUser?.lastName, object.lastName)
-    } catch {
-      XCTFail("Failed with error: \(error)")
-    }
+    let inmemoryCachedUser: User? = cache.manager.frontStorage.object(key)
+    XCTAssertEqual(inmemoryCachedUser?.firstName, object.firstName)
+    XCTAssertEqual(inmemoryCachedUser?.lastName, object.lastName)
   }
 
   /// Removes cached object from memory and disk
-  func testRemoveObject() {
+  func testRemoveObject() throws {
+    try cache.addObject(object, forKey: key)
+    XCTAssertNotNil(cache.object(forKey: key))
+
+    try cache.removeObject(forKey: key)
+    XCTAssertNil(cache.object(forKey: key))
+
+    let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+    XCTAssertNil(memoryObject)
+
+    var diskObject: User?
     do {
-      try cache.addObject(object, forKey: key)
-      XCTAssertNotNil(cache.object(forKey: key))
+      diskObject = try self.cache.manager.backStorage.object(self.key)
+    } catch {}
 
-      try cache.removeObject(forKey: key)
-      XCTAssertNil(cache.object(forKey: key))
-
-      let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
-      XCTAssertNil(memoryObject)
-
-      var diskObject: User?
-      do {
-        diskObject = try self.cache.manager.backStorage.object(self.key)
-      } catch {}
-
-      XCTAssertNil(diskObject)
-    } catch {
-      XCTFail("Failed with error: \(error)")
-    }
+    XCTAssertNil(diskObject)
   }
 
   /// Clears memory and disk cache
-  func testClear() {
+  func testClear() throws {
+    try cache.addObject(object, forKey: key)
+    try cache.clear()
+    XCTAssertNil(cache.object(forKey: key))
+
+    let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+    XCTAssertNil(memoryObject)
+
+    var diskObject: User?
     do {
-      try cache.addObject(object, forKey: key)
-      try cache.clear()
-
-      XCTAssertNil(cache.object(forKey: key))
-
-      let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
-      XCTAssertNil(memoryObject)
-
-      var diskObject: User?
-      do {
-        diskObject = try self.cache.manager.backStorage.object(self.key)
-      } catch {}
-      XCTAssertNil(diskObject)
-    } catch {
-      XCTFail("Failed with error: \(error)")
-    }
+      diskObject = try self.cache.manager.backStorage.object(self.key)
+    } catch {}
+    XCTAssertNil(diskObject)
   }
 
   /// Clears expired objects from memory and disk cache
-  func testClearExpired() {
+  func testClearExpired() throws {
     let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))
     let expiry2: Expiry = .date(Date().addingTimeInterval(100000))
     let key1 = "key1"
     let key2 = "key2"
 
-    do {
-      try cache.addObject(object, forKey: key1, expiry: expiry1)
-      try cache.addObject(object, forKey: key2, expiry: expiry2)
-      try cache.clearExpired()
-      XCTAssertNil(cache.object(forKey: key1))
-      XCTAssertNotNil(cache.object(forKey: key2))
-    } catch {
-      XCTFail("Failed with error: \(error)")
-    }
+    try cache.addObject(object, forKey: key1, expiry: expiry1)
+    try cache.addObject(object, forKey: key2, expiry: expiry2)
+    try cache.clearExpired()
+    XCTAssertNil(cache.object(forKey: key1))
+    XCTAssertNotNil(cache.object(forKey: key2))
+  }
+
+  func testTotalSize() throws {
+    let cache = SpecializedCache<Data>(name: cacheName)
+    try cache.addObject(SpecHelper.data(10), forKey: "key1")
+    try cache.addObject(SpecHelper.data(20), forKey: "key2")
+    let size = try cache.totalSize()
+    XCTAssertEqual(size, 30)
   }
 }
