@@ -100,7 +100,7 @@ class MemoryStorageSpec: QuickSpec {
           let object2: User? = storage.object(key2)
 
           expect(object1).to(beNil())
-          expect(object2).to(beNil())
+          expect(object2).toNot(beNil())
         }
       }
     }
