@@ -4,15 +4,11 @@ import UIKit
 import Cache
 
 struct Helper {
-
-  static func image(color: UIColor = .red,
-    size: CGSize = CGSize(width: 1, height: 1), opaque: Bool = false) -> UIImage {
-
+  static func image(color: UIColor = .red, size: CGSize = .init(width: 1, height: 1), opaque: Bool = false) -> UIImage {
     UIGraphicsBeginImageContextWithOptions(size, opaque, 0)
     let context = UIGraphicsGetCurrentContext()
     context!.setFillColor(color.cgColor)
     context!.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
-
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
 
@@ -41,40 +37,36 @@ let date = Date(timeInterval: 100000, since: Date())
 
 // Add objects to the cache
 
-cache.add("string", object: string)
-cache.add("json", object: json)
-cache.add("image", object: image)
-cache.add("data", object: data)
-cache.add("date", object: date)
+try cache.addObject(string, forKey: "string")
+try cache.addObject(json, forKey: "json")
+try cache.addObject(image, forKey: "image")
+try cache.addObject(data, forKey: "data")
+try cache.addObject(date, forKey: "date")
 
 // Get objects from the cache
+let cachedObject: String? = cache.object(forKey: "string")
+print(cachedObject)
 
-cache.object("string") { (string: String?) in
-  print(string ?? "")
-}
-
-cache.object("json") { (json: JSON?) in
+cache.async.object(forKey: "json") { (json: JSON?) in
   print(json?.object ?? "")
 }
 
-cache.object("image") { (image: UIImage?) in
+cache.async.object(forKey: "image") { (image: UIImage?) in
   print(image ?? "")
 }
 
-cache.object("data") { (data: Data?) in
+cache.async.object(forKey: "data") { (data: Data?) in
   print(data ?? "'")
 }
 
-cache.object("date") { (date: Date?) in
+cache.async.object(forKey: "date") { (date: Date?) in
   print(date ?? "")
 }
 
 // Remove an object from the cache
-
-cache.remove("data")
+try cache.removeObject(forKey: "data")
 
 // Clean the cache
-
-cache.clear()
+try cache.clear()
 
 PlaygroundPage.current.needsIndefiniteExecution = true
