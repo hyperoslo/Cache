@@ -64,11 +64,11 @@ final class DiskStorage: CacheAware {
 
   /**
    Saves passed object on the disk.
-   - Parameter key: Unique key to identify the object in the cache
    - Parameter object: Object that needs to be cached
+   - Parameter key: Unique key to identify the object in the cache
    - Parameter expiry: Expiration date for the cached object
    */
-  func add<T: Cachable>(_ key: String, object: T, expiry: Expiry = .never) throws {
+  func addObject<T: Cachable>(_ object: T, forKey key: String, expiry: Expiry = .never) throws {
     let filePath = makeFilePath(for: key)
     fileManager.createFile(atPath: filePath, contents: object.encode(), attributes: nil)
     try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)
@@ -78,8 +78,8 @@ final class DiskStorage: CacheAware {
    Gets information about the cached object.
    - Parameter key: Unique key to identify the object in the cache
    */
-  func object<T: Cachable>(_ key: String) throws -> T? {
-    return (try cacheEntry(key) as CacheEntry<T>?)?.object
+  func object<T: Cachable>(forKey key: String) throws -> T? {
+    return (try cacheEntry(forKey: key) as CacheEntry<T>?)?.object
   }
 
   /**
@@ -87,7 +87,7 @@ final class DiskStorage: CacheAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure returns object wrapper with metadata or nil
    */
-  func cacheEntry<T: Cachable>(_ key: String) throws -> CacheEntry<T>? {
+  func cacheEntry<T: Cachable>(forKey key: String) throws -> CacheEntry<T>? {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
     let attributes = try fileManager.attributesOfItem(atPath: filePath)
@@ -106,7 +106,7 @@ final class DiskStorage: CacheAware {
    Removes the object from the cache by the given key.
    - Parameter key: Unique key to identify the object in the cache
    */
-  func remove(_ key: String) throws {
+  func removeObject(forKey key: String) throws {
     try fileManager.removeItem(atPath: makeFilePath(for: key))
   }
 
@@ -114,7 +114,7 @@ final class DiskStorage: CacheAware {
    Removes the object from the cache if it's expired.
    - Parameter key: Unique key to identify the object in the cache
    */
-  func removeIfExpired(_ key: String) throws {
+  func removeObjectIfExpired(forKey key: String) throws {
     let filePath = makeFilePath(for: key)
     let attributes = try fileManager.attributesOfItem(atPath: filePath)
     if let expiryDate = attributes[.modificationDate] as? Date, expiryDate.inThePast {

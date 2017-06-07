@@ -22,8 +22,8 @@ final class CodingTests: XCTestCase {
 
   /// Test encoding and decoding
   func testCoding() {
-    try! storage.add(key, object: object)
-    let cachedObject: User? = try! storage.object(key)
+    try! storage.addObject(object, forKey: key)
+    let cachedObject: User? = try! storage.object(forKey: key)
     XCTAssertEqual(cachedObject?.firstName, "First")
     XCTAssertEqual(cachedObject?.lastName, "Last")
   }
