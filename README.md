@@ -23,7 +23,6 @@
 * [Optional bonuses](#optional-bonuses)
   * [JSON](#json)
   * [Coding](#coding)
-  * [DefaultCacheConverter](#defaultcacheconverter)
 * [What about images?](#what-about-images)
 * [Installation](#installation)
 * [Author](#author)
@@ -316,25 +315,6 @@ cache.add("post", object: post) {
     print(object?.title) // Title
   }
 }
-```
-
-### DefaultCacheConverter
-
-You could use this `Data` encoding and decoding implementation for any kind
-of objects, but do it on ***your own risk***. With this approach decoding
-***will not work*** if the `Data` length doesn't match the type size. This can commonly
-happen if you try to read the data after updates in the type's structure, so
-there is a different-sized version of the same type. Also note that `size`
-and `size(ofValue:)` may return different values on different devices.
-
-```swift
-do {
-  object = try DefaultCacheConverter<User>().decode(data)
-} catch {}
-
-do {
-  data = try DefaultCacheConverter<User>().encode(self)
-} catch {}
 ```
 
 ## What about images?

@@ -1,7 +1,6 @@
 import UIKit
 
-struct SpecHelper {
-
+struct TestHelper {
   static var user: User {
     return User(firstName: "John", lastName: "Snow")
   }
@@ -11,10 +10,10 @@ struct SpecHelper {
     return Data(bytes: buffer)
   }
 
-  static func image(_ color: UIColor = UIColor.red, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
+  static func image(_ color: UIColor = .red, size: CGSize = .init(width: 1, height: 1)) -> UIImage {
     UIGraphicsBeginImageContextWithOptions(size, false, 0)
-    let context = UIGraphicsGetCurrentContext()
 
+    let context = UIGraphicsGetCurrentContext()
     context?.setFillColor(color.cgColor)
     context?.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
 
