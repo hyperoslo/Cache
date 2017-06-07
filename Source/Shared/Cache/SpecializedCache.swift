@@ -102,7 +102,7 @@ public class AsyncSpecializedCache<T: Cachable> {
    - Parameter expiry: Expiration date for the cached object
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func addObject(_ object: T, forKey key: String, expiry: Expiry? = nil, completion: Completion?) {
+  public func addObject(_ object: T, forKey key: String, expiry: Expiry? = nil, completion: Completion? = nil) {
     manager.addObject(object, forKey: key, expiry: expiry, completion: completion)
   }
 
@@ -129,7 +129,7 @@ public class AsyncSpecializedCache<T: Cachable> {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func removeObject(forKey key: String, completion: Completion?) {
+  public func removeObject(forKey key: String, completion: Completion? = nil) {
     manager.removeObject(forKey: key, completion: completion)
   }
 
@@ -137,7 +137,7 @@ public class AsyncSpecializedCache<T: Cachable> {
    Clears the front and back cache storages.
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func clear(completion: Completion?) {
+  public func clear(completion: Completion? = nil) {
     manager.clear(completion: completion)
   }
 
@@ -145,7 +145,7 @@ public class AsyncSpecializedCache<T: Cachable> {
    Clears all expired objects from front and back storages.
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func clearExpired(completion: Completion?) {
+  public func clearExpired(completion: Completion? = nil) {
     manager.clearExpired(completion: completion)
   }
 }
