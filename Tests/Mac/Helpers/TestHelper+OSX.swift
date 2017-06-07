@@ -1,6 +1,6 @@
 import Cocoa
 
-struct TestHelper {
+extension TestHelper {
   static func image(color: NSColor = .red, size: NSSize = .init(width: 1, height: 1)) -> NSImage {
     let image = NSImage(size: size)
     image.lockFocus()

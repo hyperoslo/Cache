@@ -1,15 +1,6 @@
 import UIKit
 
-struct TestHelper {
-  static var user: User {
-    return User(firstName: "John", lastName: "Snow")
-  }
-
-  static func data(_ length : Int) -> Data {
-    let buffer = [UInt8](repeating: 0, count: length)
-    return Data(bytes: buffer)
-  }
-
+extension TestHelper {
   static func image(_ color: UIColor = .red, size: CGSize = .init(width: 1, height: 1)) -> UIImage {
     UIGraphicsBeginImageContextWithOptions(size, false, 0)
 
