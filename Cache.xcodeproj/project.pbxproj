@@ -26,17 +26,6 @@
 		BDEDD3831DBCEBC4007416A6 /* TestHelper+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CDF1C28374800B702C9 /* TestHelper+iOS.swift */; };
 		BDEDD3841DBCEBC4007416A6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE01C28374800B702C9 /* User.swift */; };
 		BDEDD3851DBCEBC4007416A6 /* UIImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */; };
-		BDEDD3861DBCEBC4007416A6 /* SpecializedCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE21C28374800B702C9 /* SpecializedCacheTests.swift */; };
-		BDEDD3881DBCEBD0007416A6 /* CapsuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE51C28374800B702C9 /* CapsuleTests.swift */; };
-		BDEDD3891DBCEBD0007416A6 /* ExpiryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE61C28374800B702C9 /* ExpiryTests.swift */; };
-		BDEDD38A1DBCEBD0007416A6 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE71C28374800B702C9 /* JSONTests.swift */; };
-		BDEDD38C1DBCEBD0007416A6 /* JSONCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEA1C28374800B702C9 /* JSONCacheTests.swift */; };
-		BDEDD38D1DBCEBD0007416A6 /* DataCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEB1C28374800B702C9 /* DataCacheTests.swift */; };
-		BDEDD38E1DBCEBD0007416A6 /* DateCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEC1C28374800B702C9 /* DateCacheTests.swift */; };
-		BDEDD38F1DBCEBD0007416A6 /* StringCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CED1C28374800B702C9 /* StringCacheTests.swift */; };
-		BDEDD3901DBCEBD0007416A6 /* UIImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D991C283DB300B702C9 /* UIImageCacheTests.swift */; };
-		BDEDD3941DBCEBD0007416A6 /* DiskStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF11C28374800B702C9 /* DiskStorageTests.swift */; };
-		BDEDD3951DBCEBD0007416A6 /* MemoryStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF21C28374800B702C9 /* MemoryStorageTests.swift */; };
 		D5291C2D1C28220B00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
 		D5291C2F1C28220B00B702C9 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
@@ -52,16 +41,6 @@
 		D5291D1D1C2837DB00B702C9 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC59E01C20593E003BD79B /* Cache.framework */; };
 		D5291D351C28389B00B702C9 /* TestHelper+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CDF1C28374800B702C9 /* TestHelper+iOS.swift */; };
 		D5291D361C28389B00B702C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE01C28374800B702C9 /* User.swift */; };
-		D5291D371C28389B00B702C9 /* SpecializedCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE21C28374800B702C9 /* SpecializedCacheTests.swift */; };
-		D5291D391C28389B00B702C9 /* CapsuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE51C28374800B702C9 /* CapsuleTests.swift */; };
-		D5291D3A1C28389B00B702C9 /* ExpiryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE61C28374800B702C9 /* ExpiryTests.swift */; };
-		D5291D3B1C28389B00B702C9 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE71C28374800B702C9 /* JSONTests.swift */; };
-		D5291D3D1C28389B00B702C9 /* JSONCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEA1C28374800B702C9 /* JSONCacheTests.swift */; };
-		D5291D3E1C28389B00B702C9 /* DataCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEB1C28374800B702C9 /* DataCacheTests.swift */; };
-		D5291D3F1C28389B00B702C9 /* DateCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CEC1C28374800B702C9 /* DateCacheTests.swift */; };
-		D5291D401C28389B00B702C9 /* StringCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CED1C28374800B702C9 /* StringCacheTests.swift */; };
-		D5291D421C28389B00B702C9 /* DiskStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF11C28374800B702C9 /* DiskStorageTests.swift */; };
-		D5291D431C28389B00B702C9 /* MemoryStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CF21C28374800B702C9 /* MemoryStorageTests.swift */; };
 		D5291D6A1C283B5400B702C9 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291D601C283B5300B702C9 /* Cache.framework */; };
 		D5291D851C283C7C00B702C9 /* TestHelper+OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D811C283C7000B702C9 /* TestHelper+OSX.swift */; };
 		D5291D881C283CFB00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
@@ -76,23 +55,42 @@
 		D5291D931C283CFB00B702C9 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C241C28220B00B702C9 /* DiskStorage.swift */; };
 		D5291D941C283CFB00B702C9 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C251C28220B00B702C9 /* MemoryStorage.swift */; };
 		D5291D951C283CFB00B702C9 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C261C28220B00B702C9 /* StorageAware.swift */; };
-		D5291D9A1C283DB300B702C9 /* UIImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D991C283DB300B702C9 /* UIImageCacheTests.swift */; };
-		D5291D9C1C283DD900B702C9 /* NSImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D9B1C283DD900B702C9 /* NSImageCacheTests.swift */; };
 		D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */; };
 		D5291DA31C2841D200B702C9 /* NSImage+CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */; };
 		D59A19A71EE8021B009F6AEE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CE01C28374800B702C9 /* User.swift */; };
+		D59A19CB1EE82482009F6AEE /* CapsuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19AF1EE8246F009F6AEE /* CapsuleTests.swift */; };
+		D59A19CC1EE82482009F6AEE /* CodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B01EE8246F009F6AEE /* CodingTests.swift */; };
+		D59A19CD1EE82482009F6AEE /* ExpiryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B11EE8246F009F6AEE /* ExpiryTests.swift */; };
+		D59A19CE1EE82482009F6AEE /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B21EE8246F009F6AEE /* JSONTests.swift */; };
+		D59A19CF1EE82482009F6AEE /* DataCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B41EE8246F009F6AEE /* DataCacheTests.swift */; };
+		D59A19D01EE82482009F6AEE /* DateCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B51EE8246F009F6AEE /* DateCacheTests.swift */; };
+		D59A19D11EE82482009F6AEE /* JSONCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B61EE8246F009F6AEE /* JSONCacheTests.swift */; };
+		D59A19D21EE82482009F6AEE /* NSDictionaryCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B71EE8246F009F6AEE /* NSDictionaryCacheTests.swift */; };
+		D59A19D31EE82482009F6AEE /* StringCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B81EE8246F009F6AEE /* StringCacheTests.swift */; };
+		D59A19D41EE82482009F6AEE /* UIImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B91EE8246F009F6AEE /* UIImageCacheTests.swift */; };
+		D59A19D51EE82482009F6AEE /* SpecializedCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19BA1EE8246F009F6AEE /* SpecializedCacheTests.swift */; };
+		D59A19D61EE82482009F6AEE /* DiskStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19BC1EE8246F009F6AEE /* DiskStorageTests.swift */; };
+		D59A19D71EE82482009F6AEE /* MemoryStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19BD1EE8246F009F6AEE /* MemoryStorageTests.swift */; };
+		D59A19D81EE82484009F6AEE /* CapsuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19AF1EE8246F009F6AEE /* CapsuleTests.swift */; };
+		D59A19D91EE82484009F6AEE /* CodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B01EE8246F009F6AEE /* CodingTests.swift */; };
+		D59A19DA1EE82484009F6AEE /* ExpiryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B11EE8246F009F6AEE /* ExpiryTests.swift */; };
+		D59A19DB1EE82484009F6AEE /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B21EE8246F009F6AEE /* JSONTests.swift */; };
+		D59A19DC1EE82484009F6AEE /* DataCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B41EE8246F009F6AEE /* DataCacheTests.swift */; };
+		D59A19DD1EE82484009F6AEE /* DateCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B51EE8246F009F6AEE /* DateCacheTests.swift */; };
+		D59A19DE1EE82484009F6AEE /* JSONCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B61EE8246F009F6AEE /* JSONCacheTests.swift */; };
+		D59A19DF1EE82484009F6AEE /* NSDictionaryCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B71EE8246F009F6AEE /* NSDictionaryCacheTests.swift */; };
+		D59A19E01EE82484009F6AEE /* StringCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B81EE8246F009F6AEE /* StringCacheTests.swift */; };
+		D59A19E11EE82484009F6AEE /* UIImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B91EE8246F009F6AEE /* UIImageCacheTests.swift */; };
+		D59A19E21EE82484009F6AEE /* SpecializedCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19BA1EE8246F009F6AEE /* SpecializedCacheTests.swift */; };
+		D59A19E31EE82484009F6AEE /* DiskStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19BC1EE8246F009F6AEE /* DiskStorageTests.swift */; };
+		D59A19E41EE82484009F6AEE /* MemoryStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19BD1EE8246F009F6AEE /* MemoryStorageTests.swift */; };
+		D59A19EA1EE824B4009F6AEE /* NSImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19E71EE824AE009F6AEE /* NSImageCacheTests.swift */; };
 		D5A138C11EB29BFA00881A20 /* UIImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138C01EB29BFA00881A20 /* UIImage+Cache.swift */; };
 		D5A138C21EB29BFA00881A20 /* UIImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138C01EB29BFA00881A20 /* UIImage+Cache.swift */; };
 		D5A138C41EB29C2100881A20 /* NSImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138C31EB29C2100881A20 /* NSImage+Cache.swift */; };
 		D5CE966D1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
 		D5CE966E1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
 		D5CE966F1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
-		D5CE96711EE4774E002BFE06 /* NSDictionaryCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96701EE4774E002BFE06 /* NSDictionaryCacheTests.swift */; };
-		D5CE96721EE4774E002BFE06 /* NSDictionaryCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96701EE4774E002BFE06 /* NSDictionaryCacheTests.swift */; };
-		D5CE96731EE4774E002BFE06 /* NSDictionaryCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96701EE4774E002BFE06 /* NSDictionaryCacheTests.swift */; };
-		D5CE96751EE47AA8002BFE06 /* CodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96741EE47AA8002BFE06 /* CodingTests.swift */; };
-		D5CE96761EE47AA8002BFE06 /* CodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96741EE47AA8002BFE06 /* CodingTests.swift */; };
-		D5CE96771EE47AA8002BFE06 /* CodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96741EE47AA8002BFE06 /* CodingTests.swift */; };
 		D5CE96861EE691D6002BFE06 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96851EE691D6002BFE06 /* Logger.swift */; };
 		D5CE96871EE691D6002BFE06 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96851EE691D6002BFE06 /* Logger.swift */; };
 		D5CE96881EE691D6002BFE06 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96851EE691D6002BFE06 /* Logger.swift */; };
@@ -152,33 +150,33 @@
 		D5291C261C28220B00B702C9 /* StorageAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageAware.swift; sourceTree = "<group>"; };
 		D5291CDF1C28374800B702C9 /* TestHelper+iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TestHelper+iOS.swift"; sourceTree = "<group>"; };
 		D5291CE01C28374800B702C9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		D5291CE21C28374800B702C9 /* SpecializedCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecializedCacheTests.swift; sourceTree = "<group>"; };
-		D5291CE51C28374800B702C9 /* CapsuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapsuleTests.swift; sourceTree = "<group>"; };
-		D5291CE61C28374800B702C9 /* ExpiryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpiryTests.swift; sourceTree = "<group>"; };
-		D5291CE71C28374800B702C9 /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
-		D5291CEA1C28374800B702C9 /* JSONCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCacheTests.swift; sourceTree = "<group>"; };
-		D5291CEB1C28374800B702C9 /* DataCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCacheTests.swift; sourceTree = "<group>"; };
-		D5291CEC1C28374800B702C9 /* DateCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCacheTests.swift; sourceTree = "<group>"; };
-		D5291CED1C28374800B702C9 /* StringCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringCacheTests.swift; sourceTree = "<group>"; };
-		D5291CF11C28374800B702C9 /* DiskStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskStorageTests.swift; sourceTree = "<group>"; };
-		D5291CF21C28374800B702C9 /* MemoryStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorageTests.swift; sourceTree = "<group>"; };
 		D5291D181C2837DB00B702C9 /* Cache-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5291D231C28380100B702C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5291D601C283B5300B702C9 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5291D691C283B5400B702C9 /* Cache-Mac-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-Mac-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5291D811C283C7000B702C9 /* TestHelper+OSX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TestHelper+OSX.swift"; sourceTree = "<group>"; };
 		D5291D821C283C7000B702C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D5291D991C283DB300B702C9 /* UIImageCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageCacheTests.swift; sourceTree = "<group>"; };
-		D5291D9B1C283DD900B702C9 /* NSImageCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSImageCacheTests.swift; sourceTree = "<group>"; };
 		D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CacheTests.swift"; sourceTree = "<group>"; };
 		D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+CacheTests.swift"; sourceTree = "<group>"; };
 		D5643E351C43F2CC00582E17 /* CustomCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CustomCache.playground; sourceTree = "<group>"; };
 		D5643E361C43F2CC00582E17 /* HybridCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HybridCache.playground; sourceTree = "<group>"; };
+		D59A19AF1EE8246F009F6AEE /* CapsuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapsuleTests.swift; sourceTree = "<group>"; };
+		D59A19B01EE8246F009F6AEE /* CodingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingTests.swift; sourceTree = "<group>"; };
+		D59A19B11EE8246F009F6AEE /* ExpiryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpiryTests.swift; sourceTree = "<group>"; };
+		D59A19B21EE8246F009F6AEE /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
+		D59A19B41EE8246F009F6AEE /* DataCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCacheTests.swift; sourceTree = "<group>"; };
+		D59A19B51EE8246F009F6AEE /* DateCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCacheTests.swift; sourceTree = "<group>"; };
+		D59A19B61EE8246F009F6AEE /* JSONCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCacheTests.swift; sourceTree = "<group>"; };
+		D59A19B71EE8246F009F6AEE /* NSDictionaryCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDictionaryCacheTests.swift; sourceTree = "<group>"; };
+		D59A19B81EE8246F009F6AEE /* StringCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringCacheTests.swift; sourceTree = "<group>"; };
+		D59A19B91EE8246F009F6AEE /* UIImageCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageCacheTests.swift; sourceTree = "<group>"; };
+		D59A19BA1EE8246F009F6AEE /* SpecializedCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecializedCacheTests.swift; sourceTree = "<group>"; };
+		D59A19BC1EE8246F009F6AEE /* DiskStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskStorageTests.swift; sourceTree = "<group>"; };
+		D59A19BD1EE8246F009F6AEE /* MemoryStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorageTests.swift; sourceTree = "<group>"; };
+		D59A19E71EE824AE009F6AEE /* NSImageCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSImageCacheTests.swift; sourceTree = "<group>"; };
 		D5A138C01EB29BFA00881A20 /* UIImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Cache.swift"; sourceTree = "<group>"; };
 		D5A138C31EB29C2100881A20 /* NSImage+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Cache.swift"; sourceTree = "<group>"; };
 		D5CE966C1EE475C0002BFE06 /* Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coding.swift; sourceTree = "<group>"; };
-		D5CE96701EE4774E002BFE06 /* NSDictionaryCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDictionaryCacheTests.swift; sourceTree = "<group>"; };
-		D5CE96741EE47AA8002BFE06 /* CodingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingTests.swift; sourceTree = "<group>"; };
 		D5CE96851EE691D6002BFE06 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		D5CE968A1EE69969002BFE06 /* SpecializedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecializedCache.swift; sourceTree = "<group>"; };
 		D5CE968B1EE69969002BFE06 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
@@ -272,9 +270,9 @@
 			children = (
 				D5291C171C28220B00B702C9 /* Cachable.swift */,
 				D5291C181C28220B00B702C9 /* Capsule.swift */,
+				D5CE966C1EE475C0002BFE06 /* Coding.swift */,
 				D5291C191C28220B00B702C9 /* Expiry.swift */,
 				D5291C1A1C28220B00B702C9 /* JSON.swift */,
-				D5CE966C1EE475C0002BFE06 /* Coding.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -282,9 +280,9 @@
 		D5291C1C1C28220B00B702C9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D5291C1D1C28220B00B702C9 /* JSON+Cache.swift */,
 				D5291C1E1C28220B00B702C9 /* Data+Cache.swift */,
 				D5291C1F1C28220B00B702C9 /* Date+Cache.swift */,
+				D5291C1D1C28220B00B702C9 /* JSON+Cache.swift */,
 				D5291C201C28220B00B702C9 /* String+Cache.swift */,
 			);
 			path = Extensions;
@@ -301,10 +299,10 @@
 		D5291C231C28220B00B702C9 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				57506FAD1EC29437009B71E9 /* CacheEntry.swift */,
 				D5291C241C28220B00B702C9 /* DiskStorage.swift */,
 				D5291C251C28220B00B702C9 /* MemoryStorage.swift */,
 				D5291C261C28220B00B702C9 /* StorageAware.swift */,
-				57506FAD1EC29437009B71E9 /* CacheEntry.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -314,7 +312,7 @@
 			children = (
 				D5291D231C28380100B702C9 /* Info.plist */,
 				D5291CDE1C28374800B702C9 /* Helpers */,
-				D5291CE11C28374800B702C9 /* Specs */,
+				D59A19AD1EE8246F009F6AEE /* Tests */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -323,54 +321,10 @@
 			isa = PBXGroup;
 			children = (
 				D5291CDF1C28374800B702C9 /* TestHelper+iOS.swift */,
-				D5291CE01C28374800B702C9 /* User.swift */,
 				D5291DA01C28405900B702C9 /* UIImage+CacheTests.swift */,
+				D5291CE01C28374800B702C9 /* User.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		D5291CE11C28374800B702C9 /* Specs */ = {
-			isa = PBXGroup;
-			children = (
-				D5291CE21C28374800B702C9 /* SpecializedCacheTests.swift */,
-				D5291CE41C28374800B702C9 /* DataStructures */,
-				D5291CE91C28374800B702C9 /* Extensions */,
-				D5291CF01C28374800B702C9 /* Storage */,
-			);
-			path = Specs;
-			sourceTree = "<group>";
-		};
-		D5291CE41C28374800B702C9 /* DataStructures */ = {
-			isa = PBXGroup;
-			children = (
-				D5291CE51C28374800B702C9 /* CapsuleTests.swift */,
-				D5291CE61C28374800B702C9 /* ExpiryTests.swift */,
-				D5291CE71C28374800B702C9 /* JSONTests.swift */,
-				D5CE96741EE47AA8002BFE06 /* CodingTests.swift */,
-			);
-			path = DataStructures;
-			sourceTree = "<group>";
-		};
-		D5291CE91C28374800B702C9 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				D5291CEA1C28374800B702C9 /* JSONCacheTests.swift */,
-				D5291CEB1C28374800B702C9 /* DataCacheTests.swift */,
-				D5291CEC1C28374800B702C9 /* DateCacheTests.swift */,
-				D5291CED1C28374800B702C9 /* StringCacheTests.swift */,
-				D5291D991C283DB300B702C9 /* UIImageCacheTests.swift */,
-				D5CE96701EE4774E002BFE06 /* NSDictionaryCacheTests.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		D5291CF01C28374800B702C9 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				D5291CF11C28374800B702C9 /* DiskStorageTests.swift */,
-				D5291CF21C28374800B702C9 /* MemoryStorageTests.swift */,
-			);
-			path = Storage;
 			sourceTree = "<group>";
 		};
 		D5291D771C283BE300B702C9 /* Mac */ = {
@@ -384,9 +338,9 @@
 		D5291D7F1C283C7000B702C9 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
-				D5291D801C283C7000B702C9 /* Helpers */,
-				D5291D971C283D4100B702C9 /* Specs */,
 				D5291D821C283C7000B702C9 /* Info.plist */,
+				D5291D801C283C7000B702C9 /* Helpers */,
+				D59A19E51EE824AE009F6AEE /* Tests */,
 			);
 			path = Mac;
 			sourceTree = "<group>";
@@ -394,26 +348,10 @@
 		D5291D801C283C7000B702C9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				D5291D811C283C7000B702C9 /* TestHelper+OSX.swift */,
 				D5291DA21C2841D200B702C9 /* NSImage+CacheTests.swift */,
+				D5291D811C283C7000B702C9 /* TestHelper+OSX.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		D5291D971C283D4100B702C9 /* Specs */ = {
-			isa = PBXGroup;
-			children = (
-				D5291D981C283D5200B702C9 /* Extensions */,
-			);
-			path = Specs;
-			sourceTree = "<group>";
-		};
-		D5291D981C283D5200B702C9 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				D5291D9B1C283DD900B702C9 /* NSImageCacheTests.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D5643E341C43F2CC00582E17 /* Playgrounds */ = {
@@ -423,6 +361,66 @@
 				D5643E361C43F2CC00582E17 /* HybridCache.playground */,
 			);
 			path = Playgrounds;
+			sourceTree = "<group>";
+		};
+		D59A19AD1EE8246F009F6AEE /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D59A19BA1EE8246F009F6AEE /* SpecializedCacheTests.swift */,
+				D59A19AE1EE8246F009F6AEE /* DataStructures */,
+				D59A19B31EE8246F009F6AEE /* Extensions */,
+				D59A19BB1EE8246F009F6AEE /* Storage */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		D59A19AE1EE8246F009F6AEE /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				D59A19AF1EE8246F009F6AEE /* CapsuleTests.swift */,
+				D59A19B01EE8246F009F6AEE /* CodingTests.swift */,
+				D59A19B11EE8246F009F6AEE /* ExpiryTests.swift */,
+				D59A19B21EE8246F009F6AEE /* JSONTests.swift */,
+			);
+			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		D59A19B31EE8246F009F6AEE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D59A19B41EE8246F009F6AEE /* DataCacheTests.swift */,
+				D59A19B51EE8246F009F6AEE /* DateCacheTests.swift */,
+				D59A19B61EE8246F009F6AEE /* JSONCacheTests.swift */,
+				D59A19B71EE8246F009F6AEE /* NSDictionaryCacheTests.swift */,
+				D59A19B81EE8246F009F6AEE /* StringCacheTests.swift */,
+				D59A19B91EE8246F009F6AEE /* UIImageCacheTests.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D59A19BB1EE8246F009F6AEE /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				D59A19BC1EE8246F009F6AEE /* DiskStorageTests.swift */,
+				D59A19BD1EE8246F009F6AEE /* MemoryStorageTests.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		D59A19E51EE824AE009F6AEE /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D59A19E61EE824AE009F6AEE /* Extensions */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		D59A19E61EE824AE009F6AEE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D59A19E71EE824AE009F6AEE /* NSImageCacheTests.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D5CE96891EE69950002BFE06 /* Cache */ = {
@@ -828,22 +826,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5CE96731EE4774E002BFE06 /* NSDictionaryCacheTests.swift in Sources */,
+				D59A19DD1EE82484009F6AEE /* DateCacheTests.swift in Sources */,
+				D59A19DC1EE82484009F6AEE /* DataCacheTests.swift in Sources */,
+				D59A19DE1EE82484009F6AEE /* JSONCacheTests.swift in Sources */,
+				D59A19E01EE82484009F6AEE /* StringCacheTests.swift in Sources */,
+				D59A19E41EE82484009F6AEE /* MemoryStorageTests.swift in Sources */,
+				D59A19DA1EE82484009F6AEE /* ExpiryTests.swift in Sources */,
 				BDEDD3841DBCEBC4007416A6 /* User.swift in Sources */,
-				BDEDD3861DBCEBC4007416A6 /* SpecializedCacheTests.swift in Sources */,
-				BDEDD3881DBCEBD0007416A6 /* CapsuleTests.swift in Sources */,
+				D59A19E21EE82484009F6AEE /* SpecializedCacheTests.swift in Sources */,
+				D59A19D81EE82484009F6AEE /* CapsuleTests.swift in Sources */,
 				BDEDD3851DBCEBC4007416A6 /* UIImage+CacheTests.swift in Sources */,
+				D59A19D91EE82484009F6AEE /* CodingTests.swift in Sources */,
+				D59A19E11EE82484009F6AEE /* UIImageCacheTests.swift in Sources */,
+				D59A19E31EE82484009F6AEE /* DiskStorageTests.swift in Sources */,
+				D59A19DF1EE82484009F6AEE /* NSDictionaryCacheTests.swift in Sources */,
 				BDEDD3831DBCEBC4007416A6 /* TestHelper+iOS.swift in Sources */,
-				D5CE96771EE47AA8002BFE06 /* CodingTests.swift in Sources */,
-				BDEDD3941DBCEBD0007416A6 /* DiskStorageTests.swift in Sources */,
-				BDEDD38D1DBCEBD0007416A6 /* DataCacheTests.swift in Sources */,
-				BDEDD38E1DBCEBD0007416A6 /* DateCacheTests.swift in Sources */,
-				BDEDD3891DBCEBD0007416A6 /* ExpiryTests.swift in Sources */,
-				BDEDD3901DBCEBD0007416A6 /* UIImageCacheTests.swift in Sources */,
-				BDEDD38A1DBCEBD0007416A6 /* JSONTests.swift in Sources */,
-				BDEDD38F1DBCEBD0007416A6 /* StringCacheTests.swift in Sources */,
-				BDEDD38C1DBCEBD0007416A6 /* JSONCacheTests.swift in Sources */,
-				BDEDD3951DBCEBD0007416A6 /* MemoryStorageTests.swift in Sources */,
+				D59A19DB1EE82484009F6AEE /* JSONTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -851,22 +849,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5CE96711EE4774E002BFE06 /* NSDictionaryCacheTests.swift in Sources */,
+				D59A19D01EE82482009F6AEE /* DateCacheTests.swift in Sources */,
+				D59A19CF1EE82482009F6AEE /* DataCacheTests.swift in Sources */,
+				D59A19D11EE82482009F6AEE /* JSONCacheTests.swift in Sources */,
+				D59A19D31EE82482009F6AEE /* StringCacheTests.swift in Sources */,
+				D59A19D71EE82482009F6AEE /* MemoryStorageTests.swift in Sources */,
+				D59A19CD1EE82482009F6AEE /* ExpiryTests.swift in Sources */,
 				D5291D351C28389B00B702C9 /* TestHelper+iOS.swift in Sources */,
-				D5291D371C28389B00B702C9 /* SpecializedCacheTests.swift in Sources */,
-				D5291D391C28389B00B702C9 /* CapsuleTests.swift in Sources */,
+				D59A19D51EE82482009F6AEE /* SpecializedCacheTests.swift in Sources */,
+				D59A19CB1EE82482009F6AEE /* CapsuleTests.swift in Sources */,
 				D5291D361C28389B00B702C9 /* User.swift in Sources */,
-				D5291D3E1C28389B00B702C9 /* DataCacheTests.swift in Sources */,
-				D5CE96751EE47AA8002BFE06 /* CodingTests.swift in Sources */,
-				D5291D3F1C28389B00B702C9 /* DateCacheTests.swift in Sources */,
-				D5291D3A1C28389B00B702C9 /* ExpiryTests.swift in Sources */,
-				D5291D3B1C28389B00B702C9 /* JSONTests.swift in Sources */,
+				D59A19CC1EE82482009F6AEE /* CodingTests.swift in Sources */,
+				D59A19D41EE82482009F6AEE /* UIImageCacheTests.swift in Sources */,
+				D59A19D61EE82482009F6AEE /* DiskStorageTests.swift in Sources */,
+				D59A19D21EE82482009F6AEE /* NSDictionaryCacheTests.swift in Sources */,
 				D5291DA11C28405900B702C9 /* UIImage+CacheTests.swift in Sources */,
-				D5291D431C28389B00B702C9 /* MemoryStorageTests.swift in Sources */,
-				D5291D401C28389B00B702C9 /* StringCacheTests.swift in Sources */,
-				D5291D9A1C283DB300B702C9 /* UIImageCacheTests.swift in Sources */,
-				D5291D3D1C28389B00B702C9 /* JSONCacheTests.swift in Sources */,
-				D5291D421C28389B00B702C9 /* DiskStorageTests.swift in Sources */,
+				D59A19CE1EE82482009F6AEE /* JSONTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -901,10 +899,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5CE96721EE4774E002BFE06 /* NSDictionaryCacheTests.swift in Sources */,
-				D5291D9C1C283DD900B702C9 /* NSImageCacheTests.swift in Sources */,
 				D59A19A71EE8021B009F6AEE /* User.swift in Sources */,
-				D5CE96761EE47AA8002BFE06 /* CodingTests.swift in Sources */,
+				D59A19EA1EE824B4009F6AEE /* NSImageCacheTests.swift in Sources */,
 				D5291D851C283C7C00B702C9 /* TestHelper+OSX.swift in Sources */,
 				D5291DA31C2841D200B702C9 /* NSImage+CacheTests.swift in Sources */,
 			);

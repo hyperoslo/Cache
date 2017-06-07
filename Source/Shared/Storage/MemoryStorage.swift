@@ -31,7 +31,7 @@ final class MemoryStorage: CacheAware {
    - Parameter object: Object that needs to be cached
    - Parameter expiry: Expiration date for the cached object
    */
-  func add<T: Cachable>(_ key: String, object: T, expiry: Expiry = .never) {
+  func addObject<T: Cachable>(_ object: T, forKey key: String, expiry: Expiry = .never) {
     let capsule = Capsule(value: object, expiry: expiry)
     cache.setObject(capsule, forKey: key as NSString)
     keys.insert(key)
@@ -42,8 +42,8 @@ final class MemoryStorage: CacheAware {
    - Parameter key: Unique key to identify the object in the cache
    - Returns: Cached object or nil if not found
    */
-  func object<T: Cachable>(_ key: String) -> T? {
-    return (cacheEntry(key) as CacheEntry<T>?)?.object
+  func object<T: Cachable>(forKey key: String) -> T? {
+    return (cacheEntry(forKey: key) as CacheEntry<T>?)?.object
   }
 
   /**
@@ -51,7 +51,7 @@ final class MemoryStorage: CacheAware {
    - Parameter key: Unique key to identify the object in the cache
    - Returns: Object wrapper with metadata or nil if not found
    */
-  func cacheEntry<T: Cachable>(_ key: String) -> CacheEntry<T>? {
+  func cacheEntry<T: Cachable>(forKey key: String) -> CacheEntry<T>? {
     guard let capsule = cache.object(forKey: key as NSString) else {
       return nil
     }
@@ -65,7 +65,7 @@ final class MemoryStorage: CacheAware {
    Removes the object from the cache by the given key.
    - Parameter key: Unique key to identify the object in the cache
    */
-  func remove(_ key: String) {
+  func removeObject(forKey key: String) {
     cache.removeObject(forKey: key as NSString)
     keys.remove(key)
   }
@@ -74,9 +74,9 @@ final class MemoryStorage: CacheAware {
    Removes the object from the cache if it's expired.
    - Parameter key: Unique key to identify the object in the cache
    */
-  func removeIfExpired(_ key: String) {
+  func removeObjectIfExpired(forKey key: String) {
     if let capsule = cache.object(forKey: key as NSString), capsule.expired {
-      remove(key)
+      removeObject(forKey: key)
     }
   }
 
@@ -93,7 +93,7 @@ final class MemoryStorage: CacheAware {
   func clearExpired() {
     let allKeys = keys
     for key in allKeys {
-      removeIfExpired(key)
+      removeObjectIfExpired(forKey: key)
     }
   }
 }

@@ -47,11 +47,11 @@ final class SpecializedCacheTests: XCTestCase {
       }
 
 
-      let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+      let memoryObject: User? = self.cache.manager.frontStorage.object(forKey: self.key)
       XCTAssertNotNil(memoryObject)
       expectation2.fulfill()
 
-      let diskObject: User? = try! self.cache.manager.backStorage.object(self.key)
+      let diskObject: User? = try! self.cache.manager.backStorage.object(forKey: self.key)
       XCTAssertNotNil(diskObject)
       expectation3.fulfill()
     }
@@ -97,13 +97,13 @@ final class SpecializedCacheTests: XCTestCase {
   func testAsyncObjectCopyToMemory() {
     let expectation = self.expectation(description: "Expectation")
 
-    try! cache.manager.backStorage.add(key, object: object)
+    try! cache.manager.backStorage.addObject(object, forKey: key)
     cache.async.object(forKey: key) { cachedObject in
       XCTAssertNotNil(cachedObject)
       XCTAssertEqual(cachedObject?.firstName, self.object.firstName)
       XCTAssertEqual(cachedObject?.lastName, self.object.lastName)
 
-      let inMemoryCachedUser: User? = self.cache.manager.frontStorage.object(self.key)
+      let inMemoryCachedUser: User? = self.cache.manager.frontStorage.object(forKey: self.key)
       XCTAssertEqual(inMemoryCachedUser?.firstName, self.object.firstName)
       XCTAssertEqual(inMemoryCachedUser?.lastName, self.object.lastName)
 
@@ -133,13 +133,13 @@ final class SpecializedCacheTests: XCTestCase {
           expectation1.fulfill()
         }
 
-        let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+        let memoryObject: User? = self.cache.manager.frontStorage.object(forKey: self.key)
         XCTAssertNil(memoryObject)
         expectation2.fulfill()
 
         var diskObject: User?
         do {
-          diskObject = try self.cache.manager.backStorage.object(self.key)
+          diskObject = try self.cache.manager.backStorage.object(forKey: self.key)
         } catch {}
 
         XCTAssertNil(diskObject)
@@ -170,13 +170,13 @@ final class SpecializedCacheTests: XCTestCase {
           expectation1.fulfill()
         }
 
-        let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+        let memoryObject: User? = self.cache.manager.frontStorage.object(forKey: self.key)
         XCTAssertNil(memoryObject)
         expectation2.fulfill()
 
         var diskObject: User?
         do {
-          diskObject = try self.cache.manager.backStorage.object(self.key)
+          diskObject = try self.cache.manager.backStorage.object(forKey: self.key)
         } catch {}
         XCTAssertNil(diskObject)
         expectation3.fulfill()
@@ -227,17 +227,17 @@ final class SpecializedCacheTests: XCTestCase {
     XCTAssertNil(cache[key])
     // Add
     cache[key] = object
-    XCTAssertNotNil(cache.manager.frontStorage.object(self.key) as User?)
-    XCTAssertNotNil(try cache.manager.backStorage.object(self.key) as User?)
+    XCTAssertNotNil(cache.manager.frontStorage.object(forKey: self.key) as User?)
+    XCTAssertNotNil(try cache.manager.backStorage.object(forKey: self.key) as User?)
     // Get
     XCTAssertNotNil(cache[key])
     // Remove
     cache[key] = nil
     XCTAssertNil(cache[key])
-    XCTAssertNil(cache.manager.frontStorage.object(self.key) as User?)
+    XCTAssertNil(cache.manager.frontStorage.object(forKey: self.key) as User?)
     var user: User?
     do {
-       user = try cache.manager.backStorage.object(self.key)
+       user = try cache.manager.backStorage.object(forKey: self.key)
     } catch {}
     XCTAssertNil(user)
   }
@@ -247,10 +247,10 @@ final class SpecializedCacheTests: XCTestCase {
     let cachedObject = cache.object(forKey: key)
     XCTAssertNotNil(cachedObject)
 
-    let memoryObject: User? = cache.manager.frontStorage.object(self.key)
+    let memoryObject: User? = cache.manager.frontStorage.object(forKey: self.key)
     XCTAssertNotNil(memoryObject)
 
-    let diskObject: User? = try cache.manager.backStorage.object(self.key)
+    let diskObject: User? = try cache.manager.backStorage.object(forKey: self.key)
     XCTAssertNotNil(diskObject)
   }
 
@@ -275,14 +275,14 @@ final class SpecializedCacheTests: XCTestCase {
 
   /// Should resolve from disk and set in-memory cache if object not in-memory
   func testObjectCopyToMemory() throws {
-    try cache.manager.backStorage.add(key, object: object)
+    try cache.manager.backStorage.addObject(object, forKey: key)
     let cachedObject = cache.object(forKey: key)
 
     XCTAssertNotNil(cachedObject)
     XCTAssertEqual(cachedObject?.firstName, object.firstName)
     XCTAssertEqual(cachedObject?.lastName, object.lastName)
 
-    let inmemoryCachedUser: User? = cache.manager.frontStorage.object(key)
+    let inmemoryCachedUser: User? = cache.manager.frontStorage.object(forKey: key)
     XCTAssertEqual(inmemoryCachedUser?.firstName, object.firstName)
     XCTAssertEqual(inmemoryCachedUser?.lastName, object.lastName)
   }
@@ -295,12 +295,12 @@ final class SpecializedCacheTests: XCTestCase {
     try cache.removeObject(forKey: key)
     XCTAssertNil(cache.object(forKey: key))
 
-    let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+    let memoryObject: User? = self.cache.manager.frontStorage.object(forKey: self.key)
     XCTAssertNil(memoryObject)
 
     var diskObject: User?
     do {
-      diskObject = try self.cache.manager.backStorage.object(self.key)
+      diskObject = try self.cache.manager.backStorage.object(forKey: self.key)
     } catch {}
 
     XCTAssertNil(diskObject)
@@ -312,12 +312,12 @@ final class SpecializedCacheTests: XCTestCase {
     try cache.clear()
     XCTAssertNil(cache.object(forKey: key))
 
-    let memoryObject: User? = self.cache.manager.frontStorage.object(self.key)
+    let memoryObject: User? = self.cache.manager.frontStorage.object(forKey: self.key)
     XCTAssertNil(memoryObject)
 
     var diskObject: User?
     do {
-      diskObject = try self.cache.manager.backStorage.object(self.key)
+      diskObject = try self.cache.manager.backStorage.object(forKey: self.key)
     } catch {}
     XCTAssertNil(diskObject)
   }

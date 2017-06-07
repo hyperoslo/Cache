@@ -180,8 +180,8 @@ extension CacheManager {
         guard let `self` = self else {
           throw CacheError.deallocated
         }
-        self.frontStorage.add(key, object: object, expiry: expiry)
-        try self.backStorage.add(key, object: object, expiry: expiry)
+        self.frontStorage.addObject(object, forKey: key, expiry: expiry)
+        try self.backStorage.addObject(object, forKey: key, expiry: expiry)
         completion?(nil)
       } catch {
         Logger.log(error: error)
@@ -212,14 +212,14 @@ extension CacheManager {
         guard let `self` = self else {
           throw CacheError.notFound
         }
-        if let entry: CacheEntry<T> = self.frontStorage.cacheEntry(key) {
+        if let entry: CacheEntry<T> = self.frontStorage.cacheEntry(forKey: key) {
           completion(entry)
           return
         }
-        guard let entry: CacheEntry<T> = try self.backStorage.cacheEntry(key) else {
+        guard let entry: CacheEntry<T> = try self.backStorage.cacheEntry(forKey: key) else {
           throw CacheError.notFound
         }
-        self.frontStorage.add(key, object: entry.object, expiry: entry.expiry)
+        self.frontStorage.addObject(entry.object, forKey: key, expiry: entry.expiry)
         completion(entry)
       } catch {
         Logger.log(error: error)
@@ -239,8 +239,8 @@ extension CacheManager {
         guard let `self` = self else {
           throw CacheError.deallocated
         }
-        self.frontStorage.remove(key)
-        try self.backStorage.remove(key)
+        self.frontStorage.removeObject(forKey: key)
+        try self.backStorage.removeObject(forKey: key)
         completion?(nil)
       } catch {
         Logger.log(error: error)
@@ -313,8 +313,8 @@ extension CacheManager {
   func addObject<T: Cachable>(_ object: T, forKey key: String, expiry: Expiry?) throws {
     let expiry = expiry ?? config.expiry
     try writeQueue.sync { [weak self] in
-      self?.frontStorage.add(key, object: object, expiry: expiry)
-      try self?.backStorage.add(key, object: object, expiry: expiry)
+      self?.frontStorage.addObject(object, forKey: key, expiry: expiry)
+      try self?.backStorage.addObject(object, forKey: key, expiry: expiry)
     }
   }
 
@@ -336,12 +336,12 @@ extension CacheManager {
     var result: CacheEntry<T>?
     readQueue.sync { [weak self] in
       do {
-        if let entry: CacheEntry<T> = self?.frontStorage.cacheEntry(key) {
+        if let entry: CacheEntry<T> = self?.frontStorage.cacheEntry(forKey: key) {
           result = entry
           return
         }
-        if let entry: CacheEntry<T> = try self?.backStorage.cacheEntry(key) {
-          self?.frontStorage.add(key, object: entry.object, expiry: entry.expiry)
+        if let entry: CacheEntry<T> = try self?.backStorage.cacheEntry(forKey: key) {
+          self?.frontStorage.addObject(entry.object, forKey: key, expiry: entry.expiry)
           result = entry
         }
       } catch {
@@ -357,8 +357,8 @@ extension CacheManager {
    */
   func removeObject(forKey key: String) throws {
     try writeQueue.sync { [weak self] in
-      self?.frontStorage.remove(key)
-      try self?.backStorage.remove(key)
+      self?.frontStorage.removeObject(forKey: key)
+      try self?.backStorage.removeObject(forKey: key)
     }
   }
 
