@@ -9,9 +9,8 @@ final class Capsule: NSObject {
   let object: Any
   /// Expiration date
   let expiryDate: Date
-
   /// Checks if cached object is expired according to expiration date
-  var expired: Bool {
+  var isExpired: Bool {
     return expiryDate.inThePast
   }
 
@@ -24,6 +23,6 @@ final class Capsule: NSObject {
    */
   init(value: Any, expiry: Expiry) {
     self.object = value
-    self.expiryDate = expiry.date as Date
+    self.expiryDate = expiry.date
   }
 }

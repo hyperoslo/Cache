@@ -9,7 +9,7 @@ extension Date: Cachable {
   public typealias CacheType = Date
 
   /**
-   Creates an instance from NSData
+   Creates an instance from Data.
    - Parameter data: Data to decode from
    - Returns: An optional CacheType
    */
@@ -18,8 +18,8 @@ extension Date: Cachable {
   }
 
   /**
-   Encodes an instance to NSData
-   - Returns: Optional NSData
+   Encodes an instance to Data.
+   - Returns: Optional Data
    */
   public func encode() -> Data? {
     return NSKeyedArchiver.archivedData(withRootObject: self)
@@ -33,7 +33,7 @@ extension Date: Cachable {
  */
 extension Date {
 
-  /// Checks if the date is in the past
+  /// Checks if the date is in the past.
   var inThePast: Bool {
     return timeIntervalSinceNow < 0
   }

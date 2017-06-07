@@ -8,7 +8,7 @@ public protocol Coding: Cachable {
 
 public extension Coding {
   /**
-   Creates an instance from NSData
+   Creates an instance from Data.
    - Parameter data: Data to decode from
    - Returns: An optional CacheType
    */
@@ -18,8 +18,8 @@ public extension Coding {
   }
 
   /**
-   Encodes an instance to NSData
-   - Returns: Optional NSData
+   Encodes an instance to Data.
+   - Returns: Optional Data
    */
   func encode() -> Data? {
     let helper = CodingHelper(value: self)
@@ -30,7 +30,7 @@ public extension Coding {
 
 public extension Cachable where Self: NSCoding {
   /**
-   Creates an instance from NSData
+   Creates an instance from Data.
    - Parameter data: Data to decode from
    - Returns: An optional CacheType
    */
@@ -39,8 +39,8 @@ public extension Cachable where Self: NSCoding {
   }
 
   /**
-   Encodes an instance to NSData
-   - Returns: Optional NSData
+   Encodes an instance to Data.
+   - Returns: Optional Data
    */
   func encode() -> Data? {
     return NSKeyedArchiver.archivedData(withRootObject: self)
@@ -54,6 +54,10 @@ public extension Cachable where Self: NSCoding {
 private final class CodingHelper<T: Coding>: NSCoding {
   let value: T
 
+  /**
+   Creates an instance of CodingHelper.
+   - Parameter data: Coding instance
+   */
   init(value: T) {
     self.value = value
   }
@@ -73,14 +77,19 @@ private final class CodingHelper<T: Coding>: NSCoding {
 /// Object to wrap value conforming to non-class `Coding` protocol
 /// It passes `NSCoder` down to `Coding` object where actual encoding and decoding happen.
 private final class CodingCapsule: NSObject, NSCoding {
+  static let key = "helper"
   let helper: NSCoding
 
+  /**
+   Creates an instance of CodingCapsule.
+   - Parameter data: NSCoding instance
+   */
   init(helper: NSCoding) {
     self.helper = helper
   }
 
   convenience init?(coder aDecoder: NSCoder) {
-    guard let type = aDecoder.decodeObject(forKey: "helper") as? String else {
+    guard let type = aDecoder.decodeObject(forKey: CodingCapsule.key) as? String else {
       return nil
     }
     guard let helper = (NSClassFromString(type) as? NSCoding.Type)?.init(coder: aDecoder) else {
@@ -91,6 +100,6 @@ private final class CodingCapsule: NSObject, NSCoding {
 
   func encode(with aCoder: NSCoder) {
     helper.encode(with: aCoder)
-    aCoder.encode(NSStringFromClass(type(of: helper)), forKey: "helper")
+    aCoder.encode(NSStringFromClass(type(of: helper)), forKey: CodingCapsule.key)
   }
 }

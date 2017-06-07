@@ -9,7 +9,7 @@ extension Data: Cachable {
   public typealias CacheType = Data
 
   /**
-   Creates an instance from NSData
+   Creates an instance from Data.
    - Parameter data: Data to decode from
    - Returns: An optional CacheType
    */
@@ -18,8 +18,8 @@ extension Data: Cachable {
   }
 
   /**
-   Encodes an instance to NSData
-   - Returns: Optional NSData
+   Encodes an instance to Data.
+   - Returns: Optional Data
    */
   public func encode() -> Data? {
     return self

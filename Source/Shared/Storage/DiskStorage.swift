@@ -2,9 +2,9 @@ import Foundation
 import SwiftHash
 
 /**
- File-based cache storage
+ File-based cache storage.
  */
-final class DiskStorage: CacheAware {
+final class DiskStorage: StorageAware {
   enum Error: Swift.Error {
     case fileEnumeratorFailed
   }
@@ -23,7 +23,6 @@ final class DiskStorage: CacheAware {
    - Parameter name: A name of the storage
    - Parameter maxSize: Maximum size of the cache storage
    - Parameter cacheDirectory: (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches
-   - Parameter fileProtectionType: Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
    */
   required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
     self.maxSize = maxSize
@@ -46,7 +45,7 @@ final class DiskStorage: CacheAware {
     }
   }
 
-  /// Calculates total disk cache size
+  /// Calculates total disk cache size.
   func totalSize() throws -> UInt64 {
     var size: UInt64 = 0
     let contents = try fileManager.contentsOfDirectory(atPath: path)
@@ -77,6 +76,7 @@ final class DiskStorage: CacheAware {
   /**
    Gets information about the cached object.
    - Parameter key: Unique key to identify the object in the cache
+   - Returns: Cached object or nil if not found
    */
   func object<T: Cachable>(forKey key: String) throws -> T? {
     return (try cacheEntry(forKey: key) as CacheEntry<T>?)?.object
@@ -85,7 +85,7 @@ final class DiskStorage: CacheAware {
   /**
    Get cache entry which includes object with metadata.
    - Parameter key: Unique key to identify the object in the cache
-   - Parameter completion: Completion closure returns object wrapper with metadata or nil
+   - Returns: Object wrapper with metadata or nil if not found
    */
   func cacheEntry<T: Cachable>(forKey key: String) throws -> CacheEntry<T>? {
     let filePath = makeFilePath(for: key)
@@ -235,13 +235,19 @@ final class DiskStorage: CacheAware {
 
 extension DiskStorage {
   #if os(iOS) || os(tvOS)
-  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
+  /**
+   Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
+   - Parameter type: File protection type
+   */
   func setFileProtection( _ type: FileProtectionType) throws {
     try setDirectoryAttributes([FileAttributeKey.protectionKey: type])
   }
   #endif
 
-  /// Set attributes on the disk cache folder.
+  /**
+   Sets attributes on the disk cache folder.
+   - Parameter attributes: Directory attributes
+   */
   func setDirectoryAttributes(_ attributes: [FileAttributeKey : Any]) throws {
     try fileManager.setAttributes(attributes, ofItemAtPath: path)
   }

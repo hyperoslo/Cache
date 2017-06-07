@@ -9,7 +9,7 @@ extension String: Cachable {
   public typealias CacheType = String
 
   /**
-   Creates a string from NSData
+   Creates a string from Data.
    - Parameter data: Data to decode from
    - Returns: An optional CacheType
    */
@@ -22,8 +22,8 @@ extension String: Cachable {
   }
 
   /**
-   Encodes a string to NSData
-   - Returns: Optional NSData
+   Encodes a string to Data.
+   - Returns: Optional Data
    */
   public func encode() -> Data? {
     return data(using: String.Encoding.utf8)

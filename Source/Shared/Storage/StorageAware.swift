@@ -1,9 +1,9 @@
 import Foundation
 
 /**
- Defines basic cache behaviour
+ Defines basic cache behaviour.
  */
-protocol CacheAware {
+protocol StorageAware {
   /**
    Saves passed object in the cache.
    - Parameter object: Object that needs to be cached

@@ -10,7 +10,7 @@ extension NSImage: Cachable {
   public typealias CacheType = NSImage
 
   /**
-   Creates UIImage from NSData
+   Creates UIImage from Data
    - Parameter data: Data to decode from
    - Returns: Optional CacheType
    */
@@ -20,8 +20,8 @@ extension NSImage: Cachable {
   }
 
   /**
-   Encodes UIImage to NSData
-   - Returns: Optional NSData
+   Encodes UIImage to Data
+   - Returns: Optional Data
    */
   public func encode() -> Data? {
     guard let data = tiffRepresentation else {
