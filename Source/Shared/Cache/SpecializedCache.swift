@@ -80,7 +80,7 @@ public class AsyncSpecializedCache<T: Cachable> {
    - Parameter expiry: Expiration date for the cached object
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func addObject(_ object: T, forKey key: String, expiry: Expiry? = nil, completion: Completion?) {
+  public func addObject(_ object: T, forKey key: String, expiry: Expiry? = nil, completion: Completion? = nil) {
     manager.addObject(object, forKey: key, expiry: expiry, completion: completion)
   }
 
@@ -107,7 +107,7 @@ public class AsyncSpecializedCache<T: Cachable> {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func removeObject(forKey key: String, completion: Completion?) {
+  public func removeObject(forKey key: String, completion: Completion? = nil) {
     manager.removeObject(forKey: key, completion: completion)
   }
 
