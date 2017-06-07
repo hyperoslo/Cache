@@ -37,7 +37,7 @@ public final class SpecializedCache<T: Cachable>: BasicHybridCache {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter expiry: Expiration date for the cached object
    */
-  func addObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
+  public func addObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     try manager.addObject(object, forKey: key, expiry: expiry)
   }
 
@@ -46,7 +46,7 @@ public final class SpecializedCache<T: Cachable>: BasicHybridCache {
    - Parameter key: Unique key to identify the object in the cache
    - Returns: Object from cache of nil
    */
-  func object(forKey key: String) -> T? {
+  public func object(forKey key: String) -> T? {
     return manager.object(forKey: key)
   }
 
@@ -55,7 +55,7 @@ public final class SpecializedCache<T: Cachable>: BasicHybridCache {
    - Parameter key: Unique key to identify the cache entry in the cache
    - Returns: Object from cache of nil
    */
-  func cacheEntry(forKey key: String) -> CacheEntry<T>? {
+  public func cacheEntry(forKey key: String) -> CacheEntry<T>? {
     return manager.cacheEntry(forKey: key)
   }
 
@@ -63,21 +63,21 @@ public final class SpecializedCache<T: Cachable>: BasicHybridCache {
    Removes the object from to the front and back cache storages.
    - Parameter key: Unique key to identify the object in the cache
    */
-  func removeObject(forKey key: String) throws {
+  public func removeObject(forKey key: String) throws {
     try manager.removeObject(forKey: key)
   }
 
   /**
    Clears the front and back cache storages.
    */
-  func clear() throws {
+  public func clear() throws {
     try manager.clear()
   }
 
   /**
    Clears all expired objects from front and back storages.
    */
-  func clearExpired() throws {
+  public func clearExpired() throws {
     try manager.clearExpired()
   }
 }
