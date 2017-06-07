@@ -2,7 +2,7 @@ import Cocoa
 @testable import Cache
 
 extension NSImage {
-  func isEqualToImage(image: NSImage) -> Bool {
+  func isEqualToImage(_ image: NSImage) -> Bool {
     return data == image.data
   }
 
@@ -10,8 +10,7 @@ extension NSImage {
     let representation = tiffRepresentation!
     let imageFileType: NSBitmapImageFileType = .PNG
 
-    return (NSBitmapImageRep(data: representation)?.representation(
-      using: imageFileType,
-      properties: [:]))!
+    return NSBitmapImageRep(data: representation)!
+      .representation(using: imageFileType, properties: [:])!
   }
 }

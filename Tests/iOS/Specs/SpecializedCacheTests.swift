@@ -1,11 +1,11 @@
 import XCTest
 @testable import Cache
 
-class SpecializedCacheTests: XCTestCase {
-  let cacheName = "WeirdoCache"
-  let key = "alongweirdkey"
-  let object = SpecHelper.user
-  var cache: SpecializedCache<User>!
+final class SpecializedCacheTests: XCTestCase {
+  private let cacheName = "WeirdoCache"
+  private let key = "alongweirdkey"
+  private let object = TestHelper.user
+  private var cache: SpecializedCache<User>!
 
   override func setUp() {
     super.setUp()
@@ -319,8 +319,8 @@ class SpecializedCacheTests: XCTestCase {
 
   func testTotalDiskSize() throws {
     let cache = SpecializedCache<Data>(name: cacheName)
-    try cache.addObject(SpecHelper.data(10), forKey: "key1")
-    try cache.addObject(SpecHelper.data(20), forKey: "key2")
+    try cache.addObject(TestHelper.data(10), forKey: "key1")
+    try cache.addObject(TestHelper.data(20), forKey: "key2")
     let size = try cache.totalDiskSize()
     XCTAssertEqual(size, 30)
   }
