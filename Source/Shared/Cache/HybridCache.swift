@@ -114,7 +114,7 @@ public class AsyncHybridCache {
    Clears the front and back cache storages.
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func clear(completion: Completion?) {
+  public func clear(completion: Completion? = nil) {
     manager.clear(completion: completion)
   }
 
@@ -122,7 +122,7 @@ public class AsyncHybridCache {
    Clears all expired objects from front and back storages.
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func clearExpired(completion: Completion?) {
+  public func clearExpired(completion: Completion? = nil) {
     manager.clearExpired(completion: completion)
   }
 }
