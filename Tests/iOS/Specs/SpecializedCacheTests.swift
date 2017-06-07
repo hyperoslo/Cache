@@ -223,6 +223,25 @@ final class SpecializedCacheTests: XCTestCase {
 
   // MARK: - Sync caching
 
+  func testSubscript() throws {
+    XCTAssertNil(cache[key])
+    // Add
+    cache[key] = object
+    XCTAssertNotNil(cache.manager.frontStorage.object(self.key) as User?)
+    XCTAssertNotNil(try cache.manager.backStorage.object(self.key) as User?)
+    // Get
+    XCTAssertNotNil(cache[key])
+    // Remove
+    cache[key] = nil
+    XCTAssertNil(cache[key])
+    XCTAssertNil(cache.manager.frontStorage.object(self.key) as User?)
+    var user: User?
+    do {
+       user = try cache.manager.backStorage.object(self.key)
+    } catch {}
+    XCTAssertNil(user)
+  }
+
   func testAdd() throws {
     try cache.addObject(object, forKey: key)
     let cachedObject = cache.object(forKey: key)
@@ -231,7 +250,7 @@ final class SpecializedCacheTests: XCTestCase {
     let memoryObject: User? = cache.manager.frontStorage.object(self.key)
     XCTAssertNotNil(memoryObject)
 
-    let diskObject: User? = try! cache.manager.backStorage.object(self.key)
+    let diskObject: User? = try cache.manager.backStorage.object(self.key)
     XCTAssertNotNil(diskObject)
   }
 

@@ -10,6 +10,28 @@ public final class SpecializedCache<T: Cachable>: BasicHybridCache {
   public private(set) lazy var async: AsyncSpecializedCache<T> = .init(manager: self.manager)
 
   /**
+   Subscript wrapper around `object`, `addObject`, `removeObject` methods
+   - Parameter key: Unique key to identify the object in the cache
+   - Returns: Object from cache of nil
+   */
+  public subscript(key: String) -> T? {
+    get {
+      return object(forKey: key)
+    }
+    set(newValue) {
+      do {
+        if let value = newValue {
+          try addObject(value, forKey: key)
+        } else {
+          try removeObject(forKey: key)
+        }
+      } catch {
+        Logger.log(error: error)
+      }
+    }
+  }
+
+  /**
    Adds passed object to the front and back cache storages.
    - Parameter object: Object that needs to be cached
    - Parameter key: Unique key to identify the object in the cache
