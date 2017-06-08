@@ -89,8 +89,7 @@ let config = Config(
 ### Hybrid cache
 
 `HybridCache` supports storing all kinds of objects, as long as they conform to
-the `Cachable` protocol. It's two layered cache (with front and back storages),
-as well as `SpecializedCache`.
+the `Cachable` protocol.
 
 **
 
@@ -110,21 +109,27 @@ try cache.addObject("This is a string", forKey: "string", expiry: .never)
 try cache.addObject(JSON.dictionary(["key": "value"]), "json")
 try cache.addObject(UIImage(named: "image.png"), forKey: "image")
 try cache.addObject(Data(bytes: [UInt8](repeating: 0, count: 10)), forKey: "data")
+
 // Get object from cache
 let string: String? = cache.object(forKey: "string") // "This is a string"
 let json: JSON? = cache.object(forKey: "json")
 let image: UIImage? = cache.object(forKey: "image")
 let data: Data? = cache.object(forKey: "data")
+
 // Get object with expiry date
 let entry: CacheEntry<String>? = cache.cacheEntry(forKey: "string")
 print(entry?.object) // Prints "This is a string"
 print(entry?.expiry.date) // Prints expiry date
+
 // Get total cache size on the disk
 let size = try cache.totalDiskSize()
+
 // Remove object from cache
 try cache.removeObject(forKey: "data")
+
 // Clear cache
 try cache.clear()
+
 // Clear expired objects
 try cache.clearExpired()
 ```
@@ -136,23 +141,28 @@ try cache.clearExpired()
 cache.async.addObject("This is a string", forKey: "string") { error in
   print(error)
 }
+
 // Get object from cache
 cache.async.object(forKey: "string") { (string: String?) in
   print(string) // Prints "This is a string"
 }
+
 // Get object with expiry date
 cache.async.cacheEntry(forKey: "string") { (entry: CacheEntry<String>?) in
   print(entry?.object) // Prints "This is a string"
   print(entry?.expiry.date) // Prints expiry date
 }
+
 // Remove object from cache
 cache.async.removeObject(forKey: "string") { error in
   print(error)
 }
+
 // Clear cache
 cache.async.clear() { error in
   print(error)
 }
+
 // Clear expired objects
 cache.async.clearExpired() { error in
   print(error)
@@ -180,20 +190,27 @@ print(cache["key"]) // Prints nil
 ```swift
 // Create image cache, so it's possible to add only UIImage objects
 let cache = SpecializedCache<UIImage>(name: "ImageCache")
+
 // Add object to cache
 try cache.addObject(UIImage(named: "image.png"), forKey: "image")
+
 // Get object from cache
 let image: UIImage? = cache.object(forKey: "image")
+
 // Get object with expiry date
 let entry: CacheEntry<String>? = cache.cacheEntry(forKey: "image")
 print(entry?.object)
 print(entry?.expiry.date) // Prints expiry date
+
 // Get total cache size on the disk
 let size = try cache.totalDiskSize()
+
 // Remove object from cache
 try cache.removeObject(forKey: "image")
+
 // Clear cache
 try cache.clear()
+
 // Clear expired objects
 try cache.clearExpired()
 ```
@@ -203,27 +220,33 @@ try cache.clearExpired()
 ```swift
 // Create string cache, so it's possible to add only String objects
 let cache = SpecializedCache<String>(name: "StringCache")
+
 // Add object to cache
 cache.async.addObject("This is a string", forKey: "string") { error in
   print(error)
 }
+
 // Get object from cache
 cache.async.object(forKey: "string") { string in
   print(string) // Prints "This is a string"
 }
+
 // Get object with expiry date
 cache.async.cacheEntry(forKey: "string") { entry in
   print(entry?.object) // Prints "This is a string"
   print(entry?.expiry.date) // Prints expiry date
 }
+
 // Remove object from cache
 cache.async.removeObject(forKey: "string") { error in
   print(error)
 }
+
 // Clear cache
 cache.async.clear() { error in
   print(error)
 }
+
 // Clear expired objects
 cache.async.clearExpired() { error in
   print(error)
@@ -235,12 +258,14 @@ cache.async.clearExpired() { error in
 ```swift
 // Default cache expiry date will be applied to the item
 try cache.addObject("This is a string", forKey: "string")
+
 // A given expiry date will be applied to the item
 try cache.addObject(
   "This is a string",
   forKey: "string"
   expiry: .date(Date().addingTimeInterval(100000))
 )
+
 // Clear expired objects
 cache.clearExpired()
 ```
@@ -293,11 +318,13 @@ Then you could cache `JSON` objects using the same API methods:
 
 ```swift
 let cache = SpecializedCache<JSON>(name: "JSONCache")
+
 // Dictionary
 cache.async.addObject(JSON.dictionary(["key": "value"]), forKey: "dictionary")
 cache.async.object(forKey: "dictionary") { json in
   print(json?.object)
 }
+
 // Array
 cache.async.addObject(JSON.array([["key1": "value1"]]), forKey: "array")
 cache.object("array") { json in
