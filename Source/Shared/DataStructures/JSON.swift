@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- Helper enum to work with JSON arrays and dictionaries
+ Helper enum to work with JSON arrays and dictionaries.
  */
 public enum JSON {
   /// JSON array
@@ -9,17 +9,13 @@ public enum JSON {
   /// JSON dictionary
   case dictionary([String : Any])
 
-  /// Converts value to AnyObject
+  /// Converts value to Any
   public var object: Any {
-    var result: Any
-
     switch self {
     case .array(let object):
-      result = object as Any
+      return object
     case .dictionary(let object):
-      result = object as Any
+      return object
     }
-
-    return result
   }
 }

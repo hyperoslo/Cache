@@ -7,14 +7,13 @@ import Foundation
 public protocol Cachable {
   associatedtype CacheType
   /**
-   Creates an instance from NSData
-
+   Creates an instance from Data
    - Parameter data: Data to decode from
    */
   static func decode(_ data: Data) -> CacheType?
 
   /**
-   Encodes an instance to NSData
+   Encodes an instance to Data
    */
   func encode() -> Data?
 }

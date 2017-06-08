@@ -8,7 +8,7 @@
 public typealias Completion = (Error?) -> Void
 
 /**
- BasicHybridCache supports storing all kinds of objects, as long as they conform to
+ CacheManager supports storing all kinds of objects, as long as they conform to
  Cachable protocol. It's two layered cache (with front and back storages)
  */
 class CacheManager: NSObject {
@@ -63,7 +63,7 @@ class CacheManager: NSObject {
     self.backStorage = backStorage
     self.config = config
 
-    let queuePrefix = [BasicHybridCache.prefix, name].joined(separator: ".")
+    let queuePrefix = [CacheManager.prefix, name].joined(separator: ".")
     writeQueue = DispatchQueue(label: "\(queuePrefix).WriteQueue", attributes: [])
     readQueue = DispatchQueue(label: "\(queuePrefix).ReadQueue", attributes: [])
 
@@ -294,9 +294,9 @@ extension CacheManager {
 
 extension CacheManager {
   /**
-    Calculates total disk cache size
+    Calculates total disk cache size.
    */
-  public func totalDiskSize() throws -> UInt64 {
+  func totalDiskSize() throws -> UInt64 {
     var size: UInt64 = 0
     try readQueue.sync { [weak self] in
       size = try self?.backStorage.totalSize() ?? 0

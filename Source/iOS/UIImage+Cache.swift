@@ -9,7 +9,7 @@ extension UIImage: Cachable {
   public typealias CacheType = UIImage
 
   /**
-   Creates UIImage from NSData
+   Creates UIImage from Data
    - Parameter data: Data to decode from
    - Returns: An optional share type
    */
@@ -19,8 +19,8 @@ extension UIImage: Cachable {
   }
 
   /**
-   Encodes UIImage to NSData
-   - Returns: Optional NSData
+   Encodes UIImage to Data
+   - Returns: Optional Data
    */
   public func encode() -> Data? {
     return hasAlpha

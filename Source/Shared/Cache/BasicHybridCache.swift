@@ -9,8 +9,6 @@
  Cachable protocol. It's two layered cache (with front and back storages)
  */
 public class BasicHybridCache {
-  /// Domain prefix
-  static let prefix = "no.hyper.Cache"
   /// A name of the cache
   public let name: String
   // Disk storage path
@@ -45,13 +43,19 @@ public extension BasicHybridCache {
   }
 
   #if os(iOS) || os(tvOS)
-  /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
+  /**
+   Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
+   - Parameter type: File protection type
+   */
   func setFileProtection( _ type: FileProtectionType) throws {
     try manager.backStorage.setFileProtection(type)
   }
   #endif
 
-  /// Set attributes on the disk cache folder.
+  /**
+   Sets attributes on the disk cache folder.
+   - Parameter attributes: Directory attributes
+   */
   func setDiskCacheDirectoryAttributes(_ attributes: [FileAttributeKey : Any]) throws {
     try manager.backStorage.setDirectoryAttributes(attributes)
   }

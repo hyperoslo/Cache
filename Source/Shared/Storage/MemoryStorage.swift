@@ -1,9 +1,9 @@
 import Foundation
 
 /**
- Memory cache storage based on NSCache
+ Memory cache storage based on NSCache.
  */
-final class MemoryStorage: CacheAware {
+final class MemoryStorage: StorageAware {
   /// Memory cache instance
   private let cache = NSCache<NSString, Capsule>()
   // Memory cache keys
@@ -75,7 +75,7 @@ final class MemoryStorage: CacheAware {
    - Parameter key: Unique key to identify the object in the cache
    */
   func removeObjectIfExpired(forKey key: String) {
-    if let capsule = cache.object(forKey: key as NSString), capsule.expired {
+    if let capsule = cache.object(forKey: key as NSString), capsule.isExpired {
       removeObject(forKey: key)
     }
   }

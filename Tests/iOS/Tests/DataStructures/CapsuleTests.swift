@@ -7,7 +7,7 @@ final class CapsuleTests: XCTestCase {
     let date = Date(timeInterval: 100000, since: Date())
     let capsule = Capsule(value: object, expiry: .date(date))
 
-    XCTAssertFalse(capsule.expired)
+    XCTAssertFalse(capsule.isExpired)
   }
 
   func testExpiredWhenExpired() {
@@ -15,6 +15,6 @@ final class CapsuleTests: XCTestCase {
     let date = Date(timeInterval: -100000, since: Date())
     let capsule = Capsule(value: object, expiry: .date(date))
 
-    XCTAssertTrue(capsule.expired)
+    XCTAssertTrue(capsule.isExpired)
   }
 }

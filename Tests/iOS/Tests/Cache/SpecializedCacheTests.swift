@@ -237,7 +237,7 @@ final class SpecializedCacheTests: XCTestCase {
     XCTAssertNil(cache.manager.frontStorage.object(forKey: self.key) as User?)
     var user: User?
     do {
-       user = try cache.manager.backStorage.object(forKey: self.key)
+      user = try cache.manager.backStorage.object(forKey: self.key)
     } catch {}
     XCTAssertNil(user)
   }

@@ -9,22 +9,18 @@ public enum Expiry {
   /// Object will be expired in the specified amount of seconds
   case seconds(TimeInterval)
   /// Object will be expired on the specified date
-  case date(Foundation.Date)
+  case date(Date)
 
   /// Returns the appropriate date object
-  public var date: Foundation.Date {
-    let result: Foundation.Date
-
+  public var date: Date {
     switch self {
     case .never:
       // Ref: http://lists.apple.com/archives/cocoa-dev/2005/Apr/msg01833.html
-      result = Foundation.Date(timeIntervalSince1970: 60 * 60 * 24 * 365 * 68)
+      return Date(timeIntervalSince1970: 60 * 60 * 24 * 365 * 68)
     case .seconds(let seconds):
-      result = Foundation.Date().addingTimeInterval(seconds)
+      return Date().addingTimeInterval(seconds)
     case .date(let date):
-      result = date
+      return date
     }
-
-    return result
   }
 }
