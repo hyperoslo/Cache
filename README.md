@@ -13,10 +13,9 @@
 * [Description](#description)
 * [Key features](#key-features)
 * [Usage](#usage)
+  * [Configuration](#configuration)
   * [Hybrid cache](#hybrid-cache)
-  * [Type safe cache](#type-safe-cache)
-  * [SpecializedSyncCache](#specialized-sync-cache)
-  * [HybridSyncCache](#hybrid-sync-cache)
+  * [Specialized cache](#specialized-cache)
   * [Expiry date](#expiry-date)
   * [Enabling Data Protection](#enabling-data-protection)
   * [Cachable protocol](#cachable-protocol)
@@ -41,41 +40,33 @@ with out-of-box implementations and great customization possibilities.
 
 ## Key features
 
-- Generic `Cachable` protocol to be able to cache any type you want.
-- `CacheAware` and `StorageAware` protocols to implement different kinds
-of key-value cache storages. The basic interface includes methods to add, get
-and remove objects by key.
-- `SpecializedCache` class to create a type safe cache storage by a given name
-for a specified `Cachable`-compliant type.
-- `HybridCache` class that works with every kind of `Cachable`-compliant types.
-- Flexible `Config` struct which is used in the initialization of `SpecializedCache` and
-`HybridCache` classes, based on the concept of having front- and back- caches.
-A request to a front cache should be less time and memory consuming (`NSCache` is used
-by default here). The difference between front and back caching is that back
-caching is used for content that outlives the application life-cycle. See it more
-like a convenient way to store user information that should persist across application
-launches. Disk cache is the most reliable choice here.
-- Possibility to set expiry date + automatic cleanup of expired objects.
-- Basic memory and disk cache functionality.
-- `Data` encoding and decoding required by `Cachable` protocol are implemented
-for `UIImage`, `String`, `JSON` and `Data`.
-- iOS and OSX support.
+- [x] Generic `Cachable` protocol to be able to cache any type you want.
+- [x] `SpecializedCache` class to create a type safe cache storage by a given
+name for a specified `Cachable`-compliant type.
+- [x] `HybridCache` class that works with every kind of `Cachable`-compliant
+types.
+- [x] Flexible `Config` struct which is used in the initialization of
+`SpecializedCache` and `HybridCache` classes.
+- [x] Possibility to set expiry date + automatic cleanup of expired objects.
+- [x] Basic memory and disk cache functionality.
+- [x] `Data` encoding and decoding required by `Cachable` protocol are
+implemented for `UIImage`, `String`, `JSON` and `Data`.
+- [x] Error handling and logs.
+- [x] `Coding` protocol brings power of `NSCoding` to Swift structs and enums
+- [x] Extensive unit test coverage and great documentation.
+- [x] iOS, tvOS and macOS support.
 
 ## Usage
 
-### Hybrid cache
+### Configuration
 
-`HybridCache` supports storing all kinds of objects, as long as they conform to
-the `Cachable` protocol. It's two layered cache (with front and back storages),
-as well as `SpecializedCache`.
-
-**Initialization with default configuration**
-
-```swift
-let cache = HybridCache(name: "Mix")
-```
-
-**Initialization with custom configuration**
+**Cache** is based on the concept of having front- and back- caches.
+A request to a front cache should be less time and memory consuming
+(`NSCache` is used by default here). The difference between front and back
+caching is that back caching is used for content that outlives the application
+life-cycle. See it more like a convenient way to store user information that
+should persist across application launches. Disk cache is the most reliable
+choice here. You can play with memory and disk cache setup using `Config` struct.
 
 ```swift
 let config = Config(
@@ -93,49 +84,77 @@ let config = Config(
                                                       FileManager.SearchPathDomainMask.userDomainMask,
                                                       true).first! + "/cache-in-documents"
 )
-
-let cache = HybridCache(name: "Custom", config: config)
 ```
 
-**Basic operations**
+### Hybrid cache
+
+`HybridCache` supports storing all kinds of objects, as long as they conform to
+the `Cachable` protocol. It's two layered cache (with front and back storages),
+as well as `SpecializedCache`.
+
+**
+
+```swift
+// Initialization with default configuration
+let cache = HybridCache(name: "Mix")
+// Initialization with custom configuration
+let customCache = HybridCache(name: "Custom", config: config)
+```
+
+**Sync API**
 
 ```swift
 let cache = HybridCache(name: "Mix")
+// Add object to cache
+try cache.addObject("This is a string", forKey: "string", expiry: .never)
+try cache.addObject(JSON.dictionary(["key": "value"]), "json")
+try cache.addObject(UIImage(named: "image.png"), forKey: "image")
+try cache.addObject(Data(bytes: [UInt8](repeating: 0, count: 10)), forKey: "data")
+// Get object from cache
+let string: String? = cache.object(forKey: "string") // "This is a string"
+let json: JSON? = cache.object(forKey: "json")
+let image: UIImage? = cache.object(forKey: "image")
+let data: Data? = cache.object(forKey: "data")
+// Get object with expiry date
+let entry: CacheEntry<String>? = cache.cacheEntry(forKey: "string")
+print(entry?.object) // Prints "This is a string"
+print(entry?.expiry.date) // Prints expiry date
+// Remove object from cache
+try cache.removeObject(forKey: "data")
+// Clear cache
+try cache.clear()
+// Clear expired objects
+try cache.clearExpired()
+```
 
-// String
-cache.add("string", object: "This is a string")
+**Async API**
 
-cache.object("string") { (string: String?) in
+```swift
+// Add object to cache
+cache.async.addObject("This is a string", forKey: "string") { error in
+  print(error)
+}
+// Get object from cache
+cache.async.object(forKey: "string") { (string: String?) in
   print(string) // Prints "This is a string"
 }
-
-// JSON
-cache.add("jsonDictionary", object: JSON.dictionary(["key": "value"]))
-
-cache.object("jsonDictionary") { (json: JSON?) in
-  print(json?.object)
+// Get object with expiry date
+cache.async.cacheEntry(forKey: "string") { (entry: CacheEntry<String>?) in
+  print(entry?.object) // Prints "This is a string"
+  print(entry?.expiry.date) // Prints expiry date
 }
-
-// UIImage
-cache.add("image", object: UIImage(named: "image.png"))
-
-cache.object("image") { (image: UIImage?) in
-  // Use your image
+// Remove object from cache
+cache.async.removeObject(forKey: "string") { error in
+  print(error)
 }
-
-// Data
-cache.add("data", object: data)
-
-cache.object("data") { (data: Data?) in
-  // Use your Data object
+// Clear cache
+cache.async.clear() { error in
+  print(error)
 }
-
-// Remove an object from the cache
-cache.remove("data")
-
-// Clean the cache
-
-cache.clear()
+// Clear expired objects
+cache.async.clearExpired() { error in
+  print(error)
+}
 ```
 
 ### Type safe cache
@@ -143,74 +162,81 @@ cache.clear()
 Initialization with default or custom configuration, basic operations and
 working with expiry dates are done exactly in the same way as in `HybridCache`.
 
-**Basic operations**
+**Subscript**
 
 ```swift
-// Create an image cache, so it's possible to add only UIImage objects
+// Create string cache, so it's possible to add only String objects
+let cache = SpecializedCache<String>(name: "StringCache")
+cache["key"] = "value"
+print(cache["key"]) // Prints "value"
+cache["key"] = nil
+print(cache["key"]) // Prints nil
+```
+
+**Sync API**
+
+```swift
+// Create image cache, so it's possible to add only UIImage objects
 let cache = SpecializedCache<UIImage>(name: "ImageCache")
+// Add object to cache
+try cache.addObject(UIImage(named: "image.png"), forKey: "image")
+// Get object from cache
+let image: UIImage? = cache.object(forKey: "image")
+// Get object with expiry date
+let entry: CacheEntry<String>? = cache.cacheEntry(forKey: "image")
+print(entry?.object)
+print(entry?.expiry.date) // Prints expiry date
+// Remove object from cache
+try cache.removeObject(forKey: "image")
+// Clear cache
+try cache.clear()
+// Clear expired objects
+try cache.clearExpired()
+```
 
-// Add objects to the cache
-cache.add("image", object: UIImage(named: "image.png"))
+**Async API**
 
-// Fetch objects from the cache
-cache.object("image") { (image: UIImage?) in
-  // Use your image
+```swift
+// Create string cache, so it's possible to add only String objects
+let cache = SpecializedCache<String>(name: "StringCache")
+// Add object to cache
+cache.async.addObject("This is a string", forKey: "string") { error in
+  print(error)
 }
-
-// Remove an object from the cache
-cache.remove("image")
-
-// Clean the cache
-cache.clear()
-```
-
-### HybridSyncCache
-
-**Cache** was born to be async, but if for some reason you need to perform cache
-operations synchronously, there is a helper for that.
-
-```swift
-let cache = HybridCache(name: "Mix")
-let syncCache = HybridSyncCache(cache)
-
-// Add UIImage to cache synchronously
-syncCache.add("image", object: UIImage(named: "image.png"))
-
-// Retrieve image from cache synchronously
-let image: UIImage? = syncCache.object("image")
-
-// Remove an object from the cache
-syncCache.remove("image")
-
-// Clean the cache
-syncCache.clear()
-```
-
-### SpecializedSyncCache
-
-`SpecializedSyncCache` works exactly in the same way as `HybridSyncCache`, the
-only difference is that it's a wrapper around a type safe cache.
-
-```swift
-let cache = SpecializedCache<UIImage>(name: "ImageCache")
-let syncCache = SpecializedSyncCache(cache)
-
-syncCache.add("image", object: UIImage(named: "image.png"))
-let image = syncCache.object("image")
-syncCache.remove("image")
-syncCache.clear()
+// Get object from cache
+cache.async.object(forKey: "string") { string in
+  print(string) // Prints "This is a string"
+}
+// Get object with expiry date
+cache.async.cacheEntry(forKey: "string") { entry in
+  print(entry?.object) // Prints "This is a string"
+  print(entry?.expiry.date) // Prints expiry date
+}
+// Remove object from cache
+cache.async.removeObject(forKey: "string") { error in
+  print(error)
+}
+// Clear cache
+cache.async.clear() { error in
+  print(error)
+}
+// Clear expired objects
+cache.async.clearExpired() { error in
+  print(error)
+}
 ```
 
 ### Expiry date
 
 ```swift
 // Default cache expiry date will be applied to the item
-cache.add("string", object: "This is a string")
-
-// A provided expiry date will be applied to the item
-cache.add("string", object: "This is a string",
-  expiry: .date(Date().addingTimeInterval(100000)))
-
+try cache.addObject("This is a string", forKey: "string")
+// A given expiry date will be applied to the item
+try cache.addObject(
+  "This is a string",
+  forKey: "string"
+  expiry: .date(Date().addingTimeInterval(100000))
+)
 // Clear expired objects
 cache.clearExpired()
 ```
@@ -239,22 +265,16 @@ try cache.setDirectoryAttributes([FileAttributeKey.immutable: true])
 Encode and decode methods should be implemented if a type conforms to `Cachable` protocol.
 
 ```swift
-class User: Cachable {
-  typealias CacheType = User
-
-  static func decode(_ data: Data) -> CacheType? {
+struct User: Cachable {
+  static func decode(_ data: Data) -> User? {
     var object: User?
-
     // Decode your object from data
-
     return object
   }
 
   func encode() -> Data? {
     var data: Data?
-
     // Encode your object to data
-
     return data
   }
 }
@@ -268,18 +288,15 @@ JSON is a helper enum that could be `Array([Any])` or `Dictionary([String : Any]
 Then you could cache `JSON` objects using the same API methods:
 
 ```swift
-cache.add("jsonDictionary", object: JSON.dictionary(["key": "value"]))
-
-cache.object("jsonDictionary") { (json: JSON?) in
+let cache = SpecializedCache<JSON>(name: "JSONCache")
+// Dictionary
+cache.async.addObject(JSON.dictionary(["key": "value"]), forKey: "dictionary")
+cache.async.object(forKey: "dictionary") { json in
   print(json?.object)
 }
-
-cache.add("jsonArray", object: JSON.array([
-  ["key1": "value1"],
-  ["key2": "value2"]
-]))
-
-cache.object("jsonArray") { (json: JSON?) in
+// Array
+cache.async.addObject(JSON.array([["key1": "value1"]]), forKey: "array")
+cache.object("array") { json in
   print(json?.object)
 }
 ```
@@ -309,12 +326,13 @@ extension Post: Coding {
 }
 
 // Save and fetch an instance of `Post` struct.
+let cache = SpecializedCache<Post>(name: "PostCache")
 let post = Post(title: "Title")
-cache.add("post", object: post) {
-  cache.object(key) { (object: Post?) in
-    print(object?.title) // Title
-  }
-}
+
+try cache.addObject(post, forKey: "post")
+let object = cache.object(forKey: key)
+print(object?.title) // Prints title
+
 ```
 
 ## What about images?
