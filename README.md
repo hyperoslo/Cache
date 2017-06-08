@@ -31,6 +31,7 @@
 ## Description
 
 <img src="https://github.com/hyperoslo/Cache/blob/master/Resources/CacheIcon.png" alt="Cache Icon" align="right" />
+
 **Cache** doesn't claim to be unique in this area, but it's not another monster
 library that gives you a god's power.
 So don't ask it to fetch something from network or magically set an image from
@@ -90,8 +91,6 @@ let config = Config(
 
 `HybridCache` supports storing all kinds of objects, as long as they conform to
 the `Cachable` protocol.
-
-**
 
 ```swift
 // Initialization with default configuration
