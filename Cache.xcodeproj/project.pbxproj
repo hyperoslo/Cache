@@ -106,6 +106,12 @@
 		D5C24DEF1EE8C50B00D2CF22 /* StringCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B81EE8246F009F6AEE /* StringCacheTests.swift */; };
 		D5C24DF01EE8C51500D2CF22 /* DiskStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19BC1EE8246F009F6AEE /* DiskStorageTests.swift */; };
 		D5C24DF11EE8C51500D2CF22 /* MemoryStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19BD1EE8246F009F6AEE /* MemoryStorageTests.swift */; };
+		D5C24E221EE9D4CF00D2CF22 /* CacheArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C24E211EE9D4CF00D2CF22 /* CacheArray.swift */; };
+		D5C24E231EE9D4CF00D2CF22 /* CacheArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C24E211EE9D4CF00D2CF22 /* CacheArray.swift */; };
+		D5C24E241EE9D4CF00D2CF22 /* CacheArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C24E211EE9D4CF00D2CF22 /* CacheArray.swift */; };
+		D5C24E261EE9D78900D2CF22 /* CacheArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C24E251EE9D78900D2CF22 /* CacheArrayTests.swift */; };
+		D5C24E271EE9D78900D2CF22 /* CacheArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C24E251EE9D78900D2CF22 /* CacheArrayTests.swift */; };
+		D5C24E281EE9D78900D2CF22 /* CacheArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C24E251EE9D78900D2CF22 /* CacheArrayTests.swift */; };
 		D5CE966D1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
 		D5CE966E1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
 		D5CE966F1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
@@ -196,6 +202,8 @@
 		D5C24DD91EE8C29D00D2CF22 /* HybridCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCacheTests.swift; sourceTree = "<group>"; };
 		D5C24DDF1EE8C49800D2CF22 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		D5C24DE31EE8C4E000D2CF22 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D5C24E211EE9D4CF00D2CF22 /* CacheArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheArray.swift; sourceTree = "<group>"; };
+		D5C24E251EE9D78900D2CF22 /* CacheArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheArrayTests.swift; sourceTree = "<group>"; };
 		D5CE966C1EE475C0002BFE06 /* Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coding.swift; sourceTree = "<group>"; };
 		D5CE96851EE691D6002BFE06 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		D5CE968A1EE69969002BFE06 /* SpecializedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecializedCache.swift; sourceTree = "<group>"; };
@@ -293,6 +301,7 @@
 				D5CE966C1EE475C0002BFE06 /* Coding.swift */,
 				D5291C191C28220B00B702C9 /* Expiry.swift */,
 				D5291C1A1C28220B00B702C9 /* JSON.swift */,
+				D5C24E211EE9D4CF00D2CF22 /* CacheArray.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -400,6 +409,7 @@
 				D59A19B01EE8246F009F6AEE /* CodingTests.swift */,
 				D59A19B11EE8246F009F6AEE /* ExpiryTests.swift */,
 				D59A19B21EE8246F009F6AEE /* JSONTests.swift */,
+				D5C24E251EE9D78900D2CF22 /* CacheArrayTests.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -830,6 +840,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDEDD3651DBCE5D8007416A6 /* Expiry.swift in Sources */,
+				D5C24E241EE9D4CF00D2CF22 /* CacheArray.swift in Sources */,
 				BDEDD3631DBCE5D8007416A6 /* Cachable.swift in Sources */,
 				BDEDD3661DBCE5D8007416A6 /* JSON.swift in Sources */,
 				BDEDD3711DBCE5D8007416A6 /* StorageAware.swift in Sources */,
@@ -860,6 +871,7 @@
 				D59A19DC1EE82484009F6AEE /* DataCacheTests.swift in Sources */,
 				D59A19DE1EE82484009F6AEE /* JSONCacheTests.swift in Sources */,
 				D59A19E01EE82484009F6AEE /* StringCacheTests.swift in Sources */,
+				D5C24E281EE9D78900D2CF22 /* CacheArrayTests.swift in Sources */,
 				D59A19E41EE82484009F6AEE /* MemoryStorageTests.swift in Sources */,
 				D59A19DA1EE82484009F6AEE /* ExpiryTests.swift in Sources */,
 				D59A19D81EE82484009F6AEE /* CapsuleTests.swift in Sources */,
@@ -885,6 +897,7 @@
 				D59A19CF1EE82482009F6AEE /* DataCacheTests.swift in Sources */,
 				D59A19D11EE82482009F6AEE /* JSONCacheTests.swift in Sources */,
 				D59A19D31EE82482009F6AEE /* StringCacheTests.swift in Sources */,
+				D5C24E261EE9D78900D2CF22 /* CacheArrayTests.swift in Sources */,
 				D59A19D71EE82482009F6AEE /* MemoryStorageTests.swift in Sources */,
 				D59A19CD1EE82482009F6AEE /* ExpiryTests.swift in Sources */,
 				D5C24DDA1EE8C29D00D2CF22 /* HybridCacheTests.swift in Sources */,
@@ -907,6 +920,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5291D941C283CFB00B702C9 /* MemoryStorage.swift in Sources */,
+				D5C24E231EE9D4CF00D2CF22 /* CacheArray.swift in Sources */,
 				D5291D8B1C283CFB00B702C9 /* Expiry.swift in Sources */,
 				D5291D891C283CFB00B702C9 /* Cachable.swift in Sources */,
 				D5291D8C1C283CFB00B702C9 /* JSON.swift in Sources */,
@@ -937,6 +951,7 @@
 				D5C24DDE1EE8C45900D2CF22 /* HybridCacheTests.swift in Sources */,
 				D5C24DF01EE8C51500D2CF22 /* DiskStorageTests.swift in Sources */,
 				D5C24DE11EE8C49800D2CF22 /* TestHelper.swift in Sources */,
+				D5C24E271EE9D78900D2CF22 /* CacheArrayTests.swift in Sources */,
 				D5C24DE81EE8C50200D2CF22 /* CodingTests.swift in Sources */,
 				D59A19EA1EE824B4009F6AEE /* NSImageCacheTests.swift in Sources */,
 				D5C24DEE1EE8C50B00D2CF22 /* NSDictionaryCacheTests.swift in Sources */,
@@ -959,6 +974,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */,
+				D5C24E221EE9D4CF00D2CF22 /* CacheArray.swift in Sources */,
 				D5291C311C28220B00B702C9 /* JSON.swift in Sources */,
 				D5291C361C28220B00B702C9 /* String+Cache.swift in Sources */,
 				D5291C341C28220B00B702C9 /* Data+Cache.swift in Sources */,
