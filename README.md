@@ -286,7 +286,7 @@ try cache.setFileProtection(.complete)
 It's also possible to update attributes of the disk cache folder:
 
 ```swift
-try cache.setDirectoryAttributes([FileAttributeKey.immutable: true])
+try cache.setDiskCacheDirectoryAttributes([FileAttributeKey.immutable: true])
 ```
 
 ### Cachable protocol
