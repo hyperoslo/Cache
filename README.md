@@ -22,6 +22,7 @@
 * [Optional bonuses](#optional-bonuses)
   * [JSON](#json)
   * [Coding](#coding)
+  * [CacheArray](#cachearray)
 * [What about images?](#what-about-images)
 * [Installation](#installation)
 * [Author](#author)
@@ -54,6 +55,7 @@ types.
 implemented for `UIImage`, `String`, `JSON` and `Data`.
 - [x] Error handling and logs.
 - [x] `Coding` protocol brings power of `NSCoding` to Swift structs and enums
+- [x] `CacheArray` allows to cache an array of `Cachable` objects.
 - [x] Extensive unit test coverage and great documentation.
 - [x] iOS, tvOS and macOS support.
 
@@ -185,6 +187,8 @@ cache["key"] = nil
 print(cache["key"]) // Prints nil
 ```
 
+Note that default cache expiry will be used when you use subscript.
+
 **Sync API**
 
 ```swift
@@ -195,10 +199,10 @@ let cache = SpecializedCache<UIImage>(name: "ImageCache")
 try cache.addObject(UIImage(named: "image.png"), forKey: "image")
 
 // Get object from cache
-let image: UIImage? = cache.object(forKey: "image")
+let image = cache.object(forKey: "image")
 
 // Get object with expiry date
-let entry: CacheEntry<String>? = cache.cacheEntry(forKey: "image")
+let entry = cache.cacheEntry(forKey: "image")
 print(entry?.object)
 print(entry?.expiry.date) // Prints expiry date
 
@@ -365,6 +369,29 @@ let object = cache.object(forKey: key)
 print(object?.title) // Prints title
 
 ```
+
+### CacheArray
+
+You can use `CacheArray` to cache an array of `Cachable` objects.
+
+```swift
+// SpecializedCache
+let cache = SpecializedCache<CacheArray<String>>(name: "User")
+let object = CacheArray(elements: ["string1", "string2"])
+try cache.addObject(object, forKey: "array")
+let array = cache.object(forKey: "array")?.elements
+print(array) // Prints ["string1", "string2"]
+```
+
+```swift
+// HybridCache
+let cache = HybridCache(name: "Mix")
+let object = CacheArray(elements: ["string1", "string2"])
+try cache.addObject(object, forKey: "array")
+let array = (cache.object(forKey: "array") as CacheArray<String>?)?.elements
+print(array) // Prints ["string1", "string2"]
+```
+
 
 ## What about images?
 
