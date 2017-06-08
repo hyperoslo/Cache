@@ -119,6 +119,8 @@ let data: Data? = cache.object(forKey: "data")
 let entry: CacheEntry<String>? = cache.cacheEntry(forKey: "string")
 print(entry?.object) // Prints "This is a string"
 print(entry?.expiry.date) // Prints expiry date
+// Get total cache size on the disk
+let size = try cache.totalDiskSize()
 // Remove object from cache
 try cache.removeObject(forKey: "data")
 // Clear cache
@@ -186,6 +188,8 @@ let image: UIImage? = cache.object(forKey: "image")
 let entry: CacheEntry<String>? = cache.cacheEntry(forKey: "image")
 print(entry?.object)
 print(entry?.expiry.date) // Prints expiry date
+// Get total cache size on the disk
+let size = try cache.totalDiskSize()
 // Remove object from cache
 try cache.removeObject(forKey: "image")
 // Clear cache
