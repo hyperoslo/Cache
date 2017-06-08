@@ -2,11 +2,6 @@ import Foundation
 
 /// A wrapper around array of `Cachable` objects that performs data decoding and encoding.
 public struct CacheArray<T: Cachable>: Cachable {
-  private enum Error: Swift.Error {
-    case encodingFailed
-    case decodingFailed
-  }
-
   /// Array of elements
   public let elements: [T]
 
@@ -61,4 +56,9 @@ public struct CacheArray<T: Cachable>: Cachable {
       return nil
     }
   }
+}
+
+private enum Error: Swift.Error {
+  case encodingFailed
+  case decodingFailed
 }
