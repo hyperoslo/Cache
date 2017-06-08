@@ -169,8 +169,9 @@ cache.async.clearExpired() { error in
 }
 ```
 
-### Type safe cache
+### Specialized cache
 
+`SpecializedCache` is a type safe alternative to `HybridCache` based on generics.
 Initialization with default or custom configuration, basic operations and
 working with expiry dates are done exactly in the same way as in `HybridCache`.
 
