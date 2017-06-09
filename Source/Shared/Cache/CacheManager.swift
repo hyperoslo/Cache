@@ -251,9 +251,11 @@ extension CacheManager {
 
   /**
    Clears the front and back cache storages.
+   - Parameter keepingDirectory: Pass `true` to keep the existing disk cache directory
+   after removing its contents. The default value is `false`.
    - Parameter completion: Completion closure to be called when the task is done
    */
-  func clear(completion: Completion?) {
+  func clear(keepingDirectory: Bool = false, completion: Completion?) {
     writeQueue.async { [weak self] in
       do {
         guard let `self` = self else {
@@ -261,6 +263,9 @@ extension CacheManager {
         }
         self.frontStorage.clear()
         try self.backStorage.clear()
+        if keepingDirectory {
+          try self.backStorage.createDirectory()
+        }
         completion?(nil)
       } catch {
         Logger.log(error: error)
@@ -364,11 +369,16 @@ extension CacheManager {
 
   /**
    Clears the front and back cache storages.
+   - Parameter keepingDirectory: Pass `true` to keep the existing disk cache directory
+   after removing its contents. The default value is `false`.
    */
-  func clear() throws {
+  func clear(keepingDirectory: Bool = false) throws {
     try writeQueue.sync { [weak self] in
       self?.frontStorage.clear()
       try self?.backStorage.clear()
+      if keepingDirectory {
+        try self?.backStorage.createDirectory()
+      }
     }
   }
 
