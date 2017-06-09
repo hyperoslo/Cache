@@ -187,14 +187,14 @@ final class SpecializedCacheTests: XCTestCase {
   }
 
   /// Test that it clears cached files, but keeps root directory
-  func testAsyncClearKeepingDirectory() throws {
+  func testAsyncClearKeepingRootDirectory() throws {
     let expectation1 = self.expectation(description: "Clear Expectation")
 
     cache.async.addObject(object, forKey: key) { error in
       if let error = error {
         XCTFail("Failed with error: \(error)")
       }
-      self.cache.async.clear(keepingDirectory: true) { error in
+      self.cache.async.clear(keepingRootDirectory: true) { error in
         if let error = error {
           XCTFail("Failed with error: \(error)")
         }
@@ -347,9 +347,9 @@ final class SpecializedCacheTests: XCTestCase {
   }
 
   /// Test that it clears cached files, but keeps root directory
-  func testClearKeepingDirectory() throws {
+  func testClearKeepingRootDirectory() throws {
     try cache.addObject(object, forKey: key)
-    try cache.clear(keepingDirectory: true)
+    try cache.clear(keepingRootDirectory: true)
     XCTAssertNil(cache.object(forKey: key))
     XCTAssertTrue(fileManager.fileExists(atPath: cache.manager.backStorage.path))
   }
