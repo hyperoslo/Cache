@@ -6,6 +6,7 @@ final class HybridCacheTests: XCTestCase {
   private let key = "alongweirdkey"
   private let object = "Test"
   private var cache: HybridCache!
+  private let fileManager = FileManager()
 
   override func setUp() {
     super.setUp()
@@ -181,6 +182,29 @@ final class HybridCacheTests: XCTestCase {
     self.waitForExpectations(timeout: 1.0, handler:nil)
   }
 
+  /// Test that it clears cached files, but keeps root directory
+  func testAsyncClearKeepingRootDirectory() throws {
+    let expectation1 = self.expectation(description: "Clear Expectation")
+
+    cache.async.addObject(object, forKey: key) { error in
+      if let error = error {
+        XCTFail("Failed with error: \(error)")
+      }
+      self.cache.async.clear(keepingRootDirectory: true) { error in
+        if let error = error {
+          XCTFail("Failed with error: \(error)")
+        }
+
+        self.cache.async.object(forKey: self.key) { (cachedObject: String?) in
+          XCTAssertNil(cachedObject)
+          XCTAssertTrue(self.fileManager.fileExists(atPath: self.cache.manager.backStorage.path))
+          expectation1.fulfill()
+        }
+      }
+    }
+    self.waitForExpectations(timeout: 1.0, handler:nil)
+  }
+
   /// Clears expired objects from memory and disk cache
   func testAsyncClearExpired() {
     let expectation1 = self.expectation(description: "Clear If Expired Expectation")
@@ -293,6 +317,14 @@ final class HybridCacheTests: XCTestCase {
       diskObject = try self.cache.manager.backStorage.object(forKey: self.key)
     } catch {}
     XCTAssertNil(diskObject)
+  }
+
+  /// Test that it clears cached files, but keeps root directory
+  func testClearKeepingRootDirectory() throws {
+    try cache.addObject(object, forKey: key)
+    try cache.clear(keepingRootDirectory: true)
+    XCTAssertNil(cache.object(forKey: key) as String?)
+    XCTAssertTrue(fileManager.fileExists(atPath: cache.manager.backStorage.path))
   }
 
   /// Clears expired objects from memory and disk cache

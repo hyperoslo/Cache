@@ -132,6 +132,15 @@ final class DiskStorageTests: XCTestCase {
     XCTAssertFalse(fileExist)
   }
 
+  /// Test that it clears cache files, but keeps root directory
+  func testCreateDirectory() throws {
+    try storage.clear()
+    XCTAssertFalse(fileManager.fileExists(atPath: storage.path))
+
+    try storage.createDirectory()
+    XCTAssertTrue(fileManager.fileExists(atPath: storage.path))
+  }
+
   /// Test that it removes expired objects
   func testClearExpired() throws {
     let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))

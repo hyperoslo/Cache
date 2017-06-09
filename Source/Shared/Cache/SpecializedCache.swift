@@ -69,9 +69,11 @@ public final class SpecializedCache<T: Cachable>: BasicHybridCache {
 
   /**
    Clears the front and back cache storages.
+   - Parameter keepingRootDirectory: Pass `true` to keep the existing disk cache directory
+   after removing its contents. The default value is `false`.
    */
-  public func clear() throws {
-    try manager.clear()
+  public func clear(keepingRootDirectory: Bool = false) throws {
+    try manager.clear(keepingRootDirectory: keepingRootDirectory)
   }
 
   /**
@@ -136,10 +138,12 @@ public class AsyncSpecializedCache<T: Cachable> {
 
   /**
    Clears the front and back cache storages.
+   - Parameter keepingRootDirectory: Pass `true` to keep the existing disk cache directory
+   after removing its contents. The default value is `false`.
    - Parameter completion: Completion closure to be called when the task is done
    */
-  public func clear(completion: Completion? = nil) {
-    manager.clear(completion: completion)
+  public func clear(keepingRootDirectory: Bool = false, completion: Completion? = nil) {
+    manager.clear(keepingRootDirectory: keepingRootDirectory, completion: completion)
   }
 
   /**

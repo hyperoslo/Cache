@@ -37,11 +37,9 @@ final class DiskStorage: StorageAware {
         path = url.appendingPathComponent(name, isDirectory: true).path
       }
 
-      if !fileManager.fileExists(atPath: path) {
-        try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-      }
+      try createDirectory()
     } catch {
-      fatalError("Failed to find or get acces to caches directory: \(error)")
+      fatalError("Failed to find or get access to caches directory: \(error)")
     }
   }
 
@@ -127,6 +125,12 @@ final class DiskStorage: StorageAware {
    */
   func clear() throws {
     try fileManager.removeItem(atPath: path)
+  }
+
+  func createDirectory() throws {
+    if !fileManager.fileExists(atPath: path) {
+      try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+    }
   }
 
   private typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])

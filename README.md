@@ -129,7 +129,9 @@ let size = try cache.totalDiskSize()
 try cache.removeObject(forKey: "data")
 
 // Clear cache
-try cache.clear()
+// Pass `true` to keep the existing disk cache directory after removing
+// its contents. The default value for `keepingRootDirectory` is `false`.
+try cache.clear(keepingRootDirectory: true)
 
 // Clear expired objects
 try cache.clearExpired()
