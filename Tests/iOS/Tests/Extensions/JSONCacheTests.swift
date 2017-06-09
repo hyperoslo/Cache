@@ -3,9 +3,9 @@ import XCTest
 
 final class JSONCacheTests: XCTestCase {
   /// Test that it decodes a dictionary from NSData
-  func testDecodeWithDictionary() {
+  func testDecodeWithDictionary() throws {
     let object = ["key": "value"]
-    let data = try! JSONSerialization.data(
+    let data = try JSONSerialization.data(
       withJSONObject: object,
       options: JSONSerialization.WritingOptions()
     )
@@ -21,9 +21,9 @@ final class JSONCacheTests: XCTestCase {
   }
 
   /// Test that it decodes an array from NSData
-  func testDecodeWithArray() {
+  func testDecodeWithArray() throws {
     let object = ["value1", "value2", "value3"]
-    let data = try! JSONSerialization.data(
+    let data = try JSONSerialization.data(
       withJSONObject: object,
       options: JSONSerialization.WritingOptions()
     )
@@ -40,9 +40,9 @@ final class JSONCacheTests: XCTestCase {
   }
 
   /// Test that it encodes a dictionary to NSData
-  func testEncodeWithDictionary() {
+  func testEncodeWithDictionary() throws {
     let object = ["key": "value"]
-    let data = try! JSONSerialization.data(
+    let data = try JSONSerialization.data(
       withJSONObject: object,
       options: JSONSerialization.WritingOptions()
     )
@@ -52,9 +52,9 @@ final class JSONCacheTests: XCTestCase {
   }
 
   /// Test that it encodes an array to NSData
-  func testEncodeWithArray() {
+  func testEncodeWithArray() throws {
     let object = ["value1", "value2", "value3"]
-    let data = try! JSONSerialization.data(
+    let data = try JSONSerialization.data(
       withJSONObject: object,
       options: JSONSerialization.WritingOptions()
     )

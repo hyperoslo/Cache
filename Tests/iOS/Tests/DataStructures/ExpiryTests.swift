@@ -18,7 +18,7 @@ final class ExpiryTests: XCTestCase {
     XCTAssertEqualWithAccuracy(
       expiry.date.timeIntervalSinceReferenceDate,
       date.timeIntervalSinceReferenceDate,
-      accuracy: 0.01
+      accuracy: 0.1
     )
   }
 

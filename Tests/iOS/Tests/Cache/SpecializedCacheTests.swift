@@ -31,7 +31,7 @@ final class SpecializedCacheTests: XCTestCase {
 
   // MARK: - Async caching
 
-  func testAsyncAddObject() {
+  func testAsyncAddObject() throws {
     let expectation1 = self.expectation(description: "Save Expectation")
     let expectation2 = self.expectation(description: "Save To Memory Expectation")
     let expectation3 = self.expectation(description: "Save To Disk Expectation")
@@ -94,10 +94,10 @@ final class SpecializedCacheTests: XCTestCase {
   }
 
   /// Should resolve from disk and set in-memory cache if object not in-memory
-  func testAsyncObjectCopyToMemory() {
+  func testAsyncObjectCopyToMemory() throws {
     let expectation = self.expectation(description: "Expectation")
 
-    try! cache.manager.backStorage.addObject(object, forKey: key)
+    try cache.manager.backStorage.addObject(object, forKey: key)
     cache.async.object(forKey: key) { cachedObject in
       XCTAssertNotNil(cachedObject)
       XCTAssertEqual(cachedObject?.firstName, self.object.firstName)
