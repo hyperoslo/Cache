@@ -9,9 +9,9 @@ class Logger {
   // It is disabled by default but you can always catch errors
   // using Swift Error break points even if the feature is
   // disabled.
-  static var enabled: Bool = false
+  static var isEnabled: Bool = false
   static func log(error: Error) {
-    guard Logger.enabled else {
+    guard Logger.isEnabled else {
       return
     }
 
