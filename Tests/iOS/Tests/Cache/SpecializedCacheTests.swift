@@ -411,7 +411,7 @@ final class SpecializedCacheTests: XCTestCase {
       expectation.fulfill()
     }
 
-    wait(for: [expectation], timeout: 10.0)
+    self.waitForExpectations(timeout: 10.0, handler:nil)
   }
 
   func testExpirationManualMode() throws {
