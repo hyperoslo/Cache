@@ -10,16 +10,19 @@ final class SpecializedCacheTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
-    cache = SpecializedCache<User>(name: cacheName)
+
   }
 
   override func tearDown() {
-    try? cache.clear()
+    if cache != nil {
+      try? cache.clear()
+    }
     super.tearDown()
   }
 
   func testInit() {
     let defaultConfig = Config()
+    cache = SpecializedCache<User>(name: cacheName)
 
     XCTAssertEqual(cache.name, cacheName)
     XCTAssertEqual(cache.manager.config.expiry.date, defaultConfig.expiry.date)
@@ -33,6 +36,7 @@ final class SpecializedCacheTests: XCTestCase {
   // MARK: - Async caching
 
   func testAsyncAddObject() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     let expectation1 = self.expectation(description: "Save Expectation")
     let expectation2 = self.expectation(description: "Save To Memory Expectation")
     let expectation3 = self.expectation(description: "Save To Disk Expectation")
@@ -61,6 +65,7 @@ final class SpecializedCacheTests: XCTestCase {
   }
 
   func testAsyncCacheEntry() {
+    cache = SpecializedCache<User>(name: cacheName)
     let expectation = self.expectation(description: "Save Expectation")
     let expiryDate = Date()
     cache.async.addObject(object, forKey: key, expiry: .date(expiryDate)) { error in
@@ -79,6 +84,7 @@ final class SpecializedCacheTests: XCTestCase {
   }
 
   func testAsyncObject() {
+    cache = SpecializedCache<User>(name: cacheName)
     let expectation = self.expectation(description: "Expectation")
     cache.async.addObject(object, forKey: key) { error in
       if let error = error {
@@ -96,6 +102,7 @@ final class SpecializedCacheTests: XCTestCase {
 
   /// Should resolve from disk and set in-memory cache if object not in-memory
   func testAsyncObjectCopyToMemory() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     let expectation = self.expectation(description: "Expectation")
 
     try cache.manager.backStorage.addObject(object, forKey: key)
@@ -116,6 +123,7 @@ final class SpecializedCacheTests: XCTestCase {
 
   /// Removes cached object from memory and disk
   func testAsyncRemoveObject() {
+    cache = SpecializedCache<User>(name: cacheName)
     let expectation1 = self.expectation(description: "Remove Expectation")
     let expectation2 = self.expectation(description: "Remove From Memory Expectation")
     let expectation3 = self.expectation(description: "Remove From Disk Expectation")
@@ -153,6 +161,7 @@ final class SpecializedCacheTests: XCTestCase {
 
   /// Clears memory and disk cache
   func testAsyncClear() {
+    cache = SpecializedCache<User>(name: cacheName)
     let expectation1 = self.expectation(description: "Clear Expectation")
     let expectation2 = self.expectation(description: "Clear Memory Expectation")
     let expectation3 = self.expectation(description: "Clear Disk Expectation")
@@ -188,6 +197,7 @@ final class SpecializedCacheTests: XCTestCase {
 
   /// Test that it clears cached files, but keeps root directory
   func testAsyncClearKeepingRootDirectory() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     let expectation1 = self.expectation(description: "Clear Expectation")
 
     cache.async.addObject(object, forKey: key) { error in
@@ -211,6 +221,7 @@ final class SpecializedCacheTests: XCTestCase {
 
   /// Clears expired objects from memory and disk cache
   func testAsyncClearExpired() {
+    cache = SpecializedCache<User>(name: cacheName)
     let expectation1 = self.expectation(description: "Clear If Expired Expectation")
     let expectation2 = self.expectation(description: "Don't Clear If Not Expired Expectation")
     let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))
@@ -248,6 +259,7 @@ final class SpecializedCacheTests: XCTestCase {
   // MARK: - Sync caching
 
   func testSubscript() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     XCTAssertNil(cache[key])
     // Add
     cache[key] = object
@@ -267,6 +279,7 @@ final class SpecializedCacheTests: XCTestCase {
   }
 
   func testAdd() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     try cache.addObject(object, forKey: key)
     let cachedObject = cache.object(forKey: key)
     XCTAssertNotNil(cachedObject)
@@ -279,6 +292,7 @@ final class SpecializedCacheTests: XCTestCase {
   }
 
   func testCacheEntry() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     let expiryDate = Date()
     try cache.addObject(object, forKey: key, expiry: .date(expiryDate))
     let entry = cache.cacheEntry(forKey: key)
@@ -289,6 +303,7 @@ final class SpecializedCacheTests: XCTestCase {
   }
 
   func testObject() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     try cache.addObject(object, forKey: key)
     let cachedObject = cache.object(forKey: key)
 
@@ -299,6 +314,7 @@ final class SpecializedCacheTests: XCTestCase {
 
   /// Should resolve from disk and set in-memory cache if object not in-memory
   func testObjectCopyToMemory() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     try cache.manager.backStorage.addObject(object, forKey: key)
     let cachedObject = cache.object(forKey: key)
 
@@ -313,6 +329,7 @@ final class SpecializedCacheTests: XCTestCase {
 
   /// Removes cached object from memory and disk
   func testRemoveObject() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     try cache.addObject(object, forKey: key)
     XCTAssertNotNil(cache.object(forKey: key))
 
@@ -332,6 +349,7 @@ final class SpecializedCacheTests: XCTestCase {
 
   /// Clears memory and disk cache
   func testClear() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     try cache.addObject(object, forKey: key)
     try cache.clear()
     XCTAssertNil(cache.object(forKey: key))
@@ -348,6 +366,7 @@ final class SpecializedCacheTests: XCTestCase {
 
   /// Test that it clears cached files, but keeps root directory
   func testClearKeepingRootDirectory() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     try cache.addObject(object, forKey: key)
     try cache.clear(keepingRootDirectory: true)
     XCTAssertNil(cache.object(forKey: key))
@@ -356,6 +375,7 @@ final class SpecializedCacheTests: XCTestCase {
 
   /// Clears expired objects from memory and disk cache
   func testClearExpired() throws {
+    cache = SpecializedCache<User>(name: cacheName)
     let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))
     let expiry2: Expiry = .date(Date().addingTimeInterval(100000))
     let key1 = "key1"
@@ -374,5 +394,34 @@ final class SpecializedCacheTests: XCTestCase {
     try cache.addObject(TestHelper.data(20), forKey: "key2")
     let size = try cache.totalDiskSize()
     XCTAssertEqual(size, 30)
+  }
+
+  func testAutoExpirationMode() throws {
+    let config = Config(expirationMode: .auto)
+    let expiry: Expiry = .date(Date().addingTimeInterval(-100000))
+    let cache = SpecializedCache<Data>(name: cacheName, config: config)
+    let key = "auto-key"
+    let expectation = self.expectation(description: "Wait for async cleanup")
+
+    try cache.addObject(TestHelper.data(10), forKey: key, expiry: expiry)
+    TestHelper.triggerApplicationEvents()
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+      XCTAssertNil(cache.object(forKey: key))
+      expectation.fulfill()
+    }
+
+    wait(for: [expectation], timeout: 10.0)
+  }
+
+  func testExpirationManualMode() throws {
+    let config = Config(expirationMode: .manual)
+    let expiry: Expiry = .date(Date().addingTimeInterval(-100000))
+    let manualCache = SpecializedCache<Data>(name: cacheName, config: config)
+    let key = "manual-key"
+
+    try manualCache.addObject(TestHelper.data(10), forKey: key, expiry: expiry)
+    TestHelper.triggerApplicationEvents()
+    XCTAssertNotNil(manualCache.object(forKey: key))
   }
 }

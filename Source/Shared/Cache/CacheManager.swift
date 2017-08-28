@@ -68,9 +68,16 @@ class CacheManager: NSObject {
     readQueue = DispatchQueue(label: "\(queuePrefix).ReadQueue", attributes: [])
 
     super.init()
+
+    guard config.expirationMode == .auto else {
+      return
+    }
+
     let notificationCenter = NotificationCenter.default
 
     #if os(macOS)
+      notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInFrontStorage),
+                                     name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
       notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
                                      name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
       notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
@@ -101,6 +108,10 @@ class CacheManager: NSObject {
    Clears expired cache items when the app enters background.
    */
   @objc private func applicationDidEnterBackground() {
+    guard config.expirationMode == .auto else {
+      return
+    }
+
     let application = UIApplication.shared
     var backgroundTask: UIBackgroundTaskIdentifier?
 

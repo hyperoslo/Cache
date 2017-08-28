@@ -15,6 +15,8 @@ public struct Config {
   public let maxDiskSize: UInt
   /// A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
   public let cacheDirectory: String?
+  /// Determines if the cache manager should clear expired objects or if this should be handled manually.
+  public let expirationMode: ExpirationMode
 
   // MARK: - Initialization
 
@@ -30,11 +32,13 @@ public struct Config {
               memoryCountLimit: UInt = 0,
               memoryTotalCostLimit: UInt = 0,
               maxDiskSize: UInt = 0,
-              cacheDirectory: String? = nil) {
+              cacheDirectory: String? = nil,
+              expirationMode: ExpirationMode = .auto) {
     self.expiry = expiry
     self.memoryCountLimit = memoryCountLimit
     self.memoryTotalCostLimit = memoryTotalCostLimit
     self.maxDiskSize = maxDiskSize
     self.cacheDirectory = cacheDirectory
+    self.expirationMode = expirationMode
   }
 }
