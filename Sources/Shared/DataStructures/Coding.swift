@@ -76,7 +76,7 @@ private final class CodingHelper<T: Coding>: NSCoding {
 
 /// Object to wrap value conforming to non-class `Coding` protocol
 /// It passes `NSCoder` down to `Coding` object where actual encoding and decoding happen.
-private final class CodingCapsule: NSObject, NSCoding {
+@objc(_TtC6SharedP33_C6E694F9132479FD05ACD085DCD585A513CodingCapsule)private final class CodingCapsule: NSObject, NSCoding {
   static let key = "helper"
   let helper: NSCoding
 

@@ -25,9 +25,15 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+*.xcodeproj
 
 # CocoaPods
 Pods
 
 # Carthage
 Carthage
+
+# SPM
+.build
+Package.resolved
+

@@ -73,24 +73,6 @@ class CacheManager: NSObject {
       return
     }
 
-    let notificationCenter = NotificationCenter.default
-
-    #if os(macOS)
-      notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInFrontStorage),
-                                     name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
-      notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
-                                     name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
-      notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
-                                     name: NSNotification.Name.NSApplicationDidResignActive, object: nil)
-    #else
-      notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInFrontStorage),
-                                     name: .UIApplicationDidReceiveMemoryWarning, object: nil)
-      notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
-                                     name: .UIApplicationWillTerminate, object: nil)
-      notificationCenter.addObserver(self, selector: #selector(CacheManager.applicationDidEnterBackground),
-                                     name: .UIApplicationDidEnterBackground, object: nil)
-    #endif
-
     // Clear expired cached objects.
     clearExpired(completion: nil)
   }
@@ -101,55 +83,6 @@ class CacheManager: NSObject {
   deinit {
     NotificationCenter.default.removeObserver(self)
   }
-
-  #if !os(macOS)
-
-  /**
-   Clears expired cache items when the app enters background.
-   */
-  @objc private func applicationDidEnterBackground() {
-    guard config.expirationMode == .auto else {
-      return
-    }
-
-    let application = UIApplication.shared
-    var backgroundTask: UIBackgroundTaskIdentifier?
-
-    backgroundTask = application.beginBackgroundTask (expirationHandler: { [weak self] in
-      guard let backgroundTask = backgroundTask else {
-        return
-      }
-      var mutableBackgroundTask = backgroundTask
-      self?.endBackgroundTask(&mutableBackgroundTask)
-    })
-
-    writeQueue.async { [weak self] in
-      guard let `self` = self, let backgroundTask = backgroundTask else {
-        return
-      }
-      do {
-        try self.backStorage.clearExpired()
-      } catch {
-        Logger.log(error: error)
-      }
-      var mutableBackgroundTask = backgroundTask
-
-      DispatchQueue.main.async { [weak self] in
-        self?.endBackgroundTask(&mutableBackgroundTask)
-      }
-    }
-  }
-
-  /**
-   Ends given background task.
-   - Parameter task: A UIBackgroundTaskIdentifier
-   */
-  private func endBackgroundTask(_ task: inout UIBackgroundTaskIdentifier) {
-    UIApplication.shared.endBackgroundTask(task)
-    task = UIBackgroundTaskInvalid
-  }
-
-  #endif
 
   /**
    Clears expired cache items in front cache.

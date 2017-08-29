@@ -8,7 +8,7 @@ extension NSImage {
 
   var data: Data {
     let representation = tiffRepresentation!
-    let imageFileType: NSBitmapImageFileType = .PNG
+    let imageFileType: NSBitmapImageRep.FileType = .png
 
     return NSBitmapImageRep(data: representation)!
       .representation(using: imageFileType, properties: [:])!

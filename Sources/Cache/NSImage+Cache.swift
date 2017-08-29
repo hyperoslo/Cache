@@ -1,5 +1,6 @@
 import Foundation
 import Cocoa
+import Shared
 
 // MARK: - Cachable
 
@@ -28,7 +29,7 @@ extension NSImage: Cachable {
       return nil
     }
 
-    let imageFileType: NSBitmapImageFileType = hasAlpha ? .PNG : .JPEG
+    let imageFileType: NSBitmapImageRep.FileType = hasAlpha ? .png : .jpeg
     return NSBitmapImageRep(data: data)?.representation(using: imageFileType, properties: [:])
   }
 }
