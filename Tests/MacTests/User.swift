@@ -1,6 +1,5 @@
 import Foundation
 @testable import Cache
-import Shared
 
 struct User {
   let firstName: String

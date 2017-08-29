@@ -1,6 +1,5 @@
 import Foundation
 import Cocoa
-import Shared
 
 // MARK: - Cachable
 
