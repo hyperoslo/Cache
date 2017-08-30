@@ -1,8 +1,4 @@
-#if os(macOS)
-  import AppKit
-#else
-  import UIKit
-#endif
+import Foundation
 
 /**
  BasicHybridCache supports storing all kinds of objects, as long as they conform to
@@ -41,16 +37,6 @@ public extension BasicHybridCache {
   func totalDiskSize() throws -> UInt64 {
     return try manager.totalDiskSize()
   }
-
-  #if os(iOS) || os(tvOS)
-  /**
-   Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
-   - Parameter type: File protection type
-   */
-  func setFileProtection( _ type: FileProtectionType) throws {
-    try manager.backStorage.setFileProtection(type)
-  }
-  #endif
 
   /**
    Sets attributes on the disk cache folder.

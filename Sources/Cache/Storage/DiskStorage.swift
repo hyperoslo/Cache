@@ -238,16 +238,6 @@ final class DiskStorage: StorageAware {
 }
 
 extension DiskStorage {
-  #if os(iOS) || os(tvOS)
-  /**
-   Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
-   - Parameter type: File protection type
-   */
-  func setFileProtection( _ type: FileProtectionType) throws {
-    try setDirectoryAttributes([FileAttributeKey.protectionKey: type])
-  }
-  #endif
-
   /**
    Sets attributes on the disk cache folder.
    - Parameter attributes: Directory attributes

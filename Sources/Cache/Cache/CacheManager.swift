@@ -1,8 +1,4 @@
-#if os(macOS)
-  import AppKit
-#else
-  import UIKit
-#endif
+import Foundation
 
 // Completion with error
 public typealias Completion = (Error?) -> Void
