@@ -1,4 +1,5 @@
 import Foundation
+import Dispatch
 
 // Completion with error
 public typealias Completion = (Error?) -> Void

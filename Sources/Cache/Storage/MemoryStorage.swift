@@ -33,7 +33,12 @@ final class MemoryStorage: StorageAware {
    */
   func addObject<T: Cachable>(_ object: T, forKey key: String, expiry: Expiry = .never) {
     let capsule = Capsule(value: object, expiry: expiry)
-    cache.setObject(capsule, forKey: key as NSString)
+    #if os(Linux)
+        let nsstring = NSString(string: key)
+    #else
+        let nsstring = key as NSString
+    #endif
+    cache.setObject(capsule, forKey: nsstring)
     keys.insert(key)
   }
 
@@ -52,7 +57,12 @@ final class MemoryStorage: StorageAware {
    - Returns: Object wrapper with metadata or nil if not found
    */
   func cacheEntry<T: Cachable>(forKey key: String) -> CacheEntry<T>? {
-    guard let capsule = cache.object(forKey: key as NSString) else {
+    #if os(Linux)
+        let nsstring = NSString(string: key)
+    #else
+        let nsstring = key as NSString
+    #endif
+    guard let capsule = cache.object(forKey: nsstring) else {
       return nil
     }
     guard let object = capsule.object as? T else {
@@ -66,7 +76,12 @@ final class MemoryStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    */
   func removeObject(forKey key: String) {
-    cache.removeObject(forKey: key as NSString)
+    #if os(Linux)
+        let nsstring = NSString(string: key)
+    #else
+        let nsstring = key as NSString
+    #endif
+    cache.removeObject(forKey: nsstring)
     keys.remove(key)
   }
 
@@ -75,7 +90,12 @@ final class MemoryStorage: StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    */
   func removeObjectIfExpired(forKey key: String) {
-    if let capsule = cache.object(forKey: key as NSString), capsule.isExpired {
+    #if os(Linux)
+        let nsstring = NSString(string: key)
+    #else
+        let nsstring = key as NSString
+    #endif
+    if let capsule = cache.object(forKey: nsstring), capsule.isExpired {
       removeObject(forKey: key)
     }
   }

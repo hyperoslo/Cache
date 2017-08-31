@@ -20,7 +20,7 @@ public struct CacheArray<T: Cachable>: Cachable {
    */
   public static func decode(_ data: Data) -> CacheArray<T>? {
     // Unarchive object as an array of data
-    guard let dataArray = (NSKeyedUnarchiver.unarchiveObject(with: data) as? NSArray) as? [Data] else {
+    guard let dataArray = (NSKeyedUnarchiver.unarchiveObject(with: data) as? NSArray)?.map({ $0 as! Data}) else {
       return nil
     }
 
@@ -36,6 +36,7 @@ public struct CacheArray<T: Cachable>: Cachable {
     } catch {
       return nil
     }
+    
   }
 
   /**
@@ -51,6 +52,7 @@ public struct CacheArray<T: Cachable>: Cachable {
         }
         return data
       })
+
       return NSKeyedArchiver.archivedData(withRootObject: NSArray(array: dataArray))
     } catch {
       return nil

@@ -16,8 +16,8 @@ let package = Package(
         .target(
             name: "Cache",
             dependencies: ["SwiftHash"]),
-            .testTarget(
-                name: "MacTests",
-                dependencies: ["Cache"]),
+        .testTarget(
+            name: "MacTests",
+            dependencies: ["Cache"]),
     ]
 )
