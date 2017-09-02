@@ -14,8 +14,9 @@ jobs:
       - run:
           name: Run unit tests
           command: |
-           swift package fetch
-           swift test -c release
+           swift package resolve
+           swift build
+           swift test
 
 workflows:
   version: 2
