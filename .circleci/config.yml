@@ -3,11 +3,28 @@ jobs:
   build:
     docker:
       - image: klembara/swift4:0.0.1
-  steps:
-    - checkout
+    steps:
+      - checkout
 
-    - run:
-      name: Run unit tests
-      command: |
-        swift fetch
-        swift test -c release
+  test:
+    docker:
+      - image: klembara/swift4:0.0.1
+    steps:
+      -checkout
+      - run:
+        name: Run unit tests
+        command: |
+          swift fetch
+          swift test -c release
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
