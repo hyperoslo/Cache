@@ -4,10 +4,10 @@ jobs:
     docker:
       - image: klembara/swift4:0.0.1
   steps:
-  - checkout
+    - checkout
 
-  - run:
-    name: Run unit tests
-    command: |
-      swift fetch
-      swift test -c release
+    - run:
+      name: Run unit tests
+      command: |
+        swift fetch
+        swift test -c release
