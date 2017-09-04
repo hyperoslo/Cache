@@ -1,31 +1,77 @@
+default_docker: &default_docker
+  docker:
+    - image: klembara/swift4:0.0.1
+
 version: 2.0
 jobs:
-  build:
-    docker:
-      - image: klembara/swift4:0.0.1
+  resolve:
+    <<: *default_docker
     steps:
       - checkout
-
-  test:
-    docker:
-      - image: klembara/swift4:0.0.1
-    steps:
-      - checkout
+      - restore_cache:
+          keys:
+            - build-cache-{{ .Branch }}-{{ checksum "Package.swift" }}
+            - build-cache-{{ .Branch }}
+            - build-cache
       - run:
-          name: Run unit tests
+          name: Resolve
           command: |
            swift package resolve
-           swift build
-           swift test
+           swift package update
+      - save_cache:
+          key: build-cache-{{ .Branch }}-{{ checksum "Package.swift" }}
+          paths:
+            - .build/
+            - Package.resolved
+      - persist_to_workspace:
+          root: .build
+          paths:
+            - checkouts
+            - dependencies-state.json
+            - repositories/
+
+  build_debug:
+    <<: *default_docker
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .build
+      - run:
+          name: Build for debug
+          command: swift build
+
+  build_release:
+    <<: *default_docker
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .build
+      - run:
+          name: Build for release
+          command: swift build
+
+  test:
+    <<: *default_docker
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .build
+      - run:
+          name: Run unit tests
+          command: swift test --parallel
 
 workflows:
   version: 2
-  build_and_test:
+  resolve_build_test:
     jobs:
-      - build
+      - resolve
+      - build_debug:
+          requires:
+            - resolve
+      - build_release:
+          requires:
+            - resolve
       - test:
           requires:
-            - build
-          filters:
-            branches:
-              only: master
+            - build_debug
+            - build_release
