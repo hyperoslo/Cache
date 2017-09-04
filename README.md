@@ -193,6 +193,8 @@ Note that default cache expiry will be used when you use subscript.
 
 **Sync API**
 
+*__NOTE:__ Images are not supported!!!*
+
 ```swift
 // Create image cache, so it's possible to add only UIImage objects
 let cache = SpecializedCache<UIImage>(name: "ImageCache")
