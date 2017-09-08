@@ -77,11 +77,11 @@ class CacheManager: NSObject {
 
     #if os(macOS)
       notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInFrontStorage),
-                                     name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
+                                     name: NSApplication.willTerminateNotification, object: nil)
       notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
-                                     name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
+                                     name: NSApplication.willTerminateNotification, object: nil)
       notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInBackStorage),
-                                     name: NSNotification.Name.NSApplicationDidResignActive, object: nil)
+                                     name: NSApplication.didResignActiveNotification, object: nil)
     #else
       notificationCenter.addObserver(self, selector: #selector(clearExpiredDataInFrontStorage),
                                      name: .UIApplicationDidReceiveMemoryWarning, object: nil)
