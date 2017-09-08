@@ -115,9 +115,6 @@
 		D5C24E261EE9D78900D2CF22 /* CacheArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C24E251EE9D78900D2CF22 /* CacheArrayTests.swift */; };
 		D5C24E271EE9D78900D2CF22 /* CacheArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C24E251EE9D78900D2CF22 /* CacheArrayTests.swift */; };
 		D5C24E281EE9D78900D2CF22 /* CacheArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C24E251EE9D78900D2CF22 /* CacheArrayTests.swift */; };
-		D5CE966D1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
-		D5CE966E1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
-		D5CE966F1EE475C0002BFE06 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE966C1EE475C0002BFE06 /* Coding.swift */; };
 		D5CE96861EE691D6002BFE06 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96851EE691D6002BFE06 /* Logger.swift */; };
 		D5CE96871EE691D6002BFE06 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96851EE691D6002BFE06 /* Logger.swift */; };
 		D5CE96881EE691D6002BFE06 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CE96851EE691D6002BFE06 /* Logger.swift */; };
@@ -208,7 +205,6 @@
 		D5C24DE31EE8C4E000D2CF22 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D5C24E211EE9D4CF00D2CF22 /* CacheArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheArray.swift; sourceTree = "<group>"; };
 		D5C24E251EE9D78900D2CF22 /* CacheArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheArrayTests.swift; sourceTree = "<group>"; };
-		D5CE966C1EE475C0002BFE06 /* Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coding.swift; sourceTree = "<group>"; };
 		D5CE96851EE691D6002BFE06 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		D5CE968A1EE69969002BFE06 /* SpecializedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecializedCache.swift; sourceTree = "<group>"; };
 		D5CE968B1EE69969002BFE06 /* HybridCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCache.swift; sourceTree = "<group>"; };
@@ -303,7 +299,6 @@
 				D5291C171C28220B00B702C9 /* Cachable.swift */,
 				D5C24E211EE9D4CF00D2CF22 /* CacheArray.swift */,
 				D5291C181C28220B00B702C9 /* Capsule.swift */,
-				D5CE966C1EE475C0002BFE06 /* Coding.swift */,
 				D5291C191C28220B00B702C9 /* Expiry.swift */,
 				D5291C1A1C28220B00B702C9 /* JSON.swift */,
 			);
@@ -854,7 +849,6 @@
 				BDEDD3641DBCE5D8007416A6 /* Capsule.swift in Sources */,
 				BDEDD3621DBCE5CE007416A6 /* Config.swift in Sources */,
 				D5CE96951EE69969002BFE06 /* BasicHybridCache.swift in Sources */,
-				D5CE966F1EE475C0002BFE06 /* Coding.swift in Sources */,
 				BDF64BC91F54764700134105 /* ExpirationMode.swift in Sources */,
 				BDEDD36B1DBCE5D8007416A6 /* String+Cache.swift in Sources */,
 				BDEDD36A1DBCE5D8007416A6 /* Date+Cache.swift in Sources */,
@@ -933,7 +927,6 @@
 				D5291D8E1C283CFB00B702C9 /* JSON+Cache.swift in Sources */,
 				D5CE968E1EE69969002BFE06 /* SpecializedCache.swift in Sources */,
 				D5291D8A1C283CFB00B702C9 /* Capsule.swift in Sources */,
-				D5CE966E1EE475C0002BFE06 /* Coding.swift in Sources */,
 				D5CE96941EE69969002BFE06 /* BasicHybridCache.swift in Sources */,
 				D5291D881C283CFB00B702C9 /* Config.swift in Sources */,
 				BDF64BC81F54764700134105 /* ExpirationMode.swift in Sources */,
@@ -989,7 +982,6 @@
 				D5291C381C28220B00B702C9 /* DiskStorage.swift in Sources */,
 				D5CE968D1EE69969002BFE06 /* SpecializedCache.swift in Sources */,
 				D5291C391C28220B00B702C9 /* MemoryStorage.swift in Sources */,
-				D5CE966D1EE475C0002BFE06 /* Coding.swift in Sources */,
 				D5CE96931EE69969002BFE06 /* BasicHybridCache.swift in Sources */,
 				BDF64BC71F54764700134105 /* ExpirationMode.swift in Sources */,
 				D5291C351C28220B00B702C9 /* Date+Cache.swift in Sources */,
