@@ -5,11 +5,7 @@ extension NSDictionary: Cachable {
   public typealias CacheType = NSDictionary
 
   public static func decode(_ data: Data) -> CacheType? {
-    guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any] else {
-      return nil
-    }
-
-    return json as NSDictionary
+    return NSKeyedUnarchiver.unarchiveObject(with: data) as? NSDictionary
   }
 
   public func encode() -> Data? {
