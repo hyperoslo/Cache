@@ -15,7 +15,7 @@ final class NSImageCacheTests: XCTestCase {
   func testEncode() {
     let image = TestHelper.image()
     let representation = image.tiffRepresentation!
-    let imageFileType: NSBitmapImageFileType = .PNG
+    let imageFileType: NSBitmapImageRep.FileType = .png
     let data = NSBitmapImageRep(data: representation)!
       .representation(using: imageFileType, properties: [:])
     let result = image.encode()!

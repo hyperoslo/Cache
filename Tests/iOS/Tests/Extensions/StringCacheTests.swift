@@ -4,8 +4,13 @@ import XCTest
 final class StringCacheTests: XCTestCase {
   /// Tests that it decodes from NSData
   func testDecode() {
-    let string = self.name
-    let data = string!.data(using: String.Encoding.utf8)!
+    #if os(tvOS)
+      let string = self.name!
+    #else
+      let string = self.name
+    #endif
+
+    let data = string.data(using: String.Encoding.utf8)!
     let result = String.decode(data)
 
     XCTAssertEqual(result, string)
@@ -13,9 +18,14 @@ final class StringCacheTests: XCTestCase {
 
   /// Test that it encodes to NSData
   func testEncode() {
-    let string = self.name
-    let data = string!.data(using: String.Encoding.utf8)!
-    let result = string!.encode()
+    #if os(tvOS)
+      let string = self.name!
+    #else
+      let string = self.name
+    #endif
+
+    let data = string.data(using: String.Encoding.utf8)!
+    let result = string.encode()
 
     XCTAssertEqual(result, data)
   }

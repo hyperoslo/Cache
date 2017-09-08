@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.tvos.source_files = 'Source/{iOS,Shared}/**/*'
 
   s.frameworks = 'Foundation'
-  s.dependency 'SwiftHash', '~> 1.4.0'
+  s.dependency 'SwiftHash', '~> 2.0.0'
 
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.0' }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
 end
