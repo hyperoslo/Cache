@@ -1,5 +1,11 @@
 import Foundation
 
+#if os(iOS) || os(tvOS)
+import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
+
 struct TestHelper {
   static var user: User {
     return User(firstName: "John", lastName: "Snow")
@@ -15,8 +21,8 @@ struct TestHelper {
       NotificationCenter.default.post(name: .UIApplicationDidEnterBackground, object: nil)
       NotificationCenter.default.post(name: .UIApplicationWillTerminate, object: nil)
     #else
-      NotificationCenter.default.post(name: NSNotification.Name.NSApplicationWillTerminate, object: nil)
-      NotificationCenter.default.post(name: NSNotification.Name.NSApplicationDidResignActive, object: nil)
+      NotificationCenter.default.post(name: NSApplication.willTerminateNotification, object: nil)
+      NotificationCenter.default.post(name: NSApplication.didResignActiveNotification, object: nil)
     #endif
   }
 }
