@@ -1,7 +1,21 @@
 import XCTest
 @testable import Cache
 
-extension NSDictionary: Cachable {}
+extension NSDictionary: Cachable {
+  public typealias CacheType = NSDictionary
+
+  public static func decode(_ data: Data) -> CacheType? {
+    guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any] else {
+      return nil
+    }
+
+    return json as NSDictionary
+  }
+
+  public func encode() -> Data? {
+    return try? JSONSerialization.data(withJSONObject: self, options: [])
+  }
+}
 
 final class NSDictionaryCacheTests: XCTestCase {
   /// Tests that it decodes from NSData
