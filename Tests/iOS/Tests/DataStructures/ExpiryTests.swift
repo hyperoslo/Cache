@@ -15,7 +15,7 @@ final class ExpiryTests: XCTestCase {
     let date = Date().addingTimeInterval(1000)
     let expiry = Expiry.seconds(1000)
 
-    XCTAssertEqualWithAccuracy(
+    XCTAssertEqual(
       expiry.date.timeIntervalSinceReferenceDate,
       date.timeIntervalSinceReferenceDate,
       accuracy: 0.1
