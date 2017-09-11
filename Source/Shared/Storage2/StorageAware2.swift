@@ -32,7 +32,7 @@ public protocol StorageAware2 {
    Check if an object exist by the given key.
    - Parameter key: Unique key to identify the object
    */
-  func existsObject<T: Codable>(forKey key: String, ofType type: T.Type) throws -> Bool
+  func existsObject<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Bool
 
   /**
    Removes all objects from the cache storage.
@@ -50,7 +50,7 @@ public extension StorageAware2 {
     return try entry(forKey: key).object
   }
 
-  func existsObject<T: Codable>(forKey key: String, ofType type: T.Type) throws -> Bool {
+  func existsObject<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Bool {
     do {
       let _: T = try object(forKey: key)
       return true
