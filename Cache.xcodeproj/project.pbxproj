@@ -37,6 +37,7 @@
 		D283BB121F668E8900394BBA /* HybridStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB111F668E8900394BBA /* HybridStorage2.swift */; };
 		D283BB141F6691AC00394BBA /* DiskStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB131F6691AC00394BBA /* DiskStorage2.swift */; };
 		D283BB161F669D0300394BBA /* DataSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB151F669D0300394BBA /* DataSerializer.swift */; };
+		D2C3D2F51F66D31D001D3CCD /* CacheError2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3D2F41F66D31D001D3CCD /* CacheError2.swift */; };
 		D5291C2D1C28220B00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
 		D5291C2F1C28220B00B702C9 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
@@ -179,6 +180,7 @@
 		D283BB111F668E8900394BBA /* HybridStorage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HybridStorage2.swift; sourceTree = "<group>"; };
 		D283BB131F6691AC00394BBA /* DiskStorage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage2.swift; sourceTree = "<group>"; };
 		D283BB151F669D0300394BBA /* DataSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSerializer.swift; sourceTree = "<group>"; };
+		D2C3D2F41F66D31D001D3CCD /* CacheError2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheError2.swift; sourceTree = "<group>"; };
 		D5291C151C28220B00B702C9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D5291C171C28220B00B702C9 /* Cachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
 		D5291C181C28220B00B702C9 /* Capsule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				D283BB111F668E8900394BBA /* HybridStorage2.swift */,
 				D283BB131F6691AC00394BBA /* DiskStorage2.swift */,
 				D283BB151F669D0300394BBA /* DataSerializer.swift */,
+				D2C3D2F41F66D31D001D3CCD /* CacheError2.swift */,
 			);
 			path = Storage2;
 			sourceTree = "<group>";
@@ -1026,6 +1029,7 @@
 				D5291C351C28220B00B702C9 /* Date+Cache.swift in Sources */,
 				D5291C301C28220B00B702C9 /* Expiry.swift in Sources */,
 				D5FAF3891EE6F956000A71A8 /* CacheManager.swift in Sources */,
+				D2C3D2F51F66D31D001D3CCD /* CacheError2.swift in Sources */,
 				D283BB101F668E6B00394BBA /* Entry2.swift in Sources */,
 				D283BB121F668E8900394BBA /* HybridStorage2.swift in Sources */,
 				D283BB081F668E0D00394BBA /* MemoryConfig2.swift in Sources */,

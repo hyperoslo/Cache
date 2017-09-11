@@ -11,16 +11,16 @@ class HybridStorage2 {
 }
 
 extension HybridStorage2: StorageAware2 {
-  func object<T: Codable>(forKey key: String) throws -> T? {
-    return try
-      memoryStorage.object(forKey: key)
-      ?? diskStorage.object(forKey: key)
+  func object<T: Codable>(forKey key: String) throws -> T {
+    return try entry(forKey: key).object
   }
 
-  func entry<T: Codable>(forKey key: String) throws -> Entry2<T>? {
-    return try
-      memoryStorage.entry(forKey: key)
-      ?? diskStorage.entry(forKey: key)
+  func entry<T: Codable>(forKey key: String) throws -> Entry2<T> {
+    do {
+      return try memoryStorage.entry(forKey: key)
+    } catch {
+      return try diskStorage.entry(forKey: key)
+    }
   }
 
   func removeObject(forKey key: String) throws {

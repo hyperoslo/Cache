@@ -6,14 +6,14 @@ protocol StorageAware2 {
    - Parameter key: Unique key to identify the object in the cache
    - Returns: Cached object or nil if not found
    */
-  func object<T: Codable>(forKey key: String) throws -> T?
+  func object<T: Codable>(forKey key: String) throws -> T
 
   /**
    Get cache entry which includes object with metadata.
    - Parameter key: Unique key to identify the object in the cache
    - Returns: Object wrapper with metadata or nil if not found
    */
-  func entry<T: Codable>(forKey key: String) throws -> Entry2<T>?
+  func entry<T: Codable>(forKey key: String) throws -> Entry2<T>
 
   /**
    Removes the object by the given key.
@@ -32,7 +32,7 @@ protocol StorageAware2 {
    Check if an object exist by the given key.
    - Parameter key: Unique key to identify the object
    */
-  func existsObject(forKey key: String) throws -> Bool
+  func existsObject<T: Codable>(forKey key: String, ofType type: T.Type) throws -> Bool
 
   /**
    Removes all objects from the cache storage.
@@ -46,8 +46,12 @@ protocol StorageAware2 {
 }
 
 extension StorageAware2 {
-  func existsObject(forKey key: String) throws -> Bool {
-    let o: Any = try object(forKey: key)
-    return o! != nil
+  func existsObject<T: Codable>(forKey key: String, ofType type: T.Type) throws -> Bool {
+    do {
+      let _: T = try object(forKey: key)
+      return true
+    } catch {
+      return false
+    }
   }
 }
