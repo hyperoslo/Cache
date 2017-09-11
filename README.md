@@ -21,7 +21,6 @@
   * [Cachable protocol](#cachable-protocol)
 * [Optional bonuses](#optional-bonuses)
   * [JSON](#json)
-  * [Coding](#coding)
   * [CacheArray](#cachearray)
 * [What about images?](#what-about-images)
 * [Installation](#installation)
@@ -336,40 +335,6 @@ cache.async.addObject(JSON.array([["key1": "value1"]]), forKey: "array")
 cache.object("array") { json in
   print(json?.object)
 }
-```
-
-### Coding
-
-`Coding` protocol works in the same way as `NSCoding`, but can be used for
-Swift structs and enums. It conforms to `Cachable` and uses `NSKeyedArchiver`
-and `NSKeyedUnarchiver` in its default implementations of `encode` and `decode`.
-
-```swift
-struct Post {
-  let title: String
-}
-
-extension Post: Coding {
-  func encode(with aCoder: NSCoder) {
-    aCoder.encode(title, forKey: "title")
-  }
-
-  init?(coder aDecoder: NSCoder) {
-    guard let title = aDecoder.decodeObject(forKey: "title") as? String else {
-      return nil
-    }
-    self.init(title: title, text: text)
-  }
-}
-
-// Save and fetch an instance of `Post` struct.
-let cache = SpecializedCache<Post>(name: "PostCache")
-let post = Post(title: "Title")
-
-try cache.addObject(post, forKey: "post")
-let object = cache.object(forKey: key)
-print(object?.title) // Prints title
-
 ```
 
 ### CacheArray
