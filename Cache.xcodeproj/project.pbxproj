@@ -28,6 +28,15 @@
 		BDF64BC71F54764700134105 /* ExpirationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF64BC61F54764700134105 /* ExpirationMode.swift */; };
 		BDF64BC81F54764700134105 /* ExpirationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF64BC61F54764700134105 /* ExpirationMode.swift */; };
 		BDF64BC91F54764700134105 /* ExpirationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF64BC61F54764700134105 /* ExpirationMode.swift */; };
+		D283BB061F668DF900394BBA /* Storage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB051F668DF900394BBA /* Storage2.swift */; };
+		D283BB081F668E0D00394BBA /* MemoryConfig2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB071F668E0D00394BBA /* MemoryConfig2.swift */; };
+		D283BB0A1F668E1500394BBA /* DiskConfig2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB091F668E1500394BBA /* DiskConfig2.swift */; };
+		D283BB0C1F668E1D00394BBA /* StorageAware2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB0B1F668E1D00394BBA /* StorageAware2.swift */; };
+		D283BB0E1F668E4F00394BBA /* MemoryStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB0D1F668E4F00394BBA /* MemoryStorage2.swift */; };
+		D283BB101F668E6B00394BBA /* Entry2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB0F1F668E6B00394BBA /* Entry2.swift */; };
+		D283BB121F668E8900394BBA /* HybridStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB111F668E8900394BBA /* HybridStorage2.swift */; };
+		D283BB141F6691AC00394BBA /* DiskStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB131F6691AC00394BBA /* DiskStorage2.swift */; };
+		D283BB161F669D0300394BBA /* DataSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283BB151F669D0300394BBA /* DataSerializer.swift */; };
 		D5291C2D1C28220B00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C171C28220B00B702C9 /* Cachable.swift */; };
 		D5291C2F1C28220B00B702C9 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
@@ -161,6 +170,15 @@
 		BDEDD3561DBCE5B1007416A6 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF64BC61F54764700134105 /* ExpirationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationMode.swift; sourceTree = "<group>"; };
+		D283BB051F668DF900394BBA /* Storage2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage2.swift; sourceTree = "<group>"; };
+		D283BB071F668E0D00394BBA /* MemoryConfig2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryConfig2.swift; sourceTree = "<group>"; };
+		D283BB091F668E1500394BBA /* DiskConfig2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskConfig2.swift; sourceTree = "<group>"; };
+		D283BB0B1F668E1D00394BBA /* StorageAware2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageAware2.swift; sourceTree = "<group>"; };
+		D283BB0D1F668E4F00394BBA /* MemoryStorage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage2.swift; sourceTree = "<group>"; };
+		D283BB0F1F668E6B00394BBA /* Entry2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry2.swift; sourceTree = "<group>"; };
+		D283BB111F668E8900394BBA /* HybridStorage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HybridStorage2.swift; sourceTree = "<group>"; };
+		D283BB131F6691AC00394BBA /* DiskStorage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage2.swift; sourceTree = "<group>"; };
+		D283BB151F669D0300394BBA /* DataSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSerializer.swift; sourceTree = "<group>"; };
 		D5291C151C28220B00B702C9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D5291C171C28220B00B702C9 /* Cachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
 		D5291C181C28220B00B702C9 /* Capsule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
@@ -262,6 +280,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D283BB041F668DF900394BBA /* Storage2 */ = {
+			isa = PBXGroup;
+			children = (
+				D283BB051F668DF900394BBA /* Storage2.swift */,
+				D283BB071F668E0D00394BBA /* MemoryConfig2.swift */,
+				D283BB091F668E1500394BBA /* DiskConfig2.swift */,
+				D283BB0B1F668E1D00394BBA /* StorageAware2.swift */,
+				D283BB0D1F668E4F00394BBA /* MemoryStorage2.swift */,
+				D283BB0F1F668E6B00394BBA /* Entry2.swift */,
+				D283BB111F668E8900394BBA /* HybridStorage2.swift */,
+				D283BB131F6691AC00394BBA /* DiskStorage2.swift */,
+				D283BB151F669D0300394BBA /* DataSerializer.swift */,
+			);
+			path = Storage2;
+			sourceTree = "<group>";
+		};
 		D5291C081C28220B00B702C9 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +317,7 @@
 		D5291C111C28220B00B702C9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				D283BB041F668DF900394BBA /* Storage2 */,
 				D5291C151C28220B00B702C9 /* Config.swift */,
 				D5CE96891EE69950002BFE06 /* Cache */,
 				D5291C161C28220B00B702C9 /* DataStructures */,
@@ -974,19 +1009,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5291C2E1C28220B00B702C9 /* Cachable.swift in Sources */,
+				D283BB141F6691AC00394BBA /* DiskStorage2.swift in Sources */,
 				D5C24E221EE9D4CF00D2CF22 /* CacheArray.swift in Sources */,
 				D5291C311C28220B00B702C9 /* JSON.swift in Sources */,
+				D283BB0E1F668E4F00394BBA /* MemoryStorage2.swift in Sources */,
 				D5291C361C28220B00B702C9 /* String+Cache.swift in Sources */,
 				D5291C341C28220B00B702C9 /* Data+Cache.swift in Sources */,
 				D5291C3A1C28220B00B702C9 /* StorageAware.swift in Sources */,
 				D5291C381C28220B00B702C9 /* DiskStorage.swift in Sources */,
+				D283BB0A1F668E1500394BBA /* DiskConfig2.swift in Sources */,
 				D5CE968D1EE69969002BFE06 /* SpecializedCache.swift in Sources */,
 				D5291C391C28220B00B702C9 /* MemoryStorage.swift in Sources */,
 				D5CE96931EE69969002BFE06 /* BasicHybridCache.swift in Sources */,
+				D283BB161F669D0300394BBA /* DataSerializer.swift in Sources */,
 				BDF64BC71F54764700134105 /* ExpirationMode.swift in Sources */,
 				D5291C351C28220B00B702C9 /* Date+Cache.swift in Sources */,
 				D5291C301C28220B00B702C9 /* Expiry.swift in Sources */,
 				D5FAF3891EE6F956000A71A8 /* CacheManager.swift in Sources */,
+				D283BB101F668E6B00394BBA /* Entry2.swift in Sources */,
+				D283BB121F668E8900394BBA /* HybridStorage2.swift in Sources */,
+				D283BB081F668E0D00394BBA /* MemoryConfig2.swift in Sources */,
+				D283BB061F668DF900394BBA /* Storage2.swift in Sources */,
+				D283BB0C1F668E1D00394BBA /* StorageAware2.swift in Sources */,
 				D5291C331C28220B00B702C9 /* JSON+Cache.swift in Sources */,
 				57506FAE1EC29437009B71E9 /* CacheEntry.swift in Sources */,
 				D5A138C11EB29BFA00881A20 /* UIImage+Cache.swift in Sources */,
