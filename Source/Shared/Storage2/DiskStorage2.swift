@@ -36,10 +36,6 @@ final class DiskStorage2 {
 }
 
 extension DiskStorage2: StorageAware2 {
-  func object<T: Codable>(forKey key: String) throws -> T {
-    return try entry(forKey: key).object
-  }
-
   func entry<T: Codable>(forKey key: String) throws -> Entry2<T> {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))

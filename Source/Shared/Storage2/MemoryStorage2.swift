@@ -19,10 +19,6 @@ final class MemoryStorage2 {
 }
 
 extension MemoryStorage2: StorageAware2 {
-  func object<T: Codable>(forKey key: String) throws -> T {
-    return try entry(forKey: key).object
-  }
-
   func entry<T: Codable>(forKey key: String) throws -> Entry2<T> {
     guard let capsule = cache.object(forKey: key as NSString) else {
       throw CacheError2.notFound

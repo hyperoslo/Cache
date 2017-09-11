@@ -1,6 +1,6 @@
 import Foundation
 
-protocol StorageAware2 {
+public protocol StorageAware2 {
   /**
    Tries to retrieve the object from the storage.
    - Parameter key: Unique key to identify the object in the cache
@@ -45,7 +45,11 @@ protocol StorageAware2 {
   func removeExpiredObjects() throws
 }
 
-extension StorageAware2 {
+public extension StorageAware2 {
+  func object<T: Codable>(forKey key: String) throws -> T {
+    return try entry(forKey: key).object
+  }
+
   func existsObject<T: Codable>(forKey key: String, ofType type: T.Type) throws -> Bool {
     do {
       let _: T = try object(forKey: key)
