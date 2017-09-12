@@ -1,9 +1,14 @@
-//
-//  ImageWrapperTests.swift
-//  Cache-iOS-Tests
-//
-//  Created by Khoa Pham on 12.09.2017.
-//  Copyright © 2017 Hyper Interaktiv AS. All rights reserved.
-//
+import XCTest
+@testable import Cache
 
-import Foundation
+final class ImageWrapperTests: XCTestCase {
+  func testImage() {
+    let image = TestHelper.image(size: CGSize(width: 100, height: 100))
+    let wrapper = ImageWrapper(image: image)
+
+    let data = try! JSONEncoder().encode(wrapper)
+    let anotherWrapper = try! JSONDecoder().decode(ImageWrapper.self, from: data)
+
+    XCTAssertTrue(image.isEqualToImage(anotherWrapper.image))
+  }
+}

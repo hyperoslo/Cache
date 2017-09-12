@@ -15,19 +15,20 @@ struct ImageWrapper: Codable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let data = try container.decode(Data.self, forKey: CodingKeys.image)
     guard let image = UIImage(data: data) else {
-      throw CacheError.constructCodableObjectFailed
+      throw CacheError.decodingFailed
     }
 
     self.image = image
   }
 
   public func encode(to encoder: Encoder) throws {
-    var container = encoder.singleValueContainer()
+    var container = encoder.container(keyedBy: CodingKeys.self)
     guard let data = image.hasAlpha
       ? UIImagePNGRepresentation(image)
       : UIImageJPEGRepresentation(image, 1.0) else {
-        return
+        throw CacheError.encodingFailed
     }
-    try container.encode(data)
+
+    try container.encode(data, forKey: CodingKeys.image)
   }
 }

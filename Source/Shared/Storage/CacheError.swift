@@ -7,6 +7,8 @@ public enum CacheError: Error {
   case typeNotMatch
   /// The file attributes are malformed
   case malformedFileAttributes
-  /// Can't construct Codable object
-  case constructCodableObjectFailed
+  /// Can't perform Decode
+  case decodingFailed
+  /// Can't perform Encode
+  case encodingFailed
 }
