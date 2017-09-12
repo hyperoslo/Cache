@@ -30,7 +30,7 @@ extension Storage: StorageAware {
     try internalStorage.removeObject(forKey: key)
   }
 
-  public func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry?) throws {
+  public func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     try internalStorage.setObject(object, forKey: key, expiry: expiry)
   }
 

@@ -52,7 +52,7 @@ extension DiskStorage: StorageAware {
     )
   }
 
-  func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry?) throws {
+  func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     let expiry = expiry ?? config.expiry
     let data = try DataSerializer.serialize(object: object)
     let filePath = makeFilePath(for: key)
