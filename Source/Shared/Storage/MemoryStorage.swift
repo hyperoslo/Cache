@@ -55,7 +55,7 @@ extension MemoryStorage: StorageAware {
   }
 }
 
-fileprivate extension MemoryStorage {
+extension MemoryStorage {
   /**
    Removes the object from the cache if it's expired.
    - Parameter key: Unique key to identify the object in the cache
