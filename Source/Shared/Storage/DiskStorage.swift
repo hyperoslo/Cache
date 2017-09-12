@@ -14,7 +14,7 @@ final class DiskStorage {
   /// Configuration
   private let config: DiskConfig
   /// The computed path `directory+name`
-  private let path: String
+  let path: String
 
   // MARK: - Initialization
 
@@ -116,7 +116,7 @@ extension DiskStorage: StorageAware {
   }
 }
 
-fileprivate extension DiskStorage {
+extension DiskStorage {
   #if os(iOS) || os(tvOS)
   /**
    Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
@@ -136,9 +136,9 @@ fileprivate extension DiskStorage {
   }
 }
 
-fileprivate typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
+typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
 
-fileprivate extension DiskStorage {
+extension DiskStorage {
   /**
    Builds file name from the key.
    - Parameter key: Unique key to identify the object in the cache
