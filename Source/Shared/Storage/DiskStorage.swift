@@ -22,16 +22,17 @@ final class DiskStorage {
     self.config = config
     self.fileManager = fileManager
 
+    let url: URL
     if let directory = config.directory {
-      self.path = directory.absoluteString
+      url = directory
     } else {
-      let url = try fileManager.url(
+      url = try fileManager.url(
         for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true
       )
-
-      path = url.appendingPathComponent(config.name, isDirectory: true).path
-      try createDirectory()
     }
+
+    path = url.appendingPathComponent(config.name, isDirectory: true).path
+    try createDirectory()
   }
 }
 
@@ -172,9 +173,12 @@ extension DiskStorage {
   }
 
   func createDirectory() throws {
-    if !fileManager.fileExists(atPath: path) {
-      try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+    guard !fileManager.fileExists(atPath: path) else {
+      return
     }
+
+    try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true,
+                                    attributes: nil)
   }
 
   /**
