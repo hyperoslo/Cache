@@ -46,11 +46,14 @@ final class DiskStorageTests: XCTestCase {
       create: true
     )
 
-    let customConfig = DiskConfig(name: "CustomPath", directory: url)
+    let customConfig = DiskConfig(name: "SSD", directory: url)
 
     storage = try DiskStorage(config: customConfig)
 
-    XCTAssertEqual(storage.path, url.absoluteString)
+    XCTAssertEqual(
+      storage.path,
+      url.appendingPathComponent("SSD", isDirectory: true).path
+    )
   }
 
   /// Test that it sets attributes
