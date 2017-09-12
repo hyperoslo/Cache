@@ -1,7 +1,7 @@
 import Foundation
 
-public class Storage2 {
-  private let internalStorage: StorageAware2
+public class Storage {
+  private let internalStorage: StorageAware
 
   /// Initialize storage with configuration options.
   ///
@@ -9,20 +9,20 @@ public class Storage2 {
   ///   - diskConfig: Configuration for disk storage
   ///   - memoryConfig: Optional. Pass confi if you want memory cache
   /// - Throws: Throw CacheError if any.
-  public required init(diskConfig: DiskConfig2, memoryConfig: MemoryConfig2? = nil) throws {
-    let disk = try DiskStorage2(config: diskConfig)
+  public required init(diskConfig: DiskConfig, memoryConfig: MemoryConfig? = nil) throws {
+    let disk = try DiskStorage(config: diskConfig)
 
     if let memoryConfig = memoryConfig {
-      let memory = MemoryStorage2(config: memoryConfig)
-      internalStorage = HybridStorage2(memoryStorage: memory, diskStorage: disk)
+      let memory = MemoryStorage(config: memoryConfig)
+      internalStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
     } else {
       internalStorage = disk
     }
   }
 }
 
-extension Storage2: StorageAware2 {
-  public func entry<T: Codable>(forKey key: String) throws -> Entry2<T> {
+extension Storage: StorageAware {
+  public func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
     return try internalStorage.entry(forKey: key)
   }
 

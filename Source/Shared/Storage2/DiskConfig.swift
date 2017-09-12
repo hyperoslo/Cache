@@ -1,6 +1,6 @@
 import Foundation
 
-public struct DiskConfig2 {
+public struct DiskConfig {
   /// The name of disk storage, this will be used as folder name within directory
   public let name: String
   /// Expiry date that will be applied by default for every added object

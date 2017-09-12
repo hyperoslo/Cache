@@ -4,7 +4,7 @@ import SwiftHash
 /**
  File-based cache storage.
  */
-final class DiskStorage2 {
+final class DiskStorage {
   enum Error: Swift.Error {
     case fileEnumeratorFailed
   }
@@ -12,13 +12,13 @@ final class DiskStorage2 {
   /// File manager to read/write to the disk
   fileprivate let fileManager: FileManager
   /// Configuration
-  private let config: DiskConfig2
+  private let config: DiskConfig
   /// The computed path `directory+name`
   private let path: String
 
   // MARK: - Initialization
 
-  required init(config: DiskConfig2, fileManager: FileManager = FileManager.default) throws {
+  required init(config: DiskConfig, fileManager: FileManager = FileManager.default) throws {
     self.config = config
     self.fileManager = fileManager
 
@@ -35,18 +35,18 @@ final class DiskStorage2 {
   }
 }
 
-extension DiskStorage2: StorageAware2 {
-  func entry<T: Codable>(forKey key: String) throws -> Entry2<T> {
+extension DiskStorage: StorageAware {
+  func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
     let attributes = try fileManager.attributesOfItem(atPath: filePath)
     let object: T = try DataSerializer.deserialize(data: data)
 
     guard let date = attributes[.modificationDate] as? Date else {
-      throw CacheError2.malformedFileAttributes
+      throw CacheError.malformedFileAttributes
     }
 
-    return Entry2(
+    return Entry(
       object: object,
       expiry: Expiry.date(date)
     )
@@ -115,7 +115,7 @@ extension DiskStorage2: StorageAware2 {
   }
 }
 
-fileprivate extension DiskStorage2 {
+fileprivate extension DiskStorage {
   #if os(iOS) || os(tvOS)
   /**
    Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
@@ -137,7 +137,7 @@ fileprivate extension DiskStorage2 {
 
 fileprivate typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
 
-fileprivate extension DiskStorage2 {
+fileprivate extension DiskStorage {
   /**
    Builds file name from the key.
    - Parameter key: Unique key to identify the object in the cache

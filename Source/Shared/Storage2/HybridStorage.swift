@@ -1,17 +1,17 @@
 import Foundation
 
-class HybridStorage2 {
-  let memoryStorage: MemoryStorage2
-  let diskStorage: DiskStorage2
+class HybridStorage {
+  let memoryStorage: MemoryStorage
+  let diskStorage: DiskStorage
 
-  init(memoryStorage: MemoryStorage2, diskStorage: DiskStorage2) {
+  init(memoryStorage: MemoryStorage, diskStorage: DiskStorage) {
     self.memoryStorage = memoryStorage
     self.diskStorage = diskStorage
   }
 }
 
-extension HybridStorage2: StorageAware2 {
-  func entry<T: Codable>(forKey key: String) throws -> Entry2<T> {
+extension HybridStorage: StorageAware {
+  func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
     do {
       return try memoryStorage.entry(forKey: key)
     } catch {

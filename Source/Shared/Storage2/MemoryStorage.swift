@@ -3,32 +3,32 @@ import Foundation
 /**
  Memory cache storage based on NSCache.
  */
-final class MemoryStorage2 {
+final class MemoryStorage {
   /// Memory cache instance
   fileprivate let cache = NSCache<NSString, Capsule>()
   // Memory cache keys
   fileprivate var keys = Set<String>()
   /// Configuration
-  private let config: MemoryConfig2
+  private let config: MemoryConfig
 
   // MARK: - Initialization
 
-  init(config: MemoryConfig2) {
+  init(config: MemoryConfig) {
     self.config = config
   }
 }
 
-extension MemoryStorage2: StorageAware2 {
-  func entry<T: Codable>(forKey key: String) throws -> Entry2<T> {
+extension MemoryStorage: StorageAware {
+  func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
     guard let capsule = cache.object(forKey: key as NSString) else {
-      throw CacheError2.notFound
+      throw CacheError.notFound
     }
 
     guard let object = capsule.object as? T else {
-      throw CacheError2.typeNotMatch
+      throw CacheError.typeNotMatch
     }
 
-    return Entry2(object: object, expiry: Expiry.date(capsule.expiryDate))
+    return Entry(object: object, expiry: Expiry.date(capsule.expiryDate))
   }
 
   func removeObject(forKey key: String) {
@@ -55,7 +55,7 @@ extension MemoryStorage2: StorageAware2 {
   }
 }
 
-fileprivate extension MemoryStorage2 {
+fileprivate extension MemoryStorage {
   /**
    Removes the object from the cache if it's expired.
    - Parameter key: Unique key to identify the object in the cache

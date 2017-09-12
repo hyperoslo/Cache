@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol StorageAware2 {
+public protocol StorageAware {
   /**
    Tries to retrieve the object from the storage.
    - Parameter key: Unique key to identify the object in the cache
@@ -13,7 +13,7 @@ public protocol StorageAware2 {
    - Parameter key: Unique key to identify the object in the cache
    - Returns: Object wrapper with metadata or nil if not found
    */
-  func entry<T: Codable>(forKey key: String) throws -> Entry2<T>
+  func entry<T: Codable>(forKey key: String) throws -> Entry<T>
 
   /**
    Removes the object by the given key.
@@ -45,7 +45,7 @@ public protocol StorageAware2 {
   func removeExpiredObjects() throws
 }
 
-public extension StorageAware2 {
+public extension StorageAware {
   func object<T: Codable>(forKey key: String) throws -> T {
     return try entry(forKey: key).object
   }
