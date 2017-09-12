@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BDEDD3621DBCE5CE007416A6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		BDEDD37D1DBCEB8A007416A6 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDEDD3561DBCE5B1007416A6 /* Cache.framework */; };
+		D21AD6141F681128003A8172 /* CapsuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19AF1EE8246F009F6AEE /* CapsuleTests.swift */; };
+		D21AD6161F68112E003A8172 /* ExpiryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59A19B11EE8246F009F6AEE /* ExpiryTests.swift */; };
 		D28C9B6C1F67D4D500C180C1 /* Expiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C191C28220B00B702C9 /* Expiry.swift */; };
 		D28C9B6D1F67D4D800C180C1 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
 		D28C9B6E1F67D4DE00C180C1 /* Date+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1F1C28220B00B702C9 /* Date+Cache.swift */; };
@@ -810,10 +812,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D21AD6161F68112E003A8172 /* ExpiryTests.swift in Sources */,
 				D28C9BAD1F67ED0000C180C1 /* User.swift in Sources */,
 				D28C9BAE1F67ED5500C180C1 /* TestHelper.swift in Sources */,
 				D28C9BA71F67E3D400C180C1 /* ImageWrapperTests.swift in Sources */,
 				D28C9BAC1F67ECD400C180C1 /* TestHelper+iOS.swift in Sources */,
+				D21AD6141F681128003A8172 /* CapsuleTests.swift in Sources */,
 				D28C9BAF1F67EF8300C180C1 /* UIImage+CacheTests.swift in Sources */,
 				D28C9BA91F67E3E000C180C1 /* PrimitiveWrapperTests.swift in Sources */,
 			);
