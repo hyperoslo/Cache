@@ -23,6 +23,8 @@
 		D28C9B6C1F67D4D500C180C1 /* Expiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C191C28220B00B702C9 /* Expiry.swift */; };
 		D28C9B6D1F67D4D800C180C1 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C181C28220B00B702C9 /* Capsule.swift */; };
 		D28C9B6E1F67D4DE00C180C1 /* Date+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C1F1C28220B00B702C9 /* Date+Cache.swift */; };
+		D28C9B6F1F67D5B600C180C1 /* ExpirationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF64BC61F54764700134105 /* ExpirationMode.swift */; };
+		D28C9B711F67DA3100C180C1 /* ImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28C9B701F67DA3100C180C1 /* ImageWrapper.swift */; };
 		D2C3D2F51F66D31D001D3CCD /* CacheError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3D2F41F66D31D001D3CCD /* CacheError.swift */; };
 		D5291C2D1C28220B00B702C9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291C151C28220B00B702C9 /* Config.swift */; };
 		D5291D1D1C2837DB00B702C9 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC59E01C20593E003BD79B /* Cache.framework */; };
@@ -126,6 +128,7 @@
 		D283BB111F668E8900394BBA /* HybridStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HybridStorage.swift; sourceTree = "<group>"; };
 		D283BB131F6691AC00394BBA /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
 		D283BB151F669D0300394BBA /* DataSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSerializer.swift; sourceTree = "<group>"; };
+		D28C9B701F67DA3100C180C1 /* ImageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWrapper.swift; sourceTree = "<group>"; };
 		D2C3D2F41F66D31D001D3CCD /* CacheError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheError.swift; sourceTree = "<group>"; };
 		D5291C151C28220B00B702C9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D5291C171C28220B00B702C9 /* Cachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
@@ -285,6 +288,7 @@
 				D5291C181C28220B00B702C9 /* Capsule.swift */,
 				D5291C191C28220B00B702C9 /* Expiry.swift */,
 				D5291C1A1C28220B00B702C9 /* JSON.swift */,
+				D28C9B701F67DA3100C180C1 /* ImageWrapper.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -922,10 +926,12 @@
 				D283BB141F6691AC00394BBA /* DiskStorage.swift in Sources */,
 				D283BB0E1F668E4F00394BBA /* MemoryStorage.swift in Sources */,
 				D28C9B6E1F67D4DE00C180C1 /* Date+Cache.swift in Sources */,
+				D28C9B711F67DA3100C180C1 /* ImageWrapper.swift in Sources */,
 				D283BB0A1F668E1500394BBA /* DiskConfig.swift in Sources */,
 				D283BB161F669D0300394BBA /* DataSerializer.swift in Sources */,
 				D2C3D2F51F66D31D001D3CCD /* CacheError.swift in Sources */,
 				D283BB101F668E6B00394BBA /* Entry.swift in Sources */,
+				D28C9B6F1F67D5B600C180C1 /* ExpirationMode.swift in Sources */,
 				D283BB121F668E8900394BBA /* HybridStorage.swift in Sources */,
 				D283BB081F668E0D00394BBA /* MemoryConfig.swift in Sources */,
 				D28C9B6C1F67D4D500C180C1 /* Expiry.swift in Sources */,

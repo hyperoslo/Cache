@@ -1,33 +1,5 @@
 import Foundation
 
-// MARK: - Cachable
-
-/**
- Implementation of Cachable protocol.
- */
-extension Date: Cachable {
-  public typealias CacheType = Date
-
-  /**
-   Creates an instance from Data.
-   - Parameter data: Data to decode from
-   - Returns: An optional CacheType
-   */
-  public static func decode(_ data: Data) -> CacheType? {
-    return NSKeyedUnarchiver.unarchiveObject(with: data) as? Date
-  }
-
-  /**
-   Encodes an instance to Data.
-   - Returns: Optional Data
-   */
-  public func encode() -> Data? {
-    return NSKeyedArchiver.archivedData(withRootObject: self)
-  }
-}
-
-// MARK: - Helpers
-
 /**
  Helper NSDate extension.
  */
