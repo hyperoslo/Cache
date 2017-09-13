@@ -23,10 +23,8 @@ extension PrimitiveStorage: StorageAware {
                                    expiry: wrapperEntry.expiry)
         return primitiveEntry
       default:
-        throw StorageError.typeNotMatch
+        throw error
       }
-    } catch {
-      throw StorageError.typeNotMatch
     }
   }
 
@@ -36,7 +34,6 @@ extension PrimitiveStorage: StorageAware {
 
   public func setObject<T: Codable>(_ object: T, forKey key: String,
                                     expiry: Expiry? = nil) throws {
-
     do {
       try internalStorage.setObject(object, forKey: key, expiry: expiry)
     } catch let error as Swift.EncodingError {
