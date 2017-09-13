@@ -17,19 +17,6 @@ final class PrimitiveStorageTests: XCTestCase {
     super.tearDown()
   }
 
-  func testPrimitiveCheck() {
-    XCTAssertTrue(storage.isPrimitive(type: Bool.self))
-    XCTAssertTrue(storage.isPrimitive(type: [Bool].self))
-    XCTAssertTrue(storage.isPrimitive(type: String.self))
-    XCTAssertTrue(storage.isPrimitive(type: [String].self))
-    XCTAssertTrue(storage.isPrimitive(type: Int.self))
-    XCTAssertTrue(storage.isPrimitive(type: [Int].self))
-    XCTAssertTrue(storage.isPrimitive(type: Float.self))
-    XCTAssertTrue(storage.isPrimitive(type: [Float].self))
-    XCTAssertTrue(storage.isPrimitive(type: Double.self))
-    XCTAssertTrue(storage.isPrimitive(type: [Double].self))
-  }
-
   func testSetPrimitive() throws {
     try storage.setObject(true, forKey: "bool")
     XCTAssertEqual(try storage.object(forKey: "bool"), true)
