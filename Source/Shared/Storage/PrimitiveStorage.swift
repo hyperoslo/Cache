@@ -25,6 +25,15 @@ extension PrimitiveStorage: StorageAware {
       try internalStorage.setObject(object, forKey: key, expiry: expiry)
       return
     }
+
+    switch object {
+    case let object as Image:
+      let wrapper = ImageWrapper(image: object)
+      try internalStorage.setObject(wrapper, forKey: key, expiry: expiry)
+    default:
+      let wrapper = PrimitiveWrapper(value: object)
+      try internalStorage.setObject(wrapper, forKey: key, expiry: expiry)
+    }
   }
 
   public func removeAll() throws {
@@ -38,6 +47,15 @@ extension PrimitiveStorage: StorageAware {
 
 extension PrimitiveStorage {
   func isPrimitive<T>(type: T.Type) -> Bool {
-    return true
+    let primitives: [Any.Type] = [
+      Image.self,
+      Bool.self, [Bool].self,
+      String.self, [String].self,
+      Int.self, [Int].self,
+      Float.self, [Float].self,
+      Double.self, [Double].self
+    ]
+
+    return primitives.contains(where: { $0.self == type.self })
   }
 }
