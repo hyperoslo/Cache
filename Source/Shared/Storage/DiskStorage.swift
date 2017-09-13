@@ -14,7 +14,7 @@ final class DiskStorage {
   /// Configuration
   private let config: DiskConfig
   /// The computed path `directory+name`
-  private let path: String
+  let path: String
 
   // MARK: - Initialization
 
@@ -22,16 +22,17 @@ final class DiskStorage {
     self.config = config
     self.fileManager = fileManager
 
+    let url: URL
     if let directory = config.directory {
-      self.path = directory.absoluteString
+      url = directory
     } else {
-      let url = try fileManager.url(
+      url = try fileManager.url(
         for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true
       )
-
-      path = url.appendingPathComponent(config.name, isDirectory: true).path
-      try createDirectory()
     }
+
+    path = url.appendingPathComponent(config.name, isDirectory: true).path
+    try createDirectory()
   }
 }
 
@@ -52,11 +53,12 @@ extension DiskStorage: StorageAware {
     )
   }
 
-  func setObject<T: Codable>(_ object: T, forKey key: String) throws {
+  func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
+    let expiry = expiry ?? config.expiry
     let data = try DataSerializer.serialize(object: object)
     let filePath = makeFilePath(for: key)
     fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
-    try fileManager.setAttributes([.modificationDate: config.expiry.date], ofItemAtPath: filePath)
+    try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)
   }
 
   func removeObject(forKey key: String) throws {
@@ -115,7 +117,7 @@ extension DiskStorage: StorageAware {
   }
 }
 
-fileprivate extension DiskStorage {
+extension DiskStorage {
   #if os(iOS) || os(tvOS)
   /**
    Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
@@ -135,9 +137,9 @@ fileprivate extension DiskStorage {
   }
 }
 
-fileprivate typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
+typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
 
-fileprivate extension DiskStorage {
+extension DiskStorage {
   /**
    Builds file name from the key.
    - Parameter key: Unique key to identify the object in the cache
@@ -171,9 +173,12 @@ fileprivate extension DiskStorage {
   }
 
   func createDirectory() throws {
-    if !fileManager.fileExists(atPath: path) {
-      try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+    guard !fileManager.fileExists(atPath: path) else {
+      return
     }
+
+    try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true,
+                                    attributes: nil)
   }
 
   /**

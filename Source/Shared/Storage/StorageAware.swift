@@ -26,7 +26,7 @@ public protocol StorageAware {
    - Parameter key: Unique key to identify the object in the cache
    - Parameter object: Object that needs to be cached
    */
-  func setObject<T: Codable>(_ object: T, forKey key: String) throws
+  func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry?) throws
 
   /**
    Check if an object exist by the given key.

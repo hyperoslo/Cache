@@ -24,9 +24,9 @@ extension HybridStorage: StorageAware {
     try diskStorage.removeObject(forKey: key)
   }
 
-  func setObject<T: Codable>(_ object: T, forKey key: String) throws {
-    memoryStorage.setObject(object, forKey: key)
-    try diskStorage.setObject(object, forKey: key)
+  func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
+    memoryStorage.setObject(object, forKey: key, expiry: expiry)
+    try diskStorage.setObject(object, forKey: key, expiry: expiry)
   }
 
   func removeAll() throws {

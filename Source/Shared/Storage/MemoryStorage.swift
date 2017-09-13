@@ -36,8 +36,8 @@ extension MemoryStorage: StorageAware {
     keys.remove(key)
   }
 
-  func setObject<T: Codable>(_ object: T, forKey key: String) {
-    let capsule = Capsule(value: object, expiry: config.expiry)
+  func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) {
+    let capsule = Capsule(value: object, expiry: expiry ?? config.expiry)
     cache.setObject(capsule, forKey: key as NSString)
     keys.insert(key)
   }
@@ -55,7 +55,7 @@ extension MemoryStorage: StorageAware {
   }
 }
 
-fileprivate extension MemoryStorage {
+extension MemoryStorage {
   /**
    Removes the object from the cache if it's expired.
    - Parameter key: Unique key to identify the object in the cache
