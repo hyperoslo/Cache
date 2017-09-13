@@ -12,7 +12,14 @@ final class PrimitiveStorage {
 
 extension PrimitiveStorage: StorageAware {
   public func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
-    return try internalStorage.entry(forKey: key)
+    guard isPrimitive(type: T.self) else {
+      return try internalStorage.entry(forKey: key) as Entry<T>
+    }
+
+    let wrapperEntry = try internalStorage.entry(forKey: key) as Entry<PrimitiveWrapper<T>>
+    let primitiveEntry = Entry(object: wrapperEntry.object.value,
+                               expiry: wrapperEntry.expiry)
+    return primitiveEntry
   }
 
   public func removeObject(forKey key: String) throws {
@@ -26,14 +33,8 @@ extension PrimitiveStorage: StorageAware {
       return
     }
 
-    switch object {
-    case let object as Image:
-      let wrapper = ImageWrapper(image: object)
-      try internalStorage.setObject(wrapper, forKey: key, expiry: expiry)
-    default:
-      let wrapper = PrimitiveWrapper(value: object)
-      try internalStorage.setObject(wrapper, forKey: key, expiry: expiry)
-    }
+    let wrapper = PrimitiveWrapper(value: object)
+    try internalStorage.setObject(wrapper, forKey: key, expiry: expiry)
   }
 
   public func removeAll() throws {
@@ -48,7 +49,6 @@ extension PrimitiveStorage: StorageAware {
 extension PrimitiveStorage {
   func isPrimitive<T>(type: T.Type) -> Bool {
     let primitives: [Any.Type] = [
-      Image.self,
       Bool.self, [Bool].self,
       String.self, [String].self,
       Int.self, [Int].self,

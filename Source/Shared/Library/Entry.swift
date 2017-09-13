@@ -6,4 +6,9 @@ public struct Entry<T: Codable> {
   public let object: T
   /// Expiry date
   public let expiry: Expiry
+
+  init(object: T, expiry: Expiry) {
+    self.object = object
+    self.expiry = expiry
+  }
 }
