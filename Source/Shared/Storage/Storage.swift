@@ -1,5 +1,6 @@
 import Foundation
 
+/// Manage storage. Use memory storage if specified.
 public class Storage {
   private let internalStorage: StorageAware
 

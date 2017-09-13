@@ -1,9 +1,7 @@
 import Foundation
 import SwiftHash
 
-/**
- File-based cache storage.
- */
+/// Save objects to file on disk
 final class DiskStorage {
   enum Error: Swift.Error {
     case fileEnumeratorFailed

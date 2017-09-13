@@ -1,5 +1,6 @@
 import Foundation
 
+/// A protocol used for saving and loading from storage
 public protocol StorageAware {
   /**
    Tries to retrieve the object from the storage.
@@ -17,20 +18,21 @@ public protocol StorageAware {
 
   /**
    Removes the object by the given key.
-   - Parameter key: Unique key to identify the object
+   - Parameter key: Unique key to identify the object.
    */
   func removeObject(forKey key: String) throws
 
   /**
    Saves passed object.
-   - Parameter key: Unique key to identify the object in the cache
-   - Parameter object: Object that needs to be cached
+   - Parameter key: Unique key to identify the object in the cache.
+   - Parameter object: Object that needs to be cached.
+   - Parameter expiry: Overwrite expiry for this object only.
    */
   func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry?) throws
 
   /**
    Check if an object exist by the given key.
-   - Parameter key: Unique key to identify the object
+   - Parameter key: Unique key to identify the object.
    */
   func existsObject<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Bool
 
