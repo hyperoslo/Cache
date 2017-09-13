@@ -1,8 +1,6 @@
 import Foundation
 
-/**
- Memory cache storage based on NSCache.
- */
+/// Save objects to memory based on NSCache
 final class MemoryStorage {
   /// Memory cache instance
   fileprivate let cache = NSCache<NSString, Capsule>()
