@@ -23,10 +23,10 @@ extension PrimitiveStorage: StorageAware {
                                    expiry: wrapperEntry.expiry)
         return primitiveEntry
       default:
-        return try internalStorage.entry(forKey: key) as Entry<T>
+        throw StorageError.typeNotMatch
       }
     } catch {
-      return try internalStorage.entry(forKey: key) as Entry<T>
+      throw StorageError.typeNotMatch
     }
   }
 
