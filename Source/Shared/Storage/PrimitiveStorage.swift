@@ -12,7 +12,22 @@ final class PrimitiveStorage {
 
 extension PrimitiveStorage: StorageAware {
   public func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
-    return try internalStorage.entry(forKey: key) as Entry<T>
+    do {
+      return try internalStorage.entry(forKey: key) as Entry<T>
+    } catch let error as Swift.DecodingError {
+      // Expected to decode T but found a dictionary instead.
+      switch error {
+      case .typeMismatch(_, let context) where context.codingPath.isEmpty:
+        let wrapperEntry = try internalStorage.entry(forKey: key) as Entry<PrimitiveWrapper<T>>
+        let primitiveEntry = Entry(object: wrapperEntry.object.value,
+                                   expiry: wrapperEntry.expiry)
+        return primitiveEntry
+      default:
+        return try internalStorage.entry(forKey: key) as Entry<T>
+      }
+    } catch {
+      return try internalStorage.entry(forKey: key) as Entry<T>
+    }
   }
 
   public func removeObject(forKey key: String) throws {
