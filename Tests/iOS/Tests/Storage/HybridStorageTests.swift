@@ -18,20 +18,26 @@ final class HybridStorageTests: XCTestCase {
   }
 
   override func tearDown() {
-    try! storage.removeAll()
+    try? storage.removeAll()
     super.tearDown()
   }
 
   func testSetObject() throws {
-    try storage.setObject(testObject, forKey: key)
-    let cachedObject: User = try storage.object(forKey: key)
-    XCTAssertEqual(cachedObject, testObject)
+    try when("set to storage") {
+      try storage.setObject(testObject, forKey: key)
+      let cachedObject: User = try storage.object(forKey: key)
+      XCTAssertEqual(cachedObject, testObject)
+    }
 
-    let memoryObject: User = try storage.memoryStorage.object(forKey: key)
-    XCTAssertNotNil(memoryObject)
+    try then("it is set to memory too") {
+      let memoryObject: User = try storage.memoryStorage.object(forKey: key)
+      XCTAssertNotNil(memoryObject)
+    }
 
-    let diskObject: User = try storage.diskStorage.object(forKey: key)
-    XCTAssertNotNil(diskObject)
+    try then("it is set to disk too") {
+      let diskObject: User = try storage.diskStorage.object(forKey: key)
+      XCTAssertNotNil(diskObject)
+    }
   }
 
   func testEntry() throws {
@@ -45,78 +51,89 @@ final class HybridStorageTests: XCTestCase {
 
   /// Should resolve from disk and set in-memory cache if object not in-memory
   func testObjectCopyToMemory() throws {
-    try storage.diskStorage.setObject(testObject, forKey: key)
-    let cachedObject: User = try storage.object(forKey: key) as User
-    XCTAssertEqual(cachedObject, testObject)
+    try when("set to disk only") {
+      try storage.diskStorage.setObject(testObject, forKey: key)
+      let cachedObject: User = try storage.object(forKey: key) as User
+      XCTAssertEqual(cachedObject, testObject)
+    }
 
-    let inMemoryCachedObject = try storage.memoryStorage.object(forKey: key) as User
-    XCTAssertEqual(inMemoryCachedObject, testObject)
+    try then("there is no object in memory") {
+      let inMemoryCachedObject = try storage.memoryStorage.object(forKey: key) as User
+      XCTAssertEqual(inMemoryCachedObject, testObject)
+    }
   }
 
   /// Removes cached object from memory and disk
   func testRemoveObject() throws {
-    try storage.setObject(testObject, forKey: key)
-    XCTAssertNotNil(try storage.object(forKey: key) as User)
+    try given("set to storage") {
+      try storage.setObject(testObject, forKey: key)
+      XCTAssertNotNil(try storage.object(forKey: key) as User)
+    }
 
-    try storage.removeObject(forKey: key)
-    let cachedObject = try? storage.object(forKey: key) as User
-    XCTAssertNil(cachedObject)
+    try when("remove object from storage") {
+      try storage.removeObject(forKey: key)
+      let cachedObject = try? storage.object(forKey: key) as User
+      XCTAssertNil(cachedObject)
+    }
 
-    let memoryObject = try? storage.memoryStorage.object(forKey: key) as User
-    XCTAssertNil(memoryObject)
+    try then("there is no object in memory") {
+      let memoryObject = try? storage.memoryStorage.object(forKey: key) as User
+      XCTAssertNil(memoryObject)
+    }
 
-    let diskObject = try? storage.diskStorage.object(forKey: key) as User
-    XCTAssertNil(diskObject)
+    try then("there is no object on disk") {
+      let diskObject = try? storage.diskStorage.object(forKey: key) as User
+      XCTAssertNil(diskObject)
+    }
   }
 
   /// Clears memory and disk cache
   func testClear() throws {
-    try storage.setObject(testObjec, forKey: key)
-    try storage.clear()
-    XCTAssertNil(storage.object(forKey: key) as String?)
+    try when("set and remove all") {
+      try storage.setObject(testObject, forKey: key)
+      try storage.removeAll()
+      XCTAssertNil(try? storage.object(forKey: key) as User)
+    }
 
-    let memoryObject: String? = self.storage.manager.frontStorage.object(forKey: self.key)
-    XCTAssertNil(memoryObject)
+    try then("there is no object in memory") {
+      let memoryObject = try? storage.memoryStorage.object(forKey: key) as User
+      XCTAssertNil(memoryObject)
+    }
 
-    var diskObject: String?
-    do {
-      diskObject = try self.storage.manager.backStorage.object(forKey: self.key)
-    } catch {}
-    XCTAssertNil(diskObject)
+    try then("there is no object on disk") {
+      let diskObject = try? storage.diskStorage.object(forKey: key) as User
+      XCTAssertNil(diskObject)
+    }
   }
 
-  /*
+  func testDiskEmptyAfterClear() throws {
+    try storage.setObject(testObject, forKey: key)
+    try storage.removeAll()
 
-  /// Test that it clears cached files, but keeps root directory
-  func testClearKeepingRootDirectory() throws {
-    try storage.addObject(object, forKey: key)
-    try storage.clear(keepingRootDirectory: true)
-    XCTAssertNil(storage.object(forKey: key) as String?)
-    XCTAssertTrue(fileManager.fileExists(atPath: storage.manager.backStorage.path))
+    try then("the disk directory is removed") {
+      XCTAssertFalse(fileManager.fileExists(atPath: storage.diskStorage.path))
+    }
   }
 
   /// Clears expired objects from memory and disk cache
   func testClearExpired() throws {
-    let expiry1: Expiry = .date(Date().addingTimeInterval(-100000))
-    let expiry2: Expiry = .date(Date().addingTimeInterval(100000))
+    let expiry1: Expiry = .date(Date().addingTimeInterval(-10))
+    let expiry2: Expiry = .date(Date().addingTimeInterval(10))
     let key1 = "key1"
     let key2 = "key2"
 
-    try storage.addObject(object, forKey: key1, expiry: expiry1)
-    try storage.addObject(object, forKey: key2, expiry: expiry2)
-    try storage.clearExpired()
-    XCTAssertNil(storage.object(forKey: key1) as String?)
-    XCTAssertNotNil(storage.object(forKey: key2) as String?)
-  }
+    try when("save 2 objects with different keys and expiry") {
+      try storage.setObject(testObject, forKey: key1, expiry: expiry1)
+      try storage.setObject(testObject, forKey: key2, expiry: expiry2)
+    }
 
-  func testTotalDiskSize() throws {
-    let cache = SpecializedCache<Data>(name: cacheName)
-    try storage.addObject(TestHelper.data(10), forKey: "key1")
-    try storage.addObject(TestHelper.data(20), forKey: "key2")
-    let size = try storage.totalDiskSize()
-    XCTAssertEqual(size, 30)
-  }
+    try when("remove expired objects") {
+      try storage.removeExpiredObjects()
+    }
 
- */
+    try then("object with key2 survived") {
+      XCTAssertNil(try? storage.object(forKey: key1) as User)
+      XCTAssertNotNil(try? storage.object(forKey: key2) as User)
+    }
+  }
 }
-
