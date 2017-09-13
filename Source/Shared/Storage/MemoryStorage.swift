@@ -19,11 +19,11 @@ final class MemoryStorage {
 extension MemoryStorage: StorageAware {
   func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
     guard let capsule = cache.object(forKey: key as NSString) else {
-      throw CacheError.notFound
+      throw StorageError.notFound
     }
 
     guard let object = capsule.object as? T else {
-      throw CacheError.typeNotMatch
+      throw StorageError.typeNotMatch
     }
 
     return Entry(object: object, expiry: Expiry.date(capsule.expiryDate))

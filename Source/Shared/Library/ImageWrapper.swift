@@ -15,7 +15,7 @@ struct ImageWrapper: Codable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let data = try container.decode(Data.self, forKey: CodingKeys.image)
     guard let image = Image(data: data) else {
-      throw CacheError.decodingFailed
+      throw StorageError.decodingFailed
     }
 
     self.image = image
@@ -26,7 +26,7 @@ struct ImageWrapper: Codable {
     guard let data = image.hasAlpha
       ? UIImagePNGRepresentation(image)
       : UIImageJPEGRepresentation(image, 1.0) else {
-        throw CacheError.encodingFailed
+        throw StorageError.encodingFailed
     }
 
     try container.encode(data, forKey: CodingKeys.image)
