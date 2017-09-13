@@ -65,4 +65,14 @@ final class PrimitiveStorageTests: XCTestCase {
     try storage.setObject(doubles, forKey: "array of doubles")
     XCTAssertEqual(try storage.object(forKey: "array of doubles"), doubles)
   }
+
+  func testSameKey() throws {
+    let user = User(firstName: "John", lastName: "Snow")
+    let key = "keyMadeOfDragonGlass"
+    try storage.setObject(user, forKey: key)
+    try storage.setObject("Dragonstone", forKey: key)
+
+    XCTAssertNil(try? storage.object(forKey: key) as User)
+    XCTAssertNotNil(try storage.object(forKey: key) as String)
+  }
 }
