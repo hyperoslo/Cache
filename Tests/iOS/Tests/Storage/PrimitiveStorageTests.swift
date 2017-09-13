@@ -75,4 +75,24 @@ final class PrimitiveStorageTests: XCTestCase {
     XCTAssertNil(try? storage.object(forKey: key) as User)
     XCTAssertNotNil(try storage.object(forKey: key) as String)
   }
+
+  func testIntFloat() throws {
+    let key = "key"
+    try storage.setObject(10, forKey: key)
+
+    try then("Casting to int or float is the same") {
+      XCTAssertEqual(try storage.object(forKey: key) as Int, 10)
+      XCTAssertEqual(try storage.object(forKey: key) as Float, 10)
+    }
+  }
+
+  func testFloatDouble() throws {
+    let key = "key"
+    try storage.setObject(10.5, forKey: key)
+
+    try then("Casting to float or double is the same") {
+      XCTAssertEqual(try storage.object(forKey: key) as Float, 10.5)
+      XCTAssertEqual(try storage.object(forKey: key) as Double, 10.5)
+    }
+  }
 }
