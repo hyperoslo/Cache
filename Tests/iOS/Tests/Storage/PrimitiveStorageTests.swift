@@ -65,15 +65,20 @@ final class PrimitiveStorageTests: XCTestCase {
       "key2": 2
     ]
 
-    try then("can't save dictionary") {
-      do {
-        try storage.setObject(dict, forKey: "dict")
-        let cachedObject = try storage.object(forKey: "key") as [String: Int]
-        XCTAssertEqual(cachedObject, dict)
-      } catch {
-        XCTAssertTrue(error.localizedDescription.contains("no such file"))
-      }
-    }
+
+    try storage.setObject(dict, forKey: "dict")
+    let cachedObject = try storage.object(forKey: "key") as [String: Int]
+    XCTAssertEqual(cachedObject, dict)
+  }
+
+  func testWithComplexDictionary() {
+    let _: [String: Any] = [
+      "key1": 1,
+      "key2": 2
+    ]
+
+    // fatal error: Dictionary<String, Any> does not conform to Encodable because Any does not conform to Encodable
+    // try storage.setObject(dict, forKey: "dict")
   }
 
   func testSameKey() throws {
