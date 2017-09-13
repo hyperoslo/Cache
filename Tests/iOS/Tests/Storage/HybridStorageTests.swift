@@ -55,28 +55,23 @@ final class HybridStorageTests: XCTestCase {
 
   /// Removes cached object from memory and disk
   func testRemoveObject() throws {
-    try storage.setObject(object, forKey: key)
-    XCTAssertNotNil(storage.object(forKey: key) as String?)
+    try storage.setObject(testObject, forKey: key)
+    XCTAssertNotNil(try storage.object(forKey: key) as User)
 
     try storage.removeObject(forKey: key)
-    XCTAssertNil(storage.object(forKey: key) as String?)
+    let cachedObject = try? storage.object(forKey: key) as User
+    XCTAssertNil(cachedObject)
 
-    let memoryObject: String? = self.storage.manager.frontStorage.object(forKey: self.key)
+    let memoryObject = try? storage.memoryStorage.object(forKey: key) as User
     XCTAssertNil(memoryObject)
 
-    var diskObject: String?
-    do {
-      diskObject = try self.storage.manager.backStorage.object(forKey: self.key)
-    } catch {}
-
+    let diskObject = try? storage.diskStorage.object(forKey: key) as User
     XCTAssertNil(diskObject)
   }
 
-  /*
-
   /// Clears memory and disk cache
   func testClear() throws {
-    try storage.addObject(object, forKey: key)
+    try storage.setObject(testObjec, forKey: key)
     try storage.clear()
     XCTAssertNil(storage.object(forKey: key) as String?)
 
@@ -89,6 +84,8 @@ final class HybridStorageTests: XCTestCase {
     } catch {}
     XCTAssertNil(diskObject)
   }
+
+  /*
 
   /// Test that it clears cached files, but keeps root directory
   func testClearKeepingRootDirectory() throws {
