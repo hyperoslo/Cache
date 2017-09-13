@@ -67,7 +67,7 @@ final class PrimitiveStorageTests: XCTestCase {
 
 
     try storage.setObject(dict, forKey: "dict")
-    let cachedObject = try storage.object(forKey: "key") as [String: Int]
+    let cachedObject = try storage.object(forKey: "dict") as [String: Int]
     XCTAssertEqual(cachedObject, dict)
   }
 
