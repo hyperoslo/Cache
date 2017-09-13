@@ -53,6 +53,29 @@ final class PrimitiveStorageTests: XCTestCase {
     XCTAssertEqual(try storage.object(forKey: "array of doubles"), doubles)
   }
 
+  func testWithSet() throws {
+    let set = Set<Int>(arrayLiteral: 1, 2, 3)
+    try storage.setObject(set, forKey: "set")
+    XCTAssertEqual(try storage.object(forKey: "set") as Set<Int>, set)
+  }
+
+  func testWithSimpleDictionary() throws {
+    let dict: [String: Int] = [
+      "key1": 1,
+      "key2": 2
+    ]
+
+    try then("can't save dictionary") {
+      do {
+        try storage.setObject(dict, forKey: "dict")
+        let cachedObject = try storage.object(forKey: "key") as [String: Int]
+        XCTAssertEqual(cachedObject, dict)
+      } catch {
+        XCTAssertTrue(error.localizedDescription.contains("no such file"))
+      }
+    }
+  }
+
   func testSameKey() throws {
     let user = User(firstName: "John", lastName: "Snow")
     let key = "keyMadeOfDragonGlass"
@@ -80,6 +103,17 @@ final class PrimitiveStorageTests: XCTestCase {
     try then("Casting to float or double is the same") {
       XCTAssertEqual(try storage.object(forKey: key) as Float, 10.5)
       XCTAssertEqual(try storage.object(forKey: key) as Double, 10.5)
+    }
+  }
+
+  func testCastingToAnotherType() throws {
+    try storage.setObject("Hello", forKey: "string")
+
+    do {
+      let cachedObject = try storage.object(forKey: "string") as Int
+      XCTAssertEqual(cachedObject, 10)
+    } catch {
+      XCTAssertTrue(error is DecodingError)
     }
   }
 }
