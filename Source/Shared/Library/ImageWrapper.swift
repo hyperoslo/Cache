@@ -1,20 +1,20 @@
 import UIKit
 
 struct ImageWrapper: Codable {
-  let image: UIImage
+  let image: Image
 
   enum CodingKeys: String, CodingKey {
     case image
   }
 
-  public init(image: UIImage) {
+  public init(image: Image) {
     self.image = image
   }
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let data = try container.decode(Data.self, forKey: CodingKeys.image)
-    guard let image = UIImage(data: data) else {
+    guard let image = Image(data: data) else {
       throw CacheError.decodingFailed
     }
 
