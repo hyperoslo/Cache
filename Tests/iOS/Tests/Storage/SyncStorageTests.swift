@@ -63,7 +63,7 @@ final class SyncStorageTests: XCTestCase {
         XCTAssertEqual(number, iterationCount)
       }
     } catch {
-      XCTFail()
+      XCTFail(error.localizedDescription)
     }
   }
 }

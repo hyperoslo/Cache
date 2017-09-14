@@ -139,7 +139,7 @@ final class DiskStorageTests: XCTestCase {
       let fileExist = fileManager.fileExists(atPath: storage.path)
       XCTAssertFalse(fileExist)
     } catch {
-      XCTFail()
+      XCTFail(error.localizedDescription)
     }
   }
 
