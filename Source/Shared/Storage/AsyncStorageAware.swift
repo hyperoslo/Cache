@@ -60,7 +60,7 @@ public protocol AsyncStorageAware: class {
   func removeExpiredObjects(completion: @escaping (Result<()>) -> Void)
 }
 
-extension AsyncStorageAware {
+public extension AsyncStorageAware {
   func object<T: Codable>(forKey key: String, completion: @escaping (Result<T>) -> Void) {
     entry(forKey: key, completion: { (result: Result<Entry<T>>) in
       completion(result.map({ entry in
