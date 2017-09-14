@@ -26,7 +26,7 @@ extension MemoryStorage: StorageAware {
       throw StorageError.typeNotMatch
     }
 
-    return Entry(object: object, expiry: Expiry.date(capsule.expiryDate))
+    return Entry(object: object, expiry: capsule.expiry)
   }
 
   func removeObject(forKey key: String) {
@@ -59,8 +59,27 @@ extension MemoryStorage {
    - Parameter key: Unique key to identify the object in the cache
    */
   func removeObjectIfExpired(forKey key: String) {
-    if let capsule = cache.object(forKey: key as NSString), capsule.isExpired {
+    if let capsule = cache.object(forKey: key as NSString), capsule.expiry.isExpired {
       removeObject(forKey: key)
     }
+  }
+}
+
+/// Helper class to hold cached instance and expiry date.
+/// Used in memory storage to work with NSCache.
+class Capsule: NSObject {
+  /// Object to be cached
+  let object: Any
+  /// Expiration date
+  let expiry: Expiry
+
+  /**
+   Creates a new instance of Capsule.
+   - Parameter value: Object to be cached
+   - Parameter expiry: Expiration date
+   */
+  init(value: Any, expiry: Expiry) {
+    self.object = value
+    self.expiry = expiry
   }
 }
