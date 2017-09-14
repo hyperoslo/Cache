@@ -1,47 +1,8 @@
-import Foundation
-import Cocoa
+import AppKit
 
-// MARK: - Cachable
-
-/**
- Implementation of Cachable protocol.
- */
-extension NSImage: Cachable {
-  public typealias CacheType = NSImage
-
-  /**
-   Creates UIImage from Data
-   - Parameter data: Data to decode from
-   - Returns: Optional CacheType
-   */
-  public static func decode(_ data: Data) -> CacheType? {
-    let image = NSImage(data: data)
-    return image
-  }
-
-  /**
-   Encodes UIImage to Data
-   - Returns: Optional Data
-   */
-  public func encode() -> Data? {
-    guard let data = tiffRepresentation else {
-      return nil
-    }
-
-    let imageFileType: NSBitmapImageRep.FileType = hasAlpha ? .png : .jpeg
-    return NSBitmapImageRep(data: data)?.representation(using: imageFileType, properties: [:])
-  }
-}
-
-// MARK: - Helpers
-
-/**
- Helper UIImage extension.
- */
-private extension NSImage {
-  /**
-   Checks if image has alpha component
-   */
+/// Helper UIImage extension.
+extension NSImage {
+  /// Checks if image has alpha component
   var hasAlpha: Bool {
     var imageRect: CGRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
 
@@ -60,5 +21,16 @@ private extension NSImage {
     }
 
     return result
+  }
+
+  /// Convert to data
+  func cache_toData() -> Data? {
+    guard let data = tiffRepresentation else {
+      return nil
+    }
+
+    let imageFileType: NSBitmapImageRep.FileType = hasAlpha ? .png : .jpeg
+    return NSBitmapImageRep(data: data)?
+      .representation(using: imageFileType, properties: [:])
   }
 }
