@@ -3,7 +3,7 @@ import Foundation
 /// Save objects to memory based on NSCache
 final class MemoryStorage {
   /// Memory cache instance
-  fileprivate let cache = NSCache<NSString, Capsule>()
+  fileprivate let cache = NSCache<NSString, MemoryCapsule>()
   // Memory cache keys
   fileprivate var keys = Set<String>()
   /// Configuration
@@ -35,7 +35,7 @@ extension MemoryStorage: StorageAware {
   }
 
   func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) {
-    let capsule = Capsule(value: object, expiry: expiry ?? config.expiry)
+    let capsule = MemoryCapsule(value: object, expiry: expiry ?? config.expiry)
     cache.setObject(capsule, forKey: key as NSString)
     keys.insert(key)
   }
@@ -67,7 +67,7 @@ extension MemoryStorage {
 
 /// Helper class to hold cached instance and expiry date.
 /// Used in memory storage to work with NSCache.
-class Capsule: NSObject {
+class MemoryCapsule: NSObject {
   /// Object to be cached
   let object: Any
   /// Expiration date
