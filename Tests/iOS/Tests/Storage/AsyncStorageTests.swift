@@ -1,7 +1,7 @@
 import XCTest
 @testable import Cache
 
-final class AAsyncStorageTests: XCTestCase {
+final class AsyncStorageTests: XCTestCase {
   private var storage: AsyncStorage!
   let user = User(firstName: "John", lastName: "Snow")
 
