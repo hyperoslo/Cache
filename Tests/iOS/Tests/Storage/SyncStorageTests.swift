@@ -3,6 +3,7 @@ import XCTest
 
 final class SyncStorageTests: XCTestCase {
   private var storage: SyncStorage!
+  let user = User(firstName: "John", lastName: "Snow")
 
   override func setUp() {
     super.setUp()
@@ -16,6 +17,13 @@ final class SyncStorageTests: XCTestCase {
   override func tearDown() {
     try? storage.removeAll()
     super.tearDown()
+  }
+
+  func testSetObject() throws {
+    try storage.setObject(user, forKey: "user")
+    let cachedObject = try storage.object(forKey: "user") as User
+
+    XCTAssertEqual(cachedObject, user)
   }
 
   func testManyOperations() throws {
