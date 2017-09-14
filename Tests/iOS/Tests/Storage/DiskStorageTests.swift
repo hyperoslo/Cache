@@ -144,12 +144,16 @@ final class DiskStorageTests: XCTestCase {
   }
 
   /// Test that it clears cache files, but keeps root directory
-  func testCreateDirectory() throws {
-    try storage.removeAll()
-    XCTAssertFalse(fileManager.fileExists(atPath: storage.path))
+  func testCreateDirectory() {
+    do {
+      try storage.removeAll()
+      XCTAssertFalse(fileManager.fileExists(atPath: storage.path))
 
-    try storage.createDirectory()
-    XCTAssertTrue(fileManager.fileExists(atPath: storage.path))
+      try storage.createDirectory()
+      XCTAssertTrue(fileManager.fileExists(atPath: storage.path))
+    } catch {
+      XCTFail(error.localizedDescription)
+    }
   }
 
   /// Test that it removes expired objects
