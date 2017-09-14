@@ -8,9 +8,7 @@ final class SyncStorageTests: XCTestCase {
   override func setUp() {
     super.setUp()
     let memory = MemoryStorage(config: MemoryConfig())
-    let disk = try! DiskStorage(config: DiskConfig(name: "ASyncDisk"))
-    let hybrid = HybridStorage(memoryStorage: memory, diskStorage: disk)
-    let primitive = PrimitiveStorage(storage: hybrid)
+    let primitive = PrimitiveStorage(storage: memory)
     storage = SyncStorage(storage: primitive)
   }
 
@@ -44,16 +42,16 @@ final class SyncStorageTests: XCTestCase {
 
   func testManyOperations() {
     do {
-      var number = 0
       let iterationCount = 10_000
 
       when("performs lots of operations") {
         DispatchQueue.concurrentPerform(iterations: iterationCount) { _ in
           do {
+            var number = try storage.object(forKey: "number") as Int
             number += 1
             try storage.setObject(number, forKey: "number")
           } catch {
-            XCTFail()
+            XCTFail(error.localizedDescription)
           }
         }
       }

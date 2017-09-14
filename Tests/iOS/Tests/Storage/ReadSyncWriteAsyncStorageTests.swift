@@ -8,9 +8,7 @@ final class ReadSyncWriteAsyncStorageTests: XCTestCase {
   override func setUp() {
     super.setUp()
     let memory = MemoryStorage(config: MemoryConfig())
-    let disk = try! DiskStorage(config: DiskConfig(name: "Floppy"))
-    let hybrid = HybridStorage(memoryStorage: memory, diskStorage: disk)
-    let primitive = PrimitiveStorage(storage: hybrid)
+    let primitive = PrimitiveStorage(storage: memory)
     storage = ReadSyncWriteAsyncStorage(storage: primitive)
   }
 
@@ -43,15 +41,21 @@ final class ReadSyncWriteAsyncStorageTests: XCTestCase {
   }
 
   func testManyOperations() throws {
-    var number = 0
     let iterationCount = 10_000
 
     when("performs lots of operations") {
       DispatchQueue.concurrentPerform(iterations: iterationCount) { _ in
-        number += 1
-        storage.setObject(number, forKey: "number", completion: { _ in })
+        do {
+          var number = try storage.object(forKey: "number") as Int
+          number += 1
+          storage.setObject(number, forKey: "number", completion: { _ in })
+        } catch {
+          XCTFail(error.localizedDescription)
+        }
       }
     }
+
+    wait(for: 1)
 
     try then("all operation must complete") {
       let cachedObject = try storage.object(forKey: "number") as Int
