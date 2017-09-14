@@ -9,7 +9,7 @@ public class Storage {
   /// - Parameters:
   ///   - diskConfig: Configuration for disk storage
   ///   - memoryConfig: Optional. Pass confi if you want memory cache
-  /// - Throws: Throw CacheError if any.
+  /// - Throws: Throw StorageError if any.
   public required init(diskConfig: DiskConfig, memoryConfig: MemoryConfig? = nil) throws {
     let disk = try DiskStorage(config: diskConfig)
 

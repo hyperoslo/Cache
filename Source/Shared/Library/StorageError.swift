@@ -1,6 +1,6 @@
 import Foundation
 
-public enum CacheError: Error {
+public enum StorageError: Error {
   /// Object can be found
   case notFound
   /// Object is found, but casting to requested type failed

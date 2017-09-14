@@ -15,7 +15,7 @@ final class DiskStorageTests: XCTestCase {
   }
 
   override func tearDown() {
-    try? fileManager.removeItem(atPath: storage.path)
+    try? storage.removeAll()
     super.tearDown()
   }
 

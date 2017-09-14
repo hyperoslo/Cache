@@ -42,7 +42,7 @@ extension DiskStorage: StorageAware {
     let object: T = try DataSerializer.deserialize(data: data)
 
     guard let date = attributes[.modificationDate] as? Date else {
-      throw CacheError.malformedFileAttributes
+      throw StorageError.malformedFileAttributes
     }
 
     return Entry(
