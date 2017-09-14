@@ -48,10 +48,10 @@ final class AAsyncStorageTests: XCTestCase {
     then("all are removed") {
       storage.existsObject(ofType: Int.self, forKey: "key-99", completion: { result in
         switch result {
-        case .value(let exists):
-          XCTAssertTrue(exists)
-        default:
+        case .value:
           XCTFail()
+        default:
+          break
         }
       })
     }
@@ -59,26 +59,27 @@ final class AAsyncStorageTests: XCTestCase {
     wait(for: 0.1)
   }
 
-  /*
-  func testManyOperations() throws {
+  func testManyOperations() {
     var number = 0
     let iterationCount = 10_000
 
-    try when("performs lots of operations") {
+    when("performs lots of operations") {
       DispatchQueue.concurrentPerform(iterations: iterationCount) { _ in
-        do {
-          number += 1
-          try storage.setObject(number, forKey: "number")
-        } catch {
-          XCTFail()
-        }
+        number += 1
+        print(number)
+        storage.setObject(number, forKey: "number", completion: { _ in })
       }
     }
 
-    try then("all operation must complete") {
-      let number = try storage.object(forKey: "number") as Int
-      XCTAssertEqual(number, iterationCount)
+    then("all operation must complete") {
+      storage.object(forKey: "number", completion: { (result: Result<Int>) in
+        switch result {
+        case .value(let cachedNumber):
+          XCTAssertEqual(cachedNumber, iterationCount)
+        default:
+          XCTFail()
+        }
+      })
     }
   }
-   */
 }
