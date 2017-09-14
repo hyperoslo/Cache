@@ -26,6 +26,22 @@ final class SyncStorageTests: XCTestCase {
     XCTAssertEqual(cachedObject, user)
   }
 
+  func testRemoveAll() throws {
+    try given("add a lot of objects") {
+      try Array(0..<100).forEach {
+        try storage.setObject($0, forKey: "key-\($0)")
+      }
+    }
+
+    try when("remove all") {
+      try storage.removeAll()
+    }
+
+    try then("all are removed") {
+      XCTAssertFalse(try storage.existsObject(ofType: Int.self, forKey: "key-99"))
+    }
+  }
+
   func testManyOperations() throws {
     try given("set an initial value") {
       try storage.setObject(0, forKey: "number")
@@ -43,7 +59,7 @@ final class SyncStorageTests: XCTestCase {
       }
     }
 
-    wait(for: 5)
+    wait(for: 1)
 
     try then("all operation must complete") {
       let number = try storage.object(forKey: "number") as Int
