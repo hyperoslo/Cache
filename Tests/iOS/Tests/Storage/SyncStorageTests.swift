@@ -8,7 +8,7 @@ final class SyncStorageTests: XCTestCase {
   override func setUp() {
     super.setUp()
     let memory = MemoryStorage(config: MemoryConfig())
-    let disk = try! DiskStorage(config: DiskConfig(name: "Floppy"))
+    let disk = try! DiskStorage(config: DiskConfig(name: "ASyncDisk"))
     let hybrid = HybridStorage(memoryStorage: memory, diskStorage: disk)
     let primitive = PrimitiveStorage(storage: hybrid)
     storage = SyncStorage(storage: primitive)

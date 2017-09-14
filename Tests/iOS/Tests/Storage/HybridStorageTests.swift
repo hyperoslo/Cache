@@ -12,7 +12,7 @@ final class HybridStorageTests: XCTestCase {
   override func setUp() {
     super.setUp()
     let memory = MemoryStorage(config: MemoryConfig())
-    let disk = try! DiskStorage(config: DiskConfig(name: "Floppy"))
+    let disk = try! DiskStorage(config: DiskConfig(name: "HybridDisk"))
 
     storage = HybridStorage(memoryStorage: memory, diskStorage: disk)
   }
