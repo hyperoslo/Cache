@@ -132,11 +132,15 @@ final class DiskStorageTests: XCTestCase {
   }
 
   /// Test that it clears cache directory
-  func testClear() throws {
-    try storage.setObject(testObject, forKey: key)
-    try storage.removeAll()
-    let fileExist = fileManager.fileExists(atPath: storage.path)
-    XCTAssertFalse(fileExist)
+  func testClear() {
+    do {
+      try storage.setObject(testObject, forKey: key)
+      try storage.removeAll()
+      let fileExist = fileManager.fileExists(atPath: storage.path)
+      XCTAssertFalse(fileExist)
+    } catch {
+      XCTFail()
+    }
   }
 
   /// Test that it clears cache files, but keeps root directory

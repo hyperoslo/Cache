@@ -42,24 +42,28 @@ final class SyncStorageTests: XCTestCase {
     }
   }
 
-  func testManyOperations() throws {
-    var number = 0
-    let iterationCount = 10_000
+  func testManyOperations() {
+    do {
+      var number = 0
+      let iterationCount = 10_000
 
-    when("performs lots of operations") {
-      DispatchQueue.concurrentPerform(iterations: iterationCount) { _ in
-        do {
-          number += 1
-          try storage.setObject(number, forKey: "number")
-        } catch {
-          XCTFail()
+      when("performs lots of operations") {
+        DispatchQueue.concurrentPerform(iterations: iterationCount) { _ in
+          do {
+            number += 1
+            try storage.setObject(number, forKey: "number")
+          } catch {
+            XCTFail()
+          }
         }
       }
-    }
 
-    try then("all operation must complete") {
-      let number = try storage.object(forKey: "number") as Int
-      XCTAssertEqual(number, iterationCount)
+      try then("all operation must complete") {
+        let number = try storage.object(forKey: "number") as Int
+        XCTAssertEqual(number, iterationCount)
+      }
+    } catch {
+      XCTFail()
     }
   }
 }
