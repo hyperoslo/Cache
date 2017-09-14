@@ -66,7 +66,6 @@ final class AsyncStorageTests: XCTestCase {
     when("performs lots of operations") {
       DispatchQueue.concurrentPerform(iterations: iterationCount) { _ in
         number += 1
-        print(number)
         storage.setObject(number, forKey: "number", completion: { _ in })
       }
     }
