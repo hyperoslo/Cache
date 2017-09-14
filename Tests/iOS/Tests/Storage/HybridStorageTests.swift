@@ -76,12 +76,12 @@ final class HybridStorageTests: XCTestCase {
       XCTAssertNil(cachedObject)
     }
 
-    try then("there is no object in memory") {
+    then("there is no object in memory") {
       let memoryObject = try? storage.memoryStorage.object(forKey: key) as User
       XCTAssertNil(memoryObject)
     }
 
-    try then("there is no object on disk") {
+    then("there is no object on disk") {
       let diskObject = try? storage.diskStorage.object(forKey: key) as User
       XCTAssertNil(diskObject)
     }
@@ -95,12 +95,12 @@ final class HybridStorageTests: XCTestCase {
       XCTAssertNil(try? storage.object(forKey: key) as User)
     }
 
-    try then("there is no object in memory") {
+    then("there is no object in memory") {
       let memoryObject = try? storage.memoryStorage.object(forKey: key) as User
       XCTAssertNil(memoryObject)
     }
 
-    try then("there is no object on disk") {
+    then("there is no object on disk") {
       let diskObject = try? storage.diskStorage.object(forKey: key) as User
       XCTAssertNil(diskObject)
     }
@@ -110,7 +110,7 @@ final class HybridStorageTests: XCTestCase {
     try storage.setObject(testObject, forKey: key)
     try storage.removeAll()
 
-    try then("the disk directory is removed") {
+    then("the disk directory is removed") {
       XCTAssertFalse(fileManager.fileExists(atPath: storage.diskStorage.path))
     }
   }
@@ -131,7 +131,7 @@ final class HybridStorageTests: XCTestCase {
       try storage.removeExpiredObjects()
     }
 
-    try then("object with key2 survived") {
+    then("object with key2 survived") {
       XCTAssertNil(try? storage.object(forKey: key1) as User)
       XCTAssertNotNil(try? storage.object(forKey: key2) as User)
     }

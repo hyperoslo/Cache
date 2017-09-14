@@ -46,7 +46,7 @@ final class SyncStorageTests: XCTestCase {
     var number = 0
     let iterationCount = 10_000
 
-    try when("performs lots of operations") {
+    when("performs lots of operations") {
       DispatchQueue.concurrentPerform(iterations: iterationCount) { _ in
         do {
           number += 1
