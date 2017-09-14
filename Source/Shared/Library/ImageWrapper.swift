@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 struct ImageWrapper: Codable {
   let image: Image
@@ -23,9 +23,7 @@ struct ImageWrapper: Codable {
 
   public func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    guard let data = image.hasAlpha
-      ? UIImagePNGRepresentation(image)
-      : UIImageJPEGRepresentation(image, 1.0) else {
+    guard let data = image.cache_toData() else {
         throw StorageError.encodingFailed
     }
 

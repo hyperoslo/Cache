@@ -1,12 +1,8 @@
 import UIKit
 
-/**
- Helper UIImage extension.
- */
+/// Helper UIImage extension.
 extension UIImage {
-  /**
-   Checks if image has alpha component
-   */
+  /// Checks if image has alpha component
   var hasAlpha: Bool {
     let result: Bool
 
@@ -22,5 +18,12 @@ extension UIImage {
     }
 
     return result
+  }
+
+  /// Convert to data
+  func cache_toData() -> Data? {
+    return hasAlpha
+      ? UIImagePNGRepresentation(self)
+      : UIImageJPEGRepresentation(self, 1.0)
   }
 }
