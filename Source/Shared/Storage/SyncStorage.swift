@@ -21,24 +21,6 @@ extension SyncStorage: StorageAware {
     return entry
   }
 
-  func object<T: Codable>(forKey key: String) throws -> T {
-    var object: T!
-    try serialQueue.sync {
-      object = try entry(forKey: key).object as T
-    }
-
-    return object
-  }
-
-  func existsObject<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Bool {
-    var exists: Bool!
-    try serialQueue.sync {
-      exists = try internalStorage.existsObject(ofType: type, forKey: key)
-    }
-
-    return exists
-  }
-
   public func removeObject(forKey key: String) throws {
     try serialQueue.sync {
       try self.internalStorage.removeObject(forKey: key)
