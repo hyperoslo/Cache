@@ -11,4 +11,6 @@ public enum StorageError: Error {
   case decodingFailed
   /// Can't perform Encode
   case encodingFailed
+  /// The object has been deallocated
+  case deallocated
 }

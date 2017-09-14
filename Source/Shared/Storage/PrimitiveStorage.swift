@@ -1,5 +1,4 @@
 import Foundation
-import SwiftHash
 
 /// Allow storing primitive (Int, [Int], Set<Int>, Bool, ...)
 final class PrimitiveStorage {
