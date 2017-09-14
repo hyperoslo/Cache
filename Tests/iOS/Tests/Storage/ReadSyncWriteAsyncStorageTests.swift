@@ -41,7 +41,11 @@ final class ReadSyncWriteAsyncStorageTests: XCTestCase {
   }
 
   func testManyOperations() throws {
-    let iterationCount = 10_000
+    let iterationCount = 1_000
+
+    given("seed initial value") {
+      storage.setObject(0, forKey: "number", completion: { _ in })
+    }
 
     when("performs lots of operations") {
       DispatchQueue.concurrentPerform(iterations: iterationCount) { _ in
