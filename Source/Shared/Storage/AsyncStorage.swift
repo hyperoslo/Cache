@@ -46,7 +46,7 @@ extension AsyncStorage: AsyncStorageAware {
 
   func setObject<T: Codable>(_ object: T,
                              forKey key: String,
-                             expiry: Expiry?,
+                             expiry: Expiry? = nil,
                              completion: @escaping (Result<()>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
