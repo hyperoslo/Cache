@@ -1,20 +1,20 @@
 import XCTest
 @testable import Cache
 
-final class CapsuleTests: XCTestCase {
+final class MemoryCapsuleTests: XCTestCase {
   let testObject = User(firstName: "a", lastName: "b")
 
   func testExpiredWhenNotExpired() {
     let date = Date(timeInterval: 100000, since: Date())
-    let capsule = Capsule(value: testObject, expiry: .date(date))
+    let capsule = MemoryCapsule(value: testObject, expiry: .date(date))
 
-    XCTAssertFalse(capsule.isExpired)
+    XCTAssertFalse(capsule.expiry.isExpired)
   }
 
   func testExpiredWhenExpired() {
     let date = Date(timeInterval: -100000, since: Date())
-    let capsule = Capsule(value: testObject, expiry: .date(date))
+    let capsule = MemoryCapsule(value: testObject, expiry: .date(date))
 
-    XCTAssertTrue(capsule.isExpired)
+    XCTAssertTrue(capsule.expiry.isExpired)
   }
 }

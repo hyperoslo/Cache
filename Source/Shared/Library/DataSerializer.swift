@@ -8,7 +8,7 @@ class DataSerializer {
   /// - Parameter object: The object to convert
   /// - Returns: Data
   /// - Throws: Encoder error if any
-  static func serialize<T: Codable>(object: T) throws -> Data {
+  static func serialize<T: Encodable>(object: T) throws -> Data {
     let encoder = JSONEncoder()
     return try encoder.encode(object)
   }
@@ -18,7 +18,7 @@ class DataSerializer {
   /// - Parameter data: The data to convert
   /// - Returns: The object
   /// - Throws: Decoder error if any
-  static func deserialize<T: Codable>(data: Data) throws -> T {
+  static func deserialize<T: Decodable>(data: Data) throws -> T {
     let decoder = JSONDecoder()
     return try decoder.decode(T.self, from: data)
   }

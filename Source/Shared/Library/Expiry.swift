@@ -23,4 +23,9 @@ public enum Expiry {
       return date
     }
   }
+
+  /// Checks if cached object is expired according to expiration date
+  public var isExpired: Bool {
+    return date.inThePast
+  }
 }
