@@ -39,30 +39,5 @@ final class ReadSyncWriteAsyncStorageTests: XCTestCase {
       XCTAssertFalse(try storage.existsObject(ofType: Int.self, forKey: "key-99"))
     }
   }
-
-  func testManyOperations() throws {
-    let iterationCount = 1_000
-
-    given("seed initial value") {
-      storage.setObject(0, forKey: "number", completion: { _ in })
-    }
-
-    when("performs lots of operations") {
-      DispatchQueue.concurrentPerform(iterations: iterationCount) { _ in
-        do {
-          var number = try storage.object(forKey: "number") as Int
-          number += 1
-          storage.setObject(number, forKey: "number", completion: { _ in })
-        } catch {
-          XCTFail(error.localizedDescription)
-        }
-      }
-    }
-
-    try then("all operation must complete") {
-      let cachedObject = try storage.object(forKey: "number") as Int
-      XCTAssertEqual(cachedObject, iterationCount)
-    }
-  }
 }
 

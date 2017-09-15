@@ -61,27 +61,4 @@ final class AsyncStorageTests: XCTestCase {
 
     wait(for: [expectation], timeout: 1)
   }
-
-  func testManyOperations() {
-    var number = 0
-    let iterationCount = 10_000
-
-    when("performs lots of operations") {
-      DispatchQueue.concurrentPerform(iterations: iterationCount) { _ in
-        number += 1
-        storage.setObject(number, forKey: "number", completion: { _ in })
-      }
-    }
-
-    then("all operation must complete") {
-      storage.object(forKey: "number", completion: { (result: Result<Int>) in
-        switch result {
-        case .value(let cachedNumber):
-          XCTAssertEqual(cachedNumber, iterationCount)
-        default:
-          XCTFail()
-        }
-      })
-    }
-  }
 }
