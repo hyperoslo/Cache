@@ -11,13 +11,25 @@ public class Storage {
   ///   - memoryConfig: Optional. Pass confi if you want memory cache
   /// - Throws: Throw StorageError if any.
   public required init(diskConfig: DiskConfig, memoryConfig: MemoryConfig? = nil) throws {
+    let storage: StorageAware
     let disk = try DiskStorage(config: diskConfig)
 
     if let memoryConfig = memoryConfig {
       let memory = MemoryStorage(config: memoryConfig)
-      internalStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
+      storage = HybridStorage(memoryStorage: memory, diskStorage: disk)
     } else {
-      internalStorage = disk
+      storage = disk
     }
+
+    self.internalStorage = TypeWrapperStorage(storage: storage)
   }
+
+  /// Return all sync storage
+  public lazy var sync: StorageAware = SyncStorage(storage: self.internalStorage)
+
+  /// Return all async storage
+  public lazy var async: AsyncStorageAware = AsyncStorage(storage: self.internalStorage)
+
+  /// Return read sync, write async storage
+  public lazy var readSyncWriteAsync: ReadSyncWriteAsyncStorage = ReadSyncWriteAsyncStorage(storage: self.internalStorage)
 }
