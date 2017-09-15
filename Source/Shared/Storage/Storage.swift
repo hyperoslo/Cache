@@ -2,7 +2,7 @@ import Foundation
 
 /// Manage storage. Use memory storage if specified.
 public class Storage {
-  private let internalStorage: StorageAware
+  let internalStorage: StorageAware
 
   /// Initialize storage with configuration options.
   ///
@@ -11,35 +11,25 @@ public class Storage {
   ///   - memoryConfig: Optional. Pass confi if you want memory cache
   /// - Throws: Throw StorageError if any.
   public required init(diskConfig: DiskConfig, memoryConfig: MemoryConfig? = nil) throws {
+    let storage: StorageAware
     let disk = try DiskStorage(config: diskConfig)
 
     if let memoryConfig = memoryConfig {
       let memory = MemoryStorage(config: memoryConfig)
-      internalStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
+      storage = HybridStorage(memoryStorage: memory, diskStorage: disk)
     } else {
-      internalStorage = disk
+      storage = disk
     }
-  }
-}
 
-extension Storage: StorageAware {
-  public func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
-    return try internalStorage.entry(forKey: key)
+    self.internalStorage = TypeWrapperStorage(storage: storage)
   }
 
-  public func removeObject(forKey key: String) throws {
-    try internalStorage.removeObject(forKey: key)
-  }
+  /// Return all sync storage
+  public lazy var sync: SyncStorage = SyncStorage(storage: self.internalStorage)
 
-  public func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
-    try internalStorage.setObject(object, forKey: key, expiry: expiry)
-  }
+  /// Return all async storage
+  public lazy var async: AsyncStorage = AsyncStorage(storage: self.internalStorage)
 
-  public func removeAll() throws {
-    try internalStorage.removeAll()
-  }
-
-  public func removeExpiredObjects() throws {
-    try internalStorage.removeExpiredObjects()
-  }
+  /// Return read sync, write async storage
+  public lazy var readSyncWriteAsync: ReadSyncWriteAsyncStorage = ReadSyncWriteAsyncStorage(storage: self.internalStorage)
 }

@@ -8,7 +8,7 @@ final class AsyncStorageTests: XCTestCase {
   override func setUp() {
     super.setUp()
     let memory = MemoryStorage(config: MemoryConfig())
-    let disk = try! DiskStorage(config: DiskConfig(name: "Floppy"))
+    let disk = try! DiskStorage(config: DiskConfig(name: "Async Disk"))
     let hybrid = HybridStorage(memoryStorage: memory, diskStorage: disk)
     let primitive = TypeWrapperStorage(storage: hybrid)
     storage = AsyncStorage(storage: primitive)
@@ -20,21 +20,24 @@ final class AsyncStorageTests: XCTestCase {
   }
 
   func testSetObject() throws {
+    let expectation = self.expectation(description: #function)
+
     storage.setObject(user, forKey: "user", completion: { _ in })
     storage.object(forKey: "user", completion: { (result: Result<User>) in
       switch result {
       case .value(let cachedUser):
         XCTAssertEqual(cachedUser, self.user)
+        expectation.fulfill()
       default:
         XCTFail()
       }
     })
 
-    wait(for: 0.1)
+    wait(for: [expectation], timeout: 1)
   }
 
-
   func testRemoveAll() {
+    let expectation = self.expectation(description: #function)
     given("add a lot of objects") {
       Array(0..<100).forEach {
         storage.setObject($0, forKey: "key-\($0)", completion: { _ in })
@@ -51,34 +54,11 @@ final class AsyncStorageTests: XCTestCase {
         case .value:
           XCTFail()
         default:
-          break
+          expectation.fulfill()
         }
       })
     }
 
-    wait(for: 0.1)
-  }
-
-  func testManyOperations() {
-    var number = 0
-    let iterationCount = 10_000
-
-    when("performs lots of operations") {
-      DispatchQueue.concurrentPerform(iterations: iterationCount) { _ in
-        number += 1
-        storage.setObject(number, forKey: "number", completion: { _ in })
-      }
-    }
-
-    then("all operation must complete") {
-      storage.object(forKey: "number", completion: { (result: Result<Int>) in
-        switch result {
-        case .value(let cachedNumber):
-          XCTAssertEqual(cachedNumber, iterationCount)
-        default:
-          XCTFail()
-        }
-      })
-    }
+    wait(for: [expectation], timeout: 1)
   }
 }
