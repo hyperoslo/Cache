@@ -2,7 +2,7 @@ import Foundation
 
 /// Manage storage. Use memory storage if specified.
 public class Storage {
-  private let internalStorage: StorageAware
+  let internalStorage: StorageAware
 
   /// Initialize storage with configuration options.
   ///
@@ -25,10 +25,10 @@ public class Storage {
   }
 
   /// Return all sync storage
-  public lazy var sync: StorageAware = SyncStorage(storage: self.internalStorage)
+  public lazy var sync: SyncStorage = SyncStorage(storage: self.internalStorage)
 
   /// Return all async storage
-  public lazy var async: AsyncStorageAware = AsyncStorage(storage: self.internalStorage)
+  public lazy var async: AsyncStorage = AsyncStorage(storage: self.internalStorage)
 
   /// Return read sync, write async storage
   public lazy var readSyncWriteAsync: ReadSyncWriteAsyncStorage = ReadSyncWriteAsyncStorage(storage: self.internalStorage)
