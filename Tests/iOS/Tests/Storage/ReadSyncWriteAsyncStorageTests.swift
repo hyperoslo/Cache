@@ -1,38 +1,38 @@
 import XCTest
 @testable import Cache
 
-final class SyncStorageTests: XCTestCase {
-  private var storage: SyncStorage!
+final class ReadSyncWriteAsyncStorageTests: XCTestCase {
+  private var storage: ReadSyncWriteAsyncStorage!
   let user = User(firstName: "John", lastName: "Snow")
 
   override func setUp() {
     super.setUp()
     let memory = MemoryStorage(config: MemoryConfig())
     let primitive = PrimitiveStorage(storage: memory)
-    storage = SyncStorage(storage: primitive)
+    storage = ReadSyncWriteAsyncStorage(storage: primitive)
   }
 
   override func tearDown() {
-    try? storage.removeAll()
+    storage.removeAll(completion: { _ in })
     super.tearDown()
   }
 
   func testSetObject() throws {
-    try storage.setObject(user, forKey: "user")
+    storage.setObject(user, forKey: "user", completion: { _ in })
     let cachedObject = try storage.object(forKey: "user") as User
 
     XCTAssertEqual(cachedObject, user)
   }
 
   func testRemoveAll() throws {
-    try given("add a lot of objects") {
-      try Array(0..<100).forEach {
-        try storage.setObject($0, forKey: "key-\($0)")
+    given("add a lot of objects") {
+      Array(0..<100).forEach {
+        storage.setObject($0, forKey: "key-\($0)", completion: { _ in })
       }
     }
 
-    try when("remove all") {
-      try storage.removeAll()
+    when("remove all") {
+      storage.removeAll(completion: { _ in })
     }
 
     try then("all are removed") {
@@ -43,8 +43,8 @@ final class SyncStorageTests: XCTestCase {
   func testManyOperations() throws {
     let iterationCount = 1_000
 
-    try given("seed initial value") {
-      try storage.setObject(0, forKey: "number")
+    given("seed initial value") {
+      storage.setObject(0, forKey: "number", completion: { _ in })
     }
 
     when("performs lots of operations") {
@@ -52,20 +52,19 @@ final class SyncStorageTests: XCTestCase {
         do {
           var number = try storage.object(forKey: "number") as Int
           number += 1
-          try storage.setObject(number, forKey: "number")
+          storage.setObject(number, forKey: "number", completion: { _ in })
         } catch {
           XCTFail(error.localizedDescription)
         }
       }
     }
 
-    do {
-      try then("all operation must complete") {
-        let number = try storage.object(forKey: "number") as Int
-        XCTAssertEqual(number, iterationCount)
-      }
-    } catch {
-      XCTFail(error.localizedDescription)
+    wait(for: 1)
+
+    try then("all operation must complete") {
+      let cachedObject = try storage.object(forKey: "number") as Int
+      XCTAssertEqual(cachedObject, iterationCount)
     }
   }
 }
+
