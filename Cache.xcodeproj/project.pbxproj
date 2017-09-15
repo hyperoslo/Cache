@@ -41,7 +41,7 @@
 		D21B669D1F6A724600125DE1 /* DiskConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF984D1F694FFA00CE8F68 /* DiskConfig.swift */; };
 		D21B669E1F6A724700125DE1 /* MemoryConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF984E1F694FFA00CE8F68 /* MemoryConfig.swift */; };
 		D21B66A11F6A747000125DE1 /* ImageWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98761F69513800CE8F68 /* ImageWrapperTests.swift */; };
-		D236F31A1F6BEF73004EE01F /* StorgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236F3191F6BEF73004EE01F /* StorgeTests.swift */; };
+		D236F31A1F6BEF73004EE01F /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236F3191F6BEF73004EE01F /* StorageTests.swift */; };
 		D28C9BAC1F67ECD400C180C1 /* TestHelper+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CDF1C28374800B702C9 /* TestHelper+iOS.swift */; };
 		D28C9BAF1F67EF8300C180C1 /* UIImage+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA01C28405900B702C9 /* UIImage+ExtensionsTests.swift */; };
 		D292DAF11F6A85F30060F614 /* SyncStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D292DAF01F6A85F30060F614 /* SyncStorage.swift */; };
@@ -130,7 +130,7 @@
 /* Begin PBXFileReference section */
 		BDEDD3561DBCE5B1007416A6 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D236F3191F6BEF73004EE01F /* StorgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorgeTests.swift; sourceTree = "<group>"; };
+		D236F3191F6BEF73004EE01F /* StorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTests.swift; sourceTree = "<group>"; };
 		D292DAF01F6A85F30060F614 /* SyncStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStorage.swift; sourceTree = "<group>"; };
 		D292DAF41F6A94000060F614 /* AsyncStorageAware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStorageAware.swift; sourceTree = "<group>"; };
 		D292DAF81F6A962D0060F614 /* AsyncStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStorage.swift; sourceTree = "<group>"; };
@@ -337,7 +337,7 @@
 				D2CF98881F695F9400CE8F68 /* TypeWrapperStorageTests.swift */,
 				D292DB001F6AA06B0060F614 /* SyncStorageTests.swift */,
 				D292DB031F6AA0730060F614 /* AsyncStorageTests.swift */,
-				D236F3191F6BEF73004EE01F /* StorgeTests.swift */,
+				D236F3191F6BEF73004EE01F /* StorageTests.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -833,7 +833,7 @@
 				D2CF98801F69513800CE8F68 /* TypeWrapperTests.swift in Sources */,
 				D2CF98241F69427C00CE8F68 /* User.swift in Sources */,
 				D2CF981E1F69427C00CE8F68 /* TestCase+Extensions.swift in Sources */,
-				D236F31A1F6BEF73004EE01F /* StorgeTests.swift in Sources */,
+				D236F31A1F6BEF73004EE01F /* StorageTests.swift in Sources */,
 				D292DB011F6AA06B0060F614 /* SyncStorageTests.swift in Sources */,
 				D2CF98811F69513800CE8F68 /* DiskStorageTests.swift in Sources */,
 			);
