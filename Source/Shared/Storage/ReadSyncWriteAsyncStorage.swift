@@ -1,7 +1,7 @@
 import Foundation
 
 /// Manipulate storage in a "read sync, write async" manner.
-final class ReadSyncWriteAsyncStorage {
+public class ReadSyncWriteAsyncStorage {
   let internalStorage: StorageAware
   let concurrentQueue = DispatchQueue(label: "Cache.ReadSyncWriteAsyncStorage.Queue",
                                       attributes: .concurrent)
@@ -21,11 +21,11 @@ extension ReadSyncWriteAsyncStorage {
     return entry
   }
 
-  func object<T: Codable>(forKey key: String) throws -> T {
+  public func object<T: Codable>(forKey key: String) throws -> T {
     return try entry(forKey: key).object
   }
 
-  func existsObject<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Bool {
+  public func existsObject<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Bool {
     do {
       let _: T = try object(forKey: key)
       return true
@@ -34,7 +34,7 @@ extension ReadSyncWriteAsyncStorage {
     }
   }
 
-  func removeObject(forKey key: String, completion: @escaping (Result<()>) -> Void) {
+  public func removeObject(forKey key: String, completion: @escaping (Result<()>) -> Void) {
     concurrentQueue.async(flags: .barrier) { [weak self] in
       guard let `self` = self else {
         completion(Result.error(StorageError.deallocated))
@@ -50,7 +50,7 @@ extension ReadSyncWriteAsyncStorage {
     }
   }
 
-  func setObject<T: Codable>(_ object: T,
+  public func setObject<T: Codable>(_ object: T,
                              forKey key: String,
                              expiry: Expiry? = nil,
                              completion: @escaping (Result<()>) -> Void) {
@@ -69,7 +69,7 @@ extension ReadSyncWriteAsyncStorage {
     }
   }
 
-  func removeAll(completion: @escaping (Result<()>) -> Void) {
+  public func removeAll(completion: @escaping (Result<()>) -> Void) {
     concurrentQueue.async(flags: .barrier) { [weak self] in
       guard let `self` = self else {
         completion(Result.error(StorageError.deallocated))
@@ -85,7 +85,7 @@ extension ReadSyncWriteAsyncStorage {
     }
   }
 
-  func removeExpiredObjects(completion: @escaping (Result<()>) -> Void) {
+  public func removeExpiredObjects(completion: @escaping (Result<()>) -> Void) {
     concurrentQueue.async(flags: .barrier) { [weak self] in
       guard let `self` = self else {
         completion(Result.error(StorageError.deallocated))
