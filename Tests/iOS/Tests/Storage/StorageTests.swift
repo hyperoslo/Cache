@@ -1,8 +1,7 @@
 import XCTest
-@testable import Cache
+import Cache
 
 final class StorageTests: XCTestCase {
-  private var interalStorage: StorageAware!
   private var storage: Storage!
   let user = User(firstName: "John", lastName: "Snow")
 
@@ -10,24 +9,23 @@ final class StorageTests: XCTestCase {
     super.setUp()
 
     storage = try! Storage(diskConfig: DiskConfig(name: "Thor"), memoryConfig: MemoryConfig())
-    interalStorage = storage.internalStorage
   }
 
   override func tearDown() {
-    try? interalStorage.removeAll()
+    try? storage.removeAll()
     super.tearDown()
   }
 
   func testSync() throws {
-    try storage.sync.setObject(user, forKey: "user")
-    let cachedObject = try storage.sync.object(forKey: "user") as User
+    try storage.setObject(user, forKey: "user")
+    let cachedObject = try storage.object(forKey: "user") as User
 
     XCTAssertEqual(cachedObject, user)
   }
 
   func testAsync() {
     let expectation = self.expectation(description: #function)
-    storage.async.setObject(user, forKey: "user", completion: { _ in })
+    storage.async.setObject(user, forKey: "user", expiry: nil, completion: { _ in })
 
     storage.async.object(forKey: "user", completion: { (result: Result<User>) in
       switch result {

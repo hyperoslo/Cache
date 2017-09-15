@@ -41,11 +41,7 @@
 		D21B669D1F6A724600125DE1 /* DiskConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF984D1F694FFA00CE8F68 /* DiskConfig.swift */; };
 		D21B669E1F6A724700125DE1 /* MemoryConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF984E1F694FFA00CE8F68 /* MemoryConfig.swift */; };
 		D21B66A11F6A747000125DE1 /* ImageWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98761F69513800CE8F68 /* ImageWrapperTests.swift */; };
-		D236F31A1F6BEF73004EE01F /* StorgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236F3191F6BEF73004EE01F /* StorgeTests.swift */; };
-		D280B6A71F6AC33D00BA59BE /* ReadSyncWriteAsyncStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D280B6A61F6AC33D00BA59BE /* ReadSyncWriteAsyncStorage.swift */; };
-		D280B6A81F6AC33D00BA59BE /* ReadSyncWriteAsyncStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D280B6A61F6AC33D00BA59BE /* ReadSyncWriteAsyncStorage.swift */; };
-		D280B6A91F6AC33D00BA59BE /* ReadSyncWriteAsyncStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D280B6A61F6AC33D00BA59BE /* ReadSyncWriteAsyncStorage.swift */; };
-		D280B6AB1F6AC69B00BA59BE /* ReadSyncWriteAsyncStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D280B6AA1F6AC69B00BA59BE /* ReadSyncWriteAsyncStorageTests.swift */; };
+		D236F31A1F6BEF73004EE01F /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236F3191F6BEF73004EE01F /* StorageTests.swift */; };
 		D28C9BAC1F67ECD400C180C1 /* TestHelper+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291CDF1C28374800B702C9 /* TestHelper+iOS.swift */; };
 		D28C9BAF1F67EF8300C180C1 /* UIImage+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291DA01C28405900B702C9 /* UIImage+ExtensionsTests.swift */; };
 		D292DAF11F6A85F30060F614 /* SyncStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D292DAF01F6A85F30060F614 /* SyncStorage.swift */; };
@@ -134,9 +130,7 @@
 /* Begin PBXFileReference section */
 		BDEDD3561DBCE5B1007416A6 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D236F3191F6BEF73004EE01F /* StorgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorgeTests.swift; sourceTree = "<group>"; };
-		D280B6A61F6AC33D00BA59BE /* ReadSyncWriteAsyncStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadSyncWriteAsyncStorage.swift; sourceTree = "<group>"; };
-		D280B6AA1F6AC69B00BA59BE /* ReadSyncWriteAsyncStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadSyncWriteAsyncStorageTests.swift; sourceTree = "<group>"; };
+		D236F3191F6BEF73004EE01F /* StorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTests.swift; sourceTree = "<group>"; };
 		D292DAF01F6A85F30060F614 /* SyncStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStorage.swift; sourceTree = "<group>"; };
 		D292DAF41F6A94000060F614 /* AsyncStorageAware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStorageAware.swift; sourceTree = "<group>"; };
 		D292DAF81F6A962D0060F614 /* AsyncStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStorage.swift; sourceTree = "<group>"; };
@@ -301,7 +295,6 @@
 				D292DAF01F6A85F30060F614 /* SyncStorage.swift */,
 				D292DAF41F6A94000060F614 /* AsyncStorageAware.swift */,
 				D292DAF81F6A962D0060F614 /* AsyncStorage.swift */,
-				D280B6A61F6AC33D00BA59BE /* ReadSyncWriteAsyncStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -344,8 +337,7 @@
 				D2CF98881F695F9400CE8F68 /* TypeWrapperStorageTests.swift */,
 				D292DB001F6AA06B0060F614 /* SyncStorageTests.swift */,
 				D292DB031F6AA0730060F614 /* AsyncStorageTests.swift */,
-				D280B6AA1F6AC69B00BA59BE /* ReadSyncWriteAsyncStorageTests.swift */,
-				D236F3191F6BEF73004EE01F /* StorgeTests.swift */,
+				D236F3191F6BEF73004EE01F /* StorageTests.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -800,7 +792,6 @@
 				D292DAF31F6A85F30060F614 /* SyncStorage.swift in Sources */,
 				D21B668C1F6A723C00125DE1 /* Types.swift in Sources */,
 				D292DAFF1F6A970B0060F614 /* Result.swift in Sources */,
-				D280B6A91F6AC33D00BA59BE /* ReadSyncWriteAsyncStorage.swift in Sources */,
 				D21B669A1F6A724300125DE1 /* Date+Extensions.swift in Sources */,
 				D21B66891F6A723C00125DE1 /* ImageWrapper.swift in Sources */,
 				D21B668B1F6A723C00125DE1 /* StorageError.swift in Sources */,
@@ -833,7 +824,6 @@
 				D2CF98821F69513800CE8F68 /* HybridStorageTests.swift in Sources */,
 				D2CF98831F69513800CE8F68 /* MemoryStorageTests.swift in Sources */,
 				D2CF987C1F69513800CE8F68 /* Date+ExtensionsTests.swift in Sources */,
-				D280B6AB1F6AC69B00BA59BE /* ReadSyncWriteAsyncStorageTests.swift in Sources */,
 				D28C9BAC1F67ECD400C180C1 /* TestHelper+iOS.swift in Sources */,
 				D2CF98211F69427C00CE8F68 /* TestHelper.swift in Sources */,
 				D2CF987F1F69513800CE8F68 /* ImageWrapperTests.swift in Sources */,
@@ -843,7 +833,7 @@
 				D2CF98801F69513800CE8F68 /* TypeWrapperTests.swift in Sources */,
 				D2CF98241F69427C00CE8F68 /* User.swift in Sources */,
 				D2CF981E1F69427C00CE8F68 /* TestCase+Extensions.swift in Sources */,
-				D236F31A1F6BEF73004EE01F /* StorgeTests.swift in Sources */,
+				D236F31A1F6BEF73004EE01F /* StorageTests.swift in Sources */,
 				D292DB011F6AA06B0060F614 /* SyncStorageTests.swift in Sources */,
 				D2CF98811F69513800CE8F68 /* DiskStorageTests.swift in Sources */,
 			);
@@ -864,7 +854,6 @@
 				D292DAF21F6A85F30060F614 /* SyncStorage.swift in Sources */,
 				D21B66831F6A723C00125DE1 /* Types.swift in Sources */,
 				D292DAFE1F6A970B0060F614 /* Result.swift in Sources */,
-				D280B6A81F6AC33D00BA59BE /* ReadSyncWriteAsyncStorage.swift in Sources */,
 				D21B66991F6A724200125DE1 /* Date+Extensions.swift in Sources */,
 				D21B66801F6A723C00125DE1 /* ImageWrapper.swift in Sources */,
 				D21B66821F6A723C00125DE1 /* StorageError.swift in Sources */,
@@ -907,7 +896,6 @@
 				D292DAF11F6A85F30060F614 /* SyncStorage.swift in Sources */,
 				D2CF98601F694FFA00CE8F68 /* DiskConfig.swift in Sources */,
 				D292DAFD1F6A970B0060F614 /* Result.swift in Sources */,
-				D280B6A71F6AC33D00BA59BE /* ReadSyncWriteAsyncStorage.swift in Sources */,
 				D2CF986D1F694FFA00CE8F68 /* MemoryStorage.swift in Sources */,
 				D2CF986F1F694FFA00CE8F68 /* StorageAware.swift in Sources */,
 				D2CF98851F69598900CE8F68 /* TypeWrapperStorage.swift in Sources */,

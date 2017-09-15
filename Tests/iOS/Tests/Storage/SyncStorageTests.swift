@@ -9,7 +9,7 @@ final class SyncStorageTests: XCTestCase {
     super.setUp()
     let memory = MemoryStorage(config: MemoryConfig())
     let primitive = TypeWrapperStorage(storage: memory)
-    storage = SyncStorage(storage: primitive)
+    storage = SyncStorage(storage: primitive, serialQueue: DispatchQueue(label: "Sync"))
   }
 
   override func tearDown() {

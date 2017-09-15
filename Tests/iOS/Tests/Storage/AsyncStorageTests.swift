@@ -11,7 +11,7 @@ final class AsyncStorageTests: XCTestCase {
     let disk = try! DiskStorage(config: DiskConfig(name: "Async Disk"))
     let hybrid = HybridStorage(memoryStorage: memory, diskStorage: disk)
     let primitive = TypeWrapperStorage(storage: hybrid)
-    storage = AsyncStorage(storage: primitive)
+    storage = AsyncStorage(storage: primitive, serialQueue: DispatchQueue(label: "Async"))
   }
 
   override func tearDown() {
