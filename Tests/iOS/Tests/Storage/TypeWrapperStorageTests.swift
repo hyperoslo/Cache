@@ -1,15 +1,15 @@
 import XCTest
 @testable import Cache
 
-final class PrimitiveStorageTests: XCTestCase {
-  private var storage: PrimitiveStorage!
+final class TypeWrapperStorageTests: XCTestCase {
+  private var storage: TypeWrapperStorage!
 
   override func setUp() {
     super.setUp()
     let memory = MemoryStorage(config: MemoryConfig())
     let disk = try! DiskStorage(config: DiskConfig(name: "PrimitiveDisk"))
     let hybrid = HybridStorage(memoryStorage: memory, diskStorage: disk)
-    storage = PrimitiveStorage(storage: hybrid)
+    storage = TypeWrapperStorage(storage: hybrid)
   }
 
   override func tearDown() {

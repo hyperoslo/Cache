@@ -8,7 +8,7 @@ final class ReadSyncWriteAsyncStorageTests: XCTestCase {
   override func setUp() {
     super.setUp()
     let memory = MemoryStorage(config: MemoryConfig())
-    let primitive = PrimitiveStorage(storage: memory)
+    let primitive = TypeWrapperStorage(storage: memory)
     storage = ReadSyncWriteAsyncStorage(storage: primitive)
   }
 

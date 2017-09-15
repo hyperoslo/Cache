@@ -10,7 +10,7 @@ final class AsyncStorageTests: XCTestCase {
     let memory = MemoryStorage(config: MemoryConfig())
     let disk = try! DiskStorage(config: DiskConfig(name: "Floppy"))
     let hybrid = HybridStorage(memoryStorage: memory, diskStorage: disk)
-    let primitive = PrimitiveStorage(storage: hybrid)
+    let primitive = TypeWrapperStorage(storage: hybrid)
     storage = AsyncStorage(storage: primitive)
   }
 
