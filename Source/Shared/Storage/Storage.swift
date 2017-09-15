@@ -21,25 +21,3 @@ public class Storage {
     }
   }
 }
-
-extension Storage: StorageAware {
-  public func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
-    return try internalStorage.entry(forKey: key)
-  }
-
-  public func removeObject(forKey key: String) throws {
-    try internalStorage.removeObject(forKey: key)
-  }
-
-  public func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
-    try internalStorage.setObject(object, forKey: key, expiry: expiry)
-  }
-
-  public func removeAll() throws {
-    try internalStorage.removeAll()
-  }
-
-  public func removeExpiredObjects() throws {
-    try internalStorage.removeExpiredObjects()
-  }
-}
