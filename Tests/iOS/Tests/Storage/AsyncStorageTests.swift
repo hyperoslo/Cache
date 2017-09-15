@@ -20,21 +20,24 @@ final class AsyncStorageTests: XCTestCase {
   }
 
   func testSetObject() throws {
+    let expectation = self.expectation(description: #function)
+
     storage.setObject(user, forKey: "user", completion: { _ in })
     storage.object(forKey: "user", completion: { (result: Result<User>) in
       switch result {
       case .value(let cachedUser):
         XCTAssertEqual(cachedUser, self.user)
+        expectation.fulfill()
       default:
         XCTFail()
       }
     })
 
-    wait(for: 0.1)
+    wait(for: [expectation], timeout: 1)
   }
 
-
   func testRemoveAll() {
+    let expectation = self.expectation(description: #function)
     given("add a lot of objects") {
       Array(0..<100).forEach {
         storage.setObject($0, forKey: "key-\($0)", completion: { _ in })
@@ -51,12 +54,12 @@ final class AsyncStorageTests: XCTestCase {
         case .value:
           XCTFail()
         default:
-          break
+          expectation.fulfill()
         }
       })
     }
 
-    wait(for: 0.1)
+    wait(for: [expectation], timeout: 1)
   }
 
   func testManyOperations() {

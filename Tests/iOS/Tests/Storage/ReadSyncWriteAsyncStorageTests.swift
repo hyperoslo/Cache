@@ -59,8 +59,6 @@ final class ReadSyncWriteAsyncStorageTests: XCTestCase {
       }
     }
 
-    wait(for: 1)
-
     try then("all operation must complete") {
       let cachedObject = try storage.object(forKey: "number") as Int
       XCTAssertEqual(cachedObject, iterationCount)

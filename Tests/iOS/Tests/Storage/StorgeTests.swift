@@ -39,7 +39,7 @@ final class StorageTests: XCTestCase {
       }
     })
 
-    wait(for: [expectation], timeout: 2)
+    wait(for: [expectation], timeout: 1)
   }
 }
 
