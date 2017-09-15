@@ -4,10 +4,11 @@ import Foundation
 /// Block the current queue until the operation completes.
 public class SyncStorage {
   let internalStorage: StorageAware
-  fileprivate let serialQueue = DispatchQueue(label: "Cache.SyncStorage.Queue")
+  fileprivate let serialQueue: DispatchQueue
 
-  init(storage: StorageAware) {
+  init(storage: StorageAware, serialQueue: DispatchQueue) {
     self.internalStorage = storage
+    self.serialQueue = serialQueue
   }
 }
 

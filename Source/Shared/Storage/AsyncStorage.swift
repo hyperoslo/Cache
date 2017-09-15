@@ -4,10 +4,11 @@ import Foundation
 /// The completion closure will be called when operation completes.
 public class AsyncStorage {
   let internalStorage: StorageAware
-  public let serialQueue = DispatchQueue(label: "Cache.AsyncStorage.Queue")
+  public let serialQueue: DispatchQueue
 
-  init(storage: StorageAware) {
+  init(storage: StorageAware, serialQueue: DispatchQueue) {
     self.internalStorage = storage
+    self.serialQueue = serialQueue
   }
 }
 
