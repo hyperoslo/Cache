@@ -3,7 +3,7 @@ import Foundation
 /// Manipulate storage in a "all async" manner.
 /// The completion closure will be called when operation completes.
 public class AsyncStorage {
-  let internalStorage: StorageAware
+  private let internalStorage: StorageAware
   public let serialQueue: DispatchQueue
 
   init(storage: StorageAware, serialQueue: DispatchQueue) {
