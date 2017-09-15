@@ -29,7 +29,4 @@ public class Storage {
 
   /// Return all async storage
   public lazy var async: AsyncStorage = AsyncStorage(storage: self.internalStorage)
-
-  /// Return read sync, write async storage
-  public lazy var readSyncWriteAsync: ReadSyncWriteAsyncStorage = ReadSyncWriteAsyncStorage(storage: self.internalStorage)
 }
