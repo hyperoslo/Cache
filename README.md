@@ -282,7 +282,7 @@ While `Storage` can persist `String` or `Data`, we recommend persisting the stro
 You can use `ObjectConverter` to convert json dictionary, string or data to objects.
 
 ```swift
-let user = ObjectConverter.convert(jsonData, to: User.self)
+let user = ObjectConverter.convert(jsonString, to: User.self)
 let cities = Object.Converter.convert(jsonDictionary, to: [City].self)
 let dragons = ObjectConverter.convert(jsonData, to: [Dragon].self)
 ```
