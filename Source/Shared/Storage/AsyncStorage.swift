@@ -3,7 +3,7 @@ import Foundation
 /// Manipulate storage in a "all async" manner.
 /// The completion closure will be called when operation completes.
 public class AsyncStorage {
-  let internalStorage: StorageAware
+  private let internalStorage: StorageAware
   public let serialQueue: DispatchQueue
 
   init(storage: StorageAware, serialQueue: DispatchQueue) {
@@ -13,7 +13,7 @@ public class AsyncStorage {
 }
 
 extension AsyncStorage: AsyncStorageAware {
-  public func entry<T>(forKey key: String, completion: @escaping (Result<Entry<T>>) -> Void) {
+  public func entry<T>(ofType type: T.Type, forKey key: String, completion: @escaping (Result<Entry<T>>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
         completion(Result.error(StorageError.deallocated))
@@ -21,7 +21,7 @@ extension AsyncStorage: AsyncStorageAware {
       }
 
       do {
-        let anEntry = try self.internalStorage.entry(forKey: key) as Entry<T>
+        let anEntry = try self.internalStorage.entry(ofType: type, forKey: key)
         completion(Result.value(anEntry))
       } catch {
         completion(Result.error(error))

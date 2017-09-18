@@ -12,11 +12,11 @@ class HybridStorage {
 }
 
 extension HybridStorage: StorageAware {
-  func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
+  func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
     do {
-      return try memoryStorage.entry(forKey: key)
+      return try memoryStorage.entry(ofType: type, forKey: key)
     } catch {
-      let entry = try diskStorage.entry(forKey: key) as Entry<T>
+      let entry = try diskStorage.entry(ofType: type, forKey: key)
       // set back to memoryStorage
       memoryStorage.setObject(entry.object, forKey: key)
       return entry

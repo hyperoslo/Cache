@@ -18,7 +18,7 @@ final class StorageTests: XCTestCase {
 
   func testSync() throws {
     try storage.setObject(user, forKey: "user")
-    let cachedObject = try storage.object(forKey: "user") as User
+    let cachedObject = try storage.object(ofType: User.self, forKey: "user")
 
     XCTAssertEqual(cachedObject, user)
   }
@@ -27,7 +27,7 @@ final class StorageTests: XCTestCase {
     let expectation = self.expectation(description: #function)
     storage.async.setObject(user, forKey: "user", expiry: nil, completion: { _ in })
 
-    storage.async.object(forKey: "user", completion: { (result: Result<User>) in
+    storage.async.object(ofType: User.self, forKey: "user", completion: { result in
       switch result {
       case .value(let cachedUser):
         XCTAssertEqual(cachedUser, self.user)

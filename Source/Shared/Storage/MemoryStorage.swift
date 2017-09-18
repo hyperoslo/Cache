@@ -17,7 +17,7 @@ final class MemoryStorage {
 }
 
 extension MemoryStorage: StorageAware {
-  func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
+  func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
     guard let capsule = cache.object(forKey: key as NSString) else {
       throw StorageError.notFound
     }

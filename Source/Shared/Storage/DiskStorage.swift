@@ -35,7 +35,7 @@ final class DiskStorage {
 }
 
 extension DiskStorage: StorageAware {
-  func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
+  func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
     let attributes = try fileManager.attributesOfItem(atPath: filePath)

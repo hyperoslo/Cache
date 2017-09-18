@@ -19,7 +19,7 @@ final class SyncStorageTests: XCTestCase {
 
   func testSetObject() throws {
     try storage.setObject(user, forKey: "user")
-    let cachedObject = try storage.object(forKey: "user") as User
+    let cachedObject = try storage.object(ofType: User.self, forKey: "user")
 
     XCTAssertEqual(cachedObject, user)
   }

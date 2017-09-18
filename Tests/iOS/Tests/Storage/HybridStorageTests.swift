@@ -25,17 +25,17 @@ final class HybridStorageTests: XCTestCase {
   func testSetObject() throws {
     try when("set to storage") {
       try storage.setObject(testObject, forKey: key)
-      let cachedObject: User = try storage.object(forKey: key)
+      let cachedObject = try storage.object(ofType: User.self, forKey: key)
       XCTAssertEqual(cachedObject, testObject)
     }
 
     try then("it is set to memory too") {
-      let memoryObject: User = try storage.memoryStorage.object(forKey: key)
+      let memoryObject = try storage.memoryStorage.object(ofType: User.self, forKey: key)
       XCTAssertNotNil(memoryObject)
     }
 
     try then("it is set to disk too") {
-      let diskObject: User = try storage.diskStorage.object(forKey: key)
+      let diskObject = try storage.diskStorage.object(ofType: User.self, forKey: key)
       XCTAssertNotNil(diskObject)
     }
   }
@@ -43,7 +43,7 @@ final class HybridStorageTests: XCTestCase {
   func testEntry() throws {
     let expiryDate = Date()
     try storage.setObject(testObject, forKey: key, expiry: .date(expiryDate))
-    let entry: Entry<User> = try storage.entry(forKey: key)
+    let entry = try storage.entry(ofType: User.self, forKey: key)
 
     XCTAssertEqual(entry.object, testObject)
     XCTAssertEqual(entry.expiry.date, expiryDate)
@@ -53,12 +53,12 @@ final class HybridStorageTests: XCTestCase {
   func testObjectCopyToMemory() throws {
     try when("set to disk only") {
       try storage.diskStorage.setObject(testObject, forKey: key)
-      let cachedObject: User = try storage.object(forKey: key) as User
+      let cachedObject: User = try storage.object(ofType: User.self, forKey: key)
       XCTAssertEqual(cachedObject, testObject)
     }
 
     try then("there is no object in memory") {
-      let inMemoryCachedObject = try storage.memoryStorage.object(forKey: key) as User
+      let inMemoryCachedObject = try storage.memoryStorage.object(ofType: User.self, forKey: key)
       XCTAssertEqual(inMemoryCachedObject, testObject)
     }
   }
@@ -67,22 +67,22 @@ final class HybridStorageTests: XCTestCase {
   func testRemoveObject() throws {
     try given("set to storage") {
       try storage.setObject(testObject, forKey: key)
-      XCTAssertNotNil(try storage.object(forKey: key) as User)
+      XCTAssertNotNil(try storage.object(ofType: User.self, forKey: key))
     }
 
     try when("remove object from storage") {
       try storage.removeObject(forKey: key)
-      let cachedObject = try? storage.object(forKey: key) as User
+      let cachedObject = try? storage.object(ofType: User.self, forKey: key)
       XCTAssertNil(cachedObject)
     }
 
     then("there is no object in memory") {
-      let memoryObject = try? storage.memoryStorage.object(forKey: key) as User
+      let memoryObject = try? storage.memoryStorage.object(ofType: User.self, forKey: key)
       XCTAssertNil(memoryObject)
     }
 
     then("there is no object on disk") {
-      let diskObject = try? storage.diskStorage.object(forKey: key) as User
+      let diskObject = try? storage.diskStorage.object(ofType: User.self, forKey: key)
       XCTAssertNil(diskObject)
     }
   }
@@ -92,16 +92,16 @@ final class HybridStorageTests: XCTestCase {
     try when("set and remove all") {
       try storage.setObject(testObject, forKey: key)
       try storage.removeAll()
-      XCTAssertNil(try? storage.object(forKey: key) as User)
+      XCTAssertNil(try? storage.object(ofType: User.self, forKey: key))
     }
 
     then("there is no object in memory") {
-      let memoryObject = try? storage.memoryStorage.object(forKey: key) as User
+      let memoryObject = try? storage.memoryStorage.object(ofType: User.self, forKey: key)
       XCTAssertNil(memoryObject)
     }
 
     then("there is no object on disk") {
-      let diskObject = try? storage.diskStorage.object(forKey: key) as User
+      let diskObject = try? storage.diskStorage.object(ofType: User.self, forKey: key)
       XCTAssertNil(diskObject)
     }
   }
@@ -132,8 +132,8 @@ final class HybridStorageTests: XCTestCase {
     }
 
     then("object with key2 survived") {
-      XCTAssertNil(try? storage.object(forKey: key1) as User)
-      XCTAssertNotNil(try? storage.object(forKey: key2) as User)
+      XCTAssertNil(try? storage.object(ofType: User.self, forKey: key1))
+      XCTAssertNotNil(try? storage.object(ofType: User.self, forKey: key2))
     }
   }
 }
