@@ -14,12 +14,12 @@
 * [Key features](#key-features)
 * [Usage](#usage)
   * [Storage](#storage)
-  * [Error handling](#error-handling)
   * [Configuration](#configuration)
   * [Sync APIs](#sync-apis)
   * [Async APIS](#async-apis)
   * [Expiry date](#expiry-date)
 * [What about images?](#what-about-images)
+* [Handling JSON response](#handling-json-response)
 * [Installation](#installation)
 * [Author](#author)
 * [Contributing](#contributing)
@@ -49,7 +49,7 @@ with out-of-box implementations and great customization possibilities. `Cache` u
 
 ### Storage
 
-`Cache` is built based on [Chain-of-responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern), in which there are many processing objects, each knows how to do 1 task and delegate to the next one. But that's just implementation detail. All you need to know is `Storage`, it saves and loads `Codable` objects.
+`Cache` is built based on [Chain-of-responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern), in which there are many processing objects, each knows how to do 1 task and delegates to the next one. But that's just implementation detail. All you need to know is `Storage`, it saves and loads `Codable` objects.
 
 `Storage` has disk storage and an optional memory storage. Memory storage should be less time and memory consuming, while disk storage is used for content that outlives the application life-cycle, see it more like a convenient way to store user information that should persist across application launches.
 
@@ -63,7 +63,21 @@ let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 
 let storage = try? Storage(diskConfig: diskConfig, memoryConfig: memoryConfig)
 ```
 
-### Error handling
+#### Codable types
+
+`Storage` supports any objects that conform to [Codable](https://developer.apple.com/documentation/swift/codable) protocol. You can [make your own things conform to Codable](https://developer.apple.com/documentation/foundation/archives_and_serialization/encoding_and_decoding_custom_types) so that can be saved and loaded from `Storage`.
+
+The supported types are
+
+- Primitives like `Int`, `Float`, `String`, `Bool`, ...
+- Array of primitives like `[Int]`, `[Float]`, `[Double]`, ...
+- Set of primitives like `Set<String>`, `Set<Int>`, ...
+- Simply dictionary like `[String: Int]`, `[String: String]`, ...
+- `Date`
+- `URL`
+- `Data`
+
+#### Error handling
 
 Error handling is done via `try catch`. `Storage` throws errors in terms of `StorageError`.
 
@@ -131,15 +145,15 @@ On iOS, tvOS we can also specify `protectionType` on `DiskConfig` to add a level
 
 ### Sync APIs
 
-`Storage` is sync by default. It supports any objects that conform to [Codable](https://developer.apple.com/documentation/swift/codable) protocol. It can be `Int`, `Bool`, `Array<Int>`, `Set<String>`, ... You can [make your own things conform to Codable](https://developer.apple.com/documentation/foundation/archives_and_serialization/encoding_and_decoding_custom_types) so that can be saved and loaded from `Storage`.
-
-Storage is `thead safe`, you can access it from any queues. All Sync functions are constrained by `StorageAware` protocol.
+`Storage` is sync by default and is `thead safe`, you can access it from any queues. All Sync functions are constrained by `StorageAware` protocol.
 
 ```swift
 // Save to storage
 try? storage.setObject(10, forKey: "score")
 try? storage.setObject("Oslo", forKey: "my favorite city", expiry: .never)
 try? storage.setObject(["alert", "sounds", "badge"], forKey: "notifications")
+try? storage.setObject(data, forKey: "a bunch of bytes")
+try? storage.setObject(authorizeURL, forKey: "authorization URL")
 
 // Load from storage
 let score = try? storage.object(ofType: Int.self, forKey: "score")
@@ -173,7 +187,7 @@ print(entry?.meta)
 
 #### Custom Codable
 
-`Codable` works for simple dictionary like `[String: Int]`, `[String: String]`, ... It does not work for [String: Any]` as `Any` is not `Codable` conformance, it will raise `fatal` error at runtime. So when you get json from backend responses, you need to convert that to your custom `Codable` objects and save to `Storage` instead.
+`Codable` works for simple dictionary like `[String: Int]`, `[String: String]`, ... It does not work for `[String: Any]` as `Any` is not `Codable` conformance, it will raise `fatal error` at runtime. So when you get json from backend responses, you need to convert that to your custom `Codable` objects and save to `Storage` instead.
 
 ```swift
 struct User: Codable {
@@ -258,6 +272,33 @@ let icon = try? storage.object(ofType: ImageWrapper.self, forKey: "star").image
 ```
 
 If you want to load image into `UIImageView` or `NSImageView`, then we also have a nice gift for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary) and uses `Cache` under the hood to make you life easier when it comes to working with remote images.
+
+## Handling JSON response
+
+Most of the time, our use case is to fetch some json from backend, display it while saving the json to storage for future uses. If you're using libraries like [Alamofire](https://github.com/Alamofire/Alamofire) or [Malibu](https://github.com/hyperoslo/Malibu), you mostly get json in the form of dictionary, string, or data.
+
+While `Storage` can persist `String` or `Data`, we recommend persisting the strong typed objects, since those are the objects that you will use to display in UI. Furthermore, if the json data can't be converted to strongly typed objects, what's the point of saving it ? 😉
+
+You can use `ObjectConverter` to convert json dictionary, string or data to objects.
+
+```swift
+let user = ObjectConverter.convert(jsonString, to: User.self)
+let cities = Object.Converter.convert(jsonDictionary, to: [City].self)
+let dragons = ObjectConverter.convert(jsonData, to: [Dragon].self)
+```
+
+This is how you perform object converting and saving with `Alamofire`
+
+```swift
+Alamofire.request("https://gameofthrones.org/mostFavoriteCharacter").responseString { response in
+  do {
+    let user = try ObjectConverter.convert(response.result.value, to: User.self)
+    try storage.setObject(user, forKey: "most favorite character")
+  } catch {
+    print(error)
+  }
+}
+```
 
 ## Installation
 

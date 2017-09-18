@@ -53,6 +53,37 @@ final class TypeWrapperStorageTests: XCTestCase {
     XCTAssertEqual(try storage.object(ofType: [Double].self, forKey: "array of doubles"), doubles)
   }
 
+  func testSetData() {
+    do {
+      let string = "Hello"
+      let data = string.data(using: .utf8)
+      try storage.setObject(data, forKey: "data")
+
+      let cachedObject = try storage.object(ofType: Data.self, forKey: "data")
+      let cachedString = String(data: cachedObject, encoding: .utf8)
+
+      XCTAssertEqual(cachedString, string)
+    } catch {
+      XCTFail(error.localizedDescription)
+    }
+  }
+
+  func testSetDate() throws {
+    let date = Date(timeIntervalSince1970: 100)
+    try storage.setObject(date, forKey: "date")
+    let cachedObject = try storage.object(ofType: Date.self, forKey: "date")
+
+    XCTAssertEqual(date, cachedObject)
+  }
+
+  func testSetURL() throws {
+    let url = URL(string: "https://hyper.no")
+    try storage.setObject(url, forKey: "url")
+    let cachedObject = try storage.object(ofType: URL.self, forKey: "url")
+
+    XCTAssertEqual(url, cachedObject)
+  }
+
   func testWithSet() throws {
     let set = Set<Int>(arrayLiteral: 1, 2, 3)
     try storage.setObject(set, forKey: "set")
