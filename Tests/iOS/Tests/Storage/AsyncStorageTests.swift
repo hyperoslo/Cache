@@ -23,7 +23,7 @@ final class AsyncStorageTests: XCTestCase {
     let expectation = self.expectation(description: #function)
 
     storage.setObject(user, forKey: "user", completion: { _ in })
-    storage.object(forKey: "user", completion: { (result: Result<User>) in
+    storage.object(ofType: User.self, forKey: "user", completion: { result in
       switch result {
       case .value(let cachedUser):
         XCTAssertEqual(cachedUser, self.user)

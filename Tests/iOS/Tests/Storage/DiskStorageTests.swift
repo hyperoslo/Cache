@@ -78,13 +78,13 @@ final class DiskStorageTests: XCTestCase {
     // Returns nil if entry doesn't exist
     var entry: Entry<User>?
     do {
-      entry = try storage.entry(forKey: key)
+      entry = try storage.entry(ofType: User.self, forKey: key)
     } catch {}
     XCTAssertNil(entry)
 
     // Returns entry if object exists
     try storage.setObject(testObject, forKey: key)
-    entry = try storage.entry(forKey: key)
+    entry = try storage.entry(ofType: User.self, forKey: key)
     let attributes = try fileManager.attributesOfItem(atPath: storage.makeFilePath(for: key))
     let expiry = Expiry.date(attributes[FileAttributeKey.modificationDate] as! Date)
 
@@ -96,7 +96,7 @@ final class DiskStorageTests: XCTestCase {
   /// Test that it resolves cached object
   func testSetObject() throws {
     try storage.setObject(testObject, forKey: key)
-    let cachedObject: User? = try storage.object(forKey: key)
+    let cachedObject: User? = try storage.object(ofType: User.self, forKey: key)
 
     XCTAssertEqual(cachedObject?.firstName, testObject.firstName)
     XCTAssertEqual(cachedObject?.lastName, testObject.lastName)
@@ -117,7 +117,7 @@ final class DiskStorageTests: XCTestCase {
     try storage.removeObjectIfExpired(forKey: key)
     var cachedObject: User?
     do {
-      cachedObject = try storage.object(forKey: key)
+      cachedObject = try storage.object(ofType: User.self, forKey: key)
     } catch {}
 
     XCTAssertNil(cachedObject)
@@ -127,7 +127,7 @@ final class DiskStorageTests: XCTestCase {
   func testRemoveObjectIfExpiredWhenNotExpired() throws {
     try storage.setObject(testObject, forKey: key)
     try storage.removeObjectIfExpired(forKey: key)
-    let cachedObject: User? = try storage.object(forKey: key)
+    let cachedObject: User? = try storage.object(ofType: User.self, forKey: key)
     XCTAssertNotNil(cachedObject)
   }
 
@@ -174,10 +174,10 @@ final class DiskStorageTests: XCTestCase {
     try storage.setObject(testObject, forKey: key2, expiry: expiry2)
     try storage.removeExpiredObjects()
     var object1: User?
-    let object2: User? = try storage.object(forKey: key2)
+    let object2 = try storage.object(ofType: User.self, forKey: key2)
 
     do {
-      object1 = try storage.object(forKey: key1)
+      object1 = try storage.object(ofType: User.self, forKey: key1)
     } catch {}
 
     XCTAssertNil(object1)

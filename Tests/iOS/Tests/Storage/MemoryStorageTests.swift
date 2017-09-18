@@ -20,7 +20,7 @@ final class MemoryStorageTests: XCTestCase {
   /// Test that it saves an object
   func testSetObject() {
     storage.setObject(testObject, forKey: key)
-    let cachedObject: User = try! storage.object(forKey: key)
+    let cachedObject = try! storage.object(ofType: User.self, forKey: key)
     XCTAssertNotNil(cachedObject)
     XCTAssertEqual(cachedObject.firstName, testObject.firstName)
     XCTAssertEqual(cachedObject.lastName, testObject.lastName)
@@ -28,12 +28,12 @@ final class MemoryStorageTests: XCTestCase {
 
   func testCacheEntry() {
     // Returns nil if entry doesn't exist
-    var entry = try? storage.entry(forKey: key) as Entry<User>
+    var entry = try? storage.entry(ofType: User.self, forKey: key)
     XCTAssertNil(entry)
 
     // Returns entry if object exists
     storage.setObject(testObject, forKey: key)
-    entry = try! storage.entry(forKey: key)
+    entry = try! storage.entry(ofType: User.self, forKey: key)
 
     XCTAssertEqual(entry?.object.firstName, testObject.firstName)
     XCTAssertEqual(entry?.object.lastName, testObject.lastName)
@@ -44,7 +44,7 @@ final class MemoryStorageTests: XCTestCase {
   func testRemoveObject() {
     storage.setObject(testObject, forKey: key)
     storage.removeObject(forKey: key)
-    let cachedObject = try? storage.object(forKey: key) as User
+    let cachedObject = try? storage.object(ofType: User.self, forKey: key)
     XCTAssertNil(cachedObject)
   }
 
@@ -53,7 +53,7 @@ final class MemoryStorageTests: XCTestCase {
     let expiry: Expiry = .date(Date().addingTimeInterval(-10))
     storage.setObject(testObject, forKey: key, expiry: expiry)
     storage.removeObjectIfExpired(forKey: key)
-    let cachedObject = try? storage.object(forKey: key) as User
+    let cachedObject = try? storage.object(ofType: User.self, forKey: key)
 
     XCTAssertNil(cachedObject)
   }
@@ -62,7 +62,7 @@ final class MemoryStorageTests: XCTestCase {
   func testRemoveObjectIfExpiredWhenNotExpired() {
     storage.setObject(testObject, forKey: key)
     storage.removeObjectIfExpired(forKey: key)
-    let cachedObject: User = try! storage.object(forKey: key)
+    let cachedObject = try! storage.object(ofType: User.self, forKey: key)
 
     XCTAssertNotNil(cachedObject)
   }
@@ -71,7 +71,7 @@ final class MemoryStorageTests: XCTestCase {
   func testRemoveAll() {
     storage.setObject(testObject, forKey: key)
     storage.removeAll()
-    let cachedObject = try? storage.object(forKey: key) as User
+    let cachedObject = try? storage.object(ofType: User.self, forKey: key)
     XCTAssertNil(cachedObject)
   }
 
@@ -84,8 +84,8 @@ final class MemoryStorageTests: XCTestCase {
     storage.setObject(testObject, forKey: key1, expiry: expiry1)
     storage.setObject(testObject, forKey: key2, expiry: expiry2)
     storage.removeExpiredObjects()
-    let object1 = try? storage.object(forKey: key1) as User
-    let object2 = try! storage.object(forKey: key2) as User
+    let object1 = try? storage.object(ofType: User.self, forKey: key1)
+    let object2 = try! storage.object(ofType: User.self, forKey: key2)
 
     XCTAssertNil(object1)
     XCTAssertNotNil(object2)
