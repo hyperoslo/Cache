@@ -107,7 +107,9 @@ let diskConfig = DiskConfig(
   maxSize: 10000,
   // Where to store the disk cache. If nil, it is placed in `cachesDirectory` directory.
   directory: try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, 
-    appropriateFor: nil, create: true).appendingPathComponent("MyPreferences")
+    appropriateFor: nil, create: true).appendingPathComponent("MyPreferences"),
+  // Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
+  protectionType: .complete
 )
 ```
 
