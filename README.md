@@ -34,7 +34,7 @@ with out-of-box implementations and great customization possibilities. `Cache` u
 
 ## Key features
 
-- [x] Work with Swift 4 `Codadable`. Anything conforming to `Codable` will be saved and loaded easily by `Storage`.
+- [x] Work with Swift 4 `Codable`. Anything conforming to `Codable` will be saved and loaded easily by `Storage`.
 - [X] Disk storage by default. Optionally using `memory storage` to enable hybrid.
 - [X] Many options via `DiskConfig` and `MemoryConfig`.
 - [x] Support `expiry` and clean up of expired objects.
