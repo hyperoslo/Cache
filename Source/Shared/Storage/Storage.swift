@@ -4,7 +4,7 @@ import Foundation
 /// Synchronous by default. Use `async` for asynchronous operations.
 public class Storage {
   /// Used for sync operations
-  private let sync: StorageAware
+  fileprivate let sync: StorageAware
 
   /// Queue used by both sync and async storages
   private let serialQueue = DispatchQueue(label: "Cache.Storage.SerialQueue")
@@ -43,23 +43,23 @@ public class Storage {
 
 extension Storage: StorageAware {
   public func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
-    return try sync.entry(ofType: type, forKey: key)
+    return try self.sync.entry(ofType: type, forKey: key)
   }
 
   public func removeObject(forKey key: String) throws {
-    try sync.removeObject(forKey: key)
+    try self.sync.removeObject(forKey: key)
   }
 
   public func setObject<T: Codable>(_ object: T, forKey key: String,
                                     expiry: Expiry? = nil) throws {
-    try sync.setObject(object, forKey: key, expiry: expiry)
+    try self.sync.setObject(object, forKey: key, expiry: expiry)
   }
 
   public func removeAll() throws {
-    try sync.removeAll()
+    try self.sync.removeAll()
   }
 
   public func removeExpiredObjects() throws {
-    try sync.removeExpiredObjects()
+    try self.sync.removeExpiredObjects()
   }
 }
