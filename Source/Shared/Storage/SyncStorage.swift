@@ -13,10 +13,10 @@ public class SyncStorage {
 }
 
 extension SyncStorage: StorageAware {
-  public func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
+  public func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
     var entry: Entry<T>!
     try serialQueue.sync {
-      entry = try internalStorage.entry(forKey: key) as Entry<T>
+      entry = try internalStorage.entry(ofType: type, forKey: key)
     }
 
     return entry

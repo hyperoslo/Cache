@@ -42,8 +42,8 @@ public class Storage {
 }
 
 extension Storage: StorageAware {
-  public func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
-    return try sync.entry(forKey: key) as Entry<T>
+  public func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
+    return try sync.entry(ofType: type, forKey: key)
   }
 
   public func removeObject(forKey key: String) throws {

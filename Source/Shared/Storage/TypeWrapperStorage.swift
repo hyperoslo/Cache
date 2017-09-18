@@ -12,8 +12,8 @@ final class TypeWrapperStorage {
 }
 
 extension TypeWrapperStorage: StorageAware {
-  public func entry<T: Codable>(forKey key: String) throws -> Entry<T> {
-    let wrapperEntry = try internalStorage.entry(forKey: key) as Entry<TypeWrapper<T>>
+  public func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
+    let wrapperEntry = try internalStorage.entry(ofType: TypeWrapper<T>.self, forKey: key)
     return Entry(object: wrapperEntry.object.object, expiry: wrapperEntry.expiry)
   }
 

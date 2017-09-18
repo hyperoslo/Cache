@@ -13,7 +13,7 @@ public class AsyncStorage {
 }
 
 extension AsyncStorage: AsyncStorageAware {
-  public func entry<T>(forKey key: String, completion: @escaping (Result<Entry<T>>) -> Void) {
+  public func entry<T>(ofType type: T.Type, forKey key: String, completion: @escaping (Result<Entry<T>>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
         completion(Result.error(StorageError.deallocated))
@@ -21,7 +21,7 @@ extension AsyncStorage: AsyncStorageAware {
       }
 
       do {
-        let anEntry = try self.internalStorage.entry(forKey: key) as Entry<T>
+        let anEntry = try self.internalStorage.entry(ofType: type, forKey: key)
         completion(Result.value(anEntry))
       } catch {
         completion(Result.error(error))

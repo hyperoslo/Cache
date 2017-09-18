@@ -10,14 +10,14 @@ public protocol AsyncStorageAware: class {
    - Parameter key: Unique key to identify the object in the cache.
    - Parameter completion: Triggered until the operation completes.
    */
-  func object<T: Codable>(forKey key: String, completion: @escaping (Result<T>) -> Void)
+  func object<T: Codable>(ofType type: T.Type, forKey key: String, completion: @escaping (Result<T>) -> Void)
 
   /**
    Get cache entry which includes object with metadata.
    - Parameter key: Unique key to identify the object in the cache
    - Parameter completion: Triggered until the operation completes.
    */
-  func entry<T>(forKey key: String, completion: @escaping (Result<Entry<T>>) -> Void)
+  func entry<T>(ofType type: T.Type, forKey key: String, completion: @escaping (Result<Entry<T>>) -> Void)
 
   /**
    Removes the object by the given key.
@@ -61,8 +61,8 @@ public protocol AsyncStorageAware: class {
 }
 
 public extension AsyncStorageAware {
-  func object<T: Codable>(forKey key: String, completion: @escaping (Result<T>) -> Void) {
-    entry(forKey: key, completion: { (result: Result<Entry<T>>) in
+  func object<T: Codable>(ofType type: T.Type, forKey key: String, completion: @escaping (Result<T>) -> Void) {
+    entry(ofType: type, forKey: key, completion: { (result: Result<Entry<T>>) in
       completion(result.map({ entry in
         return entry.object
       }))
@@ -72,7 +72,7 @@ public extension AsyncStorageAware {
   func existsObject<T: Codable>(ofType type: T.Type,
                                 forKey key: String,
                                 completion: @escaping (Result<Bool>) -> Void) {
-    object(forKey: key, completion: { (result: Result<T>) in
+    object(ofType: type, forKey: key, completion: { (result: Result<T>) in
       completion(result.map({ _ in
         return true
       }))
