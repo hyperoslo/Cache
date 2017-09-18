@@ -1,9 +1,9 @@
 import Foundation
 
-struct ImageWrapper: Codable {
-  let image: Image
+public struct ImageWrapper: Codable {
+  public let image: Image
 
-  enum CodingKeys: String, CodingKey {
+  public enum CodingKeys: String, CodingKey {
     case image
   }
 
