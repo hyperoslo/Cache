@@ -10,7 +10,7 @@ final class DiskStorage {
   /// File manager to read/write to the disk
   fileprivate let fileManager: FileManager
   /// Configuration
-  private let config: DiskConfig
+  fileprivate let config: DiskConfig
   /// The computed path `directory+name`
   let path: String
 

@@ -3,7 +3,7 @@ import Foundation
 /// Manipulate storage in a "all sync" manner.
 /// Block the current queue until the operation completes.
 public class SyncStorage {
-  private let internalStorage: StorageAware
+  fileprivate let internalStorage: StorageAware
   fileprivate let serialQueue: DispatchQueue
 
   init(storage: StorageAware, serialQueue: DispatchQueue) {

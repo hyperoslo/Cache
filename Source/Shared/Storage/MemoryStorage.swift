@@ -7,7 +7,7 @@ final class MemoryStorage {
   // Memory cache keys
   fileprivate var keys = Set<String>()
   /// Configuration
-  private let config: MemoryConfig
+  fileprivate let config: MemoryConfig
 
   // MARK: - Initialization
 
