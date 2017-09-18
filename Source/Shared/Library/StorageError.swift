@@ -1,7 +1,7 @@
 import Foundation
 
 public enum StorageError: Error {
-  /// Object can be found
+  /// Object can not be found
   case notFound
   /// Object is found, but casting to requested type failed
   case typeNotMatch
@@ -11,6 +11,6 @@ public enum StorageError: Error {
   case decodingFailed
   /// Can't perform Encode
   case encodingFailed
-  /// The object has been deallocated
+  /// The storage has been deallocated
   case deallocated
 }
