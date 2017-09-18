@@ -13,7 +13,8 @@
 * [Description](#description)
 * [Key features](#key-features)
 * [Usage](#usage)
-  * [Storage]($storage)
+  * [Storage](#storage)
+  * [Error handling](#error-handling)
   * [Configuration](#configuration)
   * [Sync APIs](#sync-apis)
   * [Async APIS](#async-apis)
@@ -62,6 +63,8 @@ let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 
 let storage = try? Storage(diskConfig: diskConfig, memoryConfig: memoryConfig)
 ```
 
+### Error handling
+
 Error handling is done via `try catch`. `Storage` throws errors in terms of `StorageError`.
 
 ```swift
@@ -90,7 +93,6 @@ do {
   print(error)
 }
 ```
-
 
 ### Configuration
 
@@ -124,6 +126,8 @@ let memoryConfig = MemoryConfig(
   totalCostLimit: 0
 )
 ```
+
+On iOS, tvOS we can also specify `protectionType` on `DiskConfig` to add a level of security to files stored on disk by your app in the app’s container. For more information, see [FileProtectionType](https://developer.apple.com/documentation/foundation/fileprotectiontype)
 
 ### Sync APIs
 
