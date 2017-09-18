@@ -38,7 +38,7 @@ public class Storage {
   }
 
   /// Used for async operations
-  public lazy var async: AsyncStorageAware = AsyncStorage(storage: self.interalStorage, serialQueue: self.serialQueue)
+  public lazy var async: AsyncStorage = AsyncStorage(storage: self.interalStorage, serialQueue: self.serialQueue)
 }
 
 extension Storage: StorageAware {
