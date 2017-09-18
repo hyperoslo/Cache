@@ -158,14 +158,20 @@ try? storage.removeAll()
 try? storage.removeExpiredObjects()
 ```
 
-There is time you want to get object together with its expiry information. You can use `Entry`
+#### Entry
+
+There is time you want to get object together with its expiry information and meta data. You can use `Entry`
 
 ```swift
 let entry = try? storage.entry(ofType: String.self, forKey: "my favorite city")
 print(entry?.object)
 print(entry?.expiry)
+print(entry?.meta)
 ```
 
+`meta` may contain file information if the object was fetched from disk storage.
+
+#### Custom Codable
 
 `Codable` works for simple dictionary like `[String: Int]`, `[String: String]`, ... It does not work for [String: Any]` as `Any` is not `Codable` conformance, it will raise `fatal` error at runtime. So when you get json from backend responses, you need to convert that to your custom `Codable` objects and save to `Storage` instead.
 
