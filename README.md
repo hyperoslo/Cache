@@ -13,7 +13,8 @@
 * [Description](#description)
 * [Key features](#key-features)
 * [Usage](#usage)
-  * [Storage]($storage)
+  * [Storage](#storage)
+  * [Error handling](#error-handling)
   * [Configuration](#configuration)
   * [Sync APIs](#sync-apis)
   * [Async APIS](#async-apis)
@@ -62,6 +63,8 @@ let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 
 let storage = try? Storage(diskConfig: diskConfig, memoryConfig: memoryConfig)
 ```
 
+### Error handling
+
 Error handling is done via `try catch`. `Storage` throws errors in terms of `StorageError`.
 
 ```swift
@@ -91,7 +94,6 @@ do {
 }
 ```
 
-
 ### Configuration
 
 Here is how you can play with many configuration options
@@ -107,7 +109,9 @@ let diskConfig = DiskConfig(
   maxSize: 10000,
   // Where to store the disk cache. If nil, it is placed in `cachesDirectory` directory.
   directory: try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, 
-    appropriateFor: nil, create: true).appendingPathComponent("MyPreferences")
+    appropriateFor: nil, create: true).appendingPathComponent("MyPreferences"),
+  // Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
+  protectionType: .complete
 )
 ```
 
@@ -122,6 +126,8 @@ let memoryConfig = MemoryConfig(
   totalCostLimit: 0
 )
 ```
+
+On iOS, tvOS we can also specify `protectionType` on `DiskConfig` to add a level of security to files stored on disk by your app in the app’s container. For more information, see [FileProtectionType](https://developer.apple.com/documentation/foundation/fileprotectiontype)
 
 ### Sync APIs
 
@@ -152,14 +158,20 @@ try? storage.removeAll()
 try? storage.removeExpiredObjects()
 ```
 
-There is time you want to get object together with its expiry information. You can use `Entry`
+#### Entry
+
+There is time you want to get object together with its expiry information and meta data. You can use `Entry`
 
 ```swift
 let entry = try? storage.entry(ofType: String.self, forKey: "my favorite city")
 print(entry?.object)
 print(entry?.expiry)
+print(entry?.meta)
 ```
 
+`meta` may contain file information if the object was fetched from disk storage.
+
+#### Custom Codable
 
 `Codable` works for simple dictionary like `[String: Int]`, `[String: String]`, ... It does not work for [String: Any]` as `Any` is not `Codable` conformance, it will raise `fatal` error at runtime. So when you get json from backend responses, you need to convert that to your custom `Codable` objects and save to `Storage` instead.
 
