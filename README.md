@@ -14,7 +14,6 @@
 * [Key features](#key-features)
 * [Usage](#usage)
   * [Storage](#storage)
-  * [Error handling](#error-handling)
   * [Configuration](#configuration)
   * [Sync APIs](#sync-apis)
   * [Async APIS](#async-apis)
@@ -49,7 +48,7 @@ with out-of-box implementations and great customization possibilities. `Cache` u
 
 ### Storage
 
-`Cache` is built based on [Chain-of-responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern), in which there are many processing objects, each knows how to do 1 task and delegate to the next one. But that's just implementation detail. All you need to know is `Storage`, it saves and loads `Codable` objects.
+`Cache` is built based on [Chain-of-responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern), in which there are many processing objects, each knows how to do 1 task and delegates to the next one. But that's just implementation detail. All you need to know is `Storage`, it saves and loads `Codable` objects.
 
 `Storage` has disk storage and an optional memory storage. Memory storage should be less time and memory consuming, while disk storage is used for content that outlives the application life-cycle, see it more like a convenient way to store user information that should persist across application launches.
 
@@ -63,7 +62,21 @@ let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 
 let storage = try? Storage(diskConfig: diskConfig, memoryConfig: memoryConfig)
 ```
 
-### Error handling
+#### Codable types
+
+`Storage` supports any objects that conform to [Codable](https://developer.apple.com/documentation/swift/codable) protocol. You can [make your own things conform to Codable](https://developer.apple.com/documentation/foundation/archives_and_serialization/encoding_and_decoding_custom_types) so that can be saved and loaded from `Storage`.
+
+The supported types are
+
+- Primitives like `Int`, `Float`, `String`, `Bool`, ...
+- Array of primitives like `[Int]`, `[Float]`, `[Double]`, ...
+- Set of primitives like `Set<String>`, `Set<Int>`, ...
+- Simply dictionary like `[String: Int]`, `[String: String]`, ...
+- `Date`
+- `URL`
+- `Data`
+
+#### Error handling
 
 Error handling is done via `try catch`. `Storage` throws errors in terms of `StorageError`.
 
@@ -131,15 +144,15 @@ On iOS, tvOS we can also specify `protectionType` on `DiskConfig` to add a level
 
 ### Sync APIs
 
-`Storage` is sync by default. It supports any objects that conform to [Codable](https://developer.apple.com/documentation/swift/codable) protocol. It can be `Int`, `Bool`, `Array<Int>`, `Set<String>`, ... You can [make your own things conform to Codable](https://developer.apple.com/documentation/foundation/archives_and_serialization/encoding_and_decoding_custom_types) so that can be saved and loaded from `Storage`.
-
-Storage is `thead safe`, you can access it from any queues. All Sync functions are constrained by `StorageAware` protocol.
+`Storage` is sync by default and is `thead safe`, you can access it from any queues. All Sync functions are constrained by `StorageAware` protocol.
 
 ```swift
 // Save to storage
 try? storage.setObject(10, forKey: "score")
 try? storage.setObject("Oslo", forKey: "my favorite city", expiry: .never)
 try? storage.setObject(["alert", "sounds", "badge"], forKey: "notifications")
+try? storage.setObject(data, forKey: "a bunch of bytes")
+try? storage.setObject(authorizeURL, forKey: "authorization URL")
 
 // Load from storage
 let score = try? storage.object(ofType: Int.self, forKey: "score")
