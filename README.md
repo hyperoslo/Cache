@@ -164,7 +164,7 @@ print(entry?.expiry)
 `Codable` works for simple dictionary like `[String: Int]`, `[String: String]`, ... It does not work for [String: Any]` as `Any` is not `Codable` conformance, it will raise `fatal` error at runtime. So when you get json from backend responses, you need to convert that to your custom `Codable` objects and save to `Storage` instead.
 
 ```swift
-struct User: Codable, Equatable {
+struct User: Codable {
   let firstName: String
   let lastName: String
 }
