@@ -19,6 +19,7 @@
   * [Async APIS](#async-apis)
   * [Expiry date](#expiry-date)
 * [What about images?](#what-about-images)
+* [Handling JSON response](#handling-json-response)
 * [Installation](#installation)
 * [Author](#author)
 * [Contributing](#contributing)
@@ -271,6 +272,33 @@ let icon = try? storage.object(ofType: ImageWrapper.self, forKey: "star").image
 ```
 
 If you want to load image into `UIImageView` or `NSImageView`, then we also have a nice gift for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary) and uses `Cache` under the hood to make you life easier when it comes to working with remote images.
+
+## Handling JSON response
+
+Most of the time, our use case is to fetch some json from backend, display it while saving the json to storage for future uses. If you're using libraries like [Alamofire](https://github.com/Alamofire/Alamofire) or [Malibu](https://github.com/hyperoslo/Malibu), you mostly get json in the form of dictionary, string, or data.
+
+While `Storage` can persist `String` or `Data`, we recommend persisting the strong typed objects, since those are the objects that you will use to display in UI. Furthermore, if the json data can't be converted to strongly typed objects, what's the point of saving it ? 😉
+
+You can use `ObjectConverter` to convert json dictionary, string or data to objects.
+
+```swift
+let user = ObjectConverter.convert(jsonData, to: User.self)
+let cities = Object.Converter.convert(jsonDictionary, to: [City].self)
+let dragons = ObjectConverter.convert(jsonData, to: [Dragon].self)
+```
+
+This is how you perform object converting and saving with `Alamofire`
+
+```swift
+Alamofire.request("https://gameofthrones.org/mostFavoriteCharacter").responseString { response in
+  do {
+    let user = try ObjectConverter.convert(response.result.value, to: User.self)
+    try storage.setObject(user, forKey: "most favorite character")
+  } catch {
+    print(error)
+  }
+}
+```
 
 ## Installation
 
