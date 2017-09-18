@@ -68,6 +68,22 @@ final class TypeWrapperStorageTests: XCTestCase {
     }
   }
 
+  func testSetDate() throws {
+    let date = Date(timeIntervalSince1970: 100)
+    try storage.setObject(date, forKey: "date")
+    let cachedObject = try storage.object(ofType: Date.self, forKey: "date")
+
+    XCTAssertEqual(date, cachedObject)
+  }
+
+  func testSetURL() throws {
+    let url = URL(string: "https://hyper.no")
+    try storage.setObject(url, forKey: "url")
+    let cachedObject = try storage.object(ofType: URL.self, forKey: "url")
+
+    XCTAssertEqual(url, cachedObject)
+  }
+
   func testWithSet() throws {
     let set = Set<Int>(arrayLiteral: 1, 2, 3)
     try storage.setObject(set, forKey: "set")
