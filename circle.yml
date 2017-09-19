@@ -4,8 +4,7 @@ machine:
 
 dependencies:
   override:
-    - carthage bootstrap iOS,macOS,tvOS
-    - brew install swiftlint
+    - bin/bootstrap-if-needed
   cache_directories:
     - "Carthage"
 
