@@ -6,9 +6,6 @@ public class Storage {
   /// Used for sync operations
   fileprivate let sync: StorageAware
 
-  /// Queue used by both sync and async storages
-  private let serialQueue = DispatchQueue(label: "Cache.Storage.SerialQueue")
-
   /// Storage used internally by both sync and async storages
   private let interalStorage: StorageAware
 
@@ -34,11 +31,13 @@ public class Storage {
     self.interalStorage = TypeWrapperStorage(storage: storage)
 
     // Sync
-    self.sync = SyncStorage(storage: interalStorage, serialQueue: serialQueue)
+    self.sync = SyncStorage(storage: interalStorage,
+                            serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue"))
   }
 
   /// Used for async operations
-  public lazy var async: AsyncStorage = AsyncStorage(storage: self.interalStorage, serialQueue: self.serialQueue)
+  public lazy var async: AsyncStorage = AsyncStorage(storage: self.interalStorage,
+                                                     serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue"))
 }
 
 extension Storage: StorageAware {
