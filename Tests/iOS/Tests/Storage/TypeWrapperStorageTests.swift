@@ -96,7 +96,6 @@ final class TypeWrapperStorageTests: XCTestCase {
       "key2": 2
     ]
 
-
     try storage.setObject(dict, forKey: "dict")
     let cachedObject = try storage.object(ofType: [String: Int].self, forKey: "dict") as [String: Int]
     XCTAssertEqual(cachedObject, dict)
