@@ -1,144 +1,88 @@
 import Foundation
 import SwiftHash
 
-/**
- File-based cache storage.
- */
-final class DiskStorage: StorageAware {
+/// Save objects to file on disk
+final class DiskStorage {
   enum Error: Swift.Error {
     case fileEnumeratorFailed
   }
 
-  /// Storage root path
-  let path: String
-  /// Maximum size of the cache storage
-  let maxSize: UInt
   /// File manager to read/write to the disk
-  fileprivate let fileManager = FileManager()
+  fileprivate let fileManager: FileManager
+  /// Configuration
+  fileprivate let config: DiskConfig
+  /// The computed path `directory+name`
+  let path: String
 
   // MARK: - Initialization
 
-  /**
-   Creates a new disk storage.
-   - Parameter name: A name of the storage
-   - Parameter maxSize: Maximum size of the cache storage
-   - Parameter cacheDirectory: (optional) A folder to store the disk cache contents. Defaults to a prefixed directory in Caches
-   */
-  required init(name: String, maxSize: UInt = 0, cacheDirectory: String? = nil) {
-    self.maxSize = maxSize
+  required init(config: DiskConfig, fileManager: FileManager = FileManager.default) throws {
+    self.config = config
+    self.fileManager = fileManager
 
-    do {
-      if let cacheDirectory = cacheDirectory {
-        path = cacheDirectory
-      } else {
-        let url = try fileManager.url(
-          for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true
-        )
-        path = url.appendingPathComponent(name, isDirectory: true).path
-      }
-
-      try createDirectory()
-    } catch {
-      fatalError("Failed to find or get access to caches directory: \(error)")
+    let url: URL
+    if let directory = config.directory {
+      url = directory
+    } else {
+      url = try fileManager.url(
+        for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true
+      )
     }
-  }
 
-  /// Calculates total disk cache size.
-  func totalSize() throws -> UInt64 {
-    var size: UInt64 = 0
-    let contents = try fileManager.contentsOfDirectory(atPath: path)
-    for pathComponent in contents {
-      let filePath = (path as NSString).appendingPathComponent(pathComponent)
-      let attributes = try fileManager.attributesOfItem(atPath: filePath)
-      if let fileSize = attributes[.size] as? UInt64 {
-        size += fileSize
+    // path
+    path = url.appendingPathComponent(config.name, isDirectory: true).path
+    try createDirectory()
+
+    // protection
+    #if os(iOS) || os(tvOS)
+      if let protectionType = config.protectionType {
+        try setDirectoryAttributes([
+          FileAttributeKey.protectionKey: protectionType
+        ])
       }
-    }
-    return size
+    #endif
   }
+}
 
-  // MARK: - CacheAware
-
-  /**
-   Saves passed object on the disk.
-   - Parameter object: Object that needs to be cached
-   - Parameter key: Unique key to identify the object in the cache
-   - Parameter expiry: Expiration date for the cached object
-   */
-  func addObject<T: Cachable>(_ object: T, forKey key: String, expiry: Expiry = .never) throws {
-    let filePath = makeFilePath(for: key)
-    fileManager.createFile(atPath: filePath, contents: object.encode(), attributes: nil)
-    try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)
-  }
-
-  /**
-   Gets information about the cached object.
-   - Parameter key: Unique key to identify the object in the cache
-   - Returns: Cached object or nil if not found
-   */
-  func object<T: Cachable>(forKey key: String) throws -> T? {
-    return (try cacheEntry(forKey: key) as CacheEntry<T>?)?.object
-  }
-
-  /**
-   Get cache entry which includes object with metadata.
-   - Parameter key: Unique key to identify the object in the cache
-   - Returns: Object wrapper with metadata or nil if not found
-   */
-  func cacheEntry<T: Cachable>(forKey key: String) throws -> CacheEntry<T>? {
+extension DiskStorage: StorageAware {
+  func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
     let attributes = try fileManager.attributesOfItem(atPath: filePath)
+    let object: T = try DataSerializer.deserialize(data: data)
 
-    guard let object = T.decode(data) as? T, let date = attributes[.modificationDate] as? Date else {
-      return nil
+    guard let date = attributes[.modificationDate] as? Date else {
+      throw StorageError.malformedFileAttributes
     }
 
-    return CacheEntry(
+    let meta: [String: Any] = [
+      "filePath": filePath
+    ]
+
+    return Entry(
       object: object,
-      expiry: Expiry.date(date)
+      expiry: Expiry.date(date),
+      meta: meta
     )
   }
 
-  /**
-   Removes the object from the cache by the given key.
-   - Parameter key: Unique key to identify the object in the cache
-   */
+  func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
+    let expiry = expiry ?? config.expiry
+    let data = try DataSerializer.serialize(object: object)
+    let filePath = makeFilePath(for: key)
+    fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
+    try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)
+  }
+
   func removeObject(forKey key: String) throws {
     try fileManager.removeItem(atPath: makeFilePath(for: key))
   }
 
-  /**
-   Removes the object from the cache if it's expired.
-   - Parameter key: Unique key to identify the object in the cache
-   */
-  func removeObjectIfExpired(forKey key: String) throws {
-    let filePath = makeFilePath(for: key)
-    let attributes = try fileManager.attributesOfItem(atPath: filePath)
-    if let expiryDate = attributes[.modificationDate] as? Date, expiryDate.inThePast {
-      try fileManager.removeItem(atPath: filePath)
-    }
-  }
-
-  /**
-   Removes all objects from the cache storage.
-   */
-  func clear() throws {
+  func removeAll() throws {
     try fileManager.removeItem(atPath: path)
   }
 
-  func createDirectory() throws {
-    if !fileManager.fileExists(atPath: path) {
-      try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-    }
-  }
-
-  private typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
-
-  /**
-   Clears all expired objects.
-   */
-  func clearExpired() throws {
+  func removeExpiredObjects() throws {
     let storageURL = URL(fileURLWithPath: path)
     let resourceKeys: [URLResourceKey] = [
       .isDirectoryKey,
@@ -184,40 +128,21 @@ final class DiskStorage: StorageAware {
     // Remove objects if storage size exceeds max size
     try removeResourceObjects(resourceObjects, totalSize: totalSize)
   }
+}
 
+extension DiskStorage {
   /**
-   Removes objects if storage size exceeds max size.
-   - Parameter objects: Resource objects to remove
-   - Parameter totalSize: Total size
+   Sets attributes on the disk cache folder.
+   - Parameter attributes: Directory attributes
    */
-  private func removeResourceObjects(_ objects: [ResourceObject], totalSize: UInt) throws {
-    guard maxSize > 0 && totalSize > maxSize else {
-      return
-    }
-
-    var totalSize = totalSize
-    let targetSize = maxSize / 2
-
-    let sortedFiles = objects.sorted {
-      let key = URLResourceKey.contentModificationDateKey
-      let time1 = ($0.resourceValues[key] as? Date)?.timeIntervalSinceReferenceDate
-      let time2 = ($1.resourceValues[key] as? Date)?.timeIntervalSinceReferenceDate
-      return time1 > time2
-    }
-
-    for file in sortedFiles {
-      try fileManager.removeItem(at: file.url)
-      if let fileSize = file.resourceValues[URLResourceKey.totalFileAllocatedSizeKey] as? NSNumber {
-        totalSize -= fileSize.uintValue
-      }
-      if totalSize < targetSize {
-        break
-      }
-    }
+  func setDirectoryAttributes(_ attributes: [FileAttributeKey : Any]) throws {
+    try fileManager.setAttributes(attributes, ofItemAtPath: path)
   }
+}
 
-  // MARK: - Helpers
+typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
 
+extension DiskStorage {
   /**
    Builds file name from the key.
    - Parameter key: Unique key to identify the object in the cache
@@ -235,44 +160,73 @@ final class DiskStorage: StorageAware {
   func makeFilePath(for key: String) -> String {
     return "\(path)/\(makeFileName(for: key))"
   }
-}
 
-extension DiskStorage {
-  #if os(iOS) || os(tvOS)
+  /// Calculates total disk cache size.
+  func totalSize() throws -> UInt64 {
+    var size: UInt64 = 0
+    let contents = try fileManager.contentsOfDirectory(atPath: path)
+    for pathComponent in contents {
+      let filePath = (path as NSString).appendingPathComponent(pathComponent)
+      let attributes = try fileManager.attributesOfItem(atPath: filePath)
+      if let fileSize = attributes[.size] as? UInt64 {
+        size += fileSize
+      }
+    }
+    return size
+  }
+
+  func createDirectory() throws {
+    guard !fileManager.fileExists(atPath: path) else {
+      return
+    }
+
+    try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true,
+                                    attributes: nil)
+  }
+
   /**
-   Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
-   - Parameter type: File protection type
+   Removes objects if storage size exceeds max size.
+   - Parameter objects: Resource objects to remove
+   - Parameter totalSize: Total size
    */
-  func setFileProtection( _ type: FileProtectionType) throws {
-    try setDirectoryAttributes([FileAttributeKey.protectionKey: type])
+  func removeResourceObjects(_ objects: [ResourceObject], totalSize: UInt) throws {
+    guard config.maxSize > 0 && totalSize > config.maxSize else {
+      return
+    }
+
+    var totalSize = totalSize
+    let targetSize = config.maxSize / 2
+
+    let sortedFiles = objects.sorted {
+      let key = URLResourceKey.contentModificationDateKey
+      if let time1 = ($0.resourceValues[key] as? Date)?.timeIntervalSinceReferenceDate,
+        let time2 = ($1.resourceValues[key] as? Date)?.timeIntervalSinceReferenceDate {
+        return time1 > time2
+      } else {
+        return false
+      }
+    }
+
+    for file in sortedFiles {
+      try fileManager.removeItem(at: file.url)
+      if let fileSize = file.resourceValues[URLResourceKey.totalFileAllocatedSizeKey] as? NSNumber {
+        totalSize -= fileSize.uintValue
+      }
+      if totalSize < targetSize {
+        break
+      }
+    }
   }
-  #endif
 
   /**
-   Sets attributes on the disk cache folder.
-   - Parameter attributes: Directory attributes
+   Removes the object from the cache if it's expired.
+   - Parameter key: Unique key to identify the object in the cache
    */
-  func setDirectoryAttributes(_ attributes: [FileAttributeKey : Any]) throws {
-    try fileManager.setAttributes(attributes, ofItemAtPath: path)
-  }
-}
-
-private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
+  func removeObjectIfExpired(forKey key: String) throws {
+    let filePath = makeFilePath(for: key)
+    let attributes = try fileManager.attributesOfItem(atPath: filePath)
+    if let expiryDate = attributes[.modificationDate] as? Date, expiryDate.inThePast {
+      try fileManager.removeItem(atPath: filePath)
+    }
   }
 }

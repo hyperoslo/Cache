@@ -1,99 +1,87 @@
 import Foundation
 
-/**
- Memory cache storage based on NSCache.
- */
-final class MemoryStorage: StorageAware {
+/// Save objects to memory based on NSCache
+final class MemoryStorage {
   /// Memory cache instance
-  private let cache = NSCache<NSString, Capsule>()
+  fileprivate let cache = NSCache<NSString, MemoryCapsule>()
   // Memory cache keys
-  private var keys = Set<String>()
+  fileprivate var keys = Set<String>()
+  /// Configuration
+  fileprivate let config: MemoryConfig
 
   // MARK: - Initialization
 
-  /**
-   Creates a new memory storage.
-   - Parameter name: A name of the storage
-   - Parameter countLimit: The maximum number of objects the cache should hold.
-   - Parameter totalCostLimit: The maximum total cost that the cache can hold before it starts evicting objects.
-   */
-  required init(name: String, countLimit: UInt = 0, totalCostLimit: UInt = 0) {
-    cache.countLimit = Int(countLimit)
-    cache.totalCostLimit = Int(totalCostLimit)
-    cache.name = name
+  init(config: MemoryConfig) {
+    self.config = config
+    self.cache.countLimit = Int(config.countLimit)
+    self.cache.totalCostLimit = Int(config.totalCostLimit)
   }
+}
 
-  // MARK: - CacheAware
-
-  /**
-   Saves passed object in the memory.
-   - Parameter key: Unique key to identify the object in the cache
-   - Parameter object: Object that needs to be cached
-   - Parameter expiry: Expiration date for the cached object
-   */
-  func addObject<T: Cachable>(_ object: T, forKey key: String, expiry: Expiry = .never) {
-    let capsule = Capsule(value: object, expiry: expiry)
-    cache.setObject(capsule, forKey: key as NSString)
-    keys.insert(key)
-  }
-
-  /**
-   Tries to retrieve the object from the memory storage.
-   - Parameter key: Unique key to identify the object in the cache
-   - Returns: Cached object or nil if not found
-   */
-  func object<T: Cachable>(forKey key: String) -> T? {
-    return (cacheEntry(forKey: key) as CacheEntry<T>?)?.object
-  }
-
-  /**
-   Get cache entry which includes object with metadata.
-   - Parameter key: Unique key to identify the object in the cache
-   - Returns: Object wrapper with metadata or nil if not found
-   */
-  func cacheEntry<T: Cachable>(forKey key: String) -> CacheEntry<T>? {
+extension MemoryStorage: StorageAware {
+  func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
     guard let capsule = cache.object(forKey: key as NSString) else {
-      return nil
+      throw StorageError.notFound
     }
+
     guard let object = capsule.object as? T else {
-      return nil
+      throw StorageError.typeNotMatch
     }
-    return CacheEntry(object: object, expiry: Expiry.date(capsule.expiryDate))
+
+    return Entry(object: object, expiry: capsule.expiry)
   }
 
-  /**
-   Removes the object from the cache by the given key.
-   - Parameter key: Unique key to identify the object in the cache
-   */
   func removeObject(forKey key: String) {
     cache.removeObject(forKey: key as NSString)
     keys.remove(key)
   }
 
+  func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) {
+    let capsule = MemoryCapsule(value: object, expiry: expiry ?? config.expiry)
+    cache.setObject(capsule, forKey: key as NSString)
+    keys.insert(key)
+  }
+
+  func removeAll() {
+    cache.removeAllObjects()
+    keys.removeAll()
+  }
+
+  func removeExpiredObjects() {
+    let allKeys = keys
+    for key in allKeys {
+      removeObjectIfExpired(forKey: key)
+    }
+  }
+}
+
+extension MemoryStorage {
   /**
    Removes the object from the cache if it's expired.
    - Parameter key: Unique key to identify the object in the cache
    */
   func removeObjectIfExpired(forKey key: String) {
-    if let capsule = cache.object(forKey: key as NSString), capsule.isExpired {
+    if let capsule = cache.object(forKey: key as NSString), capsule.expiry.isExpired {
       removeObject(forKey: key)
     }
   }
+}
+
+/// Helper class to hold cached instance and expiry date.
+/// Used in memory storage to work with NSCache.
+class MemoryCapsule: NSObject {
+  /// Object to be cached
+  let object: Any
+  /// Expiration date
+  let expiry: Expiry
 
   /**
-   Removes all objects from the cache storage.
+   Creates a new instance of Capsule.
+   - Parameter value: Object to be cached
+   - Parameter expiry: Expiration date
    */
-  func clear() {
-    cache.removeAllObjects()
-  }
-
-  /**
-   Clears all expired objects.
-   */
-  func clearExpired() {
-    let allKeys = keys
-    for key in allKeys {
-      removeObjectIfExpired(forKey: key)
-    }
+  init(value: Any, expiry: Expiry) {
+    self.object = value
+    self.expiry = expiry
   }
 }

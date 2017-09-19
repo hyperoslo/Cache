@@ -3,19 +3,19 @@ import SwiftHash
 @testable import Cache
 
 final class DiskStorageTests: XCTestCase {
-  private let cacheName = "Floppy"
   private let key = "youknownothing"
-  private let object = TestHelper.user
+  private let testObject = User(firstName: "John", lastName: "Snow")
   private let fileManager = FileManager()
   private var storage: DiskStorage!
+  private let config = DiskConfig(name: "Floppy")
 
   override func setUp() {
     super.setUp()
-    storage = DiskStorage(name: cacheName)
+    storage = try! DiskStorage(config: config)
   }
 
   override func tearDown() {
-    try? fileManager.removeItem(atPath: storage.path)
+    try? storage.removeAll()
     super.tearDown()
   }
 
@@ -25,7 +25,7 @@ final class DiskStorageTests: XCTestCase {
     XCTAssertTrue(fileExist)
 
     // Test that it returns the default maximum size of a cache
-    XCTAssertEqual(storage.maxSize, 0)
+    XCTAssertEqual(config.maxSize, 0)
   }
 
   /// Test that it returns the correct path
@@ -33,25 +33,32 @@ final class DiskStorageTests: XCTestCase {
     let paths = NSSearchPathForDirectoriesInDomains(
       .cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true
     )
-    let path = "\(paths.first!)/\(cacheName.capitalized)"
+    let path = "\(paths.first!)/\(config.name.capitalized)"
     XCTAssertEqual(storage.path, path)
   }
 
   /// Test that it returns the correct path
   func testCustomPath() throws {
-    let path = try fileManager.url(
+    let url = try fileManager.url(
       for: .applicationSupportDirectory,
       in: .userDomainMask,
       appropriateFor: nil,
-      create: true).path
-    storage = DiskStorage(name: cacheName, cacheDirectory: path)
+      create: true
+    )
 
-    XCTAssertEqual(storage.path, path)
+    let customConfig = DiskConfig(name: "SSD", directory: url)
+
+    storage = try DiskStorage(config: customConfig)
+
+    XCTAssertEqual(
+      storage.path,
+      url.appendingPathComponent("SSD", isDirectory: true).path
+    )
   }
 
   /// Test that it sets attributes
   func testSetDirectoryAttributes() throws {
-    try storage.addObject(object, forKey: key)
+    try storage.setObject(testObject, forKey: key)
     try storage.setDirectoryAttributes([FileAttributeKey.immutable: true])
     let attributes = try fileManager.attributesOfItem(atPath: storage.path)
 
@@ -60,8 +67,8 @@ final class DiskStorageTests: XCTestCase {
   }
 
   /// Test that it saves an object
-  func testAddObject() throws {
-    try storage.addObject(object, forKey: key)
+  func testsetObject() throws {
+    try storage.setObject(testObject, forKey: key)
     let fileExist = fileManager.fileExists(atPath: storage.makeFilePath(for: key))
     XCTAssertTrue(fileExist)
   }
@@ -69,35 +76,35 @@ final class DiskStorageTests: XCTestCase {
   /// Test that
   func testCacheEntry() throws {
     // Returns nil if entry doesn't exist
-    var entry: CacheEntry<User>?
+    var entry: Entry<User>?
     do {
-      entry = try storage.cacheEntry(forKey: key)
+      entry = try storage.entry(ofType: User.self, forKey: key)
     } catch {}
     XCTAssertNil(entry)
 
     // Returns entry if object exists
-    try storage.addObject(object, forKey: key)
-    entry = try storage.cacheEntry(forKey: key)
+    try storage.setObject(testObject, forKey: key)
+    entry = try storage.entry(ofType: User.self, forKey: key)
     let attributes = try fileManager.attributesOfItem(atPath: storage.makeFilePath(for: key))
     let expiry = Expiry.date(attributes[FileAttributeKey.modificationDate] as! Date)
 
-    XCTAssertEqual(entry?.object.firstName, object.firstName)
-    XCTAssertEqual(entry?.object.lastName, object.lastName)
+    XCTAssertEqual(entry?.object.firstName, testObject.firstName)
+    XCTAssertEqual(entry?.object.lastName, testObject.lastName)
     XCTAssertEqual(entry?.expiry.date, expiry.date)
   }
 
   /// Test that it resolves cached object
-  func testObject() throws {
-    try storage.addObject(object, forKey: key)
-    let cachedObject: User? = try storage.object(forKey: key)
+  func testSetObject() throws {
+    try storage.setObject(testObject, forKey: key)
+    let cachedObject: User? = try storage.object(ofType: User.self, forKey: key)
 
-    XCTAssertEqual(cachedObject?.firstName, object.firstName)
-    XCTAssertEqual(cachedObject?.lastName, object.lastName)
+    XCTAssertEqual(cachedObject?.firstName, testObject.firstName)
+    XCTAssertEqual(cachedObject?.lastName, testObject.lastName)
   }
 
   /// Test that it removes cached object
   func testRemoveObject() throws {
-    try storage.addObject(object, forKey: key)
+    try storage.setObject(testObject, forKey: key)
     try storage.removeObject(forKey: key)
     let fileExist = fileManager.fileExists(atPath: storage.makeFilePath(for: key))
     XCTAssertFalse(fileExist)
@@ -106,11 +113,11 @@ final class DiskStorageTests: XCTestCase {
   /// Test that it removes expired object
   func testRemoveObjectIfExpiredWhenExpired() throws {
     let expiry: Expiry = .date(Date().addingTimeInterval(-100000))
-    try storage.addObject(object, forKey: key, expiry: expiry)
+    try storage.setObject(testObject, forKey: key, expiry: expiry)
     try storage.removeObjectIfExpired(forKey: key)
     var cachedObject: User?
     do {
-      cachedObject = try storage.object(forKey: key)
+      cachedObject = try storage.object(ofType: User.self, forKey: key)
     } catch {}
 
     XCTAssertNil(cachedObject)
@@ -118,27 +125,43 @@ final class DiskStorageTests: XCTestCase {
 
   /// Test that it doesn't remove not expired object
   func testRemoveObjectIfExpiredWhenNotExpired() throws {
-    try storage.addObject(object, forKey: key)
+    try storage.setObject(testObject, forKey: key)
     try storage.removeObjectIfExpired(forKey: key)
-    let cachedObject: User? = try storage.object(forKey: key)
+    let cachedObject: User? = try storage.object(ofType: User.self, forKey: key)
     XCTAssertNotNil(cachedObject)
   }
 
   /// Test that it clears cache directory
   func testClear() throws {
-    try storage.addObject(object, forKey: key)
-    try storage.clear()
-    let fileExist = fileManager.fileExists(atPath: storage.path)
-    XCTAssertFalse(fileExist)
+    try given("create some files inside folder so that it is not empty") {
+      try storage.setObject(testObject, forKey: key)
+    }
+
+    when("call removeAll to remove the whole the folder") {
+      do {
+        try storage.removeAll()
+      } catch {
+        XCTFail(error.localizedDescription)
+      }
+    }
+
+    then("the folder should be deleted") {
+      let fileExist = fileManager.fileExists(atPath: storage.path)
+      XCTAssertFalse(fileExist)
+    }
   }
 
   /// Test that it clears cache files, but keeps root directory
-  func testCreateDirectory() throws {
-    try storage.clear()
-    XCTAssertFalse(fileManager.fileExists(atPath: storage.path))
+  func testCreateDirectory() {
+    do {
+      try storage.removeAll()
+      XCTAssertFalse(fileManager.fileExists(atPath: storage.path))
 
-    try storage.createDirectory()
-    XCTAssertTrue(fileManager.fileExists(atPath: storage.path))
+      try storage.createDirectory()
+      XCTAssertTrue(fileManager.fileExists(atPath: storage.path))
+    } catch {
+      XCTFail(error.localizedDescription)
+    }
   }
 
   /// Test that it removes expired objects
@@ -147,14 +170,14 @@ final class DiskStorageTests: XCTestCase {
     let expiry2: Expiry = .date(Date().addingTimeInterval(100000))
     let key1 = "item1"
     let key2 = "item2"
-    try storage.addObject(object, forKey: key1, expiry: expiry1)
-    try storage.addObject(object, forKey: key2, expiry: expiry2)
-    try storage.clearExpired()
+    try storage.setObject(testObject, forKey: key1, expiry: expiry1)
+    try storage.setObject(testObject, forKey: key2, expiry: expiry2)
+    try storage.removeExpiredObjects()
     var object1: User?
-    let object2: User? = try storage.object(forKey: key2)
+    let object2 = try storage.object(ofType: User.self, forKey: key2)
 
     do {
-      object1 = try storage.object(forKey: key1)
+      object1 = try storage.object(ofType: User.self, forKey: key1)
     } catch {}
 
     XCTAssertNil(object1)
@@ -172,3 +195,4 @@ final class DiskStorageTests: XCTestCase {
     XCTAssertEqual(storage.makeFilePath(for: key), filePath)
   }
 }
+
