@@ -80,6 +80,7 @@ extension DiskStorage: StorageAware {
 
   func removeAll() throws {
     try fileManager.removeItem(atPath: path)
+    try createDirectory()
   }
 
   func removeExpiredObjects() throws {

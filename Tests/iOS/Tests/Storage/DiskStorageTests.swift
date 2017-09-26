@@ -145,20 +145,24 @@ final class DiskStorageTests: XCTestCase {
       }
     }
 
-    then("the folder should be deleted") {
+    then("the folder should exist") {
       let fileExist = fileManager.fileExists(atPath: storage.path)
-      XCTAssertFalse(fileExist)
+      XCTAssertTrue(fileExist)
     }
-  }
+
+    then("the folder should be empty") {
+      let contents = try? fileManager.contentsOfDirectory(atPath: storage.path)
+      XCTAssertEqual(contents?.count, 0)
+    }
+}
 
   /// Test that it clears cache files, but keeps root directory
   func testCreateDirectory() {
     do {
       try storage.removeAll()
-      XCTAssertFalse(fileManager.fileExists(atPath: storage.path))
-
-      try storage.createDirectory()
       XCTAssertTrue(fileManager.fileExists(atPath: storage.path))
+      let contents = try? fileManager.contentsOfDirectory(atPath: storage.path)
+      XCTAssertEqual(contents?.count, 0)
     } catch {
       XCTFail(error.localizedDescription)
     }

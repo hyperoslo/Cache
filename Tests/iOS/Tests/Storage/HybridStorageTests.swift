@@ -110,8 +110,9 @@ final class HybridStorageTests: XCTestCase {
     try storage.setObject(testObject, forKey: key)
     try storage.removeAll()
 
-    then("the disk directory is removed") {
-      XCTAssertFalse(fileManager.fileExists(atPath: storage.diskStorage.path))
+    then("the disk directory is empty") {
+      let contents = try? fileManager.contentsOfDirectory(atPath: storage.diskStorage.path)
+      XCTAssertEqual(contents?.count, 0)
     }
   }
 
