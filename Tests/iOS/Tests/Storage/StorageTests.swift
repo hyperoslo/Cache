@@ -39,6 +39,34 @@ final class StorageTests: XCTestCase {
 
     wait(for: [expectation], timeout: 1)
   }
+
+  func testMigration() {
+    struct Person1: Codable {
+      let fullName: String
+    }
+
+    struct Person2: Codable {
+      let firstName: String
+      let lastName: String
+    }
+
+    // Firstly, save object of type Person1
+    let person = Person1(fullName: "John Snow")
+
+    try! storage.setObject(person, forKey: "person")
+    XCTAssertNil(try? storage.object(ofType: Person2.self, forKey: "person"))
+
+    // Later, convert to Person2, do the migration, then overwrite
+    let tempPerson = try! storage.object(ofType: Person1.self, forKey: "person")
+    let parts = tempPerson.fullName.split(separator: " ")
+    let migratedPerson = Person2(firstName: String(parts[0]), lastName: String(parts[1]))
+    try! storage.setObject(migratedPerson, forKey: "person")
+
+    XCTAssertEqual(
+      try! storage.object(ofType: Person2.self, forKey: "person").firstName,
+      "John"
+    )
+  }
 }
 
 
