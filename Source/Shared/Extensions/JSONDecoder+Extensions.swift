@@ -1,7 +1,7 @@
 import Foundation
 
 /// Convert json string, dictionary, data to Codable objects
-public class ObjectConverter {
+public extension JSONDecoder {
   /// Convert json string to Codable object
   ///
   /// - Parameters:
@@ -9,12 +9,12 @@ public class ObjectConverter {
   ///   - type: Type information.
   /// - Returns: Codable object.
   /// - Throws: Error if failed.
-  static func convert<T: Codable>(_ string: String, to type: T.Type) throws -> T {
+  static func decode<T: Codable>(_ string: String, to type: T.Type) throws -> T {
     guard let data = string.data(using: .utf8) else {
       throw StorageError.decodingFailed
     }
 
-    return try convert(data, to: type.self)
+    return try decode(data, to: type.self)
   }
 
   /// Convert json dictionary to Codable object
@@ -24,9 +24,9 @@ public class ObjectConverter {
   ///   - type: Type information.
   /// - Returns: Codable object
   /// - Throws: Error if failed
-  static func convert<T: Codable>(_ json: [String: Any], to type: T.Type) throws -> T {
+  static func decode<T: Codable>(_ json: [String: Any], to type: T.Type) throws -> T {
     let data = try JSONSerialization.data(withJSONObject: json, options: [])
-    return try convert(data, to: type)
+    return try decode(data, to: type)
   }
 
   /// Convert json data to Codable object
@@ -36,7 +36,7 @@ public class ObjectConverter {
   ///   - type: Type information.
   /// - Returns: Codable object
   /// - Throws: Error if failed
-  static func convert<T: Codable>(_ data: Data, to type: T.Type) throws -> T {
+  static func decode<T: Codable>(_ data: Data, to type: T.Type) throws -> T {
     return try JSONDecoder().decode(T.self, from: data)
   }
 }

@@ -279,12 +279,12 @@ Most of the time, our use case is to fetch some json from backend, display it wh
 
 While `Storage` can persist `String` or `Data`, we recommend persisting the strong typed objects, since those are the objects that you will use to display in UI. Furthermore, if the json data can't be converted to strongly typed objects, what's the point of saving it ? 😉
 
-You can use `ObjectConverter` to convert json dictionary, string or data to objects.
+You can use `JSONDecoder` to decode json dictionary, string or data to objects.
 
 ```swift
-let user = ObjectConverter.convert(jsonString, to: User.self)
-let cities = Object.Converter.convert(jsonDictionary, to: [City].self)
-let dragons = ObjectConverter.convert(jsonData, to: [Dragon].self)
+let user = JSONDecoder.decode(jsonString, to: User.self)
+let cities = JSONDecoder.decode(jsonDictionary, to: [City].self)
+let dragons = JSONDecoder.decode(jsonData, to: [Dragon].self)
 ```
 
 This is how you perform object converting and saving with `Alamofire`
@@ -292,7 +292,7 @@ This is how you perform object converting and saving with `Alamofire`
 ```swift
 Alamofire.request("https://gameofthrones.org/mostFavoriteCharacter").responseString { response in
   do {
-    let user = try ObjectConverter.convert(response.result.value, to: User.self)
+    let user = try JSONDecoder.decode(response.result.value, to: User.self)
     try storage.setObject(user, forKey: "most favorite character")
   } catch {
     print(error)
