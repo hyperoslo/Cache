@@ -67,6 +67,25 @@ final class StorageTests: XCTestCase {
       "John"
     )
   }
+
+  func testSameProperties() {
+    struct Person: Codable {
+      let firstName: String
+      let lastName: String
+    }
+
+    struct Alien: Codable {
+      let firstName: String
+      let lastName: String
+    }
+
+    let person = Person(firstName: "John", lastName: "Snow")
+    try! storage.setObject(person, forKey: "person")
+
+    // As long as it has same properties, it works too
+    let cachedObject = try! storage.object(ofType: Alien.self, forKey: "person")
+    XCTAssertEqual(cachedObject.firstName, "John")
+  }
 }
 
 
