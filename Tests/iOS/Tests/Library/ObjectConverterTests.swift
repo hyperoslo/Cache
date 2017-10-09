@@ -1,7 +1,7 @@
 import XCTest
 @testable import Cache
 
-final class ObjectStorageTests: XCTestCase {
+final class JSONDecoderExtensionsTests: XCTestCase {
   private var storage: HybridStorage!
 
   override func setUp() {
@@ -23,7 +23,7 @@ final class ObjectStorageTests: XCTestCase {
       "last_name": "Snow"
     ]
 
-    let user = try ObjectConverter.convert(json, to: User.self)
+    let user = try JSONDecoder.decode(json, to: User.self)
     try storage.setObject(user, forKey: "user")
 
     let cachedObject = try storage.object(ofType: User.self, forKey: "user")
@@ -33,7 +33,7 @@ final class ObjectStorageTests: XCTestCase {
   func testJsonString() throws {
     let string: String = "{\"first_name\": \"John\", \"last_name\": \"Snow\"}"
 
-    let user = try ObjectConverter.convert(string, to: User.self)
+    let user = try JSONDecoder.decode(string, to: User.self)
     try storage.setObject(user, forKey: "user")
 
     let cachedObject = try storage.object(ofType: User.self, forKey: "user")
