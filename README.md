@@ -302,6 +302,8 @@ Alamofire.request("https://gameofthrones.org/mostFavoriteCharacter").responseStr
 
 ## Installation
 
+### Cocoapods
+
 **Cache** is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
@@ -309,12 +311,16 @@ it, simply add the following line to your Podfile:
 pod 'Cache'
 ```
 
+### Carthage
+
 **Cache** is also available through [Carthage](https://github.com/Carthage/Carthage).
 To install just write into your Cartfile:
 
 ```ruby
 github "hyperoslo/Cache"
 ```
+
+You also need to add `SwiftHash.framework` in your [copy-frameworks](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos) script.
 
 ## Author
 
