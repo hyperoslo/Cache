@@ -493,7 +493,6 @@
 				BDEDD3531DBCE5B1007416A6 /* Headers */,
 				BDEDD3541DBCE5B1007416A6 /* Resources */,
 				BDEDD3731DBCE616007416A6 /* ShellScript */,
-				D2AB91781F83939F008610B5 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -551,7 +550,6 @@
 				D5291D5D1C283B5300B702C9 /* Headers */,
 				D5291D5E1C283B5300B702C9 /* Resources */,
 				BD58C3AE1CF2EA04003F7141 /* SwiftLint */,
-				D2AB91771F839384008610B5 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -766,36 +764,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftHash.framework",
-			);
-			name = Carthage;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		D2AB91771F839384008610B5 /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/Mac/SwiftHash.framework",
-			);
-			name = Carthage;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		D2AB91781F83939F008610B5 /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/SwiftHash.framework",
 			);
 			name = Carthage;
 			outputPaths = (
