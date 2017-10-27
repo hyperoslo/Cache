@@ -277,9 +277,9 @@ If you want to load image into `UIImageView` or `NSImageView`, then we also have
 
 Most of the time, our use case is to fetch some json from backend, display it while saving the json to storage for future uses. If you're using libraries like [Alamofire](https://github.com/Alamofire/Alamofire) or [Malibu](https://github.com/hyperoslo/Malibu), you mostly get json in the form of dictionary, string, or data.
 
-While `Storage` can persist `String` or `Data`, we recommend persisting the strong typed objects, since those are the objects that you will use to display in UI. Furthermore, if the json data can't be converted to strongly typed objects, what's the point of saving it ? 😉
+`Storage` can persist `String` or `Data`. You can even save json to `Storage` using `JSONArrayWrapper` and `JSONDictionaryWrapper`, but we prefer persisting the strong typed objects, since those are the objects that you will use to display in UI. Furthermore, if the json data can't be converted to strongly typed objects, what's the point of saving it ? 😉
 
-You can use `JSONDecoder` to decode json dictionary, string or data to objects.
+You can use these extensions on `JSONDecoder` to decode json dictionary, string or data to objects.
 
 ```swift
 let user = JSONDecoder.decode(jsonString, to: User.self)
