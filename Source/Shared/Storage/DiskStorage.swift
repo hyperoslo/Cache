@@ -1,5 +1,4 @@
 import Foundation
-import SwiftHash
 
 /// Save objects to file on disk
 final class DiskStorage {
