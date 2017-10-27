@@ -21,7 +21,7 @@ import Foundation
 
 // MARK: - Public
 
-func MD5(_ input: String) -> String {
+public func MD5(_ input: String) -> String {
   return hex_md5(input)
 }
 
