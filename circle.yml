@@ -2,12 +2,6 @@ machine:
   xcode:
     version: "9.0"
 
-dependencies:
-  override:
-    - bin/bootstrap-if-needed
-  cache_directories:
-    - "Carthage"
-
 test:
   override:
     - set -o pipefail && xcodebuild -project Cache.xcodeproj -scheme "Cache-macOS" -sdk macosx clean build
