@@ -324,7 +324,8 @@ You also need to add `SwiftHash.framework` in your [copy-frameworks](https://git
 
 ## Author
 
-[Hyper](http://hyper.no) made this with ❤️
+- [Hyper](http://hyper.no) made this with ❤️
+- Inline MD5 implementation from [SwiftHash](https://github.com/onmyway133/SwiftHash) 
 
 ## Contributing
 
