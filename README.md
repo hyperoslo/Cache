@@ -1,6 +1,6 @@
 ![Cache](https://github.com/hyperoslo/Cache/blob/master/Resources/CachePresentation.png)
 
-[![CI Status](http://img.shields.io/travis/hyperoslo/Cache.svg?style=flat)](https://travis-ci.org/hyperoslo/Cache)
+[![CI Status](https://circleci.com/gh/hyperoslo/Cache.png)](https://circleci.com/gh/hyperoslo/Cache)
 [![Version](https://img.shields.io/cocoapods/v/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
