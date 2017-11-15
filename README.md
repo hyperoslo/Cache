@@ -210,7 +210,7 @@ storage.async.setObject("Oslo", forKey: "my favorite city") { result in
   switch result {
     case .value:
       print("saved successfully")
-    case .error:
+    case .error(let error):
       print(error)
     }
   }
@@ -220,7 +220,7 @@ storage.async.object(ofType: String.self, forKey: "my favorite city") { result i
   switch result {
     case .value(let city):
       print("my favorite city is \(city)")
-    case .error:
+    case .error(let error):
       print(error)
     }
   }
