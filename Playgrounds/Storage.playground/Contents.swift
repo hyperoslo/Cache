@@ -17,9 +17,9 @@ struct Helper {
         return image!
     }
 
-  static func data(length : Int) -> Data {
-    var buffer = [UInt8](repeating:0, count:length)
-    return Data(bytes:&buffer, count: length)
+  static func data(length: Int) -> Data {
+    var buffer = [UInt8](repeating: 0, count: length)
+    return Data(bytes: &buffer, count: length)
   }
 }
 
@@ -49,26 +49,26 @@ try storage.setObject(date, forKey: "date")
 let cachedString = try? storage.object(ofType: String.self, forKey: "string")
 print(cachedString)
 
-storage.async.object(ofType:ImageWrapper.self, forKey: "imageWrapper") { result in
+storage.async.object(ofType: ImageWrapper.self, forKey: "imageWrapper") { result in
     if case .value(let imageWrapper) = result {
         let image = imageWrapper.image
         print(image)
     }
 }
 
-storage.async.object(ofType:Data.self, forKey: "data") { result in
+storage.async.object(ofType: Data.self, forKey: "data") { result in
     if case .value(let data) = result {
         print(data)
     }
 }
 
-storage.async.object(ofType:Data.self, forKey: "data") { result in
+storage.async.object(ofType: Data.self, forKey: "data") { result in
     if case .value(let data) = result {
         print(data)
     }
 }
 
-storage.async.object(ofType:Date.self, forKey: "date") { result in
+storage.async.object(ofType: Date.self, forKey: "date") { result in
     if case .value(let date) = result {
         print(date)
     }

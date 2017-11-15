@@ -25,7 +25,7 @@ let key = "\(user.id)"
 try storage.setObject(user, forKey: key)
 
 // Fetch object from the cache
-storage.async.object(ofType:User.self, forKey: key) { result in
+storage.async.object(ofType: User.self, forKey: key) { result in
     switch result {
     case .value(let user):
         print(user.name)
@@ -38,7 +38,7 @@ storage.async.object(ofType:User.self, forKey: key) { result in
 try storage.removeObject(forKey: key)
 
 // Try to fetch removed object from the cache
-storage.async.object(ofType:User.self, forKey: key) { result in
+storage.async.object(ofType: User.self, forKey: key) { result in
     switch result {
     case .value(let user):
         print(user.name)
@@ -51,4 +51,3 @@ storage.async.object(ofType:User.self, forKey: key) { result in
 try storage.removeAll()
 
 PlaygroundPage.current.needsIndefiniteExecution = true
-
