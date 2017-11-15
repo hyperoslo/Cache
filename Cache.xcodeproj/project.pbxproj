@@ -199,7 +199,6 @@
 		D5291DA01C28405900B702C9 /* UIImage+ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		D5291DA21C2841D200B702C9 /* NSImage+ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		D5643E361C43F2CC00582E17 /* Storage.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Storage.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		D59A19EB1EE82B44009F6AEE /* SpecializedCache.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SpecializedCache.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D5A138C01EB29BFA00881A20 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		D5A138C31EB29C2100881A20 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -442,7 +441,6 @@
 			children = (
 				EBAACA991FBC369300FA206E /* SimpleStorage.playground */,
 				D5643E361C43F2CC00582E17 /* Storage.playground */,
-				D59A19EB1EE82B44009F6AEE /* SpecializedCache.playground */,
 			);
 			path = Playgrounds;
 			sourceTree = "<group>";
