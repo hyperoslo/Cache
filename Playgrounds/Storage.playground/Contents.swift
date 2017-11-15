@@ -4,16 +4,18 @@ import UIKit
 import Cache
 
 struct Helper {
-  static func image(color: UIColor = .red, size: CGSize = .init(width: 1, height: 1), opaque: Bool = false) -> UIImage {
-    UIGraphicsBeginImageContextWithOptions(size, opaque, 0)
-    let context = UIGraphicsGetCurrentContext()
-    context!.setFillColor(color.cgColor)
-    context!.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
+    static func image(_ color: UIColor = .red, size: CGSize = .init(width: 1, height: 1)) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 1)
 
-    return image!
-  }
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
+
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return image!
+    }
 
   static func data(length : Int) -> Data {
     var buffer = [UInt8](repeating:0, count:length)
@@ -21,52 +23,62 @@ struct Helper {
   }
 }
 
-// MARK: - Cache
+// MARK: - Storage
 
-let cache = HybridCache(name: "Mix")
+let diskConfig = DiskConfig(name: "Mix")
 
-// There is no need to implement Cachable protocol here.
-// We already have default implementations for:
-// String, JSON, UIImage, NSData and NSDate (just for fun =)
+let storage = try! Storage(diskConfig: diskConfig)
+
+// We already have Codable conformances for:
+// String, UIImage, NSData and NSDate (just for fun =)
 
 let string = "This is a string"
-let json = JSON.dictionary(["key": "value"])
 let image = Helper.image()
+let imageWrapper = ImageWrapper(image: image)
+let newImage = imageWrapper.image
 let data = Helper.data(length: 64)
 let date = Date(timeInterval: 100000, since: Date())
 
 // Add objects to the cache
+try storage.setObject(string, forKey: "string")
+try storage.setObject(imageWrapper, forKey: "imageWrapper")
+try storage.setObject(data, forKey: "data")
+try storage.setObject(date, forKey: "date")
+//
+//// Get objects from the cache
+let cachedString = try? storage.object(ofType: String.self, forKey: "string")
+print(cachedString)
 
-try cache.addObject(string, forKey: "string")
-try cache.addObject(json, forKey: "json")
-try cache.addObject(image, forKey: "image")
-try cache.addObject(data, forKey: "data")
-try cache.addObject(date, forKey: "date")
-
-// Get objects from the cache
-let cachedObject: String? = cache.object(forKey: "string")
-print(cachedObject)
-
-cache.async.object(forKey: "json") { (json: JSON?) in
-  print(json?.object ?? "")
+storage.async.object(ofType:ImageWrapper.self, forKey: "imageWrapper") { result in
+    if case .value(let imageWrapper) = result {
+        let image = imageWrapper.image
+        print(image)
+    }
 }
 
-cache.async.object(forKey: "image") { (image: UIImage?) in
-  print(image ?? "")
+storage.async.object(ofType:Data.self, forKey: "data") { result in
+    if case .value(let data) = result {
+        print(data)
+    }
 }
 
-cache.async.object(forKey: "data") { (data: Data?) in
-  print(data ?? "'")
+storage.async.object(ofType:Data.self, forKey: "data") { result in
+    if case .value(let data) = result {
+        print(data)
+    }
 }
 
-cache.async.object(forKey: "date") { (date: Date?) in
-  print(date ?? "")
+storage.async.object(ofType:Date.self, forKey: "date") { result in
+    if case .value(let date) = result {
+        print(date)
+    }
 }
-
-// Remove an object from the cache
-try cache.removeObject(forKey: "data")
 
 // Clean the cache
-try cache.clear()
+try storage.async.removeAll(completion: { (result) in
+    if case .value = result {
+        print("Cache cleaned")
+    }
+})
 
 PlaygroundPage.current.needsIndefiniteExecution = true
