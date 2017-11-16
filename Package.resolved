@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftHash",
+        "repositoryURL": "https://github.com/onmyway133/SwiftHash.git",
+        "state": {
+          "branch": null,
+          "revision": "1387bd2a614060ff516b3aa1279354b139b3e6f1",
+          "version": "2.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
