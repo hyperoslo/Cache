@@ -118,6 +118,7 @@
 		D5A138C11EB29BFA00881A20 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138C01EB29BFA00881A20 /* UIImage+Extensions.swift */; };
 		D5A138C21EB29BFA00881A20 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138C01EB29BFA00881A20 /* UIImage+Extensions.swift */; };
 		D5A138C41EB29C2100881A20 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138C31EB29C2100881A20 /* NSImage+Extensions.swift */; };
+		EBF96C251FC300C60021BF23 /* IdleStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF96C241FC300C60021BF23 /* IdleStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +204,7 @@
 		D5A138C31EB29C2100881A20 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBAACA991FBC369300FA206E /* SimpleStorage.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleStorage.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		EBF96C241FC300C60021BF23 /* IdleStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +325,7 @@
 				D292DAF01F6A85F30060F614 /* SyncStorage.swift */,
 				D292DAF41F6A94000060F614 /* AsyncStorageAware.swift */,
 				D292DAF81F6A962D0060F614 /* AsyncStorage.swift */,
+				EBF96C241FC300C60021BF23 /* IdleStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 				D2D4CC241FA3426B00E4A2D5 /* JSONArrayWrapper.swift in Sources */,
 				D2CF986D1F694FFA00CE8F68 /* MemoryStorage.swift in Sources */,
 				D2CF986F1F694FFA00CE8F68 /* StorageAware.swift in Sources */,
+				EBF96C251FC300C60021BF23 /* IdleStorage.swift in Sources */,
 				D2CF98851F69598900CE8F68 /* TypeWrapperStorage.swift in Sources */,
 				D2CF98671F694FFA00CE8F68 /* Expiry.swift in Sources */,
 				D292DAF91F6A962D0060F614 /* AsyncStorage.swift in Sources */,
