@@ -1,4 +1,5 @@
 import Foundation
+import Dispatch
 
 /// Manipulate storage in a "all sync" manner.
 /// Block the current queue until the operation completes.

@@ -1,4 +1,5 @@
 import XCTest
+import Dispatch
 @testable import Cache
 
 final class AsyncStorageTests: XCTestCase {
