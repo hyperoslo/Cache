@@ -31,7 +31,6 @@ public struct DiskConfig {
     self.expiry = expiry
     self.maxSize = maxSize
     self.directory = directory
-    self.protectionType = protectionType
   }
   #endif
 }
