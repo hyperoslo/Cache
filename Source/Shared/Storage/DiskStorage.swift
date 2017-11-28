@@ -69,7 +69,7 @@ extension DiskStorage: StorageAware {
     let expiry = expiry ?? config.expiry
     let data = try DataSerializer.serialize(object: object)
     let filePath = makeFilePath(for: key)
-    fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
+    _ = fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
     try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)
   }
 
@@ -104,18 +104,18 @@ extension DiskStorage: StorageAware {
     }
 
     for url in urlArray {
-      let resourceValues = try (url as NSURL).resourceValues(forKeys: resourceKeys)
-      guard (resourceValues[.isDirectoryKey] as? NSNumber)?.boolValue == false else {
+      let resourceValues = try url.resourceValues(forKeys: Set(resourceKeys))
+      guard resourceValues.isDirectory != true else {
         continue
       }
 
-      if let expiryDate = resourceValues[.contentModificationDateKey] as? Date, expiryDate.inThePast {
+      if let expiryDate = resourceValues.contentModificationDate, expiryDate.inThePast {
         filesToDelete.append(url)
         continue
       }
 
-      if let fileSize = resourceValues[.totalFileAllocatedSizeKey] as? NSNumber {
-        totalSize += fileSize.uintValue
+      if let fileSize = resourceValues.totalFileAllocatedSize {
+        totalSize += UInt(fileSize)
         resourceObjects.append((url: url, resourceValues: resourceValues))
       }
     }
@@ -135,12 +135,12 @@ extension DiskStorage {
    Sets attributes on the disk cache folder.
    - Parameter attributes: Directory attributes
    */
-  func setDirectoryAttributes(_ attributes: [FileAttributeKey : Any]) throws {
+  func setDirectoryAttributes(_ attributes: [FileAttributeKey: Any]) throws {
     try fileManager.setAttributes(attributes, ofItemAtPath: path)
   }
 }
 
-typealias ResourceObject = (url: Foundation.URL, resourceValues: [AnyHashable: Any])
+typealias ResourceObject = (url: Foundation.URL, resourceValues: URLResourceValues)
 
 extension DiskStorage {
   /**
@@ -166,7 +166,7 @@ extension DiskStorage {
     var size: UInt64 = 0
     let contents = try fileManager.contentsOfDirectory(atPath: path)
     for pathComponent in contents {
-      let filePath = (path as NSString).appendingPathComponent(pathComponent)
+      let filePath = NSString(string: path).appendingPathComponent(pathComponent)
       let attributes = try fileManager.attributesOfItem(atPath: filePath)
       if let fileSize = attributes[.size] as? UInt64 {
         size += fileSize
@@ -198,9 +198,8 @@ extension DiskStorage {
     let targetSize = config.maxSize / 2
 
     let sortedFiles = objects.sorted {
-      let key = URLResourceKey.contentModificationDateKey
-      if let time1 = ($0.resourceValues[key] as? Date)?.timeIntervalSinceReferenceDate,
-        let time2 = ($1.resourceValues[key] as? Date)?.timeIntervalSinceReferenceDate {
+      if let time1 = $0.resourceValues.contentModificationDate?.timeIntervalSinceReferenceDate,
+        let time2 = $1.resourceValues.contentModificationDate?.timeIntervalSinceReferenceDate {
         return time1 > time2
       } else {
         return false
@@ -209,8 +208,8 @@ extension DiskStorage {
 
     for file in sortedFiles {
       try fileManager.removeItem(at: file.url)
-      if let fileSize = file.resourceValues[URLResourceKey.totalFileAllocatedSizeKey] as? NSNumber {
-        totalSize -= fileSize.uintValue
+      if let fileSize = file.resourceValues.totalFileAllocatedSize {
+        totalSize -= UInt(fileSize)
       }
       if totalSize < targetSize {
         break

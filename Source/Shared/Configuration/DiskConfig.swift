@@ -10,6 +10,7 @@ public struct DiskConfig {
   public let maxSize: UInt
   /// A folder to store the disk cache contents. Defaults to a prefixed directory in Caches if nil
   public let directory: URL?
+  #if os(iOS) || os(tvOS)
   /// Data protection is used to store files in an encrypted format on disk and to decrypt them on demand.
   /// Support only on iOS and tvOS.
   public let protectionType: FileProtectionType?
@@ -23,4 +24,13 @@ public struct DiskConfig {
     self.directory = directory
     self.protectionType = protectionType
   }
+  #else
+  public init(name: String, expiry: Expiry = .never,
+              maxSize: UInt = 0, directory: URL? = nil) {
+    self.name = name
+    self.expiry = expiry
+    self.maxSize = maxSize
+    self.directory = directory
+  }
+  #endif
 }

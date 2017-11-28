@@ -1,4 +1,5 @@
 import Foundation
+import Dispatch
 
 /// Manage storage. Use memory storage if specified.
 /// Synchronous by default. Use `async` for asynchronous operations.

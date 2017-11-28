@@ -1,4 +1,5 @@
 import Foundation
+import Dispatch
 
 /// A protocol used for saving and loading from storage in async manner.
 public protocol AsyncStorageAware: class {
