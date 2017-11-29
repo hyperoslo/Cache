@@ -13,19 +13,24 @@ public class Storage {
   /// Initialize storage with configuration options.
   ///
   /// - Parameters:
-  ///   - diskConfig: Configuration for disk storage
-  ///   - memoryConfig: Optional. Pass confi if you want memory cache
+  ///   - diskConfig: Optional. Configuration for disk storage
+  ///   - memoryConfig: Optional. Pass config if you want memory cache
   /// - Throws: Throw StorageError if any.
-  public required init(diskConfig: DiskConfig, memoryConfig: MemoryConfig? = nil) throws {
-    // Disk or Hybrid
+  public required init(diskConfig: DiskConfig?, memoryConfig: MemoryConfig? = nil) throws {
+    // Disk, Memory, Hybrid or Idle
     let storage: StorageAware
-    let disk = try DiskStorage(config: diskConfig)
 
-    if let memoryConfig = memoryConfig {
+    switch (diskConfig, memoryConfig) {
+    case (.some(let diskConfig), .some(let memoryConfig)):
+      let disk = try DiskStorage(config: diskConfig)
       let memory = MemoryStorage(config: memoryConfig)
       storage = HybridStorage(memoryStorage: memory, diskStorage: disk)
-    } else {
-      storage = disk
+    case (.some(let diskConfig), nil):
+      storage = try DiskStorage(config: diskConfig)
+    case (nil, .some(let memoryConfig)):
+      storage = MemoryStorage(config: memoryConfig)
+    case (nil, nil):
+      storage = IdleStorage()
     }
 
     // Wrapper
