@@ -61,6 +61,26 @@ final class HybridStorageTests: XCTestCase {
       XCTAssertEqual(inMemoryCachedObject, testObject)
     }
   }
+  
+  func testEntityExpiryForObjectCopyToMemory() throws {
+    let date = Date().addingTimeInterval(3)
+    try when("set to disk only") {
+      try storage.diskStorage.setObject(testObject, forKey: key, expiry: .seconds(3))
+      let entry = try storage.entry(ofType: User.self, forKey: key)
+      //accuracy for slow disk processes
+      XCTAssertEqual(entry.expiry.date.timeIntervalSinceReferenceDate,
+                     date.timeIntervalSinceReferenceDate,
+                     accuracy: 1.0)
+    }
+    
+    try then("there is no object in memory") {
+      let entry = try storage.memoryStorage.entry(ofType: User.self, forKey: key)
+      //accuracy for slow disk processes
+      XCTAssertEqual(entry.expiry.date.timeIntervalSinceReferenceDate,
+                     date.timeIntervalSinceReferenceDate,
+                     accuracy: 1.0)
+    }
+  }
 
   /// Removes cached object from memory and disk
   func testRemoveObject() throws {

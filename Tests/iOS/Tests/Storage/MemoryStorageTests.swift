@@ -39,6 +39,21 @@ final class MemoryStorageTests: XCTestCase {
     XCTAssertEqual(entry?.object.lastName, testObject.lastName)
     XCTAssertEqual(entry?.expiry.date, config.expiry.date)
   }
+  
+  func testSetObjectWithExpiry() {
+    let date = Date().addingTimeInterval(1)
+    storage.setObject(testObject, forKey: key, expiry: .seconds(1))
+    var entry = try! storage.entry(ofType: User.self, forKey: key)
+    XCTAssertEqual(entry.expiry.date.timeIntervalSinceReferenceDate,
+                   date.timeIntervalSinceReferenceDate,
+                   accuracy: 0.1)
+    //Timer vs sleep: do not complicate
+    sleep(1)
+    entry = try! storage.entry(ofType: User.self, forKey: key)
+    XCTAssertEqual(entry.expiry.date.timeIntervalSinceReferenceDate,
+                   date.timeIntervalSinceReferenceDate,
+                   accuracy: 0.1)
+  }
 
   /// Test that it removes cached object
   func testRemoveObject() {
