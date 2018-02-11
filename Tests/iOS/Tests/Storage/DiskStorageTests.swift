@@ -129,6 +129,14 @@ final class DiskStorageTests: XCTestCase {
     let cachedObject: User? = try storage.object(ofType: User.self, forKey: key)
     XCTAssertNotNil(cachedObject)
   }
+  
+  /// Test expired object
+  func testExpiredObject() throws {
+    try storage.setObject(testObject, forKey: key, expiry: .seconds(0.9))
+    XCTAssertFalse(try! storage.isExpiredObject(ofType: User.self, forKey: key))
+    sleep(1)
+    XCTAssertTrue(try! storage.isExpiredObject(ofType: User.self, forKey: key))
+  }
 
   /// Test that it clears cache directory
   func testClear() throws {
