@@ -45,7 +45,7 @@ public protocol StorageAware {
    Clears all expired objects.
    */
   func removeExpiredObjects() throws
-  
+
   /**
    Check if an expired object by the given key.
    - Parameter key: Unique key to identify the object.
@@ -66,7 +66,7 @@ public extension StorageAware {
       return false
     }
   }
-  
+
   func isExpiredObject<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Bool {
     do {
       let entry = try self.entry(ofType: type, forKey: key)
