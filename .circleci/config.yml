@@ -10,8 +10,8 @@ jobs:
       - run: xcodebuild -project Cache.xcodeproj -scheme "Cache-macOS" -sdk macosx -enableCodeCoverage YES test
       - run: xcodebuild -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator clean
       - run: xcodebuild -project Cache.xcodeproj -scheme "Cache-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=11.3,name=iPhone X' -enableCodeCoverage YES test
-      - run: xcodebuild -project Cache.xcodeproj -scheme "Cache-tvOS" -destination 'platform=tvOS Simulator,name=Apple TV 4K,OS=11.2' clean
-      - run: xcodebuild -project Cache.xcodeproj -scheme "Cache-tvOS" -destination 'platform=tvOS Simulator,name=Apple TV 4K,OS=11.2' -enableCodeCoverage YES test
+      - run: xcodebuild -project Cache.xcodeproj -scheme "Cache-tvOS" -destination 'platform=tvOS Simulator,name=Apple TV,OS=11.3' clean
+      - run: xcodebuild -project Cache.xcodeproj -scheme "Cache-tvOS" -destination 'platform=tvOS Simulator,name=Apple TV,OS=11.3' -enableCodeCoverage YES test
 
 workflows:
   version: 2
