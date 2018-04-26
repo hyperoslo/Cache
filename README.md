@@ -145,7 +145,7 @@ On iOS, tvOS we can also specify `protectionType` on `DiskConfig` to add a level
 
 ### Sync APIs
 
-`Storage` is sync by default and is `thead safe`, you can access it from any queues. All Sync functions are constrained by `StorageAware` protocol.
+`Storage` is sync by default and is `thread safe`, you can access it from any queues. All Sync functions are constrained by `StorageAware` protocol.
 
 ```swift
 // Save to storage
