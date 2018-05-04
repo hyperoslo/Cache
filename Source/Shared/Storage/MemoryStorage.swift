@@ -14,7 +14,6 @@ final class MemoryStorage {
   init(config: MemoryConfig) {
     self.config = config
     self.cache.countLimit = Int(config.countLimit)
-    self.cache.totalCostLimit = Int(config.totalCostLimit)
   }
 }
 
