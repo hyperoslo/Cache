@@ -212,7 +212,6 @@ storage.async.setObject("Oslo", forKey: "my favorite city") { result in
       print("saved successfully")
     case .error(let error):
       print(error)
-    }
   }
 }
 
@@ -222,7 +221,6 @@ storage.async.object(ofType: String.self, forKey: "my favorite city") { result i
       print("my favorite city is \(city)")
     case .error(let error):
       print(error)
-    }
   }
 }
 
@@ -233,11 +231,21 @@ storage.async.existsObject(ofType: String.self, forKey: "my favorite city") { re
 }
 
 storage.async.removeAll() { result in
-  print("removal completes")
+  switch result {
+    case .value:
+      print("removal completes")
+    case .error(let error):
+      print(error)
+  }
 }
 
 storage.async.removeExpiredObjects() { result in
-  print("removal completes")
+  switch result {
+    case .value:
+      print("removal completes")
+    case .error(let error):
+      print(error)
+  }
 }
 ```
 
