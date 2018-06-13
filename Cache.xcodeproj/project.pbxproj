@@ -68,6 +68,11 @@
 		D270149620D125AC003B45C7 /* MemoryCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270149320D125AC003B45C7 /* MemoryCapsule.swift */; };
 		D270149E20D1286F003B45C7 /* MemoryStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF987B1F69513800CE8F68 /* MemoryStorageTests.swift */; };
 		D27014A020D12870003B45C7 /* MemoryStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF987B1F69513800CE8F68 /* MemoryStorageTests.swift */; };
+		D27014A120D129A2003B45C7 /* DiskStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98791F69513800CE8F68 /* DiskStorageTests.swift */; };
+		D27014A320D129A3003B45C7 /* DiskStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98791F69513800CE8F68 /* DiskStorageTests.swift */; };
+		D27014A520D129EB003B45C7 /* TransformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27014A420D129EB003B45C7 /* TransformerFactory.swift */; };
+		D27014A620D129EB003B45C7 /* TransformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27014A420D129EB003B45C7 /* TransformerFactory.swift */; };
+		D27014A720D129EB003B45C7 /* TransformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27014A420D129EB003B45C7 /* TransformerFactory.swift */; };
 		D28897051F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897061F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897071F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
@@ -163,6 +168,7 @@
 		D270148B20D113EA003B45C7 /* Optional+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extension.swift"; sourceTree = "<group>"; };
 		D270148F20D1251E003B45C7 /* TypeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeWrapper.swift; sourceTree = "<group>"; };
 		D270149320D125AC003B45C7 /* MemoryCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCapsule.swift; sourceTree = "<group>"; };
+		D27014A420D129EB003B45C7 /* TransformerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerFactory.swift; sourceTree = "<group>"; };
 		D285143E1F6FFE1F00C674D1 /* ObjectConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectConverterTests.swift; sourceTree = "<group>"; };
 		D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extensions.swift"; sourceTree = "<group>"; };
 		D292DAFC1F6A970B0060F614 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -316,6 +322,7 @@
 				D270148B20D113EA003B45C7 /* Optional+Extension.swift */,
 				D270148F20D1251E003B45C7 /* TypeWrapper.swift */,
 				D270149320D125AC003B45C7 /* MemoryCapsule.swift */,
+				D27014A420D129EB003B45C7 /* TransformerFactory.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -789,6 +796,7 @@
 				D270147220D1018A003B45C7 /* Transformer.swift in Sources */,
 				D21B668C1F6A723C00125DE1 /* Types.swift in Sources */,
 				D2D4CC261FA3426B00E4A2D5 /* JSONArrayWrapper.swift in Sources */,
+				D27014A720D129EB003B45C7 /* TransformerFactory.swift in Sources */,
 				D270147E20D107DA003B45C7 /* SyncStorage.swift in Sources */,
 				D292DAFF1F6A970B0060F614 /* Result.swift in Sources */,
 				D21B669A1F6A724300125DE1 /* Date+Extensions.swift in Sources */,
@@ -812,6 +820,7 @@
 			files = (
 				D2CF98201F69427C00CE8F68 /* TestCase+Extensions.swift in Sources */,
 				D2CF98231F69427C00CE8F68 /* TestHelper.swift in Sources */,
+				D27014A320D129A3003B45C7 /* DiskStorageTests.swift in Sources */,
 				D27014A020D12870003B45C7 /* MemoryStorageTests.swift in Sources */,
 				D2CF98261F69427C00CE8F68 /* User.swift in Sources */,
 				D28A1D241F6FFEF60030DF81 /* ObjectConverterTests.swift in Sources */,
@@ -833,6 +842,7 @@
 				D2D4CC281FA342CA00E4A2D5 /* JSONWrapperTests.swift in Sources */,
 				D28C9BAF1F67EF8300C180C1 /* UIImage+ExtensionsTests.swift in Sources */,
 				D2CF987D1F69513800CE8F68 /* MemoryCapsuleTests.swift in Sources */,
+				D27014A120D129A2003B45C7 /* DiskStorageTests.swift in Sources */,
 				D2CF98801F69513800CE8F68 /* TypeWrapperTests.swift in Sources */,
 				D2CF98241F69427C00CE8F68 /* User.swift in Sources */,
 				D2CF981E1F69427C00CE8F68 /* TestCase+Extensions.swift in Sources */,
@@ -857,6 +867,7 @@
 				D270147120D1018A003B45C7 /* Transformer.swift in Sources */,
 				D21B66831F6A723C00125DE1 /* Types.swift in Sources */,
 				D2D4CC251FA3426B00E4A2D5 /* JSONArrayWrapper.swift in Sources */,
+				D27014A620D129EB003B45C7 /* TransformerFactory.swift in Sources */,
 				D270147D20D107DA003B45C7 /* SyncStorage.swift in Sources */,
 				D292DAFE1F6A970B0060F614 /* Result.swift in Sources */,
 				D21B66991F6A724200125DE1 /* Date+Extensions.swift in Sources */,
@@ -906,6 +917,7 @@
 				D2CF98601F694FFA00CE8F68 /* DiskConfig.swift in Sources */,
 				D270147020D1018A003B45C7 /* Transformer.swift in Sources */,
 				D292DAFD1F6A970B0060F614 /* Result.swift in Sources */,
+				D27014A520D129EB003B45C7 /* TransformerFactory.swift in Sources */,
 				D2D4CC241FA3426B00E4A2D5 /* JSONArrayWrapper.swift in Sources */,
 				D270147C20D107DA003B45C7 /* SyncStorage.swift in Sources */,
 				D2CF98671F694FFA00CE8F68 /* Expiry.swift in Sources */,
