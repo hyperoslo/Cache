@@ -67,8 +67,33 @@ All you need to do is to specify the configuration you want with `DiskConfig` an
 let diskConfig = DiskConfig(name: "Floppy")
 let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
 
-let storage = try? Storage(diskConfig: diskConfig, memoryConfig: memoryConfig)
+let storage = try? Storage(
+  diskConfig: diskConfig, 
+  memoryConfig: memoryConfig, 
+  transformer: TransformerFactory.forCodable(ofType: User.self) // Storage<User>
+)
 ```
+
+### Generic, Type safety and Transformer
+
+All `Storage` now are generic by default, so you can get a type safety experience. Once you create a Storage, it has a type constraint that you don't need to specify type for each operations afterwards.
+`
+If you want to change the type, `Cache` offers `transform` functions, look for `Transformer` and TransformerFactory` for built-in transformers.
+
+```swift
+let storage: Storage<User> = ...
+storage.setObject(superman, forKey: "user")
+
+let imageStorage = storage.transformImage() // Storage<UIImage>
+imageStorage.setObject(image, forKey: "image")
+
+let stringStorage = storage.transformCodable(ofType: String.self) // Storage<String>
+stringStorage.setObject("hello world", forKey: "string")
+```
+
+Each transformation allows you to work with a specific type, however the underlying caching mechanism remains the same, you're working with the same `Storage`, just with different type annotation. You can also create different `Storage` for each type if you want.
+
+`Transformer` is necessary because the need of serialising and deserialising objects to and from `Data` for disk persistency. `Cache` provides default `Transformer ` for `Data`, `Codable` and `UIImage/NSImage`
 
 #### Codable types
 
@@ -102,6 +127,8 @@ public enum StorageError: Error {
   case encodingFailed
   /// The storage has been deallocated
   case deallocated
+  /// Fail to perform transformation to or from Data
+  case transformerFail
 }
 ```
 
