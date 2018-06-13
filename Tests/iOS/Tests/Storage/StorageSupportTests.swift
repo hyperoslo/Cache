@@ -125,15 +125,16 @@ final class StorageSupportTests: XCTestCase {
     XCTAssertEqual(try s.object(forKey: "set") as Set<Int>, set)
   }
 
-  /*
   func testWithSimpleDictionary() throws {
+    let s = storage.support(transformer: TransformerFactory.forCodable(ofType: [String: Int].self))
+
     let dict: [String: Int] = [
       "key1": 1,
       "key2": 2
     ]
 
-    try storage.setObject(dict, forKey: "dict")
-    let cachedObject = try storage.object(ofType: [String: Int].self, forKey: "dict") as [String: Int]
+    try s.setObject(dict, forKey: "dict")
+    let cachedObject = try s.object(forKey: "dict") as [String: Int]
     XCTAssertEqual(cachedObject, dict)
   }
 
@@ -148,44 +149,57 @@ final class StorageSupportTests: XCTestCase {
   }
 
   func testSameKey() throws {
+    let s = storage.support(transformer: TransformerFactory.forCodable(ofType: User.self))
+
     let user = User(firstName: "John", lastName: "Snow")
     let key = "keyMadeOfDragonGlass"
-    try storage.setObject(user, forKey: key)
-    try storage.setObject("Dragonstone", forKey: key)
+    try s.setObject(user, forKey: key)
 
-    XCTAssertNil(try? storage.object(ofType: User.self, forKey: key))
-    XCTAssertNotNil(try storage.object(ofType: String.self, forKey: key))
+    do {
+      let stringStorage = s.support(transformer: TransformerFactory.forCodable(ofType: String.self))
+      try stringStorage.setObject("Dragonstone", forKey: key)
+    }
+
+    XCTAssertNil(try? s.object(forKey: key))
+    XCTAssertNotNil(try s.object(forKey: key))
   }
 
   func testIntFloat() throws {
+    let s = storage.support(transformer: TransformerFactory.forCodable(ofType: Float.self))
     let key = "key"
-    try storage.setObject(10, forKey: key)
+    try s.setObject(10, forKey: key)
 
     try then("Casting to int or float is the same") {
-      XCTAssertEqual(try storage.object(ofType: Int.self, forKey: key), 10)
-      XCTAssertEqual(try storage.object(ofType: Float.self, forKey: key), 10)
+      XCTAssertEqual(try s.object(forKey: key), 10)
+
+      let intStorage = s.support(transformer: TransformerFactory.forCodable(ofType: Int.self))
+      XCTAssertEqual(try intStorage.object(forKey: key), 10)
     }
   }
 
   func testFloatDouble() throws {
+    let s = storage.support(transformer: TransformerFactory.forCodable(ofType: Float.self))
     let key = "key"
-    try storage.setObject(10.5, forKey: key)
+    try s.setObject(10.5, forKey: key)
 
     try then("Casting to float or double is the same") {
-      XCTAssertEqual(try storage.object(ofType: Float.self, forKey: key), 10.5)
-      XCTAssertEqual(try storage.object(ofType: Double.self, forKey: key), 10.5)
+      XCTAssertEqual(try s.object(forKey: key), 10.5)
+
+      let doubleStorage = s.support(transformer: TransformerFactory.forCodable(ofType: Double.self))
+      XCTAssertEqual(try doubleStorage.object(forKey: key), 10.5)
     }
   }
 
   func testCastingToAnotherType() throws {
-    try storage.setObject("Hello", forKey: "string")
+    let s = storage.support(transformer: TransformerFactory.forCodable(ofType: String.self))
+    try s.setObject("Hello", forKey: "string")
 
     do {
-      let cachedObject = try storage.object(ofType: Int.self, forKey: "string")
-      XCTAssertEqual(cachedObject, 10)
+      let intStorage = s.support(transformer: TransformerFactory.forCodable(ofType: Int.self))
+      let _ = try intStorage.object(forKey: "string")
+      XCTFail()
     } catch {
       XCTAssertTrue(error is DecodingError)
     }
   }
- */
 }
