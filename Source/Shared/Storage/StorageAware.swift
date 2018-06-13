@@ -1,7 +1,7 @@
 import Foundation
 
 /// A protocol used for saving and loading from storage
-public protocol StorageAware2 {
+public protocol StorageAware {
   associatedtype T
   /**
    Tries to retrieve the object from the storage.
@@ -54,7 +54,7 @@ public protocol StorageAware2 {
   func isExpiredObject(forKey key: String) throws -> Bool
 }
 
-public extension StorageAware2 {
+public extension StorageAware {
   func object(forKey key: String) throws -> T {
     return try entry(forKey: key).object
   }

@@ -11,7 +11,7 @@ public class HybridStorage<T> {
   }
 }
 
-extension HybridStorage: StorageAware2 {
+extension HybridStorage: StorageAware {
   public func entry(forKey key: String) throws -> Entry<T> {
     do {
       return try memoryStorage.entry(forKey: key)

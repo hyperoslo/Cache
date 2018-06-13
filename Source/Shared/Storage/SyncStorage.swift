@@ -13,7 +13,7 @@ public class SyncStorage<T> {
   }
 }
 
-extension SyncStorage: StorageAware2 {
+extension SyncStorage: StorageAware {
   public func entry(forKey key: String) throws -> Entry<T> {
     var entry: Entry<T>!
     try serialQueue.sync {

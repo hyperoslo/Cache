@@ -1,6 +1,6 @@
 import Foundation
 
-public class MemoryStorage<T>: StorageAware2 {
+public class MemoryStorage<T>: StorageAware {
   fileprivate let cache = NSCache<NSString, MemoryCapsule>()
   // Memory cache keys
   fileprivate var keys = Set<String>()

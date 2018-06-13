@@ -1,23 +1,23 @@
 import Foundation
 
 /// Save objects to file on disk
-final class DiskStorage<T>: StorageAware2 {
+final public class DiskStorage<T> {
   enum Error: Swift.Error {
     case fileEnumeratorFailed
   }
 
   /// File manager to read/write to the disk
-  private let fileManager: FileManager
+  public let fileManager: FileManager
   /// Configuration
   fileprivate let config: DiskConfig
   /// The computed path `directory+name`
-  private let path: String
+  public let path: String
 
   private let transformer: Transformer<T>
 
   // MARK: - Initialization
 
-  required init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<T>) throws {
+  public required init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<T>) throws {
     self.config = config
     self.fileManager = fileManager
     self.transformer = transformer
@@ -47,8 +47,8 @@ final class DiskStorage<T>: StorageAware2 {
   }
 }
 
-extension DiskStorage {
-  func entry(forKey key: String) throws -> Entry<T> {
+extension DiskStorage: StorageAware {
+  public func entry(forKey key: String) throws -> Entry<T> {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
     let attributes = try fileManager.attributesOfItem(atPath: filePath)
@@ -69,7 +69,7 @@ extension DiskStorage {
     )
   }
 
-  func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
+  public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     let expiry = expiry ?? config.expiry
     let data = try transformer.toData(object)
     let filePath = makeFilePath(for: key)
@@ -77,16 +77,16 @@ extension DiskStorage {
     try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)
   }
 
-  func removeObject(forKey key: String) throws {
+  public func removeObject(forKey key: String) throws {
     try fileManager.removeItem(atPath: makeFilePath(for: key))
   }
 
-  func removeAll() throws {
+  public func removeAll() throws {
     try fileManager.removeItem(atPath: path)
     try createDirectory()
   }
 
-  func removeExpiredObjects() throws {
+  public func removeExpiredObjects() throws {
     let storageURL = URL(fileURLWithPath: path)
     let resourceKeys: [URLResourceKey] = [
       .isDirectoryKey,
@@ -234,7 +234,7 @@ extension DiskStorage {
   }
 }
 
-extension DiskStorage {
+public extension DiskStorage {
   func support<U>(transformer: Transformer<U>) -> DiskStorage<U> {
     // swiftlint:disable force_try
     let storage = try! DiskStorage<U>(

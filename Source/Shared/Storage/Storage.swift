@@ -45,7 +45,7 @@ public class Storage<T> {
   public lazy var async = self.asyncStorage
 }
 
-extension Storage: StorageAware2 {
+extension Storage: StorageAware {
   public func entry(forKey key: String) throws -> Entry<T> {
     return try self.syncStorage.entry(forKey: key)
   }
