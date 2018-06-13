@@ -79,6 +79,8 @@
 		D27014AD20D12CC3003B45C7 /* SyncStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D292DB001F6AA06B0060F614 /* SyncStorageTests.swift */; };
 		D27014AE20D12D83003B45C7 /* AsyncStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D292DB031F6AA0730060F614 /* AsyncStorageTests.swift */; };
 		D27014AF20D12D84003B45C7 /* AsyncStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D292DB031F6AA0730060F614 /* AsyncStorageTests.swift */; };
+		D27014B020D12E37003B45C7 /* StorageSupportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98881F695F9400CE8F68 /* StorageSupportTests.swift */; };
+		D27014B120D12E38003B45C7 /* StorageSupportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98881F695F9400CE8F68 /* StorageSupportTests.swift */; };
 		D28897051F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897061F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897071F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
@@ -200,7 +202,7 @@
 		D2CF987A1F69513800CE8F68 /* HybridStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridStorageTests.swift; sourceTree = "<group>"; };
 		D2CF987B1F69513800CE8F68 /* MemoryStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStorageTests.swift; sourceTree = "<group>"; };
 		D2CF98861F695B8F00CE8F68 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
-		D2CF98881F695F9400CE8F68 /* TypeWrapperStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeWrapperStorageTests.swift; sourceTree = "<group>"; };
+		D2CF98881F695F9400CE8F68 /* StorageSupportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSupportTests.swift; sourceTree = "<group>"; };
 		D2D4CC151FA3145000E4A2D5 /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
 		D2D4CC191FA3166900E4A2D5 /* MD5Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5Tests.swift; sourceTree = "<group>"; };
 		D2D4CC1F1FA3411300E4A2D5 /* JSONDictionaryWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDictionaryWrapper.swift; sourceTree = "<group>"; };
@@ -386,7 +388,7 @@
 				D2CF98791F69513800CE8F68 /* DiskStorageTests.swift */,
 				D2CF987A1F69513800CE8F68 /* HybridStorageTests.swift */,
 				D2CF987B1F69513800CE8F68 /* MemoryStorageTests.swift */,
-				D2CF98881F695F9400CE8F68 /* TypeWrapperStorageTests.swift */,
+				D2CF98881F695F9400CE8F68 /* StorageSupportTests.swift */,
 				D292DB001F6AA06B0060F614 /* SyncStorageTests.swift */,
 				D292DB031F6AA0730060F614 /* AsyncStorageTests.swift */,
 				D236F3191F6BEF73004EE01F /* StorageTests.swift */,
@@ -831,6 +833,7 @@
 				D2CF98261F69427C00CE8F68 /* User.swift in Sources */,
 				D27014AE20D12D83003B45C7 /* AsyncStorageTests.swift in Sources */,
 				D28A1D241F6FFEF60030DF81 /* ObjectConverterTests.swift in Sources */,
+				D27014B120D12E38003B45C7 /* StorageSupportTests.swift in Sources */,
 				D27014AD20D12CC3003B45C7 /* SyncStorageTests.swift in Sources */,
 				D27014AA20D12BA4003B45C7 /* HybridStorageTests.swift in Sources */,
 			);
@@ -852,6 +855,7 @@
 				D28C9BAF1F67EF8300C180C1 /* UIImage+ExtensionsTests.swift in Sources */,
 				D2CF987D1F69513800CE8F68 /* MemoryCapsuleTests.swift in Sources */,
 				D27014A120D129A2003B45C7 /* DiskStorageTests.swift in Sources */,
+				D27014B020D12E37003B45C7 /* StorageSupportTests.swift in Sources */,
 				D2CF98801F69513800CE8F68 /* TypeWrapperTests.swift in Sources */,
 				D27014A820D12BA3003B45C7 /* HybridStorageTests.swift in Sources */,
 				D27014AF20D12D84003B45C7 /* AsyncStorageTests.swift in Sources */,
