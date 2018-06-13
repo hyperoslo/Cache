@@ -49,9 +49,9 @@ extension SyncStorage: StorageAware {
 }
 
 public extension SyncStorage {
-  func support<U>(transformer: Transformer<U>) -> SyncStorage<U> {
+  func transform<U>(transformer: Transformer<U>) -> SyncStorage<U> {
     let storage = SyncStorage<U>(
-      storage: innerStorage.support(transformer: transformer),
+      storage: innerStorage.transform(transformer: transformer),
       serialQueue: serialQueue
     )
 

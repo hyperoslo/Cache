@@ -235,7 +235,7 @@ extension DiskStorage {
 }
 
 public extension DiskStorage {
-  func support<U>(transformer: Transformer<U>) -> DiskStorage<U> {
+  func transform<U>(transformer: Transformer<U>) -> DiskStorage<U> {
     // swiftlint:disable force_try
     let storage = try! DiskStorage<U>(
       config: config,

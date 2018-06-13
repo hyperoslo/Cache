@@ -45,10 +45,10 @@ extension HybridStorage: StorageAware {
 }
 
 public extension HybridStorage {
-  func support<U>(transformer: Transformer<U>) -> HybridStorage<U> {
+  func transform<U>(transformer: Transformer<U>) -> HybridStorage<U> {
     let storage = HybridStorage<U>(
-      memoryStorage: memoryStorage.support(),
-      diskStorage: diskStorage.support(transformer: transformer)
+      memoryStorage: memoryStorage.transform(),
+      diskStorage: diskStorage.transform(transformer: transformer)
     )
 
     return storage

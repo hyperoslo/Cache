@@ -29,7 +29,7 @@ final class SyncStorageTests: XCTestCase {
   }
 
   func testRemoveAll() throws {
-    let intStorage = storage.support(transformer: TransformerFactory.forCodable(ofType: Int.self))
+    let intStorage = storage.transform(transformer: TransformerFactory.forCodable(ofType: Int.self))
     try given("add a lot of objects") {
       try Array(0..<100).forEach {
         try intStorage.setObject($0, forKey: "key-\($0)")

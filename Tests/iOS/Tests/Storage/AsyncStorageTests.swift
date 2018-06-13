@@ -37,7 +37,7 @@ final class AsyncStorageTests: XCTestCase {
   }
 
   func testRemoveAll() {
-    let intStorage = storage.support(transformer: TransformerFactory.forCodable(ofType: Int.self))
+    let intStorage = storage.transform(transformer: TransformerFactory.forCodable(ofType: Int.self))
     let expectation = self.expectation(description: #function)
     given("add a lot of objects") {
       Array(0..<100).forEach {

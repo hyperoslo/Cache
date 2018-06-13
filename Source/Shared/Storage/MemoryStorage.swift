@@ -58,7 +58,7 @@ extension MemoryStorage {
 }
 
 public extension MemoryStorage {
-  func support<U>() -> MemoryStorage<U> {
+  func transform<U>() -> MemoryStorage<U> {
     let storage = MemoryStorage<U>(config: config)
     return storage
   }

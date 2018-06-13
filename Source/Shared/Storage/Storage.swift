@@ -68,10 +68,10 @@ extension Storage: StorageAware {
 }
 
 public extension Storage {
-  func support<U>(transformer: Transformer<U>) -> Storage<U> {
+  func transform<U>(transformer: Transformer<U>) -> Storage<U> {
     let storage = Storage<U>(
-      syncStorage: syncStorage.support(transformer: transformer),
-      asyncStorage: asyncStorage.support(transformer: transformer)
+      syncStorage: syncStorage.transform(transformer: transformer),
+      asyncStorage: asyncStorage.transform(transformer: transformer)
     )
     return storage
   }

@@ -118,9 +118,9 @@ extension AsyncStorage {
 }
 
 public extension AsyncStorage {
-  func support<U>(transformer: Transformer<U>) -> AsyncStorage<U> {
+  func transform<U>(transformer: Transformer<U>) -> AsyncStorage<U> {
     let storage = AsyncStorage<U>(
-      storage: innerStorage.support(transformer: transformer),
+      storage: innerStorage.transform(transformer: transformer),
       serialQueue: serialQueue
     )
 
