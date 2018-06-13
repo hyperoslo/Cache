@@ -190,7 +190,7 @@ try? storage.setObject(data, forKey: "a bunch of bytes")
 try? storage.setObject(authorizeURL, forKey: "authorization URL")
 
 // Load from storage
-let score = try? storage.object(=forKey: "score")
+let score = try? storage.object(forKey: "score")
 let favoriteCharacter = try? storage.object(forKey: "my favorite city")
 
 // Check if an object exists
