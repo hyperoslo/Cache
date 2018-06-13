@@ -46,7 +46,7 @@ public class Storage2<T> {
 }
 
 extension Storage2: StorageAware2 {
-  public func entry(forKey key: String) throws -> Entry2<T> {
+  public func entry(forKey key: String) throws -> Entry<T> {
     return try self.syncStorage.entry(forKey: key)
   }
 

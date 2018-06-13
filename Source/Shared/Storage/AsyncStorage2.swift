@@ -14,7 +14,7 @@ public class AsyncStorage2<T> {
 }
 
 extension AsyncStorage2 {
-  public func entry(forKey key: String, completion: @escaping (Result<Entry2<T>>) -> Void) {
+  public func entry(forKey key: String, completion: @escaping (Result<Entry<T>>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
         completion(Result.error(StorageError.deallocated))
@@ -99,7 +99,7 @@ extension AsyncStorage2 {
   }
 
   public func object(forKey key: String, completion: @escaping (Result<T>) -> Void) {
-    entry(forKey: key, completion: { (result: Result<Entry2<T>>) in
+    entry(forKey: key, completion: { (result: Result<Entry<T>>) in
       completion(result.map({ entry in
         return entry.object
       }))

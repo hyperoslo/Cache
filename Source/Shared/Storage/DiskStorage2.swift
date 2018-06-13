@@ -48,7 +48,7 @@ final class DiskStorage2<T>: StorageAware2 {
 }
 
 extension DiskStorage2 {
-  func entry(forKey key: String) throws -> Entry2<T> {
+  func entry(forKey key: String) throws -> Entry<T> {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
     let attributes = try fileManager.attributesOfItem(atPath: filePath)
@@ -62,7 +62,7 @@ extension DiskStorage2 {
       "filePath": filePath
     ]
 
-    return Entry2(
+    return Entry(
       object: object,
       expiry: Expiry.date(date),
       meta: meta
@@ -93,7 +93,7 @@ extension DiskStorage2 {
       .contentModificationDateKey,
       .totalFileAllocatedSizeKey
     ]
-    var resourceObjects = [ResourceObject2]()
+    var resourceObjects = [ResourceObject]()
     var filesToDelete = [URL]()
     var totalSize: UInt = 0
     let fileEnumerator = fileManager.enumerator(
@@ -144,7 +144,7 @@ extension DiskStorage2 {
   }
 }
 
-typealias ResourceObject2 = (url: Foundation.URL, resourceValues: URLResourceValues)
+typealias ResourceObject = (url: Foundation.URL, resourceValues: URLResourceValues)
 
 extension DiskStorage2 {
   /**

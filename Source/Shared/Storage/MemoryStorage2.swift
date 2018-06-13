@@ -43,7 +43,7 @@ extension MemoryStorage2 {
     keys.remove(key)
   }
 
-  public func entry(forKey key: String) throws -> Entry2<T> {
+  public func entry(forKey key: String) throws -> Entry<T> {
     guard let capsule = cache.object(forKey: NSString(string: key)) else {
       throw StorageError.notFound
     }
@@ -52,7 +52,7 @@ extension MemoryStorage2 {
       throw StorageError.typeNotMatch
     }
 
-    return Entry2(object: object, expiry: capsule.expiry)
+    return Entry(object: object, expiry: capsule.expiry)
   }
 }
 

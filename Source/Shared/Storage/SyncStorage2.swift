@@ -14,8 +14,8 @@ public class SyncStorage2<T> {
 }
 
 extension SyncStorage2: StorageAware2 {
-  public func entry(forKey key: String) throws -> Entry2<T> {
-    var entry: Entry2<T>!
+  public func entry(forKey key: String) throws -> Entry<T> {
+    var entry: Entry<T>!
     try serialQueue.sync {
       entry = try innerStorage.entry(forKey: key)
     }

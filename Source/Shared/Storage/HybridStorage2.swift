@@ -12,7 +12,7 @@ public class HybridStorage2<T> {
 }
 
 extension HybridStorage2: StorageAware2 {
-  public func entry(forKey key: String) throws -> Entry2<T> {
+  public func entry(forKey key: String) throws -> Entry<T> {
     do {
       return try memoryStorage.entry(forKey: key)
     } catch {

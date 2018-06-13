@@ -15,7 +15,7 @@ public protocol StorageAware2 {
    - Parameter key: Unique key to identify the object in the cache
    - Returns: Object wrapper with metadata or nil if not found
    */
-  func entry(forKey key: String) throws -> Entry2<T>
+  func entry(forKey key: String) throws -> Entry<T>
 
   /**
    Removes the object by the given key.
