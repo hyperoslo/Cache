@@ -9,7 +9,7 @@ final class JSONDecoderExtensionsTests: XCTestCase {
     let memory = MemoryStorage<User>(config: MemoryConfig())
     let disk = try! DiskStorage<User>(
       config: DiskConfig(name: "HybridDisk"),
-      transformer: Transformer<User>.forCodable(ofType: User.self)
+      transformer: TransformerFactory.forCodable(ofType: User.self)
     )
 
     storage = HybridStorage(memoryStorage: memory, diskStorage: disk)
