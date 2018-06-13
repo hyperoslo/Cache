@@ -18,8 +18,8 @@
   * [Sync APIs](#sync-apis)
   * [Async APIS](#async-apis)
   * [Expiry date](#expiry-date)
-* [What about images?](#what-about-images)
 * [Handling JSON response](#handling-json-response)
+* [What about images?](#what-about-images)
 * [Installation](#installation)
 * [Author](#author)
 * [Contributing](#contributing)
@@ -329,7 +329,7 @@ Alamofire.request("https://gameofthrones.org/mostFavoriteCharacter").responseStr
 }
 ```
 
-## What abou images
+## What about images
 
 If you want to load image into `UIImageView` or `NSImageView`, then we also have a nice gift for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary) and uses `Cache` under the hood to make you life easier when it comes to working with remote images.
 
