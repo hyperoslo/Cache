@@ -36,12 +36,11 @@ with out-of-box implementations and great customization possibilities. `Cache` u
 ## Key features
 
 - [x] Work with Swift 4 `Codable`. Anything conforming to `Codable` will be saved and loaded easily by `Storage`.
-- [X] Disk storage by default. Optionally using `memory storage` to enable hybrid.
+- [x] Hybrid with memory and disk storage.
 - [X] Many options via `DiskConfig` and `MemoryConfig`.
 - [x] Support `expiry` and clean up of expired objects.
 - [x] Thread safe. Operations can be accessed from any queue.
 - [x] Sync by default. Also support Async APIs.
-- [X] Store images via `ImageWrapper`.
 - [x] Extensive unit test coverage and great documentation.
 - [x] iOS, tvOS and macOS support.
 
@@ -49,11 +48,19 @@ with out-of-box implementations and great customization possibilities. `Cache` u
 
 ### Storage
 
-`Cache` is built based on [Chain-of-responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern), in which there are many processing objects, each knows how to do 1 task and delegates to the next one. But that's just implementation detail. All you need to know is `Storage`, it saves and loads `Codable` objects.
+`Cache` is built based on [Chain-of-responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern), in which there are many processing objects, each knows how to do 1 task and delegates to the next one, so can you compose Storages the way you like.
 
-`Storage` has disk storage and an optional memory storage. Memory storage should be less time and memory consuming, while disk storage is used for content that outlives the application life-cycle, see it more like a convenient way to store user information that should persist across application launches.
+For now the following Storage are supported
 
-`DiskConfig` is required to set up disk storage. You can optionally pass `MemoryConfig` to use memory as front storage.
+- `MemoryStorage`: save object to memory.
+- `DiskStorage`: save object to disk.
+- `HybridStorage`: save object to memory and disk, so you get persistented object on disk, while fast access with in memory objects.
+- `SyncStorage`: blocking APIs, all read and write operations are scheduled in a serial queue, all sync manner.
+- `AsyncStorage`: non-blocking APIs, operations are scheduled in an internal queue for serial processing. No read and write should happen at the same time.
+
+Although you can use those Storage at your discretion, you don't have to. Because we also provide a convenient `Storage` which uses `HybridStorage` under the hood, while exposes sync and async APIs through `SyncStorage` and `AsyncStorage`.
+
+All you need to do is to specify the configuration you want with `DiskConfig` and `MemoryConfig`. The default configurations are good to go, but you can customise a lot.
 
 
 ```swift
