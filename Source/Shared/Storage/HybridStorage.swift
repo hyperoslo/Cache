@@ -2,10 +2,10 @@ import Foundation
 
 /// Use both memory and disk storage. Try on memory first.
 public class HybridStorage<T> {
-  let memoryStorage: MemoryStorage<T>
-  let diskStorage: DiskStorage<T>
+  public let memoryStorage: MemoryStorage<T>
+  public let diskStorage: DiskStorage<T>
 
-  init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
+  public init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
     self.memoryStorage = memoryStorage
     self.diskStorage = diskStorage
   }

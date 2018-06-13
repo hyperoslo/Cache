@@ -4,10 +4,10 @@ import Dispatch
 /// Manipulate storage in a "all async" manner.
 /// The completion closure will be called when operation completes.
 public class AsyncStorage<T> {
-  fileprivate let innerStorage: HybridStorage<T>
+  public let innerStorage: HybridStorage<T>
   public let serialQueue: DispatchQueue
 
-  init(storage: HybridStorage<T>, serialQueue: DispatchQueue) {
+  public init(storage: HybridStorage<T>, serialQueue: DispatchQueue) {
     self.innerStorage = storage
     self.serialQueue = serialQueue
   }

@@ -4,10 +4,10 @@ import Dispatch
 /// Manipulate storage in a "all sync" manner.
 /// Block the current queue until the operation completes.
 public class SyncStorage<T> {
-  fileprivate let innerStorage: HybridStorage<T>
-  fileprivate let serialQueue: DispatchQueue
+  public let innerStorage: HybridStorage<T>
+  public let serialQueue: DispatchQueue
 
-  init(innerStorage: HybridStorage<T>, serialQueue: DispatchQueue) {
+  public init(innerStorage: HybridStorage<T>, serialQueue: DispatchQueue) {
     self.innerStorage = innerStorage
     self.serialQueue = serialQueue
   }
