@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 /// Save objects to memory based on NSCache
 final class MemoryStorage {
