@@ -1,45 +1,56 @@
 import Foundation
 
 /// Use both memory and disk storage. Try on memory first.
-class HybridStorage {
-  let memoryStorage: MemoryStorage
-  let diskStorage: DiskStorage
+public class HybridStorage<T> {
+  public let memoryStorage: MemoryStorage<T>
+  public let diskStorage: DiskStorage<T>
 
-  init(memoryStorage: MemoryStorage, diskStorage: DiskStorage) {
+  public init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
     self.memoryStorage = memoryStorage
     self.diskStorage = diskStorage
   }
 }
 
 extension HybridStorage: StorageAware {
-  func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
+  public func entry(forKey key: String) throws -> Entry<T> {
     do {
-      return try memoryStorage.entry(ofType: type, forKey: key)
+      return try memoryStorage.entry(forKey: key)
     } catch {
-      let entry = try diskStorage.entry(ofType: type, forKey: key)
+      let entry = try diskStorage.entry(forKey: key)
       // set back to memoryStorage
       memoryStorage.setObject(entry.object, forKey: key, expiry: entry.expiry)
       return entry
     }
   }
 
-  func removeObject(forKey key: String) throws {
+  public func removeObject(forKey key: String) throws {
     memoryStorage.removeObject(forKey: key)
     try diskStorage.removeObject(forKey: key)
   }
 
-  func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
+  public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     memoryStorage.setObject(object, forKey: key, expiry: expiry)
     try diskStorage.setObject(object, forKey: key, expiry: expiry)
   }
 
-  func removeAll() throws {
+  public func removeAll() throws {
     memoryStorage.removeAll()
     try diskStorage.removeAll()
   }
 
-  func removeExpiredObjects() throws {
+  public func removeExpiredObjects() throws {
     memoryStorage.removeExpiredObjects()
     try diskStorage.removeExpiredObjects()
+  }
+}
+
+public extension HybridStorage {
+  func transform<U>(transformer: Transformer<U>) -> HybridStorage<U> {
+    let storage = HybridStorage<U>(
+      memoryStorage: memoryStorage.transform(),
+      diskStorage: diskStorage.transform(transformer: transformer)
+    )
+
+    return storage
   }
 }

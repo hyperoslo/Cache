@@ -1,54 +1,61 @@
 import Foundation
 
 /// Save objects to file on disk
-final class DiskStorage {
+final public class DiskStorage<T> {
   enum Error: Swift.Error {
     case fileEnumeratorFailed
   }
 
   /// File manager to read/write to the disk
-  fileprivate let fileManager: FileManager
+  public let fileManager: FileManager
   /// Configuration
   fileprivate let config: DiskConfig
   /// The computed path `directory+name`
-  let path: String
+  public let path: String
+
+  private let transformer: Transformer<T>
 
   // MARK: - Initialization
 
-  required init(config: DiskConfig, fileManager: FileManager = FileManager.default) throws {
+  public required init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<T>) throws {
     self.config = config
     self.fileManager = fileManager
+    self.transformer = transformer
 
     let url: URL
     if let directory = config.directory {
       url = directory
     } else {
       url = try fileManager.url(
-        for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true
+        for: .documentDirectory,
+        in: .userDomainMask,
+        appropriateFor: nil,
+        create: true
       )
     }
 
     // path
-    path = url.appendingPathComponent(config.name, isDirectory: true).path
+    self.path = url.appendingPathComponent(config.name, isDirectory: true).path
+
     try createDirectory()
 
     // protection
     #if os(iOS) || os(tvOS)
-      if let protectionType = config.protectionType {
-        try setDirectoryAttributes([
-          FileAttributeKey.protectionKey: protectionType
-        ])
-      }
+    if let protectionType = config.protectionType {
+      try setDirectoryAttributes([
+        FileAttributeKey.protectionKey: protectionType
+      ])
+    }
     #endif
   }
 }
 
 extension DiskStorage: StorageAware {
-  func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
+  public func entry(forKey key: String) throws -> Entry<T> {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
     let attributes = try fileManager.attributesOfItem(atPath: filePath)
-    let object: T = try DataSerializer.deserialize(data: data)
+    let object = try transformer.fromData(data)
 
     guard let date = attributes[.modificationDate] as? Date else {
       throw StorageError.malformedFileAttributes
@@ -65,24 +72,24 @@ extension DiskStorage: StorageAware {
     )
   }
 
-  func setObject<T: Codable>(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
+  public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     let expiry = expiry ?? config.expiry
-    let data = try DataSerializer.serialize(object: object)
+    let data = try transformer.toData(object)
     let filePath = makeFilePath(for: key)
     _ = fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
     try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)
   }
 
-  func removeObject(forKey key: String) throws {
+  public func removeObject(forKey key: String) throws {
     try fileManager.removeItem(atPath: makeFilePath(for: key))
   }
 
-  func removeAll() throws {
+  public func removeAll() throws {
     try fileManager.removeItem(atPath: path)
     try createDirectory()
   }
 
-  func removeExpiredObjects() throws {
+  public func removeExpiredObjects() throws {
     let storageURL = URL(fileURLWithPath: path)
     let resourceKeys: [URLResourceKey] = [
       .isDirectoryKey,
@@ -227,5 +234,18 @@ extension DiskStorage {
     if let expiryDate = attributes[.modificationDate] as? Date, expiryDate.inThePast {
       try fileManager.removeItem(atPath: filePath)
     }
+  }
+}
+
+public extension DiskStorage {
+  func transform<U>(transformer: Transformer<U>) -> DiskStorage<U> {
+    // swiftlint:disable force_try
+    let storage = try! DiskStorage<U>(
+      config: config,
+      fileManager: fileManager,
+      transformer: transformer
+    )
+
+    return storage
   }
 }
