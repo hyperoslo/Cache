@@ -5,61 +5,50 @@ import Dispatch
 /// Synchronous by default. Use `async` for asynchronous operations.
 public class Storage2<T> {
   /// Used for sync operations
-  fileprivate let syncStorage: SyncStorage<T>
-
-  /// Storage used internally by both sync and async storages
-  private let interalStorage: StorageAware
+  fileprivate let syncStorage: SyncStorage2<T>
 
   /// Initialize storage with configuration options.
   ///
   /// - Parameters:
   ///   - diskConfig: Configuration for disk storage
-  ///   - memoryConfig: Optional. Pass confi if you want memory cache
+  ///   - memoryConfig: Optional. Pass config if you want memory cache
   /// - Throws: Throw StorageError if any.
-  public required init(diskConfig: DiskConfig, memoryConfig: MemoryConfig? = nil) throws {
-    // Disk or Hybrid
-    let storage: StorageAware
-    let disk = try DiskStorage(config: diskConfig)
+  public required init(diskConfig: DiskConfig, memoryConfig: MemoryConfig, transformer: Transformer<T>) throws {
+    let disk = try DiskStorage2(config: diskConfig, transformer: transformer)
+    let memory = MemoryStorage2<T>(config: memoryConfig)
 
-    if let memoryConfig = memoryConfig {
-      let memory = MemoryStorage(config: memoryConfig)
-      storage = HybridStorage(memoryStorage: memory, diskStorage: disk)
-    } else {
-      storage = disk
-    }
-
-    // Wrapper
-    self.interalStorage = TypeWrapperStorage(storage: storage)
-
-    // Sync
-    self.sync = SyncStorage(storage: interalStorage,
-                            serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue"))
+    let hybridStorage = HybridStorage2(memoryStorage: memory, diskStorage: disk)
+    self.syncStorage = SyncStorage2(
+      innerStorage: hybridStorage,
+      serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
+    )
   }
 
   /// Used for async operations
-  public lazy var async: AsyncStorage = AsyncStorage(storage: self.interalStorage,
-                                                     serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue"))
+//  public lazy var async: AsyncStorage = AsyncStorage(
+//    storage: self.interalStorage,
+//    serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
+//  )
 }
 
-extension Storage: StorageAware {
-  public func entry<T: Codable>(ofType type: T.Type, forKey key: String) throws -> Entry<T> {
-    return try self.sync.entry(ofType: type, forKey: key)
+extension Storage2: StorageAware2 {
+  public func entry(forKey key: String) throws -> Entry2<T> {
+    return try self.syncStorage.entry(forKey: key)
   }
 
   public func removeObject(forKey key: String) throws {
-    try self.sync.removeObject(forKey: key)
+    try self.syncStorage.removeObject(forKey: key)
   }
 
-  public func setObject<T: Codable>(_ object: T, forKey key: String,
-                                    expiry: Expiry? = nil) throws {
-    try self.sync.setObject(object, forKey: key, expiry: expiry)
+  public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
+    try self.syncStorage.setObject(object, forKey: key, expiry: expiry)
   }
 
   public func removeAll() throws {
-    try self.sync.removeAll()
+    try self.syncStorage.removeAll()
   }
 
   public func removeExpiredObjects() throws {
-    try self.sync.removeExpiredObjects()
+    try self.syncStorage.removeExpiredObjects()
   }
 }
