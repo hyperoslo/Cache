@@ -46,23 +46,23 @@ try storage.setObject(data, forKey: "data")
 try storage.setObject(date, forKey: "date")
 //
 //// Get objects from the cache
-let cachedString = try? storage.object(ofType: String.self, forKey: "string")
+let cachedString = try? storage.object(forKey: "string")
 print(cachedString)
 
-storage.async.object(ofType: ImageWrapper.self, forKey: "imageWrapper") { result in
+storage.async.object(forKey: "imageWrapper") { result in
     if case .value(let imageWrapper) = result {
         let image = imageWrapper.image
         print(image)
     }
 }
 
-storage.async.object(ofType: Data.self, forKey: "data") { result in
+storage.async.object(forKey: "data") { result in
     if case .value(let data) = result {
         print(data)
     }
 }
 
-storage.async.object(ofType: Data.self, forKey: "data") { result in
+storage.async.object(forKey: "data") { result in
     if case .value(let data) = result {
         print(data)
     }
