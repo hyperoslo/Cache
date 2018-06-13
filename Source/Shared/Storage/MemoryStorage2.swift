@@ -53,3 +53,10 @@ class MemoryStorage2<T>: StorageAware2 {
     return Entry2(object: object, expiry: capsule.expiry)
   }
 }
+
+extension MemoryStorage2 {
+  func support<U>() -> MemoryStorage2<U> {
+    let storage = MemoryStorage2<U>(config: config)
+    return storage
+  }
+}

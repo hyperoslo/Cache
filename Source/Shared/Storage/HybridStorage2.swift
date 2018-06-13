@@ -43,3 +43,14 @@ extension HybridStorage2: StorageAware2 {
     try diskStorage.removeExpiredObjects()
   }
 }
+
+extension HybridStorage2 {
+  func support<U>(transformer: Transformer<U>) -> HybridStorage2<U> {
+    let storage = HybridStorage2<U>(
+      memoryStorage: memoryStorage.support(),
+      diskStorage: diskStorage.support(transformer: transformer)
+    )
+
+    return storage
+  }
+}

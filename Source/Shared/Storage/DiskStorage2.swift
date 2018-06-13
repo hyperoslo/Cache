@@ -7,11 +7,11 @@ final class DiskStorage2<T>: StorageAware2 {
   }
 
   /// File manager to read/write to the disk
-  let fileManager: FileManager
+  private let fileManager: FileManager
   /// Configuration
   fileprivate let config: DiskConfig
   /// The computed path `directory+name`
-  let path: String
+  private let path: String
 
   private let transformer: Transformer<T>
 
@@ -41,7 +41,7 @@ final class DiskStorage2<T>: StorageAware2 {
     if let protectionType = config.protectionType {
       try setDirectoryAttributes([
         FileAttributeKey.protectionKey: protectionType
-        ])
+      ])
     }
     #endif
   }
@@ -229,5 +229,18 @@ extension DiskStorage2 {
     if let expiryDate = attributes[.modificationDate] as? Date, expiryDate.inThePast {
       try fileManager.removeItem(atPath: filePath)
     }
+  }
+}
+
+extension DiskStorage2 {
+  func support<U>(transformer: Transformer<U>) -> DiskStorage2<U> {
+    // swiftlint:disable force_try
+    let storage = try! DiskStorage2<U>(
+      config: config,
+      fileManager: fileManager,
+      transformer: transformer
+    )
+
+    return storage
   }
 }
