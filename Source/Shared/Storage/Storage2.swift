@@ -6,6 +6,7 @@ import Dispatch
 public class Storage2<T> {
   /// Used for sync operations
   fileprivate let syncStorage: SyncStorage2<T>
+  fileprivate let asyncStorage: AsyncStorage2<T>
 
   /// Initialize storage with configuration options.
   ///
@@ -22,13 +23,15 @@ public class Storage2<T> {
       innerStorage: hybridStorage,
       serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
     )
+
+    self.asyncStorage = AsyncStorage2(
+      storage: hybridStorage,
+      serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
+    )
   }
 
   /// Used for async operations
-//  public lazy var async: AsyncStorage = AsyncStorage(
-//    storage: self.interalStorage,
-//    serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
-//  )
+  public lazy var async = self.asyncStorage
 }
 
 extension Storage2: StorageAware2 {
