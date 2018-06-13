@@ -77,8 +77,8 @@ let storage = try? Storage(
 ### Generic, Type safety and Transformer
 
 All `Storage` now are generic by default, so you can get a type safety experience. Once you create a Storage, it has a type constraint that you don't need to specify type for each operations afterwards.
-`
-If you want to change the type, `Cache` offers `transform` functions, look for `Transformer` and TransformerFactory` for built-in transformers.
+
+If you want to change the type, `Cache` offers `transform` functions, look for `Transformer` and `TransformerFactory` for built-in transformers.
 
 ```swift
 let storage: Storage<User> = ...
