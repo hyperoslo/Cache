@@ -1,17 +1,17 @@
 import Foundation
 
 /// Use both memory and disk storage. Try on memory first.
-public class HybridStorage2<T> {
-  let memoryStorage: MemoryStorage2<T>
-  let diskStorage: DiskStorage2<T>
+public class HybridStorage<T> {
+  let memoryStorage: MemoryStorage<T>
+  let diskStorage: DiskStorage<T>
 
-  init(memoryStorage: MemoryStorage2<T>, diskStorage: DiskStorage2<T>) {
+  init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
     self.memoryStorage = memoryStorage
     self.diskStorage = diskStorage
   }
 }
 
-extension HybridStorage2: StorageAware2 {
+extension HybridStorage: StorageAware2 {
   public func entry(forKey key: String) throws -> Entry<T> {
     do {
       return try memoryStorage.entry(forKey: key)
@@ -44,9 +44,9 @@ extension HybridStorage2: StorageAware2 {
   }
 }
 
-public extension HybridStorage2 {
-  func support<U>(transformer: Transformer<U>) -> HybridStorage2<U> {
-    let storage = HybridStorage2<U>(
+public extension HybridStorage {
+  func support<U>(transformer: Transformer<U>) -> HybridStorage<U> {
+    let storage = HybridStorage<U>(
       memoryStorage: memoryStorage.support(),
       diskStorage: diskStorage.support(transformer: transformer)
     )

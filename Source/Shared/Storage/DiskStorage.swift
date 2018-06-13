@@ -1,7 +1,7 @@
 import Foundation
 
 /// Save objects to file on disk
-final class DiskStorage2<T>: StorageAware2 {
+final class DiskStorage<T>: StorageAware2 {
   enum Error: Swift.Error {
     case fileEnumeratorFailed
   }
@@ -47,7 +47,7 @@ final class DiskStorage2<T>: StorageAware2 {
   }
 }
 
-extension DiskStorage2 {
+extension DiskStorage {
   func entry(forKey key: String) throws -> Entry<T> {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
@@ -134,7 +134,7 @@ extension DiskStorage2 {
   }
 }
 
-extension DiskStorage2 {
+extension DiskStorage {
   /**
    Sets attributes on the disk cache folder.
    - Parameter attributes: Directory attributes
@@ -146,7 +146,7 @@ extension DiskStorage2 {
 
 typealias ResourceObject = (url: Foundation.URL, resourceValues: URLResourceValues)
 
-extension DiskStorage2 {
+extension DiskStorage {
   /**
    Builds file name from the key.
    - Parameter key: Unique key to identify the object in the cache
@@ -234,10 +234,10 @@ extension DiskStorage2 {
   }
 }
 
-extension DiskStorage2 {
-  func support<U>(transformer: Transformer<U>) -> DiskStorage2<U> {
+extension DiskStorage {
+  func support<U>(transformer: Transformer<U>) -> DiskStorage<U> {
     // swiftlint:disable force_try
-    let storage = try! DiskStorage2<U>(
+    let storage = try! DiskStorage<U>(
       config: config,
       fileManager: fileManager,
       transformer: transformer

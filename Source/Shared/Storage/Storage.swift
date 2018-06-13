@@ -3,10 +3,10 @@ import Dispatch
 
 /// Manage storage. Use memory storage if specified.
 /// Synchronous by default. Use `async` for asynchronous operations.
-public class Storage2<T> {
+public class Storage<T> {
   /// Used for sync operations
-  let syncStorage: SyncStorage2<T>
-  let asyncStorage: AsyncStorage2<T>
+  let syncStorage: SyncStorage<T>
+  let asyncStorage: AsyncStorage<T>
 
   /// Initialize storage with configuration options.
   ///
@@ -15,16 +15,16 @@ public class Storage2<T> {
   ///   - memoryConfig: Optional. Pass config if you want memory cache
   /// - Throws: Throw StorageError if any.
   public convenience init(diskConfig: DiskConfig, memoryConfig: MemoryConfig, transformer: Transformer<T>) throws {
-    let disk = try DiskStorage2(config: diskConfig, transformer: transformer)
-    let memory = MemoryStorage2<T>(config: memoryConfig)
+    let disk = try DiskStorage(config: diskConfig, transformer: transformer)
+    let memory = MemoryStorage<T>(config: memoryConfig)
 
-    let hybridStorage = HybridStorage2(memoryStorage: memory, diskStorage: disk)
-    let syncStorage = SyncStorage2(
+    let hybridStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
+    let syncStorage = SyncStorage(
       innerStorage: hybridStorage,
       serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
     )
 
-    let asyncStorage = AsyncStorage2(
+    let asyncStorage = AsyncStorage(
       storage: hybridStorage,
       serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
     )
@@ -36,7 +36,7 @@ public class Storage2<T> {
   ///
   /// - Parameter syncStorage: Synchronous storage
   /// - Paraeter: asyncStorage: Asynchronous storage
-  public required init(syncStorage: SyncStorage2<T>, asyncStorage: AsyncStorage2<T>) {
+  public required init(syncStorage: SyncStorage<T>, asyncStorage: AsyncStorage<T>) {
     self.syncStorage = syncStorage
     self.asyncStorage = asyncStorage
   }
@@ -45,7 +45,7 @@ public class Storage2<T> {
   public lazy var async = self.asyncStorage
 }
 
-extension Storage2: StorageAware2 {
+extension Storage: StorageAware2 {
   public func entry(forKey key: String) throws -> Entry<T> {
     return try self.syncStorage.entry(forKey: key)
   }
@@ -67,9 +67,9 @@ extension Storage2: StorageAware2 {
   }
 }
 
-public extension Storage2 {
-  func support<U>(transformer: Transformer<U>) -> Storage2<U> {
-    let storage = Storage2<U>(
+public extension Storage {
+  func support<U>(transformer: Transformer<U>) -> Storage<U> {
+    let storage = Storage<U>(
       syncStorage: syncStorage.support(transformer: transformer),
       asyncStorage: asyncStorage.support(transformer: transformer)
     )

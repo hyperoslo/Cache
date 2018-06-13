@@ -1,6 +1,6 @@
 import Foundation
 
-public class MemoryStorage2<T>: StorageAware2 {
+public class MemoryStorage<T>: StorageAware2 {
   fileprivate let cache = NSCache<NSString, MemoryCapsule>()
   // Memory cache keys
   fileprivate var keys = Set<String>()
@@ -13,7 +13,7 @@ public class MemoryStorage2<T>: StorageAware2 {
   }
 }
 
-extension MemoryStorage2 {
+extension MemoryStorage {
   public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) {
     let capsule = MemoryCapsule(value: object, expiry: .date(expiry?.date ?? config.expiry.date))
     cache.setObject(capsule, forKey: NSString(string: key))
@@ -56,9 +56,9 @@ extension MemoryStorage2 {
   }
 }
 
-public extension MemoryStorage2 {
-  func support<U>() -> MemoryStorage2<U> {
-    let storage = MemoryStorage2<U>(config: config)
+public extension MemoryStorage {
+  func support<U>() -> MemoryStorage<U> {
+    let storage = MemoryStorage<U>(config: config)
     return storage
   }
 }

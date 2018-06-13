@@ -3,17 +3,17 @@ import Dispatch
 
 /// Manipulate storage in a "all async" manner.
 /// The completion closure will be called when operation completes.
-public class AsyncStorage2<T> {
-  fileprivate let innerStorage: HybridStorage2<T>
+public class AsyncStorage<T> {
+  fileprivate let innerStorage: HybridStorage<T>
   public let serialQueue: DispatchQueue
 
-  init(storage: HybridStorage2<T>, serialQueue: DispatchQueue) {
+  init(storage: HybridStorage<T>, serialQueue: DispatchQueue) {
     self.innerStorage = storage
     self.serialQueue = serialQueue
   }
 }
 
-extension AsyncStorage2 {
+extension AsyncStorage {
   public func entry(forKey key: String, completion: @escaping (Result<Entry<T>>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
@@ -117,9 +117,9 @@ extension AsyncStorage2 {
   }
 }
 
-public extension AsyncStorage2 {
-  func support<U>(transformer: Transformer<U>) -> AsyncStorage2<U> {
-    let storage = AsyncStorage2<U>(
+public extension AsyncStorage {
+  func support<U>(transformer: Transformer<U>) -> AsyncStorage<U> {
+    let storage = AsyncStorage<U>(
       storage: innerStorage.support(transformer: transformer),
       serialQueue: serialQueue
     )

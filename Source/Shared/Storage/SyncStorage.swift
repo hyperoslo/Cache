@@ -3,17 +3,17 @@ import Dispatch
 
 /// Manipulate storage in a "all sync" manner.
 /// Block the current queue until the operation completes.
-public class SyncStorage2<T> {
-  fileprivate let innerStorage: HybridStorage2<T>
+public class SyncStorage<T> {
+  fileprivate let innerStorage: HybridStorage<T>
   fileprivate let serialQueue: DispatchQueue
 
-  init(innerStorage: HybridStorage2<T>, serialQueue: DispatchQueue) {
+  init(innerStorage: HybridStorage<T>, serialQueue: DispatchQueue) {
     self.innerStorage = innerStorage
     self.serialQueue = serialQueue
   }
 }
 
-extension SyncStorage2: StorageAware2 {
+extension SyncStorage: StorageAware2 {
   public func entry(forKey key: String) throws -> Entry<T> {
     var entry: Entry<T>!
     try serialQueue.sync {
@@ -48,9 +48,9 @@ extension SyncStorage2: StorageAware2 {
   }
 }
 
-public extension SyncStorage2 {
-  func support<U>(transformer: Transformer<U>) -> SyncStorage2<U> {
-    let storage = SyncStorage2<U>(
+public extension SyncStorage {
+  func support<U>(transformer: Transformer<U>) -> SyncStorage<U> {
+    let storage = SyncStorage<U>(
       innerStorage: innerStorage.support(transformer: transformer),
       serialQueue: serialQueue
     )
