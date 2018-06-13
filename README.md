@@ -190,11 +190,11 @@ try? storage.setObject(data, forKey: "a bunch of bytes")
 try? storage.setObject(authorizeURL, forKey: "authorization URL")
 
 // Load from storage
-let score = try? storage.object(ofType: Int.self, forKey: "score")
-let favoriteCharacter = try? storage.object(ofType: String.self, forKey: "my favorite city")
+let score = try? storage.object(=forKey: "score")
+let favoriteCharacter = try? storage.object(forKey: "my favorite city")
 
 // Check if an object exists
-let hasFavoriteCharacter = try? storage.existsObject(ofType: String.self, forKey: "my favorite city")
+let hasFavoriteCharacter = try? storage.existsObject(forKey: "my favorite city")
 
 // Remove an object in storage
 try? storage.removeObject(forKey: "my favorite city")
@@ -211,7 +211,7 @@ try? storage.removeExpiredObjects()
 There is time you want to get object together with its expiry information and meta data. You can use `Entry`
 
 ```swift
-let entry = try? storage.entry(ofType: String.self, forKey: "my favorite city")
+let entry = try? storage.entry(forKey: "my favorite city")
 print(entry?.object)
 print(entry?.expiry)
 print(entry?.meta)
@@ -249,7 +249,7 @@ storage.async.setObject("Oslo", forKey: "my favorite city") { result in
   }
 }
 
-storage.async.object(ofType: String.self, forKey: "my favorite city") { result in
+storage.async.object(forKey: "my favorite city") { result in
   switch result {
     case .value(let city):
       print("my favorite city is \(city)")
@@ -258,7 +258,7 @@ storage.async.object(ofType: String.self, forKey: "my favorite city") { result i
   }
 }
 
-storage.async.existsObject(ofType: String.self, forKey: "my favorite city") { result in
+storage.async.existsObject(forKey: "my favorite city") { result in
   if case .value(let exists) = result, exists {
     print("I have a favorite city")
   }
@@ -301,19 +301,6 @@ try? storage.setObject(
 // Clear expired objects
 storage.removeExpiredObjects()
 ```
-
-## What about images?
-
-As you may know, `NSImage` and `UIImage` don't conform to `Codable` by default. To make it play well with `Codable`, we introduce `ImageWrapper`, so you can save and load images like
-
-```swift
-let wrapper = ImageWrapper(image: starIconImage)
-try? storage.setObject(wrapper, forKey: "star")
-
-let icon = try? storage.object(ofType: ImageWrapper.self, forKey: "star").image
-```
-
-If you want to load image into `UIImageView` or `NSImageView`, then we also have a nice gift for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary) and uses `Cache` under the hood to make you life easier when it comes to working with remote images.
 
 ## Handling JSON response
 
