@@ -187,7 +187,7 @@ final class StorageSupportTests: XCTestCase {
     }
   }
 
-  func testOverriden() throws {
+  func testOverridenOnDisk() throws {
     let intStorage = storage.transform(transformer: TransformerFactory.forCodable(ofType: Int.self))
     let stringStorage = storage.transform(transformer: TransformerFactory.forCodable(ofType: String.self))
 
@@ -196,8 +196,8 @@ final class StorageSupportTests: XCTestCase {
     try intStorage.setObject(1, forKey: key)
     try stringStorage.setObject("hello world", forKey: key)
 
-    let intValue = try? intStorage.object(forKey: key)
-    let stringValue = try? stringStorage.object(forKey: key)
+    let intValue = try? intStorage.diskStorage.object(forKey: key)
+    let stringValue = try? stringStorage.diskStorage.object(forKey: key)
 
     XCTAssertNil(intValue)
     XCTAssertNotNil(stringValue)
