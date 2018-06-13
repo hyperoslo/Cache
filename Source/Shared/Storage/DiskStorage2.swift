@@ -52,7 +52,7 @@ extension DiskStorage2 {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
     let attributes = try fileManager.attributesOfItem(atPath: filePath)
-    let object = transformer.fromData(data)
+    let object = try transformer.fromData(data)
 
     guard let date = attributes[.modificationDate] as? Date else {
       throw StorageError.malformedFileAttributes
@@ -71,7 +71,7 @@ extension DiskStorage2 {
 
   func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     let expiry = expiry ?? config.expiry
-    let data = transformer.toData(object)
+    let data = try transformer.toData(object)
     let filePath = makeFilePath(for: key)
     _ = fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
     try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)

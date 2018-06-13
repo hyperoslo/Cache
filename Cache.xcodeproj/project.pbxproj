@@ -69,9 +69,12 @@
 		D270148420D10E76003B45C7 /* AsyncStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148320D10E76003B45C7 /* AsyncStorage2.swift */; };
 		D270148520D10E76003B45C7 /* AsyncStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148320D10E76003B45C7 /* AsyncStorage2.swift */; };
 		D270148620D10E76003B45C7 /* AsyncStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148320D10E76003B45C7 /* AsyncStorage2.swift */; };
-		D270148820D11040003B45C7 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148720D11040003B45C7 /* StorageFactory.swift */; };
-		D270148920D11040003B45C7 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148720D11040003B45C7 /* StorageFactory.swift */; };
-		D270148A20D11040003B45C7 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148720D11040003B45C7 /* StorageFactory.swift */; };
+		D270148820D11040003B45C7 /* Storage+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148720D11040003B45C7 /* Storage+Support.swift */; };
+		D270148920D11040003B45C7 /* Storage+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148720D11040003B45C7 /* Storage+Support.swift */; };
+		D270148A20D11040003B45C7 /* Storage+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148720D11040003B45C7 /* Storage+Support.swift */; };
+		D270148C20D113EA003B45C7 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148B20D113EA003B45C7 /* Optional+Extension.swift */; };
+		D270148D20D113EA003B45C7 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148B20D113EA003B45C7 /* Optional+Extension.swift */; };
+		D270148E20D113EA003B45C7 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148B20D113EA003B45C7 /* Optional+Extension.swift */; };
 		D28897051F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897061F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897071F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
@@ -187,7 +190,8 @@
 		D270147B20D107DA003B45C7 /* SyncStorage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStorage2.swift; sourceTree = "<group>"; };
 		D270147F20D10982003B45C7 /* Storage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage2.swift; sourceTree = "<group>"; };
 		D270148320D10E76003B45C7 /* AsyncStorage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStorage2.swift; sourceTree = "<group>"; };
-		D270148720D11040003B45C7 /* StorageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageFactory.swift; sourceTree = "<group>"; };
+		D270148720D11040003B45C7 /* Storage+Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storage+Support.swift"; sourceTree = "<group>"; };
+		D270148B20D113EA003B45C7 /* Optional+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extension.swift"; sourceTree = "<group>"; };
 		D285143E1F6FFE1F00C674D1 /* ObjectConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectConverterTests.swift; sourceTree = "<group>"; };
 		D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extensions.swift"; sourceTree = "<group>"; };
 		D292DAF01F6A85F30060F614 /* SyncStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStorage.swift; sourceTree = "<group>"; };
@@ -349,6 +353,7 @@
 				D2D4CC231FA3426B00E4A2D5 /* JSONArrayWrapper.swift */,
 				D221E5BF20D00DCC00BC940E /* Entry2.swift */,
 				D270146F20D1018A003B45C7 /* Transformer.swift */,
+				D270148B20D113EA003B45C7 /* Optional+Extension.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -372,7 +377,7 @@
 				D270147B20D107DA003B45C7 /* SyncStorage2.swift */,
 				D270147F20D10982003B45C7 /* Storage2.swift */,
 				D270148320D10E76003B45C7 /* AsyncStorage2.swift */,
-				D270148720D11040003B45C7 /* StorageFactory.swift */,
+				D270148720D11040003B45C7 /* Storage+Support.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -830,6 +835,7 @@
 				D2D4CC181FA3145000E4A2D5 /* MD5.swift in Sources */,
 				D221E5BE20D00D9300BC940E /* MemoryStorage2.swift in Sources */,
 				D21B66951F6A724000125DE1 /* MemoryStorage.swift in Sources */,
+				D270148E20D113EA003B45C7 /* Optional+Extension.swift in Sources */,
 				D292DAF31F6A85F30060F614 /* SyncStorage.swift in Sources */,
 				D270147220D1018A003B45C7 /* Transformer.swift in Sources */,
 				D21B668C1F6A723C00125DE1 /* Types.swift in Sources */,
@@ -840,7 +846,7 @@
 				D21B66891F6A723C00125DE1 /* ImageWrapper.swift in Sources */,
 				D21B668B1F6A723C00125DE1 /* StorageError.swift in Sources */,
 				D292DAFB1F6A962D0060F614 /* AsyncStorage.swift in Sources */,
-				D270148A20D11040003B45C7 /* StorageFactory.swift in Sources */,
+				D270148A20D11040003B45C7 /* Storage+Support.swift in Sources */,
 				D5A138C21EB29BFA00881A20 /* UIImage+Extensions.swift in Sources */,
 				D21B66851F6A723C00125DE1 /* DataSerializer.swift in Sources */,
 				D270147A20D1046A003B45C7 /* HybridStorage2.swift in Sources */,
@@ -910,6 +916,7 @@
 				D2D4CC171FA3145000E4A2D5 /* MD5.swift in Sources */,
 				D221E5BD20D00D9300BC940E /* MemoryStorage2.swift in Sources */,
 				D21B668F1F6A723F00125DE1 /* MemoryStorage.swift in Sources */,
+				D270148D20D113EA003B45C7 /* Optional+Extension.swift in Sources */,
 				D292DAF21F6A85F30060F614 /* SyncStorage.swift in Sources */,
 				D270147120D1018A003B45C7 /* Transformer.swift in Sources */,
 				D21B66831F6A723C00125DE1 /* Types.swift in Sources */,
@@ -920,7 +927,7 @@
 				D21B66801F6A723C00125DE1 /* ImageWrapper.swift in Sources */,
 				D21B66821F6A723C00125DE1 /* StorageError.swift in Sources */,
 				D292DAFA1F6A962D0060F614 /* AsyncStorage.swift in Sources */,
-				D270148920D11040003B45C7 /* StorageFactory.swift in Sources */,
+				D270148920D11040003B45C7 /* Storage+Support.swift in Sources */,
 				D5A138C41EB29C2100881A20 /* NSImage+Extensions.swift in Sources */,
 				D21B667C1F6A723C00125DE1 /* DataSerializer.swift in Sources */,
 				D270147920D1046A003B45C7 /* HybridStorage2.swift in Sources */,
@@ -968,6 +975,7 @@
 				D2D4CC161FA3145000E4A2D5 /* MD5.swift in Sources */,
 				D221E5BC20D00D9300BC940E /* MemoryStorage2.swift in Sources */,
 				D292DAF11F6A85F30060F614 /* SyncStorage.swift in Sources */,
+				D270148C20D113EA003B45C7 /* Optional+Extension.swift in Sources */,
 				D2CF98601F694FFA00CE8F68 /* DiskConfig.swift in Sources */,
 				D270147020D1018A003B45C7 /* Transformer.swift in Sources */,
 				D292DAFD1F6A970B0060F614 /* Result.swift in Sources */,
@@ -978,7 +986,7 @@
 				D2CF98851F69598900CE8F68 /* TypeWrapperStorage.swift in Sources */,
 				D2CF98671F694FFA00CE8F68 /* Expiry.swift in Sources */,
 				D292DAF91F6A962D0060F614 /* AsyncStorage.swift in Sources */,
-				D270148820D11040003B45C7 /* StorageFactory.swift in Sources */,
+				D270148820D11040003B45C7 /* Storage+Support.swift in Sources */,
 				D2CF986A1F694FFA00CE8F68 /* StorageError.swift in Sources */,
 				D5A138C11EB29BFA00881A20 /* UIImage+Extensions.swift in Sources */,
 				D270147820D1046A003B45C7 /* HybridStorage2.swift in Sources */,
