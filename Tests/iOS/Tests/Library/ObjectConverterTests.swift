@@ -2,12 +2,15 @@ import XCTest
 @testable import Cache
 
 final class JSONDecoderExtensionsTests: XCTestCase {
-  private var storage: HybridStorage!
+  private var storage: HybridStorage<User>!
 
   override func setUp() {
     super.setUp()
-    let memory = MemoryStorage(config: MemoryConfig())
-    let disk = try! DiskStorage(config: DiskConfig(name: "HybridDisk"))
+    let memory = MemoryStorage<User>(config: MemoryConfig())
+    let disk = try! DiskStorage<User>(
+      config: DiskConfig(name: "HybridDisk"),
+      transformer: Transformer<User>.forCodable(ofType: User.self)
+    )
 
     storage = HybridStorage(memoryStorage: memory, diskStorage: disk)
   }
@@ -26,7 +29,7 @@ final class JSONDecoderExtensionsTests: XCTestCase {
     let user = try JSONDecoder.decode(json, to: User.self)
     try storage.setObject(user, forKey: "user")
 
-    let cachedObject = try storage.object(ofType: User.self, forKey: "user")
+    let cachedObject = try storage.object(forKey: "user")
     XCTAssertEqual(user, cachedObject)
   }
 
@@ -36,7 +39,7 @@ final class JSONDecoderExtensionsTests: XCTestCase {
     let user = try JSONDecoder.decode(string, to: User.self)
     try storage.setObject(user, forKey: "user")
 
-    let cachedObject = try storage.object(ofType: User.self, forKey: "user")
+    let cachedObject = try storage.object(forKey: "user")
     XCTAssertEqual(cachedObject.firstName, "John")
   }
 }
