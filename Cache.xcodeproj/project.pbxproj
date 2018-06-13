@@ -57,6 +57,9 @@
 		D270147420D101F3003B45C7 /* StorageAware2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147320D101F3003B45C7 /* StorageAware2.swift */; };
 		D270147520D101F3003B45C7 /* StorageAware2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147320D101F3003B45C7 /* StorageAware2.swift */; };
 		D270147620D101F3003B45C7 /* StorageAware2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147320D101F3003B45C7 /* StorageAware2.swift */; };
+		D270147820D1046A003B45C7 /* HybridStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147720D1046A003B45C7 /* HybridStorage2.swift */; };
+		D270147920D1046A003B45C7 /* HybridStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147720D1046A003B45C7 /* HybridStorage2.swift */; };
+		D270147A20D1046A003B45C7 /* HybridStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147720D1046A003B45C7 /* HybridStorage2.swift */; };
 		D28897051F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897061F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897071F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
@@ -168,6 +171,7 @@
 		D236F3191F6BEF73004EE01F /* StorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTests.swift; sourceTree = "<group>"; };
 		D270146F20D1018A003B45C7 /* Transformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		D270147320D101F3003B45C7 /* StorageAware2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageAware2.swift; sourceTree = "<group>"; };
+		D270147720D1046A003B45C7 /* HybridStorage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HybridStorage2.swift; sourceTree = "<group>"; };
 		D285143E1F6FFE1F00C674D1 /* ObjectConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectConverterTests.swift; sourceTree = "<group>"; };
 		D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extensions.swift"; sourceTree = "<group>"; };
 		D292DAF01F6A85F30060F614 /* SyncStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStorage.swift; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 				D221E5BB20D00D9300BC940E /* MemoryStorage2.swift */,
 				D221E5C320D00DDB00BC940E /* DiskStorage2.swift */,
 				D270147320D101F3003B45C7 /* StorageAware2.swift */,
+				D270147720D1046A003B45C7 /* HybridStorage2.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -816,6 +821,7 @@
 				D292DAFB1F6A962D0060F614 /* AsyncStorage.swift in Sources */,
 				D5A138C21EB29BFA00881A20 /* UIImage+Extensions.swift in Sources */,
 				D21B66851F6A723C00125DE1 /* DataSerializer.swift in Sources */,
+				D270147A20D1046A003B45C7 /* HybridStorage2.swift in Sources */,
 				D21B66941F6A724000125DE1 /* HybridStorage.swift in Sources */,
 				D28897071F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */,
 				D292DAF71F6A94000060F614 /* AsyncStorageAware.swift in Sources */,
@@ -891,6 +897,7 @@
 				D292DAFA1F6A962D0060F614 /* AsyncStorage.swift in Sources */,
 				D5A138C41EB29C2100881A20 /* NSImage+Extensions.swift in Sources */,
 				D21B667C1F6A723C00125DE1 /* DataSerializer.swift in Sources */,
+				D270147920D1046A003B45C7 /* HybridStorage2.swift in Sources */,
 				D21B668E1F6A723F00125DE1 /* HybridStorage.swift in Sources */,
 				D28897061F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */,
 				D292DAF61F6A94000060F614 /* AsyncStorageAware.swift in Sources */,
@@ -944,6 +951,7 @@
 				D292DAF91F6A962D0060F614 /* AsyncStorage.swift in Sources */,
 				D2CF986A1F694FFA00CE8F68 /* StorageError.swift in Sources */,
 				D5A138C11EB29BFA00881A20 /* UIImage+Extensions.swift in Sources */,
+				D270147820D1046A003B45C7 /* HybridStorage2.swift in Sources */,
 				D2CF986E1F694FFA00CE8F68 /* Storage.swift in Sources */,
 				D28897051F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */,
 				D292DAF51F6A94000060F614 /* AsyncStorageAware.swift in Sources */,
