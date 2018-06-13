@@ -75,6 +75,9 @@
 		D270148C20D113EA003B45C7 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148B20D113EA003B45C7 /* Optional+Extension.swift */; };
 		D270148D20D113EA003B45C7 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148B20D113EA003B45C7 /* Optional+Extension.swift */; };
 		D270148E20D113EA003B45C7 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148B20D113EA003B45C7 /* Optional+Extension.swift */; };
+		D270149020D1251E003B45C7 /* TypeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148F20D1251E003B45C7 /* TypeWrapper.swift */; };
+		D270149120D1251E003B45C7 /* TypeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148F20D1251E003B45C7 /* TypeWrapper.swift */; };
+		D270149220D1251E003B45C7 /* TypeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148F20D1251E003B45C7 /* TypeWrapper.swift */; };
 		D28897051F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897061F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897071F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
@@ -192,6 +195,7 @@
 		D270148320D10E76003B45C7 /* AsyncStorage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStorage2.swift; sourceTree = "<group>"; };
 		D270148720D11040003B45C7 /* Storage+Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storage+Support.swift"; sourceTree = "<group>"; };
 		D270148B20D113EA003B45C7 /* Optional+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extension.swift"; sourceTree = "<group>"; };
+		D270148F20D1251E003B45C7 /* TypeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeWrapper.swift; sourceTree = "<group>"; };
 		D285143E1F6FFE1F00C674D1 /* ObjectConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectConverterTests.swift; sourceTree = "<group>"; };
 		D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extensions.swift"; sourceTree = "<group>"; };
 		D292DAF01F6A85F30060F614 /* SyncStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStorage.swift; sourceTree = "<group>"; };
@@ -354,6 +358,7 @@
 				D221E5BF20D00DCC00BC940E /* Entry2.swift */,
 				D270146F20D1018A003B45C7 /* Transformer.swift */,
 				D270148B20D113EA003B45C7 /* Optional+Extension.swift */,
+				D270148F20D1251E003B45C7 /* TypeWrapper.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -831,6 +836,7 @@
 				D21B66881F6A723C00125DE1 /* Expiry.swift in Sources */,
 				D270147620D101F3003B45C7 /* StorageAware2.swift in Sources */,
 				D21B669E1F6A724700125DE1 /* MemoryConfig.swift in Sources */,
+				D270149220D1251E003B45C7 /* TypeWrapper.swift in Sources */,
 				D2D4CC221FA3411300E4A2D5 /* JSONDictionaryWrapper.swift in Sources */,
 				D2D4CC181FA3145000E4A2D5 /* MD5.swift in Sources */,
 				D221E5BE20D00D9300BC940E /* MemoryStorage2.swift in Sources */,
@@ -912,6 +918,7 @@
 				D21B667F1F6A723C00125DE1 /* Expiry.swift in Sources */,
 				D270147520D101F3003B45C7 /* StorageAware2.swift in Sources */,
 				D21B669C1F6A724600125DE1 /* MemoryConfig.swift in Sources */,
+				D270149120D1251E003B45C7 /* TypeWrapper.swift in Sources */,
 				D2D4CC211FA3411300E4A2D5 /* JSONDictionaryWrapper.swift in Sources */,
 				D2D4CC171FA3145000E4A2D5 /* MD5.swift in Sources */,
 				D221E5BD20D00D9300BC940E /* MemoryStorage2.swift in Sources */,
@@ -971,6 +978,7 @@
 				D2CF98641F694FFA00CE8F68 /* DataSerializer.swift in Sources */,
 				D270147420D101F3003B45C7 /* StorageAware2.swift in Sources */,
 				D2CF986B1F694FFA00CE8F68 /* DiskStorage.swift in Sources */,
+				D270149020D1251E003B45C7 /* TypeWrapper.swift in Sources */,
 				D2D4CC201FA3411300E4A2D5 /* JSONDictionaryWrapper.swift in Sources */,
 				D2D4CC161FA3145000E4A2D5 /* MD5.swift in Sources */,
 				D221E5BC20D00D9300BC940E /* MemoryStorage2.swift in Sources */,

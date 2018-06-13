@@ -35,16 +35,3 @@ extension TypeWrapperStorage: StorageAware {
     try internalStorage.removeExpiredObjects()
   }
 }
-
-/// Used to wrap Codable object
-struct TypeWrapper<T: Codable>: Codable {
-  enum CodingKeys: String, CodingKey {
-    case object
-  }
-
-  let object: T
-
-  init(object: T) {
-    self.object = object
-  }
-}
