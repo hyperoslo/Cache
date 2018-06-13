@@ -27,7 +27,10 @@ final public class DiskStorage<T> {
       url = directory
     } else {
       url = try fileManager.url(
-        for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true
+        for: .documentDirectory,
+        in: .userDomainMask,
+        appropriateFor: nil,
+        create: true
       )
     }
 
