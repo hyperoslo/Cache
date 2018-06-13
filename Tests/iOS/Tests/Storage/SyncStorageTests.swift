@@ -3,14 +3,17 @@ import Dispatch
 @testable import Cache
 
 final class SyncStorageTests: XCTestCase {
-  private var storage: SyncStorage!
+  private var storage: SyncStorage<User>!
   let user = User(firstName: "John", lastName: "Snow")
 
   override func setUp() {
     super.setUp()
-    let memory = MemoryStorage(config: MemoryConfig())
-    let primitive = TypeWrapperStorage(storage: memory)
-    storage = SyncStorage(storage: primitive, serialQueue: DispatchQueue(label: "Sync"))
+
+    let memory = MemoryStorage<User>(config: MemoryConfig())
+    let disk = try! DiskStorage<User>(config: DiskConfig(name: "HybridDisk"), transformer: TransformerFactory.forCodable(ofType: User.self))
+
+    let hybridStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
+    storage = SyncStorage(storage: hybridStorage, serialQueue: DispatchQueue(label: "Sync"))
   }
 
   override func tearDown() {
@@ -20,24 +23,25 @@ final class SyncStorageTests: XCTestCase {
 
   func testSetObject() throws {
     try storage.setObject(user, forKey: "user")
-    let cachedObject = try storage.object(ofType: User.self, forKey: "user")
+    let cachedObject = try storage.object(forKey: "user")
 
     XCTAssertEqual(cachedObject, user)
   }
 
   func testRemoveAll() throws {
+    let intStorage = storage.support(transformer: TransformerFactory.forCodable(ofType: Int.self))
     try given("add a lot of objects") {
       try Array(0..<100).forEach {
-        try storage.setObject($0, forKey: "key-\($0)")
+        try intStorage.setObject($0, forKey: "key-\($0)")
       }
     }
 
     try when("remove all") {
-      try storage.removeAll()
+      try intStorage.removeAll()
     }
 
     try then("all are removed") {
-      XCTAssertFalse(try storage.existsObject(ofType: Int.self, forKey: "key-99"))
+      XCTAssertFalse(try intStorage.existsObject(forKey: "key-99"))
     }
   }
 }

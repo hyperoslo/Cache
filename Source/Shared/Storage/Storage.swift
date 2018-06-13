@@ -20,7 +20,7 @@ public class Storage<T> {
 
     let hybridStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
     let syncStorage = SyncStorage(
-      innerStorage: hybridStorage,
+      storage: hybridStorage,
       serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
     )
 

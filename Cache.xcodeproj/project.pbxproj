@@ -75,6 +75,8 @@
 		D27014A720D129EB003B45C7 /* TransformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27014A420D129EB003B45C7 /* TransformerFactory.swift */; };
 		D27014A820D12BA3003B45C7 /* HybridStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF987A1F69513800CE8F68 /* HybridStorageTests.swift */; };
 		D27014AA20D12BA4003B45C7 /* HybridStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF987A1F69513800CE8F68 /* HybridStorageTests.swift */; };
+		D27014AC20D12CC1003B45C7 /* SyncStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D292DB001F6AA06B0060F614 /* SyncStorageTests.swift */; };
+		D27014AD20D12CC3003B45C7 /* SyncStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D292DB001F6AA06B0060F614 /* SyncStorageTests.swift */; };
 		D28897051F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897061F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897071F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
@@ -826,6 +828,7 @@
 				D27014A020D12870003B45C7 /* MemoryStorageTests.swift in Sources */,
 				D2CF98261F69427C00CE8F68 /* User.swift in Sources */,
 				D28A1D241F6FFEF60030DF81 /* ObjectConverterTests.swift in Sources */,
+				D27014AD20D12CC3003B45C7 /* SyncStorageTests.swift in Sources */,
 				D27014AA20D12BA4003B45C7 /* HybridStorageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -849,6 +852,7 @@
 				D2CF98801F69513800CE8F68 /* TypeWrapperTests.swift in Sources */,
 				D27014A820D12BA3003B45C7 /* HybridStorageTests.swift in Sources */,
 				D2CF98241F69427C00CE8F68 /* User.swift in Sources */,
+				D27014AC20D12CC1003B45C7 /* SyncStorageTests.swift in Sources */,
 				D2CF981E1F69427C00CE8F68 /* TestCase+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,8 +7,8 @@ public class SyncStorage<T> {
   public let innerStorage: HybridStorage<T>
   public let serialQueue: DispatchQueue
 
-  public init(innerStorage: HybridStorage<T>, serialQueue: DispatchQueue) {
-    self.innerStorage = innerStorage
+  public init(storage: HybridStorage<T>, serialQueue: DispatchQueue) {
+    self.innerStorage = storage
     self.serialQueue = serialQueue
   }
 }
@@ -51,7 +51,7 @@ extension SyncStorage: StorageAware {
 public extension SyncStorage {
   func support<U>(transformer: Transformer<U>) -> SyncStorage<U> {
     let storage = SyncStorage<U>(
-      innerStorage: innerStorage.support(transformer: transformer),
+      storage: innerStorage.support(transformer: transformer),
       serialQueue: serialQueue
     )
 
