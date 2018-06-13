@@ -11,7 +11,15 @@ public class Transformer<T> {
 }
 
 extension Transformer {
-  static func imageTransformer() -> Transformer<Image> {
+  static func forData() -> Transformer<Data> {
+    let toData: (Data) throws -> Data = { $0 }
+
+    let fromData: (Data) throws -> Data = { $0 }
+
+    return Transformer<Data>(toData: toData, fromData: fromData)
+  }
+
+  static func forImage() -> Transformer<Image> {
     let toData: (Image) throws -> Data = { image in
       return try image.cache_toData().unwrapOrThrow(error: StorageError.transformerFail)
     }
@@ -21,5 +29,19 @@ extension Transformer {
     }
 
     return Transformer<Image>(toData: toData, fromData: fromData)
+  }
+
+  static func forCodable<U: Codable>(ofType: U) -> Transformer<U> {
+    let toData: (U) throws -> Data = { object in
+      let encoder = JSONEncoder()
+      return try encoder.encode(object)
+    }
+
+    let fromData: (Data) throws -> U = { data in
+      let decoder = JSONDecoder()
+      return try decoder.decode(U.self, from: data)
+    }
+
+    return Transformer<U>(toData: toData, fromData: fromData)
   }
 }
