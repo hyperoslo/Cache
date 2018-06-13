@@ -81,6 +81,8 @@
 		D27014AF20D12D84003B45C7 /* AsyncStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D292DB031F6AA0730060F614 /* AsyncStorageTests.swift */; };
 		D27014B020D12E37003B45C7 /* StorageSupportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98881F695F9400CE8F68 /* StorageSupportTests.swift */; };
 		D27014B120D12E38003B45C7 /* StorageSupportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98881F695F9400CE8F68 /* StorageSupportTests.swift */; };
+		D27014B320D13E2C003B45C7 /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236F3191F6BEF73004EE01F /* StorageTests.swift */; };
+		D27014B420D13E2C003B45C7 /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236F3191F6BEF73004EE01F /* StorageTests.swift */; };
 		D28897051F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897061F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
 		D28897071F8B79B300C61DEE /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
@@ -828,6 +830,7 @@
 			files = (
 				D2CF98201F69427C00CE8F68 /* TestCase+Extensions.swift in Sources */,
 				D2CF98231F69427C00CE8F68 /* TestHelper.swift in Sources */,
+				D27014B420D13E2C003B45C7 /* StorageTests.swift in Sources */,
 				D27014A320D129A3003B45C7 /* DiskStorageTests.swift in Sources */,
 				D27014A020D12870003B45C7 /* MemoryStorageTests.swift in Sources */,
 				D2CF98261F69427C00CE8F68 /* User.swift in Sources */,
@@ -852,6 +855,7 @@
 				D2CF987F1F69513800CE8F68 /* ImageWrapperTests.swift in Sources */,
 				D2D4CC1A1FA3166900E4A2D5 /* MD5Tests.swift in Sources */,
 				D2D4CC281FA342CA00E4A2D5 /* JSONWrapperTests.swift in Sources */,
+				D27014B320D13E2C003B45C7 /* StorageTests.swift in Sources */,
 				D28C9BAF1F67EF8300C180C1 /* UIImage+ExtensionsTests.swift in Sources */,
 				D2CF987D1F69513800CE8F68 /* MemoryCapsuleTests.swift in Sources */,
 				D27014A120D129A2003B45C7 /* DiskStorageTests.swift in Sources */,
