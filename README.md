@@ -76,7 +76,7 @@ let storage = try? Storage(
 
 ### Generic, Type safety and Transformer
 
-All `Storage` now are generic by default, so you can get a type safety experience. Once you create a Storage, it has a type constraint that you don't need to specify type for each operations afterwards.
+All `Storage` now are generic by default, so you can get a type safety experience. Once you create a Storage, it has a type constraint that you don't need to specify type for each operation afterwards.
 
 If you want to change the type, `Cache` offers `transform` functions, look for `Transformer` and `TransformerFactory` for built-in transformers.
 
@@ -328,6 +328,10 @@ Alamofire.request("https://gameofthrones.org/mostFavoriteCharacter").responseStr
   }
 }
 ```
+
+## What abou images
+
+If you want to load image into `UIImageView` or `NSImageView`, then we also have a nice gift for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary) and uses `Cache` under the hood to make you life easier when it comes to working with remote images.
 
 ## Installation
 
