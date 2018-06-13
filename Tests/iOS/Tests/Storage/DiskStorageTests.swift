@@ -10,7 +10,7 @@ final class DiskStorageTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
-    storage = try! DiskStorage<User>(config: config, transformer: Transformer<User>.forCodable(ofType: User.self))
+    storage = try! DiskStorage<User>(config: config, transformer: TransformerFactory.forCodable(ofType: User.self))
   }
 
   override func tearDown() {
@@ -47,7 +47,7 @@ final class DiskStorageTests: XCTestCase {
 
     let customConfig = DiskConfig(name: "SSD", directory: url)
 
-    storage = try DiskStorage(config: customConfig)
+    storage = try DiskStorage<User>(config: customConfig, transformer: TransformerFactory.forCodable(ofType: User.self))
 
     XCTAssertEqual(
       storage.path,
@@ -77,13 +77,13 @@ final class DiskStorageTests: XCTestCase {
     // Returns nil if entry doesn't exist
     var entry: Entry<User>?
     do {
-      entry = try storage.entry(ofType: User.self, forKey: key)
+      entry = try storage.entry(forKey: key)
     } catch {}
     XCTAssertNil(entry)
 
     // Returns entry if object exists
     try storage.setObject(testObject, forKey: key)
-    entry = try storage.entry(ofType: User.self, forKey: key)
+    entry = try storage.entry(forKey: key)
     let attributes = try fileManager.attributesOfItem(atPath: storage.makeFilePath(for: key))
     let expiry = Expiry.date(attributes[FileAttributeKey.modificationDate] as! Date)
 
@@ -95,7 +95,7 @@ final class DiskStorageTests: XCTestCase {
   /// Test that it resolves cached object
   func testSetObject() throws {
     try storage.setObject(testObject, forKey: key)
-    let cachedObject: User? = try storage.object(ofType: User.self, forKey: key)
+    let cachedObject: User? = try storage.object(forKey: key)
 
     XCTAssertEqual(cachedObject?.firstName, testObject.firstName)
     XCTAssertEqual(cachedObject?.lastName, testObject.lastName)
@@ -116,7 +116,7 @@ final class DiskStorageTests: XCTestCase {
     try storage.removeObjectIfExpired(forKey: key)
     var cachedObject: User?
     do {
-      cachedObject = try storage.object(ofType: User.self, forKey: key)
+      cachedObject = try storage.object(forKey: key)
     } catch {}
 
     XCTAssertNil(cachedObject)
@@ -126,16 +126,16 @@ final class DiskStorageTests: XCTestCase {
   func testRemoveObjectIfExpiredWhenNotExpired() throws {
     try storage.setObject(testObject, forKey: key)
     try storage.removeObjectIfExpired(forKey: key)
-    let cachedObject: User? = try storage.object(ofType: User.self, forKey: key)
+    let cachedObject: User? = try storage.object(forKey: key)
     XCTAssertNotNil(cachedObject)
   }
   
   /// Test expired object
   func testExpiredObject() throws {
     try storage.setObject(testObject, forKey: key, expiry: .seconds(0.9))
-    XCTAssertFalse(try! storage.isExpiredObject(ofType: User.self, forKey: key))
+    XCTAssertFalse(try! storage.isExpiredObject(forKey: key))
     sleep(1)
-    XCTAssertTrue(try! storage.isExpiredObject(ofType: User.self, forKey: key))
+    XCTAssertTrue(try! storage.isExpiredObject(forKey: key))
   }
 
   /// Test that it clears cache directory
@@ -185,10 +185,10 @@ final class DiskStorageTests: XCTestCase {
     try storage.setObject(testObject, forKey: key2, expiry: expiry2)
     try storage.removeExpiredObjects()
     var object1: User?
-    let object2 = try storage.object(ofType: User.self, forKey: key2)
+    let object2 = try storage.object(forKey: key2)
 
     do {
-      object1 = try storage.object(ofType: User.self, forKey: key1)
+      object1 = try storage.object(forKey: key1)
     } catch {}
 
     XCTAssertNil(object1)
