@@ -17,17 +17,13 @@ final public class DiskStorage<T> {
 
   // MARK: - Initialization
 
-  public required init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<T>) throws {
-    self.config = config
-    self.fileManager = fileManager
-    self.transformer = transformer
-
+  public convenience init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<T>) throws {
     let url: URL
     if let directory = config.directory {
       url = directory
     } else {
       url = try fileManager.url(
-        for: .documentDirectory,
+        for: .cachesDirectory,
         in: .userDomainMask,
         appropriateFor: nil,
         create: true
@@ -35,7 +31,9 @@ final public class DiskStorage<T> {
     }
 
     // path
-    self.path = url.appendingPathComponent(config.name, isDirectory: true).path
+    let path = url.appendingPathComponent(config.name, isDirectory: true).path
+
+    self.init(config: config, fileManager: fileManager, path: path, transformer: transformer)
 
     try createDirectory()
 
@@ -47,6 +45,13 @@ final public class DiskStorage<T> {
       ])
     }
     #endif
+  }
+
+  public required init(config: DiskConfig, fileManager: FileManager = FileManager.default, path: String, transformer: Transformer<T>) {
+    self.config = config
+    self.fileManager = fileManager
+    self.path = path
+    self.transformer = transformer
   }
 }
 
@@ -239,10 +244,10 @@ extension DiskStorage {
 
 public extension DiskStorage {
   func transform<U>(transformer: Transformer<U>) -> DiskStorage<U> {
-    // swiftlint:disable force_try
-    let storage = try! DiskStorage<U>(
+    let storage = DiskStorage<U>(
       config: config,
       fileManager: fileManager,
+      path: path,
       transformer: transformer
     )
 

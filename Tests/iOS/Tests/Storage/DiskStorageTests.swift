@@ -30,7 +30,7 @@ final class DiskStorageTests: XCTestCase {
   /// Test that it returns the correct path
   func testDefaultPath() {
     let paths = NSSearchPathForDirectoriesInDomains(
-      .documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true
+      .cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true
     )
     let path = "\(paths.first!)/\(config.name.capitalized)"
     XCTAssertEqual(storage.path, path)

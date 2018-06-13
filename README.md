@@ -18,8 +18,8 @@
   * [Sync APIs](#sync-apis)
   * [Async APIS](#async-apis)
   * [Expiry date](#expiry-date)
-* [What about images?](#what-about-images)
 * [Handling JSON response](#handling-json-response)
+* [What about images?](#what-about-images)
 * [Installation](#installation)
 * [Author](#author)
 * [Contributing](#contributing)
@@ -36,12 +36,11 @@ with out-of-box implementations and great customization possibilities. `Cache` u
 ## Key features
 
 - [x] Work with Swift 4 `Codable`. Anything conforming to `Codable` will be saved and loaded easily by `Storage`.
-- [X] Disk storage by default. Optionally using `memory storage` to enable hybrid.
+- [x] Hybrid with memory and disk storage.
 - [X] Many options via `DiskConfig` and `MemoryConfig`.
 - [x] Support `expiry` and clean up of expired objects.
 - [x] Thread safe. Operations can be accessed from any queue.
 - [x] Sync by default. Also support Async APIs.
-- [X] Store images via `ImageWrapper`.
 - [x] Extensive unit test coverage and great documentation.
 - [x] iOS, tvOS and macOS support.
 
@@ -49,19 +48,52 @@ with out-of-box implementations and great customization possibilities. `Cache` u
 
 ### Storage
 
-`Cache` is built based on [Chain-of-responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern), in which there are many processing objects, each knows how to do 1 task and delegates to the next one. But that's just implementation detail. All you need to know is `Storage`, it saves and loads `Codable` objects.
+`Cache` is built based on [Chain-of-responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern), in which there are many processing objects, each knows how to do 1 task and delegates to the next one, so can you compose Storages the way you like.
 
-`Storage` has disk storage and an optional memory storage. Memory storage should be less time and memory consuming, while disk storage is used for content that outlives the application life-cycle, see it more like a convenient way to store user information that should persist across application launches.
+For now the following Storage are supported
 
-`DiskConfig` is required to set up disk storage. You can optionally pass `MemoryConfig` to use memory as front storage.
+- `MemoryStorage`: save object to memory.
+- `DiskStorage`: save object to disk.
+- `HybridStorage`: save object to memory and disk, so you get persistented object on disk, while fast access with in memory objects.
+- `SyncStorage`: blocking APIs, all read and write operations are scheduled in a serial queue, all sync manner.
+- `AsyncStorage`: non-blocking APIs, operations are scheduled in an internal queue for serial processing. No read and write should happen at the same time.
+
+Although you can use those Storage at your discretion, you don't have to. Because we also provide a convenient `Storage` which uses `HybridStorage` under the hood, while exposes sync and async APIs through `SyncStorage` and `AsyncStorage`.
+
+All you need to do is to specify the configuration you want with `DiskConfig` and `MemoryConfig`. The default configurations are good to go, but you can customise a lot.
 
 
 ```swift
 let diskConfig = DiskConfig(name: "Floppy")
 let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
 
-let storage = try? Storage(diskConfig: diskConfig, memoryConfig: memoryConfig)
+let storage = try? Storage(
+  diskConfig: diskConfig, 
+  memoryConfig: memoryConfig, 
+  transformer: TransformerFactory.forCodable(ofType: User.self) // Storage<User>
+)
 ```
+
+### Generic, Type safety and Transformer
+
+All `Storage` now are generic by default, so you can get a type safety experience. Once you create a Storage, it has a type constraint that you don't need to specify type for each operation afterwards.
+
+If you want to change the type, `Cache` offers `transform` functions, look for `Transformer` and `TransformerFactory` for built-in transformers.
+
+```swift
+let storage: Storage<User> = ...
+storage.setObject(superman, forKey: "user")
+
+let imageStorage = storage.transformImage() // Storage<UIImage>
+imageStorage.setObject(image, forKey: "image")
+
+let stringStorage = storage.transformCodable(ofType: String.self) // Storage<String>
+stringStorage.setObject("hello world", forKey: "string")
+```
+
+Each transformation allows you to work with a specific type, however the underlying caching mechanism remains the same, you're working with the same `Storage`, just with different type annotation. You can also create different `Storage` for each type if you want.
+
+`Transformer` is necessary because the need of serialising and deserialising objects to and from `Data` for disk persistency. `Cache` provides default `Transformer ` for `Data`, `Codable` and `UIImage/NSImage`
 
 #### Codable types
 
@@ -95,6 +127,8 @@ public enum StorageError: Error {
   case encodingFailed
   /// The storage has been deallocated
   case deallocated
+  /// Fail to perform transformation to or from Data
+  case transformerFail
 }
 ```
 
@@ -156,11 +190,11 @@ try? storage.setObject(data, forKey: "a bunch of bytes")
 try? storage.setObject(authorizeURL, forKey: "authorization URL")
 
 // Load from storage
-let score = try? storage.object(ofType: Int.self, forKey: "score")
-let favoriteCharacter = try? storage.object(ofType: String.self, forKey: "my favorite city")
+let score = try? storage.object(forKey: "score")
+let favoriteCharacter = try? storage.object(forKey: "my favorite city")
 
 // Check if an object exists
-let hasFavoriteCharacter = try? storage.existsObject(ofType: String.self, forKey: "my favorite city")
+let hasFavoriteCharacter = try? storage.existsObject(forKey: "my favorite city")
 
 // Remove an object in storage
 try? storage.removeObject(forKey: "my favorite city")
@@ -177,7 +211,7 @@ try? storage.removeExpiredObjects()
 There is time you want to get object together with its expiry information and meta data. You can use `Entry`
 
 ```swift
-let entry = try? storage.entry(ofType: String.self, forKey: "my favorite city")
+let entry = try? storage.entry(forKey: "my favorite city")
 print(entry?.object)
 print(entry?.expiry)
 print(entry?.meta)
@@ -215,7 +249,7 @@ storage.async.setObject("Oslo", forKey: "my favorite city") { result in
   }
 }
 
-storage.async.object(ofType: String.self, forKey: "my favorite city") { result in
+storage.async.object(forKey: "my favorite city") { result in
   switch result {
     case .value(let city):
       print("my favorite city is \(city)")
@@ -224,7 +258,7 @@ storage.async.object(ofType: String.self, forKey: "my favorite city") { result i
   }
 }
 
-storage.async.existsObject(ofType: String.self, forKey: "my favorite city") { result in
+storage.async.existsObject(forKey: "my favorite city") { result in
   if case .value(let exists) = result, exists {
     print("I have a favorite city")
   }
@@ -268,19 +302,6 @@ try? storage.setObject(
 storage.removeExpiredObjects()
 ```
 
-## What about images?
-
-As you may know, `NSImage` and `UIImage` don't conform to `Codable` by default. To make it play well with `Codable`, we introduce `ImageWrapper`, so you can save and load images like
-
-```swift
-let wrapper = ImageWrapper(image: starIconImage)
-try? storage.setObject(wrapper, forKey: "star")
-
-let icon = try? storage.object(ofType: ImageWrapper.self, forKey: "star").image
-```
-
-If you want to load image into `UIImageView` or `NSImageView`, then we also have a nice gift for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary) and uses `Cache` under the hood to make you life easier when it comes to working with remote images.
-
 ## Handling JSON response
 
 Most of the time, our use case is to fetch some json from backend, display it while saving the json to storage for future uses. If you're using libraries like [Alamofire](https://github.com/Alamofire/Alamofire) or [Malibu](https://github.com/hyperoslo/Malibu), you mostly get json in the form of dictionary, string, or data.
@@ -307,6 +328,10 @@ Alamofire.request("https://gameofthrones.org/mostFavoriteCharacter").responseStr
   }
 }
 ```
+
+## What about images
+
+If you want to load image into `UIImageView` or `NSImageView`, then we also have a nice gift for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary) and uses `Cache` under the hood to make you life easier when it comes to working with remote images.
 
 ## Installation
 
