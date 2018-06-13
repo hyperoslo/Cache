@@ -98,7 +98,7 @@ extension AsyncStorage2 {
     }
   }
 
-  func object(forKey key: String, completion: @escaping (Result<T>) -> Void) {
+  public func object(forKey key: String, completion: @escaping (Result<T>) -> Void) {
     entry(forKey: key, completion: { (result: Result<Entry2<T>>) in
       completion(result.map({ entry in
         return entry.object
@@ -106,7 +106,7 @@ extension AsyncStorage2 {
     })
   }
 
-  func existsObject(
+  public func existsObject(
     forKey key: String,
     completion: @escaping (Result<Bool>) -> Void) {
     object(forKey: key, completion: { (result: Result<T>) in
@@ -114,5 +114,16 @@ extension AsyncStorage2 {
         return true
       }))
     })
+  }
+}
+
+public extension AsyncStorage2 {
+  func support<U>(transformer: Transformer<U>) -> AsyncStorage2<U> {
+    let storage = AsyncStorage2<U>(
+      storage: innerStorage.support(transformer: transformer),
+      serialQueue: serialQueue
+    )
+
+    return storage
   }
 }

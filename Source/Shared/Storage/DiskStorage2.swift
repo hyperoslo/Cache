@@ -45,7 +45,9 @@ final class DiskStorage2<T>: StorageAware2 {
     }
     #endif
   }
+}
 
+extension DiskStorage2 {
   func entry(forKey key: String) throws -> Entry2<T> {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))

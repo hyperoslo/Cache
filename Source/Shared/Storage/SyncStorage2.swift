@@ -48,7 +48,7 @@ extension SyncStorage2: StorageAware2 {
   }
 }
 
-extension SyncStorage2 {
+public extension SyncStorage2 {
   func support<U>(transformer: Transformer<U>) -> SyncStorage2<U> {
     let storage = SyncStorage2<U>(
       innerStorage: innerStorage.support(transformer: transformer),

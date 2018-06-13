@@ -1,7 +1,7 @@
 import Foundation
 
 /// Use both memory and disk storage. Try on memory first.
-class HybridStorage2<T> {
+public class HybridStorage2<T> {
   let memoryStorage: MemoryStorage2<T>
   let diskStorage: DiskStorage2<T>
 
@@ -12,7 +12,7 @@ class HybridStorage2<T> {
 }
 
 extension HybridStorage2: StorageAware2 {
-  func entry(forKey key: String) throws -> Entry2<T> {
+  public func entry(forKey key: String) throws -> Entry2<T> {
     do {
       return try memoryStorage.entry(forKey: key)
     } catch {
@@ -23,28 +23,28 @@ extension HybridStorage2: StorageAware2 {
     }
   }
 
-  func removeObject(forKey key: String) throws {
+  public func removeObject(forKey key: String) throws {
     memoryStorage.removeObject(forKey: key)
     try diskStorage.removeObject(forKey: key)
   }
 
-  func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
+  public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     memoryStorage.setObject(object, forKey: key, expiry: expiry)
     try diskStorage.setObject(object, forKey: key, expiry: expiry)
   }
 
-  func removeAll() throws {
+  public func removeAll() throws {
     memoryStorage.removeAll()
     try diskStorage.removeAll()
   }
 
-  func removeExpiredObjects() throws {
+  public func removeExpiredObjects() throws {
     memoryStorage.removeExpiredObjects()
     try diskStorage.removeExpiredObjects()
   }
 }
 
-extension HybridStorage2 {
+public extension HybridStorage2 {
   func support<U>(transformer: Transformer<U>) -> HybridStorage2<U> {
     let storage = HybridStorage2<U>(
       memoryStorage: memoryStorage.support(),
