@@ -202,4 +202,20 @@ final class StorageSupportTests: XCTestCase {
       XCTAssertTrue(error is DecodingError)
     }
   }
+
+  func testOverriden() throws {
+    let intStorage = storage.support(transformer: TransformerFactory.forCodable(ofType: Int.self))
+    let stringStorage = storage.support(transformer: TransformerFactory.forCodable(ofType: String.self))
+
+    let key = "sameKey"
+
+    try intStorage.setObject(1, forKey: key)
+    try stringStorage.setObject("hello world", forKey: key)
+
+    let intValue = try? intStorage.object(forKey: key)
+    let stringValue = try? stringStorage.object(forKey: key)
+
+    XCTAssertNil(intValue)
+    XCTAssertNotNil(stringValue)
+  }
 }
