@@ -97,5 +97,3 @@ final class StorageTests: XCTestCase {
     XCTAssertEqual(cachedObject.firstName, "John")
   }
 }
-
-
