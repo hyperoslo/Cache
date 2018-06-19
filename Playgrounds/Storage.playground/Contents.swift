@@ -53,7 +53,7 @@ try dateStorage.setObject(date, forKey: "date")
 //
 //// Get objects from the cache
 let cachedString = try? stringStorage.object(forKey: "string")
-print(cachedString)
+print(cachedString as Any)
 
 imageStorage.async.object(forKey: "image") { result in
     if case .value(let image) = result {
@@ -74,7 +74,7 @@ dateStorage.async.object(forKey: "date") { result in
 }
 
 // Clean the cache
-try dataStorage.async.removeAll(completion: { (result) in
+dataStorage.async.removeAll(completion: { (result) in
     if case .value = result {
         print("Cache cleaned")
     }
