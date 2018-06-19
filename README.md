@@ -33,6 +33,8 @@
 library that gives you a god's power. It does nothing but caching, but it does it well. It offers a good public API
 with out-of-box implementations and great customization possibilities. `Cache` utilizes `Codable` in Swift 4 to perform serialization.
 
+Read the story here [Open Source Stories: From Cachable to Generic Storage in Cache](https://medium.com/hyperoslo/open-source-stories-from-cachable-to-generic-storage-in-cache-418d9a230d51)
+
 ## Key features
 
 - [x] Work with Swift 4 `Codable`. Anything conforming to `Codable` will be saved and loaded easily by `Storage`.
