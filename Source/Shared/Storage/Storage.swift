@@ -1,13 +1,6 @@
 import Foundation
 import Dispatch
 
-enum StoreChange {
-  case addition
-  case singleDeletion
-  case allDeletion
-  case expiredDeletion
-}
-
 /// Manage storage. Use memory storage if specified.
 /// Synchronous by default. Use `async` for asynchronous operations.
 public class Storage<T> {
@@ -41,7 +34,6 @@ public class Storage<T> {
       storage: hybridStorage,
       serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
     )
-
     let asyncStorage = AsyncStorage(
       storage: hybridStorage,
       serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
@@ -57,10 +49,29 @@ public class Storage<T> {
   public required init(syncStorage: SyncStorage<T>, asyncStorage: AsyncStorage<T>) {
     self.syncStorage = syncStorage
     self.asyncStorage = asyncStorage
+    subscribeToChanges()
   }
 
   /// Used for async operations
   public lazy var async = self.asyncStorage
+
+  private func subscribeToChanges() {
+    subscribeToChanges(in: syncStorage.innerStorage)
+    if syncStorage !== asyncStorage {
+      subscribeToChanges(in: asyncStorage.innerStorage)
+    }
+  }
+
+  private func subscribeToChanges(in storage: HybridStorage<T>) {
+    storage.observeChanges { [weak self] _, change in
+      self?.observations.values.forEach { [weak self] closure in
+        guard let strongSelf = self else {
+          return
+        }
+        closure(strongSelf, change)
+      }
+    }
+  }
 }
 
 extension Storage: StorageAware {
@@ -74,26 +85,14 @@ extension Storage: StorageAware {
 
   public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     try self.syncStorage.setObject(object, forKey: key, expiry: expiry)
-    notifyObservers(of: .addition)
   }
 
   public func removeAll() throws {
     try self.syncStorage.removeAll()
-    notifyObservers(of: .allDeletion)
   }
 
   public func removeExpiredObjects() throws {
     try self.syncStorage.removeExpiredObjects()
-    notifyObservers(of: .expiredDeletion)
-  }
-
-  private func notifyObservers(of change: StoreChange) {
-    observations.values.forEach { [weak self] closure in
-      guard let strongSelf = self else {
-        return
-      }
-      closure(strongSelf, change)
-    }
   }
 }
 

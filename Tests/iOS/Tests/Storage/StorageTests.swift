@@ -96,4 +96,8 @@ final class StorageTests: XCTestCase {
     let cachedObject = try! alienStorage.object(forKey: "person")
     XCTAssertEqual(cachedObject.firstName, "John")
   }
+
+  func testObserveAddition() {
+    
+  }
 }
