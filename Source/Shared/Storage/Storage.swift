@@ -1,12 +1,30 @@
 import Foundation
 import Dispatch
 
+enum StoreChange {
+  case addition
+  case singleDeletion
+  case allDeletion
+  case expiredDeletion
+}
+
 /// Manage storage. Use memory storage if specified.
 /// Synchronous by default. Use `async` for asynchronous operations.
 public class Storage<T> {
   /// Used for sync operations
   let syncStorage: SyncStorage<T>
   let asyncStorage: AsyncStorage<T>
+
+  private var observations = [UUID : (Storage, StoreChange) -> Void]()
+
+  @discardableResult
+  func observeChanges(using closure: @escaping (Storage, StoreChange) -> Void) -> ObservationToken {
+    let id = observations.insert(closure)
+
+    return ObservationToken { [weak self] in
+      self?.observations.removeValue(forKey: id)
+    }
+  }
 
   /// Initialize storage with configuration options.
   ///
@@ -56,14 +74,26 @@ extension Storage: StorageAware {
 
   public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     try self.syncStorage.setObject(object, forKey: key, expiry: expiry)
+    notifyObservers(of: .addition)
   }
 
   public func removeAll() throws {
     try self.syncStorage.removeAll()
+    notifyObservers(of: .allDeletion)
   }
 
   public func removeExpiredObjects() throws {
     try self.syncStorage.removeExpiredObjects()
+    notifyObservers(of: .expiredDeletion)
+  }
+
+  private func notifyObservers(of change: StoreChange) {
+    observations.values.forEach { [weak self] closure in
+      guard let strongSelf = self else {
+        return
+      }
+      closure(strongSelf, change)
+    }
   }
 }
 
