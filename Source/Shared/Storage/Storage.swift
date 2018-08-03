@@ -56,7 +56,7 @@ public final class Storage<T> {
   private func subscribeToChanges(in storage: HybridStorage<T>) {
     storage.storageObservationRegistry.addObservation { [weak self] _, change in
       guard let strongSelf = self else { return }
-      self?.storageObservationRegistry.notifyObservers(about: change, in: strongSelf)
+      strongSelf.storageObservationRegistry.notifyObservers(about: change, in: strongSelf)
     }
   }
 }
