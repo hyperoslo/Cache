@@ -52,9 +52,9 @@ final class StorageObservationRegistryTests: XCTestCase {
       change2 = change
     }
 
-    registry.notifyObservers(about: .addition, in: storage)
+    registry.notifyObservers(about: .add(key: "key"), in: storage)
 
-    XCTAssertEqual(change1, .addition)
-    XCTAssertEqual(change2, .addition)
+    XCTAssertEqual(change1, StorageChange.add(key: "key"))
+    XCTAssertEqual(change2, StorageChange.add(key: "key"))
   }
 }

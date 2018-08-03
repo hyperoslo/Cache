@@ -27,25 +27,25 @@ extension HybridStorage: StorageAware {
   public func removeObject(forKey key: String) throws {
     memoryStorage.removeObject(forKey: key)
     try diskStorage.removeObject(forKey: key)
-    storageObservationRegistry.notifyObservers(about: .singleDeletion, in: self)
+    storageObservationRegistry.notifyObservers(about: .remove(key: key), in: self)
   }
 
   public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     memoryStorage.setObject(object, forKey: key, expiry: expiry)
     try diskStorage.setObject(object, forKey: key, expiry: expiry)
-    storageObservationRegistry.notifyObservers(about: .addition, in: self)
+    storageObservationRegistry.notifyObservers(about: .add(key: key), in: self)
   }
 
   public func removeAll() throws {
     memoryStorage.removeAll()
     try diskStorage.removeAll()
-    storageObservationRegistry.notifyObservers(about: .allDeletion, in: self)
+    storageObservationRegistry.notifyObservers(about: .removeAll, in: self)
   }
 
   public func removeExpiredObjects() throws {
     memoryStorage.removeExpiredObjects()
     try diskStorage.removeExpiredObjects()
-    storageObservationRegistry.notifyObservers(about: .expiredDeletion, in: self)
+    storageObservationRegistry.notifyObservers(about: .removeExpired, in: self)
   }
 }
 

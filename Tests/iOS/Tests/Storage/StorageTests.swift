@@ -110,6 +110,14 @@ final class StorageTests: XCTestCase {
     try storage.removeExpiredObjects()
     try storage.removeAll()
 
-    XCTAssertEqual(changes, [.addition, .addition, .singleDeletion, .expiredDeletion, .allDeletion])
+    let expectedChanges: [StorageChange] = [
+      .add(key: "user1"),
+      .add(key: "user2"),
+      .remove(key: "user1"),
+      .removeExpired,
+      .removeAll
+    ]
+
+    XCTAssertEqual(changes, expectedChanges)
   }
 }
