@@ -3,21 +3,12 @@ import Dispatch
 
 /// Manage storage. Use memory storage if specified.
 /// Synchronous by default. Use `async` for asynchronous operations.
-public class Storage<T> {
+public final class Storage<T>: StoreObservable {
   /// Used for sync operations
   let syncStorage: SyncStorage<T>
   let asyncStorage: AsyncStorage<T>
 
-  private var observations = [UUID : (Storage, StoreChange) -> Void]()
-
-  @discardableResult
-  func observeChanges(using closure: @escaping (Storage, StoreChange) -> Void) -> ObservationToken {
-    let id = observations.insert(closure)
-
-    return ObservationToken { [weak self] in
-      self?.observations.removeValue(forKey: id)
-    }
-  }
+  var observations = [UUID : (Storage, StoreChange) -> Void]()
 
   /// Initialize storage with configuration options.
   ///
@@ -64,12 +55,7 @@ public class Storage<T> {
 
   private func subscribeToChanges(in storage: HybridStorage<T>) {
     storage.observeChanges { [weak self] _, change in
-      self?.observations.values.forEach { [weak self] closure in
-        guard let strongSelf = self else {
-          return
-        }
-        closure(strongSelf, change)
-      }
+      self?.notifyObservers(of: change)
     }
   }
 }

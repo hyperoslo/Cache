@@ -1,11 +1,11 @@
 import Foundation
 
 /// Use both memory and disk storage. Try on memory first.
-public class HybridStorage<T> {
+public final class HybridStorage<T>: StoreObservable {
   public let memoryStorage: MemoryStorage<T>
   public let diskStorage: DiskStorage<T>
 
-  private var observations = [UUID : (HybridStorage, StoreChange) -> Void]()
+  var observations = [UUID : (HybridStorage<T>, StoreChange) -> Void]()
 
   public init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
     self.memoryStorage = memoryStorage
@@ -58,27 +58,5 @@ public extension HybridStorage {
     )
 
     return storage
-  }
-}
-
-// MARK: - Observations
-
-extension HybridStorage {
-  @discardableResult
-  func observeChanges(using closure: @escaping (HybridStorage, StoreChange) -> Void) -> ObservationToken {
-    let id = observations.insert(closure)
-
-    return ObservationToken { [weak self] in
-      self?.observations.removeValue(forKey: id)
-    }
-  }
-
-  private func notifyObservers(of change: StoreChange) {
-    observations.values.forEach { [weak self] closure in
-      guard let strongSelf = self else {
-        return
-      }
-      closure(strongSelf, change)
-    }
   }
 }
