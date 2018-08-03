@@ -157,10 +157,10 @@ final class HybridStorageTests: XCTestCase {
     }
   }
 
-  func testRegisterObservations() throws {
+  func testAddObservations() throws {
     var changes = [StorageChange]()
 
-    storage.registry.register { storage, change in
+    storage.storageObservationRegistry.addObservation { storage, change in
       changes.append(change)
     }
 

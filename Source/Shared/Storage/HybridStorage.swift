@@ -4,7 +4,7 @@ import Foundation
 public final class HybridStorage<T> {
   public let memoryStorage: MemoryStorage<T>
   public let diskStorage: DiskStorage<T>
-  public let registry = StorageObservationRegistry<HybridStorage>()
+  public let storageObservationRegistry = StorageObservationRegistry<HybridStorage>()
 
   public init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
     self.memoryStorage = memoryStorage
@@ -27,25 +27,25 @@ extension HybridStorage: StorageAware {
   public func removeObject(forKey key: String) throws {
     memoryStorage.removeObject(forKey: key)
     try diskStorage.removeObject(forKey: key)
-    registry.notifyObservers(about: .singleDeletion, in: self)
+    storageObservationRegistry.notifyObservers(about: .singleDeletion, in: self)
   }
 
   public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     memoryStorage.setObject(object, forKey: key, expiry: expiry)
     try diskStorage.setObject(object, forKey: key, expiry: expiry)
-    registry.notifyObservers(about: .addition, in: self)
+    storageObservationRegistry.notifyObservers(about: .addition, in: self)
   }
 
   public func removeAll() throws {
     memoryStorage.removeAll()
     try diskStorage.removeAll()
-    registry.notifyObservers(about: .allDeletion, in: self)
+    storageObservationRegistry.notifyObservers(about: .allDeletion, in: self)
   }
 
   public func removeExpiredObjects() throws {
     memoryStorage.removeExpiredObjects()
     try diskStorage.removeExpiredObjects()
-    registry.notifyObservers(about: .expiredDeletion, in: self)
+    storageObservationRegistry.notifyObservers(about: .expiredDeletion, in: self)
   }
 }
 

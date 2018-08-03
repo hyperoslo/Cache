@@ -97,10 +97,10 @@ final class StorageTests: XCTestCase {
     XCTAssertEqual(cachedObject.firstName, "John")
   }
 
-  func testRegisterObservations() throws {
+  func testAddObservations() throws {
     var changes = [StorageChange]()
 
-    storage.registry.register { storage, change in
+    storage.storageObservationRegistry.addObservation { storage, change in
       changes.append(change)
     }
 

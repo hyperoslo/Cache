@@ -15,28 +15,28 @@ final class StorageObservationRegistryTests: XCTestCase {
     )
   }
 
-  func testRegister() {
-    registry.register { _, _ in }
+  func testAddObservation() {
+    registry.addObservation { _, _ in }
     XCTAssertEqual(registry.observations.count, 1)
 
-    registry.register { _, _ in }
+    registry.addObservation { _, _ in }
     XCTAssertEqual(registry.observations.count, 2)
   }
 
-  func testDeregister() {
-    let token = registry.register { _, _ in }
+  func testRemoveObservation() {
+    let token = registry.addObservation { _, _ in }
     XCTAssertEqual(registry.observations.count, 1)
 
-    registry.deregister(token: token)
+    registry.removeObservation(token: token)
     XCTAssertTrue(registry.observations.isEmpty)
   }
 
-  func testDeregisterAll() {
-    registry.register { _, _ in }
-    registry.register { _, _ in }
+  func testRemoveAllObservation() {
+    registry.addObservation { _, _ in }
+    registry.addObservation { _, _ in }
     XCTAssertEqual(registry.observations.count, 2)
 
-    registry.deregisterAll()
+    registry.removeAllObservations()
     XCTAssertTrue(registry.observations.isEmpty)
   }
 
@@ -44,11 +44,11 @@ final class StorageObservationRegistryTests: XCTestCase {
     var change1: StorageChange?
     var change2: StorageChange?
 
-    registry.register { _, change in
+    registry.addObservation { _, change in
       change1 = change
     }
 
-    registry.register { _, change in
+    registry.addObservation { _, change in
       change2 = change
     }
 

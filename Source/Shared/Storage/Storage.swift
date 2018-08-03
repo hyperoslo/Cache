@@ -8,7 +8,7 @@ public final class Storage<T> {
   let syncStorage: SyncStorage<T>
   let asyncStorage: AsyncStorage<T>
 
-  public let registry = StorageObservationRegistry<Storage>()
+  public let storageObservationRegistry = StorageObservationRegistry<Storage>()
 
   /// Initialize storage with configuration options.
   ///
@@ -54,9 +54,9 @@ public final class Storage<T> {
   }
 
   private func subscribeToChanges(in storage: HybridStorage<T>) {
-    storage.registry.register { [weak self] _, change in
+    storage.storageObservationRegistry.addObservation { [weak self] _, change in
       guard let strongSelf = self else { return }
-      self?.registry.notifyObservers(about: change, in: strongSelf)
+      self?.storageObservationRegistry.notifyObservers(about: change, in: strongSelf)
     }
   }
 }

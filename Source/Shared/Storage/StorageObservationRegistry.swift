@@ -5,7 +5,7 @@ public final class StorageObservationRegistry<T: StorageAware> {
   private(set) var observations = [UUID: Observation]()
 
   @discardableResult
-  public func register(observation: @escaping Observation) -> ObservationToken {
+  public func addObservation(_ observation: @escaping Observation) -> ObservationToken {
     let id = UUID()
     observations[id] = observation
 
@@ -14,11 +14,11 @@ public final class StorageObservationRegistry<T: StorageAware> {
     }
   }
 
-  public func deregister(token: ObservationToken) {
+  public func removeObservation(token: ObservationToken) {
     token.cancel()
   }
 
-  public func deregisterAll() {
+  public func removeAllObservations() {
     observations.removeAll()
   }
 
