@@ -4,7 +4,7 @@ import Foundation
 public final class HybridStorage<T> {
   public let memoryStorage: MemoryStorage<T>
   public let diskStorage: DiskStorage<T>
-  public let registry = StorageObservationRegister<HybridStorage>()
+  public let registry = StorageObservationRegistry<HybridStorage>()
 
   public init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
     self.memoryStorage = memoryStorage

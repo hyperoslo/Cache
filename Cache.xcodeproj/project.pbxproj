@@ -128,6 +128,10 @@
 		D2D4CC251FA3426B00E4A2D5 /* JSONArrayWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4CC231FA3426B00E4A2D5 /* JSONArrayWrapper.swift */; };
 		D2D4CC261FA3426B00E4A2D5 /* JSONArrayWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4CC231FA3426B00E4A2D5 /* JSONArrayWrapper.swift */; };
 		D2D4CC281FA342CA00E4A2D5 /* JSONWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4CC271FA342CA00E4A2D5 /* JSONWrapperTests.swift */; };
+		D511464B2114775100197DCE /* StorageObservationRegistryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D511464A2114775100197DCE /* StorageObservationRegistryTests.swift */; };
+		D511464D2114775100197DCE /* StorageObservationRegistryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D511464A2114775100197DCE /* StorageObservationRegistryTests.swift */; };
+		D511464F21147B7C00197DCE /* ObservationTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D511464E21147B7C00197DCE /* ObservationTokenTests.swift */; };
+		D511465121147B7C00197DCE /* ObservationTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D511464E21147B7C00197DCE /* ObservationTokenTests.swift */; };
 		D5291D1D1C2837DB00B702C9 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DC59E01C20593E003BD79B /* Cache.framework */; };
 		D5291D6A1C283B5400B702C9 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5291D601C283B5300B702C9 /* Cache.framework */; };
 		D5291D851C283C7C00B702C9 /* TestHelper+OSX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D811C283C7000B702C9 /* TestHelper+OSX.swift */; };
@@ -141,9 +145,9 @@
 		D5A9D1BF21134776005DBD3F /* StoreChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1BE21134776005DBD3F /* StoreChange.swift */; };
 		D5A9D1C021134776005DBD3F /* StoreChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1BE21134776005DBD3F /* StoreChange.swift */; };
 		D5A9D1C121134776005DBD3F /* StoreChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1BE21134776005DBD3F /* StoreChange.swift */; };
-		D5A9D1C321144B65005DBD3F /* StoreObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1C221144B65005DBD3F /* StoreObservable.swift */; };
-		D5A9D1C421144B65005DBD3F /* StoreObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1C221144B65005DBD3F /* StoreObservable.swift */; };
-		D5A9D1C521144B65005DBD3F /* StoreObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1C221144B65005DBD3F /* StoreObservable.swift */; };
+		D5A9D1C321144B65005DBD3F /* StorageObservationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1C221144B65005DBD3F /* StorageObservationRegistry.swift */; };
+		D5A9D1C421144B65005DBD3F /* StorageObservationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1C221144B65005DBD3F /* StorageObservationRegistry.swift */; };
+		D5A9D1C521144B65005DBD3F /* StorageObservationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1C221144B65005DBD3F /* StorageObservationRegistry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +223,8 @@
 		D2D4CC1F1FA3411300E4A2D5 /* JSONDictionaryWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDictionaryWrapper.swift; sourceTree = "<group>"; };
 		D2D4CC231FA3426B00E4A2D5 /* JSONArrayWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONArrayWrapper.swift; sourceTree = "<group>"; };
 		D2D4CC271FA342CA00E4A2D5 /* JSONWrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONWrapperTests.swift; sourceTree = "<group>"; };
+		D511464A2114775100197DCE /* StorageObservationRegistryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageObservationRegistryTests.swift; sourceTree = "<group>"; };
+		D511464E21147B7C00197DCE /* ObservationTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationTokenTests.swift; sourceTree = "<group>"; };
 		D5291CDF1C28374800B702C9 /* TestHelper+iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TestHelper+iOS.swift"; sourceTree = "<group>"; };
 		D5291D181C2837DB00B702C9 /* Cache-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5291D231C28380100B702C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -233,7 +239,7 @@
 		D5A138C31EB29C2100881A20 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		D5A9D1B621134547005DBD3F /* ObservationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationToken.swift; sourceTree = "<group>"; };
 		D5A9D1BE21134776005DBD3F /* StoreChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreChange.swift; sourceTree = "<group>"; };
-		D5A9D1C221144B65005DBD3F /* StoreObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreObservable.swift; sourceTree = "<group>"; };
+		D5A9D1C221144B65005DBD3F /* StorageObservationRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageObservationRegistry.swift; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBAACA991FBC369300FA206E /* SimpleStorage.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleStorage.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
@@ -362,7 +368,7 @@
 				D270148320D10E76003B45C7 /* AsyncStorage.swift */,
 				D270148720D11040003B45C7 /* Storage+Transform.swift */,
 				D5A9D1BE21134776005DBD3F /* StoreChange.swift */,
-				D5A9D1C221144B65005DBD3F /* StoreObservable.swift */,
+				D5A9D1C221144B65005DBD3F /* StorageObservationRegistry.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -395,6 +401,7 @@
 				D285143E1F6FFE1F00C674D1 /* ObjectConverterTests.swift */,
 				D2D4CC191FA3166900E4A2D5 /* MD5Tests.swift */,
 				D2D4CC271FA342CA00E4A2D5 /* JSONWrapperTests.swift */,
+				D511464E21147B7C00197DCE /* ObservationTokenTests.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -409,6 +416,7 @@
 				D292DB001F6AA06B0060F614 /* SyncStorageTests.swift */,
 				D292DB031F6AA0730060F614 /* AsyncStorageTests.swift */,
 				D236F3191F6BEF73004EE01F /* StorageTests.swift */,
+				D511464A2114775100197DCE /* StorageObservationRegistryTests.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -809,7 +817,7 @@
 			files = (
 				D221E5C620D00DDB00BC940E /* DiskStorage.swift in Sources */,
 				D21B669D1F6A724600125DE1 /* DiskConfig.swift in Sources */,
-				D5A9D1C521144B65005DBD3F /* StoreObservable.swift in Sources */,
+				D5A9D1C521144B65005DBD3F /* StorageObservationRegistry.swift in Sources */,
 				D21B66871F6A723C00125DE1 /* ExpirationMode.swift in Sources */,
 				D21B66881F6A723C00125DE1 /* Expiry.swift in Sources */,
 				D270147620D101F3003B45C7 /* StorageAware.swift in Sources */,
@@ -853,8 +861,10 @@
 				D27014A020D12870003B45C7 /* MemoryStorageTests.swift in Sources */,
 				D2CF98261F69427C00CE8F68 /* User.swift in Sources */,
 				D27014AE20D12D83003B45C7 /* AsyncStorageTests.swift in Sources */,
+				D511465121147B7C00197DCE /* ObservationTokenTests.swift in Sources */,
 				D28A1D241F6FFEF60030DF81 /* ObjectConverterTests.swift in Sources */,
 				D27014B120D12E38003B45C7 /* StorageSupportTests.swift in Sources */,
+				D511464D2114775100197DCE /* StorageObservationRegistryTests.swift in Sources */,
 				D27014AD20D12CC3003B45C7 /* SyncStorageTests.swift in Sources */,
 				D27014AA20D12BA4003B45C7 /* HybridStorageTests.swift in Sources */,
 			);
@@ -870,9 +880,11 @@
 				D2CF987C1F69513800CE8F68 /* Date+ExtensionsTests.swift in Sources */,
 				D28C9BAC1F67ECD400C180C1 /* TestHelper+iOS.swift in Sources */,
 				D2CF98211F69427C00CE8F68 /* TestHelper.swift in Sources */,
+				D511464F21147B7C00197DCE /* ObservationTokenTests.swift in Sources */,
 				D2CF987F1F69513800CE8F68 /* ImageWrapperTests.swift in Sources */,
 				D2D4CC1A1FA3166900E4A2D5 /* MD5Tests.swift in Sources */,
 				D2D4CC281FA342CA00E4A2D5 /* JSONWrapperTests.swift in Sources */,
+				D511464B2114775100197DCE /* StorageObservationRegistryTests.swift in Sources */,
 				D27014B320D13E2C003B45C7 /* StorageTests.swift in Sources */,
 				D28C9BAF1F67EF8300C180C1 /* UIImage+ExtensionsTests.swift in Sources */,
 				D2CF987D1F69513800CE8F68 /* MemoryCapsuleTests.swift in Sources */,
@@ -893,7 +905,7 @@
 			files = (
 				D221E5C520D00DDB00BC940E /* DiskStorage.swift in Sources */,
 				D21B669B1F6A724600125DE1 /* DiskConfig.swift in Sources */,
-				D5A9D1C421144B65005DBD3F /* StoreObservable.swift in Sources */,
+				D5A9D1C421144B65005DBD3F /* StorageObservationRegistry.swift in Sources */,
 				D21B667E1F6A723C00125DE1 /* ExpirationMode.swift in Sources */,
 				D21B667F1F6A723C00125DE1 /* Expiry.swift in Sources */,
 				D270147520D101F3003B45C7 /* StorageAware.swift in Sources */,
@@ -946,7 +958,7 @@
 			files = (
 				D221E5C420D00DDB00BC940E /* DiskStorage.swift in Sources */,
 				D2CF98681F694FFA00CE8F68 /* ImageWrapper.swift in Sources */,
-				D5A9D1C321144B65005DBD3F /* StoreObservable.swift in Sources */,
+				D5A9D1C321144B65005DBD3F /* StorageObservationRegistry.swift in Sources */,
 				D2CF98871F695B8F00CE8F68 /* Types.swift in Sources */,
 				D2CF98621F694FFA00CE8F68 /* Date+Extensions.swift in Sources */,
 				D2CF98641F694FFA00CE8F68 /* DataSerializer.swift in Sources */,

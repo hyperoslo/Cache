@@ -8,7 +8,7 @@ public final class Storage<T> {
   let syncStorage: SyncStorage<T>
   let asyncStorage: AsyncStorage<T>
 
-  public let registry = StorageObservationRegister<Storage>()
+  public let registry = StorageObservationRegistry<Storage>()
 
   /// Initialize storage with configuration options.
   ///

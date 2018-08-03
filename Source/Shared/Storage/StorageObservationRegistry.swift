@@ -1,6 +1,6 @@
 import Foundation
 
-public final class StorageObservationRegister<T: StorageAware> {
+public final class StorageObservationRegistry<T: StorageAware> {
   public typealias Observation = (T, StorageChange) -> Void
   private(set) var observations = [UUID: Observation]()
 
