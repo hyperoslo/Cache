@@ -1,11 +1,10 @@
 import Foundation
 
 /// Use both memory and disk storage. Try on memory first.
-public final class HybridStorage<T>: StoreObservable {
+public final class HybridStorage<T> {
   public let memoryStorage: MemoryStorage<T>
   public let diskStorage: DiskStorage<T>
-
-  var observations = [UUID : (HybridStorage<T>, StoreChange) -> Void]()
+  public let registry = StorageObservationRegister<HybridStorage>()
 
   public init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
     self.memoryStorage = memoryStorage
@@ -28,25 +27,25 @@ extension HybridStorage: StorageAware {
   public func removeObject(forKey key: String) throws {
     memoryStorage.removeObject(forKey: key)
     try diskStorage.removeObject(forKey: key)
-    notifyObservers(of: .singleDeletion)
+    registry.notifyObservers(about: .singleDeletion, in: self)
   }
 
   public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     memoryStorage.setObject(object, forKey: key, expiry: expiry)
     try diskStorage.setObject(object, forKey: key, expiry: expiry)
-    notifyObservers(of: .addition)
+    registry.notifyObservers(about: .addition, in: self)
   }
 
   public func removeAll() throws {
     memoryStorage.removeAll()
     try diskStorage.removeAll()
-    notifyObservers(of: .allDeletion)
+    registry.notifyObservers(about: .allDeletion, in: self)
   }
 
   public func removeExpiredObjects() throws {
     memoryStorage.removeExpiredObjects()
     try diskStorage.removeExpiredObjects()
-    notifyObservers(of: .expiredDeletion)
+    registry.notifyObservers(about: .expiredDeletion, in: self)
   }
 }
 

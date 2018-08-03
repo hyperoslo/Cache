@@ -1,5 +1,5 @@
 import XCTest
-import Cache
+@testable import Cache
 
 final class StorageTests: XCTestCase {
   private var storage: Storage<User>!
@@ -97,7 +97,19 @@ final class StorageTests: XCTestCase {
     XCTAssertEqual(cachedObject.firstName, "John")
   }
 
-  func testObserveAddition() {
-    
+  func testRegisterObservations() throws {
+    var changes = [StorageChange]()
+
+    storage.registry.register { storage, change in
+      changes.append(change)
+    }
+
+    try storage.setObject(user, forKey: "user1")
+    try storage.setObject(user, forKey: "user2")
+    try storage.removeObject(forKey: "user1")
+    try storage.removeExpiredObjects()
+    try storage.removeAll()
+
+    XCTAssertEqual(changes, [.addition, .addition, .singleDeletion, .expiredDeletion, .allDeletion])
   }
 }

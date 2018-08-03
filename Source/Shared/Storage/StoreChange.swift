@@ -1,4 +1,4 @@
-public enum StoreChange {
+public enum StorageChange {
   case addition
   case singleDeletion
   case allDeletion

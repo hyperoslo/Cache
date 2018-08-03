@@ -1,26 +1,30 @@
 import Foundation
 
-protocol StoreObservable: class {
-  var observations: [UUID : (Self, StoreChange) -> Void] { get set }
-}
+public final class StorageObservationRegister<T: StorageAware> {
+  public typealias Observation = (T, StorageChange) -> Void
+  private(set) var observations = [UUID: Observation]()
 
-extension StoreObservable {
   @discardableResult
-  public func observeChanges(using closure: @escaping (Self, StoreChange) -> Void) -> ObservationToken {
+  public func register(observation: @escaping Observation) -> ObservationToken {
     let id = UUID()
-    observations[id] = closure
+    observations[id] = observation
 
     return ObservationToken { [weak self] in
       self?.observations.removeValue(forKey: id)
     }
   }
 
-  func notifyObservers(of change: StoreChange) {
-    observations.values.forEach { [weak self] closure in
-      guard let strongSelf = self else {
-        return
-      }
-      closure(strongSelf, change)
+  public func deregister(token: ObservationToken) {
+    token.cancel()
+  }
+
+  public func deregisterAll() {
+    observations.removeAll()
+  }
+
+  func notifyObservers(about change: StorageChange, in storage: T) {
+    observations.values.forEach { closure in
+      closure(storage, change)
     }
   }
 }
