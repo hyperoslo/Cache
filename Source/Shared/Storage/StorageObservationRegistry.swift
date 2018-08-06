@@ -1,7 +1,7 @@
 import Foundation
 
-public final class StorageObservationRegistry<T: StorageAware> {
-  public typealias Observation = (T, StorageChange) -> Void
+public final class StorageObservationRegistry<Storage: StorageAware> {
+  public typealias Observation = (Storage, StorageChange) -> Void
   private(set) var observations = [UUID: Observation]()
 
   @discardableResult
@@ -22,7 +22,7 @@ public final class StorageObservationRegistry<T: StorageAware> {
     observations.removeAll()
   }
 
-  func notifyObservers(about change: StorageChange, in storage: T) {
+  func notifyObservers(about change: StorageChange, in storage: Storage) {
     observations.values.forEach { closure in
       closure(storage, change)
     }
