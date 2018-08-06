@@ -2,7 +2,7 @@ import Foundation
 
 public final class StorageObservationRegistry<Storage: StorageAware> {
   public typealias Observation = (Storage, StorageChange) -> Void
-  private(set) var observations = [UUID: Observation]()
+  private(set) var observations = [UUID: Observation]() 
 
   public var isEmpty: Bool {
     return observations.isEmpty

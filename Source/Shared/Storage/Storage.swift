@@ -5,8 +5,9 @@ import Dispatch
 /// Synchronous by default. Use `async` for asynchronous operations.
 public final class Storage<T> {
   /// Used for sync operations
-  let syncStorage: SyncStorage<T>
-  let asyncStorage: AsyncStorage<T>
+  private let syncStorage: SyncStorage<T>
+  private let asyncStorage: AsyncStorage<T>
+  private let hybridStorage: HybridStorage<T>
 
   public let storageObservationRegistry = StorageObservationRegistry<Storage>()
   public let keyObservationRegistry = KeyObservationRegistry<Storage>()
@@ -20,44 +21,40 @@ public final class Storage<T> {
   public convenience init(diskConfig: DiskConfig, memoryConfig: MemoryConfig, transformer: Transformer<T>) throws {
     let disk = try DiskStorage(config: diskConfig, transformer: transformer)
     let memory = MemoryStorage<T>(config: memoryConfig)
-
     let hybridStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
-    let syncStorage = SyncStorage(
-      storage: hybridStorage,
-      serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
-    )
-    let asyncStorage = AsyncStorage(
-      storage: hybridStorage,
-      serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
-    )
-
-    self.init(syncStorage: syncStorage, asyncStorage: asyncStorage)
+    self.init(hybridStorage: hybridStorage)
   }
 
   /// Initialise with sync and async storages
   ///
   /// - Parameter syncStorage: Synchronous storage
   /// - Paraeter: asyncStorage: Asynchronous storage
-  public required init(syncStorage: SyncStorage<T>, asyncStorage: AsyncStorage<T>) {
-    self.syncStorage = syncStorage
-    self.asyncStorage = asyncStorage
-    subscribeToChanges()
+  public init(hybridStorage: HybridStorage<T>) {
+    self.hybridStorage = hybridStorage
+    self.syncStorage = SyncStorage(
+      storage: hybridStorage,
+      serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
+    )
+    self.asyncStorage = AsyncStorage(
+      storage: hybridStorage,
+      serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
+    )
+    subscribeToChanges(in: hybridStorage)
   }
 
   /// Used for async operations
   public lazy var async = self.asyncStorage
 
-  private func subscribeToChanges() {
-    subscribeToChanges(in: syncStorage.innerStorage)
-    if syncStorage.innerStorage !== asyncStorage.innerStorage {
-      subscribeToChanges(in: asyncStorage.innerStorage)
-    }
-  }
-
   private func subscribeToChanges(in storage: HybridStorage<T>) {
     storage.storageObservationRegistry.addObservation { [weak self] _, change in
       guard let strongSelf = self else { return }
       strongSelf.storageObservationRegistry.notifyObservers(about: change, in: strongSelf)
+    }
+    keyObservationRegistry.onNewKey = { [weak self] key in
+      guard let strongSelf = self else { return }
+      storage.keyObservationRegistry.addObservation({ _, change in
+        strongSelf.keyObservationRegistry.notifyObserver(forKey: key, about: change, in: strongSelf)
+      }, forKey: key)
     }
   }
 }
@@ -86,10 +83,6 @@ extension Storage: StorageAware {
 
 public extension Storage {
   func transform<U>(transformer: Transformer<U>) -> Storage<U> {
-    let storage = Storage<U>(
-      syncStorage: syncStorage.transform(transformer: transformer),
-      asyncStorage: asyncStorage.transform(transformer: transformer)
-    )
-    return storage
+    return Storage<U>(hybridStorage: hybridStorage.transform(transformer: transformer))
   }
 }

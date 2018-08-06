@@ -1,11 +1,26 @@
 import Foundation
 
+protocol StorageChangeNotifier {
+  func notifyObservers(about change: StorageChange)
+}
+
+struct KeyChangeNotifier<T> {
+  
+
+  func notifyObserver(about change: KeyChange<T>, where closure: ((String) -> Bool)) {
+    
+  }
+}
+
+
 /// Use both memory and disk storage. Try on memory first.
 public final class HybridStorage<T> {
   public let memoryStorage: MemoryStorage<T>
   public let diskStorage: DiskStorage<T>
-  public let storageObservationRegistry = StorageObservationRegistry<HybridStorage>()
-  public let keyObservationRegistry = KeyObservationRegistry<HybridStorage>()
+  let storageObservationRegistry = ObservationRegistry<StorageChange>()
+  let keyObservationRegistry = ObservationRegistry<KeyChange<T>>()
+
+  var onKeyChange: ((KeyChange<T>, ((String) -> Bool)) -> Void)?
 
   public init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
     self.memoryStorage = memoryStorage
@@ -17,7 +32,7 @@ public final class HybridStorage<T> {
   }
 
   private func handleRemovedObject(at path: String) {
-    keyObservationRegistry.notifyObserver(about: .remove, in: self) { key in
+    keyObservationRegistry.notifyObserver(about: .remove) { key in
       let fileName = diskStorage.makeFileName(for: key)
       return path.contains(fileName)
     }
@@ -40,7 +55,7 @@ extension HybridStorage: StorageAware {
     memoryStorage.removeObject(forKey: key)
     try diskStorage.removeObject(forKey: key)
 
-    storageObservationRegistry.notifyObservers(about: .remove(key: key), in: self)
+    storageObservationRegistry.notifyAllObservers(about: .remove(key: key))
   }
 
   public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
@@ -55,25 +70,25 @@ extension HybridStorage: StorageAware {
 
 
     if let change = keyChange {
-      keyObservationRegistry.notifyObserver(forKey: key, about: change, in: self)
+      keyObservationRegistry.notifyObserver(forKey: key, about: change)
     }
 
-    storageObservationRegistry.notifyObservers(about: .add(key: key), in: self)
+    storageObservationRegistry.notifyAllObservers(about: .add(key: key))
   }
 
   public func removeAll() throws {
     memoryStorage.removeAll()
     try diskStorage.removeAll()
 
-    storageObservationRegistry.notifyObservers(about: .removeAll, in: self)
-    keyObservationRegistry.notifyAllObservers(about: .remove, in: self)
+    storageObservationRegistry.notifyAllObservers(about: .removeAll)
+    keyObservationRegistry.notifyAllObservers(about: .remove)
   }
 
   public func removeExpiredObjects() throws {
     memoryStorage.removeExpiredObjects()
     try diskStorage.removeExpiredObjects()
 
-    storageObservationRegistry.notifyObservers(about: .removeExpired, in: self)
+    storageObservationRegistry.notifyAllObservers(about: .removeExpired)
   }
 }
 
