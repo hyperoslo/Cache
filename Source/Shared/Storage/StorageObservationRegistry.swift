@@ -4,7 +4,11 @@ public protocol StorageObservationRegistry {
   associatedtype S: StorageAware
 
   @discardableResult
-  func observeStorage(using closure: @escaping (S, StorageChange) -> Void) -> ObservationToken
+  func addStorageObserver<O: AnyObject>(
+    _ observer: O,
+    closure: @escaping (O, S, StorageChange) -> Void
+  ) -> ObservationToken
+
   func removeAllStorageObservations()
 }
 

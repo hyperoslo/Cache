@@ -5,10 +5,8 @@ public final class HybridStorage<T> {
   public let memoryStorage: MemoryStorage<T>
   public let diskStorage: DiskStorage<T>
 
-  private var observations = (
-    storage: [UUID : (HybridStorage, StorageChange) -> Void](),
-    key: [String : (HybridStorage, KeyChange<T>) -> Void]()
-  )
+  private var storageObservations = [UUID : (HybridStorage, StorageChange) -> Void]()
+  private var keyObservations = [String : (HybridStorage, KeyChange<T>) -> Void]()
 
   public init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
     self.memoryStorage = memoryStorage
@@ -49,7 +47,7 @@ extension HybridStorage: StorageAware {
   public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     var keyChange: KeyChange<T>?
 
-    if observations.key[key] != nil {
+    if keyObservations[key] != nil {
       keyChange = .edit(before: try? self.object(forKey: key), after: object)
     }
 
@@ -93,21 +91,32 @@ public extension HybridStorage {
 
 extension HybridStorage: StorageObservationRegistry {
   @discardableResult
-  public func observeStorage(using closure: @escaping (HybridStorage, StorageChange) -> Void) -> ObservationToken {
+  public func addStorageObserver<O: AnyObject>(
+    _ observer: O,
+    closure: @escaping (O, HybridStorage, StorageChange) -> Void
+  ) -> ObservationToken {
     let id = UUID()
-    observations.storage[id] = closure
+
+    storageObservations[id] = { [weak self, weak observer] storage, change in
+      guard let observer = observer else {
+        self?.storageObservations.removeValue(forKey: id)
+        return
+      }
+
+      closure(observer, storage, change)
+    }
 
     return ObservationToken { [weak self] in
-      self?.observations.storage.removeValue(forKey: id)
+      self?.storageObservations.removeValue(forKey: id)
     }
   }
   
   public func removeAllStorageObservations() {
-    observations.storage.removeAll()
+    storageObservations.removeAll()
   }
 
   private func notifyStorageObservers(about change: StorageChange) {
-    observations.storage.values.forEach { closure in
+    storageObservations.values.forEach { closure in
       closure(self, change)
     }
   }
@@ -115,33 +124,44 @@ extension HybridStorage: StorageObservationRegistry {
 
 extension HybridStorage: KeyObservationRegistry {
   @discardableResult
-  public func observeKey(_ key: String, using closure: @escaping (HybridStorage, KeyChange<T>) -> Void) -> ObservationToken {
-    observations.key[key] = closure
+  public func addObserver<O: AnyObject>(
+    _ observer: O,
+    forKey key: String,
+    closure: @escaping (O, HybridStorage, KeyChange<T>) -> Void
+  ) -> ObservationToken {
+    keyObservations[key] = { [weak self, weak observer] storage, change in
+      guard let observer = observer else {
+        self?.removeObservation(forKey: key)
+        return
+      }
+
+      closure(observer, storage, change)
+    }
 
     return ObservationToken { [weak self] in
-      self?.observations.key.removeValue(forKey: key)
+      self?.keyObservations.removeValue(forKey: key)
     }
   }
 
   public func removeObservation(forKey key: String) {
-    observations.key.removeValue(forKey: key)
+    keyObservations.removeValue(forKey: key)
   }
 
   public func removeAllKeyObservations() {
-    observations.key.removeAll()
+    keyObservations.removeAll()
   }
 
   private func notifyObserver(forKey key: String, about change: KeyChange<T>) {
-    observations.key[key]?(self, change)
+    keyObservations[key]?(self, change)
   }
 
   private func notifyObserver(about change: KeyChange<T>, whereKey closure: ((String) -> Bool)) {
-    let observation = observations.key.first { key, value in closure(key) }?.value
+    let observation = keyObservations.first { key, value in closure(key) }?.value
     observation?(self, change)
   }
 
   private func notifyKeyObservers(about change: KeyChange<T>) {
-    observations.key.values.forEach { closure in
+    keyObservations.values.forEach { closure in
       closure(self, change)
     }
   }

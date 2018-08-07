@@ -86,10 +86,14 @@ public extension Storage {
 
 extension Storage: StorageObservationRegistry {
   @discardableResult
-  public func observeStorage(using closure: @escaping (Storage, StorageChange) -> Void) -> ObservationToken {
-    return hybridStorage.observeStorage(using: { _, change in
-      closure(self, change)
-    })
+  public func addStorageObserver<O: AnyObject>(
+    _ observer: O,
+    closure: @escaping (O, Storage, StorageChange) -> Void
+  ) -> ObservationToken {
+    return hybridStorage.addStorageObserver(observer) { [weak self] observer, _, change in
+      guard let strongSelf = self else { return }
+      closure(observer, strongSelf, change)
+    }
   }
 
   public func removeAllStorageObservations() {
@@ -99,10 +103,15 @@ extension Storage: StorageObservationRegistry {
 
 extension Storage: KeyObservationRegistry {
   @discardableResult
-  public func observeKey(_ key: String, using closure: @escaping (Storage, KeyChange<T>) -> Void) -> ObservationToken {
-    return hybridStorage.observeKey(key, using: { _, change in
-      closure(self, change)
-    })
+  public func addObserver<O: AnyObject>(
+    _ observer: O,
+    forKey key: String,
+    closure: @escaping (O, Storage, KeyChange<T>) -> Void
+  ) -> ObservationToken {
+    return hybridStorage.addObserver(observer, forKey: key) { [weak self] observer, _ , change in
+      guard let strongSelf = self else { return }
+      closure(observer, strongSelf, change)
+    }
   }
 
   public func removeObservation(forKey key: String) {

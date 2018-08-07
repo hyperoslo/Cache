@@ -4,7 +4,12 @@ public protocol KeyObservationRegistry {
   associatedtype S: StorageAware
 
   @discardableResult
-  func observeKey(_ key: String, using closure: @escaping (S, KeyChange<S.T>) -> Void) -> ObservationToken
+  func addObserver<O: AnyObject>(
+    _ observer: O,
+    forKey key: String,
+    closure: @escaping (O, S, KeyChange<S.T>) -> Void
+  ) -> ObservationToken
+
   func removeObservation(forKey key: String)
   func removeAllKeyObservations()
 }
