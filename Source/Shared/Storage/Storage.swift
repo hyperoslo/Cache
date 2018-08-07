@@ -3,10 +3,12 @@ import Dispatch
 
 /// Manage storage. Use memory storage if specified.
 /// Synchronous by default. Use `async` for asynchronous operations.
-public class Storage<T> {
+public final class Storage<T> {
   /// Used for sync operations
   let syncStorage: SyncStorage<T>
   let asyncStorage: AsyncStorage<T>
+
+  public let storageObservationRegistry = StorageObservationRegistry<Storage>()
 
   /// Initialize storage with configuration options.
   ///
@@ -23,7 +25,6 @@ public class Storage<T> {
       storage: hybridStorage,
       serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
     )
-
     let asyncStorage = AsyncStorage(
       storage: hybridStorage,
       serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
@@ -39,10 +40,25 @@ public class Storage<T> {
   public required init(syncStorage: SyncStorage<T>, asyncStorage: AsyncStorage<T>) {
     self.syncStorage = syncStorage
     self.asyncStorage = asyncStorage
+    subscribeToChanges()
   }
 
   /// Used for async operations
   public lazy var async = self.asyncStorage
+
+  private func subscribeToChanges() {
+    subscribeToChanges(in: syncStorage.innerStorage)
+    if syncStorage.innerStorage !== asyncStorage.innerStorage {
+      subscribeToChanges(in: asyncStorage.innerStorage)
+    }
+  }
+
+  private func subscribeToChanges(in storage: HybridStorage<T>) {
+    storage.storageObservationRegistry.addObservation { [weak self] _, change in
+      guard let strongSelf = self else { return }
+      strongSelf.storageObservationRegistry.notifyObservers(about: change, in: strongSelf)
+    }
+  }
 }
 
 extension Storage: StorageAware {

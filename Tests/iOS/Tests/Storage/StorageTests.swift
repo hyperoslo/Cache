@@ -1,5 +1,5 @@
 import XCTest
-import Cache
+@testable import Cache
 
 final class StorageTests: XCTestCase {
   private var storage: Storage<User>!
@@ -95,5 +95,29 @@ final class StorageTests: XCTestCase {
     // As long as it has same properties, it works too
     let cachedObject = try! alienStorage.object(forKey: "person")
     XCTAssertEqual(cachedObject.firstName, "John")
+  }
+
+  func testAddObservations() throws {
+    var changes = [StorageChange]()
+
+    storage.storageObservationRegistry.addObservation { storage, change in
+      changes.append(change)
+    }
+
+    try storage.setObject(user, forKey: "user1")
+    try storage.setObject(user, forKey: "user2")
+    try storage.removeObject(forKey: "user1")
+    try storage.removeExpiredObjects()
+    try storage.removeAll()
+
+    let expectedChanges: [StorageChange] = [
+      .add(key: "user1"),
+      .add(key: "user2"),
+      .remove(key: "user1"),
+      .removeExpired,
+      .removeAll
+    ]
+
+    XCTAssertEqual(changes, expectedChanges)
   }
 }

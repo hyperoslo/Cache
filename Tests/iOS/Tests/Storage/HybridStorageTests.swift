@@ -156,4 +156,28 @@ final class HybridStorageTests: XCTestCase {
       XCTAssertNotNil(try? storage.object(forKey: key2))
     }
   }
+
+  func testAddObservations() throws {
+    var changes = [StorageChange]()
+
+    storage.storageObservationRegistry.addObservation { storage, change in
+      changes.append(change)
+    }
+
+    try storage.setObject(testObject, forKey: "user1")
+    try storage.setObject(testObject, forKey: "user2")
+    try storage.removeObject(forKey: "user1")
+    try storage.removeExpiredObjects()
+    try storage.removeAll()
+
+    let expectedChanges: [StorageChange] = [
+      .add(key: "user1"),
+      .add(key: "user2"),
+      .remove(key: "user1"),
+      .removeExpired,
+      .removeAll
+    ]
+
+    XCTAssertEqual(changes, expectedChanges)
+  }
 }
