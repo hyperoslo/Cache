@@ -318,7 +318,7 @@ removed automatically when the weekly captured observer has been deallocated.
 
 ```swift
 // Add observer
-let token = storage.addStorageObserver(self) { observer, storage, change
+let token = storage.addStorageObserver(self) { observer, storage, change in
   switch change {
   case .add(let key):
     print("Added \(key)")
@@ -356,7 +356,7 @@ let token = storage.addObserver(self, forKey: key) { observer, storage, change i
 token.cancel()
 
 // Remove observer for key
-storage.removeObserver(forKey: "user1")
+storage.removeObserver(forKey: key)
 
 // Remove all observers
 storage.removeAllKeyObservers()

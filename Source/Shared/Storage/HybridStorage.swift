@@ -5,8 +5,8 @@ public final class HybridStorage<T> {
   public let memoryStorage: MemoryStorage<T>
   public let diskStorage: DiskStorage<T>
 
-  private(set) var storageObservations = [UUID : (HybridStorage, StorageChange) -> Void]()
-  private(set) var keyObservations = [String : (HybridStorage, KeyChange<T>) -> Void]()
+  private(set) var storageObservations = [UUID: (HybridStorage, StorageChange) -> Void]()
+  private(set) var keyObservations = [String: (HybridStorage, KeyChange<T>) -> Void]()
 
   public init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
     self.memoryStorage = memoryStorage

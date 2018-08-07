@@ -36,24 +36,10 @@ public final class Storage<T> {
       storage: hybridStorage,
       serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
     )
-    subscribeToChanges(in: hybridStorage)
   }
 
   /// Used for async operations
   public lazy var async = self.asyncStorage
-
-  private func subscribeToChanges(in storage: HybridStorage<T>) {
-//    storage.storageObservationRegistry.addObservation { [weak self] _, change in
-//      guard let strongSelf = self else { return }
-//      strongSelf.storageObservationRegistry.notifyObservers(about: change, in: strongSelf)
-//    }
-//    keyObservationRegistry.onNewKey = { [weak self] key in
-//      guard let strongSelf = self else { return }
-//      storage.keyObservationRegistry.addObservation({ _, change in
-//        strongSelf.keyObservationRegistry.notifyObserver(forKey: key, about: change, in: strongSelf)
-//      }, forKey: key)
-//    }
-  }
 }
 
 extension Storage: StorageAware {
