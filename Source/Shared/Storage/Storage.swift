@@ -9,9 +9,6 @@ public final class Storage<T> {
   private let asyncStorage: AsyncStorage<T>
   private let hybridStorage: HybridStorage<T>
 
-  public let storageObservationRegistry = StorageObservationRegistry<Storage>()
-  public let keyObservationRegistry = KeyObservationRegistry<Storage>()
-
   /// Initialize storage with configuration options.
   ///
   /// - Parameters:
@@ -46,16 +43,16 @@ public final class Storage<T> {
   public lazy var async = self.asyncStorage
 
   private func subscribeToChanges(in storage: HybridStorage<T>) {
-    storage.storageObservationRegistry.addObservation { [weak self] _, change in
-      guard let strongSelf = self else { return }
-      strongSelf.storageObservationRegistry.notifyObservers(about: change, in: strongSelf)
-    }
-    keyObservationRegistry.onNewKey = { [weak self] key in
-      guard let strongSelf = self else { return }
-      storage.keyObservationRegistry.addObservation({ _, change in
-        strongSelf.keyObservationRegistry.notifyObserver(forKey: key, about: change, in: strongSelf)
-      }, forKey: key)
-    }
+//    storage.storageObservationRegistry.addObservation { [weak self] _, change in
+//      guard let strongSelf = self else { return }
+//      strongSelf.storageObservationRegistry.notifyObservers(about: change, in: strongSelf)
+//    }
+//    keyObservationRegistry.onNewKey = { [weak self] key in
+//      guard let strongSelf = self else { return }
+//      storage.keyObservationRegistry.addObservation({ _, change in
+//        strongSelf.keyObservationRegistry.notifyObserver(forKey: key, about: change, in: strongSelf)
+//      }, forKey: key)
+//    }
   }
 }
 
@@ -84,5 +81,35 @@ extension Storage: StorageAware {
 public extension Storage {
   func transform<U>(transformer: Transformer<U>) -> Storage<U> {
     return Storage<U>(hybridStorage: hybridStorage.transform(transformer: transformer))
+  }
+}
+
+extension Storage: StorageObservationRegistry {
+  @discardableResult
+  public func observeStorage(using closure: @escaping (Storage, StorageChange) -> Void) -> ObservationToken {
+    return hybridStorage.observeStorage(using: { _, change in
+      closure(self, change)
+    })
+  }
+
+  public func removeAllStorageObservations() {
+    hybridStorage.removeAllStorageObservations()
+  }
+}
+
+extension Storage: KeyObservationRegistry {
+  @discardableResult
+  public func observeKey(_ key: String, using closure: @escaping (Storage, KeyChange<T>) -> Void) -> ObservationToken {
+    return hybridStorage.observeKey(key, using: { _, change in
+      closure(self, change)
+    })
+  }
+
+  public func removeObservation(forKey key: String) {
+    hybridStorage.removeObservation(forKey: key)
+  }
+
+  public func removeAllKeyObservations() {
+    hybridStorage.removeAllKeyObservations()
   }
 }
