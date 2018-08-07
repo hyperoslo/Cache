@@ -1,8 +1,17 @@
 import Foundation
 
+/// A protocol used for adding and removing key observations
 public protocol KeyObservationRegistry {
   associatedtype S: StorageAware
 
+  /**
+   Registers observation closure which will be removed automatically
+   when the weekly captured observer has been deallocated.
+   - Parameter observer: Any object that helps to determine if the observation is still valid
+   - Parameter key: Unique key to identify the object in the cache
+   - Parameter closure: Observation closure
+   - Returns: Token used to cancel the observation and remove the observation closure
+   */
   @discardableResult
   func addObserver<O: AnyObject>(
     _ observer: O,
@@ -10,7 +19,10 @@ public protocol KeyObservationRegistry {
     closure: @escaping (O, S, KeyChange<S.T>) -> Void
   ) -> ObservationToken
 
+  /// Removes observer by the given key.
   func removeObserver(forKey key: String)
+
+  /// Removes all registered key observers
   func removeAllKeyObservers()
 }
 
