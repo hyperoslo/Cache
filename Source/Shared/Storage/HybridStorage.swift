@@ -5,8 +5,8 @@ public final class HybridStorage<T> {
   public let memoryStorage: MemoryStorage<T>
   public let diskStorage: DiskStorage<T>
 
-  private var storageObservations = [UUID : (HybridStorage, StorageChange) -> Void]()
-  private var keyObservations = [String : (HybridStorage, KeyChange<T>) -> Void]()
+  private(set) var storageObservations = [UUID : (HybridStorage, StorageChange) -> Void]()
+  private(set) var keyObservations = [String : (HybridStorage, KeyChange<T>) -> Void]()
 
   public init(memoryStorage: MemoryStorage<T>, diskStorage: DiskStorage<T>) {
     self.memoryStorage = memoryStorage
@@ -53,7 +53,6 @@ extension HybridStorage: StorageAware {
 
     memoryStorage.setObject(object, forKey: key, expiry: expiry)
     try diskStorage.setObject(object, forKey: key, expiry: expiry)
-
 
     if let change = keyChange {
       notifyObserver(forKey: key, about: change)
@@ -111,7 +110,7 @@ extension HybridStorage: StorageObservationRegistry {
     }
   }
   
-  public func removeAllStorageObservations() {
+  public func removeAllStorageObservers() {
     storageObservations.removeAll()
   }
 
@@ -131,7 +130,7 @@ extension HybridStorage: KeyObservationRegistry {
   ) -> ObservationToken {
     keyObservations[key] = { [weak self, weak observer] storage, change in
       guard let observer = observer else {
-        self?.removeObservation(forKey: key)
+        self?.removeObserver(forKey: key)
         return
       }
 
@@ -143,11 +142,11 @@ extension HybridStorage: KeyObservationRegistry {
     }
   }
 
-  public func removeObservation(forKey key: String) {
+  public func removeObserver(forKey key: String) {
     keyObservations.removeValue(forKey: key)
   }
 
-  public func removeAllKeyObservations() {
+  public func removeAllKeyObservers() {
     keyObservations.removeAll()
   }
 

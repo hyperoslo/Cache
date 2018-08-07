@@ -10,8 +10,8 @@ public protocol KeyObservationRegistry {
     closure: @escaping (O, S, KeyChange<S.T>) -> Void
   ) -> ObservationToken
 
-  func removeObservation(forKey key: String)
-  func removeAllKeyObservations()
+  func removeObserver(forKey key: String)
+  func removeAllKeyObservers()
 }
 
 // MARK: - KeyChange

@@ -9,7 +9,7 @@ public protocol StorageObservationRegistry {
     closure: @escaping (O, S, StorageChange) -> Void
   ) -> ObservationToken
 
-  func removeAllStorageObservations()
+  func removeAllStorageObservers()
 }
 
 // MARK: - StorageChange

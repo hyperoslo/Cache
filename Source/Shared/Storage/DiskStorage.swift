@@ -17,7 +17,6 @@ final public class DiskStorage<T> {
 
   private let transformer: Transformer<T>
   
-
   // MARK: - Initialization
 
   public convenience init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<T>) throws {

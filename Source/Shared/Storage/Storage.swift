@@ -96,8 +96,8 @@ extension Storage: StorageObservationRegistry {
     }
   }
 
-  public func removeAllStorageObservations() {
-    hybridStorage.removeAllStorageObservations()
+  public func removeAllStorageObservers() {
+    hybridStorage.removeAllStorageObservers()
   }
 }
 
@@ -114,11 +114,11 @@ extension Storage: KeyObservationRegistry {
     }
   }
 
-  public func removeObservation(forKey key: String) {
-    hybridStorage.removeObservation(forKey: key)
+  public func removeObserver(forKey key: String) {
+    hybridStorage.removeObserver(forKey: key)
   }
 
-  public func removeAllKeyObservations() {
-    hybridStorage.removeAllKeyObservations()
+  public func removeAllKeyObservers() {
+    hybridStorage.removeAllKeyObservers()
   }
 }
