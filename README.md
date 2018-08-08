@@ -312,7 +312,7 @@ storage.removeExpiredObjects()
 [Storage](#storage) allows you to observe changes in the cache layer, both on
 a store and a key levels. The API lets you pass any object as an observer,
 while also passing an observation closure. The observation closure will be
-removed automatically when the weekly captured observer has been deallocated.
+removed automatically when the weakly captured observer has been deallocated.
 
 ## Storage observations
 

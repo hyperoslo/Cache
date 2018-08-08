@@ -6,8 +6,8 @@ public protocol StorageObservationRegistry {
 
   /**
    Registers observation closure which will be removed automatically
-   when the weekly captured observer has been deallocated.
-   - Parameter observer: Any object that helps to determine if the observation is still valid
+   when the weakly captured observer has been deallocated.
+   - Parameter observer: Any object that helps determine if the observation is still valid
    - Parameter closure: Observation closure
    - Returns: Token used to cancel the observation and remove the observation closure
    */
