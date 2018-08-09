@@ -9,12 +9,14 @@ final public class DiskStorage<T> {
   /// File manager to read/write to the disk
   public let fileManager: FileManager
   /// Configuration
-  fileprivate let config: DiskConfig
+  private let config: DiskConfig
   /// The computed path `directory+name`
   public let path: String
+  /// The closure to be called when single file has been removed
+  var onRemove: ((String) -> Void)?
 
   private let transformer: Transformer<T>
-
+  
   // MARK: - Initialization
 
   public convenience init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<T>) throws {
@@ -86,7 +88,9 @@ extension DiskStorage: StorageAware {
   }
 
   public func removeObject(forKey key: String) throws {
-    try fileManager.removeItem(atPath: makeFilePath(for: key))
+    let filePath = makeFilePath(for: key)
+    try fileManager.removeItem(atPath: filePath)
+    onRemove?(filePath)
   }
 
   public func removeAll() throws {
@@ -135,6 +139,7 @@ extension DiskStorage: StorageAware {
     // Remove expired objects
     for url in filesToDelete {
       try fileManager.removeItem(at: url)
+      onRemove?(url.path)
     }
 
     // Remove objects if storage size exceeds max size
@@ -220,9 +225,12 @@ extension DiskStorage {
 
     for file in sortedFiles {
       try fileManager.removeItem(at: file.url)
+      onRemove?(file.url.path)
+
       if let fileSize = file.resourceValues.totalFileAllocatedSize {
         totalSize -= UInt(fileSize)
       }
+
       if totalSize < targetSize {
         break
       }
@@ -238,6 +246,7 @@ extension DiskStorage {
     let attributes = try fileManager.attributesOfItem(atPath: filePath)
     if let expiryDate = attributes[.modificationDate] as? Date, expiryDate.inThePast {
       try fileManager.removeItem(atPath: filePath)
+      onRemove?(filePath)
     }
   }
 }

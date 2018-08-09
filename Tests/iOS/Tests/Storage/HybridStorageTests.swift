@@ -157,27 +157,81 @@ final class HybridStorageTests: XCTestCase {
     }
   }
 
-  func testAddObservations() throws {
-    var changes = [StorageChange]()
+  // MARK: - Storage observers
 
-    storage.storageObservationRegistry.addObservation { storage, change in
+  func testAddStorageObserver() throws {
+    var changes = [StorageChange]()
+    storage.addStorageObserver(self) { _, _, change in
       changes.append(change)
     }
 
     try storage.setObject(testObject, forKey: "user1")
-    try storage.setObject(testObject, forKey: "user2")
-    try storage.removeObject(forKey: "user1")
-    try storage.removeExpiredObjects()
-    try storage.removeAll()
+    XCTAssertEqual(changes, [StorageChange.add(key: "user1")])
+    XCTAssertEqual(storage.storageObservations.count, 1)
 
-    let expectedChanges: [StorageChange] = [
-      .add(key: "user1"),
-      .add(key: "user2"),
-      .remove(key: "user1"),
-      .removeExpired,
-      .removeAll
-    ]
+    storage.addStorageObserver(self) { _, _, _ in }
+    XCTAssertEqual(storage.storageObservations.count, 2)
+  }
 
-    XCTAssertEqual(changes, expectedChanges)
+  func testRemoveStorageObserver() {
+    let token = storage.addStorageObserver(self) { _, _, _ in }
+    XCTAssertEqual(storage.storageObservations.count, 1)
+
+    token.cancel()
+    XCTAssertTrue(storage.storageObservations.isEmpty)
+  }
+
+  func testRemoveAllStorageObservers() {
+    storage.addStorageObserver(self) { _, _, _ in }
+    storage.addStorageObserver(self) { _, _, _ in }
+    XCTAssertEqual(storage.storageObservations.count, 2)
+
+    storage.removeAllStorageObservers()
+    XCTAssertTrue(storage.storageObservations.isEmpty)
+  }
+
+  // MARK: - Key observers
+
+  func testAddObserverForKey() throws {
+    var changes = [KeyChange<User>]()
+    storage.addObserver(self, forKey: "user1") { _, _, change in
+      changes.append(change)
+    }
+
+    XCTAssertEqual(storage.keyObservations.count, 1)
+
+    try storage.setObject(testObject, forKey: "user1")
+    XCTAssertEqual(changes, [KeyChange.edit(before: nil, after: testObject)])
+
+    storage.addObserver(self, forKey: "user1") { _, _, _ in }
+    XCTAssertEqual(storage.keyObservations.count, 1)
+
+    storage.addObserver(self, forKey: "user2") { _, _, _ in }
+    XCTAssertEqual(storage.keyObservations.count, 2)
+  }
+
+  func testRemoveKeyObserver() {
+    // Test remove for key
+    storage.addObserver(self, forKey: "user1") { _, _, _ in }
+    XCTAssertEqual(storage.keyObservations.count, 1)
+
+    storage.removeObserver(forKey: "user1")
+    XCTAssertTrue(storage.storageObservations.isEmpty)
+
+    // Test remove by token
+    let token = storage.addObserver(self, forKey: "user2") { _, _, _ in }
+    XCTAssertEqual(storage.keyObservations.count, 1)
+
+    token.cancel()
+    XCTAssertTrue(storage.storageObservations.isEmpty)
+  }
+
+  func testRemoveAllKeyObservers() {
+    storage.addObserver(self, forKey: "user1") { _, _, _ in }
+    storage.addObserver(self, forKey: "user2") { _, _, _ in }
+    XCTAssertEqual(storage.keyObservations.count, 2)
+
+    storage.removeAllKeyObservers()
+    XCTAssertTrue(storage.keyObservations.isEmpty)
   }
 }

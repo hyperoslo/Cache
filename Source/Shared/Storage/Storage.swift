@@ -5,10 +5,9 @@ import Dispatch
 /// Synchronous by default. Use `async` for asynchronous operations.
 public final class Storage<T> {
   /// Used for sync operations
-  let syncStorage: SyncStorage<T>
-  let asyncStorage: AsyncStorage<T>
-
-  public let storageObservationRegistry = StorageObservationRegistry<Storage>()
+  private let syncStorage: SyncStorage<T>
+  private let asyncStorage: AsyncStorage<T>
+  private let hybridStorage: HybridStorage<T>
 
   /// Initialize storage with configuration options.
   ///
@@ -19,46 +18,28 @@ public final class Storage<T> {
   public convenience init(diskConfig: DiskConfig, memoryConfig: MemoryConfig, transformer: Transformer<T>) throws {
     let disk = try DiskStorage(config: diskConfig, transformer: transformer)
     let memory = MemoryStorage<T>(config: memoryConfig)
-
     let hybridStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
-    let syncStorage = SyncStorage(
-      storage: hybridStorage,
-      serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
-    )
-    let asyncStorage = AsyncStorage(
-      storage: hybridStorage,
-      serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
-    )
-
-    self.init(syncStorage: syncStorage, asyncStorage: asyncStorage)
+    self.init(hybridStorage: hybridStorage)
   }
 
   /// Initialise with sync and async storages
   ///
   /// - Parameter syncStorage: Synchronous storage
   /// - Paraeter: asyncStorage: Asynchronous storage
-  public required init(syncStorage: SyncStorage<T>, asyncStorage: AsyncStorage<T>) {
-    self.syncStorage = syncStorage
-    self.asyncStorage = asyncStorage
-    subscribeToChanges()
+  public init(hybridStorage: HybridStorage<T>) {
+    self.hybridStorage = hybridStorage
+    self.syncStorage = SyncStorage(
+      storage: hybridStorage,
+      serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
+    )
+    self.asyncStorage = AsyncStorage(
+      storage: hybridStorage,
+      serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
+    )
   }
 
   /// Used for async operations
   public lazy var async = self.asyncStorage
-
-  private func subscribeToChanges() {
-    subscribeToChanges(in: syncStorage.innerStorage)
-    if syncStorage.innerStorage !== asyncStorage.innerStorage {
-      subscribeToChanges(in: asyncStorage.innerStorage)
-    }
-  }
-
-  private func subscribeToChanges(in storage: HybridStorage<T>) {
-    storage.storageObservationRegistry.addObservation { [weak self] _, change in
-      guard let strongSelf = self else { return }
-      strongSelf.storageObservationRegistry.notifyObservers(about: change, in: strongSelf)
-    }
-  }
 }
 
 extension Storage: StorageAware {
@@ -85,10 +66,45 @@ extension Storage: StorageAware {
 
 public extension Storage {
   func transform<U>(transformer: Transformer<U>) -> Storage<U> {
-    let storage = Storage<U>(
-      syncStorage: syncStorage.transform(transformer: transformer),
-      asyncStorage: asyncStorage.transform(transformer: transformer)
-    )
-    return storage
+    return Storage<U>(hybridStorage: hybridStorage.transform(transformer: transformer))
+  }
+}
+
+extension Storage: StorageObservationRegistry {
+  @discardableResult
+  public func addStorageObserver<O: AnyObject>(
+    _ observer: O,
+    closure: @escaping (O, Storage, StorageChange) -> Void
+  ) -> ObservationToken {
+    return hybridStorage.addStorageObserver(observer) { [weak self] observer, _, change in
+      guard let strongSelf = self else { return }
+      closure(observer, strongSelf, change)
+    }
+  }
+
+  public func removeAllStorageObservers() {
+    hybridStorage.removeAllStorageObservers()
+  }
+}
+
+extension Storage: KeyObservationRegistry {
+  @discardableResult
+  public func addObserver<O: AnyObject>(
+    _ observer: O,
+    forKey key: String,
+    closure: @escaping (O, Storage, KeyChange<T>) -> Void
+  ) -> ObservationToken {
+    return hybridStorage.addObserver(observer, forKey: key) { [weak self] observer, _ , change in
+      guard let strongSelf = self else { return }
+      closure(observer, strongSelf, change)
+    }
+  }
+
+  public func removeObserver(forKey key: String) {
+    hybridStorage.removeObserver(forKey: key)
+  }
+
+  public func removeAllKeyObservers() {
+    hybridStorage.removeAllKeyObservers()
   }
 }

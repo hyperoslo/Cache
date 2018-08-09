@@ -1,30 +1,42 @@
 import Foundation
 
-public final class StorageObservationRegistry<T: StorageAware> {
-  public typealias Observation = (T, StorageChange) -> Void
-  private(set) var observations = [UUID: Observation]()
+/// A protocol used for adding and removing storage observations
+public protocol StorageObservationRegistry {
+  associatedtype S: StorageAware
 
+  /**
+   Registers observation closure which will be removed automatically
+   when the weakly captured observer has been deallocated.
+   - Parameter observer: Any object that helps determine if the observation is still valid
+   - Parameter closure: Observation closure
+   - Returns: Token used to cancel the observation and remove the observation closure
+   */
   @discardableResult
-  public func addObservation(_ observation: @escaping Observation) -> ObservationToken {
-    let id = UUID()
-    observations[id] = observation
+  func addStorageObserver<O: AnyObject>(
+    _ observer: O,
+    closure: @escaping (O, S, StorageChange) -> Void
+  ) -> ObservationToken
 
-    return ObservationToken { [weak self] in
-      self?.observations.removeValue(forKey: id)
-    }
-  }
+  /// Removes all registered key observers
+  func removeAllStorageObservers()
+}
 
-  public func removeObservation(token: ObservationToken) {
-    token.cancel()
-  }
+// MARK: - StorageChange
 
-  public func removeAllObservations() {
-    observations.removeAll()
-  }
+public enum StorageChange: Equatable {
+  case add(key: String)
+  case remove(key: String)
+  case removeAll
+  case removeExpired
+}
 
-  func notifyObservers(about change: StorageChange, in storage: T) {
-    observations.values.forEach { closure in
-      closure(storage, change)
-    }
+public func == (lhs: StorageChange, rhs: StorageChange) -> Bool {
+  switch (lhs, rhs) {
+  case (.add(let key1), .add(let key2)), (.remove(let key1), .remove(let key2)):
+    return key1 == key2
+  case (.removeAll, .removeAll), (.removeExpired, .removeExpired):
+    return true
+  default:
+    return false
   }
 }

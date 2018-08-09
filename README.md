@@ -18,6 +18,9 @@
   * [Sync APIs](#sync-apis)
   * [Async APIS](#async-apis)
   * [Expiry date](#expiry-date)
+* [Observations](#observations)
+  * [Storage observations](#storage-observations)
+  * [Key observations](#key-observations)
 * [Handling JSON response](#handling-json-response)
 * [What about images?](#what-about-images)
 * [Installation](#installation)
@@ -70,8 +73,8 @@ let diskConfig = DiskConfig(name: "Floppy")
 let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
 
 let storage = try? Storage(
-  diskConfig: diskConfig, 
-  memoryConfig: memoryConfig, 
+  diskConfig: diskConfig,
+  memoryConfig: memoryConfig,
   transformer: TransformerFactory.forCodable(ofType: User.self) // Storage<User>
 )
 ```
@@ -158,7 +161,7 @@ let diskConfig = DiskConfig(
   // Maximum size of the disk cache storage (in bytes)
   maxSize: 10000,
   // Where to store the disk cache. If nil, it is placed in `cachesDirectory` directory.
-  directory: try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, 
+  directory: try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask,
     appropriateFor: nil, create: true).appendingPathComponent("MyPreferences"),
   // Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
   protectionType: .complete
@@ -237,7 +240,7 @@ try? storage.setObject(user, forKey: "character")
 
 ### Async APIs
 
-In `async` fashion, you deal with `Result` instead of `try catch` because the result is delivered at a later time, in order to not block the current calling queue. In the completion block, you either have `value` or `error`. 
+In `async` fashion, you deal with `Result` instead of `try catch` because the result is delivered at a later time, in order to not block the current calling queue. In the completion block, you either have `value` or `error`.
 
 You access Async APIs via `storage.async`, it is also thread safe, and you can use Sync and Async APIs in any order you want. All Async functions are constrained by `AsyncStorageAware` protocol.
 
@@ -290,7 +293,7 @@ storage.async.removeExpiredObjects() { result in
 By default, all saved objects have the same expiry as the expiry you specify in `DiskConfig` or `MemoryConfig`. You can overwrite this for a specific object by specifying `expiry` for `setObject`
 
 ```swift
-// Default cexpiry date from configuration will be applied to the item
+// Default expiry date from configuration will be applied to the item
 try? storage.setObject("This is a string", forKey: "string")
 
 // A given expiry date will be applied to the item
@@ -302,6 +305,61 @@ try? storage.setObject(
 
 // Clear expired objects
 storage.removeExpiredObjects()
+```
+
+## Observations
+
+[Storage](#storage) allows you to observe changes in the cache layer, both on
+a store and a key levels. The API lets you pass any object as an observer,
+while also passing an observation closure. The observation closure will be
+removed automatically when the weakly captured observer has been deallocated.
+
+## Storage observations
+
+```swift
+// Add observer
+let token = storage.addStorageObserver(self) { observer, storage, change in
+  switch change {
+  case .add(let key):
+    print("Added \(key)")
+  case .remove(let key):
+    print("Removed \(key)")
+  case .removeAll:
+    print("Removed all")
+  case .removeExpired:
+    print("Removed expired")
+  }
+}
+
+// Remove observer
+token.cancel()
+
+// Remove all observers
+storage.removeAllStorageObservers()
+```
+
+## Key observations
+
+```swift
+let key = "user1"
+
+let token = storage.addObserver(self, forKey: key) { observer, storage, change in
+  switch change {
+  case .edit(let before, let after):
+    print("Changed object for \(key) from \(String(describing: before)) to \(after)")
+  case .remove:
+    print("Removed \(key)")
+  }
+}
+
+// Remove observer by token
+token.cancel()
+
+// Remove observer for key
+storage.removeObserver(forKey: key)
+
+// Remove all observers
+storage.removeAllKeyObservers()
 ```
 
 ## Handling JSON response
@@ -360,7 +418,7 @@ You also need to add `SwiftHash.framework` in your [copy-frameworks](https://git
 ## Author
 
 - [Hyper](http://hyper.no) made this with ❤️
-- Inline MD5 implementation from [SwiftHash](https://github.com/onmyway133/SwiftHash) 
+- Inline MD5 implementation from [SwiftHash](https://github.com/onmyway133/SwiftHash)
 
 ## Contributing
 
