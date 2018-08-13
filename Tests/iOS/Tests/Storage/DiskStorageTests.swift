@@ -92,6 +92,15 @@ final class DiskStorageTests: XCTestCase {
     XCTAssertEqual(entry?.expiry.date, expiry.date)
   }
 
+  func testCacheEntryPath() throws {
+    let key = "test.mp4"
+    try storage.setObject(testObject, forKey: key)
+    let entry = try storage.entry(forKey: key)
+    let filePath = storage.makeFilePath(for: key)
+
+    XCTAssertEqual(entry.filePath, filePath)
+  }
+
   /// Test that it resolves cached object
   func testSetObject() throws {
     try storage.setObject(testObject, forKey: key)
@@ -198,6 +207,7 @@ final class DiskStorageTests: XCTestCase {
   /// Test that it returns a correct file name
   func testMakeFileName() {
     XCTAssertEqual(storage.makeFileName(for: key), MD5(key))
+    XCTAssertEqual(storage.makeFileName(for: "test.mp4"), "\(MD5("test.mp4")).mp4")
   }
 
   /// Test that it returns a correct file path

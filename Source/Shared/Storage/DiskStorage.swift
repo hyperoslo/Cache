@@ -162,7 +162,15 @@ extension DiskStorage {
    - Returns: A md5 string
    */
   func makeFileName(for key: String) -> String {
-    return MD5(key)
+    let fileExtension = URL(fileURLWithPath: key).pathExtension
+    let fileName = MD5(key)
+
+    switch fileExtension.isEmpty {
+    case true:
+      return fileName
+    case false:
+      return "\(fileName).\(fileExtension)"
+    }
   }
 
   /**
