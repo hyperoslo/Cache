@@ -68,14 +68,10 @@ extension DiskStorage: StorageAware {
       throw StorageError.malformedFileAttributes
     }
 
-    let meta: [String: Any] = [
-      "filePath": filePath
-    ]
-
     return Entry(
       object: object,
       expiry: Expiry.date(date),
-      meta: meta
+      filePath: filePath
     )
   }
 
