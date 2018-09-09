@@ -4,7 +4,9 @@ import XCTest
 final class HybridStorageTests: XCTestCase {
   private let cacheName = "WeirdoCache"
   private let key = "alongweirdkey"
+  private let keyTwo = "secondweirdokey"
   private let testObject = User(firstName: "John", lastName: "Targaryen")
+  private let testObjectTwo = User(firstName: "Jon", lastName: "Snow")
   private var storage: HybridStorage<User>!
   private let fileManager = FileManager()
 
@@ -46,6 +48,15 @@ final class HybridStorageTests: XCTestCase {
 
     XCTAssertEqual(entry.object, testObject)
     XCTAssertEqual(entry.expiry.date, expiryDate)
+  }
+    
+  func testEntries() throws {
+    try storage.setObject(testObject, forKey: key)
+    try storage.setObject(testObjectTwo, forKey: keyTwo)
+    
+    let entries = try storage.entries()
+    XCTAssertEqual(entries.count, 2)
+    XCTAssertTrue(entries.contains(where: { $0.object == testObjectTwo} ))
   }
 
   /// Should resolve from disk and set in-memory cache if object not in-memory

@@ -91,6 +91,25 @@ final class DiskStorageTests: XCTestCase {
     XCTAssertEqual(entry?.object.lastName, testObject.lastName)
     XCTAssertEqual(entry?.expiry.date, expiry.date)
   }
+    
+  func testEntries() throws {
+    // Store multiple entries
+    let userOne = User(firstName: "First", lastName: "Something")
+    let userTwo = User(firstName: "Second", lastName: "Something")
+    try storage.setObject(userOne, forKey: "First")
+    try storage.setObject(userTwo, forKey: "Second")
+    
+    // Retrieve all
+    let entries: [Entry<User>] = try storage.entries()
+    
+    // Assert
+    XCTAssertNotNil(entries)
+    XCTAssertEqual(entries.count, 2)
+    
+    let users = entries.compactMap({ $0.object })
+    XCTAssertTrue(users.contains(userOne))
+    XCTAssertTrue(users.contains(userTwo))
+  }
 
   func testCacheEntryPath() throws {
     let key = "test.mp4"

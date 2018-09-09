@@ -5,6 +5,7 @@ import Dispatch
 final class AsyncStorageTests: XCTestCase {
   private var storage: AsyncStorage<User>!
   let user = User(firstName: "John", lastName: "Snow")
+  let userTwo = User(firstName: "Jamie", lastName: "Lannister")
 
   override func setUp() {
     super.setUp()
@@ -32,6 +33,26 @@ final class AsyncStorageTests: XCTestCase {
         XCTFail()
       }
     })
+
+    wait(for: [expectation], timeout: 1)
+  }
+
+  func testGettingObjects() throws {
+    let expectation = self.expectation(description: #function)
+
+    storage.setObject(user, forKey: user.firstName, completion: { _ in })
+    storage.setObject(userTwo, forKey: userTwo.firstName, completion: { _ in })
+    storage.objects { result in
+      switch result {
+      case .value(let users):
+        XCTAssertEqual(users.count, 2)
+        XCTAssertTrue(users.contains(self.user))
+        XCTAssertTrue(users.contains(self.userTwo))
+        expectation.fulfill()
+      default:
+        XCTFail()
+      }
+    }
 
     wait(for: [expectation], timeout: 1)
   }

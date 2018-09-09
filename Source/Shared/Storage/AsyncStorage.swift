@@ -30,6 +30,22 @@ extension AsyncStorage {
     }
   }
 
+  public func entries(completion: @escaping (Result<[Entry<T>]>) -> Void) {
+    serialQueue.async { [weak self] in
+      guard let `self` = self else {
+        completion(Result.error(StorageError.deallocated))
+        return
+      }
+
+      do {
+        let entries = try self.innerStorage.entries()
+        completion(Result.value(entries))
+      } catch {
+        completion(Result.error(error))
+      }
+    }
+  }
+
   public func removeObject(forKey key: String, completion: @escaping (Result<()>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
@@ -104,6 +120,14 @@ extension AsyncStorage {
         return entry.object
       }))
     })
+  }
+
+  public func objects(completion: @escaping (Result<[T]>) -> Void) {
+    entries { (result: Result<[Entry<T>]>) in
+      completion(result.map({ entries in
+        return entries.map({ $0.object })
+      }))
+    }
   }
 
   public func existsObject(

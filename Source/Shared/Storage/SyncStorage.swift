@@ -13,6 +13,16 @@ public class SyncStorage<T> {
   }
 }
 
+extension SyncStorage: AllEntriesRetriever {
+  func entries() throws -> [Entry<T>] {
+    var entries: [Entry<T>] = []
+    try serialQueue.sync {
+        entries = try innerStorage.entries()
+    }
+    return entries
+  }
+}
+
 extension SyncStorage: StorageAware {
   public func entry(forKey key: String) throws -> Entry<T> {
     var entry: Entry<T>!

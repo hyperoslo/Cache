@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12F4A066214538040099B9EC /* AllEntriesFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F4A065214538040099B9EC /* AllEntriesFinder.swift */; };
 		BDEDD37D1DBCEB8A007416A6 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDEDD3561DBCE5B1007416A6 /* Cache.framework */; };
 		D21B667C1F6A723C00125DE1 /* DataSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98531F694FFA00CE8F68 /* DataSerializer.swift */; };
 		D21B667E1F6A723C00125DE1 /* ExpirationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98551F694FFA00CE8F68 /* ExpirationMode.swift */; };
@@ -173,6 +174,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		12F4A065214538040099B9EC /* AllEntriesFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEntriesFinder.swift; sourceTree = "<group>"; };
 		BDEDD3561DBCE5B1007416A6 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D221E5BB20D00D9300BC940E /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 		D2CF985A1F694FFA00CE8F68 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				12F4A065214538040099B9EC /* AllEntriesFinder.swift */,
 				D221E5BB20D00D9300BC940E /* MemoryStorage.swift */,
 				D221E5C320D00DDB00BC940E /* DiskStorage.swift */,
 				D270147320D101F3003B45C7 /* StorageAware.swift */,
@@ -954,6 +957,7 @@
 				D2CF98681F694FFA00CE8F68 /* ImageWrapper.swift in Sources */,
 				D5A9D1C321144B65005DBD3F /* StorageObservationRegistry.swift in Sources */,
 				D2CF98871F695B8F00CE8F68 /* Types.swift in Sources */,
+				12F4A066214538040099B9EC /* AllEntriesFinder.swift in Sources */,
 				D2CF98621F694FFA00CE8F68 /* Date+Extensions.swift in Sources */,
 				D2CF98641F694FFA00CE8F68 /* DataSerializer.swift in Sources */,
 				D270147420D101F3003B45C7 /* StorageAware.swift in Sources */,

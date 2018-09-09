@@ -42,6 +42,12 @@ public final class Storage<T> {
   public lazy var async = self.asyncStorage
 }
 
+extension Storage: AllEntriesRetriever {
+  func entries() throws -> [Entry<T>] {
+    return try self.syncStorage.entries()
+  }
+}
+
 extension Storage: StorageAware {
   public func entry(forKey key: String) throws -> Entry<T> {
     return try self.syncStorage.entry(forKey: key)
@@ -94,7 +100,7 @@ extension Storage: KeyObservationRegistry {
     forKey key: String,
     closure: @escaping (O, Storage, KeyChange<T>) -> Void
   ) -> ObservationToken {
-    return hybridStorage.addObserver(observer, forKey: key) { [weak self] observer, _ , change in
+    return hybridStorage.addObserver(observer, forKey: key) { [weak self] observer, _, change in
       guard let strongSelf = self else { return }
       closure(observer, strongSelf, change)
     }

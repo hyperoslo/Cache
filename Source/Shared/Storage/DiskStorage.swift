@@ -16,7 +16,7 @@ final public class DiskStorage<T> {
   var onRemove: ((String) -> Void)?
 
   private let transformer: Transformer<T>
-  
+
   // MARK: - Initialization
 
   public convenience init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<T>) throws {
@@ -57,22 +57,25 @@ final public class DiskStorage<T> {
   }
 }
 
+extension DiskStorage: AllEntriesRetriever {
+  public func entries() throws -> [Entry<T>] {
+    let paths = try fileManager.contentsOfDirectory(atPath: path)
+    return paths.compactMap({
+      do {
+        let filePath = NSString(string: path).appendingPathComponent($0)
+        return try entry(forPath: filePath)
+      } catch {
+        // This should never occur. Therefore, return nil
+        return nil
+      }
+    })
+  }
+}
+
 extension DiskStorage: StorageAware {
   public func entry(forKey key: String) throws -> Entry<T> {
     let filePath = makeFilePath(for: key)
-    let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
-    let attributes = try fileManager.attributesOfItem(atPath: filePath)
-    let object = try transformer.fromData(data)
-
-    guard let date = attributes[.modificationDate] as? Date else {
-      throw StorageError.malformedFileAttributes
-    }
-
-    return Entry(
-      object: object,
-      expiry: Expiry.date(date),
-      filePath: filePath
-    )
+    return try entry(forPath: filePath)
   }
 
   public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
@@ -252,6 +255,25 @@ extension DiskStorage {
       try fileManager.removeItem(atPath: filePath)
       onRemove?(filePath)
     }
+  }
+
+  /**
+   Retrieve an entry from the given file path. Path must be an absolute path.
+   - Parameter filePath: Absolute filepath to the entry
+   - Returns: Entry object
+   */
+  fileprivate func entry(forPath filePath: String) throws -> Entry<T> {
+    let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
+    let attributes = try fileManager.attributesOfItem(atPath: filePath)
+    let object = try transformer.fromData(data)
+    guard let date = attributes[.modificationDate] as? Date else {
+      throw StorageError.malformedFileAttributes
+    }
+    return Entry(
+      object: object,
+      expiry: Expiry.date(date),
+      filePath: filePath
+    )
   }
 }
 

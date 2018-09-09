@@ -5,6 +5,7 @@ import Dispatch
 final class SyncStorageTests: XCTestCase {
   private var storage: SyncStorage<User>!
   let user = User(firstName: "John", lastName: "Snow")
+  let userTwo = User(firstName: "Job", lastName: "Thatcher")
 
   override func setUp() {
     super.setUp()
@@ -26,6 +27,21 @@ final class SyncStorageTests: XCTestCase {
     let cachedObject = try storage.object(forKey: "user")
 
     XCTAssertEqual(cachedObject, user)
+  }
+  
+  func testSetObjects() throws {
+    try storage.setObject(user, forKey: "john")
+    try storage.setObject(userTwo, forKey: "job")
+    
+    let objects = try storage.objects()
+    XCTAssertEqual(objects.count, 2)
+    XCTAssertTrue(objects.contains(userTwo))
+    XCTAssertTrue(objects.contains(user))
+  }
+  
+  func testSetObjects_EmptyEntries() throws {
+    let objects = try storage.objects()
+    XCTAssertEqual(objects.count, 0)
   }
 
   func testRemoveAll() throws {
