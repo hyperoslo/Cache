@@ -14,27 +14,31 @@ public final class Storage<T> {
   /// - Parameters:
   ///   - diskConfig: Configuration for disk storage
   ///   - memoryConfig: Optional. Pass config if you want memory cache
+  ///   - autoRemove: Removes expired objects automatically. Default: false
   /// - Throws: Throw StorageError if any.
-  public convenience init(diskConfig: DiskConfig, memoryConfig: MemoryConfig, transformer: Transformer<T>) throws {
+  public convenience init(diskConfig: DiskConfig, memoryConfig: MemoryConfig, transformer: Transformer<T>, autoRemove: Bool = false) throws {
     let disk = try DiskStorage(config: diskConfig, transformer: transformer)
     let memory = MemoryStorage<T>(config: memoryConfig)
     let hybridStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
-    self.init(hybridStorage: hybridStorage)
+    self.init(hybridStorage: hybridStorage, autoRemove: autoRemove)
   }
 
   /// Initialise with sync and async storages
   ///
   /// - Parameter syncStorage: Synchronous storage
-  /// - Paraeter: asyncStorage: Asynchronous storage
-  public init(hybridStorage: HybridStorage<T>) {
+  ///   - asyncStorage: Asynchronous storage
+  ///   - autoRemove: Bool indicating if expired objects should be removed automatically. Default: false
+  public init(hybridStorage: HybridStorage<T>, autoRemove: Bool = false) {
     self.hybridStorage = hybridStorage
     self.syncStorage = SyncStorage(
       storage: hybridStorage,
-      serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
+      serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue"),
+      autoRemove: autoRemove
     )
     self.asyncStorage = AsyncStorage(
       storage: hybridStorage,
-      serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
+      serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue"),
+      autoRemove: autoRemove
     )
   }
 
@@ -72,7 +76,8 @@ extension Storage: StorageAware {
 
 public extension Storage {
   func transform<U>(transformer: Transformer<U>) -> Storage<U> {
-    return Storage<U>(hybridStorage: hybridStorage.transform(transformer: transformer))
+    let autoRemove = syncStorage.autoRemove && asyncStorage.autoRemove
+    return Storage<U>(hybridStorage: hybridStorage.transform(transformer: transformer), autoRemove: autoRemove)
   }
 }
 

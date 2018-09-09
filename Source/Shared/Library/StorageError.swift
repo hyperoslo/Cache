@@ -15,4 +15,6 @@ public enum StorageError: Error {
   case deallocated
   /// Fail to perform transformation to or from Data
   case transformerFail
+  /// Object has expired
+  case hasExpired
 }

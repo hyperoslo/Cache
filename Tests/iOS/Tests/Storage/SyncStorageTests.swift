@@ -9,12 +9,7 @@ final class SyncStorageTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
-
-    let memory = MemoryStorage<User>(config: MemoryConfig())
-    let disk = try! DiskStorage<User>(config: DiskConfig(name: "HybridDisk"), transformer: TransformerFactory.forCodable(ofType: User.self))
-
-    let hybridStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
-    storage = SyncStorage(storage: hybridStorage, serialQueue: DispatchQueue(label: "Sync"))
+    createStorage(autoRemoveOn: false)
   }
 
   override func tearDown() {
@@ -29,7 +24,7 @@ final class SyncStorageTests: XCTestCase {
     XCTAssertEqual(cachedObject, user)
   }
   
-  func testSetObjects() throws {
+  func testGetObjects() throws {
     try storage.setObject(user, forKey: "john")
     try storage.setObject(userTwo, forKey: "job")
     
@@ -39,9 +34,22 @@ final class SyncStorageTests: XCTestCase {
     XCTAssertTrue(objects.contains(user))
   }
   
-  func testSetObjects_EmptyEntries() throws {
+  func testGetObjects_EmptyEntries() throws {
     let objects = try storage.objects()
     XCTAssertEqual(objects.count, 0)
+  }
+
+  func testAutoRemove() throws {
+    let date = Date().addingTimeInterval(-120)
+    createStorage(autoRemoveOn: true)
+
+    try storage.setObject(user, forKey: user.firstName, expiry: .date(date))
+    do {
+      _ = try storage.object(forKey: user.firstName)
+    } catch {
+      XCTAssertTrue(error is StorageError)
+      XCTAssertEqual(error as! StorageError, StorageError.hasExpired)
+    }
   }
 
   func testRemoveAll() throws {
@@ -59,5 +67,13 @@ final class SyncStorageTests: XCTestCase {
     try then("all are removed") {
       XCTAssertFalse(try intStorage.existsObject(forKey: "key-99"))
     }
+  }
+
+  fileprivate func createStorage(autoRemoveOn: Bool) {
+    let memory = MemoryStorage<User>(config: MemoryConfig())
+    let disk = try! DiskStorage<User>(config: DiskConfig(name: "HybridDisk"), transformer: TransformerFactory.forCodable(ofType: User.self))
+
+    let hybridStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
+    storage = SyncStorage(storage: hybridStorage, serialQueue: DispatchQueue(label: "Sync"), autoRemove: autoRemoveOn)
   }
 }

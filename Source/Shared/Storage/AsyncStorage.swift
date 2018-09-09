@@ -6,10 +6,12 @@ import Dispatch
 public class AsyncStorage<T> {
   public let innerStorage: HybridStorage<T>
   public let serialQueue: DispatchQueue
+  public let autoRemove: Bool
 
-  public init(storage: HybridStorage<T>, serialQueue: DispatchQueue) {
+  public init(storage: HybridStorage<T>, serialQueue: DispatchQueue, autoRemove: Bool) {
     self.innerStorage = storage
     self.serialQueue = serialQueue
+    self.autoRemove = autoRemove
   }
 }
 
@@ -23,7 +25,14 @@ extension AsyncStorage {
 
       do {
         let anEntry = try self.innerStorage.entry(forKey: key)
-        completion(Result.value(anEntry))
+        if self.autoRemove && anEntry.expiry.isExpired {
+          if let key = anEntry.key {
+            self.removeObject(forKey: key, completion: { _ in })
+          }
+          completion(Result.error(StorageError.hasExpired))
+        } else {
+          completion(Result.value(anEntry))
+        }
       } catch {
         completion(Result.error(error))
       }
@@ -39,7 +48,16 @@ extension AsyncStorage {
 
       do {
         let entries = try self.innerStorage.entries()
-        completion(Result.value(entries))
+        if self.autoRemove {
+          entries.filter({ $0.expiry.isExpired }).forEach({ entry in
+            if let key = entry.key {
+              self.removeObject(forKey: key, completion: { _ in })
+            }
+          })
+          completion(Result.value(entries.filter({ !$0.expiry.isExpired })))
+        } else {
+          completion(Result.value(entries))
+        }
       } catch {
         completion(Result.error(error))
       }
@@ -145,7 +163,8 @@ public extension AsyncStorage {
   func transform<U>(transformer: Transformer<U>) -> AsyncStorage<U> {
     let storage = AsyncStorage<U>(
       storage: innerStorage.transform(transformer: transformer),
-      serialQueue: serialQueue
+      serialQueue: serialQueue,
+      autoRemove: autoRemove
     )
 
     return storage

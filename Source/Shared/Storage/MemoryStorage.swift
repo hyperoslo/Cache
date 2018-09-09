@@ -53,7 +53,7 @@ extension MemoryStorage {
       throw StorageError.typeNotMatch
     }
 
-    return Entry(object: object, expiry: capsule.expiry)
+    return Entry(object: object, expiry: capsule.expiry, key: key)
   }
 }
 
