@@ -109,7 +109,7 @@ extension HybridStorage: StorageObservationRegistry {
       self?.storageObservations.removeValue(forKey: id)
     }
   }
-  
+
   public func removeAllStorageObservers() {
     storageObservations.removeAll()
   }
@@ -155,7 +155,7 @@ extension HybridStorage: KeyObservationRegistry {
   }
 
   private func notifyObserver(about change: KeyChange<T>, whereKey closure: ((String) -> Bool)) {
-    let observation = keyObservations.first { key, value in closure(key) }?.value
+    let observation = keyObservations.first { key, _ in closure(key) }?.value
     observation?(self, change)
   }
 

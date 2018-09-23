@@ -94,7 +94,7 @@ extension Storage: KeyObservationRegistry {
     forKey key: String,
     closure: @escaping (O, Storage, KeyChange<T>) -> Void
   ) -> ObservationToken {
-    return hybridStorage.addObserver(observer, forKey: key) { [weak self] observer, _ , change in
+    return hybridStorage.addObserver(observer, forKey: key) { [weak self] observer, _, change in
       guard let strongSelf = self else { return }
       closure(observer, strongSelf, change)
     }
