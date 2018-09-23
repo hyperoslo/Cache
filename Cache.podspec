@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "Cache"
   s.summary          = "Nothing but cache."
-  s.version          = "5.1.0"
+  s.version          = "5.1.1"
   s.homepage         = "https://github.com/hyperoslo/Cache"
   s.license          = 'MIT'
   s.author           = { "Hyper Interaktiv AS" => "ios@hyper.no" }
@@ -19,5 +19,5 @@ Pod::Spec.new do |s|
 
   s.frameworks = 'Foundation'
 
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.1' }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
 end

@@ -16,9 +16,8 @@ final public class DiskStorage<T> {
   var onRemove: ((String) -> Void)?
 
   private let transformer: Transformer<T>
-  
-  // MARK: - Initialization
 
+  // MARK: - Initialization
   public convenience init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<T>) throws {
     let url: URL
     if let directory = config.directory {
