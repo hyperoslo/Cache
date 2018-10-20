@@ -16,7 +16,7 @@
   * [Storage](#storage)
   * [Configuration](#configuration)
   * [Sync APIs](#sync-apis)
-  * [Async APIS](#async-apis)
+  * [Async APIs](#async-apis)
   * [Expiry date](#expiry-date)
 * [Observations](#observations)
   * [Storage observations](#storage-observations)
