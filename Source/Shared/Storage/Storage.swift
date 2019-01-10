@@ -47,8 +47,12 @@ public final class Storage<T> {
 }
 
 extension Storage: AllEntriesRetriever {
-  func entries() throws -> [Entry<T>] {
+  public func entries() throws -> [Entry<T>] {
     return try self.syncStorage.entries()
+  }
+  
+  public func objects() throws -> [T] {
+    return try self.syncStorage.entries().compactMap({ $0.object })
   }
 }
 
