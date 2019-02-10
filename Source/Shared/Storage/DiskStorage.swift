@@ -81,6 +81,11 @@ extension DiskStorage: StorageAware {
     _ = fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
     try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)
   }
+    
+  public func existsObject(forKey key: String) throws -> Bool {
+    let filePath = makeFilePath(for: key)
+    return fileManager.fileExists(atPath: filePath)
+  }
 
   public func removeObject(forKey key: String) throws {
     let filePath = makeFilePath(for: key)

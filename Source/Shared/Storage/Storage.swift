@@ -54,7 +54,11 @@ extension Storage: StorageAware {
   public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
     try self.syncStorage.setObject(object, forKey: key, expiry: expiry)
   }
-
+  
+  public func existsObject(forKey key: String) throws -> Bool {
+    return try self.syncStorage.existsObject(forKey: key)
+  }
+  
   public func removeAll() throws {
     try self.syncStorage.removeAll()
   }

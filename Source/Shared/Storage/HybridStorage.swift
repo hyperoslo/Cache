@@ -61,6 +61,15 @@ extension HybridStorage: StorageAware {
     notifyStorageObservers(about: .add(key: key))
   }
 
+  public func existsObject(forKey key: String) throws -> Bool {
+    do {
+      return try memoryStorage.existsObject(forKey: key) ||
+             diskStorage.existsObject(forKey: key)
+    } catch {
+      return false
+    }
+  }
+
   public func removeAll() throws {
     memoryStorage.removeAll()
     try diskStorage.removeAll()

@@ -58,16 +58,7 @@ public extension StorageAware {
   func object(forKey key: String) throws -> T {
     return try entry(forKey: key).object
   }
-
-  func existsObject(forKey key: String) throws -> Bool {
-    do {
-      let _: T = try object(forKey: key)
-      return true
-    } catch {
-      return false
-    }
-  }
-
+  
   func isExpiredObject(forKey key: String) throws -> Bool {
     do {
       let entry = try self.entry(forKey: key)

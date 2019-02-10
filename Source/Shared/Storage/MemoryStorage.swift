@@ -20,6 +20,10 @@ extension MemoryStorage {
     cache.setObject(capsule, forKey: NSString(string: key))
     keys.insert(key)
   }
+  
+  public func existsObject(forKey key: String) throws -> Bool {
+    return cache.object(forKey: NSString(string: key)) != nil
+  }
 
   public func removeAll() {
     cache.removeAllObjects()
