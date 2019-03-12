@@ -103,13 +103,10 @@ func rstr_md5(_ input: [CUnsignedChar]) -> [CUnsignedChar] {
 }
 
 /*
- * Add integers, wrapping at 2^32. This uses 16-bit operations internally
- * to work around bugs in some JS interpreters.
+ * Add integers, wrapping at 2^32.
  */
 func safe_add(_ x: Int32, _ y: Int32) -> Int32 {
-  let lsw = (x & 0xFFFF) + (y & 0xFFFF)
-  let msw = (x >> 16) + (y >> 16) + (lsw >> 16)
-  return (msw << 16) | (lsw & 0xFFFF)
+  return x &+ y
 }
 
 /*
