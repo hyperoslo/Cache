@@ -497,9 +497,9 @@
 				D5DC59FA1C205AC9003BD79B /* Tests */,
 				D5DC59E11C20593E003BD79B /* Products */,
 			);
-			indentWidth = 4;
+			indentWidth = 2;
 			sourceTree = "<group>";
-			tabWidth = 4;
+			tabWidth = 2;
 		};
 		D5DC59E11C20593E003BD79B /* Products */ = {
 			isa = PBXGroup;
