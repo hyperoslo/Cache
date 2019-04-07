@@ -9,7 +9,9 @@ let package = Package(
             name: "Cache",
             targets: ["Cache"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/antitypical/Result.git", from: "4.1.0"),
+    ],
     targets: [
         .target(
             name: "Cache",
