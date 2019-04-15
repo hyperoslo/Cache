@@ -13,7 +13,7 @@ public final class Storage<T> {
   ///
   /// - Parameters:
   ///   - diskConfig: Configuration for disk storage
-  ///   - memoryConfig: Optional. Pass config if you want memory cache
+  ///   - memoryConfig: Configuration for memory cache
   /// - Throws: Throw StorageError if any.
   public convenience init(diskConfig: DiskConfig, memoryConfig: MemoryConfig, transformer: Transformer<T>) throws {
     let disk = try DiskStorage(config: diskConfig, transformer: transformer)
