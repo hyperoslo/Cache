@@ -7,3 +7,7 @@
   import AppKit
   public typealias Image = NSImage
 #endif
+
+
+/// Cache Result
+public typealias Result<T> = Swift.Result<T,Error>

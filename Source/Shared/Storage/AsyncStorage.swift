@@ -17,15 +17,15 @@ extension AsyncStorage {
   public func entry(forKey key: String, completion: @escaping (Result<Entry<T>>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
-        completion(Result.error(StorageError.deallocated))
+        completion(Result.failure(StorageError.deallocated))
         return
       }
 
       do {
         let anEntry = try self.innerStorage.entry(forKey: key)
-        completion(Result.value(anEntry))
+        completion(Result.success(anEntry))
       } catch {
-        completion(Result.error(error))
+        completion(Result.failure(error))
       }
     }
   }
@@ -33,15 +33,15 @@ extension AsyncStorage {
   public func removeObject(forKey key: String, completion: @escaping (Result<()>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
-        completion(Result.error(StorageError.deallocated))
+        completion(Result.failure(StorageError.deallocated))
         return
       }
 
       do {
         try self.innerStorage.removeObject(forKey: key)
-        completion(Result.value(()))
+        completion(Result.success(()))
       } catch {
-        completion(Result.error(error))
+        completion(Result.failure(error))
       }
     }
   }
@@ -53,15 +53,15 @@ extension AsyncStorage {
     completion: @escaping (Result<()>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
-        completion(Result.error(StorageError.deallocated))
+        completion(Result.failure(StorageError.deallocated))
         return
       }
 
       do {
         try self.innerStorage.setObject(object, forKey: key, expiry: expiry)
-        completion(Result.value(()))
+        completion(Result.success(()))
       } catch {
-        completion(Result.error(error))
+        completion(Result.failure(error))
       }
     }
   }
@@ -69,15 +69,15 @@ extension AsyncStorage {
   public func removeAll(completion: @escaping (Result<()>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
-        completion(Result.error(StorageError.deallocated))
+        completion(Result.failure(StorageError.deallocated))
         return
       }
 
       do {
         try self.innerStorage.removeAll()
-        completion(Result.value(()))
+        completion(Result.success(()))
       } catch {
-        completion(Result.error(error))
+        completion(Result.failure(error))
       }
     }
   }
@@ -85,15 +85,15 @@ extension AsyncStorage {
   public func removeExpiredObjects(completion: @escaping (Result<()>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
-        completion(Result.error(StorageError.deallocated))
+        completion(Result.failure(StorageError.deallocated))
         return
       }
 
       do {
         try self.innerStorage.removeExpiredObjects()
-        completion(Result.value(()))
+        completion(Result.success(()))
       } catch {
-        completion(Result.error(error))
+        completion(Result.failure(error))
       }
     }
   }
