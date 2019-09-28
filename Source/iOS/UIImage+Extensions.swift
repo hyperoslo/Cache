@@ -1,8 +1,5 @@
 #if canImport(UIKit)
 import UIKit
-#endif
-
-#if os(iOS) || os(watchOS) || os(tvOS)
 
 /// Helper UIImage extension.
 extension UIImage {

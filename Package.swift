@@ -19,5 +19,6 @@ let package = Package(
             name: "CacheTests",
             dependencies: ["Cache"],
             path: "Tests"),
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )
