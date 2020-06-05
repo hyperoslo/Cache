@@ -9,7 +9,7 @@ import AppKit
 struct TestHelper {
   static func data(_ length : Int) -> Data {
     let buffer = [UInt8](repeating: 0, count: length)
-    return Data(bytes: buffer)
+    return Data(buffer)
   }
 
   static func triggerApplicationEvents() {
@@ -17,11 +17,11 @@ struct TestHelper {
     NotificationCenter.default.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
     NotificationCenter.default.post(name: UIApplication.willTerminateNotification, object: nil)
     #elseif os(tvOS)
-    NotificationCenter.default.post(name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
-    NotificationCenter.default.post(name: Notification.Name.UIApplicationWillTerminate, object: nil)
+    NotificationCenter.default.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
+    NotificationCenter.default.post(name: UIApplication.willTerminateNotification, object: nil)
     #else
-      NotificationCenter.default.post(name: NSApplication.willTerminateNotification, object: nil)
-      NotificationCenter.default.post(name: NSApplication.didResignActiveNotification, object: nil)
+    NotificationCenter.default.post(name: NSApplication.willTerminateNotification, object: nil)
+    NotificationCenter.default.post(name: NSApplication.didResignActiveNotification, object: nil)
     #endif
   }
 }
