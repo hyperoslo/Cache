@@ -1,7 +1,3 @@
-// swiftlint:disable comma function_parameter_count variable_name syntactic_sugar function_body_length vertical_whitespace
-
-// https://github.com/onmyway133/SwiftHash/blob/master/Sources/MD5.swift
-
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
  * Digest Algorithm, as defined in RFC 1321.
@@ -103,13 +99,10 @@ func rstr_md5(_ input: [CUnsignedChar]) -> [CUnsignedChar] {
 }
 
 /*
- * Add integers, wrapping at 2^32. This uses 16-bit operations internally
- * to work around bugs in some JS interpreters.
+ * Add integers, wrapping at 2^32.
  */
 func safe_add(_ x: Int32, _ y: Int32) -> Int32 {
-  let lsw = (x & 0xFFFF) + (y & 0xFFFF)
-  let msw = (x >> 16) + (y >> 16) + (lsw >> 16)
-  return (msw << 16) | (lsw & 0xFFFF)
+  return x &+ y
 }
 
 /*
