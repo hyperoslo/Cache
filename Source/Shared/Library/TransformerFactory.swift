@@ -9,6 +9,7 @@ public class TransformerFactory {
     return Transformer<Data>(toData: toData, fromData: fromData)
   }
 
+  #if os(iOS) || os(tvOS) || os(macOS)
   public static func forImage() -> Transformer<Image> {
     let toData: (Image) throws -> Data = { image in
       return try image.cache_toData().unwrapOrThrow(error: StorageError.transformerFail)
@@ -20,6 +21,7 @@ public class TransformerFactory {
 
     return Transformer<Image>(toData: toData, fromData: fromData)
   }
+  #endif
 
   public static func forCodable<U: Codable>(ofType: U.Type) -> Transformer<U> {
     let toData: (U) throws -> Data = { object in
