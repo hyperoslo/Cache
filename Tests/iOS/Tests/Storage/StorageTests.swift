@@ -2,13 +2,13 @@ import XCTest
 @testable import Cache
 
 final class StorageTests: XCTestCase {
-  private var storage: Storage<User>!
+  private var storage: Storage<String, User>!
   let user = User(firstName: "John", lastName: "Snow")
 
   override func setUp() {
     super.setUp()
 
-    storage = try! Storage<User>(
+    storage = try! Storage<String, User>(
       diskConfig: DiskConfig(name: "Thor"),
       memoryConfig: MemoryConfig(),
       transformer: TransformerFactory.forCodable(ofType: User.self)
@@ -100,7 +100,7 @@ final class StorageTests: XCTestCase {
   // MARK: - Storage observers
 
   func testAddStorageObserver() throws {
-    var changes = [StorageChange]()
+    var changes = [StorageChange<String>]()
     var observer: ObserverMock? = ObserverMock()
 
     storage.addStorageObserver(observer!) { _, _, change in
@@ -115,7 +115,7 @@ final class StorageTests: XCTestCase {
     observer = nil
     try storage.setObject(user, forKey: "user1")
 
-    let expectedChanges: [StorageChange] = [
+    let expectedChanges: [StorageChange<String>] = [
       .add(key: "user1"),
       .add(key: "user2"),
       .remove(key: "user1"),
@@ -127,8 +127,8 @@ final class StorageTests: XCTestCase {
   }
 
   func testRemoveAllStorageObservers() throws {
-    var changes1 = [StorageChange]()
-    var changes2 = [StorageChange]()
+    var changes1 = [StorageChange<String>]()
+    var changes2 = [StorageChange<String>]()
 
     storage.addStorageObserver(self) { _, _, change in
       changes1.append(change)

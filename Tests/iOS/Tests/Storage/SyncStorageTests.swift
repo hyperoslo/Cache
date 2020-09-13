@@ -3,14 +3,14 @@ import Dispatch
 @testable import Cache
 
 final class SyncStorageTests: XCTestCase {
-  private var storage: SyncStorage<User>!
+  private var storage: SyncStorage<String, User>!
   let user = User(firstName: "John", lastName: "Snow")
 
   override func setUp() {
     super.setUp()
 
-    let memory = MemoryStorage<User>(config: MemoryConfig())
-    let disk = try! DiskStorage<User>(config: DiskConfig(name: "HybridDisk"), transformer: TransformerFactory.forCodable(ofType: User.self))
+    let memory = MemoryStorage<String, User>(config: MemoryConfig())
+    let disk = try! DiskStorage<String, User>(config: DiskConfig(name: "HybridDisk"), transformer: TransformerFactory.forCodable(ofType: User.self))
 
     let hybridStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
     storage = SyncStorage(storage: hybridStorage, serialQueue: DispatchQueue(label: "Sync"))
