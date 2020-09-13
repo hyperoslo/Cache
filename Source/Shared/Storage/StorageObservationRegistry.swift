@@ -14,7 +14,7 @@ public protocol StorageObservationRegistry {
   @discardableResult
   func addStorageObserver<O: AnyObject>(
     _ observer: O,
-    closure: @escaping (O, S, StorageChange) -> Void
+    closure: @escaping (O, S, StorageChange<S.Key>) -> Void
   ) -> ObservationToken
 
   /// Removes all registered key observers
@@ -23,14 +23,14 @@ public protocol StorageObservationRegistry {
 
 // MARK: - StorageChange
 
-public enum StorageChange: Equatable {
-  case add(key: String)
-  case remove(key: String)
+public enum StorageChange<Key: Hashable>: Equatable {
+  case add(key: Key)
+  case remove(key: Key)
   case removeAll
   case removeExpired
 }
 
-public func == (lhs: StorageChange, rhs: StorageChange) -> Bool {
+public func == <Key : Hashable>(lhs: StorageChange<Key>, rhs: StorageChange<Key>) -> Bool {
   switch (lhs, rhs) {
   case (.add(let key1), .add(let key2)), (.remove(let key1), .remove(let key2)):
     return key1 == key2
