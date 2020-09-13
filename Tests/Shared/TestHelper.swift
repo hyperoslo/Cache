@@ -19,7 +19,7 @@ struct TestHelper {
     #elseif os(tvOS)
     NotificationCenter.default.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
     NotificationCenter.default.post(name: UIApplication.willTerminateNotification, object: nil)
-    #else
+    #elseif os(macOS)
     NotificationCenter.default.post(name: NSApplication.willTerminateNotification, object: nil)
     NotificationCenter.default.post(name: NSApplication.didResignActiveNotification, object: nil)
     #endif
