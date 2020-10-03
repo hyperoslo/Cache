@@ -1,3 +1,4 @@
+#if os(macOS)
 import Cocoa
 @testable import Cache
 
@@ -14,3 +15,4 @@ extension NSImage {
       .representation(using: imageFileType, properties: [:])!
   }
 }
+#endif

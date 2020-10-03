@@ -5,12 +5,12 @@ final class DiskStorageTests: XCTestCase {
   private let key = "youknownothing"
   private let testObject = User(firstName: "John", lastName: "Snow")
   private let fileManager = FileManager()
-  private var storage: DiskStorage<User>!
+  private var storage: DiskStorage<String, User>!
   private let config = DiskConfig(name: "Floppy")
 
   override func setUp() {
     super.setUp()
-    storage = try! DiskStorage<User>(config: config, transformer: TransformerFactory.forCodable(ofType: User.self))
+    storage = try! DiskStorage<String, User>(config: config, transformer: TransformerFactory.forCodable(ofType: User.self))
   }
 
   override func tearDown() {
@@ -47,7 +47,7 @@ final class DiskStorageTests: XCTestCase {
 
     let customConfig = DiskConfig(name: "SSD", directory: url)
 
-    storage = try DiskStorage<User>(config: customConfig, transformer: TransformerFactory.forCodable(ofType: User.self))
+    storage = try DiskStorage<String, User>(config: customConfig, transformer: TransformerFactory.forCodable(ofType: User.self))
 
     XCTAssertEqual(
       storage.path,

@@ -2,12 +2,12 @@ import XCTest
 @testable import Cache
 
 final class JSONDecoderExtensionsTests: XCTestCase {
-  private var storage: HybridStorage<User>!
+  private var storage: HybridStorage<String, User>!
 
   override func setUp() {
     super.setUp()
-    let memory = MemoryStorage<User>(config: MemoryConfig())
-    let disk = try! DiskStorage<User>(
+    let memory = MemoryStorage<String, User>(config: MemoryConfig())
+    let disk = try! DiskStorage<String, User>(
       config: DiskConfig(name: "HybridDisk"),
       transformer: TransformerFactory.forCodable(ofType: User.self)
     )

@@ -1,3 +1,4 @@
+#if os(iOS) || os(tvOS)
 import UIKit
 
 extension TestHelper {
@@ -14,3 +15,4 @@ extension TestHelper {
     return image!
   }
 }
+#endif

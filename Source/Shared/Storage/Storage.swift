@@ -3,11 +3,11 @@ import Dispatch
 
 /// Manage storage. Use memory storage if specified.
 /// Synchronous by default. Use `async` for asynchronous operations.
-public final class Storage<T> {
+public final class Storage<Key: Hashable, Value> {
   /// Used for sync operations
-  private let syncStorage: SyncStorage<T>
-  private let asyncStorage: AsyncStorage<T>
-  private let hybridStorage: HybridStorage<T>
+  private let syncStorage: SyncStorage<Key, Value>
+  private let asyncStorage: AsyncStorage<Key, Value>
+  private let hybridStorage: HybridStorage<Key, Value>
 
   /// Initialize storage with configuration options.
   ///
@@ -15,9 +15,9 @@ public final class Storage<T> {
   ///   - diskConfig: Configuration for disk storage
   ///   - memoryConfig: Optional. Pass config if you want memory cache
   /// - Throws: Throw StorageError if any.
-  public convenience init(diskConfig: DiskConfig, memoryConfig: MemoryConfig, transformer: Transformer<T>) throws {
-    let disk = try DiskStorage(config: diskConfig, transformer: transformer)
-    let memory = MemoryStorage<T>(config: memoryConfig)
+  public convenience init(diskConfig: DiskConfig, memoryConfig: MemoryConfig, transformer: Transformer<Value>) throws {
+    let disk = try DiskStorage<Key, Value>(config: diskConfig, transformer: transformer)
+    let memory = MemoryStorage<Key, Value>(config: memoryConfig)
     let hybridStorage = HybridStorage(memoryStorage: memory, diskStorage: disk)
     self.init(hybridStorage: hybridStorage)
   }
@@ -26,7 +26,7 @@ public final class Storage<T> {
   ///
   /// - Parameter syncStorage: Synchronous storage
   /// - Paraeter: asyncStorage: Asynchronous storage
-  public init(hybridStorage: HybridStorage<T>) {
+  public init(hybridStorage: HybridStorage<Key, Value>) {
     self.hybridStorage = hybridStorage
     self.syncStorage = SyncStorage(
       storage: hybridStorage,
@@ -43,15 +43,15 @@ public final class Storage<T> {
 }
 
 extension Storage: StorageAware {
-  public func entry(forKey key: String) throws -> Entry<T> {
+  public func entry(forKey key: Key) throws -> Entry<Value> {
     return try self.syncStorage.entry(forKey: key)
   }
 
-  public func removeObject(forKey key: String) throws {
+  public func removeObject(forKey key: Key) throws {
     try self.syncStorage.removeObject(forKey: key)
   }
 
-  public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) throws {
+  public func setObject(_ object: Value, forKey key: Key, expiry: Expiry? = nil) throws {
     try self.syncStorage.setObject(object, forKey: key, expiry: expiry)
   }
 
@@ -65,8 +65,8 @@ extension Storage: StorageAware {
 }
 
 public extension Storage {
-  func transform<U>(transformer: Transformer<U>) -> Storage<U> {
-    return Storage<U>(hybridStorage: hybridStorage.transform(transformer: transformer))
+  func transform<U>(transformer: Transformer<U>) -> Storage<Key, U> {
+    return Storage<Key, U>(hybridStorage: hybridStorage.transform(transformer: transformer))
   }
 }
 
@@ -74,7 +74,7 @@ extension Storage: StorageObservationRegistry {
   @discardableResult
   public func addStorageObserver<O: AnyObject>(
     _ observer: O,
-    closure: @escaping (O, Storage, StorageChange) -> Void
+    closure: @escaping (O, Storage, StorageChange<Key>) -> Void
   ) -> ObservationToken {
     return hybridStorage.addStorageObserver(observer) { [weak self] observer, _, change in
       guard let strongSelf = self else { return }
@@ -91,8 +91,8 @@ extension Storage: KeyObservationRegistry {
   @discardableResult
   public func addObserver<O: AnyObject>(
     _ observer: O,
-    forKey key: String,
-    closure: @escaping (O, Storage, KeyChange<T>) -> Void
+    forKey key: Key,
+    closure: @escaping (O, Storage, KeyChange<Value>) -> Void
   ) -> ObservationToken {
     return hybridStorage.addObserver(observer, forKey: key) { [weak self] observer, _, change in
       guard let strongSelf = self else { return }
@@ -100,7 +100,7 @@ extension Storage: KeyObservationRegistry {
     }
   }
 
-  public func removeObserver(forKey key: String) {
+  public func removeObserver(forKey key: Key) {
     hybridStorage.removeObserver(forKey: key)
   }
 

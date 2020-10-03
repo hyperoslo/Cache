@@ -4,12 +4,12 @@ import XCTest
 final class MemoryStorageTests: XCTestCase {
   private let key = "youknownothing"
   private let testObject = User(firstName: "John", lastName: "Snow")
-  private var storage: MemoryStorage<User>!
+  private var storage: MemoryStorage<String, User>!
   private let config = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
 
   override func setUp() {
     super.setUp()
-    storage = MemoryStorage<User>(config: config)
+    storage = MemoryStorage<String, User>(config: config)
   }
 
   override func tearDown() {
