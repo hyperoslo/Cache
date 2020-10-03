@@ -3,14 +3,14 @@ import Dispatch
 @testable import Cache
 
 final class AsyncStorageTests: XCTestCase {
-  private var storage: AsyncStorage<User>!
+  private var storage: AsyncStorage<String, User>!
   let user = User(firstName: "John", lastName: "Snow")
 
   override func setUp() {
     super.setUp()
-    let memory = MemoryStorage<User>(config: MemoryConfig())
-    let disk = try! DiskStorage<User>(config: DiskConfig(name: "Async Disk"), transformer: TransformerFactory.forCodable(ofType: User.self))
-    let hybrid = HybridStorage<User>(memoryStorage: memory, diskStorage: disk)
+    let memory = MemoryStorage<String, User>(config: MemoryConfig())
+    let disk = try! DiskStorage<String, User>(config: DiskConfig(name: "Async Disk"), transformer: TransformerFactory.forCodable(ofType: User.self))
+    let hybrid = HybridStorage<String, User>(memoryStorage: memory, diskStorage: disk)
     storage = AsyncStorage(storage: hybrid, serialQueue: DispatchQueue(label: "Async"))
   }
 

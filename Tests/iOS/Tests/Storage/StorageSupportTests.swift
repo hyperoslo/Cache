@@ -2,13 +2,13 @@ import XCTest
 @testable import Cache
 
 final class StorageSupportTests: XCTestCase {
-  private var storage: HybridStorage<Bool>!
+  private var storage: HybridStorage<String, Bool>!
 
   override func setUp() {
     super.setUp()
-    let memory = MemoryStorage<Bool>(config: MemoryConfig())
-    let disk = try! DiskStorage<Bool>(config: DiskConfig(name: "PrimitiveDisk"), transformer: TransformerFactory.forCodable(ofType: Bool.self))
-    storage = HybridStorage<Bool>(memoryStorage: memory, diskStorage: disk)
+    let memory = MemoryStorage<String, Bool>(config: MemoryConfig())
+    let disk = try! DiskStorage<String, Bool>(config: DiskConfig(name: "PrimitiveDisk"), transformer: TransformerFactory.forCodable(ofType: Bool.self))
+    storage = HybridStorage<String, Bool>(memoryStorage: memory, diskStorage: disk)
   }
 
   override func tearDown() {

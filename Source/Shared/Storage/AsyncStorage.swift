@@ -3,18 +3,18 @@ import Dispatch
 
 /// Manipulate storage in a "all async" manner.
 /// The completion closure will be called when operation completes.
-public class AsyncStorage<T> {
-  public let innerStorage: HybridStorage<T>
+public class AsyncStorage<Key: Hashable, Value> {
+  public let innerStorage: HybridStorage<Key, Value>
   public let serialQueue: DispatchQueue
 
-  public init(storage: HybridStorage<T>, serialQueue: DispatchQueue) {
+  public init(storage: HybridStorage<Key, Value>, serialQueue: DispatchQueue) {
     self.innerStorage = storage
     self.serialQueue = serialQueue
   }
 }
 
 extension AsyncStorage {
-  public func entry(forKey key: String, completion: @escaping (Result<Entry<T>>) -> Void) {
+  public func entry(forKey key: Key, completion: @escaping (Result<Entry<Value>>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
         completion(Result.error(StorageError.deallocated))
@@ -30,7 +30,7 @@ extension AsyncStorage {
     }
   }
 
-  public func removeObject(forKey key: String, completion: @escaping (Result<()>) -> Void) {
+  public func removeObject(forKey key: Key, completion: @escaping (Result<()>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
         completion(Result.error(StorageError.deallocated))
@@ -47,8 +47,8 @@ extension AsyncStorage {
   }
 
   public func setObject(
-    _ object: T,
-    forKey key: String,
+    _ object: Value,
+    forKey key: Key,
     expiry: Expiry? = nil,
     completion: @escaping (Result<()>) -> Void) {
     serialQueue.async { [weak self] in
@@ -98,8 +98,8 @@ extension AsyncStorage {
     }
   }
 
-  public func object(forKey key: String, completion: @escaping (Result<T>) -> Void) {
-    entry(forKey: key, completion: { (result: Result<Entry<T>>) in
+  public func object(forKey key: Key, completion: @escaping (Result<Value>) -> Void) {
+    entry(forKey: key, completion: { (result: Result<Entry<Value>>) in
       completion(result.map({ entry in
         return entry.object
       }))
@@ -107,9 +107,9 @@ extension AsyncStorage {
   }
 
   public func existsObject(
-    forKey key: String,
+    forKey key: Key,
     completion: @escaping (Result<Bool>) -> Void) {
-    object(forKey: key, completion: { (result: Result<T>) in
+    object(forKey: key, completion: { (result: Result<Value>) in
       completion(result.map({ _ in
         return true
       }))
@@ -118,8 +118,8 @@ extension AsyncStorage {
 }
 
 public extension AsyncStorage {
-  func transform<U>(transformer: Transformer<U>) -> AsyncStorage<U> {
-    let storage = AsyncStorage<U>(
+  func transform<U>(transformer: Transformer<U>) -> AsyncStorage<Key, U> {
+    let storage = AsyncStorage<Key, U>(
       storage: innerStorage.transform(transformer: transformer),
       serialQueue: serialQueue
     )

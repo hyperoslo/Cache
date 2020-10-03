@@ -5,13 +5,13 @@ final class HybridStorageTests: XCTestCase {
   private let cacheName = "WeirdoCache"
   private let key = "alongweirdkey"
   private let testObject = User(firstName: "John", lastName: "Targaryen")
-  private var storage: HybridStorage<User>!
+  private var storage: HybridStorage<String, User>!
   private let fileManager = FileManager()
 
   override func setUp() {
     super.setUp()
-    let memory = MemoryStorage<User>(config: MemoryConfig())
-    let disk = try! DiskStorage<User>(config: DiskConfig(name: "HybridDisk"), transformer: TransformerFactory.forCodable(ofType: User.self))
+    let memory = MemoryStorage<String, User>(config: MemoryConfig())
+    let disk = try! DiskStorage<String, User>(config: DiskConfig(name: "HybridDisk"), transformer: TransformerFactory.forCodable(ofType: User.self))
 
     storage = HybridStorage(memoryStorage: memory, diskStorage: disk)
   }
@@ -160,7 +160,7 @@ final class HybridStorageTests: XCTestCase {
   // MARK: - Storage observers
 
   func testAddStorageObserver() throws {
-    var changes = [StorageChange]()
+    var changes = [StorageChange<String>]()
     storage.addStorageObserver(self) { _, _, change in
       changes.append(change)
     }
