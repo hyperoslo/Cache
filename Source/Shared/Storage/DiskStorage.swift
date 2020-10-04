@@ -188,20 +188,6 @@ extension DiskStorage {
     return "\(path)/\(makeFileName(for: key))"
   }
 
-  /// Calculates total disk cache size.
-  func totalSize() throws -> UInt64 {
-    var size: UInt64 = 0
-    let contents = try fileManager.contentsOfDirectory(atPath: path)
-    for pathComponent in contents {
-      let filePath = NSString(string: path).appendingPathComponent(pathComponent)
-      let attributes = try fileManager.attributesOfItem(atPath: filePath)
-      if let fileSize = attributes[.size] as? UInt64 {
-        size += fileSize
-      }
-    }
-    return size
-  }
-
   func createDirectory() throws {
     guard !fileManager.fileExists(atPath: path) else {
       return
@@ -271,5 +257,15 @@ public extension DiskStorage {
     )
 
     return storage
+  }
+}
+
+public extension DiskStorage {
+  /// Calculates the total size of the cache directory in bytes.
+  var totalSize: Int? {
+    if let directory = URL(string: self.path), let size = self.fileManager.sizeOfDirectory(at: directory) {
+      return size
+    }
+      return nil
   }
 }
