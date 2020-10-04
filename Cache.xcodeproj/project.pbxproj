@@ -11,6 +11,12 @@
 		0E79164B250E2AA500A71666 /* Hasher+constantAccrossExecutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E791649250E2AA500A71666 /* Hasher+constantAccrossExecutions.swift */; };
 		0E79164C250E2AA500A71666 /* Hasher+constantAccrossExecutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E791649250E2AA500A71666 /* Hasher+constantAccrossExecutions.swift */; };
 		0E79164E250E2B0400A71666 /* Hasher+constantAccrossExecutions+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79164D250E2B0400A71666 /* Hasher+constantAccrossExecutions+Tests.swift */; };
+		2292AB7B252A14520031F3B9 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB7A252A14520031F3B9 /* URL+Extensions.swift */; };
+		2292AB7C252A14520031F3B9 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB7A252A14520031F3B9 /* URL+Extensions.swift */; };
+		2292AB7D252A14520031F3B9 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB7A252A14520031F3B9 /* URL+Extensions.swift */; };
+		2292AB85252A14F50031F3B9 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB84252A14F50031F3B9 /* FileManager+Extensions.swift */; };
+		2292AB86252A14F50031F3B9 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB84252A14F50031F3B9 /* FileManager+Extensions.swift */; };
+		2292AB87252A14F50031F3B9 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB84252A14F50031F3B9 /* FileManager+Extensions.swift */; };
 		BDEDD37D1DBCEB8A007416A6 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDEDD3561DBCE5B1007416A6 /* Cache.framework */; };
 		D21B667C1F6A723C00125DE1 /* DataSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98531F694FFA00CE8F68 /* DataSerializer.swift */; };
 		D21B667E1F6A723C00125DE1 /* ExpirationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98551F694FFA00CE8F68 /* ExpirationMode.swift */; };
@@ -179,6 +185,8 @@
 /* Begin PBXFileReference section */
 		0E791649250E2AA500A71666 /* Hasher+constantAccrossExecutions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Hasher+constantAccrossExecutions.swift"; sourceTree = "<group>"; };
 		0E79164D250E2B0400A71666 /* Hasher+constantAccrossExecutions+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Hasher+constantAccrossExecutions+Tests.swift"; sourceTree = "<group>"; };
+		2292AB7A252A14520031F3B9 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		2292AB84252A14F50031F3B9 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
 		BDEDD3561DBCE5B1007416A6 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D221E5BB20D00D9300BC940E /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
@@ -332,6 +340,8 @@
 				0E791649250E2AA500A71666 /* Hasher+constantAccrossExecutions.swift */,
 				D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */,
 				D2CF98501F694FFA00CE8F68 /* Date+Extensions.swift */,
+				2292AB7A252A14520031F3B9 /* URL+Extensions.swift */,
+				2292AB84252A14F50031F3B9 /* FileManager+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -792,10 +802,12 @@
 				D2D4CC261FA3426B00E4A2D5 /* JSONArrayWrapper.swift in Sources */,
 				D27014A720D129EB003B45C7 /* TransformerFactory.swift in Sources */,
 				D270147E20D107DA003B45C7 /* SyncStorage.swift in Sources */,
+				2292AB7D252A14520031F3B9 /* URL+Extensions.swift in Sources */,
 				D292DAFF1F6A970B0060F614 /* Result.swift in Sources */,
 				D21B669A1F6A724300125DE1 /* Date+Extensions.swift in Sources */,
 				0E79164C250E2AA500A71666 /* Hasher+constantAccrossExecutions.swift in Sources */,
 				D21B66891F6A723C00125DE1 /* ImageWrapper.swift in Sources */,
+				2292AB87252A14F50031F3B9 /* FileManager+Extensions.swift in Sources */,
 				D21B668B1F6A723C00125DE1 /* StorageError.swift in Sources */,
 				D5A9D1B921134547005DBD3F /* ObservationToken.swift in Sources */,
 				D270148A20D11040003B45C7 /* Storage+Transform.swift in Sources */,
@@ -880,10 +892,12 @@
 				D2D4CC251FA3426B00E4A2D5 /* JSONArrayWrapper.swift in Sources */,
 				D27014A620D129EB003B45C7 /* TransformerFactory.swift in Sources */,
 				D270147D20D107DA003B45C7 /* SyncStorage.swift in Sources */,
+				2292AB7C252A14520031F3B9 /* URL+Extensions.swift in Sources */,
 				D292DAFE1F6A970B0060F614 /* Result.swift in Sources */,
 				D21B66991F6A724200125DE1 /* Date+Extensions.swift in Sources */,
 				0E79164B250E2AA500A71666 /* Hasher+constantAccrossExecutions.swift in Sources */,
 				D21B66801F6A723C00125DE1 /* ImageWrapper.swift in Sources */,
+				2292AB86252A14F50031F3B9 /* FileManager+Extensions.swift in Sources */,
 				D21B66821F6A723C00125DE1 /* StorageError.swift in Sources */,
 				D5A9D1B821134547005DBD3F /* ObservationToken.swift in Sources */,
 				D270148920D11040003B45C7 /* Storage+Transform.swift in Sources */,
@@ -934,10 +948,12 @@
 				D292DAFD1F6A970B0060F614 /* Result.swift in Sources */,
 				D27014A520D129EB003B45C7 /* TransformerFactory.swift in Sources */,
 				D2D4CC241FA3426B00E4A2D5 /* JSONArrayWrapper.swift in Sources */,
+				2292AB7B252A14520031F3B9 /* URL+Extensions.swift in Sources */,
 				D270147C20D107DA003B45C7 /* SyncStorage.swift in Sources */,
 				D2CF98671F694FFA00CE8F68 /* Expiry.swift in Sources */,
 				0E79164A250E2AA500A71666 /* Hasher+constantAccrossExecutions.swift in Sources */,
 				D270148820D11040003B45C7 /* Storage+Transform.swift in Sources */,
+				2292AB85252A14F50031F3B9 /* FileManager+Extensions.swift in Sources */,
 				D2CF986A1F694FFA00CE8F68 /* StorageError.swift in Sources */,
 				D5A9D1B721134547005DBD3F /* ObservationToken.swift in Sources */,
 				D5A138C11EB29BFA00881A20 /* UIImage+Extensions.swift in Sources */,

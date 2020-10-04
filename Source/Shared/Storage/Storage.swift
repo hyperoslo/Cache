@@ -108,3 +108,10 @@ extension Storage: KeyObservationRegistry {
     hybridStorage.removeAllKeyObservers()
   }
 }
+
+public extension Storage {
+  /// Returns the total size of the DiskStorage of the underlying HybridStorage in bytes.
+  var totalDiskStorageSize: Int? {
+    return self.hybridStorage.diskStorage.totalSize
+  }
+}

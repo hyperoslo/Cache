@@ -165,3 +165,10 @@ extension HybridStorage: KeyObservationRegistry {
     }
   }
 }
+
+public extension HybridStorage {
+  /// Returns the total size of the underlying DiskStorage in bytes.
+  var totalDiskStorageSize: Int? {
+    return self.diskStorage.totalSize
+  }
+}
