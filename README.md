@@ -75,7 +75,7 @@ let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 
 let storage = try? Storage(
   diskConfig: diskConfig,
   memoryConfig: memoryConfig,
-  transformer: TransformerFactory.forCodable(ofType: User.self) // Storage<User>
+  transformer: TransformerFactory.forCodable(ofType: User.self) // Storage<String, User>
 )
 ```
 
@@ -86,13 +86,13 @@ All `Storage` now are generic by default, so you can get a type safety experienc
 If you want to change the type, `Cache` offers `transform` functions, look for `Transformer` and `TransformerFactory` for built-in transformers.
 
 ```swift
-let storage: Storage<User> = ...
+let storage: Storage<String, User> = ...
 storage.setObject(superman, forKey: "user")
 
-let imageStorage = storage.transformImage() // Storage<UIImage>
+let imageStorage = storage.transformImage() // Storage<String, UIImage>
 imageStorage.setObject(image, forKey: "image")
 
-let stringStorage = storage.transformCodable(ofType: String.self) // Storage<String>
+let stringStorage = storage.transformCodable(ofType: String.self) // Storage<String, String>
 stringStorage.setObject("hello world", forKey: "string")
 ```
 
