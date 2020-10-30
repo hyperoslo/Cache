@@ -33,7 +33,7 @@ final class StorageTests: XCTestCase {
 
     storage.async.object(forKey: "user", completion: { result in
       switch result {
-      case .value(let cachedUser):
+      case .success(let cachedUser):
         XCTAssertEqual(cachedUser, self.user)
         expectation.fulfill()
       default:
