@@ -247,42 +247,42 @@ You access Async APIs via `storage.async`, it is also thread safe, and you can u
 ```swift
 storage.async.setObject("Oslo", forKey: "my favorite city") { result in
   switch result {
-    case .value:
+    case .success:
       print("saved successfully")
-    case .error(let error):
+    case .failure(let error):
       print(error)
   }
 }
 
 storage.async.object(forKey: "my favorite city") { result in
   switch result {
-    case .value(let city):
+    case .success(let city):
       print("my favorite city is \(city)")
-    case .error(let error):
+    case .failure(let error):
       print(error)
   }
 }
 
 storage.async.existsObject(forKey: "my favorite city") { result in
-  if case .value(let exists) = result, exists {
+  if case .success(let exists) = result, exists {
     print("I have a favorite city")
   }
 }
 
 storage.async.removeAll() { result in
   switch result {
-    case .value:
+    case .success:
       print("removal completes")
-    case .error(let error):
+    case .failure(let error):
       print(error)
   }
 }
 
 storage.async.removeExpiredObjects() { result in
   switch result {
-    case .value:
+    case .success:
       print("removal completes")
-    case .error(let error):
+    case .failure(let error):
       print(error)
   }
 }
@@ -381,7 +381,7 @@ This is how you perform object converting and saving with `Alamofire`
 ```swift
 Alamofire.request("https://gameofthrones.org/mostFavoriteCharacter").responseString { response in
   do {
-    let user = try JSONDecoder.decode(response.result.value, to: User.self)
+    let user = try JSONDecoder.decode(response.result.success, to: User.self)
     try storage.setObject(user, forKey: "most favorite character")
   } catch {
     print(error)
