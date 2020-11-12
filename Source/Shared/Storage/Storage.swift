@@ -43,6 +43,14 @@ public final class Storage<Key: Hashable, Value> {
 }
 
 extension Storage: StorageAware {
+  public var allKeys: [Key] {
+    self.syncStorage.allKeys
+  }
+
+  public var allObjects: [Value] {
+    self.syncStorage.allObjects
+  }
+
   public func entry(forKey key: Key) throws -> Entry<Value> {
     return try self.syncStorage.entry(forKey: key)
   }

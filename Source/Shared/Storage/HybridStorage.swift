@@ -26,6 +26,14 @@ public final class HybridStorage<Key: Hashable, Value> {
 }
 
 extension HybridStorage: StorageAware {
+  public var allKeys: [Key] {
+    memoryStorage.allKeys
+  }
+
+  public var allObjects: [Value] {
+    memoryStorage.allObjects
+  }
+
   public func entry(forKey key: Key) throws -> Entry<Value> {
     do {
       return try memoryStorage.entry(forKey: key)

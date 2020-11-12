@@ -58,6 +58,10 @@ final public class DiskStorage<Key: Hashable, Value> {
 }
 
 extension DiskStorage: StorageAware {
+  public var allKeys: [Key] { [] }
+
+  public var allObjects: [Value] { [] }
+
   public func entry(forKey key: Key) throws -> Entry<Value> {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))

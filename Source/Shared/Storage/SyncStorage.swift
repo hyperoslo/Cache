@@ -14,12 +14,27 @@ public class SyncStorage<Key: Hashable, Value> {
 }
 
 extension SyncStorage: StorageAware {
+  public var allKeys: [Key] {
+    var keys: [Key]!
+    serialQueue.sync {
+      keys = self.innerStorage.allKeys
+    }
+    return keys
+  }
+
+  public var allObjects: [Value] {
+    var objects: [Value]!
+    serialQueue.sync {
+      objects = self.innerStorage.allObjects
+    }
+    return objects
+  }
+
   public func entry(forKey key: Key) throws -> Entry<Value> {
     var entry: Entry<Value>!
     try serialQueue.sync {
       entry = try innerStorage.entry(forKey: key)
     }
-
     return entry
   }
 
