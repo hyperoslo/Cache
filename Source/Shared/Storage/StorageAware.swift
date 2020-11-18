@@ -4,6 +4,17 @@ import Foundation
 public protocol StorageAware {
   associatedtype Key: Hashable
   associatedtype Value
+
+  /**
+   Get all keys in the storage
+  */
+  var allKeys: [Key] { get }
+
+  /**
+   Get all objects from the storage
+  */
+  var allObjects: [Value] { get }
+  
   /**
    Tries to retrieve the object from the storage.
    - Parameter key: Unique key to identify the object in the cache
