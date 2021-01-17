@@ -64,7 +64,7 @@ extension DiskStorage: StorageAware {
 
   public func entry(forKey key: Key) throws -> Entry<Value> {
     let filePath = makeFilePath(for: key)
-    let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
+    let data = try Data(contentsOf: URL(fileURLWithPath: filePath, isDirectory: false))
     let attributes = try fileManager.attributesOfItem(atPath: filePath)
     let object = try transformer.fromData(data)
 
@@ -99,7 +99,7 @@ extension DiskStorage: StorageAware {
   }
 
   public func removeExpiredObjects() throws {
-    let storageURL = URL(fileURLWithPath: path)
+    let storageURL = URL(fileURLWithPath: path, isDirectory: true)
     let resourceKeys: [URLResourceKey] = [
       .isDirectoryKey,
       .contentModificationDateKey,
@@ -167,7 +167,7 @@ extension DiskStorage {
    */
   func makeFileName(for key: Key) -> String {
     if let key = key as? String {
-        let fileExtension = URL(fileURLWithPath: key).pathExtension
+        let fileExtension = (key as NSString).pathExtension
         let fileName = MD5(key)
 
         switch fileExtension.isEmpty {
