@@ -25,17 +25,13 @@ public final class Storage<Key: Hashable, Value> {
   /// Initialise with sync and async storages
   ///
   /// - Parameter syncStorage: Synchronous storage
-  /// - Paraeter: asyncStorage: Asynchronous storage
+  /// - Parameter asyncStorage: Asynchronous storage
   public init(hybridStorage: HybridStorage<Key, Value>) {
     self.hybridStorage = hybridStorage
-    self.syncStorage = SyncStorage(
-      storage: hybridStorage,
-      serialQueue: DispatchQueue(label: "Cache.SyncStorage.SerialQueue")
-    )
-    self.asyncStorage = AsyncStorage(
-      storage: hybridStorage,
-      serialQueue: DispatchQueue(label: "Cache.AsyncStorage.SerialQueue")
-    )
+
+    let queue = DispatchQueue(label: "Cache.Storage.SerialQueue")
+    self.syncStorage = SyncStorage(storage: hybridStorage, serialQueue: queue)
+    self.asyncStorage = AsyncStorage(storage: hybridStorage, serialQueue: queue)
   }
 
   /// Used for async operations
