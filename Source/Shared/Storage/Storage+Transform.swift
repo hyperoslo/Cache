@@ -7,7 +7,7 @@ public extension Storage {
   }
 
 
-  #if os(iOS) || os(tvOS) || os(macOS)
+  #if os(iOS) || os(tvOS) || os(macOS) || os(watchOS)
   func transformImage() -> Storage<Key, Image> {
     let storage = transform(transformer: TransformerFactory.forImage())
     return storage
