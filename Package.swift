@@ -13,8 +13,8 @@ let package = Package(
     targets: [
         .target(
             name: "Cache",
-            path: "Source",
-            exclude: ["Library/ImageWrapper.swift"]),
+            path: "Source"
+        ),
         .testTarget(
             name: "CacheTests",
             dependencies: ["Cache"],
