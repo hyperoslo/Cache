@@ -73,3 +73,9 @@ public extension SyncStorage {
     return storage
   }
 }
+
+public extension SyncStorage {
+  func applyExpiratonMode(_ expirationMode: ExpirationMode) {
+    self.innerStorage.applyExpiratonMode(expirationMode)
+  }
+}

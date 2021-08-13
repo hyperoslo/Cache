@@ -127,3 +127,9 @@ public extension AsyncStorage {
     return storage
   }
 }
+
+public extension AsyncStorage {
+  func applyExpiratonMode(_ expirationMode: ExpirationMode) {
+    self.innerStorage.applyExpiratonMode(expirationMode)
+  }
+}

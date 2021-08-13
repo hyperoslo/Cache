@@ -62,4 +62,68 @@ final class AsyncStorageTests: XCTestCase {
 
     wait(for: [expectation], timeout: 1)
   }
+    
+    func testAutoClearAllExpiredObjectWhenApplicationEnterBackground() {
+        let expiry1: Expiry = .date(Date().addingTimeInterval(-10))
+        let expiry2: Expiry = .date(Date().addingTimeInterval(10))
+        let key1 = "item1"
+        let key2 = "item2"
+        var key1Removed = false
+        var key2Removed = false
+        storage.innerStorage.memoryStorage.onRemove = { key in
+          key1Removed = true
+          key2Removed = true
+          XCTAssertTrue(key1Removed)
+          XCTAssertTrue(key2Removed)
+        }
+            
+        storage.innerStorage.diskStorage.onRemove = { path in
+          key1Removed = true
+          key2Removed = true
+          XCTAssertTrue(key1Removed)
+          XCTAssertTrue(key2Removed)
+        }
+        
+        storage.setObject(user, forKey: key1, expiry: expiry1) { _ in
+            
+        }
+        storage.setObject(user, forKey: key2, expiry: expiry2) { _ in
+            
+        }
+        ///Device enters background
+        NotificationCenter.default.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
+      }
+        
+    func testManualManageExpirationMode() {
+        storage.applyExpiratonMode(.manual)
+        let expiry1: Expiry = .date(Date().addingTimeInterval(-10))
+        let expiry2: Expiry = .date(Date().addingTimeInterval(60))
+        let key1 = "item1"
+        let key2 = "item2"
+          
+        var key1Removed = false
+        var key2Removed = false
+        storage.innerStorage.memoryStorage.onRemove = { key in
+          key1Removed = true
+          key2Removed = true
+          XCTAssertFalse(key1Removed)
+          XCTAssertFalse(key2Removed)
+        }
+          
+        storage.innerStorage.diskStorage.onRemove = { path in
+          key1Removed = true
+          key2Removed = true
+          XCTAssertFalse(key1Removed)
+          XCTAssertFalse(key2Removed)
+        }
+        
+        storage.setObject(user, forKey: key1, expiry: expiry1) { _ in
+            
+        }
+        storage.setObject(user, forKey: key2, expiry: expiry2) { _ in
+            
+        }
+        ///Device enters background
+        NotificationCenter.default.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
+      }
 }

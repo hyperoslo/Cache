@@ -5,7 +5,9 @@ final class MemoryStorageTests: XCTestCase {
   private let key = "youknownothing"
   private let testObject = User(firstName: "John", lastName: "Snow")
   private var storage: MemoryStorage<String, User>!
-  private let config = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
+
+  /// 16 bytes, can contain 2 objects
+  private let config = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 16)
 
   override func setUp() {
     super.setUp()
@@ -104,13 +106,68 @@ final class MemoryStorageTests: XCTestCase {
     let expiry2: Expiry = .date(Date().addingTimeInterval(10))
     let key1 = "item1"
     let key2 = "item2"
+    storage.onRemove = { key in
+        XCTAssertTrue(key == key1)
+    }
     storage.setObject(testObject, forKey: key1, expiry: expiry1)
     storage.setObject(testObject, forKey: key2, expiry: expiry2)
     storage.removeExpiredObjects()
+    
     let object1 = try? storage.object(forKey: key1)
     let object2 = try! storage.object(forKey: key2)
 
     XCTAssertNil(object1)
     XCTAssertNotNil(object2)
   }
+    
+    
+    func testAutoClearAllExpiredObjectWhenApplicationEnterBackground() {
+        let expiry1: Expiry = .date(Date().addingTimeInterval(-10))
+        let expiry2: Expiry = .date(Date().addingTimeInterval(10))
+        let key1 = "item1"
+        let key2 = "item2"
+        storage.onRemove = { key in
+            XCTAssertTrue(key == key1)
+        }
+        storage.setObject(testObject, forKey: key1, expiry: expiry1)
+        storage.setObject(testObject, forKey: key2, expiry: expiry2)
+        ///Device enters background
+        NotificationCenter.default.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+    
+    func testManualManageExpirationMode() {
+        storage.applyExpiratonMode(.manual)
+        let expiry1: Expiry = .date(Date().addingTimeInterval(-10))
+        let expiry2: Expiry = .date(Date().addingTimeInterval(10))
+        let key1 = "item1"
+        let key2 = "item2"
+        var success = true
+        storage.onRemove = { key in
+            success = false
+            XCTAssertTrue(success)
+        }
+        storage.setObject(testObject, forKey: key1, expiry: expiry1)
+        storage.setObject(testObject, forKey: key2, expiry: expiry2)
+            ///Device enters background
+        NotificationCenter.default.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+    
+    ///we have set max cost 16 bytes, so the first object is released
+    func testCost() {
+        let key1 = "item1"
+        let key2 = "item2"
+        let key3 = "item3"
+        storage.setObject(testObject, forKey: key1)
+        storage.setObject(testObject, forKey: key2)
+        storage.setObject(testObject, forKey: key3)
+        
+        let object1 = try? storage.object(forKey: key1)
+        let object2 = try! storage.object(forKey: key2)
+        let object3 = try! storage.object(forKey: key2)
+        XCTAssertNotNil(object2)
+        XCTAssertNotNil(object3)
+        XCTAssertNil(object1)
+    }
+    
+    
 }

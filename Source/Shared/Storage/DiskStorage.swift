@@ -1,4 +1,8 @@
-import Foundation
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit) && !targetEnvironment(macCatalyst)
+import AppKit
+#endif
 
 /// Save objects to file on disk
 final public class DiskStorage<Key: Hashable, Value> {
@@ -17,6 +21,9 @@ final public class DiskStorage<Key: Hashable, Value> {
 
   private let transformer: Transformer<Value>
   private let hasher = Hasher.constantAccrossExecutions()
+    
+  private var didEnterBackgroundObserver: NSObjectProtocol?
+
 
   // MARK: - Initialization
   public convenience init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<Value>) throws {
@@ -54,6 +61,29 @@ final public class DiskStorage<Key: Hashable, Value> {
     self.fileManager = fileManager
     self.path = path
     self.transformer = transformer
+    applyExpiratonMode(self.config.expirationMode)
+  }
+    
+  public func applyExpiratonMode(_ expirationMode: ExpirationMode) {
+    if let didEnterBackgroundObserver = didEnterBackgroundObserver {
+      NotificationCenter.default.removeObserver(didEnterBackgroundObserver)
+    }
+      
+    if expirationMode == .auto {
+      didEnterBackgroundObserver =
+      NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification,
+                                             object: nil,
+                                             queue: nil) { [weak self] _ in
+        guard let `self` = self else { return }
+        try? self.removeExpiredObjects()
+      }
+    }
+  }
+    
+  deinit {
+    if let didEnterBackgroundObserver = didEnterBackgroundObserver {
+      NotificationCenter.default.removeObserver(didEnterBackgroundObserver)
+    }
   }
 }
 
