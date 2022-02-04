@@ -391,7 +391,7 @@ Alamofire.request("https://gameofthrones.org/mostFavoriteCharacter").responseStr
 
 ## What about images
 
-If you want to load image into `UIImageView` or `NSImageView`, then we also have a nice gift for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary) and uses `Cache` under the hood to make you life easier when it comes to working with remote images.
+If you want to load image into `UIImageView` or `NSImageView`, then we also have a nice gift for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary) and uses `Cache` under the hood to make your life easier when it comes to working with remote images.
 
 ## Installation
 
