@@ -217,7 +217,7 @@ extension DiskStorage {
     let sortedFiles = objects.sorted {
       if let time1 = $0.resourceValues.contentModificationDate?.timeIntervalSinceReferenceDate,
         let time2 = $1.resourceValues.contentModificationDate?.timeIntervalSinceReferenceDate {
-        return time1 > time2
+        return time1 < time2
       } else {
         return false
       }
