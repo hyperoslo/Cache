@@ -50,7 +50,7 @@ final class AsyncStorageTests: XCTestCase {
     }
 
     then("all are removed") {
-      intStorage.existsObject(forKey: "key-99", completion: { result in
+      intStorage.objectExists(forKey: "key-99", completion: { result in
         switch result {
         case .success:
           XCTFail()

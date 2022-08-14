@@ -106,6 +106,7 @@ extension AsyncStorage {
     })
   }
 
+  @available(*, deprecated, renamed: "objectExists(forKey:completion:)")
   public func existsObject(
     forKey key: Key,
     completion: @escaping (Result<Bool, Error>) -> Void) {
@@ -115,6 +116,16 @@ extension AsyncStorage {
       }))
     })
   }
+
+  public func objectExists(
+    forKey key: Key,
+    completion: @escaping (Result<Bool, Error>) -> Void) {
+      object(forKey: key, completion: { (result: Result<Value, Error>) in
+        completion(result.map({ _ in
+          return true
+        }))
+      })
+    }
 }
 
 public extension AsyncStorage {
