@@ -40,8 +40,8 @@ final class SyncStorageTests: XCTestCase {
       try intStorage.removeAll()
     }
 
-    try then("all are removed") {
-      XCTAssertFalse(try intStorage.existsObject(forKey: "key-99"))
+    then("all are removed") {
+      XCTAssertFalse(intStorage.objectExists(forKey: "key-99"))
     }
   }
 }
