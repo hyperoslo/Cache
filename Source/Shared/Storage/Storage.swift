@@ -43,6 +43,10 @@ public final class Storage<Key: Hashable, Value> {
 }
 
 extension Storage: StorageAware {
+  public func removeInMemoryObject(forKey key: Key) throws {
+    try self.syncStorage.removeInMemoryObject(forKey: key)
+  }
+    
   public var allKeys: [Key] {
     self.syncStorage.allKeys
   }

@@ -145,6 +145,8 @@ extension DiskStorage: StorageAware {
     // Remove objects if storage size exceeds max size
     try removeResourceObjects(resourceObjects, totalSize: totalSize)
   }
+
+  public func removeInMemoryObject(forKey key: Key) throws { }
 }
 
 extension DiskStorage {

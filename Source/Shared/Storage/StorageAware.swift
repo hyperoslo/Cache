@@ -71,6 +71,11 @@ public protocol StorageAware {
    - Parameter key: Unique key to identify the object.
    */
   func isExpiredObject(forKey key: Key) throws -> Bool
+  /**
+   Removes the object by the given key from cache in memory only.
+   - Parameter key: Unique key to identify the object.
+   */
+  func removeInMemoryObject(forKey key: Key) throws
 }
 
 public extension StorageAware {
