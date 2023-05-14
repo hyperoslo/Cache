@@ -67,6 +67,11 @@ extension MemoryStorage {
     cache.removeObject(forKey: WrappedKey(key))
     keys.remove(key)
   }
+    
+  public func removeInMemoryObject(forKey key: Key) throws {
+    cache.removeObject(forKey: WrappedKey(key))
+    keys.remove(key)
+  }
 
   public func entry(forKey key: Key) throws -> Entry<Value> {
     guard let capsule = cache.object(forKey: WrappedKey(key)) else {

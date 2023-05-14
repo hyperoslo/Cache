@@ -28,11 +28,12 @@ public enum StorageChange<Key: Hashable>: Equatable {
   case remove(key: Key)
   case removeAll
   case removeExpired
+  case removeInMemory(key: Key)
 }
 
 public func == <Key : Hashable>(lhs: StorageChange<Key>, rhs: StorageChange<Key>) -> Bool {
   switch (lhs, rhs) {
-  case (.add(let key1), .add(let key2)), (.remove(let key1), .remove(let key2)):
+  case (.add(let key1), .add(let key2)), (.remove(let key1), .remove(let key2)), (.removeInMemory(let key1), .removeInMemory(let key2)):
     return key1 == key2
   case (.removeAll, .removeAll), (.removeExpired, .removeExpired):
     return true

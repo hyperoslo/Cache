@@ -51,6 +51,11 @@ extension HybridStorage: StorageAware {
 
     notifyStorageObservers(about: .remove(key: key))
   }
+    
+  public func removeInMemoryObject(forKey key: Key) throws {
+    memoryStorage.removeObject(forKey: key)
+    notifyStorageObservers(about: .removeInMemory(key: key))
+  }
 
   public func setObject(_ object: Value, forKey key: Key, expiry: Expiry? = nil) throws {
     var keyChange: KeyChange<Value>?
