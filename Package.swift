@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.5
 
 import PackageDescription
 
@@ -13,7 +13,8 @@ let package = Package(
     targets: [
         .target(
             name: "Cache",
-            path: "Source"
+            path: "Source",
+            resources: [.copy("PrivacyInfo.xcprivacy")]
         ),
         .testTarget(
             name: "CacheTests",
