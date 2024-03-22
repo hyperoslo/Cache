@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "Cache"
   s.summary          = "Nothing but cache."
-  s.version          = "7.0.0"
+  s.version          = "7.0.1"
   s.homepage         = "https://github.com/hyperoslo/Cache"
   s.license          = 'MIT'
   s.author           = { "Hyper Interaktiv AS" => "ios@hyper.no" }
@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
   s.ios.source_files = 'Source/{iOS,Shared}/**/*'
   s.osx.source_files = 'Source/{Mac,Shared}/**/*'
   s.tvos.source_files = 'Source/{iOS,Shared}/**/*'
+  s.resources = 'Source/PrivacyInfo.xcprivacy'
  
   s.frameworks = 'Foundation'
   s.swift_version = '5.0'
