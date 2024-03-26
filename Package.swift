@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.5
 
 import PackageDescription
 
@@ -14,7 +14,8 @@ let package = Package(
         .target(
             name: "Cache",
             path: "Source",
-            exclude: ["Library/ImageWrapper.swift"]),
+            resources: [.copy("PrivacyInfo.xcprivacy")]
+        ),
         .testTarget(
             name: "CacheTests",
             dependencies: ["Cache"],

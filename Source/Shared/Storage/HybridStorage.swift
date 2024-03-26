@@ -26,6 +26,14 @@ public final class HybridStorage<Key: Hashable, Value> {
 }
 
 extension HybridStorage: StorageAware {
+  public var allKeys: [Key] {
+    memoryStorage.allKeys
+  }
+
+  public var allObjects: [Value] {
+    memoryStorage.allObjects
+  }
+
   public func entry(forKey key: Key) throws -> Entry<Value> {
     do {
       return try memoryStorage.entry(forKey: key)
@@ -42,6 +50,11 @@ extension HybridStorage: StorageAware {
     try diskStorage.removeObject(forKey: key)
 
     notifyStorageObservers(about: .remove(key: key))
+  }
+    
+  public func removeInMemoryObject(forKey key: Key) throws {
+    memoryStorage.removeObject(forKey: key)
+    notifyStorageObservers(about: .removeInMemory(key: key))
   }
 
   public func setObject(_ object: Value, forKey key: Key, expiry: Expiry? = nil) throws {
@@ -163,5 +176,12 @@ extension HybridStorage: KeyObservationRegistry {
     keyObservations.values.forEach { closure in
       closure(self, change)
     }
+  }
+}
+
+public extension HybridStorage {
+  /// Returns the total size of the underlying DiskStorage in bytes.
+  var totalDiskStorageSize: Int? {
+    return self.diskStorage.totalSize
   }
 }

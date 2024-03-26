@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/cocoapods/l/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
 [![Platform](https://img.shields.io/cocoapods/p/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
 [![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/Cache.svg?style=flat)](http://cocoadocs.org/docsets/Cache)
-![Swift](https://img.shields.io/badge/%20in-swift%204.0-orange.svg)
+![Swift](https://img.shields.io/badge/%20in-swift%205-orange.svg)
 
 ## Table of Contents
 
@@ -75,7 +75,7 @@ let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 
 let storage = try? Storage(
   diskConfig: diskConfig,
   memoryConfig: memoryConfig,
-  transformer: TransformerFactory.forCodable(ofType: User.self) // Storage<User>
+  transformer: TransformerFactory.forCodable(ofType: User.self) // Storage<String, User>
 )
 ```
 
@@ -86,13 +86,13 @@ All `Storage` now are generic by default, so you can get a type safety experienc
 If you want to change the type, `Cache` offers `transform` functions, look for `Transformer` and `TransformerFactory` for built-in transformers.
 
 ```swift
-let storage: Storage<User> = ...
+let storage: Storage<String, User> = ...
 storage.setObject(superman, forKey: "user")
 
-let imageStorage = storage.transformImage() // Storage<UIImage>
+let imageStorage = storage.transformImage() // Storage<String, UIImage>
 imageStorage.setObject(image, forKey: "image")
 
-let stringStorage = storage.transformCodable(ofType: String.self) // Storage<String>
+let stringStorage = storage.transformCodable(ofType: String.self) // Storage<String, String>
 stringStorage.setObject("hello world", forKey: "string")
 ```
 
@@ -247,42 +247,42 @@ You access Async APIs via `storage.async`, it is also thread safe, and you can u
 ```swift
 storage.async.setObject("Oslo", forKey: "my favorite city") { result in
   switch result {
-    case .value:
+    case .success:
       print("saved successfully")
-    case .error(let error):
+    case .failure(let error):
       print(error)
   }
 }
 
 storage.async.object(forKey: "my favorite city") { result in
   switch result {
-    case .value(let city):
+    case .success(let city):
       print("my favorite city is \(city)")
-    case .error(let error):
+    case .failure(let error):
       print(error)
   }
 }
 
 storage.async.existsObject(forKey: "my favorite city") { result in
-  if case .value(let exists) = result, exists {
+  if case .success(let exists) = result, exists {
     print("I have a favorite city")
   }
 }
 
 storage.async.removeAll() { result in
   switch result {
-    case .value:
+    case .success:
       print("removal completes")
-    case .error(let error):
+    case .failure(let error):
       print(error)
   }
 }
 
 storage.async.removeExpiredObjects() { result in
   switch result {
-    case .value:
+    case .success:
       print("removal completes")
-    case .error(let error):
+    case .failure(let error):
       print(error)
   }
 }
@@ -381,7 +381,7 @@ This is how you perform object converting and saving with `Alamofire`
 ```swift
 Alamofire.request("https://gameofthrones.org/mostFavoriteCharacter").responseString { response in
   do {
-    let user = try JSONDecoder.decode(response.result.value, to: User.self)
+    let user = try JSONDecoder.decode(response.result.success, to: User.self)
     try storage.setObject(user, forKey: "most favorite character")
   } catch {
     print(error)
@@ -391,17 +391,18 @@ Alamofire.request("https://gameofthrones.org/mostFavoriteCharacter").responseStr
 
 ## What about images
 
-If you want to load image into `UIImageView` or `NSImageView`, then we also have a nice gift for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary) and uses `Cache` under the hood to make you life easier when it comes to working with remote images.
+If you want to load image into `UIImageView` or `NSImageView`, then we also have a nice gift for you. It's called [Imaginary](https://github.com/hyperoslo/Imaginary) and uses `Cache` under the hood to make your life easier when it comes to working with remote images.
 
 ## Installation
 
 ### Cocoapods
 
 **Cache** is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+it or update it, use the following line to your Podfile:
 
 ```ruby
-pod 'Cache'
+pod 'Cache', :git => 'https://github.com/hyperoslo/Cache.git'
+
 ```
 
 ### Carthage

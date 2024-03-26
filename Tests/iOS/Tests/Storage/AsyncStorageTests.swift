@@ -25,7 +25,7 @@ final class AsyncStorageTests: XCTestCase {
     storage.setObject(user, forKey: "user", completion: { _ in })
     storage.object(forKey: "user", completion: { result in
       switch result {
-      case .value(let cachedUser):
+      case .success(let cachedUser):
         XCTAssertEqual(cachedUser, self.user)
         expectation.fulfill()
       default:
@@ -50,9 +50,9 @@ final class AsyncStorageTests: XCTestCase {
     }
 
     then("all are removed") {
-      intStorage.existsObject(forKey: "key-99", completion: { result in
+      intStorage.objectExists(forKey: "key-99", completion: { result in
         switch result {
-        case .value:
+        case .success:
           XCTFail()
         default:
           expectation.fulfill()

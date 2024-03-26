@@ -43,6 +43,18 @@ public final class Storage<Key: Hashable, Value> {
 }
 
 extension Storage: StorageAware {
+  public func removeInMemoryObject(forKey key: Key) throws {
+    try self.syncStorage.removeInMemoryObject(forKey: key)
+  }
+    
+  public var allKeys: [Key] {
+    self.syncStorage.allKeys
+  }
+
+  public var allObjects: [Value] {
+    self.syncStorage.allObjects
+  }
+
   public func entry(forKey key: Key) throws -> Entry<Value> {
     return try self.syncStorage.entry(forKey: key)
   }
@@ -106,5 +118,12 @@ extension Storage: KeyObservationRegistry {
 
   public func removeAllKeyObservers() {
     hybridStorage.removeAllKeyObservers()
+  }
+}
+
+public extension Storage {
+  /// Returns the total size of the DiskStorage of the underlying HybridStorage in bytes.
+  var totalDiskStorageSize: Int? {
+    return self.hybridStorage.diskStorage.totalSize
   }
 }

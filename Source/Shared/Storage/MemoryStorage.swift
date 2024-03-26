@@ -31,6 +31,14 @@ public class MemoryStorage<Key: Hashable, Value>: StorageAware {
 }
 
 extension MemoryStorage {
+  public var allKeys: [Key] {
+    Array(keys)
+  }
+
+  public var allObjects: [Value] {
+    allKeys.compactMap { try? object(forKey: $0) }
+  }
+
   public func setObject(_ object: Value, forKey key: Key, expiry: Expiry? = nil) {
     let capsule = MemoryCapsule(value: object, expiry: .date(expiry?.date ?? config.expiry.date))
     cache.setObject(capsule, forKey: WrappedKey(key))
@@ -56,6 +64,11 @@ extension MemoryStorage {
   }
 
   public func removeObject(forKey key: Key) {
+    cache.removeObject(forKey: WrappedKey(key))
+    keys.remove(key)
+  }
+    
+  public func removeInMemoryObject(forKey key: Key) throws {
     cache.removeObject(forKey: WrappedKey(key))
     keys.remove(key)
   }

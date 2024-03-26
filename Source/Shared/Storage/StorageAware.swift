@@ -4,6 +4,17 @@ import Foundation
 public protocol StorageAware {
   associatedtype Key: Hashable
   associatedtype Value
+
+  /**
+   Get all keys in the storage
+  */
+  var allKeys: [Key] { get }
+
+  /**
+   Get all objects from the storage
+  */
+  var allObjects: [Value] { get }
+  
   /**
    Tries to retrieve the object from the storage.
    - Parameter key: Unique key to identify the object in the cache
@@ -36,7 +47,14 @@ public protocol StorageAware {
    Check if an object exist by the given key.
    - Parameter key: Unique key to identify the object.
    */
+  @available(*, deprecated, renamed: "objectExists(forKey:)")
   func existsObject(forKey key: Key) throws -> Bool
+
+  /**
+   Check if an object exist by the given key.
+   - Parameter key: Unique key to identify the object.
+   */
+  func objectExists(forKey key: Key) -> Bool
 
   /**
    Removes all objects from the cache storage.
@@ -53,6 +71,11 @@ public protocol StorageAware {
    - Parameter key: Unique key to identify the object.
    */
   func isExpiredObject(forKey key: Key) throws -> Bool
+  /**
+   Removes the object by the given key from cache in memory only.
+   - Parameter key: Unique key to identify the object.
+   */
+  func removeInMemoryObject(forKey key: Key) throws
 }
 
 public extension StorageAware {
@@ -61,6 +84,15 @@ public extension StorageAware {
   }
 
   func existsObject(forKey key: Key) throws -> Bool {
+    do {
+      let _: Value = try object(forKey: key)
+      return true
+    } catch {
+      return false
+    }
+  }
+
+  func objectExists(forKey key: Key) -> Bool {
     do {
       let _: Value = try object(forKey: key)
       return true

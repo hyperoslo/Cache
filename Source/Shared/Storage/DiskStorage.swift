@@ -58,9 +58,13 @@ final public class DiskStorage<Key: Hashable, Value> {
 }
 
 extension DiskStorage: StorageAware {
+  public var allKeys: [Key] { [] }
+
+  public var allObjects: [Value] { [] }
+
   public func entry(forKey key: Key) throws -> Entry<Value> {
     let filePath = makeFilePath(for: key)
-    let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
+    let data = try Data(contentsOf: URL(fileURLWithPath: filePath, isDirectory: false))
     let attributes = try fileManager.attributesOfItem(atPath: filePath)
     let object = try transformer.fromData(data)
 
@@ -95,7 +99,7 @@ extension DiskStorage: StorageAware {
   }
 
   public func removeExpiredObjects() throws {
-    let storageURL = URL(fileURLWithPath: path)
+    let storageURL = URL(fileURLWithPath: path, isDirectory: true)
     let resourceKeys: [URLResourceKey] = [
       .isDirectoryKey,
       .contentModificationDateKey,
@@ -141,6 +145,8 @@ extension DiskStorage: StorageAware {
     // Remove objects if storage size exceeds max size
     try removeResourceObjects(resourceObjects, totalSize: totalSize)
   }
+
+  public func removeInMemoryObject(forKey key: Key) throws { }
 }
 
 extension DiskStorage {
@@ -163,7 +169,7 @@ extension DiskStorage {
    */
   func makeFileName(for key: Key) -> String {
     if let key = key as? String {
-        let fileExtension = URL(fileURLWithPath: key).pathExtension
+        let fileExtension = (key as NSString).pathExtension
         let fileName = MD5(key)
 
         switch fileExtension.isEmpty {
@@ -186,20 +192,6 @@ extension DiskStorage {
    */
   func makeFilePath(for key: Key) -> String {
     return "\(path)/\(makeFileName(for: key))"
-  }
-
-  /// Calculates total disk cache size.
-  func totalSize() throws -> UInt64 {
-    var size: UInt64 = 0
-    let contents = try fileManager.contentsOfDirectory(atPath: path)
-    for pathComponent in contents {
-      let filePath = NSString(string: path).appendingPathComponent(pathComponent)
-      let attributes = try fileManager.attributesOfItem(atPath: filePath)
-      if let fileSize = attributes[.size] as? UInt64 {
-        size += fileSize
-      }
-    }
-    return size
   }
 
   func createDirectory() throws {
@@ -271,5 +263,15 @@ public extension DiskStorage {
     )
 
     return storage
+  }
+}
+
+public extension DiskStorage {
+  /// Calculates the total size of the cache directory in bytes.
+  var totalSize: Int? {
+    if let directory = URL(string: self.path), let size = self.fileManager.sizeOfDirectory(at: directory) {
+      return size
+    }
+      return nil
   }
 }
