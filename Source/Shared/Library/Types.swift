@@ -1,4 +1,4 @@
-#if os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
   import UIKit
   public typealias Image = UIImage
 #elseif os(watchOS)

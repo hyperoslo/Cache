@@ -153,40 +153,6 @@
 		D5A9D1C321144B65005DBD3F /* StorageObservationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1C221144B65005DBD3F /* StorageObservationRegistry.swift */; };
 		D5A9D1C421144B65005DBD3F /* StorageObservationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1C221144B65005DBD3F /* StorageObservationRegistry.swift */; };
 		D5A9D1C521144B65005DBD3F /* StorageObservationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1C221144B65005DBD3F /* StorageObservationRegistry.swift */; };
-		F812FB77264D57BC00D179F5 /* MemoryConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF984E1F694FFA00CE8F68 /* MemoryConfig.swift */; };
-		F812FB78264D57BC00D179F5 /* DiskConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF984D1F694FFA00CE8F68 /* DiskConfig.swift */; };
-		F812FB79264D57BC00D179F5 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98501F694FFA00CE8F68 /* Date+Extensions.swift */; };
-		F812FB7A264D57BC00D179F5 /* Hasher+constantAccrossExecutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E791649250E2AA500A71666 /* Hasher+constantAccrossExecutions.swift */; };
-		F812FB7B264D57BC00D179F5 /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
-		F812FB7C264D57BC00D179F5 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB7A252A14520031F3B9 /* URL+Extensions.swift */; };
-		F812FB7D264D57BC00D179F5 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB84252A14F50031F3B9 /* FileManager+Extensions.swift */; };
-		F812FB7E264D57C300D179F5 /* TransformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27014A420D129EB003B45C7 /* TransformerFactory.swift */; };
-		F812FB7F264D57C300D179F5 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148B20D113EA003B45C7 /* Optional+Extension.swift */; };
-		F812FB80264D57C300D179F5 /* JSONDictionaryWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4CC1F1FA3411300E4A2D5 /* JSONDictionaryWrapper.swift */; };
-		F812FB81264D57C300D179F5 /* ExpirationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98551F694FFA00CE8F68 /* ExpirationMode.swift */; };
-		F812FB82264D57C300D179F5 /* ImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98571F694FFA00CE8F68 /* ImageWrapper.swift */; };
-		F812FB83264D57C300D179F5 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98861F695B8F00CE8F68 /* Types.swift */; };
-		F812FB84264D57C300D179F5 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98591F694FFA00CE8F68 /* StorageError.swift */; };
-		F812FB85264D57C300D179F5 /* JSONArrayWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4CC231FA3426B00E4A2D5 /* JSONArrayWrapper.swift */; };
-		F812FB86264D57C300D179F5 /* TypeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148F20D1251E003B45C7 /* TypeWrapper.swift */; };
-		F812FB87264D57C300D179F5 /* ObservationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1B621134547005DBD3F /* ObservationToken.swift */; };
-		F812FB88264D57C300D179F5 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221E5BF20D00DCC00BC940E /* Entry.swift */; };
-		F812FB89264D57C300D179F5 /* MemoryCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270149320D125AC003B45C7 /* MemoryCapsule.swift */; };
-		F812FB8A264D57C300D179F5 /* DataSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98531F694FFA00CE8F68 /* DataSerializer.swift */; };
-		F812FB8B264D57C300D179F5 /* Expiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98561F694FFA00CE8F68 /* Expiry.swift */; };
-		F812FB8C264D57C300D179F5 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4CC151FA3145000E4A2D5 /* MD5.swift */; };
-		F812FB8D264D57C300D179F5 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270146F20D1018A003B45C7 /* Transformer.swift */; };
-		F812FB8E264D57C800D179F5 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147F20D10982003B45C7 /* Storage.swift */; };
-		F812FB8F264D57C800D179F5 /* StorageObservationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1C221144B65005DBD3F /* StorageObservationRegistry.swift */; };
-		F812FB90264D57C800D179F5 /* HybridStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147720D1046A003B45C7 /* HybridStorage.swift */; };
-		F812FB91264D57C800D179F5 /* SyncStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147B20D107DA003B45C7 /* SyncStorage.swift */; };
-		F812FB92264D57C800D179F5 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221E5BB20D00D9300BC940E /* MemoryStorage.swift */; };
-		F812FB93264D57C800D179F5 /* KeyObservationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51146522118337500197DCE /* KeyObservationRegistry.swift */; };
-		F812FB94264D57C800D179F5 /* AsyncStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148320D10E76003B45C7 /* AsyncStorage.swift */; };
-		F812FB95264D57C800D179F5 /* Storage+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148720D11040003B45C7 /* Storage+Transform.swift */; };
-		F812FB96264D57C800D179F5 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221E5C320D00DDB00BC940E /* DiskStorage.swift */; };
-		F812FB97264D57C800D179F5 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147320D101F3003B45C7 /* StorageAware.swift */; };
-		F812FB98264D57CC00D179F5 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138C01EB29BFA00881A20 /* UIImage+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -283,9 +249,6 @@
 		D5A9D1C221144B65005DBD3F /* StorageObservationRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageObservationRegistry.swift; sourceTree = "<group>"; };
 		D5DC59E01C20593E003BD79B /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBAACA991FBC369300FA206E /* SimpleStorage.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SimpleStorage.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		F812FB6F264D579E00D179F5 /* Cache_watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache_watchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F812FB71264D579E00D179F5 /* Cache_watchOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cache_watchOS.h; sourceTree = "<group>"; };
-		F812FB72264D579E00D179F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,13 +291,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D5DC59DC1C20593E003BD79B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F812FB6C264D579E00D179F5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -552,7 +508,6 @@
 				D5643E341C43F2CC00582E17 /* Playgrounds */,
 				D5291C081C28220B00B702C9 /* Source */,
 				D5DC59FA1C205AC9003BD79B /* Tests */,
-				F812FB70264D579E00D179F5 /* Cache-watchOS */,
 				D5DC59E11C20593E003BD79B /* Products */,
 			);
 			indentWidth = 4;
@@ -568,7 +523,6 @@
 				D5291D691C283B5400B702C9 /* Cache-Mac-Tests.xctest */,
 				BDEDD3561DBCE5B1007416A6 /* Cache.framework */,
 				BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */,
-				F812FB6F264D579E00D179F5 /* Cache_watchOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -581,15 +535,6 @@
 				D5291D7F1C283C7000B702C9 /* Mac */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		F812FB70264D579E00D179F5 /* Cache-watchOS */ = {
-			isa = PBXGroup;
-			children = (
-				F812FB71264D579E00D179F5 /* Cache_watchOS.h */,
-				F812FB72264D579E00D179F5 /* Info.plist */,
-			);
-			path = "Cache-watchOS";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -610,13 +555,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D5DC59DD1C20593E003BD79B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F812FB6A264D579E00D179F5 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -734,24 +672,6 @@
 			productReference = D5DC59E01C20593E003BD79B /* Cache.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		F812FB6E264D579E00D179F5 /* Cache-watchOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F812FB76264D579E00D179F5 /* Build configuration list for PBXNativeTarget "Cache-watchOS" */;
-			buildPhases = (
-				F812FB6A264D579E00D179F5 /* Headers */,
-				F812FB6B264D579E00D179F5 /* Sources */,
-				F812FB6C264D579E00D179F5 /* Frameworks */,
-				F812FB6D264D579E00D179F5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Cache-watchOS";
-			productName = "Cache-watchOS";
-			productReference = F812FB6F264D579E00D179F5 /* Cache_watchOS.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -785,10 +705,6 @@
 						CreatedOnToolsVersion = 7.2;
 						LastSwiftMigration = 0800;
 					};
-					F812FB6E264D579E00D179F5 = {
-						CreatedOnToolsVersion = 12.5;
-						ProvisioningStyle = Manual;
-					};
 				};
 			};
 			buildConfigurationList = D5DC59DA1C20593E003BD79B /* Build configuration list for PBXProject "Cache" */;
@@ -810,7 +726,6 @@
 				D5291D681C283B5400B702C9 /* Cache-Mac-Tests */,
 				BDEDD3551DBCE5B1007416A6 /* Cache-tvOS */,
 				BDEDD3771DBCEB8A007416A6 /* Cache-tvOS-Tests */,
-				F812FB6E264D579E00D179F5 /* Cache-watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -852,13 +767,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D5DC59DE1C20593E003BD79B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F812FB6D264D579E00D179F5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1050,47 +958,6 @@
 				D2CF98611F694FFA00CE8F68 /* MemoryConfig.swift in Sources */,
 				D2CF98661F694FFA00CE8F68 /* ExpirationMode.swift in Sources */,
 				D221E5C020D00DCC00BC940E /* Entry.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F812FB6B264D579E00D179F5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F812FB95264D57C800D179F5 /* Storage+Transform.swift in Sources */,
-				F812FB81264D57C300D179F5 /* ExpirationMode.swift in Sources */,
-				F812FB82264D57C300D179F5 /* ImageWrapper.swift in Sources */,
-				F812FB78264D57BC00D179F5 /* DiskConfig.swift in Sources */,
-				F812FB8A264D57C300D179F5 /* DataSerializer.swift in Sources */,
-				F812FB8D264D57C300D179F5 /* Transformer.swift in Sources */,
-				F812FB8E264D57C800D179F5 /* Storage.swift in Sources */,
-				F812FB7D264D57BC00D179F5 /* FileManager+Extensions.swift in Sources */,
-				F812FB8B264D57C300D179F5 /* Expiry.swift in Sources */,
-				F812FB92264D57C800D179F5 /* MemoryStorage.swift in Sources */,
-				F812FB7C264D57BC00D179F5 /* URL+Extensions.swift in Sources */,
-				F812FB80264D57C300D179F5 /* JSONDictionaryWrapper.swift in Sources */,
-				F812FB96264D57C800D179F5 /* DiskStorage.swift in Sources */,
-				F812FB88264D57C300D179F5 /* Entry.swift in Sources */,
-				F812FB89264D57C300D179F5 /* MemoryCapsule.swift in Sources */,
-				F812FB8C264D57C300D179F5 /* MD5.swift in Sources */,
-				F812FB7B264D57BC00D179F5 /* JSONDecoder+Extensions.swift in Sources */,
-				F812FB91264D57C800D179F5 /* SyncStorage.swift in Sources */,
-				F812FB87264D57C300D179F5 /* ObservationToken.swift in Sources */,
-				F812FB97264D57C800D179F5 /* StorageAware.swift in Sources */,
-				F812FB85264D57C300D179F5 /* JSONArrayWrapper.swift in Sources */,
-				F812FB7F264D57C300D179F5 /* Optional+Extension.swift in Sources */,
-				F812FB8F264D57C800D179F5 /* StorageObservationRegistry.swift in Sources */,
-				F812FB83264D57C300D179F5 /* Types.swift in Sources */,
-				F812FB90264D57C800D179F5 /* HybridStorage.swift in Sources */,
-				F812FB77264D57BC00D179F5 /* MemoryConfig.swift in Sources */,
-				F812FB93264D57C800D179F5 /* KeyObservationRegistry.swift in Sources */,
-				F812FB84264D57C300D179F5 /* StorageError.swift in Sources */,
-				F812FB7A264D57BC00D179F5 /* Hasher+constantAccrossExecutions.swift in Sources */,
-				F812FB94264D57C800D179F5 /* AsyncStorage.swift in Sources */,
-				F812FB7E264D57C300D179F5 /* TransformerFactory.swift in Sources */,
-				F812FB98264D57CC00D179F5 /* UIImage+Extensions.swift in Sources */,
-				F812FB79264D57BC00D179F5 /* Date+Extensions.swift in Sources */,
-				F812FB86264D57C300D179F5 /* TypeWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1463,72 +1330,6 @@
 			};
 			name = Release;
 		};
-		F812FB74264D579E00D179F5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Manual;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/watchOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-watchOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
-			};
-			name = Debug;
-		};
-		F812FB75264D579E00D179F5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Manual;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/watchOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-watchOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1591,15 +1392,6 @@
 			buildConfigurations = (
 				D5DC59F51C20593E003BD79B /* Debug */,
 				D5DC59F61C20593E003BD79B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F812FB76264D579E00D179F5 /* Build configuration list for PBXNativeTarget "Cache-watchOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F812FB74264D579E00D179F5 /* Debug */,
-				F812FB75264D579E00D179F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

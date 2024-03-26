@@ -40,7 +40,7 @@ final public class DiskStorage<Key: Hashable, Value> {
     try createDirectory()
 
     // protection
-    #if os(iOS) || os(tvOS) || os(watchOS)
+    #if os(iOS) || os(tvOS)
     if let protectionType = config.protectionType {
       try setDirectoryAttributes([
         FileAttributeKey.protectionKey: protectionType

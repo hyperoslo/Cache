@@ -1,6 +1,6 @@
 import Foundation
 
-#if os(iOS) || os(tvOS) || os(macOS) || os(watchOS)
+#if os(iOS) || os(tvOS) || os(macOS)
 public struct ImageWrapper: Codable {
   public let image: Image
 
