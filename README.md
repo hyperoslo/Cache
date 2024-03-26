@@ -398,10 +398,11 @@ If you want to load image into `UIImageView` or `NSImageView`, then we also have
 ### Cocoapods
 
 **Cache** is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+it or update it, use the following line to your Podfile:
 
 ```ruby
-pod 'Cache'
+pod 'Cache', :git => 'https://github.com/hyperoslo/Cache.git'
+
 ```
 
 ### Carthage
