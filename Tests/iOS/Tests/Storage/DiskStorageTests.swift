@@ -215,5 +215,37 @@ final class DiskStorageTests: XCTestCase {
     let filePath = "\(storage.path)/\(storage.makeFileName(for: key))"
     XCTAssertEqual(storage.makeFilePath(for: key), filePath)
   }
+    
+  func testAutoClearAllExpiredObjectWhenApplicationEnterBackground() {
+    let expiry1: Expiry = .date(Date().addingTimeInterval(-10))
+    let expiry2: Expiry = .date(Date().addingTimeInterval(10))
+    let key1 = "item1"
+    let key2 = "item2"
+    let filePathForKey1 = storage.makeFilePath(for: key1)
+    storage.onRemove = { key in
+      XCTAssertTrue(key == filePathForKey1)
+    }
+    try? storage.setObject(testObject, forKey: key1, expiry: expiry1)
+    try? storage.setObject(testObject, forKey: key2, expiry: expiry2)
+        ///Device enters background
+    NotificationCenter.default.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+    
+    func testManualManageExpirationMode() {
+        storage.applyExpiratonMode(.manual)
+        let expiry1: Expiry = .date(Date().addingTimeInterval(-10))
+        let expiry2: Expiry = .date(Date().addingTimeInterval(10))
+        let key1 = "item1"
+        let key2 = "item2"
+        var success = true
+        storage.onRemove = { key in
+            success = false
+            XCTAssertTrue(success)
+        }
+        try? storage.setObject(testObject, forKey: key1, expiry: expiry1)
+        try? storage.setObject(testObject, forKey: key2, expiry: expiry2)
+            ///Device enters background
+        NotificationCenter.default.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
 }
 

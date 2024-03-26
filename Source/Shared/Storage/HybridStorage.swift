@@ -185,3 +185,10 @@ public extension HybridStorage {
     return self.diskStorage.totalSize
   }
 }
+
+public extension HybridStorage {
+  func applyExpiratonMode(_ expirationMode: ExpirationMode) {
+    self.memoryStorage.applyExpiratonMode(expirationMode)
+    self.diskStorage.applyExpiratonMode(expirationMode)
+  }
+}
