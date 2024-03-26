@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,40 @@
 		2292AB85252A14F50031F3B9 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB84252A14F50031F3B9 /* FileManager+Extensions.swift */; };
 		2292AB86252A14F50031F3B9 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB84252A14F50031F3B9 /* FileManager+Extensions.swift */; };
 		2292AB87252A14F50031F3B9 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB84252A14F50031F3B9 /* FileManager+Extensions.swift */; };
+		285DC4822BB2D1440036F206 /* DiskConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF984D1F694FFA00CE8F68 /* DiskConfig.swift */; };
+		285DC4832BB2D1440036F206 /* MemoryConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF984E1F694FFA00CE8F68 /* MemoryConfig.swift */; };
+		285DC4842BB2D1440036F206 /* Hasher+constantAccrossExecutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E791649250E2AA500A71666 /* Hasher+constantAccrossExecutions.swift */; };
+		285DC4852BB2D1440036F206 /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28897041F8B79B300C61DEE /* JSONDecoder+Extensions.swift */; };
+		285DC4862BB2D1440036F206 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98501F694FFA00CE8F68 /* Date+Extensions.swift */; };
+		285DC4872BB2D1440036F206 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB7A252A14520031F3B9 /* URL+Extensions.swift */; };
+		285DC4882BB2D1440036F206 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292AB84252A14F50031F3B9 /* FileManager+Extensions.swift */; };
+		285DC4892BB2D1440036F206 /* DataSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98531F694FFA00CE8F68 /* DataSerializer.swift */; };
+		285DC48A2BB2D1440036F206 /* ExpirationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98551F694FFA00CE8F68 /* ExpirationMode.swift */; };
+		285DC48B2BB2D1440036F206 /* Expiry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98561F694FFA00CE8F68 /* Expiry.swift */; };
+		285DC48C2BB2D1440036F206 /* ImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98571F694FFA00CE8F68 /* ImageWrapper.swift */; };
+		285DC48D2BB2D1440036F206 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98591F694FFA00CE8F68 /* StorageError.swift */; };
+		285DC48E2BB2D1440036F206 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98861F695B8F00CE8F68 /* Types.swift */; };
+		285DC48F2BB2D1440036F206 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4CC151FA3145000E4A2D5 /* MD5.swift */; };
+		285DC4902BB2D1440036F206 /* JSONDictionaryWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4CC1F1FA3411300E4A2D5 /* JSONDictionaryWrapper.swift */; };
+		285DC4912BB2D1440036F206 /* JSONArrayWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4CC231FA3426B00E4A2D5 /* JSONArrayWrapper.swift */; };
+		285DC4922BB2D1440036F206 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221E5BF20D00DCC00BC940E /* Entry.swift */; };
+		285DC4932BB2D1440036F206 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270146F20D1018A003B45C7 /* Transformer.swift */; };
+		285DC4942BB2D1440036F206 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148B20D113EA003B45C7 /* Optional+Extension.swift */; };
+		285DC4952BB2D1440036F206 /* TypeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148F20D1251E003B45C7 /* TypeWrapper.swift */; };
+		285DC4962BB2D1440036F206 /* MemoryCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270149320D125AC003B45C7 /* MemoryCapsule.swift */; };
+		285DC4972BB2D1440036F206 /* TransformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27014A420D129EB003B45C7 /* TransformerFactory.swift */; };
+		285DC4982BB2D1440036F206 /* ObservationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1B621134547005DBD3F /* ObservationToken.swift */; };
+		285DC4992BB2D1440036F206 /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221E5BB20D00D9300BC940E /* MemoryStorage.swift */; };
+		285DC49A2BB2D1440036F206 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221E5C320D00DDB00BC940E /* DiskStorage.swift */; };
+		285DC49B2BB2D1440036F206 /* StorageAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147320D101F3003B45C7 /* StorageAware.swift */; };
+		285DC49C2BB2D1440036F206 /* HybridStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147720D1046A003B45C7 /* HybridStorage.swift */; };
+		285DC49D2BB2D1440036F206 /* SyncStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147B20D107DA003B45C7 /* SyncStorage.swift */; };
+		285DC49E2BB2D1440036F206 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270147F20D10982003B45C7 /* Storage.swift */; };
+		285DC49F2BB2D1440036F206 /* AsyncStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148320D10E76003B45C7 /* AsyncStorage.swift */; };
+		285DC4A02BB2D1440036F206 /* Storage+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270148720D11040003B45C7 /* Storage+Transform.swift */; };
+		285DC4A12BB2D1440036F206 /* StorageObservationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9D1C221144B65005DBD3F /* StorageObservationRegistry.swift */; };
+		285DC4A22BB2D1440036F206 /* KeyObservationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51146522118337500197DCE /* KeyObservationRegistry.swift */; };
+		285DC4A32BB2D2DB0036F206 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A138C01EB29BFA00881A20 /* UIImage+Extensions.swift */; };
 		BDEDD37D1DBCEB8A007416A6 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDEDD3561DBCE5B1007416A6 /* Cache.framework */; };
 		D21B667C1F6A723C00125DE1 /* DataSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98531F694FFA00CE8F68 /* DataSerializer.swift */; };
 		D21B667E1F6A723C00125DE1 /* ExpirationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CF98551F694FFA00CE8F68 /* ExpirationMode.swift */; };
@@ -184,6 +218,7 @@
 		0E79164D250E2B0400A71666 /* Hasher+constantAccrossExecutions+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Hasher+constantAccrossExecutions+Tests.swift"; sourceTree = "<group>"; };
 		2292AB7A252A14520031F3B9 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		2292AB84252A14F50031F3B9 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
+		285DC47A2BB2CFCC0036F206 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDD3561DBCE5B1007416A6 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cache-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D221E5BB20D00D9300BC940E /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
@@ -252,6 +287,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		285DC4772BB2CFCC0036F206 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BDEDD3521DBCE5B1007416A6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -523,6 +565,7 @@
 				D5291D691C283B5400B702C9 /* Cache-Mac-Tests.xctest */,
 				BDEDD3561DBCE5B1007416A6 /* Cache.framework */,
 				BDEDD3781DBCEB8A007416A6 /* Cache-tvOS-Tests.xctest */,
+				285DC47A2BB2CFCC0036F206 /* Cache.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -540,6 +583,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		285DC4812BB2D11B0036F206 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BDEDD3531DBCE5B1007416A6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -564,6 +614,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		285DC4792BB2CFCC0036F206 /* Cache-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 285DC47E2BB2CFCC0036F206 /* Build configuration list for PBXNativeTarget "Cache-watchOS" */;
+			buildPhases = (
+				285DC4812BB2D11B0036F206 /* Headers */,
+				285DC4762BB2CFCC0036F206 /* Sources */,
+				285DC4772BB2CFCC0036F206 /* Frameworks */,
+				285DC4782BB2CFCC0036F206 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Cache-watchOS";
+			productName = "Cache-watchOS";
+			productReference = 285DC47A2BB2CFCC0036F206 /* Cache.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		BDEDD3551DBCE5B1007416A6 /* Cache-tvOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BDEDD35D1DBCE5B1007416A6 /* Build configuration list for PBXNativeTarget "Cache-tvOS" */;
@@ -678,10 +746,14 @@
 		D5DC59D71C20593E003BD79B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1530;
 				ORGANIZATIONNAME = "Hyper Interaktiv AS";
 				TargetAttributes = {
+					285DC4792BB2CFCC0036F206 = {
+						CreatedOnToolsVersion = 15.3;
+					};
 					BDEDD3551DBCE5B1007416A6 = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Manual;
@@ -726,11 +798,19 @@
 				D5291D681C283B5400B702C9 /* Cache-Mac-Tests */,
 				BDEDD3551DBCE5B1007416A6 /* Cache-tvOS */,
 				BDEDD3771DBCEB8A007416A6 /* Cache-tvOS-Tests */,
+				285DC4792BB2CFCC0036F206 /* Cache-watchOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		285DC4782BB2CFCC0036F206 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BDEDD3541DBCE5B1007416A6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -776,6 +856,47 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		285DC4762BB2CFCC0036F206 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				285DC4A32BB2D2DB0036F206 /* UIImage+Extensions.swift in Sources */,
+				285DC4822BB2D1440036F206 /* DiskConfig.swift in Sources */,
+				285DC4832BB2D1440036F206 /* MemoryConfig.swift in Sources */,
+				285DC4842BB2D1440036F206 /* Hasher+constantAccrossExecutions.swift in Sources */,
+				285DC4852BB2D1440036F206 /* JSONDecoder+Extensions.swift in Sources */,
+				285DC4862BB2D1440036F206 /* Date+Extensions.swift in Sources */,
+				285DC4872BB2D1440036F206 /* URL+Extensions.swift in Sources */,
+				285DC4882BB2D1440036F206 /* FileManager+Extensions.swift in Sources */,
+				285DC4892BB2D1440036F206 /* DataSerializer.swift in Sources */,
+				285DC48A2BB2D1440036F206 /* ExpirationMode.swift in Sources */,
+				285DC48B2BB2D1440036F206 /* Expiry.swift in Sources */,
+				285DC48C2BB2D1440036F206 /* ImageWrapper.swift in Sources */,
+				285DC48D2BB2D1440036F206 /* StorageError.swift in Sources */,
+				285DC48E2BB2D1440036F206 /* Types.swift in Sources */,
+				285DC48F2BB2D1440036F206 /* MD5.swift in Sources */,
+				285DC4902BB2D1440036F206 /* JSONDictionaryWrapper.swift in Sources */,
+				285DC4912BB2D1440036F206 /* JSONArrayWrapper.swift in Sources */,
+				285DC4922BB2D1440036F206 /* Entry.swift in Sources */,
+				285DC4932BB2D1440036F206 /* Transformer.swift in Sources */,
+				285DC4942BB2D1440036F206 /* Optional+Extension.swift in Sources */,
+				285DC4952BB2D1440036F206 /* TypeWrapper.swift in Sources */,
+				285DC4962BB2D1440036F206 /* MemoryCapsule.swift in Sources */,
+				285DC4972BB2D1440036F206 /* TransformerFactory.swift in Sources */,
+				285DC4982BB2D1440036F206 /* ObservationToken.swift in Sources */,
+				285DC4992BB2D1440036F206 /* MemoryStorage.swift in Sources */,
+				285DC49A2BB2D1440036F206 /* DiskStorage.swift in Sources */,
+				285DC49B2BB2D1440036F206 /* StorageAware.swift in Sources */,
+				285DC49C2BB2D1440036F206 /* HybridStorage.swift in Sources */,
+				285DC49D2BB2D1440036F206 /* SyncStorage.swift in Sources */,
+				285DC49E2BB2D1440036F206 /* Storage.swift in Sources */,
+				285DC49F2BB2D1440036F206 /* AsyncStorage.swift in Sources */,
+				285DC4A02BB2D1440036F206 /* Storage+Transform.swift in Sources */,
+				285DC4A12BB2D1440036F206 /* StorageObservationRegistry.swift in Sources */,
+				285DC4A22BB2D1440036F206 /* KeyObservationRegistry.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BDEDD3511DBCE5B1007416A6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -982,6 +1103,100 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		285DC47F2BB2CFCC0036F206 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Hyper Interaktiv AS. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-watchOS";
+				PRODUCT_NAME = Cache;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		285DC4802BB2CFCC0036F206 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Hyper Interaktiv AS. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-watchOS";
+				PRODUCT_NAME = Cache;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
 		BDEDD35B1DBCE5B1007416A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -994,17 +1209,23 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/tvOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-tvOS";
 				PRODUCT_NAME = Cache;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -1020,16 +1241,22 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/tvOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-tvOS";
 				PRODUCT_NAME = Cache;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -1043,7 +1270,11 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Tests/tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-tvOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1064,7 +1295,11 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Tests/tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-tvOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1079,10 +1314,17 @@
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Tests/iOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-iOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator watchos watchsimulator";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2,4";
 			};
 			name = Debug;
 		};
@@ -1092,9 +1334,16 @@
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Tests/iOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-iOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator watchos watchsimulator";
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,4";
 			};
 			name = Release;
 		};
@@ -1103,16 +1352,23 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/Mac/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-Mac";
 				PRODUCT_NAME = Cache;
 				SDKROOT = macosx;
@@ -1125,16 +1381,23 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/Mac/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-Mac";
 				PRODUCT_NAME = Cache;
 				SDKROOT = macosx;
@@ -1147,9 +1410,14 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Tests/Mac/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1162,9 +1430,14 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Tests/Mac/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "no.hyper.Cache-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1221,7 +1494,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1276,10 +1549,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1291,19 +1565,26 @@
 		D5DC59F51C20593E003BD79B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = no.hyper.Cache;
 				PRODUCT_NAME = Cache;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1312,19 +1593,26 @@
 		D5DC59F61C20593E003BD79B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/SupportFiles/iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = no.hyper.Cache;
 				PRODUCT_NAME = Cache;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1333,6 +1621,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		285DC47E2BB2CFCC0036F206 /* Build configuration list for PBXNativeTarget "Cache-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				285DC47F2BB2CFCC0036F206 /* Debug */,
+				285DC4802BB2CFCC0036F206 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BDEDD35D1DBCE5B1007416A6 /* Build configuration list for PBXNativeTarget "Cache-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

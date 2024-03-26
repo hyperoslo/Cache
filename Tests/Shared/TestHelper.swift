@@ -1,8 +1,8 @@
 import Foundation
 
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
 import UIKit
-#elseif os(OSX)
+#elseif os(macOS)
 import AppKit
 #endif
 
@@ -13,7 +13,7 @@ struct TestHelper {
   }
 
   static func triggerApplicationEvents() {
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)  || os(visionOS)
     NotificationCenter.default.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
     NotificationCenter.default.post(name: UIApplication.willTerminateNotification, object: nil)
     #elseif os(macOS)
