@@ -1,6 +1,9 @@
+#if canImport(UIKit)
+import UIKit
+#endif
+
 import Foundation
 
-#if os(iOS) || os(tvOS) || os(macOS)
 public struct ImageWrapper: Codable {
   public let image: Image
 
@@ -31,4 +34,3 @@ public struct ImageWrapper: Codable {
     try container.encode(data, forKey: CodingKeys.image)
   }
 }
-#endif
