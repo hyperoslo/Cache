@@ -36,6 +36,13 @@ final class AsyncStorageTests: XCTestCase {
     wait(for: [expectation], timeout: 1)
   }
 
+  func testSetObject() async throws {
+    try await storage.setObject(user, forKey: "user")
+    let cachedUser = try await storage.object(forKey: "user")
+
+    XCTAssertEqual(cachedUser, self.user)
+  }
+
   func testRemoveAll() {
     let intStorage = storage.transform(transformer: TransformerFactory.forCodable(ofType: Int.self))
     let expectation = self.expectation(description: #function)
@@ -61,5 +68,25 @@ final class AsyncStorageTests: XCTestCase {
     }
 
     wait(for: [expectation], timeout: 1)
+  }
+
+  func testRemoveAll() async throws {
+    let intStorage = storage.transform(transformer: TransformerFactory.forCodable(ofType: Int.self))
+    try await given("add a lot of objects") {
+      for i in 0 ..< 100 {
+        try await intStorage.setObject(i, forKey: "key-\(i)")
+      }
+    }
+
+    try await when("remove all") {
+      try await intStorage.removeAll()
+    }
+
+    await then("all are removed") {
+      do {
+        _ = try await intStorage.objectExists(forKey: "key-99")
+        XCTFail()
+      } catch {}
+    }
   }
 }
