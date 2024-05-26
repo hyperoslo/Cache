@@ -36,6 +36,7 @@ final class AsyncStorageTests: XCTestCase {
     wait(for: [expectation], timeout: 1)
   }
 
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   func testSetObject() async throws {
     try await storage.setObject(user, forKey: "user")
     let cachedUser = try await storage.object(forKey: "user")
@@ -70,6 +71,7 @@ final class AsyncStorageTests: XCTestCase {
     wait(for: [expectation], timeout: 1)
   }
 
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   func testRemoveAll() async throws {
     let intStorage = storage.transform(transformer: TransformerFactory.forCodable(ofType: Int.self))
     try await given("add a lot of objects") {
