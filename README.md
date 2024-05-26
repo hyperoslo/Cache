@@ -199,7 +199,7 @@ let score = try? storage.object(forKey: "score")
 let favoriteCharacter = try? storage.object(forKey: "my favorite city")
 
 // Check if an object exists
-let hasFavoriteCharacter = try? storage.existsObject(forKey: "my favorite city")
+let hasFavoriteCharacter = try? storage.objectExists(forKey: "my favorite city")
 
 // Remove an object in storage
 try? storage.removeObject(forKey: "my favorite city")
@@ -263,7 +263,7 @@ storage.async.object(forKey: "my favorite city") { result in
   }
 }
 
-storage.async.existsObject(forKey: "my favorite city") { result in
+storage.async.objectExists(forKey: "my favorite city") { result in
   if case .success(let exists) = result, exists {
     print("I have a favorite city")
   }
@@ -299,7 +299,7 @@ try? storage.setObject("This is a string", forKey: "string")
 // A given expiry date will be applied to the item
 try? storage.setObject(
   "This is a string",
-  forKey: "string"
+  forKey: "string",
   expiry: .date(Date().addingTimeInterval(2 * 3600))
 )
 
