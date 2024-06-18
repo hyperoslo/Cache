@@ -17,8 +17,7 @@ Pod::Spec.new do |s|
   s.ios.source_files = 'Source/{iOS,Shared}/**/*'
   s.osx.source_files = 'Source/{Mac,Shared}/**/*'
   s.tvos.source_files = 'Source/{iOS,Shared}/**/*'
-  s.resources = 'Source/PrivacyInfo.xcprivacy'
- 
+  s.resource_bundles = { 'Cache_privacy' => 'Source/PrivacyInfo.xcprivacy' }
   s.frameworks = 'Foundation'
   s.swift_version = '5.0'
 end
