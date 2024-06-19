@@ -109,21 +109,27 @@ extension AsyncStorage {
   @available(*, deprecated, renamed: "objectExists(forKey:completion:)")
   public func existsObject(
     forKey key: Key,
-    completion: @escaping (Result<Bool, Error>) -> Void) {
+    completion: @escaping (Bool) -> Void) {
     object(forKey: key, completion: { (result: Result<Value, Error>) in
-      completion(result.map({ _ in
-        return true
-      }))
+      switch result {
+      case .success:
+        completion(true)
+      case .failure:
+        completion(false)
+      }
     })
   }
 
   public func objectExists(
     forKey key: Key,
-    completion: @escaping (Result<Bool, Error>) -> Void) {
+    completion: @escaping (Bool) -> Void) {
       object(forKey: key, completion: { (result: Result<Value, Error>) in
-        completion(result.map({ _ in
-          return true
-        }))
+        switch result {
+        case .success:
+          completion(true)
+        case .failure:
+          completion(false)
+        }
       })
     }
 }
@@ -192,10 +198,10 @@ public extension AsyncStorage {
     }
   }
 
-  func objectExists(forKey key: Key) async throws -> Bool {
-    try await withCheckedThrowingContinuation { continuation in
+  func objectExists(forKey key: Key) async -> Bool {
+    await withCheckedContinuation { continuation in
       objectExists(forKey: key) {
-        continuation.resume(with: $0)
+        continuation.resume(returning: $0)
       }
     }
   }

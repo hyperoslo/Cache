@@ -48,7 +48,7 @@ public protocol StorageAware {
    - Parameter key: Unique key to identify the object.
    */
   @available(*, deprecated, renamed: "objectExists(forKey:)")
-  func existsObject(forKey key: Key) throws -> Bool
+  func existsObject(forKey key: Key) -> Bool
 
   /**
    Check if an object exist by the given key.
@@ -83,7 +83,7 @@ public extension StorageAware {
     return try entry(forKey: key).object
   }
 
-  func existsObject(forKey key: Key) throws -> Bool {
+  func existsObject(forKey key: Key) -> Bool {
     do {
       let _: Value = try object(forKey: key)
       return true
