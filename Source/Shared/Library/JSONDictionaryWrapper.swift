@@ -13,7 +13,7 @@ public struct JSONDictionaryWrapper: Codable {
     self.jsonDictionary = jsonDictionary
   }
 
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let data = try container.decode(Data.self, forKey: CodingKeys.jsonDictionary)
     let object = try JSONSerialization.jsonObject(
@@ -28,7 +28,7 @@ public struct JSONDictionaryWrapper: Codable {
     self.jsonDictionary = jsonDictionary
   }
 
-  public func encode(to encoder: Encoder) throws {
+  public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     let data = try JSONSerialization.data(
       withJSONObject: jsonDictionary,

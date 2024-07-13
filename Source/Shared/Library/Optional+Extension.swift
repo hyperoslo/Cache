@@ -1,7 +1,7 @@
 import Foundation
 
 public extension Optional {
-  func unwrapOrThrow(error: Error) throws -> Wrapped {
+  func unwrapOrThrow(error: any Error) throws -> Wrapped {
     if let value = self {
       return value
     } else {
