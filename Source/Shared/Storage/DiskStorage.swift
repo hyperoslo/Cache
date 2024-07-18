@@ -17,9 +17,11 @@ final public class DiskStorage<Key: Hashable, Value> {
 
   private let transformer: Transformer<Value>
   private let hasher = Hasher.constantAccrossExecutions()
+    private var defaultFileAttributes: [FileAttributeKey : Any]?
 
   // MARK: - Initialization
-  public convenience init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<Value>) throws {
+  public convenience init(config: DiskConfig, fileManager: FileManager = FileManager.default, transformer: Transformer<Value>,
+                          fileAttributes: [FileAttributeKey : Any] = [:]) throws {
     let url: URL
     if let directory = config.directory {
       url = directory
@@ -44,6 +46,9 @@ final public class DiskStorage<Key: Hashable, Value> {
         FileAttributeKey.protectionKey: protectionType
       ])
     }
+      
+      defaultFileAttributes = fileAttributes
+
   }
 
   public required init(config: DiskConfig, fileManager: FileManager = FileManager.default, path: String, transformer: Transformer<Value>) {
@@ -80,8 +85,11 @@ extension DiskStorage: StorageAware {
     let expiry = expiry ?? config.expiry
     let data = try transformer.toData(object)
     let filePath = makeFilePath(for: key)
-    _ = fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
-    try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)
+      var attributes = defaultFileAttributes!
+      attributes[.modificationDate] = expiry.date
+      
+    _ = fileManager.createFile(atPath: filePath, contents: data, attributes: attributes)
+//    try fileManager.setAttributes([.modificationDate: expiry.date], ofItemAtPath: filePath)
   }
 
   public func removeObject(forKey key: Key) throws {
