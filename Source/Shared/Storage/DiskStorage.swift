@@ -44,9 +44,6 @@ final public class DiskStorage<Key: Hashable, Value> {
         FileAttributeKey.protectionKey: protectionType
       ])
     }
-      
-//      defaultFileAttributes = fileAttributes
-
   }
 
   public required init(config: DiskConfig, fileManager: FileManager = FileManager.default, path: String, transformer: Transformer<Value>) {
