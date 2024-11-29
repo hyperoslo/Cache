@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        schemes: [iOS, macOS, tvOS, watchOS]
+        build-config:
+          - {
+              scheme: "Cache-iOS",
+              destination: "platform=iOS Simulator,name=iPhone 15",
+              sdk: "iphonesimulator",
+            }
+          - {
+              scheme: "Cache-tvOS",
+              destination: "platform=tvOS Simulator,name=Apple TV",
+              sdk: "appletvsimulator",
+            }
+          - {
+              scheme: "Cache-watchOS",
+              destination: "platform=watchOS Simulator",
+              sdk: "watchsimulator",
+            }
+          - {
+              scheme: "Cache-macOS",
+              destination: "platform=generic/platform=macOS",
+              sdk: "macosx",
+            }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          xcodebuild clean build \
+          -workspace 'Cache.xcproject' \
+          -scheme '${{ matrix.build-config['scheme'] }}' \
+          -sdk '${{ matrix.build-config['sdk'] }}' \
+          -destination '${{ matrix.build-config['destination'] }}'
+
+      - name: Execute Unit Tests
+        run: |
+          if [ "${{ matrix.build-config['scheme'] }}" == "Cache-watchOS" ]; then
+            exit 0;
+          fi
+
+          xcodebuild test \
+          -workspace 'Cache.xcproject' \
+          -scheme '${{ matrix.build-config['scheme'] }}' \
+          -sdk '${{ matrix.build-config['sdk'] }}' \
+          -destination '${{ matrix.build-config['destination'] }}'
