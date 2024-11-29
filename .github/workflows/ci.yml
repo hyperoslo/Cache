@@ -23,7 +23,7 @@ jobs:
             }
           - {
               scheme: "Cache-watchOS",
-              destination: "platform=watchOS Simulator",
+              destination: "platform=watchOS Simulator,name=Apple Watch Ultra 2",
               sdk: "watchsimulator",
             }
           - {
