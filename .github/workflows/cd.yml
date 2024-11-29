@@ -1,0 +1,29 @@
+name: CD
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "*.*.*"
+
+jobs:
+  release_version:
+    name: Release Version
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to CocoaPods
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+        run: |
+          set -eo pipefail
+          pod lib lint --allow-warnings
+          pod trunk push --allow-warnings
