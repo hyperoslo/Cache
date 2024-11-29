@@ -10,7 +10,6 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        schemes: [iOS, macOS, tvOS, watchOS]
         build-config:
           - {
               scheme: "Cache-iOS",
@@ -37,7 +36,7 @@ jobs:
       - name: Build
         run: |
           xcodebuild clean build \
-          -workspace 'Cache.xcproject' \
+          -project 'Cache.xcodeproj' \
           -scheme '${{ matrix.build-config['scheme'] }}' \
           -sdk '${{ matrix.build-config['sdk'] }}' \
           -destination '${{ matrix.build-config['destination'] }}'
@@ -49,7 +48,7 @@ jobs:
           fi
 
           xcodebuild test \
-          -workspace 'Cache.xcproject' \
+          -project 'Cache.xcodeproj' \
           -scheme '${{ matrix.build-config['scheme'] }}' \
           -sdk '${{ matrix.build-config['sdk'] }}' \
           -destination '${{ matrix.build-config['destination'] }}'
