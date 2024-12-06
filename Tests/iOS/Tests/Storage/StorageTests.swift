@@ -11,6 +11,7 @@ final class StorageTests: XCTestCase {
     storage = try! Storage<String, User>(
       diskConfig: DiskConfig(name: "Thor"),
       memoryConfig: MemoryConfig(),
+      fileManager: FileManager.default,
       transformer: TransformerFactory.forCodable(ofType: User.self)
     )
   }
