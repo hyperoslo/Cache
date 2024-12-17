@@ -2,6 +2,7 @@ import XCTest
 @testable import Cache
 
 final class StorageTests: XCTestCase {
+  private let fileManager = FileManager()
   private var storage: Storage<String, User>!
   let user = User(firstName: "John", lastName: "Snow")
 
@@ -11,6 +12,7 @@ final class StorageTests: XCTestCase {
     storage = try! Storage<String, User>(
       diskConfig: DiskConfig(name: "Thor"),
       memoryConfig: MemoryConfig(),
+      fileManager: fileManager,
       transformer: TransformerFactory.forCodable(ofType: User.self)
     )
   }
