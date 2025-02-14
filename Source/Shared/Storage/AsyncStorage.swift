@@ -14,7 +14,7 @@ public class AsyncStorage<Key: Hashable, Value> {
 }
 
 extension AsyncStorage {
-  public func entry(forKey key: Key, completion: @escaping (Result<Entry<Value>, Error>) -> Void) {
+  public func entry(forKey key: Key, completion: @escaping (Result<Entry<Value>, any Error>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
         completion(.failure(StorageError.deallocated))
@@ -30,7 +30,7 @@ extension AsyncStorage {
     }
   }
 
-  public func removeObject(forKey key: Key, completion: @escaping (Result<(), Error>) -> Void) {
+  public func removeObject(forKey key: Key, completion: @escaping (Result<(), any Error>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
         completion(.failure(StorageError.deallocated))
@@ -50,7 +50,7 @@ extension AsyncStorage {
     _ object: Value,
     forKey key: Key,
     expiry: Expiry? = nil,
-    completion: @escaping (Result<(), Error>) -> Void) {
+    completion: @escaping (Result<(), any Error>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
         completion(.failure(StorageError.deallocated))
@@ -66,7 +66,7 @@ extension AsyncStorage {
     }
   }
 
-  public func removeAll(completion: @escaping (Result<(), Error>) -> Void) {
+  public func removeAll(completion: @escaping (Result<(), any Error>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
         completion(.failure(StorageError.deallocated))
@@ -82,7 +82,7 @@ extension AsyncStorage {
     }
   }
 
-  public func removeExpiredObjects(completion: @escaping (Result<(), Error>) -> Void) {
+  public func removeExpiredObjects(completion: @escaping (Result<(), any Error>) -> Void) {
     serialQueue.async { [weak self] in
       guard let `self` = self else {
         completion(.failure(StorageError.deallocated))
@@ -98,7 +98,7 @@ extension AsyncStorage {
     }
   }
 
-  public func object(forKey key: Key, completion: @escaping (Result<Value, Error>) -> Void) {
+  public func object(forKey key: Key, completion: @escaping (Result<Value, any Error>) -> Void) {
     entry(forKey: key, completion: { (result: Result<Entry<Value>, Error>) in
       completion(result.map({ entry in
         return entry.object
@@ -109,7 +109,7 @@ extension AsyncStorage {
   @available(*, deprecated, renamed: "objectExists(forKey:completion:)")
   public func existsObject(
     forKey key: Key,
-    completion: @escaping (Result<Bool, Error>) -> Void) {
+    completion: @escaping (Result<Bool, any Error>) -> Void) {
     object(forKey: key, completion: { (result: Result<Value, Error>) in
       completion(result.map({ _ in
         return true
@@ -119,7 +119,7 @@ extension AsyncStorage {
 
   public func objectExists(
     forKey key: Key,
-    completion: @escaping (Result<Bool, Error>) -> Void) {
+    completion: @escaping (Result<Bool, any Error>) -> Void) {
       object(forKey: key, completion: { (result: Result<Value, Error>) in
         completion(result.map({ _ in
           return true
