@@ -58,11 +58,10 @@ final class AsyncStorageTests: XCTestCase {
     }
 
     then("all are removed") {
-      intStorage.objectExists(forKey: "key-99", completion: { result in
-        switch result {
-        case .success:
+      intStorage.objectExists(forKey: "key-99", completion: { exists in
+        if exists {
           XCTFail()
-        default:
+        } else {
           expectation.fulfill()
         }
       })
@@ -85,10 +84,8 @@ final class AsyncStorageTests: XCTestCase {
     }
 
     await then("all are removed") {
-      do {
-        _ = try await intStorage.objectExists(forKey: "key-99")
-        XCTFail()
-      } catch {}
+      let exists = await intStorage.objectExists(forKey: "key-99")
+      XCTAssertFalse(exists)
     }
   }
 }
