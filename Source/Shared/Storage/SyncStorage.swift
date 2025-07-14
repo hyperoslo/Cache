@@ -64,7 +64,7 @@ extension SyncStorage: StorageAware {
 
   public func removeExpiredObjects(expiryPeriod: TimeInterval? = nil) throws {
     try serialQueue.sync {
-      try innerStorage.removeExpiredObjects()
+      try innerStorage.removeExpiredObjects(expiryPeriod: expiryPeriod)
     }
   }
 
