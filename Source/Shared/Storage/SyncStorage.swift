@@ -62,6 +62,12 @@ extension SyncStorage: StorageAware {
     }
   }
 
+  public func removeExpiredObjects(expiryPeriod: TimeInterval? = nil) throws {
+    try serialQueue.sync {
+      try innerStorage.removeExpiredObjects()
+    }
+  }
+
   public func removeInMemoryObject(forKey key: Key) throws {
     try serialQueue.sync {
     try self.innerStorage.removeInMemoryObject(forKey: key)
