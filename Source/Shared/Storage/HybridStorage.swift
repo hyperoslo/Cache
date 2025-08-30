@@ -88,6 +88,13 @@ extension HybridStorage: StorageAware {
 
     notifyStorageObservers(about: .removeExpired)
   }
+
+  public func removeExpiredObjects(expiryPeriod: TimeInterval? = nil) throws {
+    memoryStorage.removeExpiredObjects()
+    try diskStorage.removeExpiredObjects(expiryPeriod: expiryPeriod)
+
+    notifyStorageObservers(about: .removeExpired)
+  }
 }
 
 public extension HybridStorage {

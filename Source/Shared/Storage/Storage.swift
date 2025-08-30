@@ -74,6 +74,10 @@ extension Storage: StorageAware {
   public func removeExpiredObjects() throws {
     try self.syncStorage.removeExpiredObjects()
   }
+
+  public func removeExpiredObjects(expiryPeriod: TimeInterval? = nil) throws {
+    try self.syncStorage.removeExpiredObjects(expiryPeriod: expiryPeriod)
+  }
 }
 
 public extension Storage {

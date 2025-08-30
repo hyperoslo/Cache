@@ -143,6 +143,64 @@ extension DiskStorage: StorageAware {
     try removeResourceObjects(resourceObjects, totalSize: totalSize)
   }
 
+  public func removeExpiredObjects(expiryPeriod: TimeInterval? = nil) throws {
+    let storageURL = URL(fileURLWithPath: path)
+    let resourceKeys: [URLResourceKey] = [
+        .isDirectoryKey,
+        .contentModificationDateKey,
+        .contentAccessDateKey,
+        .totalFileAllocatedSizeKey
+    ]
+
+    var resourceObjects = [ResourceObject]()
+    var filesToDelete = [URL]()
+    var totalSize: UInt = 0
+
+    let fileEnumerator = fileManager.enumerator(
+        at: storageURL,
+        includingPropertiesForKeys: resourceKeys,
+        options: .skipsHiddenFiles,
+        errorHandler: nil
+    )
+
+    guard let urlArray = fileEnumerator?.allObjects as? [URL] else {
+        throw Error.fileEnumeratorFailed
+    }
+
+    for url in urlArray {
+        let resourceValues = try url.resourceValues(forKeys: Set(resourceKeys))
+        guard resourceValues.isDirectory != true else {
+            continue
+        }
+
+        if let expiryPeriod = expiryPeriod,
+           let accessDate = resourceValues.contentAccessDate,
+           accessDate.addingTimeInterval(expiryPeriod) < Date() {
+            filesToDelete.append(url)
+            continue
+        } else if expiryPeriod == nil,
+                  let expiryDate = resourceValues.contentModificationDate,
+                  expiryDate.inThePast {
+            filesToDelete.append(url)
+            continue
+        }
+
+        if let fileSize = resourceValues.totalFileAllocatedSize {
+            totalSize += UInt(fileSize)
+            resourceObjects.append((url: url, resourceValues: resourceValues))
+        }
+    }
+
+    // Remove expired
+    for url in filesToDelete {
+        try fileManager.removeItem(at: url)
+        onRemove?(url.path)
+    }
+
+    // Enforce size limits
+    try removeResourceObjects(resourceObjects, totalSize: totalSize)
+}
+
   public func removeInMemoryObject(forKey key: Key) throws { }
 }
 
